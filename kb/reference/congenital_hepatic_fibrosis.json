@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for congenital hepatic fibrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_hepatic_fibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Liver and kidney structure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Biliary anatomy; ductal dilatation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Ductal plate malformation and portal fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Varices screened and graded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests and imaging",
+          "cells": [
+            {
+              "text": "Associated polycystic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hepatic_fibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Caroli disease and Caroli syndrome",
+          "cells": [
+            {
+              "text": "Biliary ductal dilatation on MRCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant polycystic liver disease",
+          "cells": [
+            {
+              "text": "Named look-alike; genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal vein thrombosis",
+          "cells": [
+            {
+              "text": "Named cause of portal hypertension"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hepatic_fibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic variceal surveillance",
+          "cells": [
+            {
+              "text": "Band ligation of oesophageal varices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockers",
+          "cells": [
+            {
+              "text": "Non-selective beta-blockers for primary and secondary prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute variceal haemorrhage",
+          "cells": [
+            {
+              "text": "Resuscitation, vasoactive agents such as terlipressin or octreotide, band ligation, antibiotic prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholangitis",
+          "cells": [
+            {
+              "text": "Prompt antibiotics for recurrent cholangitis with ductal dilatation or Caroli disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal care",
+          "cells": [
+            {
+              "text": "Renal function monitoring and nephrology input for associated polycystic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "Liver or combined liver-kidney transplant for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "PKHD1-related fibrocystic disease; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_hepatic_fibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Congenital hepatic fibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital hepatic fibrosis: portal hypertension with preserved liver function",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (variceal bleeding, cholangitis, renal decline, hypersplenism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent variceal bleed management: resuscitation, terlipressin or octreotide, bands",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound; MRCP; liver biopsy; endoscopy for varices; renal tests; PKHD1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show ductal plate malformation with portal fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Caroli disease, cirrhosis or non-cirrhotic portal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Non-selective beta-blockers and endoscopic band ligation for varices",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Acute variceal haemorrhage care with vasoactive agents and antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics for recurrent cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal monitoring; transplantation for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outlook depends on portal hypertensive complications, cholangitis and renal disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

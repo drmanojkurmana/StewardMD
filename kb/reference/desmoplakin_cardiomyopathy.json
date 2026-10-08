@@ -152,5 +152,334 @@
       "caption": "Overview comparison matrix for desmoplakin cardiomyopathy (dsp-related arrhythmogenic cardiomyopathy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cardiomyopathy references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "desmoplakin_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac MRI with late gadolinium enhancement",
+          "cells": [
+            {
+              "text": "Subepicardial or mid-wall ring-like left ventricular fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial high-sensitivity troponin during chest-pain episodes",
+          "cells": [
+            {
+              "text": "Hot-phase myocardial injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Signal-averaged ECG and ambulatory rhythm monitoring",
+          "cells": [
+            {
+              "text": "Ventricular ectopy and non-sustained ventricular tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted cardiomyopathy gene panel including DSP",
+          "cells": [
+            {
+              "text": "DSP variant, with segregation in relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatological examination",
+          "cells": [
+            {
+              "text": "Keratoderma and woolly hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endomyocardial biopsy in selected cases",
+          "cells": [
+            {
+              "text": "Excludes sarcoidosis or giant cell myocarditis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoplakin_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute viral or lymphocytic myocarditis",
+          "cells": [
+            {
+              "text": "A hot-phase episode mislabelled as isolated viral myocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac sarcoidosis and giant cell myocarditis",
+          "cells": [
+            {
+              "text": "Excluded by endomyocardial biopsy in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoplakin_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Restrict high-intensity exercise",
+          "cells": [
+            {
+              "text": "Drives cardiomyocyte injury and arrhythmia in desmosomal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiarrhythmic therapy",
+          "cells": [
+            {
+              "text": "Beta-blockers and antiarrhythmic drugs; catheter ablation for refractory ventricular tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Sudden-death prevention based on arrhythmic risk, not ejection fraction alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "RAS blockade or ARNI, beta-blockers, mineralocorticoid antagonists and SGLT2 inhibitors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hot-phase episodes",
+          "cells": [
+            {
+              "text": "Monitoring and troponin surveillance; exclude myocarditis, sarcoidosis and giant cell myocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial surveillance",
+          "cells": [
+            {
+              "text": "Cardiac MRI, ambulatory rhythm monitoring and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and cascade screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant; family counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced therapies",
+          "cells": [
+            {
+              "text": "Advanced heart failure and transplant assessment for progressive biventricular failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "desmoplakin_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of Desmoplakin Cardiomyopathy (DSP-related arrhythmogenic cardiomyopathy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected desmoplakin cardiomyopathy: arrhythmia and LV scar with preserved EF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ventricular arrhythmia, syncope, extensive scar, family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent arrhythmia management and ICD assessment for sudden-death risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cardiac MRI with LGE; serial troponin; rhythm monitoring; DSP gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a DSP variant found with mid-wall LV fibrosis on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider myocarditis, sarcoidosis, giant cell myocarditis or other cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Restrict high-intensity and competitive exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Beta-blockers and antiarrhythmics; ablation for refractory VT",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ICD for sudden-death prevention based on arrhythmic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Heart failure therapy with RAS blockade, beta-blockers, MRA and SGLT2 inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cascade genetic screening of relatives and family counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Driven by arrhythmic burden and fibrosis more than EF; biventricular failure can progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

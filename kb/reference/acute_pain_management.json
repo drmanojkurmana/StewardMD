@@ -147,5 +147,346 @@
       "caption": "Overview comparison matrix for acute pain management."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_pain_management-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pain scoring at rest and on movement",
+          "cells": [
+            {
+              "text": "Guides titration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sedation and respiratory rate when opioids are used",
+          "cells": [
+            {
+              "text": "Opioid-induced respiratory depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for a surgical or vascular cause",
+          "cells": [
+            {
+              "text": "Severe or escalating pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for compartment syndrome",
+          "cells": [
+            {
+              "text": "Disproportionate pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of the analgesic regimen",
+          "cells": [
+            {
+              "text": "Effectiveness and side effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_pain_management-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical complication (bleeding, ischaemia or infection)",
+          "cells": [
+            {
+              "text": "Escalating pain with bleeding, ischaemia or infection"
+            },
+            {
+              "text": "Evaluation for surgical or vascular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment syndrome",
+          "cells": [
+            {
+              "text": "Disproportionate pain"
+            },
+            {
+              "text": "Assessment for compartment syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain from nerve injury",
+          "cells": [
+            {
+              "text": "Pain after nerve injury"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_pain_management-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Paracetamol and anti-inflammatories",
+          "cells": [
+            {
+              "text": "Multimodal foundation"
+            },
+            {
+              "text": "Opioid-sparing base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regional and neuraxial techniques",
+          "cells": [
+            {
+              "text": "Targeted analgesia within enhanced recovery"
+            },
+            {
+              "text": "Opioid-sparing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Opioids",
+          "cells": [
+            {
+              "text": "Moderate-to-severe or breakthrough pain"
+            },
+            {
+              "text": "Titrated to effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketamine, gabapentinoids or local anaesthetic infiltration",
+          "cells": [
+            {
+              "text": "Refractory or neuropathic pain"
+            },
+            {
+              "text": "Adjunct agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular pain assessment at rest and on movement",
+          "cells": [
+            {
+              "text": "Titration and procedure-specific plan"
+            },
+            {
+              "text": "Tailored to the procedure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for oversedation and respiratory depression",
+          "cells": [
+            {
+              "text": "Elderly, sleep apnoea or other sedatives"
+            },
+            {
+              "text": "Vigilant monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pain service referral",
+          "cells": [
+            {
+              "text": "Complex or poorly controlled pain"
+            },
+            {
+              "text": "Specialist input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_pain_management-dx-mgmt",
+      "title": "Diagnosis and management of Acute pain management",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute postoperative or post-injury pain needing a plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pain severe, escalating or disproportionate, or new neurological deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical or vascular review; check for compartment syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pain scores at rest and on movement; check sedation and respiratory rate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Surgical or compartment cause excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start multimodal analgesia: paracetamol and anti-inflammatories",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Investigate surgical complication, bleeding, ischaemia or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Regional or neuraxial techniques within an opioid-sparing pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Opioids for moderate-to-severe or breakthrough pain, titrated to effect",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ketamine, gabapentinoids or local infiltration for refractory pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good multimodal control aids recovery and limits chronic postsurgical pain",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

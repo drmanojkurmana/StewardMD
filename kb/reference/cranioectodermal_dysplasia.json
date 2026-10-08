@@ -154,5 +154,323 @@
       "caption": "Overview comparison matrix for cranioectodermal dysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and skeletal dysplasia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cranioectodermal_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Brachydactyly, rib and long-bone changes; craniosynostosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and renal ultrasound",
+          "cells": [
+            {
+              "text": "Nephronophthisis-like nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic imaging",
+          "cells": [
+            {
+              "text": "Fibrosis and ductal plate malformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review with electroretinography",
+          "cells": [
+            {
+              "text": "Retinal dystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciliopathy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cranioectodermal_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ellis-van Creveld syndrome",
+          "cells": [
+            {
+              "text": "Polydactyly and cardiac disease; named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephronophthisis and related renal ciliopathies",
+          "cells": [
+            {
+              "text": "Renal disease without skeletal and ectodermal features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bardet-Biedl syndrome",
+          "cells": [
+            {
+              "text": "Multisystem ciliopathy with renal and retinal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cranioectodermal_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary supportive care",
+          "cells": [
+            {
+              "text": "No therapy corrects the intraflagellar defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong renal monitoring",
+          "cells": [
+            {
+              "text": "Progression to dialysis or transplantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Narrow thorax; prompt treatment of respiratory infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic surveillance",
+          "cells": [
+            {
+              "text": "Fibrosis and portal hypertension complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Electroretinography and low-vision support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and orthodontic care",
+          "cells": [
+            {
+              "text": "Enamel defects, microdontia and tooth-number anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical review",
+          "cells": [
+            {
+              "text": "Correction of sagittal craniosynostosis where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive IFT-A genes; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cranioectodermal_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Cranioectodermal dysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cranioectodermal dysplasia: short limbs, craniosynostosis, ectodermal change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (raised pressure, falling renal function, thoracic distress, liver fibrosis)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical and respiratory assessment for pressure or thorax compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey; renal and liver tests; ophthalmology with ERG; ciliopathy panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does gene testing confirm an IFT-A ciliopathy with renal and skeletal features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ellis-van Creveld, Bardet-Biedl or isolated ectodermal dysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong renal monitoring; plan dialysis or transplant if progressive",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Respiratory support for the narrow thorax; prompt infection treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hepatic fibrosis surveillance and ophthalmic care with ERG",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurosurgical correction of craniosynostosis; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Dominated by renal and hepatic ciliopathy severity; renal failure can result",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

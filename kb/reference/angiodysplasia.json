@@ -144,5 +144,298 @@
       "caption": "Overview comparison matrix for angiodysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastroenterology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angiodysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper and lower gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsule endoscopy or device-assisted enteroscopy",
+          "cells": [
+            {
+              "text": "Small-bowel lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or catheter angiography",
+          "cells": [
+            {
+              "text": "Used during active bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and iron studies",
+          "cells": [
+            {
+              "text": "Iron-deficiency anaemia from chronic occult loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for aortic stenosis and von Willebrand disease",
+          "cells": [
+            {
+              "text": "Recurrent cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angiodysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic ablation",
+          "cells": [
+            {
+              "text": "Argon plasma coagulation first-line"
+            },
+            {
+              "text": "For accessible bleeding lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron replacement and red cell transfusion",
+          "cells": [
+            {
+              "text": "Correct iron-deficiency anaemia"
+            },
+            {
+              "text": "Anaemia from chronic occult loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiographic embolisation",
+          "cells": [
+            {
+              "text": "For active bleeding not controlled endoscopically"
+            },
+            {
+              "text": "Endoscopic control has failed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiangiogenic medical therapy",
+          "cells": [
+            {
+              "text": "Somatostatin analogues or thalidomide"
+            },
+            {
+              "text": "Recurrent or diffuse lesions refractory to endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat contributing systemic factors",
+          "cells": [
+            {
+              "text": "Aortic valve replacement for Heyde syndrome; correct uraemic platelet dysfunction"
+            },
+            {
+              "text": "Chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Segmental surgical resection",
+          "cells": [
+            {
+              "text": "Surgical resection of the affected segment"
+            },
+            {
+              "text": "Reserved for localised, refractory, life-threatening bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor haemoglobin and iron status",
+          "cells": [
+            {
+              "text": "Track haemoglobin and iron indices"
+            },
+            {
+              "text": "Bleeding frequently recurs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angiodysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Angiodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ectatic mucosal and submucosal vessels, a common cause of obscure GI bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Haemodynamic compromise or transfusion-dependent bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of significant bleeding; consider angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Upper and lower endoscopy; capsule or enteroscopy for small-bowel lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bleeding lesion identified on endoscopy or enteroscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Endoscopic argon plasma coagulation for accessible lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging if bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron replacement and transfusion for iron-deficiency anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Embolisation, somatostatin analogues or thalidomide if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat Heyde syndrome; correct uraemic platelet dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrence is frequent; monitor haemoglobin and iron status",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

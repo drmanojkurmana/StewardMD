@@ -158,5 +158,336 @@
       "caption": "Overview comparison matrix for autosomal dominant hypocalcaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrine and renal genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autosomal_dominant_hypocalcaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Albumin-corrected and ionised calcium",
+          "cells": [
+            {
+              "text": "Serum calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact parathyroid hormone measured with calcium",
+          "cells": [
+            {
+              "text": "Parathyroid hormone level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timed urinary calcium and calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Relative hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CASR sequencing, then GNA11 if negative",
+          "cells": [
+            {
+              "text": "Genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis or calculi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Corrected QT interval"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_hypocalcaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypoparathyroidism (autoimmune, post-surgical or 22q11 deletion)",
+          "cells": [
+            {
+              "text": "Relative hypercalciuria on timed urine supports ADH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial isolated hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Separated by CASR and GNA11 sequencing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_hypocalcaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptomatic treatment only",
+          "cells": [
+            {
+              "text": "Aim to abolish neuromuscular symptoms"
+            },
+            {
+              "text": "Full correction of serum calcium precipitates nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restrained calcium and active vitamin D",
+          "cells": [
+            {
+              "text": "Oral calcium with calcitriol or alfacalcidol at the lowest effective dose"
+            },
+            {
+              "text": "Lowest dose that controls symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiazide with sodium restriction",
+          "cells": [
+            {
+              "text": "Curbs urinary calcium loss with dietary sodium restriction"
+            },
+            {
+              "text": "Protects the kidneys from nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute treatment",
+          "cells": [
+            {
+              "text": "Intravenous calcium gluconate under cardiac monitoring"
+            },
+            {
+              "text": "Tetany, carpopedal spasm, laryngospasm or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist options",
+          "cells": [
+            {
+              "text": "Recombinant PTH or calcilytics when conventional treatment is inadequate"
+            },
+            {
+              "text": "Under specialist care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum and urinary calcium, magnesium, renal function, renal ultrasound"
+            },
+            {
+              "text": "Nephrocalcinosis and stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and screening",
+          "cells": [
+            {
+              "text": "CASR and GNA11 screening of relatives"
+            },
+            {
+              "text": "Autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autosomal_dominant_hypocalcaemia-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal Dominant Hypocalcaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypocalcaemia with low PTH and neuromuscular symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Seizures, laryngospasm or prolonged QT interval?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intravenous calcium gluconate under cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corrected calcium, intact PTH, timed urinary calcium, CASR and GNA11, renal ultrasound, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Relative hypercalciuria with a CASR variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Restrained oral calcium with active vitamin D and a thiazide",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat to abolish symptoms rather than normalise calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thiazide with dietary sodium restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor urinary calcium and renal ultrasound for nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and CASR or GNA11 screening of relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

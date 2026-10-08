@@ -141,5 +141,286 @@
       "caption": "Overview comparison matrix for cephalohaematoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cephalohaematoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Fluctuant swelling limited by sutures; does not cross suture lines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin monitoring",
+          "cells": [
+            {
+              "text": "Associated jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skull imaging",
+          "cells": [
+            {
+              "text": "Only if an underlying fracture or intracranial injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin assessment",
+          "cells": [
+            {
+              "text": "Anaemia when the collection is large"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical distinction from subgaleal haemorrhage",
+          "cells": [
+            {
+              "text": "Subgaleal haemorrhage crosses sutures and is diffuse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cephalohaematoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Allow spontaneous resorption over weeks"
+            },
+            {
+              "text": "Never aspirate because of infection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin management",
+          "cells": [
+            {
+              "text": "Phototherapy, escalating to exchange transfusion if severe"
+            },
+            {
+              "text": "Associated hyperbilirubinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia monitoring",
+          "cells": [
+            {
+              "text": "Monitor when the collection is large"
+            },
+            {
+              "text": "Large collection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K",
+          "cells": [
+            {
+              "text": "Ensure adequate vitamin K to support coagulation"
+            },
+            {
+              "text": "Newborn coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective skull imaging",
+          "cells": [
+            {
+              "text": "Image only if fracture or intracranial injury is suspected"
+            },
+            {
+              "text": "Clinical suspicion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parent counselling",
+          "cells": [
+            {
+              "text": "Explain slow resolution and possible calcified rim"
+            },
+            {
+              "text": "Escalate for infection, rapid enlargement or neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cephalohaematoma-dx-mgmt",
+      "title": "Diagnosis and management of Cephalohaematoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cephalohaematoma: swelling limited by sutures after instrumental birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (swelling crosses sutures, blood loss, fracture or infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude subgaleal haemorrhage or intracranial injury; urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; bilirubin monitoring; skull imaging only if fracture suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Swelling confined to one bone, not crossing sutures, without fracture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Expectant management; allow resorption over weeks, never aspirate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check subgaleal haemorrhage and caput succedaneum",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phototherapy for associated hyperbilirubinaemia; exchange transfusion if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor haemoglobin if the collection is large; ensure vitamin K",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel parents on slow resolution and possible calcified rim",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually benign, resolving over weeks to months; jaundice is the main issue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -159,5 +159,336 @@
       "caption": "Overview comparison matrix for anti-amphiphysin paraneoplastic syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_amphiphysin_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF anti-amphiphysin with confirmatory assays",
+          "cells": [
+            {
+              "text": "Antibody confirmation with onconeural panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography, breast MRI and CT chest with whole-body FDG-PET",
+          "cells": [
+            {
+              "text": "Breast or small cell lung carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Continuous motor unit activity and agonist-antagonist co-contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and spinal cord",
+          "cells": [
+            {
+              "text": "Encephalomyelitis or myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Neuropathy or sensory neuronopathy, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for anti-GAD65 and anti-glycine receptor antibodies",
+          "cells": [
+            {
+              "text": "Distinguishes related syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_amphiphysin_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-GAD65 stiff-person syndrome",
+          "cells": [
+            {
+              "text": "Usually non-paraneoplastic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-glycine receptor antibody disease",
+          "cells": [
+            {
+              "text": "Progressive encephalomyelitis with rigidity and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_amphiphysin_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour search and treatment",
+          "cells": [
+            {
+              "text": "Stage-appropriate surgery for breast or small cell lung carcinoma"
+            },
+            {
+              "text": "The primary, disease-modifying step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "First-line immunotherapy"
+            },
+            {
+              "text": "Start without waiting for antibody confirmation once infection excluded; IVIG or plasma exchange as alternatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line agents",
+          "cells": [
+            {
+              "text": "Rituximab, azathioprine, mycophenolate mofetil or cyclophosphamide"
+            },
+            {
+              "text": "Non-responders to first line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tocilizumab",
+          "cells": [
+            {
+              "text": "Autoimmune encephalitis refractory to rituximab"
+            },
+            {
+              "text": "Not specific to the amphiphysin phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stiff-person symptom control",
+          "cells": [
+            {
+              "text": "GABA-enhancing agents such as benzodiazepines and baclofen, with physiotherapy"
+            },
+            {
+              "text": "Rigidity and spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat malignancy screening",
+          "cells": [
+            {
+              "text": "Every four to six months for up to two years"
+            },
+            {
+              "text": "If no tumour found on initial screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral triggers",
+          "cells": [
+            {
+              "text": "Severe truncal or respiratory spasms, autonomic instability"
+            },
+            {
+              "text": "Admission triggers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_amphiphysin_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Anti-Amphiphysin Paraneoplastic Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rigidity and stimulus-sensitive spasms with possible breast or lung cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Spasms compromising ventilation, or falls and fractures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent admission if ventilation is compromised; urgent oncology staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-amphiphysin assay, breast MRI, chest CT with FDG-PET, EMG, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anti-amphiphysin antibody confirmed with malignancy found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stage-appropriate tumour treatment alongside immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table); repeat malignancy screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-dose corticosteroids; IVIG or plasma exchange as alternatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab, azathioprine or cyclophosphamide for non-responders",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Benzodiazepines, baclofen and physiotherapy for rigidity and spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurological response to tumour treatment is not guaranteed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

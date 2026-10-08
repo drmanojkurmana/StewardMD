@@ -147,5 +147,324 @@
       "caption": "Overview comparison matrix for aortopulmonary window."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aortopulmonary_window-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Defect and two separate semilunar valves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MR angiography",
+          "cells": [
+            {
+              "text": "The window and associated arch or coronary anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Shunt quantification and pulmonary vascular resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Cardiomegaly and pulmonary plethora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Biventricular hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for interrupted aortic arch and anomalous coronary origins",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortopulmonary_window-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Truncus arteriosus",
+          "cells": [
+            {
+              "text": "Two separate semilunar valves must be confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large patent ductus arteriosus",
+          "cells": [
+            {
+              "text": "Mistaking the lesion for it misses the window"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortopulmonary_window-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early surgical closure",
+          "cells": [
+            {
+              "text": "Patch closure on cardiopulmonary bypass in infancy"
+            },
+            {
+              "text": "Before irreversible pulmonary vascular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative heart failure control",
+          "cells": [
+            {
+              "text": "Diuretics, afterload reduction and nutritional support"
+            },
+            {
+              "text": "Pulmonary over-circulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair of associated anomalies",
+          "cells": [
+            {
+              "text": "Interrupted aortic arch or anomalous coronary origin at the same operation"
+            },
+            {
+              "text": "Guided by preoperative imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary vascular assessment",
+          "cells": [
+            {
+              "text": "Catheterisation in late presenters; targeted pulmonary hypertension therapy"
+            },
+            {
+              "text": "Established pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative surveillance",
+          "cells": [
+            {
+              "text": "Residual shunt, pulmonary hypertension and arrhythmia; endocarditis prevention"
+            },
+            {
+              "text": "Ongoing surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Congenital cardiology and cardiac surgery"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aortopulmonary_window-dx-mgmt",
+      "title": "Diagnosis and management of Aortopulmonary window",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with early heart failure from a large left-to-right shunt",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid pulmonary vascular obstruction or interrupted arch?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent heart failure stabilisation with diuretics and afterload reduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo for two semilunar valves, CT or MR angiography, catheterisation, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Two separate semilunar valves with a window on echo?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early patch closure on bypass in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repair interrupted arch or anomalous coronary at the same operation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Catheter assessment of pulmonary vascular resistance in late presenters",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for residual shunt and pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated congenital cardiology and cardiac surgery follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

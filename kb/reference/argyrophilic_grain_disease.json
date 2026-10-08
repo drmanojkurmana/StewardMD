@@ -149,5 +149,295 @@
       "caption": "Overview comparison matrix for argyrophilic grain disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "argyrophilic_grain_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Amnestic and behavioural profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Medial temporal atrophy without distinguishing features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Pattern of cortical metabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid PET or CSF biomarkers",
+          "cells": [
+            {
+              "text": "Coexisting Alzheimer pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of reversible causes",
+          "cells": [
+            {
+              "text": "Cognitive and behavioural change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathological examination",
+          "cells": [
+            {
+              "text": "Definitive diagnostic method"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "argyrophilic_grain_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cholinesterase inhibitor",
+          "cells": [
+            {
+              "text": "Trial for cognitive support, particularly with coexisting Alzheimer pathology"
+            },
+            {
+              "text": "Review benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-pharmacological strategies first",
+          "cells": [
+            {
+              "text": "For neuropsychiatric and behavioural symptoms"
+            },
+            {
+              "text": "Antidepressants or antipsychotics used cautiously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat reversible contributors",
+          "cells": [
+            {
+              "text": "Metabolic, medication, mood and sensory causes"
+            },
+            {
+              "text": "Exclude and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured dementia care",
+          "cells": [
+            {
+              "text": "Caregiver education, safety planning, advance-care planning"
+            },
+            {
+              "text": "Structured support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Memory and old-age psychiatry services",
+          "cells": [
+            {
+              "text": "Occupational therapy and social care"
+            },
+            {
+              "text": "Multidisciplinary support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular review",
+          "cells": [
+            {
+              "text": "Cognition, mood and function"
+            },
+            {
+              "text": "Generally slow course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "argyrophilic_grain_disease-dx-mgmt",
+      "title": "Diagnosis and management of Argyrophilic grain disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive amnestic decline with behavioural change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid decline or behaviour compromising safety?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review to exclude reversible causes of rapid decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neuropsychology, MRI, FDG-PET, amyloid PET or CSF biomarkers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Coexisting Alzheimer pathology excluded on amyloid PET or CSF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Trial a cholinesterase inhibitor and review benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biomarker assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat reversible causes: metabolic, medication, mood, sensory",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Non-drug strategies first for behavioural symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structured dementia care with caregiver and advance-care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neuropathological examination is the definitive diagnostic method",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

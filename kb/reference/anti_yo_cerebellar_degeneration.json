@@ -159,5 +159,307 @@
       "caption": "Overview comparison matrix for anti-yo paraneoplastic cerebellar degeneration."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_yo_cerebellar_degeneration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF anti-Yo (PCA-1) with immunohistochemistry and line blot",
+          "cells": [
+            {
+              "text": "Antibody confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal pelvic ultrasound and CT or MRI of abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Ovarian or tubal carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography and breast MRI",
+          "cells": [
+            {
+              "text": "Breast malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body FDG-PET",
+          "cells": [
+            {
+              "text": "When initial imaging is unrevealing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA-125 and other tumour markers",
+          "cells": [
+            {
+              "text": "Occult gynaecological malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial brain MRI",
+          "cells": [
+            {
+              "text": "Evolving cerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_yo_cerebellar_degeneration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour control",
+          "cells": [
+            {
+              "text": "Primary treatment lever"
+            },
+            {
+              "text": "Yo targets an intracellular antigen and responds poorly to immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour treatment",
+          "cells": [
+            {
+              "text": "Stage-appropriate surgery, systemic therapy or radiotherapy"
+            },
+            {
+              "text": "Ovarian, breast or other primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parallel immune-directed therapy",
+          "cells": [
+            {
+              "text": "Treat the tumour alongside immunotherapy"
+            },
+            {
+              "text": "Not one after the other"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Short course of high-dose corticosteroids"
+            },
+            {
+              "text": "IVIG or plasma exchange as other options; empiric treatment considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line agents",
+          "cells": [
+            {
+              "text": "Rituximab, azathioprine, mycophenolate or cyclophosphamide"
+            },
+            {
+              "text": "For non-responders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exploratory surgery",
+          "cells": [
+            {
+              "text": "Risk-reducing surgery for the malignancy"
+            },
+            {
+              "text": "Antibody positive but initial imaging negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complications of fixed disability",
+          "cells": [
+            {
+              "text": "Manage aspiration risk and falls"
+            },
+            {
+              "text": "Deficits typically plateau after Purkinje cell loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_yo_cerebellar_degeneration-dx-mgmt",
+      "title": "Diagnosis and management of Anti-Yo Paraneoplastic Cerebellar Degeneration",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly progressive cerebellar ataxia, unable to walk within weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Occult gynaecological or breast malignancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gynaecological and breast oncology staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-Yo assay, pelvic ultrasound, CT or MRI, mammography, FDG-PET, CA-125",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anti-Yo confirmed with an ovarian or breast cancer found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stage-appropriate tumour treatment in parallel with immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table); consider exploratory surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short course of high-dose corticosteroids as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab, azathioprine or cyclophosphamide for non-responders",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage aspiration risk and falls from fixed cerebellar disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Overall poor immunotherapy response; deficits typically plateau",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

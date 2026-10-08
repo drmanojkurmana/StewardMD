@@ -300,5 +300,586 @@
       "caption": "Diagnostic and clinical overview matrix for device-related infection (cied / vascular catheter)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Alberta Health Services Bugs and Drugs, Catheter-related bloodstream infection (based on IDSA 2009)",
+      "url": "https://bugsanddrugs.org/557679E7-DCA7-4381-B446-4559A999614F",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "McMaster Textbook of Internal Medicine, Organism-based treatment of catheter-related bloodstream infections",
+      "url": "https://ebm.one/en/node/2132",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "DEVICE_INFECTION-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing catheter and cardiac device infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired blood cultures",
+          "cells": [
+            {
+              "text": "One set from the catheter and one peripheral"
+            },
+            {
+              "text": "Required to show the line is the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Differential time to positivity",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Catheter set positive >2 h before peripheral",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "{{hy:Suggests catheter-related bloodstream infection}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter tip culture",
+          "unit": "CFU",
+          "cells": [
+            {
+              "text": ">=15",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "Colonised tip; remove short-term catheter"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exit site",
+          "cells": [
+            {
+              "text": "Erythema or purulence"
+            },
+            {
+              "text": "Local infection; remove short-term catheter"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Unexplained S. aureus bacteraemia with a CIED",
+          "cells": [
+            {
+              "text": "No other source"
+            },
+            {
+              "text": "Treat as device or valve endocarditis until proven otherwise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse of bacteraemia after therapy with a CIED",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Device likely source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generator pocket",
+          "cells": [
+            {
+              "text": "Inflammation or pus, often within 6 months of device manipulation"
+            },
+            {
+              "text": "Aspirate collection with blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures for suspected device endocarditis",
+          "cells": [
+            {
+              "text": "3 or more sets from separate venepunctures, about 10 mL per bottle"
+            },
+            {
+              "text": "Repeat sets if negative at 48 to 72 hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echo",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Finds vegetations in >90% of definite endocarditis",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Repeat in 7 to 10 days if negative but suspicion high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lead vegetation size",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">2",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Risk of pulmonary embolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET/CT",
+          "cells": [
+            {
+              "text": "Pocket, lead and distant infection"
+            },
+            {
+              "text": "Less sensitive than TEE inside the heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timing after CIED implant",
+          "cells": [
+            {
+              "text": "About one third each: under 3 months, 3 to 12 months, over 1 year"
+            },
+            {
+              "text": "Late infection does not exclude the device"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "DEVICE_INFECTION-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from device-related infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Native or prosthetic valve endocarditis",
+          "cells": [
+            {
+              "text": "May coexist with device infection; TEE examines valves and leads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacteraemia from another focus",
+          "cells": [
+            {
+              "text": "{{hy:Gram-negative, streptococcal or enterococcal bacteraemia with a clear extracardiac source}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic thrombophlebitis",
+          "cells": [
+            {
+              "text": "Bacteraemia persisting more than 3 days after line removal and therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metastatic infection (vertebral osteomyelitis, endophthalmitis)",
+          "cells": [
+            {
+              "text": "Remote-site symptoms in bacteraemic device infection; look for it with S. aureus and Candida"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single positive culture for skin flora",
+          "cells": [
+            {
+              "text": "Only one bottle with coagulase-negative staphylococci, Bacillus, Micrococcus or Propionibacterium may be contamination; more than one is significant"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "DEVICE_INFECTION-treatment",
+      "kind": "treatment",
+      "title": "Management of catheter-related bloodstream infection and CIED infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empiric vancomycin 15 mg/kg IV every 8 to 12 h, with or without gentamicin 7 mg/kg daily",
+          "cells": [
+            {
+              "text": "Suspected CRBSI"
+            },
+            {
+              "text": "Add an echinocandin or fluconazole if fungaemia is a concern"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Remove short-term catheter",
+          "cells": [
+            {
+              "text": "Sepsis, thrombophlebitis, endocarditis, osteomyelitis, bacteraemia >72 h on therapy, or S. aureus, Gram-negative, enterococcal, fungal or mycobacterial infection"
+            },
+            {
+              "text": "Also exit-site pus or tip >=15 CFU"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Coagulase-negative staphylococci",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Remove and treat 5 to 7 days",
+              "range": [
+                5,
+                7
+              ]
+            },
+            {
+              "text": "Or retain with systemic plus lock therapy for 10 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staphylococcus aureus",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Remove and treat >=14 days",
+              "op": ">=",
+              "value": 14
+            },
+            {
+              "text": "{{hy:Exclude endocarditis with TEE}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enterococcus",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "7 to 14",
+              "range": [
+                7,
+                14
+              ]
+            },
+            {
+              "text": "Remove short-term line"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gram-negative bacilli",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Remove and treat 7 to 14",
+              "range": [
+                7,
+                14
+              ]
+            },
+            {
+              "text": "Salvage only if essential, with lock therapy 10 to 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Candida",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Remove and treat 14 after first negative culture",
+              "op": "=",
+              "value": 14
+            },
+            {
+              "text": "Rule out endocarditis and endophthalmitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MSSA or methicillin-susceptible CoNS",
+          "cells": [
+            {
+              "text": "Definitive therapy"
+            },
+            {
+              "text": "Cefazolin 2 g IV every 8 h or cloxacillin 2 g IV every 4 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MRSA or methicillin-resistant CoNS",
+          "cells": [
+            {
+              "text": "Definitive therapy"
+            },
+            {
+              "text": "Vancomycin 15 to 20 mg/kg IV every 12 h; daptomycin if vancomycin MIC >=2"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Antibiotic lock therapy",
+          "cells": [
+            {
+              "text": "Catheter salvage, always with systemic therapy"
+            },
+            {
+              "text": "For example vancomycin 2 mg/mL or gentamicin 1 mg/mL in 2 to 5 mL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complete CIED removal",
+          "cells": [
+            {
+              "text": "Confirmed CIED infection"
+            },
+            {
+              "text": "Removal during first admission improves 30-day and 1-year survival; antibiotics alone usually fail"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Durations follow IDSA 2009 as summarised by Alberta Health Services; doses as stated by the cited sources with normal renal function."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "DEVICE_INFECTION-dx-mgmt",
+      "title": "Diagnosis and management of device-related infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever or bacteraemia in a patient with a catheter or CIED",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Paired catheter and peripheral cultures; empiric vancomycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Cardiac device present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "3 blood culture sets, TEE, pocket aspirate; PET/CT if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Device or lead infection confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Remove whole device in first admission plus targeted therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "DTP >2 h, tip >=15 CFU or exit-site pus?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Seek another source of bacteraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "S. aureus, Gram-negative, enterococcus, fungus, or sepsis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Remove catheter; organism-specific duration",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "CoNS: remove 5 to 7 days, or retain with lock 10 to 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Bacteraemia beyond 72 h despite therapy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Look for thrombophlebitis, endocarditis, metastatic infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Complete course",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "CoNS"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

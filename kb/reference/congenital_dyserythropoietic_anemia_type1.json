@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for congenital dyserythropoietic anaemia type i (cdan1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_dyserythropoietic_anemia_type1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Macrocytic anaemia with inappropriately low reticulocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Internuclear bridges and dyserythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy of erythroblasts",
+          "cells": [
+            {
+              "text": "Spongy heterochromatin pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies with ferritin and transferrin saturation",
+          "cells": [
+            {
+              "text": "Overload assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for CDAN1 and C15orf41",
+          "cells": [
+            {
+              "text": "Causative variant identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dyserythropoietic_anemia_type1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital dyserythropoietic anaemia type II (SEC23B)",
+          "cells": [
+            {
+              "text": "Separated by gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thalassaemia syndromes",
+          "cells": [
+            {
+              "text": "Excluded in the haemolysis workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Megaloblastic anaemia from B12 or folate deficiency",
+          "cells": [
+            {
+              "text": "Excluded by B12 and folate status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dyserythropoietic_anemia_type1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Interferon alpha",
+          "cells": [
+            {
+              "text": "Disease-specific therapy in type I; can raise haemoglobin and reduce transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferasirox, deferiprone or desferrioxamine for progressive overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Supports ineffective erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion and splenectomy",
+          "cells": [
+            {
+              "text": "Leucodepleted, phenotype-matched transfusion; splenectomy for haemolytic component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Ferritin and MRI iron; pigment gallstone surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CDAN1 and C15orf41; relatives tested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Haematology and genetics; stem cell transplantation in severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_dyserythropoietic_anemia_type1-dx-mgmt",
+      "title": "Diagnosis and management of Congenital dyserythropoietic anaemia type I (CDAN1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CDA type I (CDAN1): macrocytic anaemia with low reticulocytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (iron overload complications, neonatal severe anaemia, cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transfusion for severe anaemia; treat aplastic crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Marrow bridges; EM spongy heterochromatin; iron studies; CDAN1 and C15orf41",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CDAN1 or C15orf41 testing confirm the defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider CDA type II, thalassaemia or myelodysplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interferon alpha as disease-specific therapy for type I",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron chelation for progressive overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Folic acid and judicious phenotype-matched transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor iron by MRI; consider splenectomy for haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many keep moderate anaemia; iron overload accumulates over decades",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

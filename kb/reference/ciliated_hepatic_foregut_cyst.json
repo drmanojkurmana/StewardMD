@@ -150,5 +150,312 @@
       "caption": "Overview comparison matrix for ciliated hepatic foregut cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Blumgart's Surgery of the Liver, Biliary Tract and Pancreas",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ciliated_hepatic_foregut_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Characterises the subcapsular cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the liver",
+          "cells": [
+            {
+              "text": "Lesion characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue characterisation and surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Confirms the ciliated foregut lining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for hydatid disease",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ciliated_hepatic_foregut_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Simple hepatic cyst",
+          "cells": [
+            {
+              "text": "Lacks ciliated lining and smooth muscle layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydatid cyst",
+          "cells": [
+            {
+              "text": "Parasitic cyst; excluded by serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucinous cystic neoplasm (biliary cystadenoma)",
+          "cells": [
+            {
+              "text": "Biliary cystadenoma, a distinct lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ciliated_hepatic_foregut_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive treatment given potential for squamous carcinoma"
+            },
+            {
+              "text": "Recognised malignant potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological confirmation",
+          "cells": [
+            {
+              "text": "Four-layered ciliated foregut lining with immunohistochemistry"
+            },
+            {
+              "text": "Confirms diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging surveillance",
+          "cells": [
+            {
+              "text": "Small incidental asymptomatic lesion when resection is deferred"
+            },
+            {
+              "text": "Deferred resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary surgical referral",
+          "cells": [
+            {
+              "text": "Assessment and operative planning"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-resection follow-up",
+          "cells": [
+            {
+              "text": "Confirms cure and detects recurrence"
+            },
+            {
+              "text": "Follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ciliated_hepatic_foregut_cyst-dx-mgmt",
+      "title": "Diagnosis and management of ciliated hepatic foregut cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected ciliated hepatic foregut cyst: subcapsular solitary cyst, left lobe segment IV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, solid or mural component, wall thickening)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent hepatobiliary referral for suspected squamous transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, contrast CT, MRI and serology to exclude hydatid disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Solid or mural component or wall thickening on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Complete surgical excision as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check simple cyst, hydatid cyst, biliary cystadenoma and abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Imaging surveillance only for a small incidental asymptomatic cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Histopathology with immunohistochemistry to confirm the lining",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hepatobiliary surgical referral for operative planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Post-resection follow-up to confirm cure and detect recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

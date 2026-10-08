@@ -152,5 +152,483 @@
       "caption": "Overview comparison matrix for hemochromatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hereditary Hemochromatosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/iron-overload/hereditary-hemochromatosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Iron overload causes (Harrison table, p38-49 section)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemochromatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing hereditary hemochromatosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin saturation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Usually above 50%",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "{{hy:Below 45% has a 97% negative predictive value for iron overload}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transferrin saturation (Harrison)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Above 60% in men, above 45 to 50% in women",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "Systemic iron overload threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ferritin, type 1",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Above 250 ng/mL in men, above 200 ng/mL in women",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "Reflects body iron stores"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ferritin needing liver assessment",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Above 1000 ng/mL",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "Liver biopsy or MRI elastography to stage fibrosis or cirrhosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HFE genotype",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "C282Y homozygous in 83% of clinical cases",
+              "op": "=",
+              "value": 83
+            },
+            {
+              "text": "C282Y/H63D gives significant overload in only 0.5 to 2%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Penetrance",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% of C282Y homozygotes have high ferritin, about 10% organ damage",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Genotype does not equal disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clinical features",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Fatigue 75%, abnormal LFTs 75%, pigmentation 70%, diabetes 50%, arthropathy 45%, cardiomyopathy 15%",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Bronze diabetes picture is late"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac and liver iron",
+          "cells": [
+            {
+              "text": "MRI quantitation"
+            },
+            {
+              "text": "Endomyocardial biopsy rarely needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Transferrin saturation cut-off differs by source: Harrison 22e gives above 60% (men) and above 45 to 50% (women); Merck gives usually above 50%, with below 45% making overload unlikely. Both kept."
+    },
+    {
+      "id": "hemochromatosis-ddx",
+      "kind": "ddx",
+      "title": "Other causes of iron overload and look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Transfusional or anaemia-related overload",
+          "cells": [
+            {
+              "text": "Thalassaemia major, sideroblastic or haemolytic anaemia, many transfusions"
+            },
+            {
+              "text": "Transfusion history; HFE testing negative"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic liver disease with secondary iron",
+          "cells": [
+            {
+              "text": "Hepatitis C, alcoholic cirrhosis, NASH, porphyria cutanea tarda, dysmetabolic iron overload"
+            },
+            {
+              "text": "Liver work-up; ferritin high with lower saturation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-HFE hemochromatosis (types 2 to 4)",
+          "cells": [
+            {
+              "text": "Type 2 ferritin above 1000 ng/mL and saturation above 90%; type 4A saturation normal or low"
+            },
+            {
+              "text": "Genetic testing for non-HFE genes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other causes of hyperpigmentation",
+          "cells": [
+            {
+              "text": "Porphyria cutanea tarda, B12 or folate deficiency, pellagra, Whipple disease"
+            },
+            {
+              "text": "Iron studies normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other restrictive or dilated cardiomyopathy",
+          "cells": [
+            {
+              "text": "Haemochromatosis often looks dilated"
+            },
+            {
+              "text": "Cardiac MRI iron quantitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rare inherited causes",
+          "cells": [
+            {
+              "text": "Aceruloplasminaemia, congenital atransferrinaemia, neonatal iron overload"
+            },
+            {
+              "text": "Ceruloplasmin and transferrin levels"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "hemochromatosis-treatment",
+      "kind": "treatment",
+      "title": "Treating hereditary hemochromatosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic phlebotomy",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "{{hy:About 500 mL weekly or every other week until ferritin 50 to 100 ng/mL}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maintenance phlebotomy",
+          "cells": [
+            {
+              "text": "After iron depletion"
+            },
+            {
+              "text": "Intermittent, keeping ferritin 50 to 100 ng/mL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iron chelation (deferoxamine or deferasirox)",
+          "cells": [
+            {
+              "text": "Cannot tolerate phlebotomy, such as anaemia or severe heart disease"
+            },
+            {
+              "text": "Chelators can precipitate Yersinia sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Avoid iron and vitamin C supplements, limit alcohol, avoid raw shellfish (Vibrio vulnificus)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ complications",
+          "cells": [
+            {
+              "text": "Diabetes, hypogonadism, cardiomyopathy, arthropathy"
+            },
+            {
+              "text": "Treat each; heart function may improve with iron removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HCC surveillance",
+          "cells": [
+            {
+              "text": "Cirrhosis"
+            },
+            {
+              "text": "Periodic liver imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "First-degree relatives"
+            },
+            {
+              "text": "Ferritin plus HFE C282Y and H63D testing"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemochromatosis-dx-mgmt",
+      "title": "Diagnosis and management of hemochromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised liver tests, fatigue, arthropathy, diabetes or affected relative",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fasting transferrin saturation and ferritin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Saturation 45% or more with high ferritin?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Iron overload unlikely; look for other cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "HFE genotyping",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "C282Y homozygous (or compound with overload)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Look for secondary or non-HFE causes; liver MRI or biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Ferritin above 1000 ng/mL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stage liver fibrosis by biopsy or MR elastography",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Weekly phlebotomy to ferritin 50 to 100 ng/mL",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen first-degree relatives",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lifelong maintenance; HCC surveillance if cirrhotic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -154,5 +154,364 @@
       "caption": "Overview comparison matrix for acute transplant rejection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard solid-organ transplantation and transplant immunology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_transplant_rejection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Allograft biopsy with histological grading",
+          "cells": [
+            {
+              "text": "Diagnostic standard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Donor-specific antibody testing through HLA antibody screening",
+          "cells": [
+            {
+              "text": "Donor-specific antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C4d immunostaining on biopsy",
+          "cells": [
+            {
+              "text": "Antibody-mediated rejection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific function tests with trend monitoring",
+          "cells": [
+            {
+              "text": "Rising organ-specific markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppressant drug levels and adherence assessment",
+          "cells": [
+            {
+              "text": "Drug exposure and adherence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler ultrasound or other imaging",
+          "cells": [
+            {
+              "text": "Vascular or mechanical causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for BK virus or cytomegalovirus",
+          "cells": [
+            {
+              "text": "Graft infection where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_transplant_rejection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcineurin-inhibitor toxicity",
+          "cells": [
+            {
+              "text": "Drug-induced graft injury"
+            },
+            {
+              "text": "Immunosuppressant drug levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BK nephropathy or cytomegalovirus disease",
+          "cells": [
+            {
+              "text": "Infection of the allograft"
+            },
+            {
+              "text": "BK virus or CMV screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombosis, stenosis or obstruction",
+          "cells": [
+            {
+              "text": "Vascular or mechanical complication"
+            },
+            {
+              "text": "Doppler ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_transplant_rejection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulsed high-dose corticosteroids",
+          "cells": [
+            {
+              "text": "Cellular rejection"
+            },
+            {
+              "text": "Escalate steroid-resistant episodes to antithymocyte globulin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange and intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Removes donor-specific antibody in antibody-mediated rejection"
+            },
+            {
+              "text": "Antibody removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab or complement- or proteasome-targeted agents",
+          "cells": [
+            {
+              "text": "Refractory antibody-mediated rejection"
+            },
+            {
+              "text": "Refractory cases only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise maintenance immunosuppression; address non-adherence",
+          "cells": [
+            {
+              "text": "Prevents rejection"
+            },
+            {
+              "text": "Calcineurin inhibitor, antiproliferative and steroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and antibody confirmation before treatment",
+          "cells": [
+            {
+              "text": "Confirms and grades severity"
+            },
+            {
+              "text": "Before committing to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis (Pneumocystis, CMV, fungi)",
+          "cells": [
+            {
+              "text": "Augmented immunosuppression"
+            },
+            {
+              "text": "During intensified treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist transplant multidisciplinary team",
+          "cells": [
+            {
+              "text": "Structured adherence and drug-level support"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_transplant_rejection-dx-mgmt",
+      "title": "Diagnosis and management of Acute transplant rejection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Falling graft function over days to months after transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid graft loss or steroid-resistant rejection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent transplant team review; consider antibody-mediated rejection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Allograft biopsy with grading, DSA screen, C4d staining and drug levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rejection confirmed on biopsy, with infection and drug toxicity excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pulsed corticosteroids for cellular rejection; plasma exchange and IVIg for AMR",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review calcineurin toxicity, BK or CMV infection, vascular complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate steroid-resistant cellular rejection to antithymocyte globulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab or complement or proteasome agents for refractory AMR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Optimise maintenance immunosuppression; address non-adherence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cellular rejection often reverses; AMR and steroid resistance risk graft loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

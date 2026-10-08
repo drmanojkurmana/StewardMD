@@ -153,5 +153,289 @@
       "caption": "Overview comparison matrix for carrion disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Infectious disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carrion_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Giemsa-stained thin and thick blood films",
+          "cells": [
+            {
+              "text": "Look for intraerythrocytic organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Detect Bartonella and Salmonella co-infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and haemolysis markers",
+          "cells": [
+            {
+              "text": "Severe haemolytic anaemia in the acute phase (Oroya fever)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy and histology of verruga lesions",
+          "cells": [
+            {
+              "text": "Vascular endothelial proliferation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carrion_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute-phase antibiotics",
+          "cells": [
+            {
+              "text": "Chloramphenicol, which also covers Salmonella, or a fluoroquinolone"
+            },
+            {
+              "text": "Add a beta-lactam such as ceftriaxone in severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verruga phase antibiotics",
+          "cells": [
+            {
+              "text": "Azithromycin or rifampicin"
+            },
+            {
+              "text": "Chronic cutaneous phase (verruga peruana)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical superinfection cover",
+          "cells": [
+            {
+              "text": "Cover opportunistic Salmonella during the immunosuppressed acute phase"
+            },
+            {
+              "text": "Immune suppression predisposes to superinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion and supportive care",
+          "cells": [
+            {
+              "text": "Blood transfusion for profound haemolytic anaemia"
+            },
+            {
+              "text": "Acute phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recovery monitoring",
+          "cells": [
+            {
+              "text": "Haemolysis markers, blood counts and secondary infection"
+            },
+            {
+              "text": "Recovery phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vector control",
+          "cells": [
+            {
+              "text": "Insecticide-treated nets and repellents against sandflies"
+            },
+            {
+              "text": "Prevents transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Infectious diseases or tropical medicine"
+            },
+            {
+              "text": "Endemic Andean exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carrion_disease-dx-mgmt",
+      "title": "Diagnosis and management of Carrion disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Carrion disease: febrile, anaemic traveller from Andean valleys",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemodynamic compromise, sepsis, neurological signs or pregnancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: severe anaemia and sepsis; pregnancy carries high mortality",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Giemsa blood films for intraerythrocytic organisms; blood cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Intraerythrocytic organisms seen, or Bartonella isolated on culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chloramphenicol or fluoroquinolone for Oroya fever; ceftriaxone if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check malaria, Salmonella and other haemolytic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cover opportunistic Salmonella during the immunosuppressed acute phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfuse for profound haemolytic anaemia; supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Azithromycin or rifampicin for the verruga peruana phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prompt antibiotics improve Oroya fever; verruga phase is generally self-limiting",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

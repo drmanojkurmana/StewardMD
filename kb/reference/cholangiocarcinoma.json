@@ -154,5 +154,327 @@
       "caption": "Overview comparison matrix for cholangiocarcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / DeVita's Cancer: Principles & Practice of Oncology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cholangiocarcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with MRCP",
+          "cells": [
+            {
+              "text": "Maps biliary anatomy and vascular and parenchymal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Local staging and distant metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERCP or percutaneous cholangiography with brush cytology or biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CA 19-9 and CEA",
+          "cells": [
+            {
+              "text": "Supportive and monitoring markers; not specific, raised by obstruction or cholangitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular profiling of tumour tissue",
+          "cells": [
+            {
+              "text": "FGFR2 fusions, IDH1 mutations and other actionable targets"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholangiocarcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatocellular carcinoma",
+          "cells": [
+            {
+              "text": "Intrahepatic mass lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choledocholithiasis",
+          "cells": [
+            {
+              "text": "Obstruction from a stone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholangiocarcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Subtype and multidisciplinary review",
+          "cells": [
+            {
+              "text": "Confirm intrahepatic, perihilar or distal subtype at a hepatobiliary tumour board"
+            },
+            {
+              "text": "Surgery and staging differ by subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Curative resection",
+          "cells": [
+            {
+              "text": "Surgery with R0 margin, after staging laparoscopy"
+            },
+            {
+              "text": "Only curative option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection extent by subtype",
+          "cells": [
+            {
+              "text": "Nonanatomic to formal lobectomy (intrahepatic); lobectomy with bile duct and lymphadenectomy (perihilar); pancreaticoduodenectomy-type approach (distal)"
+            },
+            {
+              "text": "Subtype-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Carefully selected early-stage unresectable perihilar tumours with neoadjuvant chemoradiation"
+            },
+            {
+              "text": "Not routinely used for intrahepatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant capecitabine",
+          "cells": [
+            {
+              "text": "Offered after resection"
+            },
+            {
+              "text": "Survival and recurrence-free survival benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line systemic therapy",
+          "cells": [
+            {
+              "text": "Platinum-gemcitabine doublet, or a clinical trial, for advanced or metastatic disease"
+            },
+            {
+              "text": "Advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line and targeted therapy",
+          "cells": [
+            {
+              "text": "Fluoropyrimidine-oxaliplatin after progression; targeted therapy for FGFR2, IDH1, BRAF V600E, NTRK, HER2"
+            },
+            {
+              "text": "Targetable alterations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cholangiocarcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Cholangiocarcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cholangiocarcinoma: painless obstructive jaundice with weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cholangitis, new dominant stricture in PSC, rapidly enlarging mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biliary decompression for cholangitis or obstructive jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI with MRCP, contrast CT staging, ERCP brushings or biopsy, CA 19-9",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Tissue-proven cholangiocarcinoma with subtype and resectability defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgery with R0 margin after staging laparoscopy; subtype-specific resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check hepatocellular carcinoma, pancreatic head cancer and choledocholithiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant capecitabine after resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Platinum-gemcitabine first line for advanced or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biliary stenting for palliation and control of cholangitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genomic profiling for FGFR2, IDH1 and other targetable alterations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

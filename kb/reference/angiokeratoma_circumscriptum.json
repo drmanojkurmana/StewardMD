@@ -145,5 +145,306 @@
       "caption": "Overview comparison matrix for angiokeratoma circumscriptum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angiokeratoma_circumscriptum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Dark lacunae with a keratotic veil"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Dilated superficial vessels with overlying hyperkeratosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Shows a deeper vascular malformation, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-galactosidase A activity",
+          "cells": [
+            {
+              "text": "Screens for Fabry disease if lesions are widespread or symmetrical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angiokeratoma_circumscriptum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angiokeratoma of Fabry disease",
+          "cells": [
+            {
+              "text": "Widespread or symmetrical lesions suggest a systemic storage disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant melanoma",
+          "cells": [
+            {
+              "text": "Pigmented or rapidly changing lesion raises suspicion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angiokeratoma_circumscriptum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Localised symptomatic or cosmetically troublesome lesions"
+            },
+            {
+              "text": "Recurrence can follow ablative treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular laser therapy",
+          "cells": [
+            {
+              "text": "Pulsed-dye or long-pulsed Nd:YAG laser"
+            },
+            {
+              "text": "Less invasive option for suitable lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local bleeding control",
+          "cells": [
+            {
+              "text": "Lesions traumatised at the surface"
+            },
+            {
+              "text": "Recurrent bleeding is a reason to treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound or MRI",
+          "cells": [
+            {
+              "text": "Defines any deeper vascular malformation"
+            },
+            {
+              "text": "Done before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude Fabry disease",
+          "cells": [
+            {
+              "text": "Measure alpha-galactosidase A activity"
+            },
+            {
+              "text": "If lesions are widespread or symmetrical rather than localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and monitoring",
+          "cells": [
+            {
+              "text": "Benign and lifelong; monitor for slow enlargement"
+            },
+            {
+              "text": "Recurrence is a recognised risk after ablative therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angiokeratoma_circumscriptum-dx-mgmt",
+      "title": "Diagnosis and management of Angiokeratoma circumscriptum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rare lesion, usually congenital or in childhood, most often on a limb",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Pigmented or rapidly changing lesion suspicious for melanoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review to exclude melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dermoscopy, skin biopsy, ultrasound or MRI if a deeper malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dilated superficial vessels with hyperkeratosis on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgical excision or pulsed-dye or Nd:YAG laser for localised lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Local measures to control bleeding from traumatised lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Alpha-galactosidase A testing if lesions are widespread or symmetrical",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Counsel on recurrence after ablative treatment; monitor enlargement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and lifelong; treated for bleeding or cosmetic reasons",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

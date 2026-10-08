@@ -148,5 +148,367 @@
       "caption": "Overview comparison matrix for adiaspiromycosis (emmonsia)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adiaspiromycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lung biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Large thick-walled adiaspores within granulomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph and CT",
+          "cells": [
+            {
+              "text": "Nodular, reticulonodular or miliary patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture and molecular identification",
+          "cells": [
+            {
+              "text": "Emmonsia species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed exposure history",
+          "cells": [
+            {
+              "text": "Soil, rural and excavation activities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations to exclude tuberculosis and endemic mycoses",
+          "cells": [
+            {
+              "text": "Excludes alternative causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "Distinguishes classical from disseminated infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adiaspiromycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis and other mycobacterial disease",
+          "cells": [
+            {
+              "text": "Mycobacterial infection, excluded first"
+            },
+            {
+              "text": "Tests to exclude tuberculosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasmosis and other endemic mycoses",
+          "cells": [
+            {
+              "text": "Endemic dimorphic mycosis"
+            },
+            {
+              "text": "Fungal culture and molecular identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Granulomas without adiaspores"
+            },
+            {
+              "text": "Lung biopsy histopathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergomycosis",
+          "cells": [
+            {
+              "text": "Disseminated dimorphic infection in the immunocompromised"
+            },
+            {
+              "text": "Immune status assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adiaspiromycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic azole (itraconazole) or amphotericin B",
+          "cells": [
+            {
+              "text": "Symptomatic or diffuse pulmonary disease"
+            },
+            {
+              "text": "Amphotericin B for severe illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation without antifungal therapy",
+          "cells": [
+            {
+              "text": "Asymptomatic low-inoculum disease"
+            },
+            {
+              "text": "Such as an incidental solitary granuloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen and ventilatory support",
+          "cells": [
+            {
+              "text": "Heavy-exposure granulomatous pneumonitis"
+            },
+            {
+              "text": "Supportive respiratory care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive corticosteroids",
+          "cells": [
+            {
+              "text": "Severe diffuse disease"
+            },
+            {
+              "text": "Attenuates granulomatous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial chest imaging and respiratory function monitoring",
+          "cells": [
+            {
+              "text": "Resolution or progression"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of further heavy soil and dust exposure",
+          "cells": [
+            {
+              "text": "Prevents re-exposure"
+            },
+            {
+              "text": "Respiratory protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases and respiratory referral",
+          "cells": [
+            {
+              "text": "Excludes tuberculosis and endemic mycoses"
+            },
+            {
+              "text": "Specialist review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adiaspiromycosis-dx-mgmt",
+      "title": "Diagnosis and management of Adiaspiromycosis (Emmonsia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness after soil or excavation exposure with nodular lung changes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Diffuse bilateral disease with hypoxaemia after heavy exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and infectious diseases review; oxygen and antifungal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lung biopsy, chest CT, fungal culture and molecular identification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thick-walled adiaspores within granulomas on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat with itraconazole or amphotericin B if symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude tuberculosis, histoplasmosis, sarcoidosis and emergomycosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe asymptomatic low-inoculum disease without antifungal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supplemental oxygen and ventilatory support for severe pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjunctive corticosteroids in severe diffuse disease; serial chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Localised disease often self-limiting; diffuse disease usually responds",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

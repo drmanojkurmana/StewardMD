@@ -160,5 +160,531 @@
       "caption": "Overview comparison matrix for autoimmune hepatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Clinical management of autoimmune hepatitis (review), 2019",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6826525/",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 306-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Simplified IAIHG criteria for autoimmune hepatitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Cut-off",
+        "Points"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA or SMA",
+          "cells": [
+            {
+              "text": "Titre 1:40 or more"
+            },
+            {
+              "text": "1",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ANA or SMA",
+          "cells": [
+            {
+              "text": "Titre 1:80 or more"
+            },
+            {
+              "text": "2",
+              "op": "=",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-LKM1",
+          "cells": [
+            {
+              "text": "1:40 or more"
+            },
+            {
+              "text": "2",
+              "op": "=",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-SLA/LP",
+          "cells": [
+            {
+              "text": "Any titre"
+            },
+            {
+              "text": "2 (antibody points capped at 2 in total)",
+              "op": "=",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgG",
+          "cells": [
+            {
+              "text": "Above upper limit of normal, or above 1.1 times ULN"
+            },
+            {
+              "text": "1, or 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver histology",
+          "cells": [
+            {
+              "text": "Atypical, compatible, or typical (hepatitis required)"
+            },
+            {
+              "text": "0, 1, or 2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No viral hepatitis",
+          "cells": [
+            {
+              "text": "Yes or no"
+            },
+            {
+              "text": "2 or 0"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total score",
+          "cells": [
+            {
+              "text": "{{hy:6 = probable AIH; 7 or more = definite AIH}}"
+            },
+            {
+              "text": "Probable 6, definite 7 or more",
+              "op": ">=",
+              "value": 6
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibody pattern by type",
+          "cells": [
+            {
+              "text": "Type I ANA (homogeneous); type II anti-LKM1; anti-SLA also described"
+            },
+            {
+              "text": "Hyperglobulinaemia typical"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Up to 30% have cirrhosis at diagnosis."
+    },
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-ddx",
+      "kind": "ddx",
+      "title": "Chronic hepatitis: separating autoimmune hepatitis from look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Diagnostic test",
+        "Autoantibodies"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic hepatitis B",
+          "cells": [
+            {
+              "text": "HBsAg, IgG anti-HBc, HBeAg, HBV DNA"
+            },
+            {
+              "text": "Uncommon"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic hepatitis C",
+          "cells": [
+            {
+              "text": "Anti-HCV, HCV RNA"
+            },
+            {
+              "text": "{{hy:Anti-LKM1 can occur, mimicking type II AIH}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chronic hepatitis D",
+          "cells": [
+            {
+              "text": "Anti-HDV, HDV RNA, HBsAg, IgG anti-HBc"
+            },
+            {
+              "text": "Anti-LKM3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drug-associated hepatitis",
+          "cells": [
+            {
+              "text": "Drug history; improves on withdrawal"
+            },
+            {
+              "text": "Uncommon"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cryptogenic chronic hepatitis",
+          "cells": [
+            {
+              "text": "All tests negative"
+            },
+            {
+              "text": "None"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Steatohepatitis",
+          "cells": [
+            {
+              "text": "Metabolic risk; atypical histology for AIH"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PBC or PSC (variant syndromes)",
+          "cells": [
+            {
+              "text": "Cholestatic pattern; AMA or cholangiography"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Young patient; low ceruloplasmin"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Autoantibody cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of autoimmune hepatitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Prednisolone",
+          "cells": [
+            {
+              "text": "{{hy:Induction}}"
+            },
+            {
+              "text": "0.5 to 1 mg/kg/day, then taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Budesonide",
+          "cells": [
+            {
+              "text": "Induction alternative without cirrhosis"
+            },
+            {
+              "text": "9 mg/day; contraindicated in cirrhosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azathioprine",
+          "cells": [
+            {
+              "text": "Maintenance, started 2 to 4 weeks after steroids"
+            },
+            {
+              "text": "50 mg/day rising to 1 to 2 mg/kg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mycophenolate mofetil",
+          "cells": [
+            {
+              "text": "Second line, azathioprine intolerance or failure"
+            },
+            {
+              "text": "1000 to 2000 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tacrolimus or ciclosporin",
+          "cells": [
+            {
+              "text": "Third line, refractory disease"
+            },
+            {
+              "text": "Response 27% to 94%; watch nephrotoxicity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treatment duration",
+          "cells": [
+            {
+              "text": "At least 2 years after normal transaminases and IgG"
+            },
+            {
+              "text": "Relapse in up to 90% after stopping; biopsy before withdrawal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Acute liver failure or end-stage disease"
+            },
+            {
+              "text": "Refer early to a transplant centre"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "AUTOIMMUNE_HEPATITIS-dx-mgmt",
+      "title": "Diagnosis and management of autoimmune hepatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised transaminases or acute hepatitis without clear cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Viral serology, ANA, SMA, anti-LKM1, IgG, drug history",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Viral or drug cause found?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat viral hepatitis or withdraw the drug",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Liver biopsy and simplified score",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Score 6 or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Reconsider PBC, PSC, steatohepatitis, Wilson disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Cirrhosis present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prednisolone 0.5 to 1 mg/kg/day",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Budesonide 9 mg/day or prednisolone",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Add azathioprine after 2 to 4 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Normal transaminases and IgG?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "Second line: mycophenolate, then calcineurin inhibitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Maintain at least 2 years in remission; monitor for relapse",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

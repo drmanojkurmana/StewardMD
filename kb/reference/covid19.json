@@ -179,5 +179,504 @@
       "caption": "Overview comparison matrix for covid-19 (sars-cov-2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care for Outpatients with COVID-19",
+      "url": "https://www.cdc.gov/covid/hcp/clinical-care/outpatient-treatment.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "NHS Highland, COVID-19 adult inpatient drug management, 2026",
+      "url": "https://www.rightdecisions.scot.nhs.uk/tam-treatments-and-medicines-nhs-highland/adult-therapeutic-guidelines/covid-19-coronavirus/covid-19-treatment-guidelines/covid-19-adult-in-patient-drug-management-following-positive-lft-pcr-test-guidelines/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "covid19-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and severity of COVID-19",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR (NAAT) on nasopharyngeal swab or saliva",
+          "cells": [
+            {
+              "text": "{{hy:Most sensitive test}}"
+            },
+            {
+              "text": "Antigen tests less accurate, especially in exposed asymptomatic people"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Usually 4 to 5, nearly always within 14",
+              "range": [
+                4,
+                14
+              ]
+            },
+            {
+              "text": "Cough, fever, myalgia, anosmia, dysgeusia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SpO2 on room air",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "94 or less = severe",
+              "op": "<=",
+              "value": 94
+            },
+            {
+              "text": "Usually needs admission and oxygen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory rate",
+          "unit": "breaths/min",
+          "cells": [
+            {
+              "text": ">30 = severe",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PaO2/FiO2",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "<300 = severe",
+              "op": "<",
+              "value": 300
+            },
+            {
+              "text": "Red flag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung infiltrates on radiograph",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">50% of lung fields = severe",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Film may be normal despite hypoxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical disease",
+          "cells": [
+            {
+              "text": "Respiratory failure needing ventilation, shock or multiorgan failure"
+            },
+            {
+              "text": "Needs ICU"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laboratory pattern",
+          "cells": [
+            {
+              "text": "Lymphopenia, thrombocytopenia, high CRP, ferritin, D-dimer, LDH, troponin"
+            },
+            {
+              "text": "Markers of inflammation and coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Ground-glass with or without consolidation"
+            },
+            {
+              "text": "For management, not a primary diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "covid19-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of COVID-19",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Influenza",
+          "cells": [
+            {
+              "text": "Similar febrile respiratory illness, seasonal"
+            },
+            {
+              "text": "{{hy:Multiplex respiratory PCR}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RSV, hMPV, parainfluenza",
+          "cells": [
+            {
+              "text": "Overlapping lower respiratory syndromes"
+            },
+            {
+              "text": "Multiplex respiratory PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common-cold coronaviruses and rhinovirus",
+          "cells": [
+            {
+              "text": "Mild upper tract illness"
+            },
+            {
+              "text": "Multiplex respiratory PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial community-acquired pneumonia",
+          "cells": [
+            {
+              "text": "Bacterial co-infection is uncommon in COVID-19"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MERS-CoV or SARS-CoV-1",
+          "cells": [
+            {
+              "text": "Exposure or travel history"
+            },
+            {
+              "text": "Specific PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "covid19-treatment",
+      "kind": "treatment",
+      "title": "Treatment of COVID-19 by setting",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and timing"
+      ],
+      "rows": [
+        {
+          "parameter": "Nirmatrelvir-ritonavir (oral)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred}} for mild to moderate disease at high risk of progression"
+            },
+            {
+              "text": "Twice daily for 5 days, started within 5 days of symptoms; check drug interactions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Remdesivir (IV), outpatient",
+          "cells": [
+            {
+              "text": "High risk when nirmatrelvir-ritonavir cannot be used"
+            },
+            {
+              "text": "3 consecutive days, within 7 days of symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Molnupiravir (oral)",
+          "cells": [
+            {
+              "text": "Adults when the above are not available or appropriate"
+            },
+            {
+              "text": "5 days, within 5 days of symptoms; avoid in pregnancy; low efficacy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "Hospitalised patients needing supplemental oxygen or ventilation"
+            },
+            {
+              "text": "6 mg orally or IV once daily for up to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prednisolone or hydrocortisone",
+          "cells": [
+            {
+              "text": "Alternative steroid"
+            },
+            {
+              "text": "Prednisolone 40 mg daily or hydrocortisone 50 mg IV every 8 h for 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Remdesivir (IV), inpatient",
+          "cells": [
+            {
+              "text": "Hospitalised patients"
+            },
+            {
+              "text": "Consider 5-day course; can combine with steroid and IL-6 or JAK inhibitor"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tocilizumab or baricitinib",
+          "cells": [
+            {
+              "text": "Severe or critical disease with systemic inflammation"
+            },
+            {
+              "text": "Immunosuppressive; CRP may become unreliable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "LMWH thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Hospitalised patients"
+            },
+            {
+              "text": "Prothrombotic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Only for diagnostic uncertainty or proven bacterial infection"
+            },
+            {
+              "text": "Stop if no bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "COVID-specific therapy is not recommended for asymptomatic infection. Antibody products lose activity as variants emerge; confirm current authorisation."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "covid19-dx-mgmt",
+      "title": "Diagnosis and management of COVID-19",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Respiratory symptoms where SARS-CoV-2 is circulating",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "NAAT (PCR) or antigen test",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "SARS-CoV-2 positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider influenza, RSV, bacterial pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SpO2 94% or less, RR over 30 or infiltrates over 50%?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "High risk of progression?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Nirmatrelvir-ritonavir within 5 days, or remdesivir 3 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Symptomatic care and isolation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Admit: oxygen, dexamethasone 6 mg daily, LMWH prophylaxis",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Rising oxygen need or systemic inflammation?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Add tocilizumab or baricitinib; escalate respiratory support",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Ward care; consider remdesivir; monitor",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

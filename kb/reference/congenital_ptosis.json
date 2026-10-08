@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for congenital ptosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski / Taylor & Hoyt Paediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_ptosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Levator function, margin-reflex distance and palpebral fissure height",
+          "cells": [
+            {
+              "text": "Ptosis severity measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation for jaw-winking during feeding or jaw movement",
+          "cells": [
+            {
+              "text": "Marcus Gunn synkinesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pupil examination",
+          "cells": [
+            {
+              "text": "Horner or third nerve involvement excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction and amblyopia assessment",
+          "cells": [
+            {
+              "text": "Amblyopia and astigmatism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_ptosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Marcus Gunn jaw-winking synkinesis",
+          "cells": [
+            {
+              "text": "Jaw movement triggers lid elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital third nerve palsy",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia or pupil involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital Horner syndrome",
+          "cells": [
+            {
+              "text": "Anisocoria; neuroblastoma must be considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_ptosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ptosis surgery",
+          "cells": [
+            {
+              "text": "Levator resection or advancement; frontalis sling where levator function is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery for visual axis occlusion",
+          "cells": [
+            {
+              "text": "To prevent stimulus-deprivation amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Refractive correction and occlusion patching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic monitoring",
+          "cells": [
+            {
+              "text": "Cycloplegic refraction through visual development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative exclusions",
+          "cells": [
+            {
+              "text": "Marcus Gunn, Horner, third nerve and myasthenic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Undercorrection or recurrence needing revision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Where syndromic, such as blepharophimosis syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_ptosis-dx-mgmt",
+      "title": "Diagnosis and management of Congenital ptosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital ptosis: drooping upper lid from birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anisocoria, ophthalmoplegia, fatigable ptosis, visual axis occlusion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgery if the lid occludes the visual axis; check for Horner syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Levator function; margin-reflex distance; jaw-wink check; pupils; refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ptosis isolated with levator function assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Marcus Gunn, third nerve palsy or congenital myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ptosis surgery timed to severity; frontalis sling if levator function is poor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent surgery when the lid obscures the visual axis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Amblyopia treatment with refraction and occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Exclude jaw-winking and neurogenic causes before surgery; follow up for revision",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With timely surgery and amblyopia care most achieve a functional, acceptable lid",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

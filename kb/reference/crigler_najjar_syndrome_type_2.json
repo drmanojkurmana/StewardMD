@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for crigler-najjar syndrome type 2."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hepatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crigler_najjar_syndrome_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fractionated bilirubin",
+          "cells": [
+            {
+              "text": "Predominantly unconjugated at intermediate levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenobarbital response test",
+          "cells": [
+            {
+              "text": "Marked reduction supports type 2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UGT1A1 genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen",
+          "cells": [
+            {
+              "text": "Increased bilirubin production excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile pigment analysis",
+          "cells": [
+            {
+              "text": "Monoglucuronide predominance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crigler_najjar_syndrome_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Crigler-Najjar syndrome type 1",
+          "cells": [
+            {
+              "text": "Little or no phenobarbital response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gilbert syndrome",
+          "cells": [
+            {
+              "text": "Benign; phenobarbital and genetics separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolytic anaemias",
+          "cells": [
+            {
+              "text": "Haemolysis screen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crigler_najjar_syndrome_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenobarbital",
+          "cells": [
+            {
+              "text": "Enzyme induction to upregulate residual UGT1A1 and lower bilirubin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensified treatment in stress",
+          "cells": [
+            {
+              "text": "Intercurrent illness, fasting, pregnancy and the neonatal period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototherapy",
+          "cells": [
+            {
+              "text": "Occasional severe rises or acute episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Dehydration, prolonged fasting and bilirubin-displacing drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum bilirubin and neurological vigilance during stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive UGT1A1; relatives tested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crigler_najjar_syndrome_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Crigler-Najjar Syndrome Type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Crigler-Najjar type 2: unconjugated jaundice at intermediate levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (rise during illness or fasting, neonatal presentation, neurological signs)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent phototherapy and bilirubin control during severe illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fractionated bilirubin; phenobarbital response; UGT1A1; monoglucuronide analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does phenobarbital markedly lower bilirubin, supporting type 2?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider type 1 disease or Gilbert syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Phenobarbital enzyme induction as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensify treatment during fasting, illness and pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Phototherapy for severe or acute rises",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid dehydration and displacing drugs; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally good prognosis with near-normal life expectancy when bilirubin is controlled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

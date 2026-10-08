@@ -158,5 +158,343 @@
       "caption": "Overview comparison matrix for desmoid tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Soft Tissue and Bone Tumours / Desmoid Tumour Working Group consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "desmoid_tumour-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI to define extent and neurovascular relationship",
+          "cells": [
+            {
+              "text": "Extent, infiltration and relation to neurovascular structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided core biopsy with beta-catenin immunohistochemistry",
+          "cells": [
+            {
+              "text": "Histology and beta-catenin confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CTNNB1 mutation analysis",
+          "cells": [
+            {
+              "text": "Supports diagnosis and prognostication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen",
+          "cells": [
+            {
+              "text": "Mesenteric or intra-abdominal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and APC testing",
+          "cells": [
+            {
+              "text": "Familial adenomatous polyposis association"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoid_tumour-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibrosarcoma and low-grade fibromyxoid sarcoma",
+          "cells": [
+            {
+              "text": "Infiltrative spindle cells mistaken for a sarcoma, or the reverse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scar, keloid or reactive fibrosis",
+          "cells": [
+            {
+              "text": "Bland spindle cells mistaken for a reactive scar"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoid_tumour-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "Preferred first step for asymptomatic new or recurrent disease; outcomes comparable to immediate treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger treatment",
+          "cells": [
+            {
+              "text": "Symptoms (pain, functional loss, compression, obstruction) or clear imaging progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weigh recurrence-risk factors",
+          "cells": [
+            {
+              "text": "Size, site and age; microscopic margin status alone should not drive operation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery selection",
+          "cells": [
+            {
+              "text": "Small abdominal wall or separable mesenteric tumours; systemic therapy first for large extremity or chest wall lesions in young patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs first",
+          "cells": [
+            {
+              "text": "Sulindac or other NSAIDs for lower-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal manipulation",
+          "cells": [
+            {
+              "text": "Tamoxifen, GnRH agonists or aromatase inhibitors; mainly anecdotal response data"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytotoxic chemotherapy",
+          "cells": [
+            {
+              "text": "Reserved for aggressive or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tyrosine kinase inhibitor",
+          "cells": [
+            {
+              "text": "Improved progression-free survival versus placebo; reasonable when a predictable response is needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiation",
+          "cells": [
+            {
+              "text": "Avoid routinely when margins are negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablative and regional therapy",
+          "cells": [
+            {
+              "text": "High-intensity focused ultrasound, cryoablation or chemoembolisation for selected extra-abdominal desmoids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "desmoid_tumour-dx-mgmt",
+      "title": "Diagnosis and management of Desmoid tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected desmoid tumour: infiltrative fibrous mass that does not metastasise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurovascular compromise, obstruction, airway or spinal encroachment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent intervention for obstruction, ischaemia or airway compromise; sarcoma team",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for extent; core biopsy with beta-catenin; CTNNB1 testing; CT abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show bland spindle cells with beta-catenin positivity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider fibrosarcoma, nodular fasciitis, GIST or sclerosing mesenteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Active surveillance with clinical review and MRI for asymptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat if symptomatic, growing on imaging or threatening vital structures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sulindac or other NSAIDs first for lower-risk symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for small resectable abdominal wall or separable mesenteric tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Evaluate for familial adenomatous polyposis in mesenteric or multifocal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Does not metastasise; often stabilises under surveillance but recurs after surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

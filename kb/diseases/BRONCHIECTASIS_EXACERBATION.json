@@ -270,5 +270,500 @@
       "caption": "Diagnostic and clinical overview matrix for bronchiectasis exacerbation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Bronchiectasis",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/bronchiectasis-and-atelectasis/bronchiectasis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "BRONCHIECTASIS_EXACERBATION-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and assessing a bronchiectasis exacerbation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Exacerbation definition",
+          "cells": [
+            {
+              "text": "{{hy:3 or more symptoms worse for at least 48 hours, and a clinician judges treatment must change}}",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Symptoms: cough, sputum volume or consistency, sputum purulence, breathlessness or exercise intolerance, fatigue or malaise, haemoptysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minimum duration of deterioration",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "At least 48",
+              "op": ">=",
+              "value": 48
+            },
+            {
+              "text": "Part of the consensus definition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever or new infiltrate",
+          "cells": [
+            {
+              "text": "May be absent"
+            },
+            {
+              "text": "Change in sputum volume and purulence is the defining feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum Gram stain and culture",
+          "cells": [
+            {
+              "text": "Send at every exacerbation"
+            },
+            {
+              "text": "Guides antibiotic choice; Pseudomonas marks worse disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "cells": [
+            {
+              "text": "Fever, chills, hypoxaemia or severe dyspnoea"
+            },
+            {
+              "text": "Look for pneumonia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bloods in severe illness",
+          "cells": [
+            {
+              "text": "CBC, renal function, electrolytes, arterial blood gas, lactate"
+            },
+            {
+              "text": "When severe systemic signs are present"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HRCT airway to artery size",
+          "cells": [
+            {
+              "text": "Inner airway lumen larger than adjacent artery in 2 or more airways (Harrison: diameter at least 1.5 times the vessel)",
+              "op": ">=",
+              "value": 1.5
+            },
+            {
+              "text": "Signet-ring sign or tram tracks confirm the underlying bronchiectasis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nontuberculous mycobacteria",
+          "cells": [
+            {
+              "text": "Isolated in 2 or more serial sputum samples or 1 bronchoalveolar lavage",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Needed to call NTM infection significant"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck defines dilation as airway lumen exceeding the adjacent artery without a numeric ratio; Harrison gives at least 1.5 times. Both are kept."
+    },
+    {
+      "id": "BRONCHIECTASIS_EXACERBATION-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic a bronchiectasis exacerbation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic bronchitis or COPD",
+          "cells": [
+            {
+              "text": "Airflow obstruction overlaps; bronchiectasis has daily purulent sputum"
+            },
+            {
+              "text": "{{hy:HRCT showing dilated airways}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Fever, hypoxaemia, new consolidation"
+            },
+            {
+              "text": "Chest x-ray"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Asthma or allergic bronchopulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Wheeze, eosinophilia, central bronchiectasis"
+            },
+            {
+              "text": "Serum IgE, Aspergillus skin test and IgG precipitins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nontuberculous mycobacterial infection",
+          "cells": [
+            {
+              "text": "Midlung disease; classically nonsmoking women over 50 years"
+            },
+            {
+              "text": "Mycobacterial sputum cultures (2 or more)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis",
+          "cells": [
+            {
+              "text": "Upper-zone disease; resistant gram-negative organisms"
+            },
+            {
+              "text": "Sweat chloride and CFTR mutation analysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Traction bronchiectasis from fibrosis",
+          "cells": [
+            {
+              "text": "Secondary to interstitial fibrosis, not primary airway disease"
+            },
+            {
+              "text": "HRCT pattern"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "BRONCHIECTASIS_EXACERBATION-treatment",
+      "kind": "treatment",
+      "title": "Treatment of a bronchiectasis exacerbation (non-CF)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Amoxicillin-clavulanate, azithromycin, clarithromycin or doxycycline",
+          "cells": [
+            {
+              "text": "No prior cultures; covers H. influenzae, M. catarrhalis, S. aureus, S. pneumoniae"
+            },
+            {
+              "text": "Source gives no doses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin or levofloxacin",
+          "cells": [
+            {
+              "text": "{{hy:Known Pseudomonas colonisation or more severe exacerbation}}"
+            },
+            {
+              "text": "Until culture results return"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotic duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Typically 14 days",
+              "op": "=",
+              "value": 14
+            },
+            {
+              "text": "Especially with Pseudomonas; shorter for mild disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Airway clearance",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "At least 10 minutes; stop after 2 clear huffs or 30 minutes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inhaled bronchodilator, rehydration, humidification, nebulised saline",
+          "cells": [
+            {
+              "text": "Supportive during exacerbation"
+            },
+            {
+              "text": "Short-acting bronchodilator before clearance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Not routine"
+            },
+            {
+              "text": "Only with coexisting COPD or asthma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bronchial artery embolisation",
+          "cells": [
+            {
+              "text": "Significant haemoptysis"
+            },
+            {
+              "text": "Surgical resection if embolisation fails"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Long-term suppressive antibiotics, including azithromycin",
+          "cells": [
+            {
+              "text": "3 or more exacerbations per year, or Pseudomonas",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Reduces exacerbations"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses are omitted because the source opened does not state them. Inhaled rhDNase may be harmful in non-CF bronchiectasis."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "BRONCHIECTASIS_EXACERBATION-dx-mgmt",
+      "title": "Diagnosis and management of bronchiectasis exacerbation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known bronchiectasis with worse cough, sputum or breathlessness",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "3 or more symptoms worse for 48 hours or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Not an exacerbation; continue usual care and review",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Send sputum Gram stain and culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever, hypoxaemia or severe dyspnoea?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chest x-ray; CBC, renal function, ABG and lactate if systemically unwell",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Known Pseudomonas or severe exacerbation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ciprofloxacin or levofloxacin pending culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Amoxicillin-clavulanate, macrolide or doxycycline",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Airway clearance, bronchodilator, hydration; adjust to culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Significant haemoptysis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Bronchial artery embolisation",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Complete about 14 days; consider suppression if 3 or more per year",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

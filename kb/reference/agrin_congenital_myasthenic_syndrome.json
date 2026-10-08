@@ -147,5 +147,355 @@
       "caption": "Overview comparison matrix for agrin-related congenital myasthenic syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repetitive nerve stimulation",
+          "cells": [
+            {
+              "text": "Decremental response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Single-fibre electromyography",
+          "cells": [
+            {
+              "text": "Increased jitter and blocking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AGRN sequencing within a congenital myasthenic syndrome panel",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Distinguishes from hereditary neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acetylcholine receptor and MuSK antibody testing",
+          "cells": [
+            {
+              "text": "Excludes autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle imaging or biopsy where a distal myopathy is considered",
+          "cells": [
+            {
+              "text": "Distal myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other postsynaptic congenital myasthenic syndromes (LRP4, MuSK, DOK7)",
+          "cells": [
+            {
+              "text": "Same postsynaptic pathway"
+            },
+            {
+              "text": "Congenital myasthenic syndrome gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot-Marie-Tooth disease and other hereditary neuropathies",
+          "cells": [
+            {
+              "text": "Distal weakness and wasting"
+            },
+            {
+              "text": "Nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune myasthenia gravis",
+          "cells": [
+            {
+              "text": "Antibody-mediated disease"
+            },
+            {
+              "text": "Acetylcholine receptor and MuSK antibodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sympathomimetic agents such as salbutamol or ephedrine",
+          "cells": [
+            {
+              "text": "Mainstay for this synaptic subtype"
+            },
+            {
+              "text": "Salbutamol or ephedrine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance or cautious use of anticholinesterase drugs",
+          "cells": [
+            {
+              "text": "Frequently ineffective or worsen symptoms"
+            },
+            {
+              "text": "Use with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and rehabilitation",
+          "cells": [
+            {
+              "text": "Progressive distal weakness and atrophy"
+            },
+            {
+              "text": "Maintain strength and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic respiratory monitoring and ventilation if needed",
+          "cells": [
+            {
+              "text": "Bulbar or respiratory involvement"
+            },
+            {
+              "text": "Support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive measures for ptosis and ophthalmoparesis",
+          "cells": [
+            {
+              "text": "Ptosis and ophthalmoparesis"
+            },
+            {
+              "text": "Ptosis props"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and AGRN testing of relatives",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "At-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist neuromuscular service",
+          "cells": [
+            {
+              "text": "Congenital myasthenic syndromes"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "agrin_congenital_myasthenic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Agrin-related congenital myasthenic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Later-onset distal, lower-limb weakness with atrophy and mild ptosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Respiratory or bulbar weakness, or decline after anticholinesterase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory assessment and neuromuscular team review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repetitive nerve stimulation, single-fibre EMG, nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Decrement or jitter on testing with antibodies negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "AGRN sequencing for biallelic variants; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review LRP4, MuSK, DOK7 CMS, CMT, distal myopathy and autoimmune MG",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sympathomimetic agents such as salbutamol or ephedrine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid or use cautiously anticholinesterases, which may worsen symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy; periodic respiratory monitoring; ptosis props",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often slowly progressive; respiratory involvement needs monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

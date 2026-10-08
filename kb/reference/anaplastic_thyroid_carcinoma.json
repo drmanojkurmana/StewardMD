@@ -147,5 +147,379 @@
       "caption": "Overview comparison matrix for anaplastic thyroid carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / WHO Classification of Endocrine Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anaplastic_thyroid_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible laryngoscopy and cross-sectional imaging of neck and thorax",
+          "cells": [
+            {
+              "text": "Airway and extent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core or open biopsy",
+          "cells": [
+            {
+              "text": "Definitive tissue diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "Distinguishes lymphoma, medullary carcinoma and metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRAF V600E testing",
+          "cells": [
+            {
+              "text": "Targetable mutation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging imaging",
+          "cells": [
+            {
+              "text": "Distant metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and thyroid function",
+          "cells": [
+            {
+              "text": "Baseline assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anaplastic_thyroid_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary thyroid lymphoma",
+          "cells": [
+            {
+              "text": "Lymphoid infiltrate"
+            },
+            {
+              "text": "Immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poorly differentiated thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Intermediate differentiation"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medullary thyroid carcinoma",
+          "cells": [
+            {
+              "text": "Neuroendocrine markers"
+            },
+            {
+              "text": "Immunohistochemistry and calcitonin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma of the neck",
+          "cells": [
+            {
+              "text": "Spindle-cell neck mass"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic carcinoma to the thyroid",
+          "cells": [
+            {
+              "text": "Known primary elsewhere"
+            },
+            {
+              "text": "Immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riedel thyroiditis",
+          "cells": [
+            {
+              "text": "Fibrous invasive thyroid process"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anaplastic_thyroid_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent airway securing, considering tracheostomy",
+          "cells": [
+            {
+              "text": "Airway compromise"
+            },
+            {
+              "text": "Dominant early threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dabrafenib with trametinib",
+          "cells": [
+            {
+              "text": "BRAF V600E mutation"
+            },
+            {
+              "text": "Targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection with external beam radiotherapy and systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Resectable intrathyroidal disease"
+            },
+            {
+              "text": "Multimodal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioactive iodine is ineffective",
+          "cells": [
+            {
+              "text": "Tumour not iodine-avid"
+            },
+            {
+              "text": "Not used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune checkpoint inhibition",
+          "cells": [
+            {
+              "text": "Appropriate patients"
+            },
+            {
+              "text": "Consider"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early palliative care and advance care planning",
+          "cells": [
+            {
+              "text": "Poor prognosis"
+            },
+            {
+              "text": "Early involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anaplastic_thyroid_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Anaplastic thyroid carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapidly enlarging hard fixed neck mass in an elderly patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stridor, dyspnoea, dysphagia, hoarseness or distant metastases?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment; consider tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Laryngoscopy; neck and chest imaging; core biopsy; BRAF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Undifferentiated tumour confirmed on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Secure the airway; BRAF V600E-directed therapy if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review lymphoma, medullary carcinoma and metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Multimodal treatment for resectable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radioiodine is not used; tumour is not iodine-avid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early palliative care and advance care planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Median survival only months; BRAF or resectable disease may do better",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,346 @@
       "caption": "Overview comparison matrix for acute otitis media."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_otitis_media-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy",
+          "cells": [
+            {
+              "text": "Drum colour, position, mobility and integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuning fork tests and audiometry",
+          "cells": [
+            {
+              "text": "Conductive hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry",
+          "cells": [
+            {
+              "text": "Effusion or Eustachian tube dysfunction when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of ear discharge",
+          "cells": [
+            {
+              "text": "Severe, recurrent or non-resolving cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal bone imaging",
+          "cells": [
+            {
+              "text": "Intratemporal or intracranial complications when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_otitis_media-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Otitis externa",
+          "cells": [
+            {
+              "text": "Canal infection rather than middle-ear infection"
+            },
+            {
+              "text": "Otoscopy with intact drum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Otitis media with effusion",
+          "cells": [
+            {
+              "text": "Effusion without acute suppuration"
+            },
+            {
+              "text": "Tympanometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early mastoiditis",
+          "cells": [
+            {
+              "text": "Postauricular swelling or tenderness"
+            },
+            {
+              "text": "Temporal bone imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_otitis_media-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Paracetamol or ibuprofen",
+          "cells": [
+            {
+              "text": "First-line symptom control"
+            },
+            {
+              "text": "Analgesia and antipyresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Otherwise well children with mild disease"
+            },
+            {
+              "text": "Antibiotics reserved for severe, bilateral or non-resolving cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral amoxicillin",
+          "cells": [
+            {
+              "text": "First-line antibiotic"
+            },
+            {
+              "text": "Co-amoxiclav for treatment failure or severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myringotomy",
+          "cells": [
+            {
+              "text": "Bulging drum, severe pain or threatened complications"
+            },
+            {
+              "text": "Surgical drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for persistent effusion and conductive hearing loss",
+          "cells": [
+            {
+              "text": "After the acute episode"
+            },
+            {
+              "text": "Follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral for mastoiditis or intracranial complications",
+          "cells": [
+            {
+              "text": "Complications"
+            },
+            {
+              "text": "Refer urgently if they arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT referral for recurrent episodes",
+          "cells": [
+            {
+              "text": "Recurrent disease"
+            },
+            {
+              "text": "Consider ventilation tubes (grommets)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_otitis_media-dx-mgmt",
+      "title": "Diagnosis and management of Acute otitis media",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ear pain, fever and irritability after an upper respiratory infection in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Postauricular swelling, persistent high fever or facial weakness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT review for mastoiditis or intracranial spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, tympanometry if effusion is suspected, and audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Acute suppurative middle-ear infection on otoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Paracetamol or ibuprofen; amoxicillin if severe, bilateral or not improving",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review otitis externa, effusion, referred otalgia and bullous myringitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Watchful waiting in well children with mild disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Co-amoxiclav for treatment failure or severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Myringotomy for bulging drum, severe pain or threatened complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve fully; recurrent disease may need grommets",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

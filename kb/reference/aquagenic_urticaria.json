@@ -145,5 +145,333 @@
       "caption": "Overview comparison matrix for aquagenic urticaria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aquagenic_urticaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Water-challenge test with body-temperature compress to upper trunk",
+          "cells": [
+            {
+              "text": "Reproduces weals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of weals after water contact, regardless of temperature",
+          "cells": [
+            {
+              "text": "Weals follow water contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold-contact test",
+          "cells": [
+            {
+              "text": "Excludes cold urticaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise or warming provocation",
+          "cells": [
+            {
+              "text": "Excludes cholinergic urticaria where overlap exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination",
+          "cells": [
+            {
+              "text": "Confirms true weals rather than itch alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for inducible or spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Coexisting urticaria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aquagenic_urticaria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aquagenic pruritus",
+          "cells": [
+            {
+              "text": "Lacks weals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholinergic urticaria",
+          "cells": [
+            {
+              "text": "Excluded by exercise or warming provocation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold urticaria",
+          "cells": [
+            {
+              "text": "Excluded by the cold-contact test"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aquagenic_urticaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Second-generation H1 antihistamines",
+          "cells": [
+            {
+              "text": "First-line, up-titrated as needed"
+            },
+            {
+              "text": "Symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barrier and protective measures",
+          "cells": [
+            {
+              "text": "Oil-based emollients before unavoidable water contact; minimise exposure"
+            },
+            {
+              "text": "Water contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omalizumab",
+          "cells": [
+            {
+              "text": "For antihistamine-resistant disease"
+            },
+            {
+              "text": "Resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuncts",
+          "cells": [
+            {
+              "text": "Anticholinergic agents or phototherapy"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation and monitoring",
+          "cells": [
+            {
+              "text": "Water-challenge testing; assess coexisting urticaria"
+            },
+            {
+              "text": "Monitor response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger education",
+          "cells": [
+            {
+              "text": "Bathing, swimming, rain, sweat and tears; self-management"
+            },
+            {
+              "text": "Day-to-day self-management"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aquagenic_urticaria-dx-mgmt",
+      "title": "Diagnosis and management of Aquagenic urticaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Weals after water contact, regardless of temperature",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Angioedema, wheeze or systemic symptoms with water?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review of anaphylaxis-type symptoms with water contact",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Water-challenge test with compress, cold-contact and exercise tests, skin exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Water challenge reproduces true weals with cold and cholinergic causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Second-generation H1 antihistamines, up-titrated as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the water challenge",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oil-based emollients before unavoidable water contact",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Omalizumab for antihistamine-resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticholinergic or phototherapy adjuncts in refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Trigger education and self-management of bathing and swimming",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

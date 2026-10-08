@@ -142,5 +142,336 @@
       "caption": "Overview comparison matrix for chronic myelomonocytic leukaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO haematolymphoid classification / haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_myelomonocytic_leukaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Sustained monocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine with cytogenetics",
+          "cells": [
+            {
+              "text": "Clonality and blast count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCR-ABL1 testing",
+          "cells": [
+            {
+              "text": "Excludes chronic myeloid leukaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular panel (TET2, SRSF2, ASXL1)",
+          "cells": [
+            {
+              "text": "Prognostic mutations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for reactive causes of monocytosis",
+          "cells": [
+            {
+              "text": "Infection, inflammation and malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_myelomonocytic_leukaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic myeloid leukaemia",
+          "cells": [
+            {
+              "text": "BCR-ABL1 positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile myelomonocytic leukaemia",
+          "cells": [
+            {
+              "text": "Children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myelodysplastic syndrome",
+          "cells": [
+            {
+              "text": "Cytopenias with dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_myelomonocytic_leukaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypomethylating agents",
+          "cells": [
+            {
+              "text": "Azacitidine or decitabine for higher-risk or dysplastic disease"
+            },
+            {
+              "text": "Risk-adapted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant",
+          "cells": [
+            {
+              "text": "Allogeneic haematopoietic stem cell transplantation, the only curative option"
+            },
+            {
+              "text": "Eligible higher-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytoreduction",
+          "cells": [
+            {
+              "text": "Hydroxycarbamide for proliferative features, leucocytosis and splenomegaly"
+            },
+            {
+              "text": "Proliferative phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Red-cell transfusion and erythropoiesis-stimulating agents; prompt infection treatment"
+            },
+            {
+              "text": "Cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial blood counts and marrow blast percentage"
+            },
+            {
+              "text": "Disease progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transformation surveillance",
+          "cells": [
+            {
+              "text": "Surveillance for transformation to acute myeloid leukaemia"
+            },
+            {
+              "text": "Progression risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology care",
+          "cells": [
+            {
+              "text": "Haematology-led multidisciplinary care with clinical trial consideration"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_myelomonocytic_leukaemia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic myelomonocytic leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic myelomonocytic leukaemia: persistent monocytosis with cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rising blasts, worsening cytopenias with bleeding, massive spleen)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent haematology review for rising blasts",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood film, marrow with cytogenetics, BCR-ABL1 and molecular panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sustained monocytosis with BCR-ABL1 negative and reactive causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Hypomethylating agent for higher-risk or dysplastic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check chronic myeloid leukaemia, MDS and juvenile myelomonocytic leukaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydroxycarbamide for proliferative features and splenomegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfusion and erythropoiesis support for anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allogeneic transplant as the only curative option for eligible patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial counts and blast percentage to detect transformation to AML",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

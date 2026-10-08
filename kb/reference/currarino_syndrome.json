@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for currarino syndrome (sacral agenesis + anorectal + presacral mass)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "currarino_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sacral and pelvic radiographs",
+          "cells": [
+            {
+              "text": "Scimitar hemisacrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and spinal MRI",
+          "cells": [
+            {
+              "text": "Presacral mass; tethered cord or meningocele"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MNX1 genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant; relatives screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast studies or examination of anorectal anatomy",
+          "cells": [
+            {
+              "text": "Anorectal anatomy defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urogenital and spinal anomaly assessment",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "currarino_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated anorectal malformation",
+          "cells": [
+            {
+              "text": "Without sacral or presacral anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sacrococcygeal teratoma",
+          "cells": [
+            {
+              "text": "Named presacral look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caudal regression syndrome",
+          "cells": [
+            {
+              "text": "Named sacral look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "currarino_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anorectal malformation surgery",
+          "cells": [
+            {
+              "text": "Posterior sagittal anorectoplasty or anoplasty for stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Presacral mass and meningocele",
+          "cells": [
+            {
+              "text": "Neurosurgical repair or resection; untethering of a tethered cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel management",
+          "cells": [
+            {
+              "text": "Laxatives or enemas for chronic constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningitis prevention",
+          "cells": [
+            {
+              "text": "Prompt repair of an anterior meningocele; avoid transrectal needling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Resected mass examined to exclude malignant change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "MNX1; first-degree relatives screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric surgery, neurosurgery and urology; continence follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "currarino_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Currarino syndrome (sacral agenesis + anorectal + presacral mass)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Currarino syndrome: sacral anomaly with anorectal malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (meningitis from meningocele, neurological decline, malignant change)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical review for meningocele or cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sacral radiographs; pelvic and spinal MRI; MNX1 testing; anorectal anatomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a scimitar sacrum with a presacral mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated anorectal malformation or caudal regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anorectoplasty or anoplasty for the anorectal malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neurosurgical repair of meningocele and resection of presacral mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bowel regimen for chronic constipation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Histology of the mass; MNX1 testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis generally good with recognition of all components; continence varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

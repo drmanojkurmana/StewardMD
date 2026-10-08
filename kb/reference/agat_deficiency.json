@@ -149,5 +149,355 @@
       "caption": "Overview comparison matrix for arginine:glycine amidinotransferase (agat) deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited metabolic disease references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "agat_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma and urine guanidinoacetate and creatine, characteristically both low",
+          "cells": [
+            {
+              "text": "Low guanidinoacetate and creatine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain proton MR spectroscopy",
+          "cells": [
+            {
+              "text": "Creatine peak depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AGAT (GATM) enzyme activity in fibroblasts or lymphoblasts",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GATM molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and muscle assessment if myopathy suspected",
+          "cells": [
+            {
+              "text": "Myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG if seizures are present",
+          "cells": [
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agat_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "GAMT deficiency",
+          "cells": [
+            {
+              "text": "Guanidinoacetate raised rather than low, in contrast to AGAT"
+            },
+            {
+              "text": "Plasma and urine guanidinoacetate and creatine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine transporter (SLC6A8) deficiency",
+          "cells": [
+            {
+              "text": "Cerebral creatine deficiency syndrome"
+            },
+            {
+              "text": "Brain proton MR spectroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital and metabolic myopathies",
+          "cells": [
+            {
+              "text": "Hypotonia and weakness"
+            },
+            {
+              "text": "Creatine kinase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agat_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral creatine monohydrate, lifelong",
+          "cells": [
+            {
+              "text": "Replenishes cerebral creatine stores"
+            },
+            {
+              "text": "Disease-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-symptomatic creatine for affected younger siblings",
+          "cells": [
+            {
+              "text": "Early treatment"
+            },
+            {
+              "text": "Can allow near-normal development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring with brain MRS and plasma and urine creatine",
+          "cells": [
+            {
+              "text": "Treatment response"
+            },
+            {
+              "text": "Creatine peak recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support and speech and language therapy",
+          "cells": [
+            {
+              "text": "Intellectual disability and speech delay"
+            },
+            {
+              "text": "Educational input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and management of proximal myopathy and hypotonia",
+          "cells": [
+            {
+              "text": "Muscle weakness"
+            },
+            {
+              "text": "Monitor muscle function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiepileptic drugs for seizures",
+          "cells": [
+            {
+              "text": "Seizures"
+            },
+            {
+              "text": "Less prominent than in GAMT deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and GATM testing of relatives",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "Early treatment of siblings"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "agat_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Arginine:glycine amidinotransferase (AGAT) deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Global developmental delay with prominent speech delay and hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive myopathy or an affected sibling in the family?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic review and early creatine treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma and urine guanidinoacetate and creatine; brain proton MRS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Guanidinoacetate and creatine both low on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm with GATM testing; start oral creatine monohydrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review GAMT deficiency, creatine transporter defect and other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pre-symptomatic creatine for affected younger siblings",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Developmental and speech therapy; physiotherapy for hypotonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor with brain MRS and plasma and urine creatine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early creatine can allow near-normal development; established disability improves partly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

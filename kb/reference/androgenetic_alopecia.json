@@ -145,5 +145,337 @@
       "caption": "Overview comparison matrix for androgenetic alopecia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "androgenetic_alopecia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Trichoscopy",
+          "cells": [
+            {
+              "text": "Demonstrates hair-diameter diversity and miniaturisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical grading (Hamilton-Norwood or Ludwig scale)",
+          "cells": [
+            {
+              "text": "Hamilton-Norwood pattern in men; Ludwig pattern in women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ferritin and thyroid function",
+          "cells": [
+            {
+              "text": "Exclude contributory factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen profile in women with hyperandrogenism",
+          "cells": [
+            {
+              "text": "Assesses for polycystic ovary syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scalp biopsy",
+          "cells": [
+            {
+              "text": "Terminal-to-vellus ratio in atypical or diagnostically uncertain cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "androgenetic_alopecia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Telogen effluvium",
+          "cells": [
+            {
+              "text": "Diffuse shedding; may coexist and unmask the pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frontal fibrosing alopecia",
+          "cells": [
+            {
+              "text": "Scarring cause of hairline recession in women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central centrifugal cicatricial alopecia",
+          "cells": [
+            {
+              "text": "Early central scarring in a patterned distribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "androgenetic_alopecia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical minoxidil",
+          "cells": [
+            {
+              "text": "Prolongs the anagen phase and promotes regrowth"
+            },
+            {
+              "text": "Applied continuously; benefit is lost on stopping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral 5-alpha-reductase inhibitor (finasteride)",
+          "cells": [
+            {
+              "text": "In men, to reduce dihydrotestosterone-driven miniaturisation"
+            },
+            {
+              "text": "Named as the example in the source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spironolactone (antiandrogen)",
+          "cells": [
+            {
+              "text": "For female pattern loss"
+            },
+            {
+              "text": "Reliable contraception advised in women of childbearing potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct contributory factors",
+          "cells": [
+            {
+              "text": "Treat iron deficiency and thyroid dysfunction"
+            },
+            {
+              "text": "These can worsen shedding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage underlying hyperandrogenism",
+          "cells": [
+            {
+              "text": "Investigate and treat, such as polycystic ovary syndrome"
+            },
+            {
+              "text": "In affected women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic options",
+          "cells": [
+            {
+              "text": "Camouflage, low-level laser devices, hair transplantation"
+            },
+            {
+              "text": "For those seeking restored density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on expectations",
+          "cells": [
+            {
+              "text": "Treatment stabilises loss and gives only partial regrowth"
+            },
+            {
+              "text": "Long-term adherence is required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "androgenetic_alopecia-dx-mgmt",
+      "title": "Diagnosis and management of Androgenetic alopecia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive, patterned, non-scarring hair loss from androgen-sensitive follicles",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Virilisation or rapid loss in a woman, or scarring?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate for androgen-secreting tumour or cicatricial alopecia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trichoscopy, Hamilton-Norwood or Ludwig grading, ferritin, thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Miniaturisation with patterned loss confirmed on trichoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start topical minoxidil to prolong the anagen phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral finasteride in men to reduce DHT-driven miniaturisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spironolactone for female pattern loss; advise contraception",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct iron deficiency and thyroid dysfunction; manage PCOS",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treatment stabilises loss; partial regrowth lasts only while treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

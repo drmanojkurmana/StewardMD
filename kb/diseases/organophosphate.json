@@ -196,5 +196,521 @@
       "caption": "Diagnostic and clinical overview matrix for organophosphate / cholinergic poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Organophosphate and Carbamate Poisoning, 2025",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/poisoning/organophosphate-poisoning-and-carbamate-poisoning"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "organophosphate-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising organophosphate (cholinergic) poisoning",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Muscarinic signs",
+          "cells": [
+            {
+              "text": "Salivation, lacrimation, urination, defecation, vomiting, miosis, bronchorrhoea, wheeze, bradycardia"
+            },
+            {
+              "text": "{{hy:Bronchorrhoea and bronchospasm drive death from respiratory failure}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nicotinic signs",
+          "cells": [
+            {
+              "text": "Fasciculations, weakness, tachycardia, mydriasis, sweating"
+            },
+            {
+              "text": "Can offset muscarinic signs, so heart rate and pupils may be mixed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CNS signs",
+          "cells": [
+            {
+              "text": "Seizures, agitation, lethargy, coma"
+            },
+            {
+              "text": "Common"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Bradycardia, heart block, QTc prolongation"
+            },
+            {
+              "text": "Monitor rhythm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atropine trial",
+          "unit": "mg",
+          "cells": [
+            {
+              "text": "1 mg IV (0.01 to 0.02 mg/kg in children) abates muscarinic signs",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "Supports diagnosis when equivocal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholinesterase activity",
+          "unit": "% of normal",
+          "cells": [
+            {
+              "text": "Plasma and red cell activity below 50% of normal",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Red cell value tracks severity; clinical response guides treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Odour",
+          "cells": [
+            {
+              "text": "Garlic or petroleum smell"
+            },
+            {
+              "text": "Supports exposure to many organophosphates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intermediate syndrome",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Proximal, cranial and respiratory weakness 1 to 3 days after exposure",
+              "range": [
+                1,
+                3
+              ]
+            },
+            {
+              "text": "Resolves in 2 to 3 weeks; rare with carbamates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Delayed neuropathy",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Axonal neuropathy 1 to 3 weeks after exposure",
+              "range": [
+                1,
+                3
+              ]
+            },
+            {
+              "text": "Chlorpyrifos and triorthocresyl phosphate; risk independent of severity"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Organophosphates may need metabolic activation, so a patient can look well early and deteriorate later (Harrison 22e)."
+    },
+    {
+      "id": "organophosphate-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic organophosphate poisoning",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbamate poisoning",
+          "cells": [
+            {
+              "text": "Same cholinergic picture; intermediate syndrome rare"
+            },
+            {
+              "text": "History of agent (aldicarb, carbaryl, propoxur)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opioid overdose",
+          "cells": [
+            {
+              "text": "Miosis and depressed state without secretions or fasciculations"
+            },
+            {
+              "text": "{{hy:Rapid response to naloxone}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medicinal cholinesterase inhibitors",
+          "cells": [
+            {
+              "text": "Neostigmine, physostigmine, tacrine"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscarinic agonists and mushrooms",
+          "cells": [
+            {
+              "text": "Bethanechol, pilocarpine, Clitocybe or Inocybe species; no nicotinic signs"
+            },
+            {
+              "text": "History; cholinesterase not reduced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nicotine poisoning",
+          "cells": [
+            {
+              "text": "Nicotinic agonist toxicity from tobacco or lobeline"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sedative-hypnotic overdose",
+          "cells": [
+            {
+              "text": "Depressed state without cholinergic secretions"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "organophosphate-treatment",
+      "kind": "treatment",
+      "title": "Treating organophosphate poisoning",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway and oxygen",
+          "cells": [
+            {
+              "text": "Monitor closely for respiratory muscle failure"
+            },
+            {
+              "text": "Intubate for respiratory failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atropine",
+          "cells": [
+            {
+              "text": "{{hy:2 to 3 mg IV (0.05 mg/kg in children), doubled every 3 to 5 min}}"
+            },
+            {
+              "text": "Endpoint: dry chest and no bronchospasm, not pupil size or heart rate; may need grams"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pralidoxime",
+          "cells": [
+            {
+              "text": "After atropine: 1 to 2 g IV adult, 20 to 40 mg/kg child, over 15 to 30 min"
+            },
+            {
+              "text": "Then 8 mg/kg/h adult, 10 to 20 mg/kg/h child; give even if agent unknown"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepine",
+          "cells": [
+            {
+              "text": "Seizures"
+            },
+            {
+              "text": "Prophylactic diazepam may reduce neurocognitive sequelae"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Skin decontamination",
+          "cells": [
+            {
+              "text": "Topical exposure: remove clothing and flush skin"
+            },
+            {
+              "text": "Protect staff from contamination"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Activated charcoal",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Ingestion presenting within 1 h",
+              "op": "<=",
+              "value": 1
+            },
+            {
+              "text": "Avoid gastric emptying; intubate first if done"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Watch for intermediate syndrome",
+          "cells": [
+            {
+              "text": "Days 1 to 3, even with treatment"
+            },
+            {
+              "text": "Atropine does not treat it; may need ventilation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "organophosphate-dx-mgmt",
+      "title": "Diagnosis and management of organophosphate poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pesticide exposure or secretions, miosis, fasciculations",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Protect staff, remove clothing, flush skin, airway and oxygen",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Cholinergic toxidrome clear?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Atropine 1 mg IV trial",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Muscarinic signs abate?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Seek another cause of coma or miosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Atropine 2 to 3 mg IV, double every 3 to 5 min",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Chest dry, bronchospasm gone?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pralidoxime bolus then infusion",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Benzodiazepine for seizures; charcoal if ingested within 1 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "ICU: monitor breathing and neck flexion strength for 1 to 3 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Proximal and respiratory weakness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Intermediate syndrome: ventilatory support",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Wean atropine; follow up for delayed neuropathy",
+          "cite": "c2"
+        },
+        {
+          "id": "n15",
+          "type": "action",
+          "text": "Keep doubling atropine until chest is dry",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Unsure"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n15",
+          "label": "No"
+        },
+        {
+          "from": "n15",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,336 @@
       "caption": "Overview comparison matrix for balanitis xerotica obliterans (genital lichen sclerosus)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "balanitis_xerotica_obliterans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical inspection of glans, prepuce and meatus, with foreskin retractility",
+          "cells": [
+            {
+              "text": "Glans, prepuce, meatus and retractility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uroflowmetry where obstruction is suspected",
+          "cells": [
+            {
+              "text": "Urinary stream and obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of atypical, persistent or non-healing lesions",
+          "cells": [
+            {
+              "text": "Confirms diagnosis and excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral imaging or endoscopy",
+          "cells": [
+            {
+              "text": "Meatal or urethral stricture suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab or microscopy",
+          "cells": [
+            {
+              "text": "Coexistent candidal or bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose testing",
+          "cells": [
+            {
+              "text": "Poorly controlled diabetes predisposes to balanitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balanitis_xerotica_obliterans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Candidal balanitis",
+          "cells": [
+            {
+              "text": "Identified by swab or microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Excluded by biopsy of persistent or indurated lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balanitis_xerotica_obliterans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-potency topical corticosteroid",
+          "cells": [
+            {
+              "text": "Applied to the affected glans and prepuce"
+            },
+            {
+              "text": "First-line medical treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circumcision",
+          "cells": [
+            {
+              "text": "Corticosteroid-refractory preputial disease or phimosis"
+            },
+            {
+              "text": "Often both diagnostic and curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meatal or urethral surgery",
+          "cells": [
+            {
+              "text": "Meatotomy, meatoplasty or urethral reconstruction"
+            },
+            {
+              "text": "Stricture disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and infection care",
+          "cells": [
+            {
+              "text": "Treat coexisting candidal or bacterial infection; optimise glycaemic control"
+            },
+            {
+              "text": "Coexisting infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy persistent lesions",
+          "cells": [
+            {
+              "text": "Excludes penile squamous cell carcinoma"
+            },
+            {
+              "text": "Atypical or non-healing lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Persistent lesions"
+            },
+            {
+              "text": "Small but definite malignant potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Urology or andrology for surgery; dermatology for refractory disease"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "balanitis_xerotica_obliterans-dx-mgmt",
+      "title": "Diagnosis and management of Balanitis xerotica obliterans (genital lichen sclerosus)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Atrophic lesions of the glans and prepuce with phimosis or meatal stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Persistent ulcer, indurated plaque or progressive meatal stenosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy persistent or indurated lesions to exclude carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inspection, uroflowmetry, biopsy, urethral imaging or endoscopy, swab, glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biopsy consistent with lichen sclerosus with carcinoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "High-potency topical corticosteroid to the glans and prepuce",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Circumcision for steroid-refractory preputial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Meatotomy or urethral reconstruction for stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat candidal or bacterial infection and control diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term surveillance of persistent lesions given malignant potential",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

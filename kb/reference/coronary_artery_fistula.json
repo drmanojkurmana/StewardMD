@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for coronary artery fistula."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coronary_artery_fistula-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography with colour Doppler",
+          "cells": [
+            {
+              "text": "Fistula and drainage site localised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary CT angiography",
+          "cells": [
+            {
+              "text": "Course and drainage defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation with coronary angiography",
+          "cells": [
+            {
+              "text": "Reference standard; shunt quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and exercise testing",
+          "cells": [
+            {
+              "text": "Ischaemia evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Cardiomegaly and pulmonary plethora in large shunts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_artery_fistula-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Patent ductus arteriosus",
+          "cells": [
+            {
+              "text": "Pitfall: fistula missed when attributed to the ductus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortopulmonary window",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous hum",
+          "cells": [
+            {
+              "text": "Named murmur look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_artery_fistula-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small asymptomatic fistulae; many remain benign and some close spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive closure",
+          "cells": [
+            {
+              "text": "Transcatheter device occlusion or surgical ligation for large or symptomatic fistulae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet or anticoagulant therapy",
+          "cells": [
+            {
+              "text": "Dilated feeding artery, high thrombotic risk, and after closure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure and steal",
+          "cells": [
+            {
+              "text": "Diuretics for volume-loading failure; ischaemia from coronary steal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Echocardiography, cross-sectional imaging and angiography for patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital cardiology referral",
+          "cells": [
+            {
+              "text": "Intervention planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coronary_artery_fistula-dx-mgmt",
+      "title": "Diagnosis and management of Coronary artery fistula",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coronary artery fistula: continuous murmur with coronary steal risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (anginal symptoms, heart failure, rapidly enlarging artery, arrhythmia)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for ischaemia or heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo Doppler; coronary CT; catheterisation; cardiac MRI; ECG and exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does catheterisation define the fistula and its shunt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PDA, aortopulmonary window or venous hum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small asymptomatic fistulae with periodic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Close large or symptomatic fistulae by device or surgical ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiplatelet or anticoagulant therapy where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Diuretics for heart failure; monitor for aneurysm and residual flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Small fistulae often remain benign; large ones risk ischaemia and heart failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

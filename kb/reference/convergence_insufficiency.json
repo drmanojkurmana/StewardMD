@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for convergence insufficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Von Noorden's Binocular Vision and Ocular Motility",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "convergence_insufficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Near point of convergence",
+          "cells": [
+            {
+              "text": "Convergence weakness measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cover testing at distance and near",
+          "cells": [
+            {
+              "text": "Near exophoria demonstrated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positive fusional vergence amplitudes at near",
+          "cells": [
+            {
+              "text": "Vergence amplitudes assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction and accommodative function",
+          "cells": [
+            {
+              "text": "Refractive or accommodative contribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "convergence_insufficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Uncorrected refractive error or presbyopia",
+          "cells": [
+            {
+              "text": "Correctable cause checked by refraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensating exophoria or intermittent exotropia",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Convergence paralysis from a dorsal midbrain lesion",
+          "cells": [
+            {
+              "text": "Sudden onset with other neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "convergence_insufficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orthoptic vision therapy",
+          "cells": [
+            {
+              "text": "Supervised office-based vergence and accommodative training; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Home convergence exercises",
+          "cells": [
+            {
+              "text": "Pencil push-ups and computer-based vergence programmes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractive correction",
+          "cells": [
+            {
+              "text": "Underlying refractive error and accommodative dysfunction treated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Base-in prism spectacles",
+          "cells": [
+            {
+              "text": "Symptomatic relief when therapy is not tolerated or completed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Near-work ergonomics",
+          "cells": [
+            {
+              "text": "Regular breaks and reduced sustained screen time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoptic follow-up",
+          "cells": [
+            {
+              "text": "Refresher exercises given the tendency to recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological review",
+          "cells": [
+            {
+              "text": "When an acquired cause such as head injury or midbrain pathology is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "convergence_insufficiency-dx-mgmt",
+      "title": "Diagnosis and management of Convergence insufficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected convergence insufficiency: eye strain and diplopia on near work",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sudden onset with neurological signs, head trauma, fatigable diplopia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological review for dorsal midbrain or neuromuscular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Near point of convergence; cover test at near; fusional amplitudes; refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is near exophoria with reduced near convergence on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider refractive error, accommodative dysfunction or neurological cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Orthoptic vision therapy as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Home convergence exercises and correction of refractive error",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Base-in prism spectacles if therapy is not tolerated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Near-work ergonomics; orthoptic follow-up for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally responds well to vision therapy; recurrence can occur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

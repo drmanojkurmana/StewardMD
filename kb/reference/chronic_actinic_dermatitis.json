@@ -147,5 +147,315 @@
       "caption": "Overview comparison matrix for chronic actinic dermatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_actinic_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Phototesting",
+          "cells": [
+            {
+              "text": "Reduced minimal erythema dose, usually to ultraviolet B and A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch and photopatch testing",
+          "cells": [
+            {
+              "text": "Identifies contact and photocontact allergens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Characterises the dermatitis; distinguishes actinic reticuloid from lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood film and lymphocyte studies",
+          "cells": [
+            {
+              "text": "Where lymphoma is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody testing",
+          "cells": [
+            {
+              "text": "Excludes lupus erythematosus"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_actinic_dermatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cutaneous T-cell lymphoma",
+          "cells": [
+            {
+              "text": "Leonine facies or erythroderma; mimics actinic reticuloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymorphic light eruption",
+          "cells": [
+            {
+              "text": "Photosensitivity without chronic plaques"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_actinic_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Photoprotection",
+          "cells": [
+            {
+              "text": "Protective clothing and broad-spectrum sunscreen; avoid ultraviolet exposure"
+            },
+            {
+              "text": "Cornerstone of control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergen avoidance",
+          "cells": [
+            {
+              "text": "Avoid fragrances, Compositae plants and sunscreen chemicals identified by testing"
+            },
+            {
+              "text": "Contact and photocontact allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical therapy",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and calcineurin inhibitors with emollients"
+            },
+            {
+              "text": "Eczematous inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic immunosuppression",
+          "cells": [
+            {
+              "text": "Oral corticosteroids, azathioprine, ciclosporin or mycophenolate"
+            },
+            {
+              "text": "Severe or disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug review",
+          "cells": [
+            {
+              "text": "Review and withdraw photosensitising medications and products"
+            },
+            {
+              "text": "Photosensitising agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photodermatology follow-up",
+          "cells": [
+            {
+              "text": "Surveillance for the actinic reticuloid variant to exclude lymphoma"
+            },
+            {
+              "text": "Lymphoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_actinic_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of Chronic actinic dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic actinic dermatitis: itchy lichenified plaques on sun-exposed skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (leonine facies, erythroderma, atypical cells, lymphadenopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: haematology review to exclude cutaneous lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phototesting, patch and photopatch testing, skin biopsy and ANA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reduced UV threshold on phototesting with allergens identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Photoprotection with clothing and broad-spectrum sunscreen",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check cutaneous T-cell lymphoma, polymorphic light eruption and lupus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid identified contact and photocontact allergens",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical corticosteroids or calcineurin inhibitors with emollients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic immunosuppression for severe or disabling disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong photoprotection; surveillance for lymphoma in actinic reticuloid",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

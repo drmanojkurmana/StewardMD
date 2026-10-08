@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for danon disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/AHA cardiomyopathy guidelines; specialist inherited cardiomyopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "danon_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Pre-excitation and high QRS voltages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Hypertrophy, dilatation and fibrosis characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Raised CK"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Myopathy and retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LAMP2 genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "danon_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sarcomeric hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Pitfall: storage aetiology missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pompe disease and other glycogen storage myopathies",
+          "cells": [
+            {
+              "text": "Named look-alike with myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fabry disease",
+          "cells": [
+            {
+              "text": "Named storage look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "danon_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Inherited cardiac conditions service",
+          "cells": [
+            {
+              "text": "No established disease-specific drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "Standard pharmacotherapy with serial echo and cardiac MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia risk assessment",
+          "cells": [
+            {
+              "text": "Electrophysiology review and implantable defibrillator consideration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early transplant assessment",
+          "cells": [
+            {
+              "text": "Rapidly progressive heart failure, particularly in males"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myopathy and retinopathy care",
+          "cells": [
+            {
+              "text": "Neurology and ophthalmology input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked LAMP2; cascade screening; milder later phenotype in carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene-directed therapy trials",
+          "cells": [
+            {
+              "text": "Specialist trial centres"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "danon_disease-dx-mgmt",
+      "title": "Diagnosis and management of Danon disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Danon disease: hypertrophic cardiomyopathy with pre-excitation in a young male",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (rapid heart failure, syncope or arrhythmia, pre-excitation)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent electrophysiology and heart-failure review for arrhythmia or decompensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG for pre-excitation; echo and cardiac MRI; CK; LAMP2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does LAMP2 testing confirm the storage cardiomyopathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider sarcomeric HCM, Pompe disease or Fabry disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Standard heart-failure therapy with serial echo and cardiac MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Electrophysiology review and defibrillator consideration for arrhythmic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early transplant assessment for rapidly progressive failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurology and ophthalmology input; LAMP2 genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Poor in affected males, with rapidly progressive cardiomyopathy and high arrhythmic risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

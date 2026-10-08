@@ -147,5 +147,331 @@
       "caption": "Overview comparison matrix for acute eosinophilic pneumonia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATS/ERS statements on eosinophilic lung disease / Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_eosinophilic_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Marked eosinophilia; the central diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Ground-glass opacity, consolidation, septal thickening and effusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia may be absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed exposure history",
+          "cells": [
+            {
+              "text": "Recent smoking, inhaled dusts or drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological workup",
+          "cells": [
+            {
+              "text": "Excludes infection first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas or oximetry",
+          "cells": [
+            {
+              "text": "Degree of hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_eosinophilic_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Severe community-acquired or viral pneumonia",
+          "cells": [
+            {
+              "text": "Infection, excluded by microbiology"
+            },
+            {
+              "text": "Microbiological workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced eosinophilic lung reaction",
+          "cells": [
+            {
+              "text": "Caused by a drug exposure"
+            },
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_eosinophilic_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay; rapid clinical and radiological improvement"
+            },
+            {
+              "text": "Corticosteroid response is rapid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen and mechanical ventilation if severe",
+          "cells": [
+            {
+              "text": "Severe hypoxaemic respiratory failure"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Removal of the provoking exposure",
+          "cells": [
+            {
+              "text": "Smoking cessation; avoid implicated dusts or drugs"
+            },
+            {
+              "text": "Trigger removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antimicrobials",
+          "cells": [
+            {
+              "text": "Exclude infection before idiopathic diagnosis"
+            },
+            {
+              "text": "Until infection is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Confirms marked alveolar eosinophilia"
+            },
+            {
+              "text": "Establishes the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of oxygenation and response",
+          "cells": [
+            {
+              "text": "Recovery and relapse risk"
+            },
+            {
+              "text": "Relapse uncommon once trigger removed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_eosinophilic_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Acute eosinophilic pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute febrile hypoxaemic illness over days, mimicking pneumonia or ARDS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypoxaemia requiring ventilatory support?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Ventilatory support and urgent corticosteroid treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bronchoalveolar lavage, HRCT, FBC with differential and microbiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Marked BAL eosinophilia with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start systemic corticosteroids; stop the provoking exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review infection, drug reaction, hypersensitivity pneumonitis and parasites",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supplemental oxygen; ventilation in severe hypoxaemic failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Smoking cessation and avoidance of implicated dusts or drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Empirical antimicrobials until infection is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis with prompt steroids; relapse uncommon if trigger removed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

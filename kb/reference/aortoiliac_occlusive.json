@@ -148,5 +148,315 @@
       "caption": "Overview comparison matrix for aortoiliac occlusive disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aortoiliac_occlusive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial index with segmental pressures",
+          "cells": [
+            {
+              "text": "Level of disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial duplex of aortoiliac and femoral segments",
+          "cells": [
+            {
+              "text": "Aortoiliac and femoral segments"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography, or catheter angiography",
+          "cells": [
+            {
+              "text": "Reconstructive planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipids, glucose and smoking status",
+          "cells": [
+            {
+              "text": "Cardiovascular risk assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and functional assessment",
+          "cells": [
+            {
+              "text": "Before major open reconstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortoiliac_occlusive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Femoropopliteal or infrapopliteal occlusive disease",
+          "cells": [
+            {
+              "text": "Coexisting infrainguinal disease limits the benefit of iliac treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip or lumbar spine osteoarthritis",
+          "cells": [
+            {
+              "text": "Buttock and thigh claudication must not be attributed to hip or spinal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortoiliac_occlusive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Best medical therapy",
+          "cells": [
+            {
+              "text": "Smoking cessation, high-intensity statin, antiplatelet therapy, diabetes and blood pressure control"
+            },
+            {
+              "text": "Atherosclerosis risk reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised exercise programme",
+          "cells": [
+            {
+              "text": "First-line for intermittent claudication"
+            },
+            {
+              "text": "Cilostazol as a symptomatic adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovascular angioplasty and stenting",
+          "cells": [
+            {
+              "text": "Focal iliac stenoses"
+            },
+            {
+              "text": "Revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortobifemoral bypass",
+          "cells": [
+            {
+              "text": "Extensive aortoiliac occlusion"
+            },
+            {
+              "text": "Extra-anatomic axillobifemoral bypass in high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent revascularisation",
+          "cells": [
+            {
+              "text": "Critical limb ischaemia with rest pain or tissue loss"
+            },
+            {
+              "text": "Alongside wound care and foot protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary and cerebrovascular risk reduction",
+          "cells": [
+            {
+              "text": "Aggressive risk control"
+            },
+            {
+              "text": "Chiefly determines long-term survival"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aortoiliac_occlusive-dx-mgmt",
+      "title": "Diagnosis and management of Aortoiliac occlusive disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Buttock and thigh claudication from aortoiliac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rest pain, ulceration or gangrene from limb ischaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular referral for limb-threatening ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABI with segmental pressures, arterial duplex, CT or MR angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Disease localised to the aortoiliac segment on ABI and duplex?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stent focal iliac stenosis; bypass extensive aortoiliac occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat ABI and duplex",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation, high-intensity statin and antiplatelet therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supervised exercise first-line; cilostazol as adjunct",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Control diabetes and blood pressure; reduce coronary risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term survival is driven by coronary and cerebrovascular risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

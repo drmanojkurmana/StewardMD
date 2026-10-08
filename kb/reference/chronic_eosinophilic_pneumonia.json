@@ -148,5 +148,324 @@
       "caption": "Overview comparison matrix for chronic eosinophilic pneumonia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATS/ERS statements on eosinophilic lung disease / Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_eosinophilic_pneumonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Peripheral, upper-zone predominant consolidation and ground-glass opacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and bronchoalveolar lavage",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia and alveolar eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum IgE and inflammatory markers",
+          "cells": [
+            {
+              "text": "Typically elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA testing and extrapulmonary assessment",
+          "cells": [
+            {
+              "text": "Excludes eosinophilic granulomatosis with polyangiitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasite serology and drug history",
+          "cells": [
+            {
+              "text": "Secondary causes of pulmonary eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_eosinophilic_pneumonia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Asthma with neuropathy or vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic bronchopulmonary aspergillosis",
+          "cells": [
+            {
+              "text": "Asthma with fungal sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptogenic organising pneumonia",
+          "cells": [
+            {
+              "text": "Consolidation without marked eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_eosinophilic_pneumonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay, with rapid symptomatic and radiographic improvement"
+            },
+            {
+              "text": "Rapid response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged tapering course",
+          "cells": [
+            {
+              "text": "Slowly tapered corticosteroid course"
+            },
+            {
+              "text": "Relapse on withdrawal is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled therapy",
+          "cells": [
+            {
+              "text": "Inhaled corticosteroid and bronchodilator for coexisting or emergent asthma"
+            },
+            {
+              "text": "Asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Steroid-sparing agents or anti-interleukin-5 biologics"
+            },
+            {
+              "text": "Relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mimics",
+          "cells": [
+            {
+              "text": "Exclude parasites, drug causes and eosinophilic granulomatosis with polyangiitis"
+            },
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Symptoms, blood eosinophils, chest imaging and lung function; bone protection"
+            },
+            {
+              "text": "Relapse and steroid harm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_eosinophilic_pneumonia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic eosinophilic pneumonia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic eosinophilic pneumonia: subacute cough, breathlessness and fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extrapulmonary vasculitis, steroid dependence, progressive hypoxaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: vasculitis review and urgent respiratory assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "High-resolution CT, bronchoalveolar lavage, eosinophils, IgE and ANCA",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Peripheral upper-zone consolidation with alveolar eosinophilia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Systemic corticosteroids with rapid response",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check eosinophilic granulomatosis, allergic aspergillosis and organising pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prolonged slowly tapered corticosteroid course",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled therapy for coexisting asthma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Steroid-sparing agents or anti-IL-5 biologics for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor eosinophils, chest imaging and lung function; protect bone",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

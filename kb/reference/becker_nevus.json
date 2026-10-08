@@ -144,5 +144,82 @@
       "caption": "Overview comparison matrix for becker naevus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "becker_nevus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Becker naevus",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical examination and dermoscopy", "cells": [{"text": "Large unilateral hyperpigmented patch, most often over the shoulder, upper back or chest"}], "cite": "c1"},
+        {"parameter": "Assessment for hypertrichosis and follicular papules", "cells": [{"text": "Progressive coarse hypertrichosis; perifollicular papules from the smooth-muscle hamartoma"}], "cite": "c1"},
+        {"parameter": "Examination for breast, nipple or skeletal anomalies", "cells": [{"text": "Ipsilateral anomalies indicate Becker naevus syndrome"}], "cite": "c1"},
+        {"parameter": "Serial photography", "cells": [{"text": "Documents stability of the lesion"}], "cite": "c1"},
+        {"parameter": "Skin biopsy, where the diagnosis is uncertain", "cells": [{"text": "Epidermal and smooth-muscle changes"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "becker_nevus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Becker naevus",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Congenital melanocytic naevus", "cells": [{"text": "Increased melanisation without proliferation of naevus cells, and no recognised malignant transformation"}], "cite": "c1"},
+        {"parameter": "Smooth muscle hamartoma", "cells": [{"text": "Slight induration or perifollicular papules within the lesion; a component of this naevus"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "becker_nevus-treatment",
+      "kind": "treatment",
+      "title": "Management options in Becker naevus",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the naevus is benign, with negligible malignant potential"}, {"text": "Treatment is for cosmetic reasons only"}], "cite": "c1"},
+        {"parameter": "Camouflage cosmetics", "cells": [{"text": "Camouflage cosmetics for the pigmentation"}, {"text": "Simple, non-invasive option"}], "cite": "c1"},
+        {"parameter": "Laser hair removal", "cells": [{"text": "Laser hair removal for troublesome hypertrichosis"}, {"text": "Applies to hair within the lesion"}], "cite": "c1"},
+        {"parameter": "Pigment-directed laser", "cells": [{"text": "Laser therapy for the hyperpigmentation"}, {"text": "Response is variable and often incomplete; recurrence is common"}], "cite": "c1"},
+        {"parameter": "Syndrome screening", "cells": [{"text": "Examine for ipsilateral breast, nipple or skeletal anomalies"}, {"text": "Would indicate Becker naevus syndrome"}], "cite": "c1"},
+        {"parameter": "Serial photography", "cells": [{"text": "Document stability with serial photographs"}, {"text": "Used in place of routine biopsy"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "becker_nevus-dx-mgmt",
+      "title": "Diagnosis and management of Becker naevus",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Large unilateral hyperpigmented patch on shoulder, upper back or chest, often from puberty", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: breast or nipple hypoplasia, skeletal anomaly, nodularity or rapid growth?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: assess for Becker naevus syndrome and exclude another lesion", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Dermoscopy; look for coarse hypertrichosis and follicular papules", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Serial photography to document stability; biopsy only if the diagnosis is uncertain", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Pigmentation or hypertrichosis troubling the patient cosmetically?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Camouflage cosmetics; laser hair removal or pigment-directed laser (variable response)", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Benign and stable lifelong; no meaningful malignant potential", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

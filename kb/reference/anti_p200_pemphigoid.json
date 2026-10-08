@@ -150,5 +150,295 @@
       "caption": "Overview comparison matrix for anti p200 pemphigoid."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_p200_pemphigoid-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Perilesional biopsy for direct immunofluorescence",
+          "cells": [
+            {
+              "text": "Linear IgG and C3 at the basement-membrane zone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesional biopsy for histopathology",
+          "cells": [
+            {
+              "text": "Subepidermal blister with neutrophil-rich infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indirect immunofluorescence on salt-split skin",
+          "cells": [
+            {
+              "text": "Dermal-side binding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoblotting of serum against dermal extract",
+          "cells": [
+            {
+              "text": "The 200 kDa band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ELISA or immunoblot for laminin gamma-1 reactivity",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological exclusion of BP180, BP230 and type VII collagen antibodies",
+          "cells": [
+            {
+              "text": "These antibodies are excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_p200_pemphigoid-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Topical or systemic, to suppress blistering"
+            },
+            {
+              "text": "The disease usually responds favourably"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Dapsone, or a tetracycline antibiotic with nicotinamide"
+            },
+            {
+              "text": "For maintenance and to limit steroid exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated psoriasis",
+          "cells": [
+            {
+              "text": "Identify and treat"
+            },
+            {
+              "text": "May accompany or precede the eruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and skin care",
+          "cells": [
+            {
+              "text": "Erosions and blisters"
+            },
+            {
+              "text": "Promotes healing and prevents secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory disease",
+          "cells": [
+            {
+              "text": "Broader immunosuppression under dermatology supervision"
+            },
+            {
+              "text": "Escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "Monitor during corticosteroid tapering"
+            },
+            {
+              "text": "Ongoing dermatology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_p200_pemphigoid-dx-mgmt",
+      "title": "Diagnosis and management of anti p200 pemphigoid",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blistering eruption with linear IgG and C3 at the basement membrane zone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Extensive erosions, mucosal involvement or fluid loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent wound care and treatment of extensive blistering",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Perilesional DIF, lesional histology, salt-split IIF, 200 kDa immunoblot",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anti-p200 reactivity confirmed with BP180 and BP230 excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids, to which the disease usually responds",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat immunoblot testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dapsone or tetracycline with nicotinamide to limit steroid exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Identify and treat associated psoriasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound and skin care to prevent secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor for relapse on tapering; escalate refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

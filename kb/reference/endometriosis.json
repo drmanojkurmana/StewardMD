@@ -149,5 +149,276 @@
       "caption": "Overview comparison matrix for endometriosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endometriosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Endometriomas and signs of deep infiltrating disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Mapping of deep infiltrating endometriosis before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Definitive diagnosis and staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian reserve and semen analysis",
+          "cells": [
+            {
+              "text": "Assessed when subfertility is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel and bladder investigations",
+          "cells": [
+            {
+              "text": "Exclude involvement when symptoms suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endometriosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line analgesia with hormonal suppression",
+          "cells": [
+            {
+              "text": "NSAIDs alongside combined hormonal contraceptives or progestogens for a hypo-oestrogenic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levonorgestrel intrauterine system",
+          "cells": [
+            {
+              "text": "Progestogen option for pain and menstrual bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line GnRH agonists or antagonists",
+          "cells": [
+            {
+              "text": "With hormonal add-back therapy to limit hypo-oestrogenic side effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic excision or ablation",
+          "cells": [
+            {
+              "text": "With adhesiolysis when pain is not controlled medically or fertility is affected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subfertility",
+          "cells": [
+            {
+              "text": "Reproductive medicine referral for assisted reproduction; hormonal suppression prevents conception"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist endometriosis MDT",
+          "cells": [
+            {
+              "text": "Deep infiltrating, bowel or bladder disease needing excisional surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term support",
+          "cells": [
+            {
+              "text": "Recurrence, chronic pain and psychological impact of this relapsing condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endometriosis-dx-mgmt",
+      "title": "Diagnosis and management of Endometriosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic cyclical pelvic pain, dysmenorrhoea, deep dyspareunia or subfertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haematuria or haematochezia, ureteric involvement, complex mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to specialist endometriosis MDT; exclude ureteric obstruction or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound and pelvic MRI to look for endometriomas and deep disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Diagnosis confirmed by laparoscopy with biopsy or imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat laparoscopy or imaging; keep a high index of suspicion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs with hormonal suppression as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levonorgestrel intrauterine system for pain and menstrual bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "GnRH analogue with add-back therapy if medical treatment fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laparoscopic excision or ablation with adhesiolysis when pain persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term support for a chronic relapsing condition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

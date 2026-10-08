@@ -169,5 +169,532 @@
       "caption": "Overview comparison matrix for infections of the skin, muscles, and soft tissues."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "MSF Clinical Guidelines, Necrotising infections of the skin and soft tissues",
+      "kind": "web",
+      "url": "https://medicalguidelines.msf.org/en/viewport/CG/english/necrotising-infections-of-the-skin-and-soft-tissues-18482422.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 135-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 52-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infections_of_the_skin_muscles-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising skin, soft tissue and muscle infection by depth",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Honey-coloured crusted papules or bullae",
+          "cells": [
+            {
+              "text": "Impetigo (group A streptococcus or S. aureus)"
+            },
+            {
+              "text": "Streptococcal impetigo can cause glomerulonephritis but not rheumatic fever"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Sharply demarcated fiery-red raised plaque",
+          "cells": [
+            {
+              "text": "Erysipelas (S. pyogenes)"
+            },
+            {
+              "text": "Desquamation follows at 5 to 10 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Purulent cellulitis or abscess",
+          "cells": [
+            {
+              "text": "Usually MSSA or MRSA"
+            },
+            {
+              "text": "Drain and culture all pus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leading-edge aspirate or punch biopsy culture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in only about 20% of cellulitis",
+              "op": "=",
+              "value": 20
+            },
+            {
+              "text": "Negative culture does not exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:Pain out of proportion to skin findings with fever}}",
+          "cells": [
+            {
+              "text": "Suspect necrotising fasciitis"
+            },
+            {
+              "text": "Surgical exploration is the definitive test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Violaceous bullae, ecchymosis, cutaneous anaesthesia, crepitus",
+          "cells": [
+            {
+              "text": "Deep necrotising infection or gas gangrene"
+            },
+            {
+              "text": "Urgent surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "White cell count",
+          "unit": "/mm3",
+          "cells": [
+            {
+              "text": "Above 15,000 or below 4,000 per mm3",
+              "op": ">",
+              "value": 15000
+            },
+            {
+              "text": "Supports necrotising infection; normal values do not exclude it"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum creatinine",
+          "unit": "umol/L",
+          "cells": [
+            {
+              "text": "Above 141 umol/L",
+              "op": ">",
+              "value": 141
+            },
+            {
+              "text": "Supports necrotising infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imaging for gas",
+          "cells": [
+            {
+              "text": "Gas in muscle or along fascia supports clostridial or mixed infection"
+            },
+            {
+              "text": "Gas usually absent with group A streptococcus or MRSA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            },
+            {
+              "text": "Suggests myositis or myonecrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "MSF lists the white cell, creatinine and glucose cut-offs as supportive only; Harrison stresses that negative imaging or biopsy, negative in about 80% of deep infections, never rules out fulminant infection."
+    },
+    {
+      "id": "infections_of_the_skin_muscles-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic skin and soft tissue infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Toxic epidermal necrolysis",
+          "cells": [
+            {
+              "text": "Drug-induced, adults, higher mortality than SSSS"
+            },
+            {
+              "text": "Frozen section: cleavage at stratum germinativum (stratum corneum in SSSS)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyoderma gangrenosum",
+          "cells": [
+            {
+              "text": "Ulcers on the anterior shins"
+            },
+            {
+              "text": "Biopsy histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophlebitis or muscle strain",
+          "cells": [
+            {
+              "text": "Common misdiagnosis of early necrotising fasciitis"
+            },
+            {
+              "text": "Surgical exploration if pain is disproportionate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hidradenitis suppurativa",
+          "cells": [
+            {
+              "text": "Recurrent axillary or groin sweat-gland nodules"
+            },
+            {
+              "text": "Clinical pattern and chronicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infected sebaceous cyst",
+          "cells": [
+            {
+              "text": "Blocked follicular duct with punctum"
+            },
+            {
+              "text": "Clinical; culture if draining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatophytosis",
+          "cells": [
+            {
+              "text": "Annular scaly plaques; groin involvement spares scrotum"
+            },
+            {
+              "text": "KOH preparation shows hyphae"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Candidiasis",
+          "cells": [
+            {
+              "text": "Intertriginous plaques with satellite pustules, may involve scrotum"
+            },
+            {
+              "text": "KOH preparation shows pseudohyphae"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "infections_of_the_skin_muscles-treatment",
+      "kind": "treatment",
+      "title": "Treating skin, soft tissue and muscle infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Impetigo",
+          "cells": [
+            {
+              "text": "Localised crusted lesions"
+            },
+            {
+              "text": "Topical or systemic antistaphylococcal antibiotic"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral therapy, MSSA skin infection",
+          "cells": [
+            {
+              "text": "Uncomplicated cellulitis or abscess"
+            },
+            {
+              "text": "Dicloxacillin 500 mg four times daily or cephalexin 500 mg four times daily"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral therapy, MRSA skin infection",
+          "cells": [
+            {
+              "text": "MRSA prevalent or proven"
+            },
+            {
+              "text": "TMP-SMX 1 or 2 DS tablets twice daily, doxycycline or minocycline 100 mg every 12 h, clindamycin, or linezolid 400 to 600 mg twice daily"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Parenteral therapy, susceptibility unknown",
+          "cells": [
+            {
+              "text": "Serious infection"
+            },
+            {
+              "text": "Vancomycin 15 to 20 mg/kg every 8 to 12 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "{{hy:Urgent surgical debridement}}",
+          "cells": [
+            {
+              "text": "Necrotising fasciitis or myonecrosis"
+            },
+            {
+              "text": "Wide excision, amputation if needed; re-look within 24 to 36 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Empirical IV antibiotics for necrotising infection",
+          "cells": [
+            {
+              "text": "With surgery, adults"
+            },
+            {
+              "text": "Cloxacillin 3 g every 6 h plus ceftriaxone 2 g daily plus clindamycin 900 mg every 8 h; or amoxicillin-clavulanate 2 g every 8 h plus clindamycin 900 mg every 8 h; at least 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clindamycin as adjunct",
+          "cells": [
+            {
+              "text": "Streptococcal or clostridial toxin-mediated disease"
+            },
+            {
+              "text": "Antitoxin effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Sepsis or toxic shock"
+            },
+            {
+              "text": "Fluids, haemodynamic support, DVT prophylaxis, analgesia, early nutrition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Selected gas gangrene"
+            },
+            {
+              "text": "Must never delay or replace debridement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 135-3 prints clindamycin as 300 to 450 mg/kg three times daily, which appears to be a misprint; dose omitted here. Tailor exposure-specific cover (Vibrio, Aeromonas, Pasteurella, Erysipelothrix) per the entry text."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infections_of_the_skin_muscles-dx-mgmt",
+      "title": "Diagnosis and management of skin, muscle and soft tissue infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Red, swollen, painful skin or muscle",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pain out of proportion, bullae, necrosis, anaesthesia or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Resuscitate, blood cultures, urgent surgical exploration",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Debride widely; IV broad-spectrum antibiotics plus clindamycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Re-look surgery in 24 to 36 h; ICU care",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Purulent lesion or abscess?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Incise and drain; culture pus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral anti-MRSA agent if MRSA likely",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nonpurulent cellulitis: cover streptococci and MSSA",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Water, bite or animal exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Add exposure-directed cover (Vibrio, Pasteurella, Aeromonas)",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue therapy; reassess if spreading",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

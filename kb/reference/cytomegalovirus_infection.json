@@ -156,5 +156,503 @@
       "caption": "Overview comparison matrix for cytomegalovirus (cmv) infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cytomegalovirus Infection",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/herpesviruses/cytomegalovirus-cmv-infection",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cytomegalovirus_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of CMV infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Test or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative CMV DNA PCR (QNAT)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred for viraemia and monitoring}}"
+            },
+            {
+              "text": "Use the same assay for serial values"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "pp65 antigenaemia assay",
+          "cells": [
+            {
+              "text": "Alternative blood test"
+            },
+            {
+              "text": "Viraemia predicts disease better than urine or saliva shedding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy with histopathology",
+          "cells": [
+            {
+              "text": "Owl's eye intranuclear inclusions"
+            },
+            {
+              "text": "Gold standard for tissue-invasive disease; GI disease can occur with negative blood tests"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atypical lymphocytes in CMV mononucleosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">10%",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Heterophile antibody negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF CMV DNA PCR",
+          "cells": [
+            {
+              "text": "Encephalitis or polyradiculopathy"
+            },
+            {
+              "text": "Supports CNS diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology (IgM, IgG)",
+          "cells": [
+            {
+              "text": "New IgM suggests new infection"
+            },
+            {
+              "text": "Not for acute disease in immunocompromised; IgG may take 4 weeks; RF gives false IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD4 count for retinitis risk in HIV",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "<50",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "End-organ disease, especially retinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine or saliva PCR",
+          "cells": [
+            {
+              "text": "Infants"
+            },
+            {
+              "text": "Shedding alone does not prove acute disease in adults"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "cytomegalovirus_infection-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of CMV infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "EBV infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Exudative pharyngitis, cervical nodes"
+            },
+            {
+              "text": "{{hy:Heterophile antibody positive in EBV}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxoplasmosis",
+          "cells": [
+            {
+              "text": "Mononucleosis or retinitis mimic"
+            },
+            {
+              "text": "Toxoplasma serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocystis pneumonia",
+          "cells": [
+            {
+              "text": "Interstitial pneumonitis in immunocompromised"
+            },
+            {
+              "text": "Respiratory specimen testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSV or Candida retinitis or oesophagitis",
+          "cells": [
+            {
+              "text": "Different retinal or mucosal appearance"
+            },
+            {
+              "text": "Ophthalmology review; biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital toxoplasmosis, rubella, Zika, syphilis, HSV",
+          "cells": [
+            {
+              "text": "Neonatal congenital infection syndromes"
+            },
+            {
+              "text": "Specific serology and PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allograft rejection",
+          "cells": [
+            {
+              "text": "Overlaps with CMV syndrome after transplant"
+            },
+            {
+              "text": "Graft biopsy and CMV QNAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or radiation lung injury, pulmonary haemorrhage",
+          "cells": [
+            {
+              "text": "Non-infective pneumonitis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cytomegalovirus_infection-treatment",
+      "kind": "treatment",
+      "title": "Treatment and prevention of CMV",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care only",
+          "cells": [
+            {
+              "text": "Immunocompetent CMV mononucleosis"
+            },
+            {
+              "text": "Self-limited, 2 to 6 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV ganciclovir",
+          "cells": [
+            {
+              "text": "{{hy:First line for serious or tissue-invasive disease}}"
+            },
+            {
+              "text": "Induction then maintenance; marrow suppressive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral valganciclovir",
+          "cells": [
+            {
+              "text": "First-line induction or maintenance (e.g. retinitis)"
+            },
+            {
+              "text": "Also used for symptomatic congenital CMV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Foscarnet",
+          "cells": [
+            {
+              "text": "Ganciclovir resistance or intolerance"
+            },
+            {
+              "text": "Nephrotoxic; low calcium, magnesium and potassium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cidofovir",
+          "cells": [
+            {
+              "text": "Second line"
+            },
+            {
+              "text": "Limited by renal failure; probenecid and prehydration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maribavir (oral)",
+          "cells": [
+            {
+              "text": "Refractory or resistant post-transplant CMV"
+            },
+            {
+              "text": "Do not combine with ganciclovir or valganciclovir"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Letermovir prophylaxis",
+          "cells": [
+            {
+              "text": "Stem cell or renal transplant"
+            },
+            {
+              "text": "Not for active disease; many drug interactions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pre-emptive therapy guided by viral load",
+          "cells": [
+            {
+              "text": "Transplant recipients at risk"
+            },
+            {
+              "text": "Avoids marrow toxicity of universal prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop retinitis maintenance in HIV",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "On ART after 3 months of CMV therapy"
+            },
+            {
+              "text": "CD4 100 or more for 3 months",
+              "op": ">=",
+              "value": 100
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Opened sources do not state antiviral doses. Reduce immunosuppression where feasible in transplant recipients."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cytomegalovirus_infection-dx-mgmt",
+      "title": "Diagnosis and management of CMV infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMV: mononucleosis, fever with cytopenia, or organ disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Immunocompromised host?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Heterophile test, atypical lymphocytes, CMV IgM",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "CMV mononucleosis: supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Quantitative CMV PCR; biopsy of affected organ",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Tissue-invasive disease or CMV syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV ganciclovir or oral valganciclovir; reduce immunosuppression",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Viraemia without disease in transplant recipient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Pre-emptive antiviral by viral load threshold",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Rising viral load despite therapy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Resistance testing; foscarnet, cidofovir or maribavir",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Complete induction then maintenance",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

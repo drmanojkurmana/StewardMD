@@ -150,5 +150,90 @@
       "caption": "Overview comparison matrix for becker muscular dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "becker_muscular_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Becker muscular dystrophy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Serum creatine kinase", "cells": [{"text": "Markedly elevated, even in mildly affected or minimally symptomatic people"}], "cite": "c1"},
+        {"parameter": "DMD molecular genetic testing", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Muscle biopsy with dystrophin immunostaining", "cells": [{"text": "Reduced or patchy dystrophin, when needed"}], "cite": "c1"},
+        {"parameter": "Electrocardiography and echocardiography or cardiac MRI", "cells": [{"text": "Dilated cardiomyopathy, which can be disproportionate to skeletal weakness"}], "cite": "c1"},
+        {"parameter": "Pulmonary function testing", "cells": [{"text": "Monitors respiratory involvement"}], "cite": "c1"},
+        {"parameter": "Carrier testing and cardiac screening of female relatives", "cells": [{"text": "Carriers can develop cardiomyopathy and occasionally skeletal symptoms"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "becker_muscular_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Becker muscular dystrophy",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Duchenne muscular dystrophy", "cells": [{"text": "Later onset and slower progression, because in-frame variants keep some dystrophin"}], "cite": "c1"},
+        {"parameter": "Limb-girdle muscular dystrophies", "cells": [{"text": "Separated by genetic confirmation"}], "cite": "c1"},
+        {"parameter": "Manifesting female dystrophinopathy carrier", "cells": [{"text": "Carriers can develop cardiomyopathy and occasionally skeletal muscle symptoms"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "becker_muscular_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options in Becker muscular dystrophy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Multidisciplinary neuromuscular care", "cells": [{"text": "Physiotherapy to maintain mobility, prevent contractures and avoid overwork weakness"}, {"text": "Care is multidisciplinary"}], "cite": "c1"},
+        {"parameter": "Heart-failure therapy", "cells": [{"text": "Treat dilated cardiomyopathy with therapy such as ACE inhibitors and beta-blockers"}, {"text": "Cardiac disease often determines prognosis"}], "cite": "c1"},
+        {"parameter": "Cardiac surveillance", "cells": [{"text": "Regular electrocardiography and echocardiography or cardiac MRI"}, {"text": "Independent of skeletal muscle severity"}], "cite": "c1"},
+        {"parameter": "Respiratory monitoring", "cells": [{"text": "Spirometry; ventilatory and cough-assist support as weakness progresses"}, {"text": "Support added as weakness progresses"}], "cite": "c1"},
+        {"parameter": "Orthoses and occupational therapy", "cells": [{"text": "Orthoses, mobility aids and occupational therapy; corticosteroids in selected patients"}, {"text": "Aims to preserve function"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling for this X-linked disorder, with carrier testing and cardiac screening"}, {"text": "Applies to at-risk female relatives"}], "cite": "c1"},
+        {"parameter": "Advanced heart-failure care", "cells": [{"text": "Escalate to advanced heart-failure services; consider cardiac transplantation"}, {"text": "For refractory cardiomyopathy"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "becker_muscular_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Becker muscular dystrophy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Proximal leg weakness, calf hypertrophy, cramps or exercise intolerance; CK raised", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: heart failure, arrhythmia or progressive respiratory insufficiency?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: heart-failure therapy and respiratory support", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Check serum CK and cardiac imaging by ECG, echocardiography or cardiac MRI", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "DMD molecular genetic testing; muscle biopsy for dystrophin if needed", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "DMD testing confirms a dystrophinopathy?", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: consider limb-girdle dystrophy, metabolic or inflammatory myopathy", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Cardiac surveillance and pulmonary function monitoring", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Heart-failure therapy such as ACE inhibitors and beta-blockers", "cite": "c1"},
+        {"id": "n10", "type": "action", "text": "Physiotherapy, orthoses; genetic counselling and carrier screening of female relatives", "cite": "c1"},
+        {"id": "n11", "type": "outcome", "text": "Slower than Duchenne; cardiomyopathy often determines prognosis", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n8", "label": "Yes"},
+        {"from": "n6", "to": "n7", "label": "No"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"},
+        {"from": "n10", "to": "n11", "label": "Next"}
+      ]
+    }
+  ]
 }

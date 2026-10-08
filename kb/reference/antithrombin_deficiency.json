@@ -149,5 +149,324 @@
       "caption": "Overview comparison matrix for antithrombin deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "antithrombin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional antithrombin activity assay",
+          "cells": [
+            {
+              "text": "Key diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombin antigen level",
+          "cells": [
+            {
+              "text": "Distinguishes type I from type II deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broader thrombophilia panel",
+          "cells": [
+            {
+              "text": "Protein C, protein S, factor V Leiden, prothrombin mutation, antiphospholipid antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat testing away from acute thrombosis and heparin",
+          "cells": [
+            {
+              "text": "Confirms a persistent defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and liver assessment",
+          "cells": [
+            {
+              "text": "Excludes acquired causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family testing",
+          "cells": [
+            {
+              "text": "First-degree relatives, once a hereditary defect is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "antithrombin_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired low antithrombin",
+          "cells": [
+            {
+              "text": "Low level during acute thrombosis or heparin therapy; repeat testing excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein C deficiency",
+          "cells": [
+            {
+              "text": "Tested in the same thrombophilia panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "antithrombin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute venous thromboembolism",
+          "cells": [
+            {
+              "text": "Anticoagulation; consider indefinite vitamin K antagonist or direct oral anticoagulant"
+            },
+            {
+              "text": "Acute thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombin concentrate for heparin resistance",
+          "cells": [
+            {
+              "text": "Restores response, as heparin acts through antithrombin"
+            },
+            {
+              "text": "Apparent heparin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombin cover in very high-risk periods",
+          "cells": [
+            {
+              "text": "Antithrombin concentrate"
+            },
+            {
+              "text": "Major surgery, delivery, or heparin prophylaxis insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-molecular-weight heparin prophylaxis",
+          "cells": [
+            {
+              "text": "Pregnancy, postpartum period, surgery and immobilisation"
+            },
+            {
+              "text": "Thromboprophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid oestrogen",
+          "cells": [
+            {
+              "text": "Oestrogen-containing contraception and hormone replacement"
+            },
+            {
+              "text": "Modifiable thrombotic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint pregnancy management",
+          "cells": [
+            {
+              "text": "Haematology and obstetrics; low-molecular-weight heparin with antithrombin concentrate around delivery"
+            },
+            {
+              "text": "Around delivery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "antithrombin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Antithrombin deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Venous thromboembolism with low antithrombin activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Extensive DVT, PE or thrombosis at unusual sites?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent anticoagulation for acute venous thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Functional antithrombin assay, antigen level, thrombophilia panel, renal and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low antithrombin confirmed on repeat testing away from clot and heparin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Anticoagulation, with antithrombin concentrate for heparin resistance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the functional assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "LMWH prophylaxis in pregnancy, surgery and immobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid oestrogen-containing contraception and hormone replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antithrombin concentrate cover in very high-risk periods",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Test and counsel first-degree relatives; joint haematology and obstetric care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

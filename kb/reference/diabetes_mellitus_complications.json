@@ -174,5 +174,546 @@
       "caption": "Overview comparison matrix for diabetes mellitus: complications."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Diabetes Mellitus (screening schedule)",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/diabetes-mellitus-dm",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "US Pharmacist, ADA Standards of Care 2025 treatment updates",
+      "url": "https://www.uspharmacist.com/article/diabetestreatment-updates",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Practical Neurology, AAN 2022 painful diabetic neuropathy guideline",
+      "url": "https://practicalneurology.com/news/aan-guidelines-for-diabetic-neuropathy-updated/2469788/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetes_mellitus_complications-diagnostic",
+      "kind": "diagnostic",
+      "title": "Screening and staging of diabetic complications",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Albuminuria (UACR)",
+          "unit": "mg/g",
+          "cells": [
+            {
+              "text": "Moderate 30 to 299; severe >300",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Confirm on 2 to 3 samples over 3 to 6 months; exercise, fever, infection, HF falsely raise it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney screening",
+          "cells": [
+            {
+              "text": "UACR plus eGFR yearly"
+            },
+            {
+              "text": "{{hy:Some lose GFR without albuminuria}}; start 5 y after type 1 onset, at type 2 diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrology referral",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "eGFR <30 or UACR >300 mg/g",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Or atypical features: haematuria, rapid decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinopathy screening",
+          "cells": [
+            {
+              "text": "Dilated exam or retinal photography"
+            },
+            {
+              "text": "Nondilated primary-care exams are inadequate; Merck: within 5 y of type 1 diagnosis then every 1 to 2 y"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nonproliferative retinopathy",
+          "cells": [
+            {
+              "text": "Microaneurysms, blot haemorrhages, cotton-wool spots, IRMA"
+            },
+            {
+              "text": "Macular oedema can occur at any stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proliferative retinopathy",
+          "cells": [
+            {
+              "text": "Neovascularisation"
+            },
+            {
+              "text": "Risk of vitreous haemorrhage and traction detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy screening",
+          "cells": [
+            {
+              "text": "10-g monofilament and vibration yearly"
+            },
+            {
+              "text": "Up to 50% of DSPN is asymptomatic; loss of protective sensation predicts ulcer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot ulcer probing to bone",
+          "cells": [
+            {
+              "text": "High likelihood of osteomyelitis"
+            },
+            {
+              "text": "MRI most specific imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral arterial disease",
+          "cells": [
+            {
+              "text": "Ankle-brachial index"
+            },
+            {
+              "text": "Screen patients over 50 with risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silent ischaemia",
+          "cells": [
+            {
+              "text": "Chest pain often absent"
+            },
+            {
+              "text": "Stress test only if symptoms, even atypical; no routine screening when asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetes_mellitus_complications-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes to exclude before attributing to diabetes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-diabetic kidney disease",
+          "cells": [
+            {
+              "text": "{{hy:CKD without retinopathy in type 1 DM}}, haematuria or rapid decline"
+            },
+            {
+              "text": "Nephrology review, consider biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B12 deficiency neuropathy",
+          "cells": [
+            {
+              "text": "Metformin lowers B12; pernicious anaemia commoner in type 1"
+            },
+            {
+              "text": "Serum B12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol or other toxic-metabolic neuropathy",
+          "cells": [
+            {
+              "text": "Exposure history"
+            },
+            {
+              "text": "History and targeted labs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renovascular hypertension",
+          "cells": [
+            {
+              "text": "BP hard to control in type 2 DM"
+            },
+            {
+              "text": "Renal artery imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type IV RTA",
+          "cells": [
+            {
+              "text": "Hyperkalaemia with acidaemia, worse on ACE inhibitor or ARB"
+            },
+            {
+              "text": "Electrolytes, renin and aldosterone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Diarrhoea or constipation in type 1 DM"
+            },
+            {
+              "text": "Anti-tissue transglutaminase antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Addison disease",
+          "cells": [
+            {
+              "text": "Orthostatic hypotension in type 1 DM, mimicking autonomic neuropathy"
+            },
+            {
+              "text": "Morning cortisol and ACTH stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment-induced retinopathy worsening",
+          "cells": [
+            {
+              "text": "Transient in first 6 to 12 months of better control or with GLP-1 RA"
+            },
+            {
+              "text": "Serial retinal exams"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Cortisol and renin tests are standard work-ups for the named conditions; the entry names the conditions, not the tests."
+    },
+    {
+      "id": "diabetes_mellitus_complications-treatment",
+      "kind": "treatment",
+      "title": "Treatment of diabetic complications",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glycaemic control",
+          "cells": [
+            {
+              "text": "Early, all patients"
+            },
+            {
+              "text": "Each 1% HbA1c fall cut microvascular events about 35% (UKPDS); legacy effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Albuminuria or hypertension"
+            },
+            {
+              "text": "Watch potassium in type IV RTA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGLT2 inhibitor or GLP-1 RA with kidney benefit",
+          "cells": [
+            {
+              "text": "{{hy:CKD with eGFR 20 to 60 or albuminuria}}"
+            },
+            {
+              "text": "GLP-1 RA preferred for glycaemia when eGFR <30"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Panretinal laser photocoagulation",
+          "cells": [
+            {
+              "text": "Proliferative retinopathy"
+            },
+            {
+              "text": "Vitrectomy for vitreous haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF",
+          "cells": [
+            {
+              "text": "Macular oedema, proliferative disease"
+            },
+            {
+              "text": "Urgent ophthalmology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain drug: TCA, SNRI, gabapentinoid or sodium channel blocker",
+          "cells": [
+            {
+              "text": "Painful DSPN"
+            },
+            {
+              "text": "Similar effect sizes; choose by cost and side effects; switch class if one fails"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Avoid opioids",
+          "cells": [
+            {
+              "text": "Painful DSPN"
+            },
+            {
+              "text": "AAN advises against"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Foot ulcer care",
+          "cells": [
+            {
+              "text": "Ulcer or infection"
+            },
+            {
+              "text": "Offloading, debridement, antibiotics (IV broad spectrum if severe), revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Statin, BP control, antiplatelet when indicated, stop smoking",
+          "cells": [
+            {
+              "text": "Macrovascular risk"
+            },
+            {
+              "text": "CVD is the main cause of death"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetes_mellitus_complications-dx-mgmt",
+      "title": "Diagnosis and management of diabetic complications",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Person with diabetes at annual review",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "UACR, eGFR, dilated retinal exam, monofilament and vibration test",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "UACR >30 mg/g or falling eGFR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ACE inhibitor or ARB plus SGLT2 inhibitor or GLP-1 RA",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Proliferative retinopathy or macular oedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Laser photocoagulation or anti-VEGF via ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Loss of protective sensation or foot ulcer?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Ulcer probes to bone or severe infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV antibiotics, MRI, debridement, offloading",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Foot protection; neuropathic pain drug if painful",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Glycaemic, BP and lipid control with yearly re-screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

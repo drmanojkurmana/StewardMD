@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for combined pulmonary fibrosis and emphysema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Murray & Nadel's Textbook of Respiratory Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "combined_pulmonary_fibrosis_and_emphysema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HRCT thorax",
+          "cells": [
+            {
+              "text": "Upper-zone emphysema with lower-zone fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests with transfer factor",
+          "cells": [
+            {
+              "text": "Preserved volumes with disproportionately low gas transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Six-minute walk test with oximetry",
+          "cells": [
+            {
+              "text": "Exertional desaturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography, where indicated",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology",
+          "cells": [
+            {
+              "text": "Connective tissue disease excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "combined_pulmonary_fibrosis_and_emphysema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Connective tissue disease-associated ILD with emphysema",
+          "cells": [
+            {
+              "text": "Autoimmune serology is used to exclude it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated COPD with emphysema",
+          "cells": [
+            {
+              "text": "Symptoms attributed to COPD alone overlook the fibrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "combined_pulmonary_fibrosis_and_emphysema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Complete cessation with pharmacological and behavioural support; the foundation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term oxygen",
+          "cells": [
+            {
+              "text": "Resting hypoxaemia and exertional desaturation; ambulatory oxygen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled bronchodilators",
+          "cells": [
+            {
+              "text": "For the emphysematous component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrotic therapy",
+          "cells": [
+            {
+              "text": "Pirfenidone or nintedanib, considered where a fibrotic component is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary rehabilitation and vaccination",
+          "cells": [
+            {
+              "text": "Influenza and pneumococcal vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension screening",
+          "cells": [
+            {
+              "text": "Echocardiography; refer to a specialist service"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer surveillance",
+          "cells": [
+            {
+              "text": "Markedly increased risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant assessment and palliation",
+          "cells": [
+            {
+              "text": "Early referral for lung transplantation; palliative support for refractory breathlessness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "combined_pulmonary_fibrosis_and_emphysema-dx-mgmt",
+      "title": "Diagnosis and management of Combined pulmonary fibrosis and emphysema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected combined pulmonary fibrosis and emphysema: breathlessness, low gas transfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pulmonary hypertension, new nodule, severe hypoxaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: assess pulmonary hypertension and hypoxaemia; oxygen; specialist referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HRCT thorax; PFTs with transfer factor; echo; 6-minute walk; autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does HRCT show upper-zone emphysema with lower-zone fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated IPF, COPD or connective tissue disease-related ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete smoking cessation as the foundation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Long-term oxygen for resting and exertional hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antifibrotic therapy such as pirfenidone or nintedanib where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lung cancer surveillance and early transplant referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outlook worse than emphysema alone; survival depends on pulmonary hypertension and cancer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

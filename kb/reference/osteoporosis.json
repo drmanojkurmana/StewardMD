@@ -158,5 +158,543 @@
       "caption": "Overview comparison matrix for osteoporosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Osteoporosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/osteoporosis/osteoporosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 354-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 354-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "osteoporosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing osteoporosis and setting the treatment threshold",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "DXA T-score, normal",
+          "unit": "SD",
+          "cells": [
+            {
+              "text": "-1.0 or higher",
+              "op": ">=",
+              "value": -1.0
+            },
+            {
+              "text": "Normal bone density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DXA T-score, osteopenia",
+          "unit": "SD",
+          "cells": [
+            {
+              "text": "Between -1.0 and -2.5",
+              "range": [
+                -2.5,
+                -1.0
+              ]
+            },
+            {
+              "text": "Low bone density; a risk factor for osteoporosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DXA T-score, osteoporosis",
+          "unit": "SD",
+          "cells": [
+            {
+              "text": "-2.5 or lower at lumbar spine, femoral neck or total hip",
+              "op": "<=",
+              "value": -2.5
+            },
+            {
+              "text": "WHO densitometric osteoporosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fragility fracture",
+          "cells": [
+            {
+              "text": "Low-trauma hip, vertebral, humerus or distal radius fracture"
+            },
+            {
+              "text": "{{hy:Establishes osteoporosis whatever the T-score}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Z-score (children, premenopausal women, men under 50)",
+          "unit": "SD",
+          "cells": [
+            {
+              "text": "-2.0 or lower",
+              "op": "<=",
+              "value": -2.0
+            },
+            {
+              "text": "Low for age; look for secondary causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FRAX 10-year major osteoporotic fracture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20% or more",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "US threshold for drug treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FRAX 10-year hip fracture",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "3% or more",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "US threshold for drug treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Indications for BMD testing",
+          "cells": [
+            {
+              "text": "Estrogen-deficient women at risk; x-ray osteopenia or vertebral fracture; glucocorticoid 7.5 mg/day prednisone equivalent or more, or over 3 months; primary hyperparathyroidism; monitoring therapy"
+            },
+            {
+              "text": "Repeat BMD at intervals over 23 months unless justified sooner"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary-cause labs",
+          "cells": [
+            {
+              "text": "Calcium, phosphorus, magnesium, 25(OH)D, ALP, PTH, creatinine, 24 h urine calcium, testosterone in men"
+            },
+            {
+              "text": "Add TSH, cortisol, SPEP and free light chains, tTG IgA when suspected"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Treatment thresholds by FRAX are the US values; other countries set their own intervention thresholds."
+    },
+    {
+      "id": "osteoporosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or cause low bone mass",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteomalacia",
+          "cells": [
+            {
+              "text": "Bone pain, proximal weakness, low mineral to matrix ratio"
+            },
+            {
+              "text": "Low 25(OH)D, low phosphate, raised ALP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple myeloma",
+          "cells": [
+            {
+              "text": "Bone pain, punched-out lesions, anemia, can mimic generalized osteoporosis"
+            },
+            {
+              "text": "SPEP, serum free light chains, urine protein electrophoresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Hypercalcemia with cortical bone loss"
+            },
+            {
+              "text": "Serum calcium with intact PTH"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyrotoxicosis or excess thyroxine",
+          "cells": [
+            {
+              "text": "Accelerated bone turnover"
+            },
+            {
+              "text": "TSH and free T4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cushing syndrome or glucocorticoid use",
+          "cells": [
+            {
+              "text": "Most common drug cause of osteoporosis"
+            },
+            {
+              "text": "24 h urinary free cortisol or dexamethasone suppression test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Celiac disease or malabsorption",
+          "cells": [
+            {
+              "text": "Weight loss, low vitamin D"
+            },
+            {
+              "text": "tTG IgA antibodies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypogonadism in men",
+          "cells": [
+            {
+              "text": "Low libido, reduced muscle mass"
+            },
+            {
+              "text": "Serum testosterone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other drug-induced bone loss",
+          "cells": [
+            {
+              "text": "Cyclosporine, cytotoxics, anticonvulsants, alcohol excess, aromatase inhibitors, excess thyroxine, aluminum, GnRH agonists, heparin, lithium"
+            },
+            {
+              "text": "Medication history"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Spinal osteoarthritis on DXA",
+          "cells": [
+            {
+              "text": "Bone spurs falsely raise spine BMD"
+            },
+            {
+              "text": "Use hip sites; review vertebral imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "osteoporosis-treatment",
+      "kind": "treatment",
+      "title": "Treating osteoporosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium and vitamin D",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Calcium at least 1000 mg/day, 1200 mg/day for postmenopausal women and older men; vitamin D 600 to 800 IU/day, aim 25(OH)D 30 ng/mL or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exercise, fall prevention, stop smoking, limit alcohol",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Weight-bearing and muscle-strengthening exercise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral bisphosphonate (alendronate, risedronate)",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "Empty stomach, full glass of water, upright 30 min or more; needs CrCl over 35 mL/min; usual course 5 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zoledronic acid IV",
+          "cells": [
+            {
+              "text": "Oral intolerance or poor adherence"
+            },
+            {
+              "text": "Usual course 3 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Denosumab",
+          "cells": [
+            {
+              "text": "Bisphosphonate unsuitable"
+            },
+            {
+              "text": "{{hy:Never stop without a follow-on antiresorptive}}; rebound vertebral fractures; no drug holiday"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Teriparatide or abaloparatide",
+          "cells": [
+            {
+              "text": "Very high risk: T-score under -3.0, multiple vertebral fractures, antiresorptive failure"
+            },
+            {
+              "text": "Daily subcutaneous, about 2 years, then an antiresorptive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Romosozumab",
+          "cells": [
+            {
+              "text": "Very high fracture risk"
+            },
+            {
+              "text": "Monthly for 1 year; avoid within 12 months of MI or stroke; follow with antiresorptive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Raloxifene",
+          "cells": [
+            {
+              "text": "Postmenopausal women with mainly vertebral risk"
+            },
+            {
+              "text": "Cuts vertebral but not hip fractures; raises thromboembolism risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug holiday",
+          "cells": [
+            {
+              "text": "After 3 years IV or 5 years oral bisphosphonate in lower-risk patients"
+            },
+            {
+              "text": "Consider 5 to 10 years if fractures or ongoing high risk"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "osteoporosis-dx-mgmt",
+      "title": "Diagnosis and management of osteoporosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Postmenopausal woman, older man, fracture or glucocorticoid use",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Low-trauma hip or vertebral fracture?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "DXA of spine and hip, with FRAX",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "T-score -2.5 or lower, or FRAX hip 3% or MOF 20% or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Lifestyle, calcium and vitamin D; repeat DXA later",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Labs for secondary causes and treat any found",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Very high risk (T under -3.0 or multiple vertebral fractures)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anabolic agent: teriparatide, abaloparatide or romosozumab",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Follow with an antiresorptive to consolidate gains",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral bisphosphonate first line; zoledronic acid or denosumab if unsuitable",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reassess at 3 to 5 years for drug holiday; never stop denosumab abruptly",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

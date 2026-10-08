@@ -147,5 +147,89 @@
       "caption": "Overview comparison matrix for bell's palsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bells_palsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Bell's palsy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical examination", "cells": [{"text": "Lower motor neuron pattern; forehead sparing points to a central lesion"}], "cite": "c1"},
+        {"parameter": "Otoscopy and skin inspection", "cells": [{"text": "Vesicles suggest Ramsay Hunt syndrome"}], "cite": "c1"},
+        {"parameter": "Lyme serology", "cells": [{"text": "Indicated in endemic areas or with bilateral palsy"}], "cite": "c1"},
+        {"parameter": "MRI of brain and facial nerve", "cells": [{"text": "Indicated when the presentation is atypical, progressive or recurrent"}], "cite": "c1"},
+        {"parameter": "Investigation for sarcoidosis", "cells": [{"text": "Only when clinically indicated"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bells_palsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Bell's palsy",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Ischaemic or haemorrhagic stroke", "cells": [{"text": "Forehead sparing indicates a central lesion"}], "cite": "c1"},
+        {"parameter": "Ramsay Hunt syndrome", "cells": [{"text": "Vesicular rash in the ear or palate"}], "cite": "c1"},
+        {"parameter": "Lyme disease", "cells": [{"text": "Especially with bilateral palsy"}], "cite": "c1"},
+        {"parameter": "Cerebellopontine angle or parotid tumour", "cells": [{"text": "Progressive or recurrent weakness suggests a compressive or neoplastic lesion"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bells_palsy-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bell's palsy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Corticosteroids", "cells": [{"text": "Oral prednisolone as early as possible after symptom onset"}, {"text": "Improves the likelihood of complete recovery"}], "cite": "c1"},
+        {"parameter": "Antiviral therapy", "cells": [{"text": "Aciclovir or valaciclovir alongside corticosteroids"}, {"text": "For severe or complete palsy"}], "cite": "c1"},
+        {"parameter": "Eye protection", "cells": [{"text": "Lubricating drops and ointment; tape or patch the eye closed at night"}, {"text": "Prevents exposure keratopathy"}], "cite": "c1"},
+        {"parameter": "Reassurance and follow-up", "cells": [{"text": "Explain most patients recover well; arrange follow-up to confirm recovery"}, {"text": "Majority regain normal or near-normal function"}], "cite": "c1"},
+        {"parameter": "Facial physiotherapy", "cells": [{"text": "Neuromuscular retraining for slow or incomplete recovery"}, {"text": "Attention to synkinesis"}], "cite": "c1"},
+        {"parameter": "Ramsay Hunt syndrome", "cells": [{"text": "Antivirals and corticosteroids if vesicles are found"}, {"text": "Herpes zoster oticus"}], "cite": "c1"},
+        {"parameter": "Referral for further evaluation", "cells": [{"text": "Refer if atypical, progressive, recurrent, bilateral or not recovering"}, {"text": "Imaging to exclude an alternative cause"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bells_palsy-dx-mgmt",
+      "title": "Diagnosis and management of Bell's palsy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Acute unilateral facial weakness over hours to days, sometimes after ear pain", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: forehead sparing, bilateral palsy, or progressive or recurrent weakness?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: MRI and search for stroke, compressive tumour, Lyme or sarcoidosis", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Examine other cranial nerves; check for lower motor neuron pattern", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Otoscopy and skin inspection; Lyme serology if endemic or bilateral", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Vesicular rash in ear or palate (Ramsay Hunt syndrome)?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Antivirals and corticosteroids for herpes zoster oticus", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Oral prednisolone as early as possible; aciclovir or valaciclovir if severe", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Protect the eye with lubricating drops; tape or patch closed at night", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Most recover well; refer and image if not recovering or atypical", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

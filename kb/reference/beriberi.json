@@ -146,5 +146,84 @@
       "caption": "Overview comparison matrix for beriberi."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO nutrition guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beriberi-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beriberi",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Dietary and alcohol history", "cells": [{"text": "Polished white rice diet, chronic alcohol use, hyperemesis, bariatric surgery, or unsupplemented parenteral feeding"}], "cite": "c1"},
+        {"parameter": "Erythrocyte transketolase activity or blood thiamine", "cells": [{"text": "Thiamine status, where available"}], "cite": "c1"},
+        {"parameter": "Cardiac function in suspected wet beriberi", "cells": [{"text": "High-output failure; rapid improvement in cardiac output after thiamine supports wet beriberi"}], "cite": "c1"},
+        {"parameter": "Neurological and cognitive assessment", "cells": [{"text": "Wernicke triad of confusion, ophthalmoplegia and ataxia"}], "cite": "c1"},
+        {"parameter": "Coexisting deficiencies", "cells": [{"text": "Evaluated in malnourished or alcohol-dependent patients"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beriberi-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for beriberi",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Other peripheral neuropathies (diabetic or alcoholic)", "cells": [{"text": "Dry beriberi is a symmetrical peripheral polyneuropathy"}], "cite": "c1"},
+        {"parameter": "Other causes of delirium and ataxia", "cells": [{"text": "The Wernicke triad of confusion, ophthalmoplegia and ataxia"}], "cite": "c1"},
+        {"parameter": "Fluid overload from cardiac disease", "cells": [{"text": "Wet beriberi has warm extremities and high-output failure that improves rapidly with thiamine"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beriberi-treatment",
+      "kind": "treatment",
+      "title": "Management options in beriberi",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Parenteral thiamine", "cells": [{"text": "Prompt parenteral thiamine replacement"}, {"text": "Definitive treatment for wet and dry beriberi and Wernicke encephalopathy"}], "cite": "c1"},
+        {"parameter": "Thiamine before glucose", "cells": [{"text": "Give thiamine before or with any glucose load in at-risk patients"}, {"text": "Glucose can precipitate acute Wernicke encephalopathy"}], "cite": "c1"},
+        {"parameter": "Circulatory support", "cells": [{"text": "Support the failing circulation in wet beriberi while thiamine reverses the high-output state"}, {"text": "Adjunct to thiamine"}], "cite": "c1"},
+        {"parameter": "Underlying cause", "cells": [{"text": "Correct coexisting deficiencies; address alcohol dependence, hyperemesis or unsupplemented parenteral feeding"}, {"text": "Treats the cause"}], "cite": "c1"},
+        {"parameter": "Diet and supplementation", "cells": [{"text": "Dietary counselling and ongoing thiamine supplementation"}, {"text": "Prevents recurrence"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Cardiac and neurological recovery"}, {"text": "Delayed treatment risks irreversible Korsakoff amnesia and incomplete neuropathy recovery"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care", "cells": [{"text": "Neurology, cardiology and dietetics; screen at-risk groups including breastfed infants of deficient mothers"}, {"text": "Infantile beriberi can be acute and life-threatening"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beriberi-dx-mgmt",
+      "title": "Diagnosis and management of beriberi",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Oedema with warm limbs, symmetrical neuropathy, or confusion with ataxia in an at-risk patient", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: acute high-output failure, Wernicke features, or a deteriorating infant?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: parenteral thiamine at once, before any glucose; support the circulation", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Take diet and alcohol history; check thiamine status and cardiac function", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Cardiac output improves rapidly after thiamine?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Supports wet beriberi; continue thiamine and treat the cause", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "No: reassess for other cardiomyopathy, neuropathy or Guillain-Barre syndrome", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Ongoing thiamine supplementation and dietary counselling to prevent recurrence", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

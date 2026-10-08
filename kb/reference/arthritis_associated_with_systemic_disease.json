@@ -176,5 +176,449 @@
       "caption": "Overview comparison matrix for arthritis associated with systemic disease, and other arthritides."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arthritis_associated_with_systemic_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clues to arthritis caused by systemic disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Characteristic finding",
+        "Next test or action"
+      ],
+      "rows": [
+        {
+          "parameter": "Acromegaly",
+          "cells": [
+            {
+              "text": "Wrist involvement, joint-space widening early, carpal tunnel in about half"
+            },
+            {
+              "text": "GH and IGF-I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemochromatosis",
+          "cells": [
+            {
+              "text": "{{hy:2nd and 3rd MCP arthropathy with hook osteophytes}}, chondrocalcinosis"
+            },
+            {
+              "text": "Transferrin saturation (more sensitive than ferritin), ferritin, iron studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilia (factor VIII or IX)",
+          "cells": [
+            {
+              "text": "Recurrent haemarthrosis of knees, ankles, elbows after age 1"
+            },
+            {
+              "text": "Correct factor before aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever with haemarthrosis",
+          "unit": "C",
+          "cells": [
+            {
+              "text": ">38.3",
+              "op": ">",
+              "value": 38.3
+            },
+            {
+              "text": "Suspect septic joint; aspirate after factor correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell dactylitis",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Children under 5",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": "Hand-foot syndrome; resolves without damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperuricaemia in sickle cell disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to about 40%",
+              "op": "<=",
+              "value": 40
+            },
+            {
+              "text": "Arthrocentesis separates gout, infection, infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "Achilles tendinitis, migratory arthritis before xanthomas"
+            },
+            {
+              "text": "Noninflammatory crystal-negative fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic (Charcot) joint",
+          "cells": [
+            {
+              "text": "Destruction out of proportion to pain; diabetes commonest; tarsal joints"
+            },
+            {
+              "text": "Indium WBC scan or MRI to separate osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic osteoarthropathy",
+          "cells": [
+            {
+              "text": "Clubbing with periosteal new bone"
+            },
+            {
+              "text": "Look for lung cancer, suppurative lung or cyanotic heart disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arthritis_associated_with_systemic_disease-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of systemic-disease arthropathies",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary osteoarthritis",
+          "cells": [
+            {
+              "text": "Spares wrist and 2nd and 3rd MCPs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium pyrophosphate disease",
+          "cells": [
+            {
+              "text": "Often coexists with acromegaly or haemochromatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "{{hy:Hard to separate from haemarthrosis or sickle effusion}}; aspirate and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteomyelitis",
+          "cells": [
+            {
+              "text": "Indium WBC uptake, unlike neuropathic joint; technetium scan does not separate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gout",
+          "cells": [
+            {
+              "text": "Crystal-positive fluid; sickle cell and drug-related hyperuricaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avascular necrosis",
+          "cells": [
+            {
+              "text": "MRI sensitive early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffuse idiopathic skeletal hyperostosis",
+          "cells": [
+            {
+              "text": "Spinal changes in acromegaly can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Transfused thalassaemia patients may be ANA positive without SLE"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arthritis_associated_with_systemic_disease-treatment",
+      "kind": "treatment",
+      "title": "Management of arthritis associated with systemic disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying disorder",
+          "cells": [
+            {
+              "text": "{{hy:All}}"
+            },
+            {
+              "text": "Normalise GH and IGF-I; venesection for iron; factor replacement for haemophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor correction before arthrocentesis",
+          "cells": [
+            {
+              "text": "Haemophilic haemarthrosis"
+            },
+            {
+              "text": "Do not aspirate intramuscular cysts unless infected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic factor replacement",
+          "cells": [
+            {
+              "text": "Haemophilia with recurrent bleeds"
+            },
+            {
+              "text": "Prevents progressive arthropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid nonselective NSAIDs",
+          "cells": [
+            {
+              "text": "Haemophilia"
+            },
+            {
+              "text": "They impair platelet function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Joint pain and function"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage chondrocalcinosis",
+          "cells": [
+            {
+              "text": "Haemochromatosis"
+            },
+            {
+              "text": "Arthritis may progress despite venesection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint replacement or orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Advanced deforming arthropathy"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Built from Harrison text only; no external source added and no doses stated."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arthritis_associated_with_systemic_disease-dx-mgmt",
+      "title": "Approach to arthritis with a suspected systemic cause",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arthropathy with unusual pattern or known systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute hot joint or fever above 38.3 C?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Correct clotting factor if haemophilic, then aspirate",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat septic arthritis, gout or haemarthrosis per fluid result",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "2nd and 3rd MCP or wrist involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Transferrin saturation, ferritin, GH and IGF-I",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Painless destructive joint with neuropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "MRI or indium WBC scan to exclude osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Look for clubbing, lipids, sickle disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Treat cause; analgesia, physiotherapy, surgery if advanced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

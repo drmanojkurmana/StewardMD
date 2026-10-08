@@ -144,5 +144,297 @@
       "caption": "Overview comparison matrix for chalazion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chalazion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination with eyelid eversion",
+          "cells": [
+            {
+              "text": "Assesses the tarsal conjunctival surface"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction",
+          "cells": [
+            {
+              "text": "Assesses induced astigmatism in large lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of excised or curetted tissue",
+          "cells": [
+            {
+              "text": "Used in recurrent or atypical cases to exclude malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chalazion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Internal or external hordeolum (stye)",
+          "cells": [
+            {
+              "text": "Acute, tender infective abscess of a meibomian gland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sebaceous gland carcinoma of the eyelid",
+          "cells": [
+            {
+              "text": "Recurrence at the same site or atypical features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chalazion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Warm compresses and lid massage",
+          "cells": [
+            {
+              "text": "Express retained meibomian secretions over several weeks"
+            },
+            {
+              "text": "Many small lesions resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyelid hygiene",
+          "cells": [
+            {
+              "text": "Treat blepharitis, meibomian gland dysfunction and rosacea"
+            },
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional corticosteroid",
+          "cells": [
+            {
+              "text": "For persistent lesions, particularly those near the lacrimal punctum"
+            },
+            {
+              "text": "Persistent lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incision and curettage",
+          "cells": [
+            {
+              "text": "Through a conjunctival approach"
+            },
+            {
+              "text": "Lesions that fail to resolve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Astigmatism assessment",
+          "cells": [
+            {
+              "text": "Assess corneal astigmatism and visual disturbance"
+            },
+            {
+              "text": "Large lesions pressing on the globe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Send excised tissue for histopathology"
+            },
+            {
+              "text": "Recurrent or atypical lesions; exclude sebaceous carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chalazion-dx-mgmt",
+      "title": "Diagnosis and management of Chalazion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chalazion: firm, painless tarsal nodule that may follow a stye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrence, madarosis, ulceration, spreading cellulitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: biopsy for sebaceous carcinoma; treat spreading infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp examination with lid eversion; refraction if the lesion is large",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Firm painless tarsal nodule without malignant features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Warm compresses and lid massage over several weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check internal hordeolum, sebaceous carcinoma and basal cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat blepharitis, meibomian dysfunction and rosacea to reduce recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intralesional corticosteroid for persistent lesions near the punctum",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Incision and curettage through a conjunctival approach if unresolved",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Histopathology for recurrent or atypical lesions to exclude carcinoma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

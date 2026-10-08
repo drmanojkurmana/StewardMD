@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for complete heart block."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC & ACC-AHA guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complete_heart_block-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG and continuous rhythm monitoring",
+          "cells": [
+            {
+              "text": "AV dissociation and escape rhythm characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and review of AV-nodal-blocking drugs",
+          "cells": [
+            {
+              "text": "Reversible causes identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Acute ischaemia or infarction assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function and structural or infiltrative disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complete_heart_block-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Second-degree AV block (Mobitz I and II)",
+          "cells": [
+            {
+              "text": "Some conduction preserved; not complete block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AV dissociation without true complete block",
+          "cells": [
+            {
+              "text": "Marked dissociation mimics complete block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinus bradycardia or sinus arrest with junctional escape",
+          "cells": [
+            {
+              "text": "Junctional escape without true AV block"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complete_heart_block-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct reversible causes",
+          "cells": [
+            {
+              "text": "Withdraw AV-nodal blocking drugs; treat hyperkalaemia and electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute stabilisation",
+          "cells": [
+            {
+              "text": "Atropine and chronotropic infusion such as isoprenaline or dopamine while arranging pacing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporary pacing",
+          "cells": [
+            {
+              "text": "Transcutaneous then transvenous for haemodynamically significant block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Permanent pacemaker",
+          "cells": [
+            {
+              "text": "Definitive treatment for irreversible complete heart block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary reperfusion",
+          "cells": [
+            {
+              "text": "Urgent when block complicates acute myocardial infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous monitoring",
+          "cells": [
+            {
+              "text": "Defibrillation and resuscitation available if escape rhythm fails"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complete_heart_block-dx-mgmt",
+      "title": "Diagnosis and management of Complete heart block",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected complete heart block: AV dissociation with slow escape rhythm",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (instability, syncope, unreliable wide-complex escape)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Medical emergency: atropine, chronotropic infusion and temporary pacing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG and rhythm monitoring; electrolytes; biomarkers; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is complete AV block confirmed with AV dissociation on ECG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Mobitz block, AV dissociation or junctional rhythm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw AV-nodal drugs; correct hyperkalaemia and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Temporary pacing for significant block with unreliable escape",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Permanent pacemaker for irreversible complete heart block",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent coronary reperfusion if block follows acute myocardial infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated symptomatic block risks syncope; permanent pacing restores a normal outlook",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

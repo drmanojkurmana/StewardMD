@@ -151,5 +151,336 @@
       "caption": "Overview comparison matrix for apparent life-threatening event."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apparent_life_threatening_event-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thorough history and examination",
+          "cells": [
+            {
+              "text": "Risk-stratifies and seeks an underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation and pulse oximetry",
+          "cells": [
+            {
+              "text": "Where clinically appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "When a cardiac cause or arrhythmia is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted testing for infection, reflux or seizures",
+          "cells": [
+            {
+              "text": "Guided by history rather than routine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for non-accidental injury",
+          "cells": [
+            {
+              "text": "When the history is inconsistent or concerning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening",
+          "cells": [
+            {
+              "text": "Only if clinical features suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apparent_life_threatening_event-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac arrhythmia",
+          "cells": [
+            {
+              "text": "ECG when an arrhythmia is a concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure or other neurological event",
+          "cells": [
+            {
+              "text": "Targeted seizure testing when the history suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apparent_life_threatening_event-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "Low-risk versus higher-risk brief resolved unexplained event"
+            },
+            {
+              "text": "Guides the intensity of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid unnecessary testing and admission",
+          "cells": [
+            {
+              "text": "Reassurance, safe-sleep advice and caregiver education"
+            },
+            {
+              "text": "Low-risk infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation with pulse oximetry",
+          "cells": [
+            {
+              "text": "Where clinically appropriate"
+            },
+            {
+              "text": "Observation period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat identified causes",
+          "cells": [
+            {
+              "text": "Reflux, infection, seizures, airway obstruction or arrhythmia"
+            },
+            {
+              "text": "Causes are not dismissed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caregiver CPR training and safety-netting",
+          "cells": [
+            {
+              "text": "Infant cardiopulmonary resuscitation; clear advice on when to seek help"
+            },
+            {
+              "text": "Safety-netting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury evaluation",
+          "cells": [
+            {
+              "text": "When the history is inconsistent or concerning"
+            },
+            {
+              "text": "Concern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral of higher-risk infants",
+          "cells": [
+            {
+              "text": "Paediatric assessment with targeted investigation including ECG"
+            },
+            {
+              "text": "Higher-risk infants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apparent_life_threatening_event-dx-mgmt",
+      "title": "Diagnosis and management of Apparent Life-Threatening Event",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief, resolved, unexplained event in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Age under two months, prematurity or recurrent events?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer higher-risk infants for paediatric assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History and examination, pulse oximetry, ECG if cardiac concern, targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cause found on history, examination or targeted testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the identified cause such as reflux, infection or seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table); low-risk infants need reassurance",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure low-risk infants; safe-sleep advice; avoid unnecessary admission",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Teach infant CPR and give safety-netting advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate for non-accidental injury if the history is inconsistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Clear safety-netting and follow-up arranged for higher-risk infants",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

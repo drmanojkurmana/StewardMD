@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for aromatase deficiency (cyp19a1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aromatase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Confirms 46,XX in a virilised infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum oestradiol with androgens and gonadotropins",
+          "cells": [
+            {
+              "text": "Oestradiol low or undetectable, androgens and gonadotropins elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CYP19A1 molecular analysis",
+          "cells": [
+            {
+              "text": "Gene defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound",
+          "cells": [
+            {
+              "text": "Enlarged multicystic ovaries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph and bone mineral density",
+          "cells": [
+            {
+              "text": "Bone age and density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic profile",
+          "cells": [
+            {
+              "text": "Fasting glucose, insulin and lipids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aromatase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital adrenal hyperplasia (21-hydroxylase deficiency)",
+          "cells": [
+            {
+              "text": "Mistaken for aromatase deficiency in a virilised 46,XX infant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal virilising tumour or luteoma of pregnancy",
+          "cells": [
+            {
+              "text": "Maternal virilisation during pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aromatase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oestrogen replacement",
+          "cells": [
+            {
+              "text": "Restores the missing oestrogen signal"
+            },
+            {
+              "text": "Induces puberty and epiphyseal closure; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Titrated oestrogen",
+          "cells": [
+            {
+              "text": "Dampens the hypergonadotropic drive"
+            },
+            {
+              "text": "Reduces recurrent multicystic ovarian enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic management",
+          "cells": [
+            {
+              "text": "Insulin resistance and dyslipidaemia; lifestyle measures and lipid-lowering therapy"
+            },
+            {
+              "text": "Sequelae of oestrogen deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged reconstructive surgery",
+          "cells": [
+            {
+              "text": "For the virilised 46,XX infant, with multidisciplinary sex assignment"
+            },
+            {
+              "text": "Timing decided by the team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone and growth surveillance",
+          "cells": [
+            {
+              "text": "Serial bone age, bone mineral density and growth"
+            },
+            {
+              "text": "Guides oestrogen dosing; detects osteoporosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Maternal virilisation in pregnancy resolves after delivery"
+            },
+            {
+              "text": "Maternal virilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CYP19A1 defect; confirmatory testing and family carrier screening"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aromatase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Aromatase deficiency (CYP19A1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Virilised 46,XX infant, or absent puberty with multicystic ovaries",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Ambiguous genitalia needing exclusion of salt-wasting CAH?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of salt-wasting congenital adrenal hyperplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, oestradiol, androgens, gonadotropins, CYP19A1, pelvic ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low oestradiol with elevated androgens and CYP19A1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oestrogen replacement to induce puberty and epiphyseal closure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat hormone profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Titrated oestrogen to limit ovarian enlargement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bone age and density monitoring to guide dosing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage insulin resistance and dyslipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Maternal virilisation resolves after delivery; genetic counselling for family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

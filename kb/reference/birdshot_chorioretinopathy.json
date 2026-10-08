@@ -150,5 +150,76 @@
       "caption": "Overview comparison matrix for birdshot chorioretinopathy (hla-a29)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "birdshot_chorioretinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in birdshot chorioretinopathy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "HLA-A29 typing", "cells": [{"text": "Supports the diagnosis in the appropriate clinical setting"}], "cite": "c1"},
+        {"parameter": "Indocyanine green angiography", "cells": [{"text": "Hypofluorescent choroidal lesions, often more numerous than seen clinically"}], "cite": "c1"},
+        {"parameter": "Fluorescein angiography", "cells": [{"text": "Retinal vasculitis, disc leakage and cystoid macular oedema"}], "cite": "c1"},
+        {"parameter": "Optical coherence tomography", "cells": [{"text": "Macular oedema and photoreceptor integrity"}], "cite": "c1"},
+        {"parameter": "Electroretinography", "cells": [{"text": "Retinal functional decline"}], "cite": "c1"},
+        {"parameter": "Visual field testing", "cells": [{"text": "Peripheral field loss disproportionate to acuity"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "birdshot_chorioretinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options in birdshot chorioretinopathy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Initial control", "cells": [{"text": "Systemic corticosteroids"}, {"text": "For acute control"}], "cite": "c1"},
+        {"parameter": "Steroid-sparing immunosuppression", "cells": [{"text": "Antimetabolites, calcineurin inhibitors or biologic agents for durable suppression"}, {"text": "Maintenance phase"}], "cite": "c1"},
+        {"parameter": "Cystoid macular oedema", "cells": [{"text": "Local or systemic anti-inflammatory therapy"}, {"text": "Leading cause of visual loss"}], "cite": "c1"},
+        {"parameter": "Refractory macular oedema", "cells": [{"text": "Periocular or intravitreal corticosteroid"}, {"text": "Used when oedema does not respond"}], "cite": "c1"},
+        {"parameter": "Objective surveillance", "cells": [{"text": "Optical coherence tomography, electroretinography and visual fields"}, {"text": "Tracks inflammation and retinal function"}], "cite": "c1"},
+        {"parameter": "Diagnostic support", "cells": [{"text": "HLA-A29 typing and indocyanine green angiography"}, {"text": "Supports diagnosis and monitors choroidal lesions"}], "cite": "c1"},
+        {"parameter": "Specialist management", "cells": [{"text": "Uveitis or medical-retina specialist"}, {"text": "Escalate immunosuppression for electroretinographic decline or recurrent oedema"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "birdshot_chorioretinopathy-dx-mgmt",
+      "title": "Diagnosis and management of birdshot chorioretinopathy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Bilateral posterior uveitis in a middle-aged adult with night-vision loss and floaters", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: macular oedema threatening vision, falling ERG, or atypical features?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: uveitis specialist review; exclude intraocular lymphoma", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "HLA-A29 typing; indocyanine green and fluorescein angiography; OCT", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Electroretinography and visual fields to document functional loss", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Classic birdshot lesions with vitritis and HLA-A29 positive?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Systemic corticosteroids, then steroid-sparing immunosuppression", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider sarcoid uveitis, VKH, intraocular lymphoma or other chorioretinitis", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Treat cystoid macular oedema; OCT and ERG surveillance", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Chronic relapsing; sustained immunosuppression preserves central vision in many", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

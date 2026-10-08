@@ -151,5 +151,315 @@
       "caption": "Overview comparison matrix for anti-ampa receptor encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_ampa_receptor_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF cell-based assay for AMPA receptor IgG",
+          "cells": [
+            {
+              "text": "Antibody against the GluA1/GluA2 AMPA receptor subunits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Thymoma and lung, breast or ovarian tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Medial temporal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Seizures and encephalopathic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis with oligoclonal bands",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Behavioural and psychiatric disturbance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_ampa_receptor_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary psychiatric disorder",
+          "cells": [
+            {
+              "text": "An isolated psychiatric presentation can be misattributed to it and delay testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_ampa_receptor_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line agents",
+          "cells": [
+            {
+              "text": "Rituximab or cyclophosphamide"
+            },
+            {
+              "text": "For refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour screening and treatment",
+          "cells": [
+            {
+              "text": "Remove or treat any associated thymoma or lung, breast or ovarian tumour"
+            },
+            {
+              "text": "Systematic screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "For seizures"
+            },
+            {
+              "text": "Supportive care of behavioural and psychiatric disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance immunotherapy",
+          "cells": [
+            {
+              "text": "Clinical and antibody surveillance"
+            },
+            {
+              "text": "High relapse rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Neurology, oncology, psychiatry and rehabilitation"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_ampa_receptor_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-AMPA receptor encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute psychiatric disturbance with cognitive decline suggesting encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid encephalopathy or tumour found on screening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent tumour search and immunotherapy; treat seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AMPA IgG assay in serum and CSF, whole-body imaging, MRI, EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AMPA receptor IgG confirmed on cell-based assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "First-line immunotherapy with steroids, IVIG or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat antibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate refractory disease to rituximab or cyclophosphamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove any associated thymoma or lung, breast or ovarian tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication and maintenance immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High relapse rate; needs antibody and clinical surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

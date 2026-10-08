@@ -166,5 +166,426 @@
       "caption": "Overview comparison matrix for brucellosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Brucellosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/brucellosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "brucellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of brucellosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Livestock contact, unpasteurised dairy (soft cheese, milk, ice cream)"
+            },
+            {
+              "text": "Diagnosis needs exposure plus compatible illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever pattern",
+          "cells": [
+            {
+              "text": "Undulant fever with night sweats"
+            },
+            {
+              "text": "Musculoskeletal features in about half"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture (blood, marrow, CSF, joint, tissue)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 50 to 70%",
+              "range": [
+                50,
+                70
+              ]
+            },
+            {
+              "text": "{{hy:Warn the lab: biohazard}}; automated systems positive within 7 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Agglutination titre, endemic or exposed",
+          "cells": [
+            {
+              "text": "1:320 to 1:640 or higher",
+              "op": ">=",
+              "value": 320
+            },
+            {
+              "text": "Diagnostic in endemic settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Agglutination titre, non-endemic",
+          "cells": [
+            {
+              "text": "At least 1:160",
+              "op": ">=",
+              "value": 160
+            },
+            {
+              "text": "Or fourfold rise over 3 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood PCR",
+          "cells": [
+            {
+              "text": "More sensitive and faster than culture"
+            },
+            {
+              "text": "Avoids biohazard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal osteoarticular disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 40%"
+            },
+            {
+              "text": "Lumbar spondylitis; knee, hip, sacroiliac arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epididymo-orchitis in men",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10%",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Hepatosplenomegaly in about one-quarter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocarditis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 1%"
+            },
+            {
+              "text": "Aortic valve; usual cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scan",
+          "cells": [
+            {
+              "text": "More sensitive than plain films"
+            },
+            {
+              "text": "For spinal or joint disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Serology is unreliable for B. canis."
+    },
+    {
+      "id": "brucellosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of brucellosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "{{hy:Vertebral destruction or cord compression favours TB}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhoid fever",
+          "cells": [
+            {
+              "text": "Similar febrile illness, usually more severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "Fever in endemic area; blood film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glandular fever-like illness (EBV, CMV, toxoplasma, HIV)",
+          "cells": [
+            {
+              "text": "Lymphadenopathy and splenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mumps or testicular torsion",
+          "cells": [
+            {
+              "text": "When epididymo-orchitis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurotuberculosis or leptospirosis",
+          "cells": [
+            {
+              "text": "Lymphocytic meningoencephalitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "brucellosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of brucellosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Duration and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline plus streptomycin or gentamicin",
+          "cells": [
+            {
+              "text": "{{hy:Preferred in adults and children over 8}}"
+            },
+            {
+              "text": "Doxycycline 6 weeks plus aminoglycoside 14 days; lower relapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline plus rifampin",
+          "cells": [
+            {
+              "text": "Uncomplicated cases"
+            },
+            {
+              "text": "Both 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluoroquinolone plus rifampin or doxycycline",
+          "cells": [
+            {
+              "text": "Alternative, not preferred"
+            },
+            {
+              "text": "14 to 42 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TMP-SMX plus rifampin",
+          "cells": [
+            {
+              "text": "Children under 8"
+            },
+            {
+              "text": "4 to 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Three antibiotics, prolonged",
+          "cells": [
+            {
+              "text": "Neurobrucellosis or endocarditis"
+            },
+            {
+              "text": "Endocarditis often needs valve surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Follow-up",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Clinical and serology for 1 year"
+            },
+            {
+              "text": "Relapse 5 to 15% even when treated",
+              "range": [
+                5,
+                15
+              ]
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "No drug doses were stated in the sources opened. Monotherapy relapses often."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "brucellosis-dx-mgmt",
+      "title": "Diagnosis and management of brucellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Prolonged fever, sweats, joint or back pain with animal or raw dairy exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood cultures (alert lab), agglutination serology, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Culture, PCR or diagnostic titre positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat serology in 2 to 4 weeks; consider TB, typhoid, malaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Focal disease: spine, CNS or endocarditis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Doxycycline 6 weeks plus aminoglycoside 14 days or rifampin",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged triple therapy; valve surgery for endocarditis",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Follow clinically and serologically for 1 year",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n3",
+          "label": "Repeat"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

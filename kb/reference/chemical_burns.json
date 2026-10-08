@@ -148,5 +148,298 @@
       "caption": "Overview comparison matrix for chemical burns."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chemical_burns-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Identification of the agent through safety data sheets or a poisons service",
+          "cells": [
+            {
+              "text": "Guides agent-specific management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "pH testing of the affected surface",
+          "cells": [
+            {
+              "text": "Confirms adequate irrigation, especially for the eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, magnesium, potassium and ECG after hydrofluoric acid exposure",
+          "cells": [
+            {
+              "text": "Monitors for hypocalcaemia and dysrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of burn depth and surface area",
+          "cells": [
+            {
+              "text": "Depth may only declare itself over hours to days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for systemic toxicity",
+          "cells": [
+            {
+              "text": "Agents known to be absorbed, such as phenol"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chemical_burns-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate copious irrigation",
+          "cells": [
+            {
+              "text": "Water irrigation for a prolonged period, started without waiting to identify the agent; remove contaminated clothing"
+            },
+            {
+              "text": "Priority first aid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Agent-specific antidote",
+          "cells": [
+            {
+              "text": "Topical, local or intravenous calcium for hydrofluoric acid injury"
+            },
+            {
+              "text": "Hydrofluoric acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and burn wound care",
+          "cells": [
+            {
+              "text": "Cleaning, appropriate dressings, analgesia and tetanus prophylaxis"
+            },
+            {
+              "text": "Standard burn care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic toxicity monitoring",
+          "cells": [
+            {
+              "text": "Electrolytes and continuous ECG after hydrofluoric acid exposure"
+            },
+            {
+              "text": "Absorbed agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depth and area reassessment",
+          "cells": [
+            {
+              "text": "Reassess over hours to days; fluid resuscitation for extensive burns"
+            },
+            {
+              "text": "Surface appearance underestimates injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye involvement",
+          "cells": [
+            {
+              "text": "Prolonged irrigation and urgent ophthalmology referral, guided by surface pH"
+            },
+            {
+              "text": "Sight-threatening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist burns referral",
+          "cells": [
+            {
+              "text": "Burns unit for deep or extensive injury; debridement and grafting"
+            },
+            {
+              "text": "Deep or extensive injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chemical_burns-dx-mgmt",
+      "title": "Diagnosis and management of Chemical burns",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chemical burn: corrosive skin, eye or mucosal exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (extensive burn, airway involvement, eye threat, hydrofluoric acid)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency burns and airway care; urgent ophthalmology for eye injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Irrigate with water at once; identify agent from safety data sheet or poisons service",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Agent identified and systemic toxicity excluded, including after hydrofluoric acid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Calcium antidote for hydrofluoric acid exposure, with electrolytes and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check thermal burns, electrical injury and toxic epidermal necrolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, wound care, dressings and tetanus prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassess burn depth and area over hours to days; fluid for extensive burns",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Specialist burns referral for debridement and grafting of deep injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Occupational review to prevent recurrence; deep injury may evolve over days",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

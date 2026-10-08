@@ -170,5 +170,603 @@
       "caption": "Overview comparison matrix for dilated cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Dilated Cardiomyopathy",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/cardiomyopathies/dilated-cardiomyopathy",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dilated_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and staging of dilated cardiomyopathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "LVEF defining DCM",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<=50%",
+              "op": "<=",
+              "value": 50
+            },
+            {
+              "text": "Most present with LVEF <=40%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early DCM dimensions",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEDV >112% of normal or LVEDD >95% predicted",
+              "op": ">",
+              "value": 112
+            },
+            {
+              "text": "For age, sex and height"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Threshold for standard HF drugs",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF <=40%",
+              "op": "<=",
+              "value": 40
+            },
+            {
+              "text": "LVEF 40 to 50% often transitional"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "{{hy:LV dilation with global hypokinesis, atrial enlargement}}"
+            },
+            {
+              "text": "Excludes primary valve disease; contrast to exclude LV thrombus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "LGE patterns and T1/T2 mapping"
+            },
+            {
+              "text": "Identifies myocarditis or infiltration; ring-like LGE is unfavourable; no gadolinium in pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Natriuretic peptides",
+          "cells": [
+            {
+              "text": "Typically raised"
+            },
+            {
+              "text": "Diagnostic and prognostic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aetiology bloods",
+          "cells": [
+            {
+              "text": "TSH, iron and transferrin saturation, troponin, CK, eosinophils, renal and liver function"
+            },
+            {
+              "text": "Thyroid tests are routine since signs can be masked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic panel",
+          "cells": [
+            {
+              "text": "Pathogenic variants in 20 to 40%"
+            },
+            {
+              "text": "Heritable in at least 30% without another cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endomyocardial biopsy",
+          "cells": [
+            {
+              "text": "Rapid progression despite therapy"
+            },
+            {
+              "text": "When giant cell or eosinophilic myocarditis is likely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Coronary angiography",
+          "cells": [
+            {
+              "text": "Ischaemia or infarction evidence"
+            },
+            {
+              "text": "If candidate for intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dilated_cardiomyopathy-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of dilated cardiomyopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Ischaemic cardiomyopathy",
+          "cells": [
+            {
+              "text": "{{hy:Coronary disease or prior infarct}}"
+            },
+            {
+              "text": "Coronary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary valvular disease",
+          "cells": [
+            {
+              "text": "Valve lesion drives dilation"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Viral myocarditis",
+          "cells": [
+            {
+              "text": "Recent viral illness; coxsackie, adenovirus, COVID-19, HIV"
+            },
+            {
+              "text": "Cardiac MRI mapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chagas disease",
+          "cells": [
+            {
+              "text": "Trypanosoma cruzi exposure"
+            },
+            {
+              "text": "Chagas serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis or giant cell myocarditis",
+          "cells": [
+            {
+              "text": "Regional wall motion defects, RV involvement, blocks"
+            },
+            {
+              "text": "Cardiac MRI, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Checkpoint inhibitor myocarditis",
+          "cells": [
+            {
+              "text": "Troponin rise, blocks, arrhythmia on immunotherapy"
+            },
+            {
+              "text": "Troponin; treat without waiting for biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemochromatosis",
+          "cells": [
+            {
+              "text": "Iron overload"
+            },
+            {
+              "text": "Iron studies, transferrin saturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid disease",
+          "cells": [
+            {
+              "text": "AF or VT with heart failure"
+            },
+            {
+              "text": "TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcoholic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Diagnosis of exclusion; may improve in 3 to 6 months of abstinence"
+            },
+            {
+              "text": "History; genetic testing (TTN variants in about 10%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takotsubo cardiomyopathy",
+          "cells": [
+            {
+              "text": "Acute apical ballooning, usually resolves"
+            },
+            {
+              "text": "Echo or ventriculography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HCM with reduced EF",
+          "cells": [
+            {
+              "text": "About 5% of HCM evolve to reduced EF"
+            },
+            {
+              "text": "Wall thickness on echo or MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dilated_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Treatment of dilated cardiomyopathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blocker, ARNI (or ACE inhibitor or ARB), MRA, SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "{{hy:All with HFrEF}}"
+            },
+            {
+              "text": "Guideline-directed medical therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diuretics",
+          "cells": [
+            {
+              "text": "Congestion"
+            },
+            {
+              "text": "Volume control"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat reversible cause",
+          "cells": [
+            {
+              "text": "Alcohol, tachycardia, thyroid, cardiotoxins"
+            },
+            {
+              "text": "Recovery common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary-prevention ICD",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Symptomatic, LVEF <=35% despite chronic GDMT",
+              "op": "<=",
+              "value": 35
+            },
+            {
+              "text": "Harrison: persistent LVEF <=30 to 35%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac resynchronisation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Symptomatic, LVEF <=35% with prolonged QRS",
+              "op": "<=",
+              "value": 35
+            },
+            {
+              "text": "Especially with LBBB"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "AF or intracardiac thrombus"
+            },
+            {
+              "text": "Consider in peripartum DCM with severe LV dysfunction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transcatheter edge-to-edge mitral repair",
+          "cells": [
+            {
+              "text": "Severe secondary MR despite GDMT or CRT"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Giant cell or eosinophilic myocarditis, sarcoidosis, SLE"
+            },
+            {
+              "text": "Not for nonspecific chronic lymphocytic myocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LVAD or transplant",
+          "cells": [
+            {
+              "text": "Refractory advanced HF"
+            },
+            {
+              "text": "Appropriate candidates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "Familial DCM"
+            },
+            {
+              "text": "Multigene panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Peripartum DCM: avoid renin-angiotensin inhibitors before delivery. No drug doses given because the opened source did not state them."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dilated_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of dilated cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heart failure symptoms, arrhythmia or embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG, chest x-ray, echocardiography, natriuretic peptide",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "LV dilated with LVEF <=50% and no primary valve disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Evaluate other causes of heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Cause work-up: coronary assessment, cardiac MRI, labs, genetic panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Specific treatable cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat cause: ischaemia, alcohol, thyroid, myocarditis, toxins",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "GDMT: beta-blocker, ARNI, MRA, SGLT2 inhibitor, diuretic",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "LVEF still <=35% with symptoms after GDMT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "ICD; add CRT if QRS prolonged, especially LBBB",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Refractory advanced heart failure?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "LVAD or transplant evaluation",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue GDMT with serial echo and family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

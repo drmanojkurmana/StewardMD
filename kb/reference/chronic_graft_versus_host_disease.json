@@ -152,5 +152,324 @@
       "caption": "Overview comparison matrix for chronic graft-versus-host disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard haematopoietic cell transplantation and transplant immunology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_graft_versus_host_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical scoring of organ involvement",
+          "cells": [
+            {
+              "text": "Establishes the diagnosis and grades severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin or mucosal biopsy",
+          "cells": [
+            {
+              "text": "Atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests and imaging",
+          "cells": [
+            {
+              "text": "Suspected bronchiolitis obliterans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmic assessment with tear-production testing",
+          "cells": [
+            {
+              "text": "Ocular sicca"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal and gut evaluation",
+          "cells": [
+            {
+              "text": "Strictures or dysmotility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_graft_versus_host_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Scleroderma or systemic sclerosis",
+          "cells": [
+            {
+              "text": "Sclerodermatous skin change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory infection",
+          "cells": [
+            {
+              "text": "Mimics bronchiolitis obliterans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying disease relapse",
+          "cells": [
+            {
+              "text": "Relapse rather than chronic graft-versus-host disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_graft_versus_host_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids with calcineurin inhibitor",
+          "cells": [
+            {
+              "text": "First-line immunosuppression"
+            },
+            {
+              "text": "Systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line therapy",
+          "cells": [
+            {
+              "text": "Ruxolitinib, extracorporeal photopheresis, ibrutinib, mycophenolate or rituximab"
+            },
+            {
+              "text": "Steroid-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-directed treatment",
+          "cells": [
+            {
+              "text": "Topical corticosteroids and calcineurin inhibitors for skin and oral disease; ocular lubricants; inhaled therapy for bronchiolitis obliterans"
+            },
+            {
+              "text": "Organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis",
+          "cells": [
+            {
+              "text": "Prophylaxis against bacteria, fungi, viruses and Pneumocystis"
+            },
+            {
+              "text": "Prolonged immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ surveillance",
+          "cells": [
+            {
+              "text": "Pulmonary function monitoring, physiotherapy for sclerosis, nutrition and ophthalmic support"
+            },
+            {
+              "text": "Organ complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Transplant, dermatology, ophthalmology and respiratory input; slow immunosuppression taper"
+            },
+            {
+              "text": "Response-guided taper"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_graft_versus_host_disease-dx-mgmt",
+      "title": "Diagnosis and management of Chronic graft-versus-host disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic graft-versus-host disease: sclerosis, sicca or airflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bronchiolitis obliterans, progressive sclerosis, serious infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent transplant and respiratory review for airflow obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Organ scoring, skin or mucosal biopsy, lung function and eye tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Chronic graft-versus-host features with organ involvement confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids with a calcineurin inhibitor as first-line therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check scleroderma, respiratory infection and disease relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ruxolitinib, photopheresis or other second-line agents for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical therapy for skin and mouth; inhaled therapy for bronchiolitis obliterans",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prophylaxis against bacteria, fungi, viruses and Pneumocystis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow immunosuppression taper guided by response",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

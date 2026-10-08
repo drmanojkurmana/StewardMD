@@ -146,5 +146,72 @@
       "caption": "Overview comparison matrix for blue-ringed octopus envenomation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies / WHO envenoming guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blue_ringed_octopus_envenomation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic assessment in blue-ringed octopus envenomation",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Exposure history and paralysis", "cells": [{"text": "Clinical diagnosis from exposure and characteristic flaccid paralysis"}], "cite": "c1"},
+        {"parameter": "Serial forced vital capacity and respiratory monitoring", "cells": [{"text": "Progression toward respiratory failure"}], "cite": "c1"},
+        {"parameter": "Pulse oximetry and arterial blood gases", "cells": [{"text": "Ventilatory failure"}], "cite": "c1"},
+        {"parameter": "Electrocardiography and cardiac monitoring", "cells": [{"text": "Cardiac status during envenomation"}], "cite": "c1"},
+        {"parameter": "Electrolytes and baseline bloods", "cells": [{"text": "Exclude alternative causes"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_ringed_octopus_envenomation-treatment",
+      "kind": "treatment",
+      "title": "Management options in blue-ringed octopus envenomation",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Pressure immobilisation", "cells": [{"text": "Pressure-immobilisation first aid of the bitten limb"}, {"text": "Delays systemic spread of the neurotoxin"}], "cite": "c1"},
+        {"parameter": "Airway and ventilation", "cells": [{"text": "Airway protection and mechanical ventilation through the flaccid paralysis"}, {"text": "Life-saving mainstay; there is no antivenom"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Continuous respiratory, pulse oximetry and cardiac monitoring in critical care"}, {"text": "Required throughout paralysis"}], "cite": "c1"},
+        {"parameter": "Sedation and analgesia", "cells": [{"text": "Sedation and analgesia as needed"}, {"text": "Awareness is preserved despite complete paralysis"}], "cite": "c1"},
+        {"parameter": "Wound and supportive care", "cells": [{"text": "Local wound care and supportive haemodynamic and electrolyte management"}, {"text": "Supportive"}], "cite": "c1"},
+        {"parameter": "Retrieval and toxicology", "cells": [{"text": "Early critical-care retrieval and clinical toxicology consultation"}, {"text": "Full recovery expected if ventilated through paralysis"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blue_ringed_octopus_envenomation-dx-mgmt",
+      "title": "Diagnosis and management of blue-ringed octopus envenomation",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Small, often painless bite with perioral tingling after handling a blue-ringed octopus", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: bulbar weakness, falling respiratory effort or saturation, or ascending paralysis?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: airway protection and mechanical ventilation now", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Pressure immobilisation of the limb; watch for paraesthesia and weakness", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Continuous respiratory and cardiac monitoring; oximetry, blood gas and serial vital capacity", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Flaccid paralysis with preserved awareness, the tetrodotoxin picture?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Ventilate through paralysis until the toxin clears; no antivenom exists", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: reconsider pufferfish, shellfish or other neuromuscular causes", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Full recovery expected if ventilation is sustained through the paralytic phase", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -160,5 +160,464 @@
       "caption": "Overview comparison matrix for kawasaki disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Kawasaki Disease",
+      "url": "https://www.merckmanuals.com/professional/pediatrics/miscellaneous-disorders-in-infants-and-children/kawasaki-disease",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "KAWASAKI_DISEASE-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for Kawasaki disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fever",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "38.0 deg C or more for 5 or more days",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "{{hy:Plus 4 of the 5 principal features}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Conjunctivae",
+          "cells": [
+            {
+              "text": "Bilateral non-exudative injection"
+            },
+            {
+              "text": "Often limbal sparing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lips and mouth",
+          "cells": [
+            {
+              "text": "Red, dry, fissured lips; strawberry tongue; injected mucosa"
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extremities",
+          "cells": [
+            {
+              "text": "Oedema or erythema of hands and feet, later desquamation"
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rash",
+          "cells": [
+            {
+              "text": "Polymorphous truncal exanthem"
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cervical lymph node",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "At least one node 1.5 or more",
+              "op": ">=",
+              "value": 1.5
+            },
+            {
+              "text": "Principal feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Incomplete Kawasaki disease",
+          "cells": [
+            {
+              "text": "Fever 5 days or more with 2 or more features"
+            },
+            {
+              "text": "Prompt labs and echo; infants under 1 year at higher risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelets (weeks 2 to 3)",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "450,000 or more",
+              "op": ">=",
+              "value": 450000
+            },
+            {
+              "text": "Supportive with high ESR, CRP, pyuria, low albumin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Giant coronary aneurysm",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Internal diameter above 8",
+              "op": ">",
+              "value": 8
+            },
+            {
+              "text": "Echo at diagnosis, 2 to 3 weeks and 6 to 8 weeks"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "KAWASAKI_DISEASE-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of Kawasaki disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "MIS-C",
+          "cells": [
+            {
+              "text": "{{hy:More GI and neurological symptoms; recent SARS-CoV-2; often older children}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Scarlet fever",
+          "cells": [
+            {
+              "text": "Group A streptococcal throat infection; throat culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Measles and viral exanthems",
+          "cells": [
+            {
+              "text": "Listed mimic with fever and rash; exclude clinically"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staphylococcal or streptococcal toxic shock",
+          "cells": [
+            {
+              "text": "Hypotension with toxin-mediated illness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug reaction or Stevens-Johnson syndrome",
+          "cells": [
+            {
+              "text": "New drug exposure; mucosal blistering"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic juvenile idiopathic arthritis",
+          "cells": [
+            {
+              "text": "Arthritis, quotidian fever, evanescent rash"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Leptospirosis or Rocky Mountain spotted fever",
+          "cells": [
+            {
+              "text": "Exposure history; less common mimics"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "KAWASAKI_DISEASE-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Kawasaki disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "IV immunoglobulin",
+          "cells": [
+            {
+              "text": "{{hy:All, ideally within the first 10 days}}"
+            },
+            {
+              "text": "2 g/kg single dose over 10 to 12 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose aspirin",
+          "cells": [
+            {
+              "text": "With IVIG in the acute phase"
+            },
+            {
+              "text": "Reduce after 4 to 5 days afebrile; dose not stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose aspirin",
+          "cells": [
+            {
+              "text": "After the acute phase"
+            },
+            {
+              "text": "At least 8 weeks; indefinitely if coronary abnormalities"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repeat IVIG, corticosteroids or infliximab",
+          "cells": [
+            {
+              "text": "IVIG-resistant disease"
+            },
+            {
+              "text": "With cardiology and rheumatology input"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjunctive corticosteroids",
+          "cells": [
+            {
+              "text": "High risk of coronary complications"
+            },
+            {
+              "text": "Intensified initial therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warfarin or added antiplatelet",
+          "cells": [
+            {
+              "text": "Giant aneurysm above 8 mm"
+            },
+            {
+              "text": "Prevent thrombosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Effective therapy lowers aneurysm rate from about 20% to under 5%; about 25% of untreated children have coronary involvement."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "KAWASAKI_DISEASE-dx-mgmt",
+      "title": "Diagnosis and management of Kawasaki disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Child with fever for 5 days or more",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "4 or more principal features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "2 or 3 features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Look for another cause of fever",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CRP, ESR, blood count, albumin, urinalysis, echocardiogram",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Supportive labs or coronary changes?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude scarlet fever, measles, toxic shock, MIS-C",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IVIG 2 g/kg over 10 to 12 hours with high-dose aspirin",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Fever persists after IVIG?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat IVIG, corticosteroids or infliximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low-dose aspirin; echo at 2 to 3 and 6 to 8 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Giant aneurysm: add warfarin; long-term cardiology follow-up",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "If aneurysm"
+        }
+      ]
+    }
+  ]
 }

@@ -144,5 +144,278 @@
       "caption": "Overview comparison matrix for dental caries."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dental_caries-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Visual-tactile examination with good lighting and drying",
+          "cells": [
+            {
+              "text": "Surface lesions on dried tooth surfaces"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bitewing and periapical radiographs",
+          "cells": [
+            {
+              "text": "Interproximal and root lesions, which inspection alone misses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caries risk assessment with diet and salivary evaluation",
+          "cells": [
+            {
+              "text": "Diet and salivary hypofunction as drivers of progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulp sensibility testing",
+          "cells": [
+            {
+              "text": "Pulpal involvement, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transillumination or laser fluorescence",
+          "cells": [
+            {
+              "text": "Adjunctive detection, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dental_caries-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early non-cavitated lesions",
+          "cells": [
+            {
+              "text": "Fluoride varnish, high-fluoride toothpaste and improved plaque control to arrest and remineralise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary counselling",
+          "cells": [
+            {
+              "text": "Reduce the frequency of fermentable sugar intake that drives acid production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Operative restoration",
+          "cells": [
+            {
+              "text": "Remove carious tissue; adhesive or definitive restorations for cavitated lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sealants and silver diamine fluoride",
+          "cells": [
+            {
+              "text": "Fissure sealants; silver diamine fluoride for high-risk or non-restorable lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk assessment and recall",
+          "cells": [
+            {
+              "text": "Individualised recall intervals for surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endodontic treatment or extraction",
+          "cells": [
+            {
+              "text": "Once the pulp is irreversibly involved; drainage and antibiotics for spreading infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dental_caries-dx-mgmt",
+      "title": "Diagnosis and management of Dental caries",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dental caries: tooth decay on clinical and radiographic examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spreading facial swelling, fever, trismus or pulpal necrosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent drainage and antibiotics for spreading odontogenic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Visual-tactile exam; bitewing and periapical radiographs; diet and salivary risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion cavitated or the pulp involved on radiographs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-cavitated lesion: arrest with fluoride, review diet and set recall",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fluoride varnish and high-fluoride toothpaste to arrest early lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Counsel on the frequency of fermentable sugar intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restore cavitated lesions after removing carious tissue",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Seal fissures; silver diamine fluoride for high-risk lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Root canal or extraction once the pulp is irreversibly involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Non-cavitated lesions can be reversed; restored lesions do well if risk is controlled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

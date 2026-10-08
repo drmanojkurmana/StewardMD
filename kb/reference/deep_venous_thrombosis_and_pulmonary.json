@@ -191,5 +191,549 @@
       "caption": "Overview comparison matrix for deep-venous thrombosis and pulmonary thromboembolism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pulmonary Embolism",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/pulmonary-embolism-pe/pulmonary-embolism-pe",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and risk stratification of DVT and PE",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "PERC rule (all 8 absent)",
+          "cells": [
+            {
+              "text": "Age <50, HR <100, SpO2 95% or more, no prior VTE, no unilateral leg swelling, no oestrogen, no haemoptysis, no surgery or trauma within 4 weeks"
+            },
+            {
+              "text": "Low-risk patient needs no further testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wells score",
+          "cells": [
+            {
+              "text": "Likely or unlikely"
+            },
+            {
+              "text": "Validated in outpatients only; high likelihood goes straight to imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-dimer, negative",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "<0.4",
+              "op": "<",
+              "value": 0.4
+            },
+            {
+              "text": "NPV over 95% at low or intermediate probability; rarely useful in inpatients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Age-adjusted D-dimer",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Age x 10 if over 50"
+            },
+            {
+              "text": "{{hy:For PE only, not for suspected DVT}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compression ultrasound",
+          "cells": [
+            {
+              "text": "Non-compressible vein"
+            },
+            {
+              "text": "First line for DVT; a negative scan does not exclude PE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Preferred PE test"
+            },
+            {
+              "text": "V/Q scan if renal failure, contrast allergy or pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RV to LV diameter ratio on CT",
+          "cells": [
+            {
+              "text": ">1",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Predicts higher 30-day mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk (massive) PE",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "SBP <90 or fall of 40 or more for 15 min",
+              "op": "<",
+              "value": 90
+            },
+            {
+              "text": "5 to 10% of PE"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intermediate-risk PE",
+          "cells": [
+            {
+              "text": "RV dysfunction without hypotension"
+            },
+            {
+              "text": "Intermediate-high when imaging and troponin or BNP both abnormal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "sPESI items",
+          "cells": [
+            {
+              "text": "Age >80, cancer, chronic lung disease, HR >110, SBP <100, SaO2 <90%"
+            },
+            {
+              "text": "sPESI 0 = low risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Sinus tachycardia, T inversion V1 to V4; S1Q3T3 specific but insensitive"
+            },
+            {
+              "text": "Supports, does not exclude"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of DVT and PE",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Ruptured Baker's cyst",
+          "cells": [
+            {
+              "text": "Sudden severe calf pain"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "{{hy:Fever and chills favour cellulitis}}"
+            },
+            {
+              "text": "Ultrasound to exclude DVT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle strain",
+          "cells": [
+            {
+              "text": "Injury history"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Fever, productive cough, focal consolidation"
+            },
+            {
+              "text": "Chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Ischaemic ECG changes"
+            },
+            {
+              "text": "ECG and troponin trend"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection or pericardial tamponade",
+          "cells": [
+            {
+              "text": "Chest pain with shock"
+            },
+            {
+              "text": "Echo or CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Failure to improve may hide coexisting PE"
+            },
+            {
+              "text": "Echo and natriuretic peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax or rib fracture",
+          "cells": [
+            {
+              "text": "Pleuritic pain after trauma"
+            },
+            {
+              "text": "Chest radiograph"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-treatment",
+      "kind": "treatment",
+      "title": "Treatment of DVT and PE",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Apixaban or rivaroxaban",
+          "cells": [
+            {
+              "text": "{{hy:First line for most patients}}"
+            },
+            {
+              "text": "No parenteral lead-in; edoxaban needs 5 to 10 days of heparin first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LMWH (weight-based)",
+          "cells": [
+            {
+              "text": "Cancer-associated VTE, pregnancy"
+            },
+            {
+              "text": "Avoid if CrCl <30 mL/min"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unfractionated heparin",
+          "cells": [
+            {
+              "text": "High bleeding risk or possible thrombolysis"
+            },
+            {
+              "text": "Titrate to aPTT 1.5 to 2.5 times control; rapidly reversible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Warfarin",
+          "cells": [
+            {
+              "text": "Antiphospholipid syndrome or DOAC unsuitable"
+            },
+            {
+              "text": "Overlap heparin at least 5 days and until INR 2 to 3 for 24 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic thrombolysis (alteplase)",
+          "cells": [
+            {
+              "text": "High-risk PE with haemodynamic compromise"
+            },
+            {
+              "text": "Catheter therapy or embolectomy if lytic contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVC filter",
+          "cells": [
+            {
+              "text": "Anticoagulation contraindicated, or recurrence despite therapy"
+            },
+            {
+              "text": "Also when cardiopulmonary reserve is marginal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration, provoked",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Transient risk factor (surgery, trauma, immobility)"
+            },
+            {
+              "text": "3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extended or indefinite therapy",
+          "cells": [
+            {
+              "text": "Unprovoked VTE, cancer, thrombophilia, recurrence"
+            },
+            {
+              "text": "Review bleeding risk yearly; rivaroxaban 10 mg daily option after 6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deep_venous_thrombosis_and_pulmonary-dx-mgmt",
+      "title": "Diagnosis and management of DVT and PE",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected PE: dyspnoea, pleuritic pain, syncope, or leg swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotension or shock?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Bedside echo or CTPA if stable enough; heparin",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Thrombolysis or catheter or surgical embolectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Clinical probability: Wells and PERC",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "PE likely?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "D-dimer (age-adjusted if over 50)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "D-dimer raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "PE excluded; seek other diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "CTPA, or V/Q scan if contrast unsuitable",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "PE confirmed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Risk stratify: RV on imaging, troponin, sPESI; anticoagulate",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "DOAC first line; 3 months if provoked, extended if not",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,336 @@
       "caption": "Overview comparison matrix for basic calcium phosphate crystal arthropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "basic_calcium_phosphate_arthropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Radiographs for amorphous periarticular calcification",
+          "cells": [
+            {
+              "text": "Calcification and resorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound for calcific tendinitis",
+          "cells": [
+            {
+              "text": "Deposits; guides aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint or bursal aspiration with cell count and culture",
+          "cells": [
+            {
+              "text": "Excludes infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polarised microscopy with alizarin red staining",
+          "cells": [
+            {
+              "text": "Crystals not seen on polarised microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Soft-tissue or rotator cuff pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty or research confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "basic_calcium_phosphate_arthropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium pyrophosphate crystal arthritis",
+          "cells": [
+            {
+              "text": "Linear chondrocalcinosis separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis or bursitis",
+          "cells": [
+            {
+              "text": "Excluded by aspiration cell count and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "basic_calcium_phosphate_arthropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for acute calcific periarthritis; colchicine as an alternative"
+            },
+            {
+              "text": "Acute attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration before injection",
+          "cells": [
+            {
+              "text": "Cell count and culture to exclude septic arthritis"
+            },
+            {
+              "text": "Before injection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided corticosteroid injection",
+          "cells": [
+            {
+              "text": "Peri-tendinous or intra-articular for severe or refractory attacks"
+            },
+            {
+              "text": "Refractory attacks after infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound-guided barbotage",
+          "cells": [
+            {
+              "text": "Needle aspiration and lavage of calcific rotator-cuff deposits"
+            },
+            {
+              "text": "Persistent calcific tendinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rest, ice and physiotherapy",
+          "cells": [
+            {
+              "text": "Restore shoulder range of movement"
+            },
+            {
+              "text": "Recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Milwaukee shoulder management",
+          "cells": [
+            {
+              "text": "Analgesia, aspiration of large effusions and physiotherapy; arthroplasty for advanced cuff arthropathy"
+            },
+            {
+              "text": "Destructive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Rheumatology or orthopaedics for destructive or recurrent disease"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "basic_calcium_phosphate_arthropathy-dx-mgmt",
+      "title": "Diagnosis and management of Basic calcium phosphate crystal arthropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute painful shoulder or joint with periarticular calcification",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Destructive shoulder or features of septic arthritis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent aspiration and culture to exclude septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, ultrasound, joint aspiration with culture, alizarin red staining, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection excluded and periarticular calcification on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "NSAIDs first-line with colchicine as an alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ultrasound-guided corticosteroid injection for severe attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ultrasound-guided barbotage for persistent tendinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy to restore shoulder movement",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer destructive or recurrent disease to rheumatology or orthopaedics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

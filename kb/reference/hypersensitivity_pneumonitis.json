@@ -184,5 +184,530 @@
       "caption": "Overview comparison matrix for hypersensitivity pneumonitis & eosinophilic lung disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypersensitivity Pneumonitis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/interstitial-lung-diseases/hypersensitivity-pneumonitis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypersensitivity_pneumonitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing hypersensitivity pneumonitis and eosinophilic lung disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Exposure history",
+          "cells": [
+            {
+              "text": "Known HP antigen (birds, mouldy hay, isocyanates, hot tubs, metalworking fluid)"
+            },
+            {
+              "text": "{{hy:Strongest single predictor of HP}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other HP predictors",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Precipitins, recurrent episodes, symptoms 4 to 8 h after exposure, crackles, weight loss",
+              "range": [
+                4,
+                8
+              ]
+            },
+            {
+              "text": "HP Study Group prediction rule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HRCT, nonfibrotic HP",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Centrilobular micronodules under 3 mm, ground glass, mosaic air trapping",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "Mediastinal nodes uncommon, unlike sarcoidosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HRCT, fibrotic HP",
+          "cells": [
+            {
+              "text": "Reticulation, traction bronchiectasis, honeycombing with basal sparing"
+            },
+            {
+              "text": "Basal sparing favours HP over IPF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAL lymphocytes",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Above 40% with CD4 to CD8 ratio below 1.0",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Ratio above 1.0 favours sarcoidosis; use lower threshold in smokers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Specific IgG or precipitins",
+          "cells": [
+            {
+              "text": "Shows sensitisation only"
+            },
+            {
+              "text": "Positive in many exposed healthy people; negative does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute eosinophilic pneumonia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "BAL eosinophils above 25%, febrile illness under 1 month, hypoxaemic failure",
+              "op": ">",
+              "value": 25
+            },
+            {
+              "text": "Blood eosinophilia often absent at onset, appears 7 to 30 days later"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EGPA",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "Asthma with blood eosinophils above 1000/uL or above 10%",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "MPO-ANCA in about one third"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABPA",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "Total IgE above 500 IU/mL, often above 1000",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "Aspergillus sensitisation; central bronchiectasis not required"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison 22e follows recent guidelines in dropping acute, subacute and chronic labels for nonfibrotic versus fibrotic HP; Merck still describes acute, subacute and chronic forms. Both kept."
+    },
+    {
+      "id": "hypersensitivity_pneumonitis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic hypersensitivity pneumonitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Hilar nodes, extrapulmonary disease, well-formed granulomas"
+            },
+            {
+              "text": "BAL CD4 to CD8 ratio above 1.0"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Idiopathic pulmonary fibrosis",
+          "cells": [
+            {
+              "text": "Basal predominant fibrosis, no exposure"
+            },
+            {
+              "text": "HRCT pattern plus multidisciplinary review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organic dust toxic syndrome",
+          "cells": [
+            {
+              "text": "No prior sensitisation, no specific IgG"
+            },
+            {
+              "text": "Exposure history and specific IgG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic eosinophilic pneumonia",
+          "cells": [
+            {
+              "text": "Peripheral opacities, blood eosinophilia in about 90%"
+            },
+            {
+              "text": "Blood and BAL eosinophil count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute eosinophilic pneumonia versus ARDS",
+          "cells": [
+            {
+              "text": "Young man, new smoking or vaping, lungs only"
+            },
+            {
+              "text": "BAL eosinophils above 25%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psittacosis",
+          "cells": [
+            {
+              "text": "Bird exposure with infection"
+            },
+            {
+              "text": "Serology or culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parasitic eosinophilia (Loffler, Strongyloides)",
+          "cells": [
+            {
+              "text": "Transient infiltrates; hyperinfection risk on steroids"
+            },
+            {
+              "text": "Stool and Strongyloides serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypersensitivity_pneumonitis-treatment",
+      "kind": "treatment",
+      "title": "Treating hypersensitivity pneumonitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antigen avoidance",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "{{hy:Cornerstone; nonfibrotic disease often resolves fully}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prednisone, high dose",
+          "cells": [
+            {
+              "text": "Symptomatic nonfibrotic or acute episodes"
+            },
+            {
+              "text": "1 to 2 weeks then taper over weeks; relieves symptoms, no proven long-term benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose maintenance prednisone",
+          "cells": [
+            {
+              "text": "Chronic disease"
+            },
+            {
+              "text": "Taper by response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mycophenolate or azathioprine",
+          "cells": [
+            {
+              "text": "Steroid-sparing need"
+            },
+            {
+              "text": "Chronic or progressive disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nintedanib",
+          "cells": [
+            {
+              "text": "Progressive fibrosis despite immunosuppression"
+            },
+            {
+              "text": "Slows lung function decline; pirfenidone if not tolerated, less studied"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygen and pulmonary rehabilitation",
+          "cells": [
+            {
+              "text": "Hypoxaemia or reduced exercise capacity"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation",
+          "cells": [
+            {
+              "text": "End-stage fibrosis"
+            },
+            {
+              "text": "After multidisciplinary review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids for eosinophilic pneumonia",
+          "cells": [
+            {
+              "text": "AEP and CEP"
+            },
+            {
+              "text": "AEP rarely relapses; over 50% of CEP relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypersensitivity_pneumonitis-dx-mgmt",
+      "title": "Diagnosis and management of hypersensitivity pneumonitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cough, dyspnoea or interstitial change with possible exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Detailed home, work and hobby exposure history",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "HRCT with expiratory views and pulmonary function tests",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Typical HRCT plus identified antigen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Bronchoscopy with BAL; biopsy if still unclear",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "BAL lymphocytes above 40% or granulomas?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Pursue other ILD or eosinophilic lung disease",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove the antigen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Fibrotic HP on HRCT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Nonfibrotic: steroids if symptomatic, expect resolution",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Steroid plus mycophenolate or azathioprine; serial PFTs",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Progressing despite immunosuppression?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Add nintedanib; consider transplant referral",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Continue and monitor with PFT and HRCT",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,298 @@
       "caption": "Overview comparison matrix for arsenic poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arsenic_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Spot and 24-hour urinary arsenic with speciation",
+          "cells": [
+            {
+              "text": "Excludes dietary organic arsenic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair and nail arsenic levels",
+          "cells": [
+            {
+              "text": "Chronic exposure assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Suspected neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, renal and liver function and ECG",
+          "cells": [
+            {
+              "text": "Acute toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and biopsy",
+          "cells": [
+            {
+              "text": "Where malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arsenic_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove from the source",
+          "cells": [
+            {
+              "text": "Contaminated water or occupational setting"
+            },
+            {
+              "text": "Immediate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chelation therapy",
+          "cells": [
+            {
+              "text": "Succimer, unithiol or dimercaprol"
+            },
+            {
+              "text": "Significant acute or symptomatic poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and electrolyte resuscitation",
+          "cells": [
+            {
+              "text": "Profuse gastrointestinal losses"
+            },
+            {
+              "text": "Acute poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "QT prolongation and arrhythmia"
+            },
+            {
+              "text": "Supportive cardiovascular care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy care",
+          "cells": [
+            {
+              "text": "Neuropathic pain agents and physiotherapy"
+            },
+            {
+              "text": "Sensorimotor peripheral neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Skin, lung and bladder"
+            },
+            {
+              "text": "Chronic arsenicosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary arsenic and public-health remediation",
+          "cells": [
+            {
+              "text": "Serial urinary arsenic; water and occupational remediation"
+            },
+            {
+              "text": "Falling body burden"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arsenic_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Arsenic poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe vomiting and diarrhoea after arsenic exposure from water or work",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Hypovolaemic shock, QT prolongation or dysrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Medical emergency: resuscitate, monitor the heart, remove from source",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary arsenic with speciation, hair and nail levels, nerve conduction, ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised urinary arsenic confirmed as inorganic, not dietary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chelation with succimer, unithiol or dimercaprol",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat speciation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive fluid and electrolyte replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac monitoring for QT prolongation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neuropathic pain agents and physiotherapy for neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial urinary arsenic and remediation of water and workplace",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

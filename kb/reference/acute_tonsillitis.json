@@ -146,5 +146,358 @@
       "caption": "Overview comparison matrix for acute tonsillitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_tonsillitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Throat examination",
+          "cells": [
+            {
+              "text": "Tonsillar size, exudate and membrane"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat swab or rapid antigen test for group A streptococcus",
+          "cells": [
+            {
+              "text": "Streptococcal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with monospot or heterophile antibody test",
+          "cells": [
+            {
+              "text": "Mononucleosis when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for splenomegaly and generalised lymphadenopathy",
+          "cells": [
+            {
+              "text": "Glandular fever features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose and workup of recurrent or atypical infection",
+          "cells": [
+            {
+              "text": "Possible immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_tonsillitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral pharyngitis",
+          "cells": [
+            {
+              "text": "Cough, coryza and conjunctivitis"
+            },
+            {
+              "text": "Throat swab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious mononucleosis",
+          "cells": [
+            {
+              "text": "Splenomegaly and generalised lymphadenopathy"
+            },
+            {
+              "text": "Monospot or heterophile test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritonsillar abscess",
+          "cells": [
+            {
+              "text": "Trismus, drooling and unilateral swelling"
+            },
+            {
+              "text": "Throat examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diphtheria",
+          "cells": [
+            {
+              "text": "Grey adherent membrane"
+            },
+            {
+              "text": "Throat examination for membrane"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_tonsillitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenoxymethylpenicillin when streptococcal infection is likely or confirmed",
+          "cells": [
+            {
+              "text": "First-line when group A streptococcus is likely"
+            },
+            {
+              "text": "Macrolide if penicillin-allergic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid aminopenicillins where glandular fever is suspected",
+          "cells": [
+            {
+              "text": "Rash risk in glandular fever"
+            },
+            {
+              "text": "Rash from aminopenicillins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration, analgesia and antipyresis",
+          "cells": [
+            {
+              "text": "Supportive care"
+            },
+            {
+              "text": "Paracetamol or an NSAID"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical scoring with rapid testing to target antibiotics",
+          "cells": [
+            {
+              "text": "Avoid unnecessary prescribing in viral disease"
+            },
+            {
+              "text": "Targeted prescribing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage of peritonsillar abscess and treatment of deep neck infection",
+          "cells": [
+            {
+              "text": "Abscess and deep neck spread"
+            },
+            {
+              "text": "Watch for airway compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for suspected mononucleosis",
+          "cells": [
+            {
+              "text": "Glandular fever"
+            },
+            {
+              "text": "Avoid contact sport if splenomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tonsillectomy referral",
+          "cells": [
+            {
+              "text": "Recurrent or complicated disease"
+            },
+            {
+              "text": "Consideration of tonsillectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_tonsillitis-dx-mgmt",
+      "title": "Diagnosis and management of Acute tonsillitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sore throat, painful swallowing, fever and tender jugulodigastric nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Trismus, drooling, muffled voice or airway compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT review; drain abscess and protect the airway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Throat examination; rapid antigen test or swab for group A streptococcus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Group A streptococcus likely or confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Phenoxymethylpenicillin; macrolide if penicillin-allergic",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care; monospot if glandular fever is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hydration, paracetamol or NSAID for pain and fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid aminopenicillins if glandular fever is suspected because of rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Check for splenomegaly; advise against contact sport if enlarged",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve; tonsillectomy considered for recurrent or complicated disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

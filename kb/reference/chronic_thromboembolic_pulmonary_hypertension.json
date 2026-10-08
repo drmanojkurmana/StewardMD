@@ -150,5 +150,312 @@
       "caption": "Overview comparison matrix for chronic thromboembolic pulmonary hypertension."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC/ERS Guidelines for Pulmonary Hypertension / Nunn's Applied Respiratory Physiology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ventilation-perfusion scintigraphy",
+          "cells": [
+            {
+              "text": "Multiple segmental mismatched perfusion defects; key screening test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right heart catheterisation",
+          "cells": [
+            {
+              "text": "Confirms pre-capillary haemodynamics and severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary angiography (conventional, CT or MR)",
+          "cells": [
+            {
+              "text": "Defines anatomy and surgical accessibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Right ventricular function and pressure estimate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia and antiphospholipid antibody screen",
+          "cells": [
+            {
+              "text": "Thromboembolic basis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary hypertension due to left heart disease (group 2)",
+          "cells": [
+            {
+              "text": "Left heart disease present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension due to lung disease or hypoxia (group 3)",
+          "cells": [
+            {
+              "text": "Lung disease or hypoxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrosing mediastinitis",
+          "cells": [
+            {
+              "text": "Compression of pulmonary vessels from outside"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong therapeutic anticoagulation",
+          "cells": [
+            {
+              "text": "Baseline treatment for all patients"
+            },
+            {
+              "text": "Standard for all patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary endarterectomy",
+          "cells": [
+            {
+              "text": "Treatment of choice for operable proximal fibrotic obstruction"
+            },
+            {
+              "text": "Can be curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon pulmonary angioplasty",
+          "cells": [
+            {
+              "text": "Inoperable, distal or residual disease"
+            },
+            {
+              "text": "Inoperable or residual disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Riociguat",
+          "cells": [
+            {
+              "text": "Soluble guanylate cyclase stimulator for inoperable or persistent disease"
+            },
+            {
+              "text": "Targeted medical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and supplemental oxygen",
+          "cells": [
+            {
+              "text": "Right heart failure and hypoxaemia"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_thromboembolic_pulmonary_hypertension-dx-mgmt",
+      "title": "Diagnosis and management of Chronic thromboembolic pulmonary hypertension",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CTEPH: progressive breathlessness months to years after thromboembolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (syncope on exertion, right heart failure, haemoptysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiorespiratory review for critically limited pulmonary flow",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "V/Q scan, then right heart catheterisation and pulmonary angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Persistent pulmonary hypertension despite months of anticoagulation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong therapeutic anticoagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check idiopathic PAH, left heart disease and lung disease causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Refer to an experienced centre to determine operability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pulmonary endarterectomy for operable proximal fibrotic obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Balloon pulmonary angioplasty or riociguat for inoperable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Right heart failure care, rehabilitation and functional surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

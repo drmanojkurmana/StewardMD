@@ -167,5 +167,469 @@
       "caption": "Overview comparison matrix for fibromyalgia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 335-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Fibromyalgia",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/bursa,-muscle,-and-tendon-disorders/fibromyalgia",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "fibromyalgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of fibromyalgia (2016 ACR criteria)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom duration",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "3 or more",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Pain most of the day on most days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generalised pain",
+          "unit": "regions",
+          "cells": [
+            {
+              "text": "At least 4 of 5",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Above and below waist, both sides, axial skeleton"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "WPI and SSS, option 1",
+          "unit": "score",
+          "cells": [
+            {
+              "text": "{{hy:WPI 7 or more and SSS 5 or more}}",
+              "op": ">=",
+              "value": 7
+            },
+            {
+              "text": "WPI range 0 to 19; SSS 0 to 12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "WPI and SSS, option 2",
+          "unit": "score",
+          "cells": [
+            {
+              "text": "WPI 4 to 6 and SSS 9 or more",
+              "range": [
+                4,
+                6
+              ]
+            },
+            {
+              "text": "Alternative route to diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Older tender point criterion",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "11 of 18 (abandoned)",
+              "op": ">=",
+              "value": 11
+            },
+            {
+              "text": "Thumb pressure about 4 kg enough to blanch the nail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine tests",
+          "cells": [
+            {
+              "text": "ESR or CRP, CBC, TSH"
+            },
+            {
+              "text": "Normal in uncomplicated FM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tests guided by findings",
+          "cells": [
+            {
+              "text": "Metabolic panel, ANA, anti-SSA/SSB, RF, anti-CCP, CK, viral or Lyme serology"
+            },
+            {
+              "text": "Repeat testing discouraged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifetime mood disorder",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Approaches 80"
+            },
+            {
+              "text": "Screen for depression, anhedonia, PTSD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibromyalgia-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of fibromyalgia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "Older patient, proximal stiffness"
+            },
+            {
+              "text": "ESR or CRP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis or spondyloarthritis",
+          "cells": [
+            {
+              "text": "Synovitis or inflammatory back pain"
+            },
+            {
+              "text": "RF, anti-CCP, imaging if inflammatory signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLE or Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Multisystem features, sicca"
+            },
+            {
+              "text": "ANA, anti-SSA/SSB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism or hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Metabolic symptoms"
+            },
+            {
+              "text": "TSH, calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory myopathy or drug myalgia",
+          "cells": [
+            {
+              "text": "Weakness; statin or aromatase inhibitor use"
+            },
+            {
+              "text": "Creatine kinase"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hepatitis C, HIV, Lyme, parvovirus",
+          "cells": [
+            {
+              "text": "Infective prodrome or exposure"
+            },
+            {
+              "text": "Targeted serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Major depressive disorder",
+          "cells": [
+            {
+              "text": "Mood disorder without widespread tenderness"
+            },
+            {
+              "text": "Clinical screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "fibromyalgia-treatment",
+      "kind": "treatment",
+      "title": "Treatment of fibromyalgia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Education and self-management",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Goal is better function, not zero pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aerobic and stretching exercise",
+          "cells": [
+            {
+              "text": "{{hy:Core non-drug treatment}}"
+            },
+            {
+              "text": "Fast walking, swimming, cycling; daily stretches"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy and sleep care",
+          "cells": [
+            {
+              "text": "Mood, stress or sleep problems"
+            },
+            {
+              "text": "Screen for sleep apnoea"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Amitriptyline",
+          "cells": [
+            {
+              "text": "First drug option, bedtime"
+            },
+            {
+              "text": "10 to 50 mg at bedtime; lowest effective dose"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Duloxetine or milnacipran (SNRI)",
+          "cells": [
+            {
+              "text": "Fatigue and depression prominent"
+            },
+            {
+              "text": "FDA-approved for fibromyalgia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pregabalin or gabapentin",
+          "cells": [
+            {
+              "text": "Severe sleep disturbance"
+            },
+            {
+              "text": "Pregabalin FDA-approved"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid opioids",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "NSAIDs not shown effective"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "fibromyalgia-dx-mgmt",
+      "title": "Diagnosis and management of fibromyalgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Widespread pain for 3 months or more with fatigue and poor sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "History, exam; ESR or CRP, CBC, TSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Inflammatory, neurologic or systemic abnormality?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Targeted tests for arthritis, CTD, myopathy, infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "WPI and SSS meet 2016 criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Pursue alternative diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Educate; exercise; CBT; treat sleep and mood",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Function still poor?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add amitriptyline, SNRI or gabapentinoid; avoid opioids",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Review function regularly; avoid repeat investigations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

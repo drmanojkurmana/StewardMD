@@ -147,5 +147,312 @@
       "caption": "Overview comparison matrix for cloacal exstrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cloacal_exstrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal and abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Upper tracts and associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal ultrasound and MRI",
+          "cells": [
+            {
+              "text": "Dysraphism and tethered cord"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and skeletal imaging",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and multidisciplinary DSD evaluation",
+          "cells": [
+            {
+              "text": "Guides gender and genital management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast studies of the bowel",
+          "cells": [
+            {
+              "text": "Hindgut anatomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cloacal_exstrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic bladder exstrophy",
+          "cells": [
+            {
+              "text": "Less severe form without an exposed hindgut"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omphalocele or gastroschisis in isolation",
+          "cells": [
+            {
+              "text": "Abdominal wall defect without exstrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cloacal malformation in females",
+          "cells": [
+            {
+              "text": "Single perineal opening with a persistent common channel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cloacal_exstrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal stabilisation",
+          "cells": [
+            {
+              "text": "Protects exposed bladder and bowel plate; manages omphalocele"
+            },
+            {
+              "text": "Immediate care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged bladder closure with pelvic osteotomy",
+          "cells": [
+            {
+              "text": "Approximates the pubic bones"
+            },
+            {
+              "text": "Staged reconstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colostomy bowel diversion",
+          "cells": [
+            {
+              "text": "Preserves all available hindgut"
+            },
+            {
+              "text": "Later pull-through or permanent stoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical repair of spinal dysraphism",
+          "cells": [
+            {
+              "text": "Tethered cord"
+            },
+            {
+              "text": "Neural involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disorders-of-sex-development care",
+          "cells": [
+            {
+              "text": "Gender assignment and staged genital reconstruction, informed by karyotype"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cloacal_exstrophy-dx-mgmt",
+      "title": "Diagnosis and management of Cloacal exstrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cloacal exstrophy: exposed hindgut between two bladder halves",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal instability, spinal cord deficit, obstructed upper tract)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal surgical review for instability or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal, spinal and abdominal imaging with karyotype and bowel contrast studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Spinal dysraphism or tethered cord on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Neonatal stabilisation and protection of exposed bladder and bowel",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check classic bladder exstrophy, omphalocele and cloacal malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Colostomy diversion preserving all available hindgut",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurosurgical repair of dysraphism and tethered cord",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Staged bladder closure with pelvic osteotomy and genital reconstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal surveillance and continence care with a multidisciplinary team",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

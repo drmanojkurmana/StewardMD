@@ -150,5 +150,327 @@
       "caption": "Overview comparison matrix for bartholin's abscess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bartholin_abscess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination for location, fluctuance and surrounding cellulitis",
+          "cells": [
+            {
+              "text": "Abscess and cellulitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab of abscess fluid for culture and sensitivity",
+          "cells": [
+            {
+              "text": "Organism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonorrhoea and chlamydia nucleic acid amplification",
+          "cells": [
+            {
+              "text": "Sexually transmitted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland wall biopsy in women over forty or with atypical masses",
+          "cells": [
+            {
+              "text": "Excludes carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose testing in recurrent infection",
+          "cells": [
+            {
+              "text": "Undiagnosed diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartholin_abscess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Uninfected Bartholin duct cyst",
+          "cells": [
+            {
+              "text": "Absence of infection on examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bartholin gland carcinoma in older women",
+          "cells": [
+            {
+              "text": "Separated by gland wall biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartholin_abscess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Incision and drainage with Word catheter",
+          "cells": [
+            {
+              "text": "Creates an epithelialised drainage tract"
+            },
+            {
+              "text": "Abscess drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marsupialisation",
+          "cells": [
+            {
+              "text": "For large or recurrent abscesses to reduce recurrence"
+            },
+            {
+              "text": "Large or recurrent abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for specific indications",
+          "cells": [
+            {
+              "text": "Surrounding cellulitis, systemic features, immunocompromise or high-risk STI"
+            },
+            {
+              "text": "Cellulitis or systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STI treatment with partner notification",
+          "cells": [
+            {
+              "text": "Gonorrhoea and chlamydia where indicated"
+            },
+            {
+              "text": "Sexually transmitted infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Sitz baths and analgesia"
+            },
+            {
+              "text": "Pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland excision",
+          "cells": [
+            {
+              "text": "For recurrent disease resistant to drainage"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland biopsy",
+          "cells": [
+            {
+              "text": "Women over forty or with atypical lesions"
+            },
+            {
+              "text": "Malignancy exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bartholin_abscess-dx-mgmt",
+      "title": "Diagnosis and management of Bartholin's Abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender fluctuant swelling at the posterior introitus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Spreading cellulitis, sepsis or rapidly enlarging solid mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for spreading cellulitis or systemic sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical examination, abscess fluid swab, STI testing, gland biopsy if older or atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fluctuant abscess confirmed with carcinoma excluded where indicated?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Incision and drainage with Word catheter",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and biopsy the gland",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Marsupialisation for large or recurrent abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics only for cellulitis or systemic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gland excision for recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biopsy gland in women over forty or with atypical masses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

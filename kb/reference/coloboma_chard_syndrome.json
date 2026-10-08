@@ -148,5 +148,267 @@
       "caption": "Overview comparison matrix for uveal/ocular coloboma and charge-associated coloboma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Taylor and Hoyt's Pediatric Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coloboma_chard_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus and slit-lamp examination",
+          "cells": [
+            {
+              "text": "Extent of coloboma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography and ultrasound",
+          "cells": [
+            {
+              "text": "Involved ocular structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Frequent ear and hearing involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and choanal assessment",
+          "cells": [
+            {
+              "text": "CHARGE features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coloboma_chard_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical rehabilitation",
+          "cells": [
+            {
+              "text": "Refractive correction, tinted or contact lenses for iris defects and photophobia, low-vision aids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Refractive correction and occlusion therapy in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal detachment surveillance",
+          "cells": [
+            {
+              "text": "Lifelong; prompt surgical repair; patient education on warning symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic CHARGE evaluation",
+          "cells": [
+            {
+              "text": "Cardiac assessment, surgical repair of choanal atresia, feeding and growth support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological care",
+          "cells": [
+            {
+              "text": "Hearing aids or implants for associated hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHD7 testing and genetic counselling",
+          "cells": [
+            {
+              "text": "For the family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Ophthalmology, cardiology, ENT and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coloboma_chard_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Uveal/ocular coloboma and CHARGE-associated coloboma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coloboma: gap in ocular structures, possibly with CHARGE features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (flashes, floaters, field shadow, or neonatal CHARGE features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: assess for retinal detachment; neonatal choanal and cardiac care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus and slit-lamp examination; OCT and ultrasound; systemic CHARGE evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CHD7 or syndromic testing confirm CHARGE?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated ocular coloboma; review the posterior segment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Refractive correction, lenses and low-vision aids; amblyopia treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lifelong surveillance for retinal detachment with prompt repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac assessment, choanal atresia repair, feeding and growth support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Audiological assessment with hearing aids or implants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Visual prognosis depends on structures involved; good for isolated iris coloboma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,85 @@
       "caption": "Overview comparison matrix for beta-ketothiolase deficiency (t2/acat1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta_ketothiolase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beta-ketothiolase deficiency",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Urine organic acids", "cells": [{"text": "2-methyl-3-hydroxybutyrate, 2-methylacetoacetate and tiglylglycine"}], "cite": "c1"},
+        {"parameter": "Plasma acylcarnitine profile by tandem mass spectrometry", "cells": [{"text": "Raised C5:1 (tiglylcarnitine) and C5-OH"}], "cite": "c1"},
+        {"parameter": "Blood gas, glucose, electrolytes and anion gap", "cells": [{"text": "Anion-gap acidosis during acute crises"}], "cite": "c1"},
+        {"parameter": "Blood and urine ketones", "cells": [{"text": "Documents ketoacidosis"}], "cite": "c1"},
+        {"parameter": "ACAT1 molecular genetic testing", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Enzyme assay or fibroblast loading studies", "cells": [{"text": "Used if genetic testing is inconclusive"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_ketothiolase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for beta-ketothiolase deficiency",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Succinyl-CoA:3-ketoacid CoA transferase (SCOT) deficiency", "cells": [{"text": "Ketosis is episodic here, not permanent as in SCOT deficiency"}], "cite": "c1"},
+        {"parameter": "Other organic acidaemias (methylmalonic, propionic, isovaleric)", "cells": [{"text": "Urine organic acid pattern with tiglylglycine and 2-methyl-3-hydroxybutyrate"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_ketothiolase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta-ketothiolase deficiency",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Acute crisis", "cells": [{"text": "Intravenous glucose to reverse catabolism; correct acidosis with fluids and electrolytes"}, {"text": "Treats acute ketoacidotic crises"}], "cite": "c1"},
+        {"parameter": "Preventing decompensation", "cells": [{"text": "Avoid prolonged fasting; emergency regimen with glucose-containing feeds during intercurrent illness"}, {"text": "Triggers include infection and fasting"}], "cite": "c1"},
+        {"parameter": "Protein moderation", "cells": [{"text": "Modest dietary protein moderation to limit isoleucine loading while maintaining growth"}, {"text": "Adequate growth must be preserved"}], "cite": "c1"},
+        {"parameter": "Carnitine supplementation", "cells": [{"text": "Consider carnitine supplementation"}, {"text": "Supports removal of accumulated acyl intermediates"}], "cite": "c1"},
+        {"parameter": "Family education", "cells": [{"text": "Sick-day rules and a written emergency protocol"}, {"text": "Encourages early presentation"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Growth, development and metabolic control with a metabolic dietitian"}, {"text": "Surveillance for basal ganglia injury after severe crises"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "ACAT1 testing, counselling and family screening"}, {"text": "Autosomal recessive disorder"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta_ketothiolase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of beta-ketothiolase deficiency",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Intermittent ketoacidotic crisis in an infant or child, triggered by fasting, infection or protein load", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: severe high-anion-gap acidosis, reduced consciousness or seizures?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: intravenous glucose to reverse catabolism; correct acidosis and electrolytes", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Blood gas, glucose, ketones; urine organic acids and acylcarnitines during the episode", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Look for urine 2-methyl-3-hydroxybutyrate and tiglylglycine; raised C5:1 and C5-OH", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Organic acid and acylcarnitine pattern consistent with ACAT1 deficiency?", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: consider SCOT deficiency, diabetic ketoacidosis or other organic acidaemias", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "ACAT1 testing; avoid fasting; protein moderation, carnitine, sick-day rules", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Many develop normally with few episodes after childhood; severe crises risk basal ganglia injury", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n8", "label": "Yes"},
+        {"from": "n6", "to": "n7", "label": "No"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

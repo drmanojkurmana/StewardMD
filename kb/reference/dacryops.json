@@ -140,5 +140,296 @@
       "caption": "Overview comparison matrix for dacryops."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oculoplastic and orbital references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dacryops-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination with transillumination",
+          "cells": [
+            {
+              "text": "Fluid-filled cystic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound, CT or MRI",
+          "cells": [
+            {
+              "text": "Cystic lacrimal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Size fluctuation and globe effect",
+          "cells": [
+            {
+              "text": "Mass effect assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of a solid lacrimal gland tumour",
+          "cells": [
+            {
+              "text": "Solid components absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of the cyst wall if excised",
+          "cells": [
+            {
+              "text": "Benign ductal cyst confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dacryops-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lacrimal gland tumour (pleomorphic adenoma)",
+          "cells": [
+            {
+              "text": "Solid lesion; pitfall of calling it a cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoid or epidermoid cyst",
+          "cells": [
+            {
+              "text": "Named look-alike cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dacryoadenitis with swelling",
+          "cells": [
+            {
+              "text": "Inflammatory look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dacryops-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small asymptomatic lesions; benign ductal cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging before intervention",
+          "cells": [
+            {
+              "text": "Confirms cystic nature and excludes solid tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marsupialisation or excision",
+          "cells": [
+            {
+              "text": "Symptomatic or enlarging lesions; cyst wall sent for histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence counselling",
+          "cells": [
+            {
+              "text": "Recurrence after drainage or incomplete excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oculoplastic referral",
+          "cells": [
+            {
+              "text": "Surgical planning for symptomatic lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dacryops-dx-mgmt",
+      "title": "Diagnosis and management of Dacryops",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dacryops: fluctuant cystic swelling of the upper outer lid",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (solid or rapidly enlarging mass, proptosis, pain, recurrence)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging for solid mass or proptosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transillumination; ultrasound, CT or MRI; exclusion of solid tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show a cystic lacrimal lesion without a solid component?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lacrimal gland tumour, dermoid cyst or dacryoadenitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small asymptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm cystic nature with imaging before intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Marsupialisation or excision for symptomatic lesions with histology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oculoplastic planning; counsel that recurrence can occur",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign with excellent prognosis; symptomatic lesions do well after marsupialisation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -178,5 +178,523 @@
       "caption": "Overview comparison matrix for gynecologic malignancies."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WHO fact sheet, Cervical cancer",
+      "kind": "web",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/cervical-cancer"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gynecologic_malignancies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging gynecologic cancers",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Cervical screening start (WHO)",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age 30; age 25 with HIV",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "HPV test every 5 to 10 years; 3 to 5 years with HIV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ovarian cancer stage at presentation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% present at stage III",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "CA-125 high but not specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adnexal mass work-up",
+          "cells": [
+            {
+              "text": "Transvaginal ultrasound, CT, CA-125"
+            },
+            {
+              "text": "{{hy:Never needle-biopsy an adnexal mass (peritoneal seeding)}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BRCA1 lifetime ovarian risk",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 39 to 63%",
+              "range": [
+                39,
+                63
+              ]
+            },
+            {
+              "text": "Test germline BRCA1/2 in every epithelial ovarian cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postmenopausal bleeding",
+          "cells": [
+            {
+              "text": "Endometrial biopsy"
+            },
+            {
+              "text": "About 75% of endometrial cancers are stage I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial tumour MSI or MMR testing",
+          "cells": [
+            {
+              "text": "Done routinely"
+            },
+            {
+              "text": "Flags Lynch syndrome and checkpoint-inhibitor response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical staging",
+          "cells": [
+            {
+              "text": "Clinical; MRI for paracervical spread, CT for hydronephrosis"
+            },
+            {
+              "text": "Stage III includes sidewall or hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molar pregnancy",
+          "cells": [
+            {
+              "text": "Complete mole diploid paternal; partial mole triploid"
+            },
+            {
+              "text": "Serial beta-hCG to monitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian 5-year survival by stage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Stage I 90 to 95%, stage IV 10 to 15%",
+              "range": [
+                10,
+                95
+              ]
+            },
+            {
+              "text": "R0 cytoreduction improves survival"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynecologic_malignancies-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes for gynecologic malignancy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional or benign ovarian cyst",
+          "cells": [
+            {
+              "text": "Simple cyst, normal CA-125"
+            },
+            {
+              "text": "Repeat ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometriosis or endometrioma",
+          "cells": [
+            {
+              "text": "Cyclical pain; can mimic carcinomatosis"
+            },
+            {
+              "text": "Ultrasound, laparoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubo-ovarian abscess",
+          "cells": [
+            {
+              "text": "Fever, pelvic tenderness"
+            },
+            {
+              "text": "Ultrasound, response to antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Krukenberg tumour",
+          "cells": [
+            {
+              "text": "Bilateral ovarian masses from GI or breast primary"
+            },
+            {
+              "text": "Endoscopy and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meigs syndrome",
+          "cells": [
+            {
+              "text": "Ovarian fibroma with ascites and pleural effusion"
+            },
+            {
+              "text": "Histology; effusions resolve after resection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leiomyoma",
+          "cells": [
+            {
+              "text": "Benign fibroid; sarcoma rare"
+            },
+            {
+              "text": "Imaging and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anovulatory uterine bleeding",
+          "cells": [
+            {
+              "text": "Premenopausal irregular bleeding"
+            },
+            {
+              "text": "Endometrial biopsy when risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervicitis or polyp",
+          "cells": [
+            {
+              "text": "Inflamed or benign lesion"
+            },
+            {
+              "text": "HPV test, cytology, colposcopic biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gynecologic_malignancies-treatment",
+      "kind": "treatment",
+      "title": "Treating gynecologic cancers",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HPV vaccination",
+          "cells": [
+            {
+              "text": "Girls aged 9 to 14"
+            },
+            {
+              "text": "One or two doses; two or three if immunocompromised"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Screen-and-treat precancer",
+          "cells": [
+            {
+              "text": "HPV-positive cervical precancer"
+            },
+            {
+              "text": "Thermal ablation, cryotherapy, LEEP or cone biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radical hysterectomy",
+          "cells": [
+            {
+              "text": "Early cervical cancer"
+            },
+            {
+              "text": "Open surgery outperforms minimally invasive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cisplatin chemoradiation with brachytherapy",
+          "cells": [
+            {
+              "text": "Locally advanced cervical cancer"
+            },
+            {
+              "text": "Stage-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytoreductive surgery plus carboplatin and paclitaxel",
+          "cells": [
+            {
+              "text": "Ovarian cancer"
+            },
+            {
+              "text": "{{hy:Aim for no residual disease (R0)}}; neoadjuvant chemo for bulky disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PARP inhibitor maintenance",
+          "cells": [
+            {
+              "text": "BRCA-mutated or HRD ovarian cancer"
+            },
+            {
+              "text": "Bevacizumab in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hysterectomy with BSO and staging",
+          "cells": [
+            {
+              "text": "Endometrial cancer"
+            },
+            {
+              "text": "Adjuvant radiation, chemo or hormones by risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PD-1 or PD-L1 inhibitor",
+          "cells": [
+            {
+              "text": "MSI-high or MMR-deficient advanced endometrial cancer"
+            },
+            {
+              "text": "Based on routine MSI testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy for trophoblastic disease",
+          "cells": [
+            {
+              "text": "Persistent or rising beta-hCG"
+            },
+            {
+              "text": "Single agent cures about 90% of low-risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-reducing salpingo-oophorectomy",
+          "cells": [
+            {
+              "text": "BRCA carriers after childbearing, ideally before 40"
+            },
+            {
+              "text": "Halves later breast cancer risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gynecologic_malignancies-dx-mgmt",
+      "title": "Diagnosis and management of gynecologic malignancies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pelvic mass, abnormal bleeding, abnormal screen, or abnormal hCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Main presentation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Ultrasound, CT, CA-125; no needle biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Surgery for staging and debulking, platinum-taxane, BRCA test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Endometrial biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Hysterectomy with BSO and staging; MSI testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "HPV test, colposcopy and biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Invasive cancer on biopsy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Treat precancer by ablation or LEEP",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Stage with MRI and CT; surgery or chemoradiation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Evacuate mole; serial beta-hCG, chemo if persistent",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Adnexal mass"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "Postmenopausal bleeding"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "Abnormal cervix or screen"
+        },
+        {
+          "from": "n2",
+          "to": "n11",
+          "label": "Molar pregnancy"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

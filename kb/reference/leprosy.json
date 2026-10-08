@@ -157,5 +157,511 @@
       "caption": "Overview comparison matrix for leprosy (hansen's disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "WHO Fact sheet, Leprosy",
+      "kind": "web",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/leprosy"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Leprosy",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/mycobacteria/leprosy"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leprosy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and classification of leprosy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardinal sign 1: skin patch",
+          "cells": [
+            {
+              "text": "Pale or reddish patch with definite loss of sensation"
+            },
+            {
+              "text": "{{hy:Any one cardinal sign establishes the diagnosis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardinal sign 2: nerve",
+          "cells": [
+            {
+              "text": "Thickened peripheral nerve with sensory loss or weakness in its territory"
+            },
+            {
+              "text": "Check ulnar, greater auricular, common peroneal, posterior tibial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardinal sign 3: smear",
+          "cells": [
+            {
+              "text": "Acid-fast bacilli on slit-skin smear or biopsy, or positive PCR"
+            },
+            {
+              "text": "Sites: earlobe, forehead, chin, buttock or thigh"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paucibacillary",
+          "unit": "lesions",
+          "cells": [
+            {
+              "text": "1 to 5 skin lesions, smear negative",
+              "range": [
+                1,
+                5
+              ]
+            },
+            {
+              "text": "Treat 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multibacillary",
+          "unit": "lesions",
+          "cells": [
+            {
+              "text": "More than 5 lesions, nerve involvement, or smear positive",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Treat 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacteriologic index",
+          "cells": [
+            {
+              "text": "0 to 6 scale",
+              "range": [
+                0,
+                6
+              ]
+            },
+            {
+              "text": "Falls about 1 log per year on therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ridley-Jopling spectrum",
+          "cells": [
+            {
+              "text": "TT, BT, BB, BL, LL plus indeterminate"
+            },
+            {
+              "text": "Borderline forms are unstable and react"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve function testing",
+          "cells": [
+            {
+              "text": "Monofilament or ballpoint pen touch, voluntary muscle test"
+            },
+            {
+              "text": "Detects silent neuritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison 22e describes two-drug therapy for paucibacillary disease; current WHO guidance uses the same three drugs for PB and MB, differing only in duration."
+    },
+    {
+      "id": "leprosy-ddx",
+      "kind": "ddx",
+      "title": "Conditions mistaken for leprosy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Vitiligo",
+          "cells": [
+            {
+              "text": "Depigmented, not hypopigmented; sensation normal"
+            },
+            {
+              "text": "Sensory testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis versicolor",
+          "cells": [
+            {
+              "text": "Fine scale, sensation normal"
+            },
+            {
+              "text": "KOH scraping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pityriasis alba or postinflammatory hypopigmentation",
+          "cells": [
+            {
+              "text": "Children, ill-defined patches, normal sensation"
+            },
+            {
+              "text": "Sensory testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-kala-azar dermal leishmaniasis",
+          "cells": [
+            {
+              "text": "History of visceral leishmaniasis, no anaesthesia"
+            },
+            {
+              "text": "Slit smear or PCR for Leishmania"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous sarcoidosis or granuloma annulare",
+          "cells": [
+            {
+              "text": "Plaques without nerve loss"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycosis fungoides",
+          "cells": [
+            {
+              "text": "Plaques, may be patchy"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary syphilis",
+          "cells": [
+            {
+              "text": "Palmoplantar rash, mucosal lesions"
+            },
+            {
+              "text": "Syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic or amyloid mononeuropathy",
+          "cells": [
+            {
+              "text": "No skin patch, no nerve thickening from granuloma"
+            },
+            {
+              "text": "Glucose, nerve biopsy if needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leprosy-treatment",
+      "kind": "treatment",
+      "title": "Treatment of leprosy and reactions",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "MDT supervised monthly doses",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Rifampin 600 mg plus clofazimine 300 mg once monthly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MDT daily self-given doses",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Dapsone 100 mg plus clofazimine 50 mg daily"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "{{hy:PB 6 months, MB 12 months}}"
+            },
+            {
+              "text": "Same three drugs for both"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Type 1 reversal reaction or neuritis",
+          "cells": [
+            {
+              "text": "Painful swollen lesions or nerve"
+            },
+            {
+              "text": "Prednisone 40 to 60 mg daily for 5 days, then 10 to 15 mg daily for 6 months"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Type 2 reaction (ENL), significant",
+          "cells": [
+            {
+              "text": "Painful nodules, fever, neuritis or iritis"
+            },
+            {
+              "text": "Prednisone 40 to 60 mg daily for 1 week with MDT; aspirin for mild episodes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Recurrent or severe ENL",
+          "cells": [
+            {
+              "text": "Steroid-dependent ENL"
+            },
+            {
+              "text": "Thalidomide 100 to 300 mg daily; never in women who may become pregnant"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Disability prevention",
+          "cells": [
+            {
+              "text": "Anaesthetic hands, feet or eyes"
+            },
+            {
+              "text": "Footwear, ulcer care, eye review, physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contacts",
+          "cells": [
+            {
+              "text": "Household and social contacts"
+            },
+            {
+              "text": "Screen and give single-dose rifampicin prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leprosy-dx-mgmt",
+      "title": "Diagnosis and management of leprosy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Skin patch, thick nerve or numbness in an endemic setting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Test patch sensation and palpate peripheral nerves",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Any cardinal sign present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-skin smear or biopsy with PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bacilli or granuloma found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider vitiligo, fungal, sarcoid, other neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "More than 5 lesions, nerve involvement or smear positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "MB: three-drug MDT for 12 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "PB: three-drug MDT for 6 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Reaction or neuritis during follow-up?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prednisone; thalidomide for recurrent ENL",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete MDT, nerve checks, screen contacts",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

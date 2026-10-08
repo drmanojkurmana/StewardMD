@@ -147,5 +147,85 @@
       "caption": "Overview comparison matrix for blue cone monochromacy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blue_cone_monochromacy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in blue cone monochromacy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Photopic and flicker full-field electroretinography", "cells": [{"text": "Reduced L/M cone responses with preserved rod responses"}], "cite": "c1"},
+        {"parameter": "S-cone electroretinography and colour testing", "cells": [{"text": "Residual blue-cone function; the diagnostic distinction"}], "cite": "c1"},
+        {"parameter": "Colour vision testing", "cells": [{"text": "Separates blue cone monochromacy from achromatopsia"}], "cite": "c1"},
+        {"parameter": "Optical coherence tomography", "cells": [{"text": "Foveal cone structure"}], "cite": "c1"},
+        {"parameter": "Molecular genetic testing of the X-linked opsin gene array", "cells": [{"text": "OPN1LW and OPN1MW region variants or deletions"}], "cite": "c1"},
+        {"parameter": "Assessment of female relatives", "cells": [{"text": "Carrier status and pedigree"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_cone_monochromacy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike cone and retinal disorders",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Complete achromatopsia (rod monochromacy)", "cells": [{"text": "Residual short-wavelength cone function separates the two"}], "cite": "c1"},
+        {"parameter": "Early-onset cone dystrophy", "cells": [{"text": "Progressive macular atrophy or falling acuity suggests an evolving dystrophy"}], "cite": "c1"},
+        {"parameter": "Idiopathic or motor infantile nystagmus", "cells": [{"text": "Electrophysiology is needed; nystagmus should not be attributed to a motor cause alone"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_cone_monochromacy-treatment",
+      "kind": "treatment",
+      "title": "Management options in blue cone monochromacy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Gene therapy", "cells": [{"text": "Gene therapy targeting the opsin array"}, {"text": "Investigational; no established therapy"}], "cite": "c1"},
+        {"parameter": "Low-vision rehabilitation", "cells": [{"text": "Magnification aids and educational support"}, {"text": "For reduced acuity"}], "cite": "c1"},
+        {"parameter": "Tinted filters", "cells": [{"text": "Tinted or red-tinted filters and contact lenses"}, {"text": "Reduces photophobia and improves contrast"}], "cite": "c1"},
+        {"parameter": "Refractive correction", "cells": [{"text": "Correction of any coexisting refractive error"}, {"text": "Routine"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Periodic optical coherence tomography and fundus review"}, {"text": "Detects macular atrophy that can develop over time"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "X-linked counselling with carrier testing of female relatives"}, {"text": "X-linked inheritance"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blue_cone_monochromacy-dx-mgmt",
+      "title": "Diagnosis and management of blue cone monochromacy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Infant with poor central acuity, pendular nystagmus, photophobia and near-absent colour vision", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive macular atrophy or falling acuity suggesting a cone dystrophy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: repeat OCT; consider an evolving cone dystrophy; genetic review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Photopic and flicker ERG; colour testing; foveal OCT", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "S-cone ERG to demonstrate residual blue-cone function; opsin array genetic testing", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Residual S-cone function with reduced L/M cone responses?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Refractive correction, tinted filters and low-vision aids; X-linked counselling", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider complete achromatopsia or another cone or retinal disease", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Vision usually stable at low-vision levels; macular change may develop over decades", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

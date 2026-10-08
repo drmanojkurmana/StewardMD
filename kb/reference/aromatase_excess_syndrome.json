@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for aromatase excess syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aromatase_excess_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum oestradiol and oestrone with androgens",
+          "cells": [
+            {
+              "text": "Raised oestrogen-to-androgen ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadotropin measurement",
+          "cells": [
+            {
+              "text": "Suppression of the pituitary-gonadal axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CYP19A1 molecular and cytogenetic analysis",
+          "cells": [
+            {
+              "text": "Gain-of-function rearrangements"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph",
+          "cells": [
+            {
+              "text": "Accelerated skeletal maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular ultrasound and tumour markers",
+          "cells": [
+            {
+              "text": "Excludes an oestrogen-secreting tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal and hepatic imaging or biochemistry",
+          "cells": [
+            {
+              "text": "When a secondary cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aromatase_excess_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pubertal (physiological) gynaecomastia",
+          "cells": [
+            {
+              "text": "Dismissing early gynaecomastia as physiological misses a familial excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen- or hCG-secreting tumour",
+          "cells": [
+            {
+              "text": "Excluded by testicular ultrasound and tumour markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aromatase_excess_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aromatase inhibitor therapy",
+          "cells": [
+            {
+              "text": "Lowers oestrogen production to preserve growth potential and limit premature epiphyseal closure"
+            },
+            {
+              "text": "Disease-directed mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aromatase inhibition for gynaecomastia",
+          "cells": [
+            {
+              "text": "Halts progression of gynaecomastia in affected males"
+            },
+            {
+              "text": "Progression halted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subcutaneous mastectomy",
+          "cells": [
+            {
+              "text": "For established gynaecomastia that persists despite medical therapy"
+            },
+            {
+              "text": "Persistent gynaecomastia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Bone age, growth velocity and predicted final height"
+            },
+            {
+              "text": "Used to time and adjust aromatase inhibition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude oestrogen-secreting tumour",
+          "cells": [
+            {
+              "text": "Gonadal or adrenal tumour excluded first"
+            },
+            {
+              "text": "Before attributing the excess to the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andrology and reproductive input",
+          "cells": [
+            {
+              "text": "Hypogonadism and impaired fertility"
+            },
+            {
+              "text": "Assess and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant CYP19A1 rearrangement; cascade screening"
+            },
+            {
+              "text": "First-degree relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aromatase_excess_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Aromatase excess syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gynaecomastia with accelerated bone age in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapidly progressive gynaecomastia or a testicular mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exclusion of an oestrogen-secreting tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oestradiol, oestrone, androgens, gonadotropins, CYP19A1, bone age, testicular US",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised oestrogen-to-androgen ratio with tumour excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Aromatase inhibitor therapy as disease-directed mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat hormone and imaging tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aromatase inhibition halts gynaecomastia progression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Subcutaneous mastectomy if gynaecomastia persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor bone age, growth velocity and predicted final height",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and cascade screening of first-degree relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

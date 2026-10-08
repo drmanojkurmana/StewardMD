@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for coronary steal syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coronary_steal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral upper-limb blood pressure comparison",
+          "cells": [
+            {
+              "text": "Inter-arm systolic gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duplex ultrasonography of subclavian and internal mammary arteries",
+          "cells": [
+            {
+              "text": "Subclavian stenosis assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myocardial perfusion imaging with vasodilator stress",
+          "cells": [
+            {
+              "text": "Ischaemia provoked by vasodilator"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive coronary and subclavian angiography",
+          "cells": [
+            {
+              "text": "Flow-limiting lesions defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Twelve-lead ECG during symptoms",
+          "cells": [
+            {
+              "text": "Ischaemic changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_steal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Progressive obstructive coronary artery disease",
+          "cells": [
+            {
+              "text": "Pitfall: steal read as fixed disease progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subclavian steal syndrome affecting the vertebrobasilar circulation",
+          "cells": [
+            {
+              "text": "Named subclavian look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graft stenosis or occlusion",
+          "cells": [
+            {
+              "text": "Named bypass look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_steal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Revascularise proximal subclavian stenosis",
+          "cells": [
+            {
+              "text": "Angioplasty with stenting or surgical bypass in coronary-subclavian steal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Revascularise flow-limiting coronary stenosis",
+          "cells": [
+            {
+              "text": "Percutaneous intervention or CABG for collateral-dependent steal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid vasodilator stress agents",
+          "cells": [
+            {
+              "text": "Adenosine, regadenoson and dipyridamole may worsen steal; use alternative testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-ischaemic medication",
+          "cells": [
+            {
+              "text": "Symptom control while definitive treatment is arranged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Risk-factor modification, antiplatelet and statin therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Cardiology and vascular surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coronary_steal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of coronary steal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coronary steal: angina after internal mammary grafting or arm symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (recurrent angina after IMA bypass, inter-arm gradient, arm claudication)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for ischaemia; avoid vasodilator testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bilateral arm pressures; subclavian duplex; angiography; perfusion imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does angiography show a subclavian or coronary lesion causing steal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider progressive coronary disease, graft failure or vasospasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Revascularise the proximal subclavian stenosis by stenting or bypass",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Revascularise a flow-limiting coronary stenosis causing steal",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid adenosine and dipyridamole stress testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-ischaemic medication and secondary prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable once the lesion is corrected; subclavian repair often abolishes angina",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

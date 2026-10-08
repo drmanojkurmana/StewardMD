@@ -150,5 +150,324 @@
       "caption": "Overview comparison matrix for chondromalacia patellae."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chondromalacia_patellae-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skyline and lateral radiographs",
+          "cells": [
+            {
+              "text": "Patellar tilt, subluxation, joint space and alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with cartilage-sensitive sequences",
+          "cells": [
+            {
+              "text": "Grades chondral change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment of Q-angle and rotational alignment",
+          "cells": [
+            {
+              "text": "Lower limb alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patellar tracking and vastus medialis obliquus assessment",
+          "cells": [
+            {
+              "text": "Tracking and quadriceps function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopy with Outerbridge grading",
+          "cells": [
+            {
+              "text": "Refractory or surgical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondromalacia_patellae-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Patellofemoral pain syndrome",
+          "cells": [
+            {
+              "text": "No structural cartilage change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patellar instability",
+          "cells": [
+            {
+              "text": "Maltracking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteochondritis dissecans",
+          "cells": [
+            {
+              "text": "Adolescents"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondromalacia_patellae-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Quadriceps and hip strengthening",
+          "cells": [
+            {
+              "text": "Physiotherapy strengthening vastus medialis obliquus, hip abductors and core"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity and load modification",
+          "cells": [
+            {
+              "text": "Reduce stair, squatting and prolonged sitting stress"
+            },
+            {
+              "text": "Provocative activities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Simple analgesia or a short course of an NSAID"
+            },
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biomechanical correction",
+          "cells": [
+            {
+              "text": "Patellar taping or bracing and foot orthoses where malalignment contributes"
+            },
+            {
+              "text": "Malalignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contributory factors",
+          "cells": [
+            {
+              "text": "Address tight lateral retinaculum, increased Q-angle and weight"
+            },
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Arthroscopic chondroplasty, lateral release or tibial tubercle transfer"
+            },
+            {
+              "text": "Refractory cases only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chondromalacia_patellae-dx-mgmt",
+      "title": "Diagnosis and management of chondromalacia patellae",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chondromalacia patellae: retropatellar pain on stairs, squatting and sitting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (effusion with warmth, locking, night pain, rapid joint space loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude septic arthritis, chondral flap or neoplasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skyline radiographs; MRI with cartilage sequences if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Retropatellar pain with chondral change and maltracking confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Quadriceps and hip strengthening physiotherapy as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check patellofemoral pain syndrome, instability and osteochondritis dissecans",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Load modification and simple analgesia or a short NSAID course",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Patellar taping, bracing or foot orthoses where malalignment contributes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Address tight lateral retinaculum, Q-angle and weight",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Arthroscopy, lateral release or realignment reserved for refractory cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

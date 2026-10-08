@@ -146,5 +146,361 @@
       "caption": "Overview comparison matrix for amblyopia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "amblyopia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Age-appropriate best-corrected visual acuity testing, ideally with crowded optotypes",
+          "cells": [
+            {
+              "text": "Reduced acuity in one or both eyes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Anisometropia or significant refractive error"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cover testing and motility assessment",
+          "cells": [
+            {
+              "text": "Associated strabismus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus and media examination",
+          "cells": [
+            {
+              "text": "Excludes structural or deprivational cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amblyopia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Uncorrected refractive error without amblyopia",
+          "cells": [
+            {
+              "text": "Acuity improves with optical correction"
+            },
+            {
+              "text": "Cycloplegic refraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural ocular disease (optic nerve or macular pathology)",
+          "cells": [
+            {
+              "text": "Structural lesion on examination"
+            },
+            {
+              "text": "Fundus examination and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinoblastoma or other intraocular tumour",
+          "cells": [
+            {
+              "text": "Leukocoria or intraocular mass"
+            },
+            {
+              "text": "Fundus examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortical visual impairment",
+          "cells": [
+            {
+              "text": "Reduced vision with neurological cause"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (non-organic) visual loss",
+          "cells": [
+            {
+              "text": "Inconsistent acuity"
+            },
+            {
+              "text": "Clinical assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amblyopia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical correction for refractive error",
+          "cells": [
+            {
+              "text": "Refractive amblyopia"
+            },
+            {
+              "text": "Correct underlying cause first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery for congenital cataract",
+          "cells": [
+            {
+              "text": "Deprivational amblyopia"
+            },
+            {
+              "text": "Removes deprivation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occlusion patching of the better eye",
+          "cells": [
+            {
+              "text": "Residual amblyopia"
+            },
+            {
+              "text": "Forces use of amblyopic eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atropine penalisation of the sound eye",
+          "cells": [
+            {
+              "text": "Patching adherence difficult"
+            },
+            {
+              "text": "Alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery where indicated",
+          "cells": [
+            {
+              "text": "Misalignment"
+            },
+            {
+              "text": "Alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for reverse amblyopia in the treated eye",
+          "cells": [
+            {
+              "text": "Adverse effect of treatment"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family education and ophthalmology follow-up",
+          "cells": [
+            {
+              "text": "Adherence and stability"
+            },
+            {
+              "text": "Support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "amblyopia-dx-mgmt",
+      "title": "Diagnosis and management of Amblyopia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reduced best-corrected acuity with misalignment or unequal refraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Structural lesion, leukocoria or poor vision not improving with treatment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review; treat cataract or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acuity testing; cycloplegic refraction; cover test; fundus and media exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Refractive or strabismic amblyopia without structural cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Optical correction and refractive adaptation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review refractive error, structural disease, retinoblastoma and cortical impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occlusion patching of the better eye; atropine as alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Strabismus surgery where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor acuity and watch for reverse amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early treatment in childhood gives good acuity in many cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

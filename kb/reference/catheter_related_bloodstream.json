@@ -154,5 +154,298 @@
       "caption": "Overview comparison matrix for catheter-related bloodstream infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / IDSA",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "catheter_related_bloodstream-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Paired peripheral and catheter-drawn blood cultures",
+          "cells": [
+            {
+              "text": "Differential time to positivity from the catheter supports diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter exit site appearance",
+          "cells": [
+            {
+              "text": "Purulence or erythema supports diagnosis but is not always present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Considered when S. aureus, candidal or persistent bacteraemia is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat blood cultures",
+          "cells": [
+            {
+              "text": "Document clearance after starting treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging for metastatic foci",
+          "cells": [
+            {
+              "text": "Sought if bacteraemia persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "catheter_related_bloodstream-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Catheter removal or exchange",
+          "cells": [
+            {
+              "text": "Remove or exchange the infected catheter"
+            },
+            {
+              "text": "Mandatory for S. aureus, Candida, Pseudomonas or complicated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Glycopeptide such as vancomycin plus Gram-negative cover, de-escalated on culture"
+            },
+            {
+              "text": "Targeted therapy once sensitivities are known"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifungal therapy",
+          "cells": [
+            {
+              "text": "Echinocandin when candidaemia is suspected or confirmed"
+            },
+            {
+              "text": "Candidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic lock therapy",
+          "cells": [
+            {
+              "text": "Attempts salvage of selected long-term lines"
+            },
+            {
+              "text": "Low-virulence organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clearance cultures",
+          "cells": [
+            {
+              "text": "Repeat blood cultures to document clearance and define duration"
+            },
+            {
+              "text": "Duration of therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and imaging",
+          "cells": [
+            {
+              "text": "Look for endocarditis or metastatic foci"
+            },
+            {
+              "text": "Persistent or high-risk bacteraemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Insertion and maintenance bundles; remove unnecessary devices"
+            },
+            {
+              "text": "Prevents recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "catheter_related_bloodstream-dx-mgmt",
+      "title": "Diagnosis and management of Catheter-related bloodstream infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected catheter-related bloodstream infection: central line, no other source",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (septic shock, persistent bacteraemia, S. aureus, tunnel infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent resuscitation and catheter removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Paired peripheral and catheter-drawn blood cultures for time to positivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Catheter culture positive earlier, or line organism confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove or exchange the infected catheter, mandatory for S. aureus or Candida",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check contamination, other sources, endocarditis and metastatic foci",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Empirical broad-spectrum antibiotics, de-escalated on culture results",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echinocandin when candidaemia is suspected or confirmed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat cultures to document clearance; echocardiography in high-risk cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coagulase-negative infection often resolves with removal; S. aureus or Candida riskier",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

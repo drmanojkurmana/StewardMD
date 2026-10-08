@@ -149,5 +149,327 @@
       "caption": "Overview comparison matrix for chemical eye injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chemical_eye_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular surface pH before and after irrigation",
+          "cells": [
+            {
+              "text": "Guides continued irrigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination with fluorescein",
+          "cells": [
+            {
+              "text": "Epithelial defect size and corneal clarity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment and grading of limbal and conjunctival ischaemia",
+          "cells": [
+            {
+              "text": "Key prognostic sign underlying Roper-Hall and Dua grading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Acute and chronic rise after burns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eyelid eversion and fornix inspection",
+          "cells": [
+            {
+              "text": "Retained particulate chemical such as lime or cement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chemical_eye_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Thermal burn of the ocular surface",
+          "cells": [
+            {
+              "text": "Heat exposure rather than chemical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultraviolet or radiation keratitis",
+          "cells": [
+            {
+              "text": "Welder's flash after ultraviolet exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chemical_eye_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate copious irrigation",
+          "cells": [
+            {
+              "text": "Continue until tear-film pH is neutral; evert eyelids and sweep the fornices for particulate"
+            },
+            {
+              "text": "Takes priority over history and examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epithelial healing",
+          "cells": [
+            {
+              "text": "Intensive lubrication, bandage contact lens, ascorbate or citrate; autologous serum drops in severe surface failure"
+            },
+            {
+              "text": "Promotes healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammation control",
+          "cells": [
+            {
+              "text": "Topical corticosteroids early; cycloplegia for comfort"
+            },
+            {
+              "text": "Early phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Topical antibiotics"
+            },
+            {
+              "text": "Secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure control",
+          "cells": [
+            {
+              "text": "Antiglaucoma medication"
+            },
+            {
+              "text": "Raised pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grading and monitoring",
+          "cells": [
+            {
+              "text": "Grade limbal ischaemia and corneal clarity; monitor for melting and perforation"
+            },
+            {
+              "text": "Prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical intervention",
+          "cells": [
+            {
+              "text": "Amniotic membrane transplantation, limbal stem cell grafting and tarsorrhaphy"
+            },
+            {
+              "text": "Severe injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chemical_eye_injury-dx-mgmt",
+      "title": "Diagnosis and management of Chemical eye injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chemical eye injury: ocular exposure with pain, redness or blanching",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (limbal ischaemia, opaque cornea, rising pressure, perforation threat)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist eye care for sight-threatening burn",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Copious irrigation to neutral tear pH; eyelid eversion; measure pH and pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Limbal ischaemia and corneal clarity graded; thermal or UV injury excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue irrigation until tear-film pH is neutral and remove particulate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check thermal burn, UV keratitis and infective keratitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lubrication, bandage contact lens and early topical corticosteroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antiglaucoma drops for raised pressure; topical antibiotics for infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Amniotic membrane, limbal stem cell grafting or tarsorrhaphy for severe injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe alkali injury can cause scarring, glaucoma and perforation; staged care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

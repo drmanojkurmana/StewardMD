@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for cutis laxa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cutis_laxa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with elastic-tissue staining",
+          "cells": [
+            {
+              "text": "Elastic-fibre number and structure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutis laxa gene panel",
+          "cells": [
+            {
+              "text": "Subtype defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and vascular imaging",
+          "cells": [
+            {
+              "text": "Aneurysm and arterial tortuosity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing and chest imaging",
+          "cells": [
+            {
+              "text": "Emphysema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and growth assessment",
+          "cells": [
+            {
+              "text": "Children with syndromic forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutis_laxa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ehlers-Danlos syndrome",
+          "cells": [
+            {
+              "text": "Pitfall: non-recoiling skin mistaken for hyperextensible skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudoxanthoma elasticum",
+          "cells": [
+            {
+              "text": "Named look-alike with skin laxity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "De Barsy syndrome",
+          "cells": [
+            {
+              "text": "Named cutis laxa look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutis_laxa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management of complications",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstructive surgery",
+          "cells": [
+            {
+              "text": "For redundant skin; laxity may recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography and vascular imaging; surgical repair when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory care",
+          "cells": [
+            {
+              "text": "Pulmonary function tests and avoidance of smoking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diverticulum management",
+          "cells": [
+            {
+              "text": "Surgery for complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Syndromic recessive forms in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Gene-panel testing; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cutis_laxa-dx-mgmt",
+      "title": "Diagnosis and management of Cutis laxa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cutis laxa: loose, non-recoiling skin with elastic tissue change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (acute chest or abdominal pain, progressive breathlessness, neurological signs)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency assessment for aneurysm rupture or dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Elastic-tissue biopsy; cutis laxa gene panel; echo and vascular imaging; PFTs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy and genetics confirm elastic-tissue disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Ehlers-Danlos syndrome or pseudoxanthoma elasticum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care directed at complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reconstructive surgery for redundant skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiovascular and respiratory surveillance; avoid smoking",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gene-panel testing, genetic counselling and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated skin disease has a normal lifespan; systemic forms carry serious risks",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

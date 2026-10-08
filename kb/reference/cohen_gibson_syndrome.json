@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for cohen-gibson syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nature Reviews chromatinopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cohen_gibson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exome or genome sequencing",
+          "cells": [
+            {
+              "text": "Pathogenic EED variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DNA methylation episignature",
+          "cells": [
+            {
+              "text": "Validated overgrowth signature, where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph",
+          "cells": [
+            {
+              "text": "Advanced skeletal maturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and head-circumference charting",
+          "cells": [
+            {
+              "text": "Tall stature and macrocephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Structural anomalies or seizures, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cohen_gibson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Weaver syndrome (EZH2)",
+          "cells": [
+            {
+              "text": "Overlapping facial features; Cohen-Gibson presents Weaver-like"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sotos syndrome (NSD1)",
+          "cells": [
+            {
+              "text": "Overgrowth should not be attributed to it without gene-specific PRC2 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cohen_gibson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy; developmental and educational support for intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic monitoring",
+          "cells": [
+            {
+              "text": "Camptodactyly, advanced bone age and limb anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth charting",
+          "cells": [
+            {
+              "text": "Serial growth and head-circumference tracking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour surveillance",
+          "cells": [
+            {
+              "text": "Given the debated malignancy risk shared across PRC2-related overgrowth syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodevelopmental assessment",
+          "cells": [
+            {
+              "text": "Brain MRI where structural anomalies or seizures arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Heterozygous EED variant, typically de novo; confirmatory sequencing and family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cohen_gibson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cohen-Gibson syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cohen-Gibson syndrome: overgrowth, intellectual disability, Weaver-like face",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disproportionate overgrowth, new abdominal mass, rapid head growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: evaluate for an embryonal or other tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exome or genome sequencing for EED variants; bone age; growth charts",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does sequencing identify a pathogenic EED variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Test across the PRC2 group; do not attribute solely to Sotos or Weaver",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Developmental and educational support for intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthopaedic monitoring for camptodactyly and advanced bone age",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial growth and head-circumference charting",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tumour surveillance and genetic counselling for a de novo EED variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Persistent overgrowth with intellectual disability of variable severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,333 @@
       "caption": "Overview comparison matrix for atp6ap1-cdg (congenital disorder of glycosylation, atp6ap1 type)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Congenital disorders of glycosylation references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atp6ap1_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing and glycoform analysis",
+          "cells": [
+            {
+              "text": "Type II pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative immunoglobulins and lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Humoral immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests, coagulation and hepatic ultrasound or elastography",
+          "cells": [
+            {
+              "text": "Hepatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum copper and caeruloplasmin",
+          "cells": [
+            {
+              "text": "Disturbed copper and caeruloplasmin handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of ATP6AP1 or exome sequencing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mass spectrometry glycomics",
+          "cells": [
+            {
+              "text": "N- and O-linked glycans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Where hepatic disease is progressive or unexplained"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atp6ap1_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "ATP6AP2-CDG",
+          "cells": [
+            {
+              "text": "Related V-ATPase accessory-protein defect with hepatopathy and immune features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP6V0A2-CDG",
+          "cells": [
+            {
+              "text": "Autosomal recessive cutis laxa type IIA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atp6ap1_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "For humoral immunodeficiency"
+            },
+            {
+              "text": "Prompt treatment of intercurrent bacterial infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic supportive care",
+          "cells": [
+            {
+              "text": "Liver function and coagulation surveillance; cholestasis; fat-soluble vitamins and nutrition"
+            },
+            {
+              "text": "Hepatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensation planning",
+          "cells": [
+            {
+              "text": "Early intervention and specialist hepatology input"
+            },
+            {
+              "text": "Intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper and caeruloplasmin monitoring",
+          "cells": [
+            {
+              "text": "Distinguish from a primary copper-metabolism disorder"
+            },
+            {
+              "text": "Disturbed handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Metabolic medicine, immunology, hepatology and developmental services"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier testing of female relatives and family screening"
+            },
+            {
+              "text": "X-linked disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atp6ap1_cdg-dx-mgmt",
+      "title": "Diagnosis and management of ATP6AP1-CDG (Congenital Disorder of Glycosylation, ATP6AP1 type)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypogammaglobulinaemia with hepatic disease and abnormal glycosylation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid hepatic decompensation or severe recurrent sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Early hepatology input and treatment of infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin IEF (type II), immunoglobulins, liver tests, copper, ATP6AP1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type II transferrin pattern with ATP6AP1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Immunoglobulin replacement and hepatic supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat glycosylation tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat intercurrent bacterial infections promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage cholestasis; fat-soluble vitamins and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticipate hepatic decompensation during intercurrent illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care and carrier testing of female relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

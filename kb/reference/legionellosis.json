@@ -137,5 +137,439 @@
       "caption": "Overview comparison matrix for legionellosis (legionnaires' disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Guidance for Legionella Infections, 2025",
+      "kind": "web",
+      "url": "https://www.cdc.gov/legionella/hcp/clinical-guidance/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 147-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "legionellosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical clues and tests for Legionnaires disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "High fever",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Above 40 C (104 F)",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Clinical clue"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyponatraemia",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Serum sodium below 131",
+              "op": "<",
+              "value": 131
+            },
+            {
+              "text": "Clinical clue; renal and liver dysfunction also common"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gram stain of sputum",
+          "cells": [
+            {
+              "text": "Many neutrophils, no organisms"
+            },
+            {
+              "text": "Clinical clue"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Diarrhoea or confusion with pneumonia",
+          "cells": [
+            {
+              "text": "GI and neurologic symptoms"
+            },
+            {
+              "text": "Raise likelihood of Legionella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Failure of beta-lactam or aminoglycoside",
+          "cells": [
+            {
+              "text": "No response to penicillins or cephalosporins"
+            },
+            {
+              "text": "Clinical clue"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Water exposure or recent hospital stay",
+          "cells": [
+            {
+              "text": "Contaminated potable water; onset within 10 days of discharge"
+            },
+            {
+              "text": "Exposure window is 14 days before onset"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Urinary antigen",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Detects L. pneumophila serogroup 1 only; sensitivity about 70%",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "{{hy:A negative test does not exclude legionellosis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower respiratory culture or PCR",
+          "cells": [
+            {
+              "text": "BCYE culture is gold standard; PCR more sensitive"
+            },
+            {
+              "text": "Collect with urine antigen; detects all species"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paired serology",
+          "cells": [
+            {
+              "text": "Fourfold rise to serogroup 1"
+            },
+            {
+              "text": "Retrospective; useful for outbreaks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Table 147-1 prints the sodium unit as mg/dL; the clinical unit is mEq/L. Exposure window: Table 147-1 uses 10 days after discharge, CDC (2025) investigates the 14 days before onset."
+    },
+    {
+      "id": "legionellosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from Legionella infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pneumococcal pneumonia",
+          "cells": [
+            {
+              "text": "Gram-positive diplococci, responds to beta-lactam"
+            },
+            {
+              "text": "Sputum Gram stain, pneumococcal urine antigen"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mycoplasma pneumoniae",
+          "cells": [
+            {
+              "text": "Younger patients, milder illness"
+            },
+            {
+              "text": "Respiratory PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chlamydia pneumoniae",
+          "cells": [
+            {
+              "text": "Atypical pneumonia, milder course"
+            },
+            {
+              "text": "Respiratory PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive fungal infection",
+          "cells": [
+            {
+              "text": "Nodules or cavities in immunosuppressed host"
+            },
+            {
+              "text": "Legionella culture or PCR of BAL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pontiac fever",
+          "cells": [
+            {
+              "text": "Flu-like illness without pneumonia, resolves in about 1 week"
+            },
+            {
+              "text": "Chest film without infiltrate"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "legionellosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of legionellosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Legionnaires disease, for example levofloxacin"
+            },
+            {
+              "text": "Active against intracellular organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macrolide",
+          "cells": [
+            {
+              "text": "Legionnaires disease, for example azithromycin"
+            },
+            {
+              "text": "Follow IDSA pneumonia guidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV therapy",
+          "cells": [
+            {
+              "text": "{{hy:All inpatients and all immunosuppressed patients}}"
+            },
+            {
+              "text": "Switch to oral once improving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Oxygen, fluids, correct hyponatraemia; ICU for respiratory failure"
+            },
+            {
+              "text": "Monitor renal and liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pontiac fever",
+          "cells": [
+            {
+              "text": "Self-limited illness"
+            },
+            {
+              "text": "No antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Public health notification",
+          "cells": [
+            {
+              "text": "Every case, especially healthcare-associated"
+            },
+            {
+              "text": "Triggers water system investigation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Neither CDC nor the entry states doses or duration; dose per IDSA pneumonia guidance."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "legionellosis-dx-mgmt",
+      "title": "Diagnosis and management of legionellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pneumonia with fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe, immunosuppressed, travel, hospital stay or failed outpatient therapy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Usual CAP care; test if no response",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine antigen plus sputum or BAL culture or PCR",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Start fluoroquinolone or macrolide without waiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Legionella confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Notify public health; trace water source",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Needs admission or immunosuppressed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "IV therapy until improving, then oral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Oral therapy as outpatient",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Negative urine antigen does not exclude; continue cover if suspicion high",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

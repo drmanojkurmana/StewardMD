@@ -148,5 +148,85 @@
       "caption": "Overview comparison matrix for benign neonatal sleep myoclonus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Volpe's Neurology of the Newborn / Swaiman's Pediatric Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_neonatal_sleep_myoclonus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benign neonatal sleep myoclonus",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Home video", "cells": [{"text": "Sleep-only jerks that stop on arousal"}], "cite": "c1"},
+        {"parameter": "Bedside arousal", "cells": [{"text": "Gently waking the infant abolishes the movements"}], "cite": "c1"},
+        {"parameter": "EEG (interictal and ictal where possible)", "cells": [{"text": "Normal, without epileptiform discharge"}], "cite": "c1"},
+        {"parameter": "Basic metabolic screen", "cells": [{"text": "Glucose, calcium and electrolytes if there is any doubt"}], "cite": "c1"},
+        {"parameter": "Neurological examination", "cells": [{"text": "Normal tone, reflexes and development"}], "cite": "c1"},
+        {"parameter": "Neuroimaging", "cells": [{"text": "Reserved for atypical cases or an abnormal examination"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_neonatal_sleep_myoclonus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign neonatal sleep myoclonus",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Neonatal seizures", "cells": [{"text": "Myoclonus occurs only in sleep and stops reliably on waking; no epileptiform correlate"}], "cite": "c1"},
+        {"parameter": "Early myoclonic encephalopathy or early infantile epileptic encephalopathy", "cells": [{"text": "Jerks persisting into wakefulness argue against this benign disorder"}], "cite": "c1"},
+        {"parameter": "Metabolic disturbance (hypocalcaemia or hypoglycaemia)", "cells": [{"text": "Excluded by a basic metabolic screen if any doubt"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_neonatal_sleep_myoclonus-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign neonatal sleep myoclonus",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the condition is benign, self-limiting and confined to sleep"}, {"text": "Resolves as the nervous system matures"}], "cite": "c1"},
+        {"parameter": "Withhold antiepileptic drugs", "cells": [{"text": "Do not start antiepileptic medication"}, {"text": "Benzodiazepines may paradoxically worsen the jerks"}], "cite": "c1"},
+        {"parameter": "Bedside confirmation", "cells": [{"text": "Gently arouse the infant to abolish the movements"}, {"text": "Supported by a normal EEG"}], "cite": "c1"},
+        {"parameter": "Avoid restraint", "cells": [{"text": "Avoid gentle restraint or rocking"}, {"text": "Can intensify the myoclonus"}], "cite": "c1"},
+        {"parameter": "Developmental follow-up", "cells": [{"text": "Developmental and neurological follow-up"}, {"text": "Confirms normal progress"}], "cite": "c1"},
+        {"parameter": "Reconsideration", "cells": [{"text": "Repeat EEG and metabolic screening if jerks persist into wakefulness or the examination becomes abnormal"}, {"text": "Reconsider the diagnosis"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_neonatal_sleep_myoclonus-dx-mgmt",
+      "title": "Diagnosis and management of benign neonatal sleep myoclonus",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Myoclonic jerks in clusters only during quiet sleep in a healthy neonate", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: jerks when awake, abnormal examination, apnoea, or jerks not stopping on waking?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: EEG, metabolic screen and neuroimaging; consider neonatal seizures", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Home video showing sleep-only jerks that stop on arousal", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Jerks abolished by waking, with normal EEG and examination?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Withhold antiepileptic drugs; avoid restraint and benzodiazepines", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: reconsider neonatal seizures or another epileptic or metabolic cause", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Developmental and neurological follow-up to confirm normal progress", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Resolves within the first few months with normal development", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -148,5 +148,312 @@
       "caption": "Overview comparison matrix for circadian rhythm sleep-wake disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "circadian_rhythm_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Sleep diary over one to two weeks",
+          "cells": [
+            {
+              "text": "Documents the timing pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Actigraphy",
+          "cells": [
+            {
+              "text": "Objective sleep-wake timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of light exposure, work schedule and travel",
+          "cells": [
+            {
+              "text": "Circadian contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dim-light melatonin onset",
+          "cells": [
+            {
+              "text": "Circadian phase marker where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for mood disorder or other sleep pathology",
+          "cells": [
+            {
+              "text": "Coexisting conditions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "circadian_rhythm_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hypersomnia disorders",
+          "cells": [
+            {
+              "text": "Excessive sleepiness without mistimed sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression or other mood disorder",
+          "cells": [
+            {
+              "text": "Affects sleep timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodegenerative disease",
+          "cells": [
+            {
+              "text": "Irregular sleep-wake rhythm with cognitive decline"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "circadian_rhythm_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Timed bright light exposure",
+          "cells": [
+            {
+              "text": "Morning light for delayed phase; evening light for advanced phase"
+            },
+            {
+              "text": "Shifts and entrains the clock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Timed melatonin",
+          "cells": [
+            {
+              "text": "Reinforces phase shifting"
+            },
+            {
+              "text": "Circadian timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tasimelteon",
+          "cells": [
+            {
+              "text": "Melatonin-receptor agonist for non-24-hour rhythm in blind patients"
+            },
+            {
+              "text": "Non-24-hour disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured sleep-wake scheduling and chronotherapy",
+          "cells": [
+            {
+              "text": "Consolidates the desired sleep timing"
+            },
+            {
+              "text": "Desired schedule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planned napping, timed light and modafinil",
+          "cells": [
+            {
+              "text": "For shift work and excessive sleepiness"
+            },
+            {
+              "text": "Shift work"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "circadian_rhythm_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Circadian rhythm sleep-wake disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected circadian rhythm sleep-wake disorder: sleep timing mismatched to schedule",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sleepiness causing accidents, cognitive decline, depression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for dangerous sleepiness or coexisting depression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sleep diary over one to two weeks with actigraphy and light history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Timing pattern confirmed with other sleep pathology and mood excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Timed bright light and melatonin to realign the clock",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check insomnia, primary hypersomnia, depression and neurodegeneration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Structured sleep-wake scheduling and sleep hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tasimelteon for non-24-hour rhythm disorder in blind patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Shift work: planned napping, timed light and modafinil for sleepiness",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sleep medicine referral for refractory or complex cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

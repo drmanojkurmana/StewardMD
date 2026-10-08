@@ -153,5 +153,316 @@
       "caption": "Overview comparison matrix for delayed haemolytic transfusion reaction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delayed_haemolytic_transfusion_reaction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Direct antiglobulin test on a current sample",
+          "cells": [
+            {
+              "text": "New positive result after a previously negative screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat antibody screen and identification panel",
+          "cells": [
+            {
+              "text": "Identifies the new alloantibody in pre- and post-transfusion sera"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elution studies",
+          "cells": [
+            {
+              "text": "Antibody bound to the transfused cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH, bilirubin, haptoglobin and reticulocyte count",
+          "cells": [
+            {
+              "text": "Haemolysis markers used to track the delayed fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin increment against the expected value",
+          "cells": [
+            {
+              "text": "Compared with the expected post-transfusion rise"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delayed_haemolytic_transfusion_reaction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ongoing bleeding",
+          "cells": [
+            {
+              "text": "Attributing a falling haemoglobin to bleeding is a common pitfall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperhaemolysis syndrome in sickle cell disease",
+          "cells": [
+            {
+              "text": "Rapidly worsening anaemia in sickle cell disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delayed_haemolytic_transfusion_reaction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Most reactions are mild and self-limiting once incompatible cells are cleared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antigen-negative, matched red cells",
+          "cells": [
+            {
+              "text": "For all future transfusions, selected against the new alloantibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial haemolysis markers",
+          "cells": [
+            {
+              "text": "LDH, bilirubin, haptoglobin and reticulocytes to track the fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration and renal monitoring",
+          "cells": [
+            {
+              "text": "Brisk haemolysis can cause renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alloimmunisation alert",
+          "cells": [
+            {
+              "text": "Record the antibody so future cross-matching prevents recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemovigilance report",
+          "cells": [
+            {
+              "text": "Confirm with DAT, elution and antibody identification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sickle cell hyperhaemolysis",
+          "cells": [
+            {
+              "text": "Avoid further transfusion where possible; consider corticosteroids and IVIG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delayed_haemolytic_transfusion_reaction-dx-mgmt",
+      "title": "Diagnosis and management of Delayed haemolytic transfusion reaction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected delayed haemolytic transfusion reaction: falling haemoglobin after transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemoglobinuria, jaundice, renal impairment, sickle hyperhaemolysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hydration, renal care and specialist review for brisk haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat antibody screen, DAT and elution; LDH, bilirubin, haptoglobin, reticulocytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a new alloantibody identified with a positive DAT after prior transfusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider bleeding, autoimmune haemolysis or drug-induced immune haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Largely supportive; most reactions are mild and self-limiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give antigen-negative, matched red cells for all future transfusions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Record the alloantibody on an alert card for future cross-matching",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Maintain hydration and monitor renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Report to the transfusion laboratory and haemovigilance system",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most resolve as incompatible cells clear; brisk haemolysis can impair renal function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

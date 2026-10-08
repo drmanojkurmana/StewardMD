@@ -151,5 +151,88 @@
       "caption": "Overview comparison matrix for beta thalassaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics, 22e",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta_thalassemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beta thalassaemia major",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Full blood count and red cell indices", "cells": [{"text": "Low MCV and MCH; severe microcytic hypochromic anaemia"}], "cite": "c1"},
+        {"parameter": "Peripheral blood film", "cells": [{"text": "Marked anisopoikilocytosis, target cells and nucleated red cells"}], "cite": "c1"},
+        {"parameter": "Haemoglobin electrophoresis or HPLC", "cells": [{"text": "Elevated HbF and often raised HbA2; little or no HbA in the major form"}], "cite": "c1"},
+        {"parameter": "Iron studies and serum ferritin", "cells": [{"text": "Distinguishes iron deficiency and monitors iron overload"}], "cite": "c1"},
+        {"parameter": "Beta-globin gene mutation analysis", "cells": [{"text": "Confirms beta-globin gene mutation"}], "cite": "c1"},
+        {"parameter": "Serial ferritin and cardiac or hepatic MRI (T2*)", "cells": [{"text": "Monitors iron burden"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_thalassemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for beta thalassaemia",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Iron deficiency anaemia", "cells": [{"text": "Separated by iron studies and serum ferritin; unnecessary iron should be avoided"}], "cite": "c1"},
+        {"parameter": "Alpha thalassaemia", "cells": [{"text": "Beta-globin gene analysis confirms beta disease"}], "cite": "c1"},
+        {"parameter": "Sickle cell disease and other haemoglobinopathies", "cells": [{"text": "Haemoglobin electrophoresis or HPLC quantifies HbA, HbA2 and HbF"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_thalassemia-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta thalassaemia major",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Regular red-cell transfusion", "cells": [{"text": "Regular transfusion in transfusion-dependent disease"}, {"text": "Corrects anaemia, supports growth and suppresses ineffective erythropoiesis"}], "cite": "c1"},
+        {"parameter": "Iron chelation", "cells": [{"text": "Deferoxamine, deferasirox or deferiprone"}, {"text": "Prevents transfusional iron overload"}], "cite": "c1"},
+        {"parameter": "Folic acid and splenectomy", "cells": [{"text": "Folic acid supplementation; splenectomy considered for hypersplenism or rising transfusion needs"}, {"text": "With pre-splenectomy vaccination and post-splenectomy antibiotic prophylaxis"}], "cite": "c1"},
+        {"parameter": "Iron burden and organ surveillance", "cells": [{"text": "Serum ferritin, cardiac and hepatic MRI, and endocrine surveillance"}, {"text": "Guides chelation"}], "cite": "c1"},
+        {"parameter": "Curative and emerging options", "cells": [{"text": "Allogeneic haematopoietic stem cell transplantation in selected patients"}, {"text": "Luspatercept and gene therapy are emerging alternatives"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care", "cells": [{"text": "Haematology-led care with cardiology, hepatology and endocrinology input"}, {"text": "For iron-related complications"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Carrier and antenatal screening for at-risk families"}, {"text": "Autosomal recessive inheritance"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta_thalassemia-dx-mgmt",
+      "title": "Diagnosis and management of beta thalassaemia major",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Pallor, poor growth and hepatosplenomegaly from late infancy with microcytic anaemia", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: cardiac decompensation, iron overload arrhythmia, or hypersplenism with falling counts?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent transfusion and cardiac iron assessment; review the spleen", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Blood film and HbA, HbA2, HbF by electrophoresis or HPLC", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Iron studies and ferritin to exclude iron deficiency; beta-globin gene analysis", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Little or no HbA with raised HbF on electrophoresis?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Regular transfusion, iron chelation with deferoxamine, deferasirox or deferiprone, folic acid", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider alpha thalassaemia, sickle cell disease or iron deficiency", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Monitor ferritin and cardiac or hepatic MRI; consider stem cell transplant if selected", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Good quality of life with transfusion and chelation; transplant can be curative", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -138,5 +138,529 @@
       "caption": "Diagnostic and clinical overview matrix for delirium tremens (alcohol withdrawal)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Entry text (StewardMD KB, alcohol withdrawal)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Alcohol Toxicity and Withdrawal",
+      "url": "https://www.merckmanuals.com/professional/special-subjects/recreational-drugs-and-intoxicants/alcohol-toxicity-and-withdrawal",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delirium_tremens-diagnostic",
+      "kind": "diagnostic",
+      "title": "Timeline and severity of alcohol withdrawal",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Timing or threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild withdrawal",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Within about 6 h of last drink",
+              "op": "<=",
+              "value": 6
+            },
+            {
+              "text": "Tremor, anxiety"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Alcoholic hallucinosis",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "12 to 24 h",
+              "range": [
+                12,
+                24
+              ]
+            },
+            {
+              "text": "Clear consciousness; usually transient"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Withdrawal seizures",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "6 to 48 h",
+              "range": [
+                6,
+                48
+              ]
+            },
+            {
+              "text": "May herald DT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Delirium tremens",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "48 to 72 h",
+              "range": [
+                48,
+                72
+              ]
+            },
+            {
+              "text": "{{hy:Delirium with autonomic instability}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mild DT",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Pulse 100 to 120, temp 37.2 to 37.8 C",
+              "range": [
+                100,
+                120
+              ]
+            },
+            {
+              "text": "Lower-risk delirium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marked DT",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "Pulse >120, temp >37.8 C",
+              "op": ">",
+              "value": 120
+            },
+            {
+              "text": "High risk of death"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bedside glucose",
+          "cells": [
+            {
+              "text": "Check at once"
+            },
+            {
+              "text": "Hypoglycaemia mimics and coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes, magnesium, phosphate, LFTs",
+          "cells": [
+            {
+              "text": "Baseline in all"
+            },
+            {
+              "text": "Replace deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CIWA-Ar",
+          "cells": [
+            {
+              "text": "Serial scoring"
+            },
+            {
+              "text": "Tracks severity and guides dosing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "CIWA-Ar score thresholds are not given in the sources opened."
+    },
+    {
+      "id": "delirium_tremens-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic delirium tremens",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "{{hy:Fever with altered mental state; do not anchor on withdrawal}}"
+            },
+            {
+              "text": "Lumbar puncture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head injury or intracranial bleed",
+          "cells": [
+            {
+              "text": "Trauma, focal signs"
+            },
+            {
+              "text": "CT head"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wernicke encephalopathy",
+          "cells": [
+            {
+              "text": "Ophthalmoplegia, ataxia, confusion"
+            },
+            {
+              "text": "Clinical; give thiamine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Low glucose"
+            },
+            {
+              "text": "Fingerstick glucose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Alcoholic ketoacidosis",
+          "cells": [
+            {
+              "text": "Ketosis with normal or low glucose"
+            },
+            {
+              "text": "Ketones, anion gap"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other drug intoxication or withdrawal",
+          "cells": [
+            {
+              "text": "Other substances"
+            },
+            {
+              "text": "Toxicology history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Schizophrenia",
+          "cells": [
+            {
+              "text": "Disordered thought; no autonomic storm"
+            },
+            {
+              "text": "Clinical"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "delirium_tremens-treatment",
+      "kind": "treatment",
+      "title": "Treatment of alcohol withdrawal and delirium tremens",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thiamine IV",
+          "cells": [
+            {
+              "text": "{{hy:All patients, before glucose}}"
+            },
+            {
+              "text": "100 mg IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diazepam",
+          "cells": [
+            {
+              "text": "Symptomatic withdrawal"
+            },
+            {
+              "text": "5 to 10 mg IV or PO hourly until sedated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diazepam or lorazepam IV for DT",
+          "cells": [
+            {
+              "text": "Delirium tremens"
+            },
+            {
+              "text": "Diazepam 5 to 10 mg or lorazepam 1 to 2 mg every 10 min; no maximum dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lorazepam or oxazepam",
+          "cells": [
+            {
+              "text": "Liver disease"
+            },
+            {
+              "text": "Preferred benzodiazepines"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chlordiazepoxide",
+          "cells": [
+            {
+              "text": "Less severe withdrawal"
+            },
+            {
+              "text": "50 to 100 mg PO every 4 to 6 h, then taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lorazepam for seizures",
+          "cells": [
+            {
+              "text": "Repeated or prolonged seizures"
+            },
+            {
+              "text": "1 to 3 mg IV; phenytoin not helpful"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Phenobarbital",
+          "cells": [
+            {
+              "text": "Alternative first agent or benzodiazepine-refractory DT"
+            },
+            {
+              "text": "10 mg/kg IV, or 120 to 240 mg IV every 20 min; watch breathing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infusion with ventilation",
+          "cells": [
+            {
+              "text": "Severe drug-resistant DT"
+            },
+            {
+              "text": "Lorazepam, midazolam, propofol or dexmedetomidine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV fluids, magnesium, multivitamins",
+          "cells": [
+            {
+              "text": "Volume depletion and deficits"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid haloperidol or phenothiazines initially",
+          "cells": [
+            {
+              "text": "Agitation"
+            },
+            {
+              "text": "May lower seizure threshold"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICU care",
+          "cells": [
+            {
+              "text": "Severe withdrawal or DT"
+            },
+            {
+              "text": "Until symptoms settle"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The 'thiamine before glucose' order comes from the entry text; Merck gives the thiamine dose but not the order."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delirium_tremens-dx-mgmt",
+      "title": "Diagnosis and management of delirium tremens",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Confusion, tremor, sweating 48 to 72 h after stopping alcohol",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Glucose, thiamine IV, electrolytes and magnesium",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Fever, focal signs or atypical course?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT head and lumbar puncture",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection or bleed found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat CNS infection or injury",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Benzodiazepine IV every 10 min until calm; ICU",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Controlled on benzodiazepines?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Phenobarbital or infusion with ventilation",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Supportive care, taper, then stop after detox",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

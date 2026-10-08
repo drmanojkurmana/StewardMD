@@ -157,5 +157,548 @@
       "caption": "Overview comparison matrix for evaluation and management of obesity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Obesity",
+      "url": "https://www.merckmanuals.com/professional/nutritional-disorders/obesity-and-the-metabolic-syndrome/obesity",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "evaluation_and_management_of_obesity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Classification and assessment of obesity",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "BMI healthy weight",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "18.5 to 24.9",
+              "range": [
+                18.5,
+                24.9
+              ]
+            },
+            {
+              "text": "Normal range"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI overweight",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "25.0 to 29.9",
+              "range": [
+                25.0,
+                29.9
+              ]
+            },
+            {
+              "text": "Increased disease risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI obesity class I",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "30.0 to 34.9",
+              "range": [
+                30.0,
+                34.9
+              ]
+            },
+            {
+              "text": "High risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI obesity class II",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "35.0 to 39.9",
+              "range": [
+                35.0,
+                39.9
+              ]
+            },
+            {
+              "text": "Very high risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI obesity class III",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "40 or more",
+              "op": ">=",
+              "value": 40
+            },
+            {
+              "text": "Extremely high risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waist circumference, Europeans",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Men >94, women >80",
+              "op": ">",
+              "value": 94
+            },
+            {
+              "text": "Surrogate for visceral fat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waist circumference, South Asian and Chinese",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "{{hy:Men >90, women >80}}",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Lower BMI thresholds proposed for Asia-Pacific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Body fat percentage",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Men >25, women >32",
+              "op": ">",
+              "value": 25
+            },
+            {
+              "text": "Body composition definition of obesity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baseline tests",
+          "cells": [
+            {
+              "text": "Fasting lipids, chemistry panel, HbA1c, blood pressure"
+            },
+            {
+              "text": "For all patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staging beyond BMI",
+          "cells": [
+            {
+              "text": "AACE/ACE stage 0 to 2; Edmonton stage 0 to 4"
+            },
+            {
+              "text": "Identify complication burden"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "evaluation_and_management_of_obesity-ddx",
+      "kind": "ddx",
+      "title": "Secondary causes to consider in obesity",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Cold intolerance, fatigue, bradycardia"
+            },
+            {
+              "text": "Thyroid function tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cushing syndrome",
+          "cells": [
+            {
+              "text": "Central obesity with proximal weakness, striae, easy bruising"
+            },
+            {
+              "text": "Cortisol evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Oligomenorrhoea and hyperandrogenism"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothalamic disease",
+          "cells": [
+            {
+              "text": "Neurological or pituitary features"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monogenic or syndromic obesity",
+          "cells": [
+            {
+              "text": "Early-onset severe obesity; Bardet-Biedl, POMC, leptin receptor defects"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced weight gain",
+          "cells": [
+            {
+              "text": "Insulin, sulfonylureas, glitazones, steroids, antipsychotics, lithium, valproate"
+            },
+            {
+              "text": "Medication review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oedema mimicking fat gain",
+          "cells": [
+            {
+              "text": "NSAIDs, calcium channel blockers"
+            },
+            {
+              "text": "Clinical examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison names these causes but the cited sources do not give a specific separating test for PCOS, hypothalamic or monogenic obesity."
+    },
+    {
+      "id": "evaluation_and_management_of_obesity-treatment",
+      "kind": "treatment",
+      "title": "Treatment of obesity",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle intervention",
+          "cells": [
+            {
+              "text": "{{hy:Foundation for all patients}}"
+            },
+            {
+              "text": "Reduced-energy diet, more activity, behavioural support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physical activity",
+          "unit": "min/week",
+          "cells": [
+            {
+              "text": "150 for health; 300 to 360 for weight loss and maintenance",
+              "op": ">=",
+              "value": 150
+            },
+            {
+              "text": "Fitness predicts mortality independent of BMI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pharmacotherapy",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "BMI >27 with comorbidity or 30 without",
+              "op": ">",
+              "value": 27
+            },
+            {
+              "text": "Adjunct to lifestyle change"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Semaglutide",
+          "cells": [
+            {
+              "text": "GLP-1 receptor agonist option"
+            },
+            {
+              "text": "2.4 mg subcutaneously"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liraglutide",
+          "cells": [
+            {
+              "text": "GLP-1 receptor agonist option"
+            },
+            {
+              "text": "Daily injection, titrated over 5 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tirzepatide, orlistat, phentermine-topiramate, naltrexone-bupropion",
+          "cells": [
+            {
+              "text": "Other approved agents"
+            },
+            {
+              "text": "Orlistat taken three times daily with fat-containing meals"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bariatric surgery (sleeve gastrectomy, Roux-en-Y bypass)",
+          "cells": [
+            {
+              "text": "Severe obesity or obesity with significant comorbidity"
+            },
+            {
+              "text": "Most effective treatment for severe obesity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat complications",
+          "cells": [
+            {
+              "text": "Diabetes, hypertension, dyslipidaemia, sleep apnoea, fatty liver"
+            },
+            {
+              "text": "Screen with STOP-BANG for sleep apnoea"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "evaluation_and_management_of_obesity-dx-mgmt",
+      "title": "Diagnosis and management of obesity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with raised weight; measure BMI and waist circumference",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "BMI 25 or more, or raised waist circumference?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Healthy weight: routine advice",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lipids, HbA1c, chemistry panel, blood pressure; review drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clues to a secondary cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Thyroid tests, cortisol evaluation, treat the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifestyle programme: diet, activity, behavioural support",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "BMI >27 with comorbidity or 30 or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add drug therapy, for example semaglutide or tirzepatide",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Severe obesity or major comorbidity despite treatment?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer for bariatric surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Long-term follow-up of weight, waist and metabolic markers",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

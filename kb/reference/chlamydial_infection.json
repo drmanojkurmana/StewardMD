@@ -190,5 +190,482 @@
       "caption": "Overview comparison matrix for chlamydial infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC STI Treatment Guidelines 2021, Chlamydial Infections",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/chlamydia.htm",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chlamydial_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and screening of chlamydial infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or rule",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Asymptomatic genital infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "80 to 90% of women, over 50% of men",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "{{hy:Screening is essential}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAAT",
+          "cells": [
+            {
+              "text": "Test of choice on urine, vaginal, urethral, rectal, pharyngeal swabs"
+            },
+            {
+              "text": "Vaginal swab slightly more sensitive than urine in women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Share of nongonococcal urethritis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 50%",
+              "range": [
+                30,
+                50
+              ]
+            },
+            {
+              "text": "Also post-gonococcal urethritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Annual screening, women",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Sexually active under 25",
+              "op": "<",
+              "value": 25
+            },
+            {
+              "text": "Older women at increased risk also"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rectal screening",
+          "cells": [
+            {
+              "text": "Men reporting receptive anal sex"
+            },
+            {
+              "text": "Annually"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Screen at first visit if under 25 or at risk"
+            },
+            {
+              "text": "Rescreen in third trimester"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LGV",
+          "cells": [
+            {
+              "text": "Painless ulcer then painful inguinal buboes, or haemorrhagic proctitis in MSM"
+            },
+            {
+              "text": "Genotyping; longer treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C. pneumoniae share of CAP",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Usually 1 to 2%, up to 10%",
+              "range": [
+                1,
+                10
+              ]
+            },
+            {
+              "text": "PCR of respiratory secretions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psittacosis",
+          "cells": [
+            {
+              "text": "Bird exposure with atypical pneumonia"
+            },
+            {
+              "text": "Respiratory NAAT or fourfold CF titre rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal conjunctivitis after exposure",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 to 30%; pneumonia 10 to 15%",
+              "range": [
+                20,
+                30
+              ]
+            },
+            {
+              "text": "Gonococcal eye prophylaxis does not prevent it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chlamydial_infection-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of chlamydial syndromes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonorrhoea",
+          "cells": [
+            {
+              "text": "{{hy:Clinically indistinguishable; co-infection common}}; test for both"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma genitalium",
+          "cells": [
+            {
+              "text": "Leading cause of chlamydia-negative and persistent NGU"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trichomonas or HSV urethritis",
+          "cells": [
+            {
+              "text": "Other NGU causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testicular torsion",
+          "cells": [
+            {
+              "text": "Acute unilateral testicular pain; exclude urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectal Crohn disease",
+          "cells": [
+            {
+              "text": "Mimics LGV proctocolitis histologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenovirus or HSV conjunctivitis",
+          "cells": [
+            {
+              "text": "Mimic inclusion conjunctivitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycoplasma pneumoniae",
+          "cells": [
+            {
+              "text": "Other atypical pneumonia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chlamydial_infection-treatment",
+      "kind": "treatment",
+      "title": "Treatment of chlamydial infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and duration"
+      ],
+      "rows": [
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "{{hy:First line, adults and adolescents}}"
+            },
+            {
+              "text": "100 mg orally twice daily for 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin or levofloxacin",
+          "cells": [
+            {
+              "text": "Alternatives"
+            },
+            {
+              "text": "Azithromycin 1 g single dose; levofloxacin 500 mg daily for 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Pregnancy"
+            },
+            {
+              "text": "1 g single dose; amoxicillin 500 mg three times daily for 7 days as alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Erythromycin",
+          "cells": [
+            {
+              "text": "Neonatal conjunctivitis or pneumonia"
+            },
+            {
+              "text": "50 mg/kg/day in 4 doses for 14 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin suspension",
+          "cells": [
+            {
+              "text": "Infant pneumonia alternative"
+            },
+            {
+              "text": "20 mg/kg/day once daily for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Partner treatment",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Partners from previous 60 days"
+            },
+            {
+              "text": "60"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abstinence",
+          "cells": [
+            {
+              "text": "After treatment"
+            },
+            {
+              "text": "7 days after single dose or until 7-day course done and symptoms gone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Retest",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "All treated patients"
+            },
+            {
+              "text": "About 3 months after treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Test of cure",
+          "cells": [
+            {
+              "text": "Pregnancy only, routinely"
+            },
+            {
+              "text": "About 4 weeks after therapy; avoid NAAT under 4 weeks"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "LGV regimen was not covered in the page opened; Harrison notes LGV needs longer treatment."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chlamydial_infection-dx-mgmt",
+      "title": "Diagnosis and management of genital chlamydia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urethritis, cervicitis, proctitis, or screening-eligible person",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "NAAT for chlamydia and gonorrhoea at exposed sites",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Chlamydia positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider M. genitalium, trichomonas, HSV if symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pregnant?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Azithromycin 1 g; test of cure at 4 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Doxycycline 100 mg twice daily for 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat partners from last 60 days; abstain 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Retest at about 3 months",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

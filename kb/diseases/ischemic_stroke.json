@@ -261,5 +261,740 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 370-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Ischemic Stroke",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/stroke/ischemic-stroke"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ischemic_stroke-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic and triage values in acute ischemic stroke",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Time of onset",
+          "cells": [
+            {
+              "text": "Last seen well, not when found"
+            },
+            {
+              "text": "Wake-up stroke defaults to bedtime; advanced imaging may still select treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Must exceed 50 mg/dL before thrombolysis",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "{{hy:With brain imaging, the only test required before IV thrombolysis}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "No haemorrhage; hypodensity not over one-third of MCA territory"
+            },
+            {
+              "text": "Excludes haemorrhage and mimics; early CT may be normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Time for infarct to show on CT",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Medium to large infarcts at 6 to 12 h",
+              "range": [
+                6,
+                12
+              ]
+            },
+            {
+              "text": "Lacunes may be seen only on MRI"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hyperdense MCA sign",
+          "cells": [
+            {
+              "text": "Seen in about 20% of MCA occlusions"
+            },
+            {
+              "text": "Specific but insensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffusion-weighted MRI",
+          "cells": [
+            {
+              "text": "Most sensitive for acute infarction"
+            },
+            {
+              "text": "Best for posterior fossa and new infarct after TIA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CTA or MRA",
+          "cells": [
+            {
+              "text": "Within 24 h of onset when large vessel occlusion is suspected"
+            },
+            {
+              "text": "CTA preferred over MRA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NIHSS mild",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1 to 4",
+              "range": [
+                1,
+                4
+              ]
+            },
+            {
+              "text": "Mild stroke"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NIHSS moderate",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "5 to 15",
+              "range": [
+                5,
+                15
+              ]
+            },
+            {
+              "text": "Moderate stroke"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NIHSS moderate to severe",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "16 to 20",
+              "range": [
+                16,
+                20
+              ]
+            },
+            {
+              "text": "Moderate to severe stroke"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NIHSS severe",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "21 to 42",
+              "range": [
+                21,
+                42
+              ]
+            },
+            {
+              "text": "Severe stroke"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Disabling deficit",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "NIHSS above 5",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Candidate for thrombolysis or thrombectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation before lysis",
+          "cells": [
+            {
+              "text": "INR above 1.7, PT above 15 s or aPTT above 40 s"
+            },
+            {
+              "text": "Excludes thrombolysis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cerebral blood flow",
+          "unit": "mL/100 g/min",
+          "cells": [
+            {
+              "text": "Below 16 to 18 mL/100 g/min infarcts within an hour",
+              "op": "<",
+              "value": 16
+            },
+            {
+              "text": "18 to 20 mL/100 g/min causes reversible ischemia unless prolonged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac work-up",
+          "cells": [
+            {
+              "text": "ECG, telemetry or Holter, troponin, echocardiography"
+            },
+            {
+              "text": "Looks for atrial fibrillation, recent MI, embolic source"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "NIHSS bands are from Merck; Harrison uses NIHSS above 5 as the disabling threshold. About 30% of ischemic strokes remain cryptogenic after full work-up."
+    },
+    {
+      "id": "ischemic_stroke-ddx",
+      "kind": "ddx",
+      "title": "Stroke mimics and look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Intracerebral haemorrhage",
+          "cells": [
+            {
+              "text": "Depressed consciousness, very high BP or progressive worsening favour it, but no clinical feature is reliable"
+            },
+            {
+              "text": "{{hy:Non-contrast CT before any reperfusion}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient ischemic attack",
+          "cells": [
+            {
+              "text": "Deficit resolves within 24 h with no infarct on imaging"
+            },
+            {
+              "text": "DWI MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure with postictal (Todd) paralysis",
+          "cells": [
+            {
+              "text": "Witnessed convulsive onset"
+            },
+            {
+              "text": "Observer history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Focal deficit that reverses with glucose"
+            },
+            {
+              "text": "Bedside glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine, including hemiplegic migraine",
+          "cells": [
+            {
+              "text": "Migrainous aura or headache history"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cerebral venous sinus thrombosis",
+          "cells": [
+            {
+              "text": "Headache, focal signs, seizures; CT often normal"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Labyrinthitis versus cerebellar infarct",
+          "cells": [
+            {
+              "text": "Vertigo and vomiting; head or neck pain raises dissection concern"
+            },
+            {
+              "text": "DWI MRI of posterior fossa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CNS infection",
+          "cells": [
+            {
+              "text": "Fever, systemic features"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Brain tumour",
+          "cells": [
+            {
+              "text": "Acute presentation through bleed, seizure or hydrocephalus"
+            },
+            {
+              "text": "Brain imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional neurologic disorder",
+          "cells": [
+            {
+              "text": "Diagnosis of exclusion"
+            },
+            {
+              "text": "Exclude organic causes first"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Thrombolysis given to a mimic carries about 0.5% haemorrhage risk (Merck)."
+    },
+    {
+      "id": "ischemic_stroke-treatment",
+      "kind": "treatment",
+      "title": "Acute treatment of ischemic stroke",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV alteplase (rtPA), standard window",
+          "cells": [
+            {
+              "text": "Clinical stroke, onset to drug start at most 3 h, CT without haemorrhage or oedema over one-third of MCA territory, age 18 or older, consent"
+            },
+            {
+              "text": "{{hy:0.9 mg/kg IV, maximum 90 mg; 10% as bolus, rest over 1 h}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thrombolysis contraindications",
+          "cells": [
+            {
+              "text": "Withhold if any present"
+            },
+            {
+              "text": "BP above 185/110 despite treatment; platelets below 100,000; HCT below 25%; glucose below 50 or above 400 mg/dL; heparin within 48 h with long PTT or high INR; rapidly improving symptoms; stroke or head injury within 3 months; prior ICH; major surgery within 14 days; minor symptoms; GI bleed within 21 days; recent MI; coma or stupor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Administration and post-lysis care",
+          "cells": [
+            {
+              "text": "Every rtPA patient"
+            },
+            {
+              "text": "Two peripheral IVs; frequent BP checks; no other antithrombotics for 24 h; avoid urethral catheter for 2 h or more; stop for neurologic decline or uncontrolled BP, give cryoprecipitate and reimage urgently"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV alteplase, 3 to 4.5 h",
+          "cells": [
+            {
+              "text": "Some experts extend the window to 4.5 h"
+            },
+            {
+              "text": "Extra exclusions: age above 80, oral anticoagulant regardless of INR, NIHSS above 25, prior stroke plus diabetes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tenecteplase",
+          "cells": [
+            {
+              "text": "Alternative to alteplase"
+            },
+            {
+              "text": "Similar outcomes and adverse events, higher reperfusion; dose not stated in source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mechanical thrombectomy",
+          "cells": [
+            {
+              "text": "Anterior circulation large vessel occlusion; classically within 6 h, up to 16 h (DEFUSE 3) or 24 h (DAWN) with favourable imaging"
+            },
+            {
+              "text": "Give IV thrombolysis first when eligible"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Blood pressure",
+          "cells": [
+            {
+              "text": "Before lysis below 185/105; after lysis below 180/105 for at least 24 h"
+            },
+            {
+              "text": "Without lysis, lower only if 220/120 or higher, by 15% in 24 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aspirin",
+          "cells": [
+            {
+              "text": "Not thrombolysed; within 48 h of onset"
+            },
+            {
+              "text": "81 to 325 mg, usually 325 mg on admission; none within 24 h of tPA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aspirin plus clopidogrel",
+          "cells": [
+            {
+              "text": "Minor stroke or high-risk TIA (ABCD2 4 or more), within 24 h"
+            },
+            {
+              "text": "Continue 21 days; avoid dual therapy over 3 months"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Usually avoided acutely; venous sinus thrombosis, some dissections, high-risk cardiac emboli"
+            },
+            {
+              "text": "Long term for AF: warfarin INR 2 to 3 or a DOAC"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Statin",
+          "cells": [
+            {
+              "text": "Atherosclerotic stroke with LDL 100 mg/dL or more"
+            },
+            {
+              "text": "Target LDL fall of 50% or more, or LDL below 70 mg/dL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Oxygen only if SpO2 below 94%; treat temperature above 38 C; treat glucose below 60, target 140 to 180 mg/dL; dysphagia screen before oral intake; pneumatic compression for immobile patients"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Decompressive hemicraniectomy",
+          "cells": [
+            {
+              "text": "Malignant MCA infarct with space-occupying oedema (5 to 10%, peaks day 2 to 3)"
+            },
+            {
+              "text": "Cerebellar infarct with falling consciousness needs emergency decompression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source conflict: the Tables PDF lists BP above 185/110 as a lysis contraindication, while Merck states a pre-lysis target below 185/105 (and also lists 185/110 as an exclusion). Tables PDF uses a 3 h window; Merck notes some experts extend to 4.5 h."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ischemic_stroke-dx-mgmt",
+      "title": "Diagnosis and management of acute ischemic stroke",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden focal deficit; note time last seen well",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Check glucose, NIHSS, non-contrast CT",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Haemorrhage or a mimic on CT or glucose?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Manage haemorrhage or the mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Within 4.5 h of last seen well?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Any thrombolysis contraindication?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV alteplase 0.9 mg/kg, max 90 mg; keep BP below 180/105",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CTA for large vessel occlusion",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Anterior large vessel occlusion with salvageable tissue?",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mechanical thrombectomy, up to 24 h with perfusion selection",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Aspirin within 48 h; DAPT 21 days if minor stroke",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Stroke unit: BP, glucose, swallow screen, DVT prevention",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "decision",
+          "text": "Malignant oedema or cerebellar swelling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Emergency decompression or hemicraniectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Mechanism work-up and secondary prevention",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n15",
+          "label": "No"
+        }
+      ]
+    }
   ]
 }

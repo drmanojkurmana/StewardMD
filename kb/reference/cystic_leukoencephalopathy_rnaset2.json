@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for cystic leukoencephalopathy (rnaset2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Multifocal white matter lesions with anterior temporal cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital CMV testing, including stored blood spot PCR",
+          "cells": [
+            {
+              "text": "CMV excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RNASET2 sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Seizures present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital cytomegalovirus infection",
+          "cells": [
+            {
+              "text": "Imaging closely mimics; CMV testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aicardi-Goutieres syndrome",
+          "cells": [
+            {
+              "text": "Named interferonopathy look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Megalencephalic leukoencephalopathy with subcortical cysts",
+          "cells": [
+            {
+              "text": "Named cystic leukoencephalopathy look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy for this ribonuclease deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure drugs",
+          "cells": [
+            {
+              "text": "Where epilepsy is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing support",
+          "cells": [
+            {
+              "text": "Audiology; hearing aids or cochlear implantation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapies",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and language therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude congenital CMV",
+          "cells": [
+            {
+              "text": "Before attributing findings to the genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive RNASET2; testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and developmental team",
+          "cells": [
+            {
+              "text": "Long-term follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystic_leukoencephalopathy_rnaset2-dx-mgmt",
+      "title": "Diagnosis and management of Cystic leukoencephalopathy (RNASET2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected RNASET2 leukoencephalopathy: developmental delay, MRI white matter cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (uncontrolled seizures, regression, hearing loss, aspiration)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent seizure control and swallowing assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI; congenital CMV PCR on blood spot; RNASET2 sequencing; audiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does RNASET2 sequencing confirm a causative variant after CMV is excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital CMV, Aicardi-Goutieres or MLC1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care with no disease-specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication where epilepsy is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Audiology with hearing aids or implants as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational and speech therapy; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often static or slowly progressive, with fixed motor and cognitive impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

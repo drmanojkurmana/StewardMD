@@ -178,5 +178,499 @@
       "caption": "Overview comparison matrix for disorders of the testes and male reproductive system."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Male Hypogonadism",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/male-reproductive-endocrinology-and-related-disorders/male-hypogonadism",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_the_testes_and-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of male hypogonadism",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Early-morning total testosterone",
+          "unit": "ng/dL",
+          "cells": [
+            {
+              "text": ">350 to 400",
+              "op": ">",
+              "value": 350
+            },
+            {
+              "text": "Androgen deficiency unlikely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Borderline testosterone",
+          "unit": "ng/dL",
+          "cells": [
+            {
+              "text": "200 to 350",
+              "range": [
+                200,
+                350
+              ]
+            },
+            {
+              "text": "Repeat fasting morning sample with free testosterone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low testosterone",
+          "unit": "ng/dL",
+          "cells": [
+            {
+              "text": "<200 with symptoms",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "{{hy:Confirms deficiency; then localise with LH and FSH}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH and FSH",
+          "cells": [
+            {
+              "text": "High with low testosterone"
+            },
+            {
+              "text": "Primary (testicular) hypogonadism; karyotype if testes small"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH low or inappropriately normal",
+          "cells": [
+            {
+              "text": "With low testosterone"
+            },
+            {
+              "text": "Secondary hypogonadism; prolactin, iron studies, pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sella imaging triggers",
+          "unit": "ng/dL",
+          "cells": [
+            {
+              "text": "Testosterone <200, prolactin >20 ng/mL, age under 60 without cause",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Or headache and visual symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal adult testis volume",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "12 to 25",
+              "range": [
+                12,
+                25
+              ]
+            },
+            {
+              "text": "1 to 2 mL in Klinefelter syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Free testosterone by equilibrium dialysis",
+          "cells": [
+            {
+              "text": "When SHBG altered"
+            },
+            {
+              "text": "Obesity, diabetes, ageing, thyroid disease, HIV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glandular gynaecomastia",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Firm tissue >4",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Workup if recent, tender or in a lean man"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives a normal adult total testosterone range of 300 to 1000 ng/dL, drawn before 10 am. Harrison uses 350 to 400 ng/dL as the level above which deficiency is unlikely."
+    },
+    {
+      "id": "disorders_of_the_testes_and-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of low testosterone or testicular failure",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Klinefelter syndrome",
+          "cells": [
+            {
+              "text": "{{hy:Very small testes, azoospermia, high LH}}"
+            },
+            {
+              "text": "Karyotype (47,XXY)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperprolactinaemia or sellar mass",
+          "cells": [
+            {
+              "text": "Low LH; visual defects or headache"
+            },
+            {
+              "text": "Prolactin, pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemochromatosis",
+          "cells": [
+            {
+              "text": "Iron deposition in pituitary or testis"
+            },
+            {
+              "text": "Ferritin, transferrin saturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kallmann syndrome",
+          "cells": [
+            {
+              "text": "Anosmia, micropenis, cryptorchidism"
+            },
+            {
+              "text": "Low LH with smell testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional delay of puberty",
+          "cells": [
+            {
+              "text": "Self-limited in adolescents"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional suppression",
+          "cells": [
+            {
+              "text": "Opioids, anabolic steroids, systemic illness, malnutrition"
+            },
+            {
+              "text": "Drug history; repeat after recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mumps orchitis",
+          "cells": [
+            {
+              "text": "Prior orchitis; primary failure"
+            },
+            {
+              "text": "LH, FSH, semen analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low SHBG from obesity",
+          "cells": [
+            {
+              "text": "Low total but often normal free testosterone"
+            },
+            {
+              "text": "Free testosterone by equilibrium dialysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_testes_and-treatment",
+      "kind": "treatment",
+      "title": "Treatment of male hypogonadism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Testosterone replacement (gel, injection, oral undecanoate, others)",
+          "cells": [
+            {
+              "text": "{{hy:Symptomatic deficiency, fertility not wanted}}"
+            },
+            {
+              "text": "Gel keeps levels most physiological; oral absorption unpredictable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid testosterone",
+          "cells": [
+            {
+              "text": "Prostate cancer or wanting fertility"
+            },
+            {
+              "text": "Exogenous testosterone suppresses spermatogenesis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitor haematocrit, PSA, testosterone",
+          "cells": [
+            {
+              "text": "On replacement"
+            },
+            {
+              "text": "Quarterly first year then 6-monthly; phlebotomy and dose cut if haematocrit 54% or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "hCG plus recombinant FSH or menotropin",
+          "cells": [
+            {
+              "text": "Fertility in secondary hypogonadism"
+            },
+            {
+              "text": "Titrate to semen analysis; pulsatile GnRH if hypothalamic and gonadotropins fail"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Microsurgical sperm retrieval with ICSI",
+          "cells": [
+            {
+              "text": "Primary testicular failure, including Klinefelter"
+            },
+            {
+              "text": "Hormones usually ineffective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dopamine agonist, iron removal, drug withdrawal",
+          "cells": [
+            {
+              "text": "Reversible secondary causes"
+            },
+            {
+              "text": "Treat cause before replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose testosterone enanthate IM monthly for 4 to 8 months",
+          "cells": [
+            {
+              "text": "Delayed puberty near age 15"
+            },
+            {
+              "text": "After excluding secondary hypogonadism"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_the_testes_and-dx-mgmt",
+      "title": "Diagnosis and management of male hypogonadism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symptoms of androgen deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Fasting early-morning total testosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Testosterone above 350 to 400 ng/dL?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Deficiency unlikely",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Repeat with free testosterone; then LH and FSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "LH and FSH raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Primary: karyotype if small testes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Secondary: prolactin, iron studies, pituitary MRI",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Fertility desired?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Gonadotropins (secondary) or sperm retrieval with ICSI (primary)",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Testosterone replacement with haematocrit and PSA monitoring",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -193,5 +193,575 @@
       "caption": "Diagnostic and clinical overview matrix for phaeochromocytoma crisis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pheochromocytoma, 2024",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/adrenal-disorders/pheochromocytoma",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pheo-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing phaeochromocytoma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic triad",
+          "cells": [
+            {
+              "text": "Episodic headache, palpitations and sweating with paroxysmal hypertension"
+            },
+            {
+              "text": "Often absent; many have only nonspecific symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertension pattern",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Paroxysmal in 45%",
+              "op": "=",
+              "value": 45
+            },
+            {
+              "text": "Postural hypotension also common"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Attack triggers",
+          "cells": [
+            {
+              "text": "Tumour palpation, posture change, anaesthesia induction, stress, unopposed beta blockade"
+            },
+            {
+              "text": "Micturition if the tumour is in the bladder"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma free metanephrines",
+          "unit": "% sensitivity",
+          "cells": [
+            {
+              "text": "Up to 99%",
+              "op": "<=",
+              "value": 99
+            },
+            {
+              "text": "{{hy:Preferred first test; normetanephrine more often raised}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "24 h urine fractionated metanephrines",
+          "unit": "% sensitivity",
+          "cells": [
+            {
+              "text": "About 95%",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "2 to 3 normal results during hypertension make the diagnosis very unlikely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine total metanephrine reference",
+          "unit": "mg/24 h",
+          "cells": [
+            {
+              "text": "Under 1.3",
+              "op": "<",
+              "value": 1.3
+            },
+            {
+              "text": "Fractionated testing preferred"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine free epinephrine plus norepinephrine reference",
+          "unit": "mcg/24 h",
+          "cells": [
+            {
+              "text": "Under 100",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Grossly raised norepinephrine makes the diagnosis highly probable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "False positives",
+          "cells": [
+            {
+              "text": "Methyldopa, MAO inhibitors, tricyclics, SSRIs, SNRIs, illicit drugs"
+            },
+            {
+              "text": "Also dehydration, sleep apnoea, extreme stress"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Suppression or provocation",
+          "cells": [
+            {
+              "text": "Clonidine suppression rarely needed"
+            },
+            {
+              "text": "Histamine and tyramine provocation are hazardous; do not use"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Localisation",
+          "cells": [
+            {
+              "text": "CT or MRI of chest and abdomen"
+            },
+            {
+              "text": "Ga-68 dotatate PET most sensitive nuclear test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Location",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "80 to 85% adrenal medulla",
+              "range": [
+                80,
+                85
+              ]
+            },
+            {
+              "text": "Remainder extra-adrenal paraganglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Nearly 50% germline",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Test all patients with a gene panel; screen calcitonin for MEN"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "pheo-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic phaeochromocytoma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Panic or anxiety disorder",
+          "cells": [
+            {
+              "text": "Episodic palpitations, sweating, sense of doom without catecholamine excess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Palpitations, sweating, tremor; endocrine cause of hyperdynamic state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cocaine or amphetamine toxicity",
+          "cells": [
+            {
+              "text": "Catecholaminergic crisis with hypertension and arrhythmia after drug exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic mastocytosis",
+          "cells": [
+            {
+              "text": "Flushing and hypotensive episodes; urine metanephrines help exclude phaeochromocytoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinoid tumour",
+          "cells": [
+            {
+              "text": "Flushing paroxysms; tested alongside metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other secondary hypertension (e.g. Cushing syndrome)",
+          "cells": [
+            {
+              "text": "More common than phaeochromocytoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takotsubo cardiomyopathy",
+          "cells": [
+            {
+              "text": "Catecholamine-mediated; can follow a surge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiological stress, sleep apnoea, dehydration",
+          "cells": [
+            {
+              "text": "Raise catecholamine metabolites and cause false-positive tests"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "pheo-treatment",
+      "kind": "treatment",
+      "title": "Treatment of phaeochromocytoma and crisis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Phentolamine IV",
+          "cells": [
+            {
+              "text": "Hypertensive crisis or intraoperative paroxysm"
+            },
+            {
+              "text": "1 to 5 mg IV; must be available during testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitroprusside infusion",
+          "cells": [
+            {
+              "text": "Pre or intraoperative hypertensive crisis"
+            },
+            {
+              "text": "2 to 4 mcg/kg/min during surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Propranolol or esmolol",
+          "cells": [
+            {
+              "text": "Tachyarrhythmia"
+            },
+            {
+              "text": "{{hy:Never before alpha blockade}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Phenoxybenzamine",
+          "cells": [
+            {
+              "text": "Preoperative alpha blockade"
+            },
+            {
+              "text": "20 to 40 mg PO three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxazosin",
+          "cells": [
+            {
+              "text": "Alternative alpha blocker, better tolerated"
+            },
+            {
+              "text": "1 to 32 mg PO once daily (range as printed)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Propranolol oral",
+          "cells": [
+            {
+              "text": "After adequate alpha blockade"
+            },
+            {
+              "text": "20 to 40 mg PO three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blockade duration and target",
+          "cells": [
+            {
+              "text": "10 to 14 days before surgery"
+            },
+            {
+              "text": "BP under 130/80 mmHg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Laparoscopic adrenalectomy",
+          "cells": [
+            {
+              "text": "Treatment of choice once BP controlled"
+            },
+            {
+              "text": "Arterial line; avoid atropine and histamine-releasing relaxants"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Postoperative hypotension",
+          "cells": [
+            {
+              "text": "After tumour removal"
+            },
+            {
+              "text": "Fluids; norepinephrine starting 0.05 mcg/kg/min titrated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydrocortisone",
+          "cells": [
+            {
+              "text": "Bilateral or MEN-associated tumours"
+            },
+            {
+              "text": "100 mg IV twice daily before and during surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "About 10% adrenal and 30% extra-adrenal tumours"
+            },
+            {
+              "text": "Continue blockade; MIBG or lutetium dotatate, metyrosine, belzutifan"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doxazosin range 1 to 32 mg is copied as printed by Merck; check labelling. Watch for hypoglycaemia after tumour removal."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pheo-dx-mgmt",
+      "title": "Diagnosis and management of phaeochromocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal hypertension, headache, sweating, palpitations",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypertensive crisis now?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "IV phentolamine or nitroprusside; beta blocker only after alpha",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma free or 24 h urine fractionated metanephrines",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Metanephrines raised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Interfering drug or stress state?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Phaeochromocytoma very unlikely; seek other causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop interfering drug and repeat testing",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CT or MRI chest and abdomen; Ga-68 dotatate PET if needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic panel testing",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Alpha blockade 10 to 14 days, then beta blockade",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Laparoscopic resection; watch for hypotension and hypoglycaemia",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Stabilised"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n5",
+          "label": "Repeat"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

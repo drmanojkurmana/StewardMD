@@ -188,5 +188,567 @@
       "caption": "Overview comparison matrix for malabsorption (disorders of absorption)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 294-7",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 294-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Merck Manual Professional, Tropical Sprue",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/malabsorption-syndromes/tropical-sprue",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Merck Manual Professional, Whipple Disease",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/malabsorption-syndromes/whipple-disease",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_absorption-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in malabsorption",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Steatorrhoea",
+          "unit": "% of dietary fat",
+          "cells": [
+            {
+              "text": "Faecal fat >7%",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Diarrhoea eases with fasting, unlike secretory diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTG-IgA with total IgA",
+          "cells": [
+            {
+              "text": "{{hy:Coeliac screening test of choice}}"
+            },
+            {
+              "text": "If IgA deficient use TTG-IgG or DGP-IgG; test while eating gluten"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenal biopsy",
+          "cells": [
+            {
+              "text": "Villus blunting, crypt hyperplasia, more intraepithelial lymphocytes"
+            },
+            {
+              "text": "Marsh grading confirms coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-DQ2/DQ8",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Negative result NPV >99%",
+              "op": ">",
+              "value": 99
+            },
+            {
+              "text": "Present in 25 to 35% of population, so a positive is not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "D-xylose test",
+          "cells": [
+            {
+              "text": "Low in coeliac disease"
+            },
+            {
+              "text": "Normal in pancreatitis, ileal disease, lymphangiectasia; normal or mildly low in bacterial overgrowth"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Faecal elastase",
+          "cells": [
+            {
+              "text": "Low in pancreatic insufficiency"
+            },
+            {
+              "text": "Fat-soluble vitamins D and K most often deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folate and B12 pattern",
+          "cells": [
+            {
+              "text": "Both low in tropical sprue"
+            },
+            {
+              "text": "Bacterial overgrowth: low B12 with high folate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with PAS-positive macrophages and PCR",
+          "cells": [
+            {
+              "text": "Whipple disease"
+            },
+            {
+              "text": "Specific diffuse biopsy finding"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Specific patchy biopsy findings",
+          "cells": [
+            {
+              "text": "Lymphoma, lymphangiectasia, eosinophilic gastroenteritis, amyloid, Crohn granulomas, mastocytosis"
+            },
+            {
+              "text": "Small-bowel biopsy can be diagnostic"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Short bowel syndrome",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "<200 cm small bowel remaining",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Intestinal failure generally <100 cm without colon"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The Tables PDF also lists Schilling test results; that test is largely historical."
+    },
+    {
+      "id": "disorders_of_absorption-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of malabsorption",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "{{hy:Iron deficiency or diarrhoea; dermatitis herpetiformis}}"
+            },
+            {
+              "text": "TTG-IgA, flat duodenal biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tropical sprue",
+          "cells": [
+            {
+              "text": "Folate and B12 both low; residence in south India and other tropics"
+            },
+            {
+              "text": "Biopsy similar to coeliac with negative serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Voluminous steatorrhoea; normal D-xylose"
+            },
+            {
+              "text": "Faecal elastase"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Stasis or PPI use; low B12, high folate"
+            },
+            {
+              "text": "Normal biopsy; response to antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ileal disease or resection",
+          "cells": [
+            {
+              "text": "<100 cm: bile acid diarrhoea; >100 cm: fatty acid diarrhoea"
+            },
+            {
+              "text": "Response to cholestyramine vs low-fat diet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whipple disease",
+          "cells": [
+            {
+              "text": "Middle-aged man, arthritis years before GI symptoms"
+            },
+            {
+              "text": "PAS-positive macrophages, PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal lymphangiectasia",
+          "cells": [
+            {
+              "text": "Protein-losing enteropathy"
+            },
+            {
+              "text": "Biopsy: dilated lymphatics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Abetalipoproteinaemia",
+          "cells": [
+            {
+              "text": "Fat-vacuolated enterocytes after meals"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_absorption-treatment",
+      "kind": "treatment",
+      "title": "Treatment of malabsorption by cause",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict lifelong gluten-free diet",
+          "cells": [
+            {
+              "text": "{{hy:Coeliac disease}}"
+            },
+            {
+              "text": "Dietitian-led; non-adherence is the commonest cause of persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroids or immunosuppression",
+          "cells": [
+            {
+              "text": "Refractory coeliac disease"
+            },
+            {
+              "text": "Type 2: lymphoma in 33 to 50% at 5 years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tetracycline (or doxycycline) plus folate",
+          "cells": [
+            {
+              "text": "Tropical sprue"
+            },
+            {
+              "text": "Tetracycline up to 6 months; oral folate first month, B12 injections for several weeks"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV ceftriaxone or penicillin G, then oral TMP-SMX or doxycycline plus hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Whipple disease"
+            },
+            {
+              "text": "IV for 2 to 4 weeks then long-term oral; relapses common"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Pancreatic enzyme replacement",
+          "cells": [
+            {
+              "text": "Exocrine pancreatic insufficiency"
+            },
+            {
+              "text": "With meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics such as rifaximin",
+          "cells": [
+            {
+              "text": "Bacterial overgrowth"
+            },
+            {
+              "text": "Correct stasis where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile acid sequestrant",
+          "cells": [
+            {
+              "text": "Ileal disease <100 cm"
+            },
+            {
+              "text": "Low-fat diet if >100 cm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replace iron, folate, B12, vitamins A, D, E, K, calcium",
+          "cells": [
+            {
+              "text": "Deficiencies"
+            },
+            {
+              "text": "Guided by levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition",
+          "cells": [
+            {
+              "text": "Intestinal failure"
+            },
+            {
+              "text": "Bowel adapts over up to 2 years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No drug doses are given because the opened sources stated durations only."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_absorption-dx-mgmt",
+      "title": "Diagnosis and management of malabsorption",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic diarrhoea, weight loss, steatorrhoea or unexplained deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "TTG-IgA with total IgA, on gluten; CBC, iron, folate, B12",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Coeliac serology positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duodenal biopsy to confirm",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Gluten-free diet; replace deficiencies",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Faecal elastase and small-bowel biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Low elastase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Pancreatic enzyme replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Biopsy diagnostic: Whipple, sprue, lymphangiectasia?",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Treat specific cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Assess for bacterial overgrowth or bile acid loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Symptoms persist on diet?",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Check gluten exposure; evaluate refractory coeliac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Follow serology; screen first-degree relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

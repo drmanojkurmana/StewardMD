@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for cutaneous larva migrans."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Fitzpatrick's Dermatology / Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cutaneous_larva_migrans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis from the migrating track and exposure history",
+          "cells": [
+            {
+              "text": "Characteristic serpiginous track"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Larval track visualised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood eosinophilia",
+          "cells": [
+            {
+              "text": "Variable and non-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for secondary bacterial infection",
+          "cells": [
+            {
+              "text": "Inflamed or purulent site"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_larva_migrans-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Larva currens due to Strongyloides",
+          "cells": [
+            {
+              "text": "Faster-moving track, often perianal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scabies",
+          "cells": [
+            {
+              "text": "Named look-alike; burrows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythema migrans of Lyme disease",
+          "cells": [
+            {
+              "text": "Named look-alike with expanding rash"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_larva_migrans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral ivermectin or albendazole",
+          "cells": [
+            {
+              "text": "Antihelminthic therapy to speed resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical albendazole",
+          "cells": [
+            {
+              "text": "Alternative antihelminthic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Antihistamines and topical corticosteroids for itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary infection",
+          "cells": [
+            {
+              "text": "Antibiotics for excoriated tracks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Self-limiting; the human is a dead-end host"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive advice",
+          "cells": [
+            {
+              "text": "Footwear; avoid skin contact with contaminated sand or soil"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cutaneous_larva_migrans-dx-mgmt",
+      "title": "Diagnosis and management of Cutaneous Larva Migrans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cutaneous larva migrans: itchy serpiginous track after sand exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (extensive tracks, perianal or rapidly moving track, infection, systemic upset)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for Strongyloides if perianal or rapidly moving track",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; exposure history; dermoscopy; eosinophils",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the characteristic track and exposure history confirm it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider larva currens, scabies or Lyme erythema migrans",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral ivermectin or albendazole, or topical albendazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antihistamines and topical steroids for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics for secondary bacterial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Advise footwear and avoidance of contaminated sand or soil",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and self-limiting; the larva dies within weeks to months without treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

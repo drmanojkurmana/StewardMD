@@ -148,5 +148,352 @@
       "caption": "Overview comparison matrix for acquired ichthyosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_ichthyosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Compact hyperkeratosis with a reduced or absent granular layer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest, abdomen and pelvis with lymph node assessment",
+          "cells": [
+            {
+              "text": "Lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional lymph node biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis where lymphadenopathy is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, ESR and LDH",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Hypothyroidism as a cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV serology",
+          "cells": [
+            {
+              "text": "HIV-associated cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and nutritional or lipid assessment",
+          "cells": [
+            {
+              "text": "Chronic renal failure and malnutrition as causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_ichthyosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Inherited ichthyosis vulgaris",
+          "cells": [
+            {
+              "text": "Childhood onset with a family history"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional deficiency (essential fatty acids, vitamin A)",
+          "cells": [
+            {
+              "text": "Deficiency of essential fatty acids or vitamin A"
+            },
+            {
+              "text": "Nutritional assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV-associated acquired ichthyosis",
+          "cells": [
+            {
+              "text": "HIV infection"
+            },
+            {
+              "text": "HIV serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_ichthyosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Chemotherapy for Hodgkin lymphoma, or correction of hypothyroidism, HIV, sarcoidosis or malnutrition"
+            },
+            {
+              "text": "Paraneoplastic or secondary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and keratolytics (urea, lactic acid, salicylic acid)",
+          "cells": [
+            {
+              "text": "Reduces scaling"
+            },
+            {
+              "text": "Skin-directed care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or systemic retinoids",
+          "cells": [
+            {
+              "text": "Extensive or refractory scaling"
+            },
+            {
+              "text": "Topical or systemic route"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw implicated drugs",
+          "cells": [
+            {
+              "text": "Causative drugs such as nicotinic acid, statins, cimetidine or clofazimine"
+            },
+            {
+              "text": "Where they are causative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and haematology review",
+          "cells": [
+            {
+              "text": "Paraneoplastic ichthyosis parallels tumour activity"
+            },
+            {
+              "text": "Multidisciplinary review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor the skin",
+          "cells": [
+            {
+              "text": "Marker of disease response or relapse"
+            },
+            {
+              "text": "Tracks underlying disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_ichthyosis-dx-mgmt",
+      "title": "Diagnosis and management of acquired ichthyosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New generalised fine scaling in an adult with no family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Lymphadenopathy, hepatosplenomegaly, B symptoms or weight loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; lymph node biopsy and CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy and CT chest, abdomen and pelvis with lymph node assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lymphoma confirmed on lymph node or CT assessment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chemotherapy for Hodgkin lymphoma; treat the underlying disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Screen for hypothyroidism, HIV, sarcoidosis, malnutrition and drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics (urea, lactic acid, salicylic acid)",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Withdraw implicated drugs such as nicotinic acid or clofazimine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical or systemic retinoids for extensive or refractory scaling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis follows the treated cause; skin often improves with lymphoma care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

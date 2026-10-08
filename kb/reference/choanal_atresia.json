@@ -147,5 +147,315 @@
       "caption": "Overview comparison matrix for choanal atresia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choanal_atresia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Passage of a fine catheter through each nostril and cold-mirror misting test",
+          "cells": [
+            {
+              "text": "Failure to pass a catheter and absent misting suggest the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible nasal endoscopy",
+          "cells": [
+            {
+              "text": "Inspects the posterior nasal cavity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the nose and skull base",
+          "cells": [
+            {
+              "text": "Whether the obstruction is bony, membranous or mixed; guides surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for CHARGE and other syndromes",
+          "cells": [
+            {
+              "text": "Bilateral cases warrant a search for additional anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Where a syndrome is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choanal_atresia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal nasal obstruction from mucosal oedema or rhinitis",
+          "cells": [
+            {
+              "text": "Mucosal oedema or rhinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choanal stenosis without complete atresia",
+          "cells": [
+            {
+              "text": "Incomplete rather than complete obstruction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choanal_atresia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent neonatal airway",
+          "cells": [
+            {
+              "text": "Oral airway, modified McGovern nipple or intubation; neonates are obligate nasal breathers"
+            },
+            {
+              "text": "Bilateral atresia is an airway emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive surgery",
+          "cells": [
+            {
+              "text": "Transnasal endoscopic perforation or drilling of the atretic plate, restoring patency"
+            },
+            {
+              "text": "Surgical treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-operative patency",
+          "cells": [
+            {
+              "text": "Nasal stenting, saline irrigation, topical decongestant or steroid, and regular debridement"
+            },
+            {
+              "text": "Prevents restenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance nasendoscopy",
+          "cells": [
+            {
+              "text": "Dilatation, revision surgery or topical mitomycin for restenosis"
+            },
+            {
+              "text": "Recurrent restenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and growth",
+          "cells": [
+            {
+              "text": "Nasogastric or careful oral feeding until the airway is secured"
+            },
+            {
+              "text": "Until the airway is secured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndrome screening",
+          "cells": [
+            {
+              "text": "Cardiology, ophthalmology and genetic evaluation for bilateral cases"
+            },
+            {
+              "text": "CHARGE and other syndromes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choanal_atresia-dx-mgmt",
+      "title": "Diagnosis and management of Choanal atresia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choanal atresia: neonate with cyclical cyanosis relieved by crying",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cyclical cyanosis, respiratory distress, CHARGE features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal airway securing; oral airway or intubation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Catheter passage, cold-mirror test, nasal endoscopy and CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bony or membranous atresia on CT with bilateral obstruction confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Secure oral airway, McGovern nipple or intubation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check mucosal oedema, pyriform aperture stenosis and midnasal stenosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Transnasal endoscopic perforation of the atretic plate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nasal stenting, irrigation and steroid or decongestant after surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance nasendoscopy for restenosis; mitomycin or dilatation if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Screen bilateral cases for CHARGE; feeding and growth support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

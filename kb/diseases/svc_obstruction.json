@@ -215,5 +215,495 @@
       "caption": "Diagnostic and clinical overview matrix for superior vena cava obstruction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Straka et al., Review of SVC syndrome, SpringerPlus 2016",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4771672",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "svc_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising SVC obstruction and grading severity",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Dusky head and neck, high venous pressure without visible pulsations, worse supine or bending"
+            },
+            {
+              "text": "{{hy:SVC syndrome is a clinical diagnosis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Abnormal in 84%; mediastinal widening 64%, effusion 26%",
+              "op": "=",
+              "value": 84
+            },
+            {
+              "text": "A normal film does not exclude SVCS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Contrast CT thorax",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Collaterals with poor caval filling: sensitivity 96%, specificity 92%"
+            },
+            {
+              "text": "Most reliable view of the mediastinum; first-line imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MR venography",
+          "cells": [
+            {
+              "text": "Up to 100% sensitive and specific"
+            },
+            {
+              "text": "Hard for dyspnoeic patients who cannot lie flat"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Venography",
+          "cells": [
+            {
+              "text": "Gold standard for thrombotic obstruction"
+            },
+            {
+              "text": "Usually done before stenting"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tissue diagnosis",
+          "cells": [
+            {
+              "text": "Bronchoscopy, EBUS, needle biopsy or mediastinoscopy"
+            },
+            {
+              "text": "Safe despite venous congestion; needed before treatment in most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Yu grade 0 to 2",
+          "cells": [
+            {
+              "text": "Mild to moderate symptoms"
+            },
+            {
+              "text": "Not life-threatening"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Yu grade 3",
+          "cells": [
+            {
+              "text": "Severe symptoms"
+            },
+            {
+              "text": "Severe"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Yu grade 4",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Cerebral or laryngeal oedema, syncope, hypotension or renal insufficiency; about 5% of patients"
+            },
+            {
+              "text": "{{hy:Life-threatening; treat urgently, stent first}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kishi score",
+          "unit": "points",
+          "cells": [
+            {
+              "text": ">=4",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Indication for stenting"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cause: lung cancer share",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 85% of malignant SVCS, mostly small-cell and squamous",
+              "op": "=",
+              "value": 85
+            },
+            {
+              "text": "Benign device-related causes are at least 40% overall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Cause proportions conflict: Harrison gives lung cancer about 85% of malignant cases and benign causes at least 40%; Straka 2016 lists NSCLC 22 to 57%, SCLC 10 to 39%, and device thrombosis up to 28%. Grade 5 is not defined in the source opened."
+    },
+    {
+      "id": "svc_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Causes to separate in SVC obstruction",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Smoker, small-cell or squamous; small-cell has more brain metastases"
+            },
+            {
+              "text": "CT then bronchoscopy or EBUS biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Young adult with mediastinal mass"
+            },
+            {
+              "text": "Tissue biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germ cell tumour",
+          "cells": [
+            {
+              "text": "Young man with anterior mediastinal mass"
+            },
+            {
+              "text": "Tissue biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter or lead thrombosis",
+          "cells": [
+            {
+              "text": "Port, dialysis catheter or pacemaker wire in place"
+            },
+            {
+              "text": "{{hy:Contrast CT or venography showing thrombus}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fibrosing mediastinitis",
+          "cells": [
+            {
+              "text": "After radiation, histoplasmosis or Behcet"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic aneurysm or goitre",
+          "cells": [
+            {
+              "text": "Benign compressive mass"
+            },
+            {
+              "text": "CT thorax"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "svc_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Management of SVC obstruction",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive measures",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Sit upright or raise the head, oxygen, fluid restriction, diuretics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biopsy before treatment",
+          "cells": [
+            {
+              "text": "Stable patient, no known cancer"
+            },
+            {
+              "text": "Minimally invasive methods diagnose up to two-thirds"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endovascular stent",
+          "cells": [
+            {
+              "text": "Grade 4 (laryngeal or cerebral oedema) or severe symptoms"
+            },
+            {
+              "text": "{{hy:Relief in 97 to 99%, often within 72 h}}; recurrence 11 to 12%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Radiosensitive tumours, often after stenting in emergencies"
+            },
+            {
+              "text": "Response about 50 to 70%, onset 3 to 9 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "Chemosensitive tumours: small-cell lung cancer, lymphoma, germ cell"
+            },
+            {
+              "text": "Relief in about 1 to 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Thrombotic or device-related obstruction"
+            },
+            {
+              "text": "Effective in up to 88% if started within 5 days; thrombolysis when needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Airway oedema or to prevent radiation oedema"
+            },
+            {
+              "text": "No proven benefit; not a primary treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid sedation or general anaesthesia",
+          "cells": [
+            {
+              "text": "Airway or vascular compromise"
+            },
+            {
+              "text": "Can precipitate cardiac arrest or respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "svc_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of superior vena cava obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Facial and arm swelling, distended neck veins, worse lying flat",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Sit upright, oxygen; contrast CT thorax",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Stridor, laryngeal or cerebral oedema, or haemodynamic compromise?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent venography and stent; avoid sedation",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Then biopsy and definitive cancer treatment",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Thrombus around a catheter or lead?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Anticoagulate; consider thrombolysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tissue diagnosis by bronchoscopy, EBUS or biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Chemosensitive tumour (small-cell, lymphoma, germ cell)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Chemotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Radiotherapy, or stent if symptoms are severe",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

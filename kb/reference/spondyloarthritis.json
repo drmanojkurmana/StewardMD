@@ -173,5 +173,518 @@
       "caption": "Overview comparison matrix for spondyloarthritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Ankylosing Spondylitis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/joint-disorders/ankylosing-spondylitis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 315-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "spondyloarthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing axial spondyloarthritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "ASAS entry",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Back pain over 3 months, onset before age 45",
+              "op": "<",
+              "value": 45
+            },
+            {
+              "text": "Required to apply ASAS criteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ASAS imaging arm",
+          "cells": [
+            {
+              "text": "Sacroiliitis on radiograph or MRI plus 1 SpA feature"
+            },
+            {
+              "text": "Classifies axial SpA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ASAS clinical arm",
+          "cells": [
+            {
+              "text": "HLA-B27 positive plus 2 SpA features"
+            },
+            {
+              "text": "Classifies axial SpA without imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SpA features",
+          "cells": [
+            {
+              "text": "Inflammatory back pain, arthritis, heel enthesitis, dactylitis, uveitis, psoriasis, IBD, family history, raised CRP, NSAID response"
+            },
+            {
+              "text": "Counted for ASAS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammatory back pain",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Onset at 40 or younger, gradual, morning stiffness, better with activity",
+              "op": "<=",
+              "value": 40
+            },
+            {
+              "text": "{{hy:Improves with exercise, worsens with rest}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Modified New York sacroiliitis",
+          "cells": [
+            {
+              "text": "Grade 2 bilateral or grade 3 to 4 unilateral or bilateral"
+            },
+            {
+              "text": "Radiographic axSpA (ankylosing spondylitis); lower grade is non-radiographic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B27",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% of white patients; up to 10% of general population",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Supportive only; low predictive value"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Raised in only 30 to 40% of active axSpA",
+              "range": [
+                30,
+                40
+              ]
+            },
+            {
+              "text": "Useful for monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI sacroiliac joints",
+          "cells": [
+            {
+              "text": "Bone marrow oedema on STIR, erosions, fat metaplasia"
+            },
+            {
+              "text": "Mechanical stress can mimic; risk of overdiagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "HLA-B27 associations (ankylosing spondylitis, reactive arthritis, anterior uveitis, psoriatic spondylitis) per Tables PDF, Table 315-1."
+    },
+    {
+      "id": "spondyloarthritis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic spondyloarthritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical back pain or disc herniation",
+          "cells": [
+            {
+              "text": "Sudden onset, worse with activity; 95 to 96% of chronic back pain"
+            },
+            {
+              "text": "History; CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DISH",
+          "cells": [
+            {
+              "text": "Men over 50, flowing anterior ossification over 4 or more vertebrae, normal SI joints and ESR"
+            },
+            {
+              "text": "Spine and pelvis radiograph"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Osteitis condensans ilii",
+          "cells": [
+            {
+              "text": "Multiparous women; iliac-side sclerosis without erosions"
+            },
+            {
+              "text": "Radiograph or CT; usually HLA-B27 negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Septic sacroiliitis (TB, brucella)",
+          "cells": [
+            {
+              "text": "Usually unilateral, systemic features"
+            },
+            {
+              "text": "MRI, aspiration or biopsy, cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Widespread pain without inflammation; often women"
+            },
+            {
+              "text": "Normal CRP and MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporotic or insufficiency fracture, malignancy",
+          "cells": [
+            {
+              "text": "Older age, red flags, postpartum"
+            },
+            {
+              "text": "MRI, bone scan"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "spondyloarthritis-treatment",
+      "kind": "treatment",
+      "title": "Treating axial spondyloarthritis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exercise and physiotherapy",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Daily extension exercises, posture training, stop smoking"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NSAID",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "Maximum doses may be needed in active disease; try withdrawal when quiet"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TNF inhibitor",
+          "cells": [
+            {
+              "text": "Active disease despite NSAIDs"
+            },
+            {
+              "text": "Adalimumab or infliximab preferred with recurrent uveitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IL-17 inhibitor (secukinumab, ixekizumab)",
+          "cells": [
+            {
+              "text": "NSAID failure, or after first TNF inhibitor fails"
+            },
+            {
+              "text": "{{hy:Preferred switch over a second TNF inhibitor}}; may worsen IBD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "JAK inhibitor (upadacitinib, tofacitinib)",
+          "cells": [
+            {
+              "text": "After TNF or IL-17 failure"
+            },
+            {
+              "text": "Cardiovascular, thrombotic and malignancy concerns"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sulfasalazine or methotrexate",
+          "cells": [
+            {
+              "text": "Peripheral arthritis only"
+            },
+            {
+              "text": "No benefit for axial disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Local corticosteroid injection",
+          "cells": [
+            {
+              "text": "1 or 2 inflamed peripheral joints, severe sacroiliitis"
+            },
+            {
+              "text": "Avoid long-term systemic steroids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Topical steroid and mydriatic",
+          "cells": [
+            {
+              "text": "Acute anterior uveitis"
+            },
+            {
+              "text": "Urgent ophthalmology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total hip arthroplasty",
+          "cells": [
+            {
+              "text": "Severe hip arthritis"
+            },
+            {
+              "text": "Small risk of heterotopic ossification"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "spondyloarthritis-dx-mgmt",
+      "title": "Diagnosis and management of axial spondyloarthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Back pain over 3 months, onset before age 45",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flags: fever, weight loss, cancer history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate infection, fracture or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pelvic radiograph, HLA-B27, CRP; count SpA features",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Definite sacroiliitis on radiograph?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Radiographic axSpA: exercise and NSAID",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "MRI sacroiliac joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "MRI sacroiliitis or HLA-B27 with 2 SpA features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Mechanical pain or other cause likely; treat accordingly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Non-radiographic axSpA: exercise and NSAID",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Active disease despite NSAID?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue NSAID and exercise; monitor CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "TNF or IL-17 inhibitor; JAK inhibitor later",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

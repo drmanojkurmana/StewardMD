@@ -178,5 +178,522 @@
       "caption": "Overview comparison matrix for concussion and other traumatic brain injuries."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Traumatic Brain Injury",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/traumatic-brain-injury-tbi/traumatic-brain-injury-tbi",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "concussion_and_other_traumatic_brain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading and imaging in traumatic brain injury",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "GCS mild TBI (concussion)",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "13 to 15",
+              "range": [
+                13,
+                15
+              ]
+            },
+            {
+              "text": "About 85% of treated TBI is mild"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCS moderate TBI",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "9 to 12",
+              "range": [
+                9,
+                12
+              ]
+            },
+            {
+              "text": "Record components, e.g. E3V4M6"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GCS severe TBI",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "3 to 8",
+              "range": [
+                3,
+                8
+              ]
+            },
+            {
+              "text": "Score 8 or less usually regarded as coma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT warning signs",
+          "cells": [
+            {
+              "text": "{{hy:Persistent confusion, 2 or more vomits, skull fracture, seizure, amnesia over 30 min}}"
+            },
+            {
+              "text": "Age over 65 or anticoagulation lowers the threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noncontrast CT head",
+          "cells": [
+            {
+              "text": "First-line for fracture, haematoma, contusion, traumatic SAH"
+            },
+            {
+              "text": "Indicated for GCS under 15, focal signs, loss of consciousness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI after CT-negative mild TBI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Abnormal in about 27%"
+            },
+            {
+              "text": "More sensitive for microhaemorrhage and axonal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood GFAP and UCHL1",
+          "cells": [
+            {
+              "text": "Point-of-care biomarkers"
+            },
+            {
+              "text": "GFAP separates CT-positive from CT-negative injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basilar skull fracture signs",
+          "cells": [
+            {
+              "text": "CSF leak, haemotympanum, Battle sign, raccoon eyes"
+            },
+            {
+              "text": "Meningitis and fistula risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lucid interval then deterioration",
+          "cells": [
+            {
+              "text": "Epidural haematoma until proven otherwise"
+            },
+            {
+              "text": "Urgent CT and neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "concussion_and_other_traumatic_brain-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis and mimics after head injury",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic subdural haematoma",
+          "cells": [
+            {
+              "text": "Elderly, trivial or forgotten trauma; mimics TIA or dementia"
+            },
+            {
+              "text": "{{hy:CT; may be isodense at 2 to 6 weeks}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or alcohol intoxication",
+          "cells": [
+            {
+              "text": "Confounds neurologic exam"
+            },
+            {
+              "text": "Reassess after intoxication clears"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carotid or vertebral dissection",
+          "cells": [
+            {
+              "text": "Focal deficit after trauma"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical spine injury",
+          "cells": [
+            {
+              "text": "Often clinically inapparent"
+            },
+            {
+              "text": "Cervical spine imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contusion mimicking tumour or abscess",
+          "cells": [
+            {
+              "text": "Delayed contrast enhancement with oedema"
+            },
+            {
+              "text": "Serial imaging with trauma history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preinjury depression, anxiety or PTSD",
+          "cells": [
+            {
+              "text": "Overlap with postconcussion symptoms"
+            },
+            {
+              "text": "Validated symptom inventory and history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "concussion_and_other_traumatic_brain-treatment",
+      "kind": "treatment",
+      "title": "Management of traumatic brain injury",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Discharge with 24-hour observer",
+          "cells": [
+            {
+              "text": "Mild TBI, normal CT and normal neurologic status"
+            },
+            {
+              "text": "Return for drowsiness, focal deficit, worsening headache, vomiting, seizure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brief rest then graded return to activity",
+          "cells": [
+            {
+              "text": "Concussion"
+            },
+            {
+              "text": "Rest beyond about 5 days can prolong recovery; no return to play until symptom-free"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical evacuation",
+          "cells": [
+            {
+              "text": "Midline shift over 5 mm, basal cistern compression, worsening exam, large or arterial epidural"
+            },
+            {
+              "text": "Small venous epidural or small subdural can be watched with serial CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICP and CPP targets",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Severe TBI"
+            },
+            {
+              "text": "ICP under 25 (sometimes 20); CPP as close to 60 as possible",
+              "op": "<",
+              "value": 25
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PaCO2 target",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Severe TBI"
+            },
+            {
+              "text": "Normal 38 to 42; brief hyperventilation 30 to 35 only for refractory ICP",
+              "range": [
+                38,
+                42
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypertonic saline (3% or 23.4%)",
+          "cells": [
+            {
+              "text": "Raised ICP"
+            },
+            {
+              "text": "2 to 3 mL/kg IV bolus or 1 mL/kg/h; keep sodium 155 mEq/L or less"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mannitol 20%",
+          "cells": [
+            {
+              "text": "Deterioration or before haematoma surgery"
+            },
+            {
+              "text": "0.5 to 1 g/kg IV over 15 to 30 min, then 0.25 to 0.5 g/kg every 6 to 8 h as needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Phenytoin or levetiracetam prophylaxis",
+          "cells": [
+            {
+              "text": "Large structural injury or GCS under 10"
+            },
+            {
+              "text": "Phenytoin 20 mg/kg IV at no more than 50 mg/min; stop after 1 week if seizure-free"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "{{hy:Avoid}}"
+            },
+            {
+              "text": "Increased mortality when given within 8 hours of TBI"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "concussion_and_other_traumatic_brain-dx-mgmt",
+      "title": "Diagnosis and management of traumatic brain injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Head injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ABC, cervical spine protection, GCS before sedation",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "GCS under 15, focal signs, LOC, vomiting, seizure or fracture?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Concussion advice; graded return to activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Noncontrast CT head; reverse anticoagulation if bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Mass lesion with shift over 5 mm or worsening exam?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urgent neurosurgical evacuation",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "GCS 8 or less?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ICU: ICP under 25, CPP near 60, osmotherapy, seizure prophylaxis",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "CT normal and neurologically normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Discharge with 24-hour observer and return advice",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Admit for observation; repeat CT if symptoms persist",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Neurorehabilitation and long-term follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

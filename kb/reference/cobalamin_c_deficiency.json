@@ -155,5 +155,312 @@
       "caption": "Overview comparison matrix for cobalamin c deficiency (cblc)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cobalamin_c_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma and urine methylmalonic acid",
+          "cells": [
+            {
+              "text": "Combined methylmalonic aciduria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma total homocysteine and methionine",
+          "cells": [
+            {
+              "text": "Raised homocysteine with low-to-normal methionine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma acylcarnitine profile",
+          "cells": [
+            {
+              "text": "Raised C3 propionylcarnitine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Megaloblastic or haemolytic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MMACHC gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the genotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cobalamin_c_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated methylmalonic acidaemia",
+          "cells": [
+            {
+              "text": "Methylmalonic aciduria without raised homocysteine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic homocystinuria",
+          "cells": [
+            {
+              "text": "Raised homocysteine without methylmalonic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical haemolytic uraemic syndrome",
+          "cells": [
+            {
+              "text": "Thrombotic microangiopathy with renal impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cobalamin_c_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral hydroxocobalamin",
+          "cells": [
+            {
+              "text": "Intramuscular, to drive residual cofactor synthesis; oral B12 is inadequate"
+            },
+            {
+              "text": "Definitive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Betaine with folinic acid and methionine",
+          "cells": [
+            {
+              "text": "Promotes remethylation of homocysteine"
+            },
+            {
+              "text": "Methionine low"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "L-carnitine",
+          "cells": [
+            {
+              "text": "Replenishes stores and buffers propionyl-CoA"
+            },
+            {
+              "text": "Adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for neurological and feeding problems",
+          "cells": [
+            {
+              "text": "Seizure control, gastrostomy feeding and developmental therapy"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemical monitoring",
+          "cells": [
+            {
+              "text": "Homocysteine, methylmalonic acid and methionine to titrate treatment"
+            },
+            {
+              "text": "Titration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cobalamin_c_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Cobalamin C deficiency (cblC)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cblC deficiency: infant with feeding failure or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, thrombotic microangiopathy, renal impairment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent metabolic review for encephalopathy or haemolytic uraemic picture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Methylmalonic acid, total homocysteine, methionine and acylcarnitines",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Combined methylmalonic aciduria with homocystinuria confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Parenteral hydroxocobalamin as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check isolated methylmalonic acidaemia and classic homocystinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Betaine with folinic acid and methionine where methionine is low",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "L-carnitine to replenish stores and buffer propionyl-CoA",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Seizure control and gastrostomy feeding for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ophthalmological surveillance for maculopathy; MMACHC genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

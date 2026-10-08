@@ -149,5 +149,298 @@
       "caption": "Overview comparison matrix for cholesteatoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cholesteatoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Otoscopy and microscopy",
+          "cells": [
+            {
+              "text": "Retraction pockets, keratin debris and granulations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the temporal bone",
+          "cells": [
+            {
+              "text": "Extent and bony erosion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffusion-weighted MRI",
+          "cells": [
+            {
+              "text": "Residual or recurrent cholesteatoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pure tone audiometry",
+          "cells": [
+            {
+              "text": "Conductive or mixed hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fistula test",
+          "cells": [
+            {
+              "text": "If erosion into the labyrinth is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholesteatoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical eradication",
+          "cells": [
+            {
+              "text": "Mastoidectomy, canal-wall-up or canal-wall-down, with complete removal of keratin matrix"
+            },
+            {
+              "text": "Medical therapy alone cannot cure it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing reconstruction",
+          "cells": [
+            {
+              "text": "Ossiculoplasty and tympanoplasty to restore hearing and repair the drum"
+            },
+            {
+              "text": "Ossicular chain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative infection control",
+          "cells": [
+            {
+              "text": "Aural microsuction toilet and topical antibiotic-steroid drops"
+            },
+            {
+              "text": "Secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence surveillance",
+          "cells": [
+            {
+              "text": "Second-look surgery or diffusion-weighted MRI"
+            },
+            {
+              "text": "Residual or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Urgent management of facial nerve involvement, labyrinthine fistula or intracranial extension"
+            },
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids where surgical reconstruction is insufficient"
+            },
+            {
+              "text": "Residual hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term ENT follow-up",
+          "cells": [
+            {
+              "text": "Follow-up for recurrence or residual matrix"
+            },
+            {
+              "text": "Tendency to recur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cholesteatoma-dx-mgmt",
+      "title": "Diagnosis and management of Cholesteatoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cholesteatoma: foul ear discharge with progressive conductive hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (vertigo or fistula sign, facial weakness, intracranial signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent ENT and neurosurgical review for intracranial or labyrinthine spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Otoscopy, high-resolution temporal-bone CT and audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Attic retraction with keratin debris and bony erosion on CT confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgical eradication by mastoidectomy with removal of keratin matrix",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check tubotympanic chronic otitis media and external canal malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ossiculoplasty and tympanoplasty to restore hearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pre-operative microsuction and topical antibiotic-steroid drops",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Second-look surgery or diffusion-weighted MRI for recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term ENT follow-up and hearing aids where reconstruction is insufficient",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for dentinogenesis imperfecta."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Burket's Oral Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dentinogenesis_imperfecta-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of both dentitions",
+          "cells": [
+            {
+              "text": "Opalescent discolouration and enamel loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs",
+          "cells": [
+            {
+              "text": "Bulbous crowns, cervical constriction and pulp obliteration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for systemic osteogenesis imperfecta features",
+          "cells": [
+            {
+              "text": "Recurrent fractures, blue sclerae or hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (DSPP or collagen genes)",
+          "cells": [
+            {
+              "text": "DSPP variants in isolated forms; collagen defects when part of osteogenesis imperfecta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Study models and clinical photographs",
+          "cells": [
+            {
+              "text": "Wear monitored over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dentinogenesis_imperfecta-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protective restorative care",
+          "cells": [
+            {
+              "text": "Preformed metal crowns on primary molars; full-coverage crowns or onlays on permanent teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive regime",
+          "cells": [
+            {
+              "text": "Topical fluoride and meticulous oral hygiene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation of attrition",
+          "cells": [
+            {
+              "text": "Overdentures and occlusal restoration to maintain the vertical dimension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aesthetic management",
+          "cells": [
+            {
+              "text": "Crowns or veneers for opalescent discolouration where aesthetics matter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated osteogenesis imperfecta",
+          "cells": [
+            {
+              "text": "Assess in type I; refer for bone management including bisphosphonate therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term monitoring",
+          "cells": [
+            {
+              "text": "Serial radiographs, models and photographs within paediatric dentistry and prosthodontics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; DSPP variants in isolated forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dentinogenesis_imperfecta-dx-mgmt",
+      "title": "Diagnosis and management of Dentinogenesis imperfecta",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dentinogenesis imperfecta: opalescent, worn teeth in both dentitions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (recurrent fractures, blue sclerae, abscesses or collapsing bite)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat abscess and plan endodontics around obliterated canals",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Family history; both dentitions; radiographs for pulp obliteration; DSPP testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are bulbous crowns and pulp obliteration seen on radiographs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider amelogenesis imperfecta, dentine dysplasia or tetracycline staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Preformed metal crowns on primary molars; full crowns or onlays on permanent teeth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensive topical fluoride and hygiene regime",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Overdentures and occlusal restoration for established attrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer for osteogenesis imperfecta assessment and bisphosphonate therapy if type I",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Serial radiographs, models and photographs for long-term monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Teeth can be preserved with protective care; severe cases need crowns or overdentures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

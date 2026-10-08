@@ -166,5 +166,534 @@
       "caption": "Overview comparison matrix for paroxysmal supraventricular tachycardias."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Reentrant SVT including WPW, 2024",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/reentrant-supraventricular-tachycardias-svt-including-wolff-parkinson-white-syndrome"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 233-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "paroxysmal_supraventricular_tachycardias-diagnostic",
+      "kind": "diagnostic",
+      "title": "ECG features of paroxysmal SVT",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart rate",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "120 to 250 beats/min, most often 180 to 210",
+              "range": [
+                120,
+                250
+              ]
+            },
+            {
+              "text": "Abrupt onset and offset"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Typical AVNRT rate",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "150 to 200 beats/min",
+              "range": [
+                150,
+                200
+              ]
+            },
+            {
+              "text": "Most common PSVT; about 60% of ablation referrals"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Orthodromic AVRT rate",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "180 to 220 beats/min",
+              "range": [
+                180,
+                220
+              ]
+            },
+            {
+              "text": "Uses accessory pathway retrogradely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "QRS",
+          "cells": [
+            {
+              "text": "Usually narrow and regular"
+            },
+            {
+              "text": "Wide with bundle branch block or antidromic AVRT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short RP interval",
+          "cells": [
+            {
+              "text": "Retrograde P in or just after QRS; pseudo-r prime in V1"
+            },
+            {
+              "text": "Typical AVNRT or orthodromic AVRT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Long RP interval",
+          "cells": [
+            {
+              "text": "P wave late in RR interval, negative in II, III, aVF"
+            },
+            {
+              "text": "Atypical AVNRT, PJRT or atrial tachycardia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Manifest WPW in sinus rhythm",
+          "cells": [
+            {
+              "text": "Short PR and delta wave"
+            },
+            {
+              "text": "Concealed pathway has a normal resting ECG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-risk accessory pathway",
+          "unit": "ms",
+          "cells": [
+            {
+              "text": "Shortest preexcited RR during AF under 250 ms",
+              "op": "<",
+              "value": 250
+            },
+            {
+              "text": "{{hy:Risk of VF and sudden death}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to vagal maneuver or adenosine",
+          "cells": [
+            {
+              "text": "Abrupt termination suggests AV node dependent reentry"
+            },
+            {
+              "text": "Block without termination unmasks flutter or atrial tachycardia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_supraventricular_tachycardias-ddx",
+      "kind": "ddx",
+      "title": "Rhythms to separate from PSVT",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sinus tachycardia",
+          "cells": [
+            {
+              "text": "Gradual onset; slows gradually with vagal maneuvers"
+            },
+            {
+              "text": "Normal P before each QRS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atrial flutter",
+          "cells": [
+            {
+              "text": "Flutter waves persist when AV block is produced"
+            },
+            {
+              "text": "Adenosine unmasks flutter waves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atrial fibrillation",
+          "cells": [
+            {
+              "text": "Irregularly irregular rhythm"
+            },
+            {
+              "text": "12-lead ECG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Preexcited AF",
+          "cells": [
+            {
+              "text": "Very irregular wide-complex tachycardia"
+            },
+            {
+              "text": "ECG; avoid AV nodal blockers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventricular tachycardia",
+          "cells": [
+            {
+              "text": "Wide-complex tachycardia, often structural heart disease"
+            },
+            {
+              "text": "Treat as VT unless SVT is proven"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Focal atrial tachycardia",
+          "cells": [
+            {
+              "text": "Long RP, may continue through AV block"
+            },
+            {
+              "text": "Adenosine response, EP study"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Junctional ectopic tachycardia",
+          "cells": [
+            {
+              "text": "Nonreentrant, often after surgery or digoxin"
+            },
+            {
+              "text": "EP study"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "paroxysmal_supraventricular_tachycardias-treatment",
+      "kind": "treatment",
+      "title": "Treating paroxysmal SVT",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Synchronized cardioversion",
+          "cells": [
+            {
+              "text": "Hemodynamic instability or drug failure"
+            },
+            {
+              "text": "50 J (0.5 to 2 J/kg in children)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vagal maneuvers",
+          "cells": [
+            {
+              "text": "First step in stable patients"
+            },
+            {
+              "text": "Modified Valsalva, carotid sinus massage, ice-water face immersion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adenosine",
+          "cells": [
+            {
+              "text": "Narrow regular QRS after vagal failure"
+            },
+            {
+              "text": "6 mg rapid IV bolus with 20 mL saline flush, then 12 mg up to two times; may trigger AF in up to about 15%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Verapamil or diltiazem",
+          "cells": [
+            {
+              "text": "Adenosine fails or is contraindicated"
+            },
+            {
+              "text": "Verapamil 5 mg IV or diltiazem 0.25 to 0.35 mg/kg IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Procainamide or amiodarone",
+          "cells": [
+            {
+              "text": "Wide QRS rhythm not proven to be SVT"
+            },
+            {
+              "text": "Avoid AV nodal blockers if VT not excluded"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Preexcited AF",
+          "cells": [
+            {
+              "text": "WPW with AF"
+            },
+            {
+              "text": "{{hy:No adenosine, verapamil, diltiazem, beta blocker or amiodarone}}; cardiovert if unstable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Recurrent symptomatic PSVT or WPW"
+            },
+            {
+              "text": "AVNRT cure over 95%, AV block under 1%; pathway ablation about 95%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta blocker or nondihydropyridine CCB",
+          "cells": [
+            {
+              "text": "Long-term suppression if ablation declined"
+            },
+            {
+              "text": "Not alone in manifest WPW"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Class Ic or III antiarrhythmic",
+          "cells": [
+            {
+              "text": "Refractory recurrences without ablation"
+            },
+            {
+              "text": "Adenosine itself causes cough and flushing"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck lists digoxin as the first prophylactic drug if ablation is declined; Harrison favors beta blockers or nondihydropyridine calcium channel blockers. Digoxin must not be used in manifest WPW. Table 233-4 lists cough and flushing as adenosine toxicity."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "paroxysmal_supraventricular_tachycardias-dx-mgmt",
+      "title": "Diagnosis and management of paroxysmal supraventricular tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Regular tachycardia with abrupt onset",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hemodynamically unstable?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Synchronized cardioversion 50 J",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "QRS narrow, or wide but known SVT?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat as VT: procainamide or amiodarone, or cardioversion",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Vagal maneuvers",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Adenosine 6 mg IV push, then 12 mg",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Terminated?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV verapamil or diltiazem; cardioversion if still running",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sinus rhythm ECG for delta wave; echocardiogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Recurrent episodes or preexcitation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Refer for catheter ablation",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Teach vagal maneuvers; drugs only if needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

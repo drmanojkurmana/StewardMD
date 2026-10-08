@@ -151,5 +151,86 @@
       "caption": "Overview comparison matrix for benign recurrent intrahepatic cholestasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_recurrent_intrahepatic_cholestasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benign recurrent intrahepatic cholestasis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Bile acids, bilirubin fractions and GGT during an episode", "cells": [{"text": "Raised bile acids and conjugated bilirubin; GGT normal or low"}], "cite": "c1"},
+        {"parameter": "Liver enzymes and synthetic function between attacks", "cells": [{"text": "Recovery between attacks, with preserved synthetic function"}], "cite": "c1"},
+        {"parameter": "Imaging of the biliary tree", "cells": [{"text": "Excludes extrahepatic biliary obstruction"}], "cite": "c1"},
+        {"parameter": "ATP8B1 and ABCB11 genetic testing", "cells": [{"text": "ATP8B1 in type 1; ABCB11 in type 2"}], "cite": "c1"},
+        {"parameter": "Liver biopsy in atypical cases", "cells": [{"text": "Bland cholestasis without progressive fibrosis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_recurrent_intrahepatic_cholestasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign recurrent intrahepatic cholestasis",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Progressive familial intrahepatic cholestasis", "cells": [{"text": "Failure of episodes to resolve, or progressive fibrosis, points to PFIC rather than benign disease"}], "cite": "c1"},
+        {"parameter": "Extrahepatic biliary obstruction", "cells": [{"text": "Excluded by imaging of the biliary tree"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_recurrent_intrahepatic_cholestasis-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign recurrent intrahepatic cholestasis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Episode care", "cells": [{"text": "Manage episodes symptomatically"}, {"text": "Attacks are self-limiting; no treatment halts progression"}], "cite": "c1"},
+        {"parameter": "Cholestatic pruritus", "cells": [{"text": "Bile acid sequestrant such as cholestyramine; add rifampicin or ursodeoxycholic acid for refractory itch"}, {"text": "Controls pruritus"}], "cite": "c1"},
+        {"parameter": "Severe attacks", "cells": [{"text": "Nasobiliary drainage or plasma-based therapies"}, {"text": "For severe, prolonged and disabling attacks"}], "cite": "c1"},
+        {"parameter": "Fat-soluble vitamins", "cells": [{"text": "Supplement during prolonged cholestasis"}, {"text": "Needed if malabsorption develops"}], "cite": "c1"},
+        {"parameter": "Trigger removal", "cells": [{"text": "Identify and remove infection, hormonal agents and offending drugs"}, {"text": "Precipitating triggers"}], "cite": "c1"},
+        {"parameter": "Biochemical monitoring", "cells": [{"text": "Liver biochemistry to confirm recovery between attacks"}, {"text": "Excludes progression; supports reassurance"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling with ATP8B1 and ABCB11 testing, and family testing where appropriate"}, {"text": "Heritable basis"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_recurrent_intrahepatic_cholestasis-dx-mgmt",
+      "title": "Diagnosis and management of benign recurrent intrahepatic cholestasis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Recurrent intense pruritus and jaundice, with symptom-free intervals between episodes", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: episode not resolving, fibrosis, coagulopathy or features of obstruction?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: consider PFIC; exclude obstruction and assess for fibrosis on biopsy", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Measure bile acids, bilirubin fractions and GGT during an episode", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Imaging of the biliary tree; ATP8B1 and ABCB11 genetic testing", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Obstruction excluded, with bland cholestasis and normal GGT?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Remove triggers; control pruritus with cholestyramine, adding rifampicin if refractory", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider PFIC or another cause of cholestasis; specialist review", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Monitor biochemistry for recovery; genetic counselling and family testing", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Benign course without cirrhosis; episodes are self-limiting but can be prolonged", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

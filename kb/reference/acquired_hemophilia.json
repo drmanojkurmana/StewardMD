@@ -147,5 +147,343 @@
       "caption": "Overview comparison matrix for acquired haemophilia a (factor viii autoantibodies)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_hemophilia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Activated partial thromboplastin time with prothrombin time",
+          "cells": [
+            {
+              "text": "Isolated prolonged aPTT with normal PT localises the defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixing study with incubated sampling",
+          "cells": [
+            {
+              "text": "Time-dependent, non-correcting inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII activity assay",
+          "cells": [
+            {
+              "text": "Reduced factor VIII level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bethesda or Nijmegen-modified Bethesda assay",
+          "cells": [
+            {
+              "text": "Inhibitor titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand factor studies",
+          "cells": [
+            {
+              "text": "Distinguishes acquired von Willebrand syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for malignancy or autoimmune disorder",
+          "cells": [
+            {
+              "text": "Underlying association"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_hemophilia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital haemophilia A with an alloantibody inhibitor",
+          "cells": [
+            {
+              "text": "Haemarthroses dominate in congenital disease"
+            },
+            {
+              "text": "Bethesda inhibitor titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired von Willebrand syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Von Willebrand factor studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus anticoagulant",
+          "cells": [
+            {
+              "text": "Prolongs the aPTT, typically without bleeding"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_hemophilia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bypassing agents or recombinant porcine factor VIII",
+          "cells": [
+            {
+              "text": "Treats acute haemorrhage"
+            },
+            {
+              "text": "Recombinant activated factor VII or activated prothrombin complex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids, with rituximab or cyclophosphamide if refractory",
+          "cells": [
+            {
+              "text": "Eradicates the inhibitor"
+            },
+            {
+              "text": "Adds rituximab or cyclophosphamide for high-titre or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid intramuscular injections and deep venepuncture",
+          "cells": [
+            {
+              "text": "Prevents provoked bleeding"
+            },
+            {
+              "text": "Avoid elective invasive procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for and manage underlying trigger",
+          "cells": [
+            {
+              "text": "Malignancy, autoimmune disorder or peripartum trigger"
+            },
+            {
+              "text": "Treat the trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial factor VIII and inhibitor titre; infection prophylaxis",
+          "cells": [
+            {
+              "text": "Gauges response"
+            },
+            {
+              "text": "Prophylaxis during immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term haematological surveillance",
+          "cells": [
+            {
+              "text": "Detects relapse"
+            },
+            {
+              "text": "Relapse can occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_hemophilia-dx-mgmt",
+      "title": "Diagnosis and management of Acquired haemophilia A (factor VIII autoantibodies)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden severe bleeding in an adult or peripartum woman with no bleeding history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Extensive haematoma, GI or intracranial bleeding, or airway compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency haemostasis and airway care; haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "aPTT with PT; mixing study with incubated sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Time-dependent inhibitor with reduced factor VIII activity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Bethesda titre, VWF studies; search for malignancy or autoimmunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review lupus anticoagulant, acquired von Willebrand syndrome and DIC",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bypassing agents or recombinant porcine factor VIII for bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids, with rituximab or cyclophosphamide if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid intramuscular injections and deep venepuncture",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Remission achievable with prompt treatment; monitor for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

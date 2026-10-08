@@ -168,5 +168,502 @@
       "caption": "Overview comparison matrix for infections acquired in health care facilities."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 257-8",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "IDSA/ATS HAP and VAP guideline 2016 (Kalil et al.), PMC4981759",
+      "kind": "web",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4981759/"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infections_acquired_in_health_care-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising health care-associated infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Onset after admission",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "After the first 48 to 72 h",
+              "op": ">",
+              "value": 48
+            },
+            {
+              "text": "Earlier onset counts as community-acquired or from the transferring site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central line bloodstream infection",
+          "unit": "x",
+          "cells": [
+            {
+              "text": "Roughly triples in-hospital death risk",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "Remove lines no longer needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilator-associated pneumonia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10% of ventilated patients",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Prolongs ventilation and ICU stay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VAP MDR risk factors",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "IV antibiotics within 90 days, 5 or more hospital days, septic shock, ARDS, renal replacement",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Prior IV antibiotics is the strongest predictor"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Starting HAP or VAP antibiotics",
+          "cells": [
+            {
+              "text": "Clinical criteria alone"
+            },
+            {
+              "text": "Not procalcitonin or CPIS"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Catheter bacteriuria without symptoms",
+          "cells": [
+            {
+              "text": "Do not culture or treat, except in pregnancy"
+            },
+            {
+              "text": "{{hy:Overtreatment drives resistance}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C. difficile",
+          "cells": [
+            {
+              "text": "Most common US hospital infection; recent antibiotics main trigger"
+            },
+            {
+              "text": "Spores survive alcohol gel; soap and water plus sporicide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Outbreak clonality",
+          "cells": [
+            {
+              "text": "Whole genome sequencing"
+            },
+            {
+              "text": "Gold standard for linking isolates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airborne isolation room",
+          "unit": "per h",
+          "cells": [
+            {
+              "text": "Negative pressure with at least 12 air changes per hour",
+              "op": ">=",
+              "value": 12
+            },
+            {
+              "text": "For TB, measles, varicella"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_acquired_in_health_care-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes of health care-associated infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Community-acquired infection",
+          "cells": [
+            {
+              "text": "Onset within 48 to 72 h of admission"
+            },
+            {
+              "text": "Timeline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic bacteriuria",
+          "cells": [
+            {
+              "text": "Bacteriuria with no urinary symptoms; confusion often unrelated"
+            },
+            {
+              "text": "Clinical assessment, not culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonisation with resistant organisms",
+          "cells": [
+            {
+              "text": "Positive screen without infection signs"
+            },
+            {
+              "text": "Clinical correlation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration pneumonitis",
+          "cells": [
+            {
+              "text": "Chemical injury without infection"
+            },
+            {
+              "text": "Clinical course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophlebitis at access site",
+          "cells": [
+            {
+              "text": "Sterile vein inflammation"
+            },
+            {
+              "text": "Blood cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative or drug fever",
+          "cells": [
+            {
+              "text": "Inflammatory fever without a source"
+            },
+            {
+              "text": "Cultures and drug review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_acquired_in_health_care-treatment",
+      "kind": "treatment",
+      "title": "Treating and preventing health care-associated infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen or notes as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Pneumonia, no MDR risk",
+          "cells": [
+            {
+              "text": "Health care-associated pneumonia without MDR risk"
+            },
+            {
+              "text": "Ceftriaxone 2 g IV q24h, or moxifloxacin 400 mg, ciprofloxacin 400 mg q8h or levofloxacin 750 mg IV q24h, or ampicillin-sulbactam 3 g IV q6h, or ertapenem 1 g IV q24h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia, MDR risk: antipseudomonal beta-lactam",
+          "cells": [
+            {
+              "text": "Step 1 of 3"
+            },
+            {
+              "text": "Ceftazidime 2 g q8h, cefepime 2 g q8 to 12h, piperacillin-tazobactam 4.5 g q6h, imipenem 500 mg q6h or meropenem 1 g q8h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia, MDR risk: second gram-negative agent",
+          "cells": [
+            {
+              "text": "Step 2 of 3"
+            },
+            {
+              "text": "Gentamicin or tobramycin 7 mg/kg q24h, amikacin 20 mg/kg q24h, or ciprofloxacin or levofloxacin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia, MDR risk: gram-positive agent",
+          "cells": [
+            {
+              "text": "Step 3 of 3"
+            },
+            {
+              "text": "Linezolid 600 mg IV q12h or vancomycin 15 mg/kg q12h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRSA cover in VAP",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Unit MRSA above 10 to 20% of S. aureus, unknown prevalence, or risk factor",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "HAP threshold above 20%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Duration for HAP and VAP",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "{{hy:7 days}}",
+              "op": "=",
+              "value": 7
+            },
+            {
+              "text": "De-escalate; stop using procalcitonin plus clinical criteria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Device removal and bundles",
+          "cells": [
+            {
+              "text": "All lines, urinary catheters, ventilators"
+            },
+            {
+              "text": "Remove as early as possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transmission precautions",
+          "cells": [
+            {
+              "text": "Colonised or infected MDR, C. auris, C. difficile"
+            },
+            {
+              "text": "Contact precautions, cohorting, sporicidal cleaning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The Tables PDF (Harrison Table 257-8) uses the health care-associated pneumonia (HCAP) category; the 2016 IDSA/ATS guideline dropped HCAP and bases empiric cover on individual MDR risk and local resistance. Both kept; prefer the 2016 approach."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infections_acquired_in_health_care-dx-mgmt",
+      "title": "Diagnosis and management of health care-associated infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New fever or organ dysfunction in a hospital patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Onset after 48 to 72 h of admission?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Manage as community-acquired infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examine devices and wounds; cultures before antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bacteriuria only, without urinary symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Do not treat; remove catheter if not needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Pneumonia with MDR risk or high local resistance?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Single agent without MDR risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antipseudomonal beta-lactam plus second agent plus MRSA cover",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Source control: remove infected line or device",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Contact precautions and notify infection prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "De-escalate on cultures; 7 days for HAP or VAP",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

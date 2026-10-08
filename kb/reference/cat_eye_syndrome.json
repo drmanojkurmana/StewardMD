@@ -149,5 +149,324 @@
       "caption": "Overview comparison matrix for cat eye syndrome (22q11 tetrasomy)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cat_eye_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Detects the small supernumerary marker chromosome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or microarray",
+          "cells": [
+            {
+              "text": "Confirms the marker derives from 22q11 and defines copy number"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Screens for anomalous pulmonary venous return and other defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Renal agenesis, hypoplasia or dysplasia occur frequently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Iris and chorioretinal coloboma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cat_eye_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CHARGE syndrome",
+          "cells": [
+            {
+              "text": "Coloboma, cardiac defects and ear anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VACTERL association",
+          "cells": [
+            {
+              "text": "Anorectal, cardiac and renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Townes-Brocks syndrome",
+          "cells": [
+            {
+              "text": "Anal, ear and renal anomalies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cat_eye_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac surgery",
+          "cells": [
+            {
+              "text": "Correct total anomalous pulmonary venous return, septal and conotruncal defects"
+            },
+            {
+              "text": "Congenital heart disease is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal anorectal surgery",
+          "cells": [
+            {
+              "text": "Surgical management of anal atresia and other anorectal anomalies"
+            },
+            {
+              "text": "Anorectal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal care",
+          "cells": [
+            {
+              "text": "Assess renal malformations and monitor renal function"
+            },
+            {
+              "text": "Frequent renal malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology follow-up",
+          "cells": [
+            {
+              "text": "Follow-up of iris and chorioretinal coloboma"
+            },
+            {
+              "text": "Protects vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Developmental assessment and educational support"
+            },
+            {
+              "text": "Variable intellectual outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Karyotype and microarray confirmation"
+            },
+            {
+              "text": "Variable expressivity; test at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cat_eye_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cat eye syndrome (22q11 tetrasomy)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cat eye syndrome: coloboma, anal atresia and preauricular pits",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anomalous pulmonary venous return, anorectal or renal malformation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac or neonatal surgical assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, FISH or microarray; echocardiography and renal tract ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Small marker chromosome derived from 22q11 confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgical correction of congenital heart defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CHARGE, VACTERL, Townes-Brocks and 22q11.2 deletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neonatal surgery for anal atresia and other anorectal anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor renal function; ophthalmology follow-up for coloboma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental and educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome varies; set mainly by cardiac and renal malformation severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,298 @@
       "caption": "Overview comparison matrix for caustic (acid/alkali) ingestion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "caustic_ingestion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Early upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Grades mucosal injury and guides prognosis and feeding decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest and abdominal imaging, or contrast CT",
+          "cells": [
+            {
+              "text": "Detects perforation and mediastinal or peritoneal air"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Assesses systemic acid-base disturbance and tissue injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Airway assessment where upper airway injury is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood group and crossmatch",
+          "cells": [
+            {
+              "text": "Needed if surgery is anticipated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "caustic_ingestion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Airway assessment and early intubation for laryngeal or supraglottic oedema and stridor"
+            },
+            {
+              "text": "Oedema can progress rapidly to obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid harmful measures",
+          "cells": [
+            {
+              "text": "No induced emesis, neutralising agents, activated charcoal or blind nasogastric tube"
+            },
+            {
+              "text": "These worsen injury or obscure endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nil by mouth and resuscitation",
+          "cells": [
+            {
+              "text": "Nil by mouth with intravenous fluids and analgesia"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early endoscopy",
+          "cells": [
+            {
+              "text": "Upper gastrointestinal endoscopy to grade mucosal injury"
+            },
+            {
+              "text": "Guides feeding and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "Acid suppression to support mucosal healing"
+            },
+            {
+              "text": "Mucosal healing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency surgery",
+          "cells": [
+            {
+              "text": "Resection for transmural necrosis, perforation, mediastinitis or peritonitis"
+            },
+            {
+              "text": "Surgical emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stricture and cancer surveillance",
+          "cells": [
+            {
+              "text": "Endoscopic dilatation for strictures; long-term surveillance endoscopy"
+            },
+            {
+              "text": "Lasting increased risk of oesophageal malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "caustic_ingestion-dx-mgmt",
+      "title": "Diagnosis and management of Caustic (acid/alkali) ingestion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected caustic ingestion: drooling, dysphagia, stridor or chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (stridor, perforation signs, haematemesis, instability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: airway protection and urgent surgical review for perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Airway assessment and early upper GI endoscopy to grade mucosal injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Deep or circumferential injury on endoscopy with systemic signs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nil by mouth, intravenous fluids and proton pump inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Boerhaave syndrome, thermal burn and pill-induced oesophagitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid emesis, neutralising agents, charcoal and blind nasogastric tubes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endoscopic dilatation for strictures that develop",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emergency surgery for transmural necrosis or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance endoscopy for lasting oesophageal cancer risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

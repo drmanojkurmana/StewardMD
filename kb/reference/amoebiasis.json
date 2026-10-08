@@ -164,5 +164,521 @@
       "caption": "Overview comparison matrix for amoebiasis (intestinal)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Amebiasis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/intestinal-protozoa-and-microsporidia/amebiasis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 209-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "amoebiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in intestinal amoebiasis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or performance",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool appearance",
+          "cells": [
+            {
+              "text": "Blood and mucus with little faecal matter; heme-positive in nearly all with dysentery"
+            },
+            {
+              "text": "Few neutrophils, unlike bacterial dysentery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever in amoebic dysentery",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 40% of patients",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Low fever rate helps separate it from bacterial dysentery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy (3 fresh specimens)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Confirms 75 to 95%",
+              "range": [
+                75,
+                95
+              ]
+            },
+            {
+              "text": "{{hy:Only erythrocyte-ingesting trophozoites prove E. histolytica}}; cysts look like E. dispar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool antigen EIA (Gal/GalNAc lectin)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 87%, specificity >90%"
+            },
+            {
+              "text": "Species-specific; faster than microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool PCR",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity approach 100%"
+            },
+            {
+              "text": "Most sensitive; separates E. histolytica from other amoebae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology (ELISA)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in >90% of colitis, ameboma or liver abscess",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Usually negative again by 6 to 12 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology in active intestinal infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in >70%",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "Antibodies can persist for years; most useful in travellers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sigmoidoscopy with ulcer-edge biopsy",
+          "cells": [
+            {
+              "text": "Flask-shaped ulcers or nonspecific inflammation"
+            },
+            {
+              "text": "Use when stool tests are negative; avoid in fulminant colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood eosinophils",
+          "cells": [
+            {
+              "text": "Not raised"
+            },
+            {
+              "text": "Invasive amoebiasis does not cause eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources give different serology positivity: Harrison over 90% across invasive syndromes, Merck over 70% in active intestinal infection."
+    },
+    {
+      "id": "amoebiasis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of amoebic colitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Shigellosis and other bacterial dysentery (Campylobacter, Salmonella, enteroinvasive E. coli)",
+          "cells": [
+            {
+              "text": "Fever and stool neutrophils more typical; amoebic stools are less frequent and less watery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ulcerative colitis or Crohn disease",
+          "cells": [
+            {
+              "text": "{{hy:Exclude amoebiasis before starting steroids}}, which can trigger toxic megacolon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colon carcinoma",
+          "cells": [
+            {
+              "text": "Ameboma can mimic cancer on barium study; serology or biopsy separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute appendicitis",
+          "cells": [
+            {
+              "text": "Caecal amoebic involvement can mimic it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal tuberculosis, actinomycosis or lymphoma",
+          "cells": [
+            {
+              "text": "Considered with a right-sided colonic mass"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Schistosomiasis",
+          "cells": [
+            {
+              "text": "Can be confused with amoebic dysentery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-pathogenic E. dispar carriage",
+          "cells": [
+            {
+              "text": "Same cyst morphology; needs antigen test or PCR; no treatment needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "amoebiasis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of intestinal amoebiasis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and duration"
+      ],
+      "rows": [
+        {
+          "parameter": "Metronidazole",
+          "cells": [
+            {
+              "text": "{{hy:Tissue amoebicide for colitis}} and liver abscess"
+            },
+            {
+              "text": "750 mg three times daily orally or IV for 5 to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tinidazole",
+          "cells": [
+            {
+              "text": "Alternative tissue amoebicide; better tolerated"
+            },
+            {
+              "text": "2 g/day orally with food for 3 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tinidazole, severe colitis",
+          "cells": [
+            {
+              "text": "Severe GI symptoms"
+            },
+            {
+              "text": "5-day course"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ornidazole or secnidazole",
+          "cells": [
+            {
+              "text": "Other nitroimidazoles where available"
+            },
+            {
+              "text": "Ornidazole 5 days; secnidazole single dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paromomycin (luminal)",
+          "cells": [
+            {
+              "text": "After tissue agent, and for asymptomatic E. histolytica carriers"
+            },
+            {
+              "text": "30 mg/kg/day orally in 3 divided doses for 5 to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Iodoquinol (luminal)",
+          "cells": [
+            {
+              "text": "Alternative luminal agent"
+            },
+            {
+              "text": "650 mg orally three times daily for 20 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Diloxanide furoate (luminal)",
+          "cells": [
+            {
+              "text": "Alternative luminal agent"
+            },
+            {
+              "text": "10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitazoxanide",
+          "cells": [
+            {
+              "text": "Non-invasive intestinal disease only when others are contraindicated"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluid and electrolyte replacement",
+          "cells": [
+            {
+              "text": "Significant dysentery or diarrhoea"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "Fulminant colitis, perforation or toxic megacolon"
+            },
+            {
+              "text": "Avoid antimotility drugs and steroids"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Metronidazole duration differs: Tables PDF 5 to 10 days, Merck 7 to 10 days. Paromomycin: Tables PDF 5 to 10 days, Merck 7 days. Avoid alcohol with nitroimidazoles."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "amoebiasis-dx-mgmt",
+      "title": "Diagnosis and management of intestinal amoebiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bloody mucoid diarrhoea or dysentery with exposure in an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fulminant colitis: severe pain, high fever, distension or peritonism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Resuscitate, IV nitroimidazole, urgent surgical review; no sigmoidoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Three fresh stools: microscopy, antigen EIA or PCR; stool culture; serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "E. histolytica confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Symptomatic or invasive disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Metronidazole or tinidazole, then a luminal agent such as paromomycin",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Luminal agent alone (paromomycin, iodoquinol or diloxanide)",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Stool tests negative but suspicion high?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sigmoidoscopy with biopsy of ulcer edges",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Consider bacterial dysentery, IBD or carcinoma",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rehydrate, hygiene advice, confirm clearance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Asymptomatic carrier"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n5",
+          "label": "Result"
+        }
+      ]
+    }
+  ]
 }

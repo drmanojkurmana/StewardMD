@@ -175,5 +175,510 @@
       "caption": "Overview comparison matrix for hyperthyroidism and other causes of thyrotoxicosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hyperthyroidism",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/hyperthyroidism"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hyperthyroidism_and_other_causes_of-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing thyrotoxicosis and its cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH",
+          "cells": [
+            {
+              "text": "Suppressed"
+            },
+            {
+              "text": "{{hy:Best screening test}}; detectable or high with TSH-secreting adenoma or hormone resistance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Free T4 and T3",
+          "cells": [
+            {
+              "text": "Raised in overt disease"
+            },
+            {
+              "text": "If free T4 normal and TSH low, measure T3 for T3 toxicosis (2 to 5%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subclinical thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Low TSH with normal free T4 and T3"
+            },
+            {
+              "text": "Mild end of the spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TSH receptor antibody",
+          "cells": [
+            {
+              "text": "Positive in Graves disease"
+            },
+            {
+              "text": "Confirms Graves when classic signs absent; third-trimester check for neonatal risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioiodine uptake, high diffuse",
+          "cells": [
+            {
+              "text": "Graves disease"
+            },
+            {
+              "text": "Graves causes 60 to 80% of thyrotoxicosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioiodine uptake, high focal or patchy",
+          "cells": [
+            {
+              "text": "Toxic adenoma or toxic multinodular goitre"
+            },
+            {
+              "text": "Adenoma usually above 3 cm before thyrotoxic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioiodine uptake, low",
+          "cells": [
+            {
+              "text": "Thyroiditis, iodine load or exogenous hormone"
+            },
+            {
+              "text": "Destructive release, not true hyperthyroidism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroglobulin",
+          "cells": [
+            {
+              "text": "Low or low-normal in factitious thyrotoxicosis"
+            },
+            {
+              "text": "Raised in destructive thyroiditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ESR",
+          "cells": [
+            {
+              "text": "High in subacute thyroiditis, normal in silent thyroiditis"
+            },
+            {
+              "text": "Tender goitre supports subacute thyroiditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmopathy grade (NO SPECS)",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Class 3 proptosis above 22 mm",
+              "op": ">",
+              "value": 22
+            },
+            {
+              "text": "EUGOGO activity scoring preferred for treatment decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism_and_other_causes_of-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of thyrotoxicosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Graves disease",
+          "cells": [
+            {
+              "text": "Diffuse goitre, eye disease, dermopathy"
+            },
+            {
+              "text": "TRAb and diffuse high uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic multinodular goitre",
+          "cells": [
+            {
+              "text": "Elderly, often atrial fibrillation, iodine can trigger"
+            },
+            {
+              "text": "Patchy heterogeneous uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic adenoma",
+          "cells": [
+            {
+              "text": "Single nodule, mild thyrotoxicosis"
+            },
+            {
+              "text": "Hot nodule with suppressed background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute (de Quervain) thyroiditis",
+          "cells": [
+            {
+              "text": "Painful tender goitre after viral illness"
+            },
+            {
+              "text": "High ESR, low uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silent or postpartum thyroiditis",
+          "cells": [
+            {
+              "text": "Painless, TPO antibodies"
+            },
+            {
+              "text": "Low uptake, normal ESR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious thyrotoxicosis",
+          "cells": [
+            {
+              "text": "Exogenous hormone, no goitre"
+            },
+            {
+              "text": "Low thyroglobulin with low uptake"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TSH-secreting pituitary adenoma",
+          "cells": [
+            {
+              "text": "High T4 with non-suppressed TSH"
+            },
+            {
+              "text": "Raised alpha-subunit and pituitary MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Panic disorder, mania, phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Adrenergic features with normal thyroid tests"
+            },
+            {
+              "text": "TSH"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism_and_other_causes_of-treatment",
+      "kind": "treatment",
+      "title": "Treating hyperthyroidism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blocker (propranolol)",
+          "cells": [
+            {
+              "text": "Adrenergic symptoms, tachycardia, while awaiting control"
+            },
+            {
+              "text": "Does not reduce hormone or goitre; calcium channel blocker if beta-blocker contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methimazole (carbimazole), preferred thionamide",
+          "cells": [
+            {
+              "text": "Graves disease; preparation for radioiodine or surgery"
+            },
+            {
+              "text": "5 to 20 mg orally 1 to 3 times daily, then 2.5 to 10 mg daily; continue at least 1 year"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Propylthiouracil",
+          "cells": [
+            {
+              "text": "First trimester of pregnancy, thyroid storm"
+            },
+            {
+              "text": "100 to 150 mg every 8 h; risk of liver failure, especially under age 40"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radioactive iodine",
+          "cells": [
+            {
+              "text": "Graves and toxic nodular goitre"
+            },
+            {
+              "text": "{{hy:Contraindicated in pregnancy, lactation and active ophthalmopathy}}; most later need thyroxine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroidectomy",
+          "cells": [
+            {
+              "text": "Relapse, large goitre, drug intolerance, some nodular disease"
+            },
+            {
+              "text": "Methimazole then potassium iodide for 10 days before surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thyroid storm bundle",
+          "cells": [
+            {
+              "text": "Fever, delirium, heart failure; mortality about 4 to 17%"
+            },
+            {
+              "text": "PTU 600 mg load then 200 to 400 mg every 6 to 8 h; potassium iodide; propranolol; hydrocortisone 100 mg IV every 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Destructive thyroiditis",
+          "cells": [
+            {
+              "text": "Low-uptake thyrotoxicosis"
+            },
+            {
+              "text": "No thionamide; beta-blocker, NSAID or steroid for subacute thyroiditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graves ophthalmopathy",
+          "cells": [
+            {
+              "text": "Active eye disease"
+            },
+            {
+              "text": "Stop smoking, selenium, steroids, orbital radiotherapy or decompression, teprotumumab"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Agranulocytosis occurs in about 0.1% on thionamides; do not switch to the other thionamide after it. Harrison names carbimazole; Merck names methimazole, its active metabolite."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hyperthyroidism_and_other_causes_of-dx-mgmt",
+      "title": "Diagnosis and management of thyrotoxicosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Weight loss, palpitations, tremor, heat intolerance or AF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "TSH with free T4 and T3",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "TSH suppressed with high T4 or T3?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "High T4 with normal TSH: image pituitary",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever, delirium or heart failure (storm)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "ICU: PTU, iodine, propranolol, hydrocortisone",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start beta-blocker; check TRAb and uptake scan",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Uptake low?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Thyroiditis or exogenous: supportive, no thionamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Diffuse uptake with positive TRAb?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Graves: methimazole at least 1 year, or radioiodine or surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Toxic nodule or MNG: radioiodine or surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

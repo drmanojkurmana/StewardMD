@@ -144,5 +144,315 @@
       "caption": "Overview comparison matrix for ataxia-telangiectasia-like disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ataxia_telangiectasia_like_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Genetic testing of MRE11",
+          "cells": [
+            {
+              "text": "Genetic basis of the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alpha-fetoprotein",
+          "cells": [
+            {
+              "text": "Typically normal, helping distinguish it from ataxia-telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellular radiosensitivity assays",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of the DNA-damage response and immune function",
+          "cells": [
+            {
+              "text": "Immune function and DNA-damage response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxia_telangiectasia_like_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ataxia-telangiectasia",
+          "cells": [
+            {
+              "text": "Alpha-fetoprotein is usually normal in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nijmegen breakage syndrome",
+          "cells": [
+            {
+              "text": "Separated by MRE11 genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxia_telangiectasia_like_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech therapy"
+            },
+            {
+              "text": "Slowly progressive cerebellar ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise ionising radiation",
+          "cells": [
+            {
+              "text": "Avoid unnecessary radiological exposure"
+            },
+            {
+              "text": "Documented cellular radiosensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Prompt investigation of concerning symptoms"
+            },
+            {
+              "text": "Risk less defined than in classic ataxia-telangiectasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune support",
+          "cells": [
+            {
+              "text": "Assess and support immune function; treat intercurrent infections"
+            },
+            {
+              "text": "Immune function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Neurology and clinical genetics"
+            },
+            {
+              "text": "Monitor neurological decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for this autosomal recessive MRE11-related disorder"
+            },
+            {
+              "text": "Recessive recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ataxia_telangiectasia_like_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Ataxia-telangiectasia-like disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly progressive cerebellar ataxia with cellular radiosensitivity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Loss of walking, bulbar dysfunction or radiation exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Protect from unnecessary ionising radiation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRE11 testing, alpha-fetoprotein, brain MRI, radiosensitivity and immune assays",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "MRE11 variant confirmed with normal alpha-fetoprotein?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Neurorehabilitation and minimal radiation exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immune support and treatment of infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Malignancy surveillance with prompt investigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aspiration precautions as bulbar function declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neurology and genetics follow-up; family testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

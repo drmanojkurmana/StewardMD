@@ -147,5 +147,367 @@
       "caption": "Overview comparison matrix for alien hand syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alien_hand_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain for callosal, frontal or parietal lesions",
+          "cells": [
+            {
+              "text": "Localises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging in suspected stroke",
+          "cells": [
+            {
+              "text": "Anterior cerebral artery territory lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological assessment of interhemispheric function and apraxia",
+          "cells": [
+            {
+              "text": "Intermanual conflict and apraxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations for corticobasal degeneration and other neurodegeneration",
+          "cells": [
+            {
+              "text": "Progressive cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and cerebrospinal fluid studies where prion disease is suspected",
+          "cells": [
+            {
+              "text": "Prion disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "Metabolic contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alien_hand_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticobasal degeneration",
+          "cells": [
+            {
+              "text": "Progressive cortical syndrome"
+            },
+            {
+              "text": "Neurodegeneration workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior or middle cerebral artery stroke",
+          "cells": [
+            {
+              "text": "Acute onset with new deficit"
+            },
+            {
+              "text": "Vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "Rapid cognitive and motor decline"
+            },
+            {
+              "text": "EEG and CSF studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional (psychogenic) limb phenomena",
+          "cells": [
+            {
+              "text": "No structural lesion"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alien_hand_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treatment of the underlying cause (stroke, tumour or neurodegeneration)",
+          "cells": [
+            {
+              "text": "Primary determinant of outcome"
+            },
+            {
+              "text": "Cause-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational and behavioural strategies, including occupying the affected hand",
+          "cells": [
+            {
+              "text": "Involuntary interference"
+            },
+            {
+              "text": "Functional strategy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sensory cueing, mirror and visuospatial techniques",
+          "cells": [
+            {
+              "text": "Intermanual conflict"
+            },
+            {
+              "text": "Reduces conflict"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hazard removal and support for daily living",
+          "cells": [
+            {
+              "text": "Risk of self-injury or harm"
+            },
+            {
+              "text": "Safety measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin for associated focal dystonic posturing",
+          "cells": [
+            {
+              "text": "Dystonia"
+            },
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological support and education of patient and carers",
+          "cells": [
+            {
+              "text": "Non-volitional movements"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology and neurorehabilitation, with palliative care if progressive",
+          "cells": [
+            {
+              "text": "Progressive cause"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alien_hand_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Alien hand syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Autonomous, purposeful-looking movements of one hand felt as foreign",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute new stroke, self-injury or rapid cognitive decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke pathway or neurology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain; vascular imaging; neuropsychological testing; metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Callosal, frontal or parietal lesion on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the underlying cause as the main determinant",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review corticobasal degeneration, stroke, CJD and functional disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Occupational and behavioural strategies to occupy the hand",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sensory cueing and mirror techniques for intermanual conflict",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hazard removal; botulinum toxin for dystonic posturing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome follows the cause; stroke may improve, neurodegeneration does not",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

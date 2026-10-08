@@ -149,5 +149,352 @@
       "caption": "Overview comparison matrix for alg2-cdg (congenital disorder of glycosylation type ii)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurometabolic and glycosylation references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alg2_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing or carbohydrate-deficient transferrin",
+          "cells": [
+            {
+              "text": "Type I pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-exome or genome sequencing, or a CDG gene panel",
+          "cells": [
+            {
+              "text": "Biallelic ALG2 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid-linked oligosaccharide profiling in fibroblasts",
+          "cells": [
+            {
+              "text": "Glycosylation defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation studies including fibrinogen and natural anticoagulants",
+          "cells": [
+            {
+              "text": "Coagulation factor deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG for hypsarrhythmia",
+          "cells": [
+            {
+              "text": "Epileptic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Hypomyelination and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repetitive nerve stimulation and muscle biopsy for tubular aggregates",
+          "cells": [
+            {
+              "text": "Myasthenic phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg2_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "ALG1-CDG (CDG-Ik)",
+          "cells": [
+            {
+              "text": "Clinically similar severe encephalopathy"
+            },
+            {
+              "text": "ALG1 gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALG11-CDG (CDG-Ip)",
+          "cells": [
+            {
+              "text": "Neighbouring mannosyltransferase"
+            },
+            {
+              "text": "ALG11 gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myasthenic syndrome with tubular aggregates (GFPT1, DPAGT1)",
+          "cells": [
+            {
+              "text": "Fatigable weakness"
+            },
+            {
+              "text": "Repetitive nerve stimulation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg2_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anticonvulsant therapy for the epileptic encephalopathy",
+          "cells": [
+            {
+              "text": "Infantile spasms and seizures"
+            },
+            {
+              "text": "Corticotropin or vigabatrin for spasms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyridostigmine for the allelic myasthenic phenotype",
+          "cells": [
+            {
+              "text": "Neuromuscular transmission"
+            },
+            {
+              "text": "Enhances transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of coagulation factor and anticoagulant deficiencies",
+          "cells": [
+            {
+              "text": "Peri-illness and procedures"
+            },
+            {
+              "text": "Around illness and surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology assessment for coloboma and nystagmus; monitoring of hepatomegaly",
+          "cells": [
+            {
+              "text": "Ocular and hepatic features"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional, feeding and developmental support",
+          "cells": [
+            {
+              "text": "Central hypotonia and delay"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and carrier testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "Carrier testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alg2_cdg-dx-mgmt",
+      "title": "Diagnosis and management of ALG2-CDG (congenital disorder of glycosylation type Ii)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Early infantile epilepsy with spasms, hypotonia and coloboma or hepatomegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intractable seizures with regression, or fatigable weakness with breathlessness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; treat spasms; respiratory check if weak",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin IEF; exome or CDG panel; EEG; MRI; coagulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type I pattern with biallelic ALG2 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Anticonvulsants; pyridostigmine if myasthenic phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review ALG1, ALG11, ALG3, ALG12 CDG and congenital myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticotropin or vigabatrin for infantile spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct coagulation factor and anticoagulant deficiencies around illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology for coloboma and nystagmus; monitor hepatomegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Encephalopathic form is guarded; a normal transferrin result does not exclude ALG2",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

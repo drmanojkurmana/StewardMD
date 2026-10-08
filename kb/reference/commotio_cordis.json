@@ -149,5 +149,296 @@
       "caption": "Overview comparison matrix for commotio cordis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "commotio_cordis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate rhythm assessment with defibrillator or monitor",
+          "cells": [
+            {
+              "text": "Ventricular fibrillation on initial rhythm check"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-resuscitation twelve-lead ECG",
+          "cells": [
+            {
+              "text": "Post-arrest rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial cardiac troponin",
+          "cells": [
+            {
+              "text": "Significant contusion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Structurally normal heart; occult cardiomyopathy excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "commotio_cordis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Myocardial contusion from blunt chest trauma",
+          "cells": [
+            {
+              "text": "Troponin monitoring to exclude significant contusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Excluded by echocardiography and cardiac MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited arrhythmia such as long QT or Brugada",
+          "cells": [
+            {
+              "text": "Genetic and family evaluation in survivors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "commotio_cordis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate CPR",
+          "cells": [
+            {
+              "text": "High-quality CPR at collapse; survival falls with each minute of delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid defibrillation",
+          "cells": [
+            {
+              "text": "Automated or manual defibrillator for ventricular fibrillation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced life support",
+          "cells": [
+            {
+              "text": "Protocols during arrest; post-resuscitation care, including targeted temperature management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac imaging after recovery",
+          "cells": [
+            {
+              "text": "Echocardiography and cardiac MRI to exclude occult cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic and family evaluation",
+          "cells": [
+            {
+              "text": "Inherited arrhythmia must be excluded in survivors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "On-site automated external defibrillators at sporting venues, chest-wall protectors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "commotio_cordis-dx-mgmt",
+      "title": "Diagnosis and management of commotio cordis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected commotio cordis: collapse after a precordial blow in a young athlete",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (no pulse with VF, delayed defibrillation, recurrent syncope)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate CPR and defibrillation; advanced life support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rhythm assessment; post-resuscitation ECG; serial troponin; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the heart structurally normal on echo and cardiac MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider contusion, coronary dissection or inherited arrhythmia; re-evaluate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immediate high-quality CPR and rapid defibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Post-resuscitation care with targeted temperature management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic and family evaluation for inherited arrhythmia in survivors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "On-site automated external defibrillators and chest-wall protectors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcomes improved with wide automated defibrillator access and bystander CPR",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

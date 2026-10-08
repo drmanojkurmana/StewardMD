@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for apert syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apert_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of FGFR2",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and enables counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cranial CT with three-dimensional reconstruction",
+          "cells": [
+            {
+              "text": "Suture fusion and vault shape"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Ventricles, hydrocephalus and hindbrain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review and fundoscopy",
+          "cells": [
+            {
+              "text": "Exposure keratopathy and papilloedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography and airway assessment",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of the hands and feet",
+          "cells": [
+            {
+              "text": "Syndactyly and skeletal fusions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apert_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Crouzon syndrome",
+          "cells": [
+            {
+              "text": "Craniosynostosis without complex syndactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pfeiffer syndrome",
+          "cells": [
+            {
+              "text": "Broad thumbs and great toes with craniosynostosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apert_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Staged craniofacial surgery",
+          "cells": [
+            {
+              "text": "Early cranial vault expansion for bicoronal synostosis, then midface advancement"
+            },
+            {
+              "text": "Relieves raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and sleep apnoea management",
+          "cells": [
+            {
+              "text": "CPAP, adenotonsillectomy or midface advancement"
+            },
+            {
+              "text": "Obstructive sleep apnoea from midface retrusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot reconstruction",
+          "cells": [
+            {
+              "text": "Staged surgical separation of syndactyly"
+            },
+            {
+              "text": "Maximises function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye protection",
+          "cells": [
+            {
+              "text": "Ocular lubrication; monitor for papilloedema"
+            },
+            {
+              "text": "Exposure keratopathy from proptosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrocephalus surveillance",
+          "cells": [
+            {
+              "text": "Shunt when indicated; repair cleft or high-arched palate"
+            },
+            {
+              "text": "Raised intracranial pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and hearing support",
+          "cells": [
+            {
+              "text": "Assessment, educational support and hearing surveillance"
+            },
+            {
+              "text": "Variable intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant FGFR2 disorder; craniofacial team"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apert_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Apert syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bicoronal craniosynostosis with midface retrusion and syndactyly at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Papilloedema, headache, airway compromise or severe apnoea?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway and raised intracranial pressure assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FGFR2 testing, 3D cranial CT, MRI, eye review, sleep study, limb radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FGFR2 variant confirms Apert syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early cranial vault expansion for bicoronal synostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat FGFR2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CPAP or adenotonsillectomy for sleep apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Staged hand and foot syndactyly separation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ocular lubrication; hydrocephalus surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated craniofacial care; genetic counselling for FGFR2",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

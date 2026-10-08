@@ -151,5 +151,327 @@
       "caption": "Overview comparison matrix for chorioamnionitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chorioamnionitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal temperature and continuous fetal heart rate monitoring",
+          "cells": [
+            {
+              "text": "Maternal fever with maternal or fetal tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and C-reactive protein",
+          "cells": [
+            {
+              "text": "Inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood and genital or amniotic fluid cultures",
+          "cells": [
+            {
+              "text": "Organism identification where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amniocentesis for Gram stain, glucose and culture",
+          "cells": [
+            {
+              "text": "Selected preterm cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Placental and membrane histology and culture after delivery",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chorioamnionitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidural-associated pyrexia",
+          "cells": [
+            {
+              "text": "Pyrexia without infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Placental abruption",
+          "cells": [
+            {
+              "text": "Uterine tenderness with bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chorioamnionitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Intravenous penicillin with an aminoglycoside and anaerobic cover such as metronidazole or clindamycin"
+            },
+            {
+              "text": "Ascending genital flora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Expedite delivery",
+          "cells": [
+            {
+              "text": "Mode guided by obstetric conditions and fetal status"
+            },
+            {
+              "text": "Infection does not resolve while pregnancy continues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis support",
+          "cells": [
+            {
+              "text": "Antipyretics, intravenous fluids and oxygen with continuous monitoring"
+            },
+            {
+              "text": "Maternal sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postpartum antibiotics",
+          "cells": [
+            {
+              "text": "Continue antibiotics after delivery, particularly after caesarean"
+            },
+            {
+              "text": "Prevents endometritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal assessment",
+          "cells": [
+            {
+              "text": "Neonatal team at delivery and paediatric evaluation for early-onset sepsis"
+            },
+            {
+              "text": "Neonatal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication monitoring",
+          "cells": [
+            {
+              "text": "Uterine atony, postpartum haemorrhage and wound infection"
+            },
+            {
+              "text": "Maternal complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care escalation",
+          "cells": [
+            {
+              "text": "Escalate to critical care for septic shock or organ dysfunction"
+            },
+            {
+              "text": "Progressive sepsis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chorioamnionitis-dx-mgmt",
+      "title": "Diagnosis and management of Chorioamnionitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chorioamnionitis: maternal fever with tachycardia and uterine tenderness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (maternal sepsis, abnormal fetal heart rate, foul fluid, no response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent resuscitation and expedited delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Maternal observation, fetal monitoring, full blood count, CRP and cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever with tachycardia or foul amniotic fluid, other sources excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Broad-spectrum intravenous antibiotics with anaerobic cover",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check epidural pyrexia, urinary infection and placental abruption",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expedite delivery; the infection does not resolve while pregnancy continues",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sepsis care with fluids, antipyretics and oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continue antibiotics after delivery, particularly after caesarean",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neonatal evaluation for early-onset sepsis; monitor for postpartum haemorrhage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

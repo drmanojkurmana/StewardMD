@@ -154,5 +154,305 @@
       "caption": "Overview comparison matrix for crimean-congo haemorrhagic fever."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crimean_congo_hemorrhagic_fever-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "RT-PCR for CCHF viral RNA in early illness",
+          "cells": [
+            {
+              "text": "Viral RNA detected; biosafe laboratory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CCHF-specific IgM and IgG serology",
+          "cells": [
+            {
+              "text": "Later in the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, coagulation, liver and renal function",
+          "cells": [
+            {
+              "text": "Severity gauged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testing for dengue, malaria and leptospirosis",
+          "cells": [
+            {
+              "text": "Overlapping presentations excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crimean_congo_hemorrhagic_fever-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue haemorrhagic fever",
+          "cells": [
+            {
+              "text": "Overlapping presentation; exclusion testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "Overlapping presentation; exclusion testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe malaria",
+          "cells": [
+            {
+              "text": "Anchoring on malaria is a pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crimean_congo_hemorrhagic_fever-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Barrier and infection-control precautions",
+          "cells": [
+            {
+              "text": "Patient isolation, safe handling of fluids and specimens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ribavirin",
+          "cells": [
+            {
+              "text": "Early antiviral therapy considered; evidence base uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care supportive care",
+          "cells": [
+            {
+              "text": "IV fluid resuscitation and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood product support",
+          "cells": [
+            {
+              "text": "Packed red cells, platelets and fresh frozen plasma for coagulopathy and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug avoidance",
+          "cells": [
+            {
+              "text": "Intramuscular injections and NSAIDs that aggravate bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity monitoring",
+          "cells": [
+            {
+              "text": "FBC, coagulation, liver and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Notification, contact tracing and symptom surveillance; ribavirin post-exposure prophylaxis considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crimean_congo_hemorrhagic_fever-dx-mgmt",
+      "title": "Diagnosis and management of Crimean-Congo haemorrhagic fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CCHF: fever with bleeding after tick or livestock exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (spontaneous bleeding, falling platelets, shock, multi-organ failure)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate isolation, barrier nursing and public health notification",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "RT-PCR for CCHF RNA; coagulation; FBC; liver and renal function; exclusion tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is CCHF RNA detected with dengue, malaria and leptospirosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dengue, leptospirosis, malaria or other viral haemorrhagic fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict barrier precautions and isolation from the first suspicion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ribavirin considered early; evidence uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Critical care with IV fluids and organ support",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood products for coagulopathy; avoid IM injections and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Case fatality is high, especially with delayed recognition and severe coagulopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

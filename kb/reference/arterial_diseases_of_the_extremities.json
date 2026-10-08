@@ -190,5 +190,505 @@
       "caption": "Overview comparison matrix for arterial diseases of the extremities."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Peripheral Arterial Disease",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/peripheral-arterial-disorders/peripheral-arterial-disease",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arterial_diseases_of_the_extremities-diagnostic",
+      "kind": "diagnostic",
+      "title": "Ankle-brachial index and other tests in peripheral artery disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "ABI normal",
+          "cells": [
+            {
+              "text": "1.00 to 1.40",
+              "range": [
+                1.0,
+                1.4
+              ]
+            },
+            {
+              "text": "No haemodynamic PAD at rest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABI borderline",
+          "cells": [
+            {
+              "text": "0.91 to 0.99",
+              "range": [
+                0.91,
+                0.99
+              ]
+            },
+            {
+              "text": "Consider exercise ABI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABI abnormal",
+          "cells": [
+            {
+              "text": "<=0.90",
+              "op": "<=",
+              "value": 0.9
+            },
+            {
+              "text": "{{hy:Diagnostic of PAD}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABI noncompressible",
+          "cells": [
+            {
+              "text": ">1.40",
+              "op": ">",
+              "value": 1.4
+            },
+            {
+              "text": "Calcified vessels in diabetes or CKD; use toe-brachial index"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toe-brachial index",
+          "cells": [
+            {
+              "text": "<=0.70 abnormal",
+              "op": "<=",
+              "value": 0.7
+            },
+            {
+              "text": "Use when ABI unreliable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-exercise ABI",
+          "cells": [
+            {
+              "text": "Falls after treadmill"
+            },
+            {
+              "text": "Confirms PAD when resting test is equivocal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Segmental pressures and duplex ultrasound",
+          "cells": [
+            {
+              "text": "Localise stenoses"
+            },
+            {
+              "text": "Also graft surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRA, CTA or angiography",
+          "cells": [
+            {
+              "text": "Anatomy"
+            },
+            {
+              "text": "For revascularisation planning, not routine diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic limb-threatening ischaemia",
+          "cells": [
+            {
+              "text": "Rest pain worse at night, ulcers, gangrene"
+            },
+            {
+              "text": "Needs urgent revascularisation assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arterial_diseases_of_the_extremities-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of limb arterial disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute limb ischaemia (embolism or thrombosis)",
+          "cells": [
+            {
+              "text": "{{hy:Sudden loss of flow}}; emboli from AF, MI, endocarditis, myxoma lodge at femoral bifurcation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atheroembolism",
+          "cells": [
+            {
+              "text": "Painful blue toe and livedo with palpable distal pulses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thromboangiitis obliterans (Buerger)",
+          "cells": [
+            {
+              "text": "Young male smoker; distal claudication, Raynaud, migratory phlebitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromuscular dysplasia",
+          "cells": [
+            {
+              "text": "Women; string-of-beads renal or carotid arteries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takayasu or giant cell arteritis",
+          "cells": [
+            {
+              "text": "Inflammatory large-vessel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Popliteal entrapment or aneurysm",
+          "cells": [
+            {
+              "text": "Young athlete or pulsatile popliteal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic outlet syndrome",
+          "cells": [
+            {
+              "text": "Arm symptoms with positional manoeuvres; cervical rib"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Episodic pallor, cyanosis, rubor with cold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythromelalgia",
+          "cells": [
+            {
+              "text": "Warm red painful extremity with normal pulses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal stenosis (neurogenic claudication)",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arterial_diseases_of_the_extremities-treatment",
+      "kind": "treatment",
+      "title": "Treatment of peripheral artery disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation and risk factor control",
+          "cells": [
+            {
+              "text": "{{hy:All patients}}"
+            },
+            {
+              "text": "Statin, ACE inhibitor or ARB, blood pressure and diabetes control"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirin or clopidogrel",
+          "cells": [
+            {
+              "text": "Symptomatic leg PAD"
+            },
+            {
+              "text": "Antiplatelet monotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rivaroxaban 2.5 mg twice daily plus aspirin",
+          "cells": [
+            {
+              "text": "Reduce cardiovascular and limb events"
+            },
+            {
+              "text": "More bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supervised walking",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "30 to 60 per session, at least 3 times weekly",
+              "range": [
+                30,
+                60
+              ]
+            },
+            {
+              "text": "Exercise-rest-exercise; supervised better than home"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cilostazol",
+          "cells": [
+            {
+              "text": "Intermittent claudication"
+            },
+            {
+              "text": "Contraindicated in systolic heart failure; headache, diarrhoea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endovascular revascularisation",
+          "cells": [
+            {
+              "text": "Lifestyle-limiting claudication despite therapy, rest pain, ulcer, gangrene"
+            },
+            {
+              "text": "Plan with MRA, CTA or angiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical bypass",
+          "cells": [
+            {
+              "text": "Chronic limb-threatening or acute ischaemia, refractory claudication, fit for surgery"
+            },
+            {
+              "text": "Vascular surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent revascularisation",
+          "cells": [
+            {
+              "text": "Acute limb ischaemia"
+            },
+            {
+              "text": "Embolectomy, thrombolysis or bypass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arterial_diseases_of_the_extremities-dx-mgmt",
+      "title": "Diagnosis and management of peripheral artery disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exertional leg pain, absent pulses or non-healing foot wound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden painful pale pulseless limb?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Acute limb ischaemia: urgent vascular revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Resting ABI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ABI result?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Toe-brachial index",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exercise ABI",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Risk factor control, antiplatelet, statin, supervised walking",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Rest pain, tissue loss or disabling claudication?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Imaging (duplex, CTA, MRA) and revascularisation",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue medical therapy; cilostazol for claudication",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "<=0.90"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": ">1.40"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "0.91 to 1.40"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "TBI <=0.70"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "ABI falls"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

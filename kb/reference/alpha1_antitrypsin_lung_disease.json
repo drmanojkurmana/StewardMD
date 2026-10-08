@@ -79,7 +79,7 @@
   "algorithms": [
     {
       "id": "alpha1_antitrypsin_lung_disease-pathway",
-      "title": "Alpha-1-antitrypsin deficiency — pulmonary/emphysema focus: Clinical Decision & Diagnostic Pathway",
+      "title": "Alpha-1-antitrypsin deficiency, pulmonary/emphysema focus: Clinical Decision & Diagnostic Pathway",
       "steps": [
         {
           "step": "Clinical Presentation & High Suspicion",
@@ -106,13 +106,13 @@
           "action": "Clinical pitfall alert: Not testing for the deficiency in every patient diagnosed with COPD"
         }
       ],
-      "caption": "Clinical pathway for the evaluation and management of alpha-1-antitrypsin deficiency — pulmonary/emphysema focus."
+      "caption": "Clinical pathway for the evaluation and management of alpha-1-antitrypsin deficiency, pulmonary/emphysema focus."
     }
   ],
   "tables": [
     {
       "id": "alpha1_antitrypsin_lung_disease-matrix",
-      "title": "Alpha-1-antitrypsin deficiency — pulmonary/emphysema focus: Clinical Features & Management Matrix",
+      "title": "Alpha-1-antitrypsin deficiency, pulmonary/emphysema focus: Clinical Features & Management Matrix",
       "headers": [
         "Clinical Domain",
         "Protocol Recommendation",
@@ -145,11 +145,16 @@
           "Prevent diagnostic or management error"
         ]
       ],
-      "caption": "Overview comparison matrix for alpha-1-antitrypsin deficiency — pulmonary/emphysema focus."
+      "caption": "Overview comparison matrix for alpha-1-antitrypsin deficiency, pulmonary/emphysema focus."
     }
   ],
   "diagrams": [],
   "citations": [
+    {
+      "id": "c1",
+      "label": "ATS/ERS alpha-1-antitrypsin deficiency guidance and respiratory texts",
+      "kind": "entry"
+    },
     {
       "id": "c3",
       "label": "Figure 286-1, user-supplied; source edition not shown (pathogenesis of emphysema)",
@@ -313,6 +318,373 @@
         ]
       },
       "cite": "c3"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alpha1_antitrypsin_lung_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum alpha-1-antitrypsin level",
+          "cells": [
+            {
+              "text": "Low level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenotyping or SERPINA1 genotyping",
+          "cells": [
+            {
+              "text": "PiZZ severe deficiency genotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function tests",
+          "cells": [
+            {
+              "text": "Airflow obstruction and reduced gas transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT chest",
+          "cells": [
+            {
+              "text": "Basal panacinar emphysema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic assessment",
+          "cells": [
+            {
+              "text": "Associated liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening and genetic counselling",
+          "cells": [
+            {
+              "text": "Relatives at risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha1_antitrypsin_lung_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking-related chronic obstructive pulmonary disease",
+          "cells": [
+            {
+              "text": "Upper-zone centrilobular emphysema"
+            },
+            {
+              "text": "CT pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma with fixed airflow obstruction",
+          "cells": [
+            {
+              "text": "Obstruction with reversibility"
+            },
+            {
+              "text": "Lung function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchiectasis",
+          "cells": [
+            {
+              "text": "Airway dilatation"
+            },
+            {
+              "text": "CT chest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis in younger patients",
+          "cells": [
+            {
+              "text": "Younger patient with chronic lung disease"
+            },
+            {
+              "text": "Sweat testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital lobar or bullous lung disease",
+          "cells": [
+            {
+              "text": "Bullous lung disease"
+            },
+            {
+              "text": "CT chest"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha1_antitrypsin_lung_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation and avoidance of inhaled oxidants",
+          "cells": [
+            {
+              "text": "Dramatically slows lung tissue loss"
+            },
+            {
+              "text": "Most important intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous augmentation with pooled human alpha-1-antitrypsin",
+          "cells": [
+            {
+              "text": "Selected deficient patients with emphysema"
+            },
+            {
+              "text": "Specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled bronchodilators, corticosteroids, pulmonary rehabilitation and oxygen when hypoxaemic",
+          "cells": [
+            {
+              "text": "Airflow obstruction"
+            },
+            {
+              "text": "Standard COPD care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination and prompt treatment of infective exacerbations",
+          "cells": [
+            {
+              "text": "Infection risk"
+            },
+            {
+              "text": "Preventive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatology input for associated liver disease",
+          "cells": [
+            {
+              "text": "Liver involvement"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation",
+          "cells": [
+            {
+              "text": "End-stage emphysema"
+            },
+            {
+              "text": "Consider in end-stage disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening and genetic counselling",
+          "cells": [
+            {
+              "text": "Relatives at risk"
+            },
+            {
+              "text": "Testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alpha1_antitrypsin_lung_disease-dx-mgmt",
+      "title": "Diagnosis and management of Alpha-1-antitrypsin deficiency, pulmonary/emphysema focus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Emphysema at young age in a never-smoker or light smoker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid lung function decline, liver disease or hypoxaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review; oxygen if hypoxaemic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Alpha-1-antitrypsin level and genotype; spirometry; HRCT basal emphysema",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PiZZ genotype or low level with basal panacinar emphysema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop smoking and avoid inhaled oxidants",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review usual COPD, asthma, bronchiectasis and cystic fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Augmentation therapy for selected deficient patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhalers, rehabilitation and oxygen as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hepatology review and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Non-smokers may do well; smokers may develop early disabling emphysema",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
     }
   ]
 }

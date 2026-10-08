@@ -147,5 +147,312 @@
       "caption": "Overview comparison matrix for cleidocranial dysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cleidocranial_dysplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Clavicular defects, wormian bones and pelvic changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RUNX2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and orthopantomographic assessment",
+          "cells": [
+            {
+              "text": "Eruption and supernumerary teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone mineral density assessment",
+          "cells": [
+            {
+              "text": "Tendency to reduced density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological review",
+          "cells": [
+            {
+              "text": "Conductive hearing loss from recurrent ear disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cleidocranial_dysplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypophosphatasia",
+          "cells": [
+            {
+              "text": "Dental features overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crane-Heise syndrome",
+          "cells": [
+            {
+              "text": "Delayed cranial ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pycnodysostosis",
+          "cells": [
+            {
+              "text": "Other skeletal syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cleidocranial_dysplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dental and orthodontic management",
+          "cells": [
+            {
+              "text": "Removal of retained and supernumerary teeth; traction of unerupted teeth"
+            },
+            {
+              "text": "Central to care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniofacial and maxillofacial surgery",
+          "cells": [
+            {
+              "text": "Midface hypoplasia and dental rehabilitation"
+            },
+            {
+              "text": "Surgical input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protection of the skull",
+          "cells": [
+            {
+              "text": "Protective helmet in infancy where indicated"
+            },
+            {
+              "text": "While fontanelles remain open"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, vitamin D and bone density monitoring",
+          "cells": [
+            {
+              "text": "Reduces fracture risk"
+            },
+            {
+              "text": "Tendency to reduced density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological and ENT review",
+          "cells": [
+            {
+              "text": "Conductive hearing loss from recurrent middle ear disease"
+            },
+            {
+              "text": "Hearing protection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cleidocranial_dysplasia-dx-mgmt",
+      "title": "Diagnosis and management of Cleidocranial dysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cleidocranial dysplasia: clavicular hypoplasia with open cranial sutures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (large calvarial defect, recurrent ear infection, dental impaction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for head injury risk or dental infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, RUNX2 testing, dental and bone density assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clavicular defects and RUNX2 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Dental and orthodontic management of retained and supernumerary teeth",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check hypophosphatasia, Crane-Heise syndrome and pycnodysostosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Craniofacial and maxillofacial surgery for midface hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protective helmet and skull care while fontanelles remain open",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calcium, vitamin D and bone density monitoring to reduce fracture risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Audiological and ENT review; genetic counselling for RUNX2 disorder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

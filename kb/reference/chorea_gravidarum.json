@@ -152,5 +152,336 @@
       "caption": "Overview comparison matrix for chorea gravidarum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chorea_gravidarum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-beta-2-glycoprotein I)",
+          "cells": [
+            {
+              "text": "Secondary cause: antiphospholipid syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear and extractable nuclear antigen antibodies",
+          "cells": [
+            {
+              "text": "Lupus as a secondary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-streptolysin O and anti-DNase B titres with echocardiography",
+          "cells": [
+            {
+              "text": "Rheumatic history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum caeruloplasmin, copper and slit-lamp examination",
+          "cells": [
+            {
+              "text": "Wilson disease unmasked in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "Thyrotoxicosis-associated chorea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chorea_gravidarum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiphospholipid antibody syndrome",
+          "cells": [
+            {
+              "text": "Thrombosis or recurrent pregnancy loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Rash, arthritis, nephritis or cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent or persistent Sydenham chorea",
+          "cells": [
+            {
+              "text": "Prior Sydenham chorea or rheumatic fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chorea_gravidarum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the unmasked disorder",
+          "cells": [
+            {
+              "text": "Anticoagulation or antiplatelet therapy with rheumatology input for antiphospholipid syndrome; immunosuppression for lupus"
+            },
+            {
+              "text": "Aetiology-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop oestrogen exposure",
+          "cells": [
+            {
+              "text": "Stop combined oral contraceptives and avoid oestrogen-containing preparations"
+            },
+            {
+              "text": "Often abolishes the chorea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic agents",
+          "cells": [
+            {
+              "text": "Dopamine-blocking or dopamine-depleting agent or benzodiazepine, choosing the most favourable pregnancy-safety profile"
+            },
+            {
+              "text": "Chorea threatening feeding, sleep or safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Safe environment, nutrition, hydration and rest"
+            },
+            {
+              "text": "Hyperkinetic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remission and carditis monitoring",
+          "cells": [
+            {
+              "text": "Monitor for remission after delivery and for rheumatic carditis by echocardiography"
+            },
+            {
+              "text": "Rheumatic aetiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstetric coordination",
+          "cells": [
+            {
+              "text": "Joint obstetric, neurology and rheumatology care with a delivery plan"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "High likelihood of recurrence in future pregnancies or with oestrogen exposure"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chorea_gravidarum-dx-mgmt",
+      "title": "Diagnosis and management of chorea gravidarum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chorea gravidarum: chorea arising in pregnancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (thrombosis, active lupus, maternal exhaustion, fetal concern)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent obstetric, neurology and rheumatology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antiphospholipid, lupus, streptococcal, thyroid and copper tests; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary cause identified by serology or rheumatic history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the unmasked disorder: anticoagulation or immunosuppression as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Wilson disease, thyrotoxicosis and functional movement disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop combined oral contraceptives and avoid oestrogen-containing preparations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dopamine-blocking agent or benzodiazepine only for disabling chorea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Supportive care with safety, nutrition, hydration and rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often remits after delivery; high risk of recurrence with later pregnancies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

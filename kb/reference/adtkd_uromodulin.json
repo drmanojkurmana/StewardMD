@@ -151,5 +151,355 @@
       "caption": "Overview comparison matrix for autosomal dominant tubulointerstitial kidney disease, umod-related."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics and nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adtkd_uromodulin-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum urate with fractional excretion of urate",
+          "cells": [
+            {
+              "text": "Inappropriately low fractional excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Kidney size and medullary or corticomedullary cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis with quantification of proteinuria",
+          "cells": [
+            {
+              "text": "Bland sediment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UMOD sequencing or dedicated ADTKD gene panel",
+          "cells": [
+            {
+              "text": "UMOD variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed multigenerational family pedigree",
+          "cells": [
+            {
+              "text": "Dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy with uromodulin immunostaining where performed",
+          "cells": [
+            {
+              "text": "Endoplasmic reticulum retention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adtkd_uromodulin-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other ADTKD subtypes (MUC1, REN, HNF1B, SEC61A1)",
+          "cells": [
+            {
+              "text": "Other ADTKD genes"
+            },
+            {
+              "text": "ADTKD gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant polycystic kidney disease",
+          "cells": [
+            {
+              "text": "Numerous bilateral cysts"
+            },
+            {
+              "text": "Renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alport syndrome and other hereditary nephropathies",
+          "cells": [
+            {
+              "text": "Haematuria"
+            },
+            {
+              "text": "Urinalysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adtkd_uromodulin-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early urate-lowering therapy with allopurinol or febuxostat",
+          "cells": [
+            {
+              "text": "Hyperuricaemia and recurrent gout"
+            },
+            {
+              "text": "Even before significant renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colchicine or corticosteroids for gout flares; NSAIDs with caution",
+          "cells": [
+            {
+              "text": "Acute gout flares"
+            },
+            {
+              "text": "NSAIDs cautiously given renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "General chronic kidney disease care",
+          "cells": [
+            {
+              "text": "Blood pressure, nephrotoxins and cardiovascular risk"
+            },
+            {
+              "text": "Standard CKD care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate salt and fluid intake; avoidance of volume depletion",
+          "cells": [
+            {
+              "text": "Salt wasting from impaired transport"
+            },
+            {
+              "text": "Thick ascending limb transport"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function, serum urate and blood pressure",
+          "cells": [
+            {
+              "text": "Disease progression"
+            },
+            {
+              "text": "Regular checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning with transplantation preferred",
+          "cells": [
+            {
+              "text": "Advancing kidney failure"
+            },
+            {
+              "text": "No recurrence in the allograft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade UMOD testing",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            },
+            {
+              "text": "At-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adtkd_uromodulin-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant tubulointerstitial kidney disease, UMOD-related",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gout in adolescence or young adulthood with family kidney failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive CKD with bland sediment and dominant family history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology and clinical genetics review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum urate and FEurate; renal ultrasound; urinalysis; pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Inappropriately low urate excretion with UMOD variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start early urate-lowering therapy; cascade testing in relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review MUC1, REN, HNF1B, ADPKD and Alport syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Allopurinol or febuxostat early to control urate and prevent gout",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colchicine or steroids for flares; NSAIDs cautiously",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood pressure control and avoidance of volume depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progresses to kidney failure in adulthood; transplant is effective",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

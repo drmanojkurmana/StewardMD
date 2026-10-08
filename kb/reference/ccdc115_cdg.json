@@ -155,5 +155,339 @@
       "caption": "Overview comparison matrix for ccdc115-related congenital disorder of glycosylation (cdg type iio)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ccdc115_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin glycosylation analysis",
+          "cells": [
+            {
+              "text": "Demonstrates a type II pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second glycoprotein or O-glycosylation marker (e.g. apolipoprotein C-III)",
+          "cells": [
+            {
+              "text": "Confirms a combined defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper studies: serum caeruloplasmin, serum and urinary copper",
+          "cells": [
+            {
+              "text": "Low caeruloplasmin and abnormal copper handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function, synthetic function and coagulation; fasting lipid profile",
+          "cells": [
+            {
+              "text": "Hepatopathy and hypercholesterolaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing (CCDC115 sequencing, CDG or hepatopathy panel, exome)",
+          "cells": [
+            {
+              "text": "Confirms the disorder by molecular testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ccdc115_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilson disease (ATP7B)",
+          "cells": [
+            {
+              "text": "Low caeruloplasmin and abnormal copper handling, a Wilson-like picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other V-ATPase and Golgi-homeostasis CDGs (TMEM199, ATP6AP1, ATP6AP2)",
+          "cells": [
+            {
+              "text": "Share hepatic, lipid and copper abnormalities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ccdc115_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive hepatic care",
+          "cells": [
+            {
+              "text": "Nutritional support and fat-soluble vitamin supplementation"
+            },
+            {
+              "text": "No specific cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulopathy correction",
+          "cells": [
+            {
+              "text": "Vitamin K and clotting-factor support"
+            },
+            {
+              "text": "Impaired synthetic liver function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid copper chelation",
+          "cells": [
+            {
+              "text": "Do not start chelation despite low caeruloplasmin"
+            },
+            {
+              "text": "Not the treatment for this picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid management",
+          "cells": [
+            {
+              "text": "Manage hypercholesterolaemia and lipid abnormalities"
+            },
+            {
+              "text": "Associated hypercholesterolaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver surveillance",
+          "cells": [
+            {
+              "text": "Serial liver function, coagulation and hepatic imaging"
+            },
+            {
+              "text": "Progression to fibrosis or failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant assessment",
+          "cells": [
+            {
+              "text": "Liver transplantation assessment"
+            },
+            {
+              "text": "Progressive hepatic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Developmental support and physiotherapy"
+            },
+            {
+              "text": "Hypotonia and psychomotor delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family testing for the autosomal recessive CCDC115 variant"
+            },
+            {
+              "text": "Autosomal recessive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ccdc115_cdg-dx-mgmt",
+      "title": "Diagnosis and management of CCDC115-related congenital disorder of glycosylation (CDG type IIo)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CCDC115-CDG: infantile hepatopathy, hypercholesterolaemia, low caeruloplasmin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive liver failure, bleeding, failure to thrive)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: manage coagulopathy and decompensated liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin glycosylation analysis, copper studies, liver tests and CCDC115 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type II transferrin pattern confirmed by molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nutritional support and fat-soluble vitamin supplementation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Wilson disease and other V-ATPase or type II CDGs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid copper chelation; it is not the treatment for this picture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vitamin K and clotting-factor support; manage hypercholesterolaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial liver surveillance; transplant assessment if failure progresses",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome varies: stable courses or progressive fatal liver failure in infancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

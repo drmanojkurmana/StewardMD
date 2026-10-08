@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for ankylosing spondylitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ACR-EULAR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ankylosing_spondylitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the sacroiliac joints",
+          "cells": [
+            {
+              "text": "Early active inflammation before radiographic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs of the pelvis and spine",
+          "cells": [
+            {
+              "text": "Sacroiliitis, syndesmophytes and ankylosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B27 typing",
+          "cells": [
+            {
+              "text": "Supports the diagnosis in the right clinical context"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP and ESR",
+          "cells": [
+            {
+              "text": "May be normal despite active disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Uveitis among the extra-articular features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankylosing_spondylitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical or degenerative low back pain",
+          "cells": [
+            {
+              "text": "Attributing young-adult back pain to mechanical causes delays diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriatic arthritis with axial involvement",
+          "cells": [
+            {
+              "text": "Psoriasis is an associated extra-articular disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthritis associated with inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease is an associated extra-articular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankylosing_spondylitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Exercise and structured physiotherapy",
+          "cells": [
+            {
+              "text": "Maintain spinal mobility, posture and function"
+            },
+            {
+              "text": "Foundation of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Pain and stiffness"
+            },
+            {
+              "text": "First-line pharmacological therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF or IL-17 inhibitors",
+          "cells": [
+            {
+              "text": "When response to NSAIDs is inadequate"
+            },
+            {
+              "text": "Biologic or targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroid injection",
+          "cells": [
+            {
+              "text": "Peripheral arthritis and enthesitis"
+            },
+            {
+              "text": "Sulfasalazine for peripheral, not axial, involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extra-articular disease",
+          "cells": [
+            {
+              "text": "Acute anterior uveitis, inflammatory bowel disease, psoriasis"
+            },
+            {
+              "text": "Co-managed with ophthalmology and other specialists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone and cardiovascular care",
+          "cells": [
+            {
+              "text": "Osteoporosis, spinal fracture risk, cardiovascular risk"
+            },
+            {
+              "text": "Advise smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist care",
+          "cells": [
+            {
+              "text": "Rheumatology-led multidisciplinary team"
+            },
+            {
+              "text": "Spinal surgery considered for severe fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ankylosing_spondylitis-dx-mgmt",
+      "title": "Diagnosis and management of Ankylosing spondylitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic back pain and stiffness in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Painful red eye or deficit after minor trauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology for uveitis; spinal fracture assessment after trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI sacroiliac joints, pelvis and spine films, HLA-B27, CRP and ESR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sacroiliitis on MRI or radiographs in the right clinical context?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start NSAIDs and structured physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat sacroiliac imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to TNF or IL-17 inhibitor when NSAIDs fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local steroid injection for peripheral arthritis; sulfasalazine if peripheral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor osteoporosis, cardiovascular risk and extra-articular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Rheumatology-led care; spinal surgery for severe fixed deformity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

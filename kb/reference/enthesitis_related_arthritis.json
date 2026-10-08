@@ -152,5 +152,352 @@
       "caption": "Overview comparison matrix for enthesitis-related arthritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Textbook of Pediatric Rheumatology / ILAR & PRINTO criteria",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enthesitis_related_arthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HLA-B27 typing",
+          "cells": [
+            {
+              "text": "Supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of sacroiliac joints",
+          "cells": [
+            {
+              "text": "Early sacroiliitis before radiographic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound of entheses",
+          "cells": [
+            {
+              "text": "Confirms active enthesitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology assessment",
+          "cells": [
+            {
+              "text": "Symptomatic anterior uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "When gastrointestinal symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of joints and sacroiliac joints",
+          "cells": [
+            {
+              "text": "Established disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enthesitis_related_arthritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Reactive arthritis",
+          "cells": [
+            {
+              "text": "Follows gastrointestinal or genitourinary infection; overlaps with this condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis or osteomyelitis",
+          "cells": [
+            {
+              "text": "Fever and systemic upset suggest infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical enthesopathy (Osgood-Schlatter, Sever disease)",
+          "cells": [
+            {
+              "text": "Heel and knee entheseal pain is not mechanical; ultrasound confirms enthesitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enthesitis_related_arthritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for enthesitis, peripheral arthritis and inflammatory back pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and exercise",
+          "cells": [
+            {
+              "text": "Maintains spinal and joint mobility and function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local corticosteroid injection",
+          "cells": [
+            {
+              "text": "Persistent enthesitis or an isolated inflamed peripheral joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sulfasalazine or methotrexate",
+          "cells": [
+            {
+              "text": "Peripheral arthritis; these do not control axial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TNF or IL-17 inhibitors",
+          "cells": [
+            {
+              "text": "Axial disease, or peripheral and entheseal disease refractory to first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent ophthalmology and topical corticosteroids",
+          "cells": [
+            {
+              "text": "Acute symptomatic anterior uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Growth, disease activity, sacroiliac MRI, and screening for inflammatory bowel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric rheumatology with planned transition to adult services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enthesitis_related_arthritis-dx-mgmt",
+      "title": "Diagnosis and management of Enthesitis-related arthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Enthesitis or peripheral arthritis with inflammatory back pain in an older boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (painful red eye, fever or infection, bloody diarrhoea or weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology for uveitis; investigate infection or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HLA-B27, ESR and CRP, sacroiliac MRI and ultrasound of entheses",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Active enthesitis confirmed on ultrasound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mechanical enthesopathy or another JIA subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Local corticosteroid injection for persistent enthesitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sulfasalazine or methotrexate for peripheral arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "TNF or IL-17 inhibitors for axial or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Physiotherapy and exercise to maintain mobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Course is variable; some progress to axial spondyloarthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

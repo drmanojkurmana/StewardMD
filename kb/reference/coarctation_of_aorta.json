@@ -151,5 +151,312 @@
       "caption": "Overview comparison matrix for coarctation of the aorta."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coarctation_of_aorta-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Four-limb blood pressure with simultaneous pulse assessment",
+          "cells": [
+            {
+              "text": "Upper-to-lower limb gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Site, severity and bicuspid aortic valve"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Rib notching and aortic contour in older children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Detailed arch anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas and end-organ perfusion assessment",
+          "cells": [
+            {
+              "text": "Collapsing neonate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coarctation_of_aorta-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Interrupted aortic arch",
+          "cells": [
+            {
+              "text": "Other duct-dependent systemic circulation lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoplastic left heart syndrome",
+          "cells": [
+            {
+              "text": "Duct-dependent left heart lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Essential hypertension in an older child",
+          "cells": [
+            {
+              "text": "Hypertension without radio-femoral delay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coarctation_of_aorta-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prostaglandin E1 infusion",
+          "cells": [
+            {
+              "text": "Reopens the ductus in the duct-dependent neonate; correct acidosis and heart failure first"
+            },
+            {
+              "text": "Neonatal stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical repair or balloon angioplasty with stenting",
+          "cells": [
+            {
+              "text": "Resection with end-to-end anastomosis or subclavian flap"
+            },
+            {
+              "text": "Definitive relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihypertensive therapy",
+          "cells": [
+            {
+              "text": "Upper-limb hypertension before and after repair"
+            },
+            {
+              "text": "Blood pressure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of bicuspid aortic valve and left-sided lesions",
+          "cells": [
+            {
+              "text": "Associated lesions"
+            },
+            {
+              "text": "Associated lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Recoarctation, late hypertension and aneurysm; Turner syndrome screening"
+            },
+            {
+              "text": "Long-term"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coarctation_of_aorta-dx-mgmt",
+      "title": "Diagnosis and management of Coarctation of the Aorta",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coarctation: weak femoral pulses and an arm-leg blood pressure gradient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal shock, weak femoral pulses, heart failure, oliguria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neonatal intensive care and prostaglandin E1 infusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Four-limb blood pressure, echocardiography and chest radiograph",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Arm-leg gradient and narrowed arch confirmed on echocardiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prostaglandin E1 to restore lower-body perfusion in duct-dependent neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check interrupted arch, hypoplastic left heart and essential hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical resection or balloon angioplasty with stenting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antihypertensive therapy for upper-limb hypertension before and after repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Assess and manage bicuspid aortic valve and other left-sided lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong surveillance for recoarctation, late hypertension and aneurysm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

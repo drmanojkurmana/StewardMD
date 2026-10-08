@@ -156,5 +156,355 @@
       "caption": "Overview comparison matrix for acute haemolytic transfusion reaction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_haemolytic_transfusion_reaction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clerical recheck of patient identity and unit",
+          "cells": [
+            {
+              "text": "Wrong-blood error"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test on a post-transfusion sample",
+          "cells": [
+            {
+              "text": "Antibody coating of red cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat ABO and RhD grouping on pre- and post-transfusion samples and unit",
+          "cells": [
+            {
+              "text": "Grouping mismatch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma free haemoglobin, haptoglobin, LDH and bilirubin",
+          "cells": [
+            {
+              "text": "Intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen, fibrinogen and D-dimer",
+          "cells": [
+            {
+              "text": "Disseminated intravascular coagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, potassium, urine output and urinalysis",
+          "cells": [
+            {
+              "text": "Acute kidney injury and haemoglobinuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_haemolytic_transfusion_reaction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial contamination with septic transfusion reaction",
+          "cells": [
+            {
+              "text": "Septic transfusion reaction"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-immune haemolysis from mechanical or thermal red-cell damage",
+          "cells": [
+            {
+              "text": "Mechanical or thermal red-cell damage"
+            },
+            {
+              "text": "Direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_haemolytic_transfusion_reaction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the transfusion immediately; keep the line open with saline",
+          "cells": [
+            {
+              "text": "First action at first suspicion"
+            },
+            {
+              "text": "Sodium chloride line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive intravenous crystalloid",
+          "cells": [
+            {
+              "text": "Maintains renal perfusion and promotes diuresis"
+            },
+            {
+              "text": "Crystalloid resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasopressor support and early critical care",
+          "cells": [
+            {
+              "text": "Hypotension and shock"
+            },
+            {
+              "text": "Critical care involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fresh frozen plasma, cryoprecipitate and platelets",
+          "cells": [
+            {
+              "text": "Disseminated intravascular coagulation"
+            },
+            {
+              "text": "Guided by coagulation results"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function, urine output, potassium and coagulation",
+          "cells": [
+            {
+              "text": "Early detection of complications"
+            },
+            {
+              "text": "Treat hyperkalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Established acute kidney injury"
+            },
+            {
+              "text": "Bridging therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Return the unit and paired samples; report through haemovigilance",
+          "cells": [
+            {
+              "text": "Investigation and reporting"
+            },
+            {
+              "text": "Haemovigilance report"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rigorous bedside patient and unit identification",
+          "cells": [
+            {
+              "text": "Prevents recurrence"
+            },
+            {
+              "text": "Preventive measure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_haemolytic_transfusion_reaction-dx-mgmt",
+      "title": "Diagnosis and management of Acute haemolytic transfusion reaction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, chills, loin pain or infusion-site pain during or after transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotension or shock after a small volume, or new bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop transfusion; resuscitate and call critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clerical recheck, DAT, repeat ABO and RhD grouping, haemolysis labs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Positive DAT with ABO incompatibility confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm haemolytic reaction; haemovigilance report and sample return",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review bacterial contamination, TRALI, anaphylaxis and non-immune haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive crystalloid to maintain renal perfusion and urine output",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vasopressors for shock; FFP, cryoprecipitate and platelets for DIC",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor potassium and renal function; renal replacement if AKI established",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severity is dose-related; prompt cessation and support improve outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

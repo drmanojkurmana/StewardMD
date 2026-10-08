@@ -148,5 +148,298 @@
       "caption": "Overview comparison matrix for central core disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular Disorders reference texts / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_core_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Muscle biopsy with oxidative enzyme histochemistry",
+          "cells": [
+            {
+              "text": "Central cores in type 1 fibres that lack oxidative enzyme staining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted or panel genetic testing including RYR1",
+          "cells": [
+            {
+              "text": "Sequencing and copy-number analysis for RYR1 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Usually normal or mildly raised; helps distinguish from dystrophies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Excludes neurogenic and other myopathic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function testing and orthopaedic assessment",
+          "cells": [
+            {
+              "text": "Serial monitoring of breathing, scoliosis and hip dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_core_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger-free anaesthesia",
+          "cells": [
+            {
+              "text": "Omit volatile agents and depolarising muscle relaxants"
+            },
+            {
+              "text": "Malignant hyperthermia susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant hyperthermia readiness",
+          "cells": [
+            {
+              "text": "Alert documentation and ready dantrolene, with active cooling for any crisis"
+            },
+            {
+              "text": "Crisis preparedness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain strength, mobility and function"
+            },
+            {
+              "text": "Function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Scoliosis, congenital hip dislocation and foot deformities"
+            },
+            {
+              "text": "Common complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory monitoring",
+          "cells": [
+            {
+              "text": "Baseline and serial respiratory function monitoring, with support where needed"
+            },
+            {
+              "text": "Where weakness affects breathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "RYR1 testing and family screening"
+            },
+            {
+              "text": "Predominantly autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary neuromuscular follow-up"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_core_disease-dx-mgmt",
+      "title": "Diagnosis and management of Central core disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central core disease: infant hypotonia with proximal weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anaesthetic complication, declining breathing, rapid scoliosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: avoid triggers; respiratory support and urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Muscle biopsy with oxidative stains; RYR1 testing; creatine kinase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Central cores in type 1 fibres with a RYR1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Trigger-free anaesthetic technique without volatile agents or depolarising relaxants",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check nemaline, centronuclear myopathy and congenital dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Malignant hyperthermia alert and dantrolene availability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy to maintain function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic care for scoliosis, hip dislocation and foot deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often static or slowly progressive; malignant hyperthermia is the main lifelong risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

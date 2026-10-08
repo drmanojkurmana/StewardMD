@@ -146,5 +146,315 @@
       "caption": "Overview comparison matrix for atrophic rhinitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atrophic_rhinitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anterior rhinoscopy and nasal endoscopy",
+          "cells": [
+            {
+              "text": "Mucosal atrophy, crusting and a widened cavity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture of nasal secretions",
+          "cells": [
+            {
+              "text": "Secondary bacterial colonisation, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy and specific tests",
+          "cells": [
+            {
+              "text": "Granulomatous or infective causes in secondary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Computed tomography",
+          "cells": [
+            {
+              "text": "Turbinate and sinus changes in atypical or secondary cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for nutritional deficiency",
+          "cells": [
+            {
+              "text": "Where clinically relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrophic_rhinitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granulomatosis with polyangiitis affecting the nose",
+          "cells": [
+            {
+              "text": "Cartilage or septal destruction and systemic features suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal tuberculosis or leprosy",
+          "cells": [
+            {
+              "text": "Granulomatous causes are excluded by biopsy and specific tests"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrophic_rhinitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasal hygiene",
+          "cells": [
+            {
+              "text": "Saline or alkaline douching and mechanical removal of crusts"
+            },
+            {
+              "text": "Centre of management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosal moisturisation",
+          "cells": [
+            {
+              "text": "Emollient nasal drops or ointments such as glucose-glycerine or oils"
+            },
+            {
+              "text": "Reduces crusting and odour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for secondary colonisation",
+          "cells": [
+            {
+              "text": "Topical or systemic, guided by culture; classically Klebsiella"
+            },
+            {
+              "text": "Secondary bacterial colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Secondary disease and any nutritional deficiency"
+            },
+            {
+              "text": "Secondary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical narrowing of the nasal cavity",
+          "cells": [
+            {
+              "text": "Medialisation of the lateral wall or submucosal implants"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT follow-up",
+          "cells": [
+            {
+              "text": "Long-term maintenance of nasal hygiene"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atrophic_rhinitis-dx-mgmt",
+      "title": "Diagnosis and management of Atrophic rhinitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nasal crusting, foul odour and a widened cavity with mucosal atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Cartilage destruction or systemic features suggesting GPA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for granulomatous disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rhinoscopy, endoscopy, secretion culture, biopsy, CT, nutrition screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Primary atrophic rhinitis confirmed after granulomatous disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nasal hygiene with saline douching and crust removal",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollient nasal drops or ointments to keep the mucosa moist",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Culture-guided antibiotics for secondary colonisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical narrowing of the nasal cavity for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term nasal hygiene with ENT follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

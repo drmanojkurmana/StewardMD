@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for dejerine-sottas disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dejerine_sottas-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Markedly slowed velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing across PMP22, MPZ, EGR2 and related genes",
+          "cells": [
+            {
+              "text": "Myelin gene variants; panel testing, not a single gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Assesses an overlapping inflammatory neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve imaging or examination",
+          "cells": [
+            {
+              "text": "Nerve hypertrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dejerine_sottas-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic inflammatory demyelinating polyneuropathy of childhood",
+          "cells": [
+            {
+              "text": "Steroid-responsive; can mimic the severe demyelinating picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other Charcot-Marie-Tooth subtypes",
+          "cells": [
+            {
+              "text": "Conflating them with milder CMT1 gives falsely reassuring counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dejerine_sottas-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive physiotherapy",
+          "cells": [
+            {
+              "text": "No disease-modifying therapy; maintain strength and prevent contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational therapy and orthoses",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses and mobility aids for progressive distal weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Skeletal deformity and joint contractures, including surgery where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain control",
+          "cells": [
+            {
+              "text": "Neuropathic agents as appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid neurotoxic drugs",
+          "cells": [
+            {
+              "text": "Vincristine aggravates the demyelinating neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early developmental input",
+          "cells": [
+            {
+              "text": "Given infantile onset and disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Confirm PMP22, MPZ and EGR2 variants; family screening; de novo and biallelic cases occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dejerine_sottas-dx-mgmt",
+      "title": "Diagnosis and management of Dejerine-Sottas disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Dejerine-Sottas disease: hypotonic infant with severely slowed nerve conduction",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (respiratory compromise, bulbar dysfunction, rapid motor loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory and feeding support; review for a treatable inflammatory neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies; PMP22, MPZ and EGR2 sequencing; CSF protein if overlap",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do markedly slowed velocities and gene variants confirm the severe neuropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital hypomyelinating neuropathy, childhood CIDP or spinal muscular atrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Physiotherapy to maintain strength and prevent contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Orthoses, mobility aids and occupational therapy for progressive weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic management of deformity and contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid vincristine and other neurotoxic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with confirmatory testing and family screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Severe, early and substantial disability; outcome varies with the gene and variant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

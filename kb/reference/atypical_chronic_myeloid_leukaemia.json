@@ -142,5 +142,315 @@
       "caption": "Overview comparison matrix for atypical chronic myeloid leukaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO haematolymphoid classification / haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atypical_chronic_myeloid_leukaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Dysgranulopoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCR-ABL1 testing",
+          "cells": [
+            {
+              "text": "Must be negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination with cytogenetics",
+          "cells": [
+            {
+              "text": "Marrow and cytogenetic findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing (for example SETBP1, ASXL1)",
+          "cells": [
+            {
+              "text": "Molecular markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of reactive and other myeloid neoplasms",
+          "cells": [
+            {
+              "text": "Excluded before diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_chronic_myeloid_leukaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic myeloid leukaemia (BCR-ABL1 positive)",
+          "cells": [
+            {
+              "text": "Separated by BCR-ABL1 testing, which must be negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic neutrophilic leukaemia",
+          "cells": [
+            {
+              "text": "Confused with aCML; film and molecular testing guide the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_chronic_myeloid_leukaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cytoreductive therapy",
+          "cells": [
+            {
+              "text": "Controls leucocytosis"
+            },
+            {
+              "text": "Tyrosine kinase inhibitors are ineffective because the disease is BCR-ABL1 negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypomethylating agents",
+          "cells": [
+            {
+              "text": "Azacitidine; ruxolitinib in selected cases"
+            },
+            {
+              "text": "Disease control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic transplant",
+          "cells": [
+            {
+              "text": "For eligible patients"
+            },
+            {
+              "text": "Only potentially curative option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Transfusion for symptomatic cytopenias; growth factor support; infection treatment"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transformation monitoring",
+          "cells": [
+            {
+              "text": "Close monitoring for acute myeloid leukaemia"
+            },
+            {
+              "text": "Transformation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist haematology team",
+          "cells": [
+            {
+              "text": "Early transplant referral"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atypical_chronic_myeloid_leukaemia-dx-mgmt",
+      "title": "Diagnosis and management of Atypical chronic myeloid leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Leucocytosis with dysgranulopoiesis and no BCR-ABL1 fusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rising blasts or progressive cytopenias with bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for transformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, BCR-ABL1, marrow cytogenetics, molecular testing (SETBP1, ASXL1)",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "BCR-ABL1 negative with reactive causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cytoreductive therapy to control leucocytosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat marrow studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hypomethylating agent such as azacitidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive transfusion and infection treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Refer early for allogeneic transplant if eligible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor for transformation to acute myeloid leukaemia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

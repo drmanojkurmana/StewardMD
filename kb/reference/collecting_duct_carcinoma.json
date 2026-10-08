@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for collecting duct carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Uro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "collecting_duct_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT of abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Infiltrative mass and nodal spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue diagnosis with immunohistochemistry",
+          "cells": [
+            {
+              "text": "Distinguishes from urothelial and medullary carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collecting_duct_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal medullary carcinoma",
+          "cells": [
+            {
+              "text": "Confused with CDC; separated by tissue diagnosis and immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper tract urothelial carcinoma",
+          "cells": [
+            {
+              "text": "Confused with CDC; separated by tissue diagnosis and immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective renal pelvis mass",
+          "cells": [
+            {
+              "text": "Attributing a central renal mass to infection delays oncological work-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collecting_duct_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical nephrectomy with regional lymph node dissection",
+          "cells": [
+            {
+              "text": "Standard curative approach for localised, resectable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete surgical resection",
+          "cells": [
+            {
+              "text": "Most important determinant of prolonged survival in localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative staging",
+          "cells": [
+            {
+              "text": "Cross-sectional abdominal and pelvic imaging plus chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant therapy",
+          "cells": [
+            {
+              "text": "No established role for routine adjuvant systemic therapy in CDC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum-based chemotherapy",
+          "cells": [
+            {
+              "text": "Most commonly used systemic treatment for advanced or metastatic CDC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clear cell targeted therapy and immunotherapy",
+          "cells": [
+            {
+              "text": "Generally poor response in CDC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical trial",
+          "cells": [
+            {
+              "text": "Consider enrolment given the limited evidence base"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative care",
+          "cells": [
+            {
+              "text": "Symptom control alongside active treatment from diagnosis of advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Structured imaging after resection to detect recurrence early"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "collecting_duct_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Collecting duct carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected collecting duct carcinoma: central infiltrative renal mass with haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bulky nodes, distant metastasis, rapid deterioration)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent uro-oncology MDT review and staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT abdomen and pelvis, chest imaging, tissue immunohistochemistry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does immunohistochemistry confirm CDC, not urothelial or medullary carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider upper tract urothelial carcinoma or renal medullary carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Radical nephrectomy with regional lymph node dissection for localised disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Complete surgical resection, the main determinant of prolonged survival",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Platinum-based chemotherapy for advanced or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Clinical trial enrolment and palliative care alongside active treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally poor prognosis; resection of localised disease gives the best chance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

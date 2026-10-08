@@ -148,5 +148,74 @@
       "caption": "Overview comparison matrix for bietti crystalline dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bietti_crystalline_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Bietti crystalline dystrophy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Dilated fundus examination", "cells": [{"text": "Numerous glistening yellow-white crystalline deposits in the posterior pole, with atrophy"}], "cite": "c1"},
+        {"parameter": "Optical coherence tomography", "cells": [{"text": "Hyper-reflective crystalline dots; progressive outer retinal, RPE and choroidal thinning"}], "cite": "c1"},
+        {"parameter": "Fundus autofluorescence", "cells": [{"text": "Maps retinal pigment epithelium and photoreceptor loss"}], "cite": "c1"},
+        {"parameter": "Full-field electroretinography", "cells": [{"text": "Cone and rod function; deteriorates over time"}], "cite": "c1"},
+        {"parameter": "CYP4V2 molecular genetic testing", "cells": [{"text": "Confirms biallelic CYP4V2 mutations"}], "cite": "c1"},
+        {"parameter": "Slit-lamp examination of the limbus", "cells": [{"text": "Limbal crystals, which may be subtle or absent"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bietti_crystalline_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bietti crystalline dystrophy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Low-vision rehabilitation", "cells": [{"text": "Visual aids and support services"}, {"text": "No established disease-modifying therapy"}], "cite": "c1"},
+        {"parameter": "Serial monitoring", "cells": [{"text": "Optical coherence tomography, fundus autofluorescence and electroretinography"}, {"text": "Tracks chorioretinal and photoreceptor loss"}], "cite": "c1"},
+        {"parameter": "Complications", "cells": [{"text": "Anti-VEGF therapy for choroidal neovascularisation; surgical cataract management"}, {"text": "Treats complications when they occur"}], "cite": "c1"},
+        {"parameter": "Photoprotection", "cells": [{"text": "Ultraviolet-blocking eyewear and retinal-health advice"}, {"text": "General advice"}], "cite": "c1"},
+        {"parameter": "Gene-directed therapy", "cells": [{"text": "CYP4V2-targeted therapy through specialist research pathways"}, {"text": "Investigational"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling on autosomal recessive CYP4V2 inheritance; testing of at-risk relatives"}, {"text": "Affected siblings warrant screening"}], "cite": "c1"},
+        {"parameter": "Social support", "cells": [{"text": "Social support and registration for visual impairment"}, {"text": "As sight declines"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bietti_crystalline_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Bietti crystalline dystrophy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Night blindness and falling acuity in early adulthood; posterior pole crystalline deposits", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive field constriction, rapid central loss or drug history suggesting acquired retinopathy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: full drug and metabolic history; reassess for a treatable acquired cause", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "OCT and fundus autofluorescence; slit-lamp check for limbal crystals", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Full-field electroretinography and CYP4V2 genetic testing", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Biallelic CYP4V2 variants confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Low-vision rehabilitation; monitor with OCT and ERG; counsel and screen siblings", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider drug-induced, talc or other crystalline retinopathy", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Progressive decline over decades; many reach severe visual impairment", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

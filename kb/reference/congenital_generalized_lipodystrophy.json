@@ -154,5 +154,314 @@
       "caption": "Overview comparison matrix for congenital generalised lipodystrophy (berardinelli-seip)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_generalized_lipodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum leptin with fasting insulin and C-peptide",
+          "cells": [
+            {
+              "text": "Leptin characteristically very low; insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile and HbA1c",
+          "cells": [
+            {
+              "text": "Triglycerides and diabetes assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and hepatic imaging",
+          "cells": [
+            {
+              "text": "Steatosis and hepatomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body or regional fat imaging (MRI or DEXA)",
+          "cells": [
+            {
+              "text": "Near-total fat deficit mapped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted genetic testing (AGPAT2, BSCL2, CAV1, PTRF/CAVIN1)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_generalized_lipodystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acquired generalised lipodystrophy (Lawrence syndrome)",
+          "cells": [
+            {
+              "text": "Acquired rather than congenital"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial partial lipodystrophy presenting in childhood",
+          "cells": [
+            {
+              "text": "Partial rather than generalised fat loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poorly controlled type 1 diabetes with marked wasting",
+          "cells": [
+            {
+              "text": "Diabetic wasting; leptin is characteristically very low in this disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_generalized_lipodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Metreleptin",
+          "cells": [
+            {
+              "text": "Recombinant leptin, disease-specific cornerstone in leptin-deficient disease; improves glycaemia and hypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin-resistant diabetes",
+          "cells": [
+            {
+              "text": "High-dose insulin and insulin sensitisers such as metformin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triglyceride lowering",
+          "cells": [
+            {
+              "text": "Fibrates and omega-3 fatty acids to reduce pancreatitis risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-fat diet",
+          "cells": [
+            {
+              "text": "Controlled, balanced diet with dietitian input to limit ectopic lipid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ monitoring",
+          "cells": [
+            {
+              "text": "Hepatic steatosis and steatohepatitis; echocardiography for cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Prompt management; apheresis for extreme hypertriglyceridaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive AGPAT2, BSCL2, CAV1, CAVIN1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_generalized_lipodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Congenital generalised lipodystrophy (Berardinelli-Seip)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital generalised lipodystrophy: near-total fat loss, low leptin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pancreatitis, steatohepatitis, cardiomyopathy, severe hyperglycaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pancreatitis and triglyceride management; metabolic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum leptin; insulin and C-peptide; lipids; liver tests; fat imaging; genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is leptin very low with generalised fat loss on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider acquired lipodystrophy, partial lipodystrophy or malnutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Metreleptin replacement, the disease-specific cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-dose insulin and metformin for insulin-resistant diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Fibrates and omega-3 fatty acids to lower triglycerides",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor liver and heart; genetic counselling and family testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis depends on metabolic control; metreleptin substantially improves it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -154,5 +154,305 @@
       "caption": "Overview comparison matrix for complement factor h deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complement_factor_h_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Complement profile",
+          "cells": [
+            {
+              "text": "Low C3 with normal C4; alternative pathway pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor H antigenic level and functional assay",
+          "cells": [
+            {
+              "text": "Overlooked if C3 low and C4 normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFH gene sequencing and copy number analysis",
+          "cells": [
+            {
+              "text": "Adjacent CFHR region included"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood film and renal function",
+          "cells": [
+            {
+              "text": "Microangiopathic haemolysis; renal function monitored"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_factor_h_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor I and other alternative pathway regulator defects",
+          "cells": [
+            {
+              "text": "Low C3 with normal C4; factor I measured directly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shiga toxin-associated (typical) haemolytic uraemic syndrome",
+          "cells": [
+            {
+              "text": "Typical form; the complement-driven form is atypical HUS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other thrombotic microangiopathies",
+          "cells": [
+            {
+              "text": "Listed as a look-alike; complement testing is needed to separate them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_factor_h_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunisation and prophylaxis",
+          "cells": [
+            {
+              "text": "Encapsulated organisms, especially meningococcus; antibiotic prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C5 inhibitor for atypical HUS",
+          "cells": [
+            {
+              "text": "Eculizumab or ravulizumab, with plasma exchange or other support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcal cover on C5 inhibitor",
+          "cells": [
+            {
+              "text": "Vaccination and antibiotic prophylaxis before and during therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibody-mediated form",
+          "cells": [
+            {
+              "text": "Immunosuppression and plasma exchange to remove anti-factor H autoantibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C3 glomerulopathy",
+          "cells": [
+            {
+              "text": "Complement-directed and immunosuppressive therapy with proteinuria support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal transplantation planning",
+          "cells": [
+            {
+              "text": "Anti-complement prophylaxis given high recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening; nephrology and complement specialist team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complement_factor_h_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Complement factor H deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected complement factor H deficiency: low C3 with normal C4",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (meningococcal features, AKI with haemolysis, nephrotic proteinuria)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat meningococcal disease; start C5 inhibitor for atypical HUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "C3 and C4; factor H level and function; CFH sequencing; anti-factor H; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CFH testing or anti-factor H testing confirm the defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider factor I defect, Shiga toxin HUS or secondary consumption",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunisation and antibiotic prophylaxis against encapsulated organisms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "C5 inhibitor (eculizumab or ravulizumab) for atypical HUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Meningococcal cover before and during C5-inhibitor therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunosuppression and plasma exchange for antibody-mediated form",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong infection risk is greatly reduced by vaccination and prompt antibiotics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

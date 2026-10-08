@@ -154,5 +154,352 @@
       "caption": "Overview comparison matrix for adenosine deaminase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adenosine_deaminase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythrocyte adenosine deaminase enzyme activity assay",
+          "cells": [
+            {
+              "text": "Deficient enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrocyte deoxyadenosine triphosphate (dATP)",
+          "cells": [
+            {
+              "text": "Accumulated metabolite"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subset enumeration by flow cytometry",
+          "cells": [
+            {
+              "text": "T, B and NK lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels and specific antibody responses",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADA gene molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Newborn screening TREC result where available",
+          "cells": [
+            {
+              "text": "Thymic output"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey and hearing assessment",
+          "cells": [
+            {
+              "text": "Costochondral changes and sensorineural deafness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_deaminase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked common gamma chain, JAK3, IL7R or RAG defects (other SCID)",
+          "cells": [
+            {
+              "text": "No metabolic or skeletal features"
+            },
+            {
+              "text": "ADA activity and dATP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Purine nucleoside phosphorylase deficiency",
+          "cells": [
+            {
+              "text": "Predominantly T-cell defect with neurological features"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_deaminase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Haematopoietic stem cell transplantation, ideally from a matched donor",
+          "cells": [
+            {
+              "text": "Definitive curative treatment"
+            },
+            {
+              "text": "Matched donor preferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autologous gene therapy",
+          "cells": [
+            {
+              "text": "Gene-corrected haematopoietic stem cells"
+            },
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme replacement with PEG-ADA (pegademase or elapegademase)",
+          "cells": [
+            {
+              "text": "Bridge, or when transplant and gene therapy are not options"
+            },
+            {
+              "text": "Polyethylene-glycol-conjugated enzyme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis and regular immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Pneumocystis, fungal and viral infection"
+            },
+            {
+              "text": "Regular infusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective isolation, irradiated CMV-negative blood products, no live vaccines",
+          "cells": [
+            {
+              "text": "Infection prevention"
+            },
+            {
+              "text": "Avoid live vaccines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition, growth support and treatment of chronic diarrhoea",
+          "cells": [
+            {
+              "text": "Failure to thrive"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune and metabolite monitoring; genetic counselling; newborn screening",
+          "cells": [
+            {
+              "text": "After definitive treatment"
+            },
+            {
+              "text": "Family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adenosine_deaminase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Adenosine deaminase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with recurrent severe infections, diarrhoea and failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Profound lymphopenia, absent thymic shadow or Pneumocystis infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review; protective isolation and treat opportunistic infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subsets, erythrocyte ADA activity and dATP level",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low ADA activity with raised erythrocyte dATP confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ADA gene testing; plan HSCT with a matched donor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review other SCIDs, PNP deficiency and DiGeorge syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Infection prophylaxis and regular immunoglobulin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "PEG-ADA enzyme replacement as bridge where transplant not yet possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protective isolation; irradiated CMV-negative products; no live vaccines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated disease usually fatal in early childhood; early treatment helps",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,324 @@
       "caption": "Overview comparison matrix for aseptic abscess syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Autoinflammatory and neutrophilic dermatosis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aseptic_abscess_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cross-sectional imaging of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Number and distribution of lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated aspiration or biopsy of a lesion",
+          "cells": [
+            {
+              "text": "Microbiology, mycobacterial and fungal culture, plus histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comprehensive infective screen and serology",
+          "cells": [
+            {
+              "text": "Exclusion of occult infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and full blood count",
+          "cells": [
+            {
+              "text": "Neutrophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ileocolonoscopy and gut imaging",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune and vasculitis serology",
+          "cells": [
+            {
+              "text": "Exclusion of mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aseptic_abscess_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyogenic visceral abscess from bacterial infection",
+          "cells": [
+            {
+              "text": "Closely mimicked; repeated cultures and biopsy exclude infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated tuberculosis or fungal infection",
+          "cells": [
+            {
+              "text": "Mycobacterial and fungal culture on biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aseptic_abscess_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "First-line; rapid defervescence and resolution of sterile collections"
+            },
+            {
+              "text": "First-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine or an anti-TNF biologic"
+            },
+            {
+              "text": "Maintains remission and enables steroid withdrawal in relapsing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infection first",
+          "cells": [
+            {
+              "text": "Repeated cultures and lesion biopsy before committing to immunosuppression"
+            },
+            {
+              "text": "Close mimicry of pyogenic abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluate associated disease",
+          "cells": [
+            {
+              "text": "Inflammatory bowel disease, particularly Crohn disease; neutrophilic dermatoses"
+            },
+            {
+              "text": "Coexisting disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse surveillance",
+          "cells": [
+            {
+              "text": "Symptoms, inflammatory markers and imaging of affected viscera during steroid taper"
+            },
+            {
+              "text": "Relapse during taper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary management",
+          "cells": [
+            {
+              "text": "Rheumatology and gastroenterology; drainage for diagnostic sampling"
+            },
+            {
+              "text": "Drainage is not definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aseptic_abscess_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Aseptic Abscess Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Multiple sterile abscesses or collections with fever and neutrophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Haemodynamic instability or splenic involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis evaluation to exclude genuine infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Imaging of chest, abdomen and pelvis, repeated cultures and biopsy, colonoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Repeated cultures and lesion biopsy sterile, with infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids as first-line, with rapid defervescence",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat cultures and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing immunosuppression with azathioprine or anti-TNF",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Evaluate for Crohn disease and neutrophilic dermatoses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for relapse during steroid taper with imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Co-managed by rheumatology and gastroenterology; drainage for sampling only",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

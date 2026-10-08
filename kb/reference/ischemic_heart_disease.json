@@ -177,5 +177,583 @@
       "caption": "Overview comparison matrix for ischemic heart disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Stable Angina, 2026 (cites 2023 AHA/ACC chronic coronary disease guideline)",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/coronary-artery-disease/angina-pectoris"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 243-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 230-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ischemic_heart_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and risk assessment in stable ischaemic heart disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical angina",
+          "cells": [
+            {
+              "text": "Pressure or heaviness, 2 to 5 minutes, with exertion, relieved by rest or nitrate"
+            },
+            {
+              "text": "Trapezius radiation or pain pinpointed with one finger points away from ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resting 12-lead ECG",
+          "cells": [
+            {
+              "text": "Often normal between episodes"
+            },
+            {
+              "text": "Dynamic ST-T change with pain is more specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise ECG: ischaemic response",
+          "unit": "mV",
+          "cells": [
+            {
+              "text": "Flat or downsloping ST depression above 0.1 mV for over 0.08 s",
+              "op": ">",
+              "value": 0.1
+            },
+            {
+              "text": "Nondiagnostic if under 85% of predicted maximal heart rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise ECG sensitivity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 46 to 68% (Merck); about 75% (Harrison)",
+              "range": [
+                46,
+                75
+              ]
+            },
+            {
+              "text": "A negative test does not exclude CAD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stress echo or SPECT",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 80 to 90%",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "Use when resting ECG is abnormal or patient cannot exercise"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Coronary CT angiography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 93 to 99%",
+              "range": [
+                93,
+                99
+              ]
+            },
+            {
+              "text": "Initial test under age 65 with intermediate or high probability"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-risk stress result",
+          "unit": "mV",
+          "cells": [
+            {
+              "text": "ST depression of 0.2 mV or more, or SBP fall over 10 mmHg",
+              "op": ">=",
+              "value": 0.2
+            },
+            {
+              "text": "{{hy:Low workload ischaemia or EF below 0.40 marks high risk}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive angiography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Luminal narrowing over 70% significant without FFR",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "Gold standard; FFR clarifies equivocal lesions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CCS class III",
+          "cells": [
+            {
+              "text": "Angina walking 1 to 2 blocks or one flight of stairs"
+            },
+            {
+              "text": "Class IV: angina with any activity or at rest"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Stress ECG sensitivity differs: Merck (2026) gives 46 to 68%, Harrison 22e about 75%. Harrison notes flow reserve falls at about 50% narrowing; Merck treats over 70% as significant on angiography."
+    },
+    {
+      "id": "ischemic_heart_disease-ddx",
+      "kind": "ddx",
+      "title": "Causes of angina-like chest pain",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Pain over 20 minutes, at rest, or with syncope or heart failure"
+            },
+            {
+              "text": "Serial troponin and ECG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aortic stenosis",
+          "cells": [
+            {
+              "text": "Ejection murmur; angina from LV hypertrophy without CAD"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Murmur rising with Valsalva, LVH"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasospastic angina",
+          "cells": [
+            {
+              "text": "Rest pain, often at night, transient ST elevation"
+            },
+            {
+              "text": "Ambulatory ECG or provocation at angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular angina",
+          "cells": [
+            {
+              "text": "Ischaemic pain without epicardial obstruction, commoner in women"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericarditis",
+          "cells": [
+            {
+              "text": "Pain to the trapezius, positional"
+            },
+            {
+              "text": "ECG and echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "Tearing pain to the back"
+            },
+            {
+              "text": "CT angiography of the aorta"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oesophageal disease or GERD",
+          "cells": [
+            {
+              "text": "Relation to meals, reflux symptoms"
+            },
+            {
+              "text": "Trial of acid suppression or endoscopy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest wall pain",
+          "cells": [
+            {
+              "text": "Reproduced by palpation"
+            },
+            {
+              "text": "Clinical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ischemic_heart_disease-treatment",
+      "kind": "treatment",
+      "title": "Management of stable ischaemic heart disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sublingual nitroglycerin",
+          "cells": [
+            {
+              "text": "Acute angina; repeat every 4 to 5 minutes up to 3 doses"
+            },
+            {
+              "text": "Relief begins in 1.5 to 3 minutes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose aspirin",
+          "cells": [
+            {
+              "text": "All patients with chronic CAD"
+            },
+            {
+              "text": "DAPT with a P2Y12 inhibitor usually 12 months after PCI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-intensity statin",
+          "cells": [
+            {
+              "text": "All patients if tolerated"
+            },
+            {
+              "text": "Add ezetimibe or PCSK9 inhibitor if needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-blocker",
+          "cells": [
+            {
+              "text": "{{hy:First line with LVEF 50% or less or prior MI}}"
+            },
+            {
+              "text": "Titrate to heart rate and tolerance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Calcium channel blocker",
+          "cells": [
+            {
+              "text": "Beta-blocker not tolerated or symptoms persist"
+            },
+            {
+              "text": "Avoid short-acting nifedipine alone; amlodipine if LV dysfunction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Long-acting nitrate",
+          "cells": [
+            {
+              "text": "Persistent symptoms on beta-blocker"
+            },
+            {
+              "text": "Needs a nitrate-free interval to avoid tolerance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ranolazine or ivabradine",
+          "cells": [
+            {
+              "text": "Refractory symptoms"
+            },
+            {
+              "text": "Ranolazine prolongs QT; ivabradine for sinus rate 70/min or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SGLT2 inhibitor or GLP-1 agonist",
+          "cells": [
+            {
+              "text": "Diabetes or heart failure"
+            },
+            {
+              "text": "Cardiovascular risk reduction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Coronary angiography",
+          "cells": [
+            {
+              "text": "CCS class III or IV on medical therapy, high-risk noninvasive test, sudden death survivor, sustained VT"
+            },
+            {
+              "text": "Leads to revascularisation decision"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "PCI or CABG",
+          "cells": [
+            {
+              "text": "Persistent angina despite therapy or high-risk anatomy"
+            },
+            {
+              "text": "CABG favoured in diabetes with multivessel disease and in left main disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk factor control",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Smoking cessation, BP below 130/80, exercise, vaccination"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck gives no mg doses for antianginal drugs; dose per local formulary."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ischemic_heart_disease-dx-mgmt",
+      "title": "Diagnosis and management of ischaemic heart disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exertional chest discomfort suggesting angina",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rest pain over 20 minutes, syncope or heart failure?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat as acute coronary syndrome",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, lipids, glucose, creatinine; estimate pretest probability",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Resting ECG normal and able to exercise?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Exercise ECG or coronary CT angiography",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stress imaging: echo, SPECT, PET or MRI",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "High-risk result or CCS class III to IV despite therapy?",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Invasive angiography with FFR",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "PCI or CABG by anatomy plus medical therapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Aspirin, statin, beta-blocker, sublingual nitrate",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Risk factor control; reassess if symptoms change",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -159,5 +159,312 @@
       "caption": "Overview comparison matrix for clear cell sarcoma of soft tissue."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "clear_cell_sarcoma_soft_tissue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the primary site",
+          "cells": [
+            {
+              "text": "Extent and relation to tendon and neurovascular structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core needle or open biopsy",
+          "cells": [
+            {
+              "text": "Expert soft-tissue pathology review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or RT-PCR for EWSR1 rearrangement",
+          "cells": [
+            {
+              "text": "EWSR1-ATF1 or EWSR1-CREB1 fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for S100, HMB-45, Melan-A and SOX10",
+          "cells": [
+            {
+              "text": "Melanocytic markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT of the chest",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clear_cell_sarcoma_soft_tissue-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Metastatic or primary malignant melanoma",
+          "cells": [
+            {
+              "text": "No EWSR1 fusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial sarcoma",
+          "cells": [
+            {
+              "text": "Deep soft-tissue sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alveolar soft part sarcoma",
+          "cells": [
+            {
+              "text": "Other deep soft-tissue sarcoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clear_cell_sarcoma_soft_tissue-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide, margin-negative surgical resection",
+          "cells": [
+            {
+              "text": "Foundation of curative treatment at a sarcoma centre"
+            },
+            {
+              "text": "Curative intent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Margin planning along tendons and fascial planes",
+          "cells": [
+            {
+              "text": "Spread follows tendons and fascia, not a superficial mass"
+            },
+            {
+              "text": "Planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resection of gross regional nodal disease",
+          "cells": [
+            {
+              "text": "Resected together with the primary tumour"
+            },
+            {
+              "text": "Distinct propensity for nodal spread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy to the tumour bed",
+          "cells": [
+            {
+              "text": "Large tumours or close or marginal margins"
+            },
+            {
+              "text": "Local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum-containing chemotherapy",
+          "cells": [
+            {
+              "text": "Most potentially beneficial conventional option"
+            },
+            {
+              "text": "Limited activity overall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "clear_cell_sarcoma_soft_tissue-dx-mgmt",
+      "title": "Diagnosis and management of Clear cell sarcoma of soft tissue",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected clear cell sarcoma of soft tissue: slowly enlarging deep mass on a tendon",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, nodes, pulmonary nodules, recurrence)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent sarcoma centre review for nodal or lung spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI of the primary, core biopsy, EWSR1 testing and melanocytic markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "EWSR1-ATF1 or EWSR1-CREB1 fusion confirmed, excluding melanoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Wide, margin-negative resection planned at a sarcoma centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check metastatic melanoma, synovial and epithelioid sarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Resect gross regional nodal disease together with the primary",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider sentinel node biopsy; benefit not established",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for large tumours or close margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Platinum-containing chemotherapy with limited activity; lung staging",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

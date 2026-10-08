@@ -296,5 +296,547 @@
       "caption": "Diagnostic and clinical overview matrix for dysentery (invasive bacterial diarrhea)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ICMR, Guidelines for Antimicrobial Use, Acute diarrhoea treatment",
+      "url": "https://amrtg.icmr.org.in/chapter5-acute-diarrhea-treatment.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 209-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "CDC, Shigella clinical care",
+      "url": "https://www.cdc.gov/shigella/hcp/clinical-care/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 128-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "DYSENTERY-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising dysentery and its cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Grossly bloody or mucoid stool with faecal leukocytes or lactoferrin",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "{{hy:Inflammatory (invasive) diarrhoea from the colon}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tenesmus",
+          "cells": [
+            {
+              "text": "Painful urge with little stool"
+            },
+            {
+              "text": "Proctitis; typical of shigellosis and amoebiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and culture",
+          "cells": [
+            {
+              "text": "Send routinely in dysentery"
+            },
+            {
+              "text": "Guides antibiotic choice"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PMNs in every field",
+          "cells": [
+            {
+              "text": "Abundant neutrophils"
+            },
+            {
+              "text": "Favours bacterial invasion, especially Shigella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythrophagocytic trophozoites, few PMNs",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Favours Entamoeba histolytica"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever in amoebic dysentery",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 40% febrile",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Gradual onset over 2 to 6 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloody diarrhoea without fever",
+          "cells": [
+            {
+              "text": "Low-grade or no fever"
+            },
+            {
+              "text": "Suspect Shiga toxin-producing E. coli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shigella incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Usually 1 to 4",
+              "range": [
+                1,
+                4
+              ]
+            },
+            {
+              "text": "Watery phase then small bloody mucopurulent stools"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shigella inoculum",
+          "unit": "organisms",
+          "cells": [
+            {
+              "text": "10 to 200",
+              "range": [
+                10,
+                200
+              ]
+            },
+            {
+              "text": "Very infectious; person-to-person spread"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Dehydration",
+          "cells": [
+            {
+              "text": "Uncommon in dysentery"
+            },
+            {
+              "text": "Small-volume stools"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "DYSENTERY-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of dysentery",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Shigella",
+          "cells": [
+            {
+              "text": "Dysentery after potato or egg salad, lettuce or raw vegetables"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Amoebic colitis",
+          "cells": [
+            {
+              "text": "Subacute onset, often afebrile, trophozoites on microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterohaemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "{{hy:Bloody stool without fever; ground beef, raw milk; risk of HUS}}"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Campylobacter jejuni",
+          "cells": [
+            {
+              "text": "Inflammatory diarrhoea from poultry or raw milk; about 10% grossly bloody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Yersinia enterocolitica",
+          "cells": [
+            {
+              "text": "Right lower quadrant pain mimicking appendicitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vibrio parahaemolyticus",
+          "cells": [
+            {
+              "text": "Dysentery after molluscs or crustaceans"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Clostridioides difficile colitis",
+          "cells": [
+            {
+              "text": "Antibiotic or healthcare exposure; stool rarely grossly bloody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "First flare can be identical; negative stool studies, no travel exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexually transmitted proctocolitis",
+          "cells": [
+            {
+              "text": "Bloody mucoid rectal discharge and tenesmus with sexual exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "DYSENTERY-treatment",
+      "kind": "treatment",
+      "title": "Treatment of dysentery in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral rehydration solution",
+          "cells": [
+            {
+              "text": "No or moderate hypovolaemia"
+            },
+            {
+              "text": "ORS with 75 mEq/L sodium and 75 mmol/L glucose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV Ringer's lactate",
+          "cells": [
+            {
+              "text": "Severe hypovolaemia"
+            },
+            {
+              "text": "Preferred over normal saline"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciprofloxacin",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea, presumed Shigella",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "500 mg twice daily for 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ceftriaxone",
+          "cells": [
+            {
+              "text": "Alternative for Shigella"
+            },
+            {
+              "text": "2 g IV single dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Campylobacter",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "500 mg for 3 days; Shigella resistance to azithromycin nearing 20% in India"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metronidazole for amoebic colitis",
+          "cells": [
+            {
+              "text": "Amoebic dysentery"
+            },
+            {
+              "text": "750 mg three times daily orally or IV for 5 to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tinidazole for amoebic colitis",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Amoebic dysentery",
+              "op": "=",
+              "value": 3
+            },
+            {
+              "text": "2 g daily with food for 3 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Luminal agent after amoebic colitis",
+          "cells": [
+            {
+              "text": "Clear intestinal cysts"
+            },
+            {
+              "text": "Paromomycin 30 mg/kg daily in 3 doses for 5 to 10 days, or iodoquinol 650 mg three times daily for 20 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Avoid loperamide and diphenoxylate",
+          "cells": [
+            {
+              "text": "Dysentery"
+            },
+            {
+              "text": "{{hy:Antimotility drugs are avoided in dysentery}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ampicillin or TMP-SMX",
+          "cells": [
+            {
+              "text": "Not recommended in India"
+            },
+            {
+              "text": "High resistance"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Metronidazole dose for amoebiasis differs: ICMR lists 500 mg three times daily for 5 days; Tables PDF 209-1 lists 750 mg three times daily for 5 to 10 days. Antibiotics are generally avoided in suspected EHEC, but that statement was not in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "DYSENTERY-dx-mgmt",
+      "title": "Diagnosis and management of dysentery",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bloody or mucoid diarrhoea with cramps or tenesmus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Assess hydration; ORS, or IV Ringer's lactate if severe",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Stool microscopy and culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Trophozoites with few PMNs, subacute course?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Metronidazole or tinidazole, then a luminal agent",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Bloody stool without fever, beef or raw milk exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Suspect EHEC; supportive care, watch for HUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ciprofloxacin 3 days, or ceftriaxone single dose",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "No improvement in a couple of days?",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Review culture susceptibility; change antibiotic",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete course; no antimotility drugs",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,287 @@
       "caption": "Overview comparison matrix for dapsone hypersensitivity syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dapsone_hypersensitivity_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Marked transaminitis or acute liver failure, the main cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with differential",
+          "cells": [
+            {
+              "text": "Eosinophilia and atypical lymphocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methaemoglobin level and haemolysis screen",
+          "cells": [
+            {
+              "text": "Separate oxidant effects, distinct from the immune syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose-6-phosphate dehydrogenase status",
+          "cells": [
+            {
+              "text": "Checked where relevant, alongside the haemolysis screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B*13:01 testing",
+          "cells": [
+            {
+              "text": "Allele status in appropriate populations; screening aims to prevent the syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dapsone_hypersensitivity_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw dapsone",
+          "cells": [
+            {
+              "text": "Immediately and permanently, with lifelong avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "For significant organ involvement, especially hepatitis; slow taper to avoid relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Fluid balance, skin care and temperature control, as for other DRESS reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ monitoring",
+          "cells": [
+            {
+              "text": "Liver and renal function and blood count closely; hepatic failure is the main cause of death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxidant effects",
+          "cells": [
+            {
+              "text": "Assess and treat methaemoglobinaemia and haemolysis; check G6PD status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA screening",
+          "cells": [
+            {
+              "text": "Screen for HLA-B*13:01 in at-risk populations before dapsone exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation and allergy record",
+          "cells": [
+            {
+              "text": "Critical care or liver unit if hepatic failure develops; record a clear drug allergy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dapsone_hypersensitivity_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Dapsone hypersensitivity syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dapsone hypersensitivity: rash, fever and multiorgan illness on dapsone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute liver failure, mucosal rash, renal or haemodynamic compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: critical care or liver unit; withdraw dapsone at once",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC with eosinophils, liver and renal function, methaemoglobin and G6PD",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Eosinophilia or atypical lymphocytes with recent dapsone exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Review look-alikes: DRESS, SJS or TEN, viral exanthem, sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop dapsone immediately and permanently; record a clear drug allergy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic corticosteroids for organ involvement, with a slow taper",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor liver, renal function and blood count; hepatic failure is the main risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat methaemoglobinaemia and haemolysis; check G6PD status",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Screen HLA-B*13:01 in at-risk populations before any dapsone exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most recover with early withdrawal and steroids; can be fatal from hepatic failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

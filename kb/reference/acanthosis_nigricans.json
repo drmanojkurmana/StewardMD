@@ -148,5 +148,307 @@
       "caption": "Overview comparison matrix for acanthosis nigricans."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Fitzpatrick's Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acanthosis_nigricans-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting glucose, HbA1c and fasting insulin",
+          "cells": [
+            {
+              "text": "Insulin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid profile and metabolic syndrome assessment",
+          "cells": [
+            {
+              "text": "Metabolic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome work-up (androgens, pelvic ultrasound)",
+          "cells": [
+            {
+              "text": "PCOS in appropriate women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening with GI evaluation and endoscopy",
+          "cells": [
+            {
+              "text": "Malignant acanthosis nigricans when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug history review",
+          "cells": [
+            {
+              "text": "Causative agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyperkeratosis and papillomatosis in atypical cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acanthosis_nigricans-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight reduction, dietary change and exercise",
+          "cells": [
+            {
+              "text": "Treats the underlying insulin resistance"
+            },
+            {
+              "text": "Optimise glycaemic control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin",
+          "cells": [
+            {
+              "text": "Glycaemic control in type 2 diabetes or PCOS"
+            },
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw any causative drug",
+          "cells": [
+            {
+              "text": "Drug-induced form"
+            },
+            {
+              "text": "Corticosteroids, nicotinic acid or oestrogens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical retinoids, keratolytics and vitamin D analogues",
+          "cells": [
+            {
+              "text": "Cosmetic improvement of plaques"
+            },
+            {
+              "text": "Keratolytics such as urea or ammonium lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent search for an underlying adenocarcinoma",
+          "cells": [
+            {
+              "text": "Suspected malignant acanthosis nigricans"
+            },
+            {
+              "text": "Particularly gastric; treat the tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage dyslipidaemia, hypertension and PCOS",
+          "cells": [
+            {
+              "text": "Metabolic syndrome features"
+            },
+            {
+              "text": "Combined hormonal contraception or anti-androgen for PCOS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology and endocrinology referral",
+          "cells": [
+            {
+              "text": "Monitor glycaemic and metabolic status"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acanthosis_nigricans-dx-mgmt",
+      "title": "Diagnosis and management of Acanthosis nigricans",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Velvety hyperpigmented thickening in flexures, often with obesity or PCOS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Abrupt onset with rapid spread, or mucosal or palmar involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent search for an underlying adenocarcinoma, particularly gastric",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fasting glucose, HbA1c, fasting insulin and lipid profile",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Insulin resistance or metabolic syndrome found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Weight reduction, diet and exercise; metformin where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review drug history and PCOS; skin biopsy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw causative drugs such as corticosteroids or oestrogens",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical retinoids, keratolytics or vitamin D analogues for cosmetic benefit",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat dyslipidaemia and hypertension; manage PCOS hormonally",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign form improves with treatment; malignant form carries a poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

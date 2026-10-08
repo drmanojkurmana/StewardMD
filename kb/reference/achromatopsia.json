@@ -148,5 +148,286 @@
       "caption": "Overview comparison matrix for achromatopsia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "achromatopsia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-field electroretinography",
+          "cells": [
+            {
+              "text": "Absent cone responses with preserved rod responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision testing (Hardy-Rand-Rittler or arrangement tests)",
+          "cells": [
+            {
+              "text": "Colour vision absent or severely defective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spectral-domain optical coherence tomography of the fovea",
+          "cells": [
+            {
+              "text": "Foveal cone structure; progressive loss if present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing (CNGB3, CNGA3 and related genes)",
+          "cells": [
+            {
+              "text": "Genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Best-corrected acuity and refraction",
+          "cells": [
+            {
+              "text": "Typically low but non-progressive acuity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "achromatopsia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dark or red-tinted filters, contact lenses and photochromic lenses",
+          "cells": [
+            {
+              "text": "Disabling photophobia"
+            },
+            {
+              "text": "Control of ambient lighting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractive correction and low-vision aids",
+          "cells": [
+            {
+              "text": "Optimise best-corrected acuity"
+            },
+            {
+              "text": "Magnifiers, large print and high-contrast materials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational support and sight-impaired registration",
+          "cells": [
+            {
+              "text": "Where appropriate"
+            },
+            {
+              "text": "Driving is precluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular ophthalmology and OCT monitoring",
+          "cells": [
+            {
+              "text": "Progressive foveal cone loss"
+            },
+            {
+              "text": "Watch for progressive change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular confirmation and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "Family counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene therapy trials directed at CNGB3 or CNGA3",
+          "cells": [
+            {
+              "text": "Emerging future therapy"
+            },
+            {
+              "text": "Within a paediatric and low-vision service"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "achromatopsia-dx-mgmt",
+      "title": "Diagnosis and management of Achromatopsia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant nystagmus, marked photophobia and poor acuity with a normal-looking fundus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Full-field ERG shows absent cone responses with preserved rods?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prompt paediatric ophthalmology and genetics referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Colour vision testing, SD-OCT of the fovea and genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CNGB3, CNGA3 or related variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review blue-cone monochromatism, LCA and cone-rod dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dark or red-tinted filters and photochromic lenses for photophobia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Refractive correction and low-vision aids such as magnifiers",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology and OCT monitoring for progressive foveal cone loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acuity low but stable; photophobia and colour blindness persist lifelong",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

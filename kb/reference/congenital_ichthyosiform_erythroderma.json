@@ -153,5 +153,314 @@
       "caption": "Overview comparison matrix for congenital ichthyosiform erythroderma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_ichthyosiform_erythroderma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Hyperkeratosis without epidermolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular panel for ARCI genes (TGM1, ALOX12B, ALOXE3, NIPAL4, CYP4F22, ABCA12, PNPLA1)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transglutaminase 1 activity assay",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair-shaft microscopy",
+          "cells": [
+            {
+              "text": "Netherton syndrome (trichorrhexis invaginata) excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Ectropion and corneal protection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_ichthyosiform_erythroderma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lamellar ichthyosis",
+          "cells": [
+            {
+              "text": "Same ARCI spectrum; plate-like scale with less erythroderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Netherton syndrome (SPINK5)",
+          "cells": [
+            {
+              "text": "Ichthyosis linearis circumflexa; hair-shaft abnormality; retinoids may worsen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Harlequin ichthyosis (ABCA12)",
+          "cells": [
+            {
+              "text": "Named look-alike; severe ARCI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_ichthyosiform_erythroderma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin-barrier care",
+          "cells": [
+            {
+              "text": "Liberal bland emollients and humectant keratolytics such as urea and lactic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal incubator care",
+          "cells": [
+            {
+              "text": "Humidified incubator with monitoring of fluid, electrolytes, temperature and weight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic retinoid",
+          "cells": [
+            {
+              "text": "Acitretin for severe scaling under specialist supervision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection vigilance",
+          "cells": [
+            {
+              "text": "Prompt treatment of cutaneous and systemic infection or sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular care",
+          "cells": [
+            {
+              "text": "Lubricants and management of ectropion to protect the cornea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology-led team",
+          "cells": [
+            {
+              "text": "Dietetic support for raised caloric and metabolic demands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive ARCI inheritance; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_ichthyosiform_erythroderma-dx-mgmt",
+      "title": "Diagnosis and management of Congenital ichthyosiform erythroderma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital ichthyosiform erythroderma: collodion baby or red scaly skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (dehydration, sepsis, severe ectropion, faltering growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neonatal fluid, electrolyte and temperature care in humidified incubator",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy; ARCI gene panel; hair-shaft microscopy for Netherton; eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show hyperkeratosis without epidermolysis, with Netherton excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Netherton syndrome, epidermolytic ichthyosis or harlequin ichthyosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive barrier care with emollients and urea or lactic acid keratolytics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Humidified incubator with fluid, electrolyte and temperature monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Acitretin for severe scaling under specialist supervision",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ocular lubrication and ectropion care; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neonatal period carries the greatest risk; with supportive care most children survive",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,324 @@
       "caption": "Overview comparison matrix for anti-nmda receptor encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_nmda_receptor_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF analysis with paired serum and CSF NMDA receptor antibodies",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis and oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Extreme delta brush pattern or diffuse slowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain with contrast",
+          "cells": [
+            {
+              "text": "Excludes alternative structural or inflammatory causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and abdominal imaging",
+          "cells": [
+            {
+              "text": "Ovarian teratoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body tumour screening",
+          "cells": [
+            {
+              "text": "Older patients, or when teratoma is not found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex virus screening",
+          "cells": [
+            {
+              "text": "Can precede antibody-mediated relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_nmda_receptor_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary psychiatric illness such as first psychotic episode or catatonia",
+          "cells": [
+            {
+              "text": "Misattribution delays immunological investigation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex or other infective encephalitis",
+          "cells": [
+            {
+              "text": "Antibody-mediated relapse can follow HSV encephalitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_nmda_receptor_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            },
+            {
+              "text": "Escalate promptly to rituximab or cyclophosphamide if response is poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian teratoma removal",
+          "cells": [
+            {
+              "text": "Detect and remove any associated teratoma"
+            },
+            {
+              "text": "Accelerates recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive-care management",
+          "cells": [
+            {
+              "text": "Autonomic instability, central hypoventilation, arrhythmia"
+            },
+            {
+              "text": "Ventilatory support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication and symptom control",
+          "cells": [
+            {
+              "text": "Seizures; cautious control of dyskinesias and agitation"
+            },
+            {
+              "text": "Severe dyskinesias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric support and rehabilitation",
+          "cells": [
+            {
+              "text": "Behavioural support in the florid phase"
+            },
+            {
+              "text": "Prolonged neurorehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse and tumour surveillance",
+          "cells": [
+            {
+              "text": "Maintenance immunotherapy where indicated"
+            },
+            {
+              "text": "Relapse and delayed tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_nmda_receptor_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-NMDA receptor encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Psychiatric change with seizures, dyskinesia and reduced consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Arrhythmia, central hypoventilation or refractory seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intensive-care support for autonomic instability and hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CSF with paired NMDA antibodies, EEG, MRI, pelvic imaging for teratoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "NMDA receptor antibody confirmed in CSF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids, IVIG or plasma exchange as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat antibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Remove any ovarian teratoma; it accelerates recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Escalate to rituximab or cyclophosphamide if response is poor",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication and psychiatric support in the florid phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prolonged neurorehabilitation; surveillance for relapse and delayed tumour",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

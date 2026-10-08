@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for crossed fused renal ectopia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crossed_fused_renal_ectopia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal tract ultrasound",
+          "cells": [
+            {
+              "text": "Empty renal fossa with both moieties on one side"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or CT/MR urography",
+          "cells": [
+            {
+              "text": "Fusion type, rotation and vascular supply defined before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MAG3 or DMSA scintigraphy",
+          "cells": [
+            {
+              "text": "Differential function and drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Micturating cystourethrogram",
+          "cells": [
+            {
+              "text": "Vesicoureteric reflux when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crossed_fused_renal_ectopia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Horseshoe kidney",
+          "cells": [
+            {
+              "text": "Named fusion variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple renal ectopia without crossing",
+          "cells": [
+            {
+              "text": "Pelvic kidney without crossing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unilateral renal agenesis",
+          "cells": [
+            {
+              "text": "Pitfall: empty fossa misread as agenesis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crossed_fused_renal_ectopia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "For the asymptomatic majority with reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for infection",
+          "cells": [
+            {
+              "text": "Prompt treatment of urinary tract infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calculi",
+          "cells": [
+            {
+              "text": "Lithotripsy or endourological techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyeloplasty",
+          "cells": [
+            {
+              "text": "For pelviureteric junction obstruction, planned around vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reflux management",
+          "cells": [
+            {
+              "text": "Antibiotic prophylaxis or antireflux surgery as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Renal function and imaging for stones, obstruction and hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic stone work-up",
+          "cells": [
+            {
+              "text": "Where calculi recur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crossed_fused_renal_ectopia-dx-mgmt",
+      "title": "Diagnosis and management of Crossed fused renal ectopia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected crossed fused renal ectopia: both kidneys fused on one side",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (febrile infection or urosepsis, obstruction, impaired function, large stone)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment of pyelonephritis or urosepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal ultrasound; CT or MR urography; MAG3 or DMSA; cystourethrogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does urography show a crossed fused kidney with both moieties on one side?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider horseshoe kidney, simple ectopia or agenesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observation and reassurance for the asymptomatic majority",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt antibiotics for infection; lithotripsy for calculi",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pyeloplasty for pelviureteric obstruction after vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reflux prophylaxis and renal surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent in the asymptomatic majority; worsens only with obstruction or complications",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

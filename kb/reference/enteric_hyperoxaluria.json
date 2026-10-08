@@ -148,5 +148,325 @@
       "caption": "Overview comparison matrix for enteric hyperoxaluria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enteric_hyperoxaluria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "24-hour urine",
+          "cells": [
+            {
+              "text": "Raised oxalate with low volume and low citrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal and surgical history with malabsorption workup",
+          "cells": [
+            {
+              "text": "Underlying gastrointestinal disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum renal function and electrolytes",
+          "cells": [
+            {
+              "text": "Renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone analysis",
+          "cells": [
+            {
+              "text": "Calcium oxalate composition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal fat",
+          "cells": [
+            {
+              "text": "Fat malabsorption, where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Oxalate nephropathy, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enteric_hyperoxaluria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary hyperoxaluria (genetic)",
+          "cells": [
+            {
+              "text": "Genetic overproduction of oxalate rather than a malabsorptive state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary hyperoxaluria",
+          "cells": [
+            {
+              "text": "Excessive oxalate intake rather than malabsorption"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enteric_hyperoxaluria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-oxalate, low-fat diet",
+          "cells": [
+            {
+              "text": "Keep dietary calcium; restricting calcium worsens oxalate absorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral calcium with meals",
+          "cells": [
+            {
+              "text": "Binds luminal oxalate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile-acid sequestrant",
+          "cells": [
+            {
+              "text": "Cholestyramine where unabsorbed bile salts drive colonic oxalate absorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High fluid intake",
+          "cells": [
+            {
+              "text": "Raises urine volume and reduces calcium oxalate supersaturation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of hypocitraturia",
+          "cells": [
+            {
+              "text": "Potassium citrate or alkali therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying gastrointestinal disorder",
+          "cells": [
+            {
+              "text": "Crohn's disease, pancreatic insufficiency or post-bariatric anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring with nephrology input",
+          "cells": [
+            {
+              "text": "Urinary oxalate, citrate and volume; oxalate nephropathy and chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enteric_hyperoxaluria-dx-mgmt",
+      "title": "Diagnosis and management of Enteric hyperoxaluria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Calcium oxalate stones or renal decline with intestinal fat malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (rising creatinine, rapid stone recurrence, severe malabsorption)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Nephrology input for oxalate nephropathy and progressive kidney disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "24-hour urine oxalate, citrate and volume; renal function; stone analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised urinary oxalate with low volume and low citrate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider primary or dietary hyperoxaluria; reassess the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-oxalate, low-fat diet with dietary calcium maintained",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral calcium with meals to bind luminal oxalate",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High fluid intake to raise urine volume",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Potassium citrate or alkali for hypocitraturia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat the underlying gastrointestinal or malabsorptive disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Stone risk reduced by diet, hydration and control of the bowel disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

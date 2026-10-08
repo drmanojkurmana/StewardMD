@@ -146,5 +146,287 @@
       "caption": "Overview comparison matrix for complement c3 deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complement_c3_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CH50 and AH50 screening",
+          "cells": [
+            {
+              "text": "Total haemolytic and alternative pathway activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative C3 and C4 levels",
+          "cells": [
+            {
+              "text": "Low C3 level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C3 nephritic factor and autoantibodies",
+          "cells": [
+            {
+              "text": "Consumption rather than inherited deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis, renal function and biopsy if glomerulonephritis suspected",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_c3_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Antibody deficiencies causing recurrent encapsulated bacterial infection",
+          "cells": [
+            {
+              "text": "Recurrent encapsulated infection; complement testing needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary complement consumption, e.g. membranoproliferative glomerulonephritis",
+          "cells": [
+            {
+              "text": "Low C3 from consumption, identified by C3 nephritic factor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_c3_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vaccination against encapsulated organisms",
+          "cells": [
+            {
+              "text": "Pneumococcal, Haemophilus influenzae type b and meningococcal vaccines; the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt aggressive antibiotics",
+          "cells": [
+            {
+              "text": "For pyogenic infections; consider long-term prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family education",
+          "cells": [
+            {
+              "text": "Urgent care for febrile illness; low threshold for empirical antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for immune-complex disease",
+          "cells": [
+            {
+              "text": "Lupus-like syndrome, under specialist care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal follow-up",
+          "cells": [
+            {
+              "text": "Urinalysis and renal function; nephrology referral if glomerulonephritis develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complement_c3_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Complement C3 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected complement C3 deficiency: recurrent encapsulated bacterial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (invasive infection, glomerulonephritis, lupus-like illness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat invasive pyogenic infection with appropriate antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CH50, AH50, C3 and C4 levels; C3 nephritic factor; renal assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is low C3 from inherited deficiency rather than consumption?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Investigate consumption; C3 nephritic factor and autoantibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Vaccinate against encapsulated organisms as the cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt antibiotics for pyogenic infection; consider prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for lupus-like immune-complex disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal follow-up and genetic counselling for relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With vaccination and prompt treatment of infection many patients do well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

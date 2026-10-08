@@ -162,5 +162,430 @@
       "caption": "Overview comparison matrix for cardiac trauma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Blunt Cardiac Injury",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/thoracic-trauma/blunt-cardiac-injury",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cardiac_trauma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of cardiac injury after chest trauma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Sinus tachycardia, RBBB, AF, PVCs, ST changes, heart block"
+            },
+            {
+              "text": "Every chest trauma patient"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal ECG and troponin at 6 to 8 h",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Both normal",
+              "range": [
+                6,
+                8
+              ]
+            },
+            {
+              "text": "{{hy:Essentially excludes blunt cardiac injury}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Troponin versus CK-MB",
+          "cells": [
+            {
+              "text": "Troponin more specific"
+            },
+            {
+              "text": "CK-MB raised in only about 20% and by muscle injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "E-FAST",
+          "cells": [
+            {
+              "text": "Pericardial fluid, wall motion abnormality, rupture"
+            },
+            {
+              "text": "During resuscitation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Formal echocardiography",
+          "cells": [
+            {
+              "text": "Wall motion, effusion, valve damage, septal rupture"
+            },
+            {
+              "text": "All suspected BCI and all penetrating chest injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small effusion with penetrating injury",
+          "cells": [
+            {
+              "text": "Any pericardial fluid"
+            },
+            {
+              "text": "Suggests occult cardiac perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "cells": [
+            {
+              "text": "Mediastinal widening"
+            },
+            {
+              "text": "Suggests aortic injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ST elevation",
+          "cells": [
+            {
+              "text": "Coronary dissection or occlusion"
+            },
+            {
+              "text": "Needs angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chamber injured in penetrating trauma",
+          "cells": [
+            {
+              "text": "Right ventricle most often, then left ventricle"
+            },
+            {
+              "text": "Anterior position"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiac_trauma-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis after chest trauma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Traumatic aortic rupture",
+          "cells": [
+            {
+              "text": "{{hy:Widened mediastinum}}, arm hypertension, weak leg pulses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "Traumatic coronary dissection can cause STEMI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac tamponade",
+          "cells": [
+            {
+              "text": "Hypotension, distant heart sounds, effusion on echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takotsubo cardiomyopathy",
+          "cells": [
+            {
+              "text": "Stress-induced apical ballooning without direct injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Commotio cordis",
+          "cells": [
+            {
+              "text": "VF after a blow to the chest in sport, no structural injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Musculoskeletal chest wall pain",
+          "cells": [
+            {
+              "text": "Normal ECG and troponin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-cardiac injury syndrome",
+          "cells": [
+            {
+              "text": "Pericarditis weeks to months later"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiac_trauma-treatment",
+      "kind": "treatment",
+      "title": "Management of cardiac trauma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac monitoring",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Contusion with conduction abnormality: 8 to 24",
+              "range": [
+                8,
+                24
+              ]
+            },
+            {
+              "text": "Risk of sudden arrhythmia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Most blunt cardiac injury"
+            },
+            {
+              "text": "Treat arrhythmias and heart failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CPR and immediate defibrillation",
+          "cells": [
+            {
+              "text": "{{hy:Commotio cordis}}"
+            },
+            {
+              "text": "Then in-hospital observation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emergency surgical repair",
+          "cells": [
+            {
+              "text": "Penetrating injury, myocardial or valve rupture"
+            },
+            {
+              "text": "Mortality near 90% if in collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-examination after several weeks",
+          "cells": [
+            {
+              "text": "Survivors of penetrating injury"
+            },
+            {
+              "text": "Late murmur, shunt or heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory treatment",
+          "cells": [
+            {
+              "text": "Post-cardiac injury syndrome"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Tamponade drainage technique was not covered in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cardiac_trauma-dx-mgmt",
+      "title": "Diagnosis and management of cardiac trauma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Blunt or penetrating chest trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamically unstable or cardiac arrest?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Resuscitate; defibrillate if VF; emergency surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG, troponin, E-FAST, chest x-ray",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Penetrating injury?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Echo; any effusion suggests perforation; surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "ECG and troponin normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Blunt cardiac injury excluded",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Formal echo; monitor 8 to 24 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Treat arrhythmia or failure; repair rupture; follow up for late lesions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

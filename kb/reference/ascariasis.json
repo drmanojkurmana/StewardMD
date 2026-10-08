@@ -151,5 +151,327 @@
       "caption": "Overview comparison matrix for ascariasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ascariasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy for Ascaris eggs",
+          "cells": [
+            {
+              "text": "Ascaris eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count for eosinophilia",
+          "cells": [
+            {
+              "text": "Especially during larval migration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound or imaging",
+          "cells": [
+            {
+              "text": "Worms in the bowel or biliary tree"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Eosinophilic pneumonitis suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic evaluation",
+          "cells": [
+            {
+              "text": "Hepatobiliary or pancreatic complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ascariasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asthma or allergic bronchopulmonary disease",
+          "cells": [
+            {
+              "text": "Mimics the pulmonary phase; stool microscopy separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical bowel obstruction",
+          "cells": [
+            {
+              "text": "Distension, vomiting and absent stool or flatus, especially in a child"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ascariasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzimidazole anthelmintic",
+          "cells": [
+            {
+              "text": "Albendazole or mebendazole; pyrantel pamoate as an alternative"
+            },
+            {
+              "text": "Clears adult intestinal worms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Micronutrient repletion in children with heavy burdens"
+            },
+            {
+              "text": "Growth impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary phase support",
+          "cells": [
+            {
+              "text": "Bronchodilators and corticosteroids for significant hypersensitivity"
+            },
+            {
+              "text": "Loeffler syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal obstruction management",
+          "cells": [
+            {
+              "text": "Fluids, nasogastric decompression and anthelmintics"
+            },
+            {
+              "text": "Surgery for failure, perforation or obstruction not settling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatobiliary or pancreatic migration",
+          "cells": [
+            {
+              "text": "Endoscopic or surgical intervention with appropriate antimicrobials"
+            },
+            {
+              "text": "Cholangitis or pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sanitation and mass deworming",
+          "cells": [
+            {
+              "text": "Hygiene, school or community deworming, household treatment"
+            },
+            {
+              "text": "Prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up stool microscopy",
+          "cells": [
+            {
+              "text": "Confirms clearance and detects reinfection"
+            },
+            {
+              "text": "After treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ascariasis-dx-mgmt",
+      "title": "Diagnosis and management of Ascariasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intestinal obstruction or pulmonary eosinophilia in a child in an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Obstruction, cholangitis or pancreatitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Fluids, nasogastric decompression and urgent endoscopy for biliary migration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy for eggs, FBC eosinophilia, abdominal ultrasound, chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ascaris eggs on stool microscopy or worms seen on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Benzimidazole anthelmintic such as albendazole or mebendazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat stool microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutritional rehabilitation for heavy burdens and growth impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bronchodilators and corticosteroids for Loeffler syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic or surgical treatment for biliary or pancreatic migration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sanitation and mass deworming; follow-up stool microscopy for reinfection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

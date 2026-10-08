@@ -152,5 +152,312 @@
       "caption": "Overview comparison matrix for claw toe."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mann's Surgery of the Foot and Ankle",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "claw_toe-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standing clinical examination",
+          "cells": [
+            {
+              "text": "Metatarsophalangeal and interphalangeal posture and flexibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Metatarsophalangeal subluxation and cavus alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed neurological examination",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy and intrinsic wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Where a neuromuscular cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pedobarography",
+          "cells": [
+            {
+              "text": "Forefoot overload and callosity distribution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "claw_toe-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hammer toe",
+          "cells": [
+            {
+              "text": "Predominant proximal interphalangeal flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mallet toe",
+          "cells": [
+            {
+              "text": "Isolated distal interphalangeal flexion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavus foot deformity",
+          "cells": [
+            {
+              "text": "Toe clawing with a cavus foot"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "claw_toe-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Accommodative footwear, toe sleeves and metatarsal pads",
+          "cells": [
+            {
+              "text": "Offload metatarsal heads; wide, deep toe box"
+            },
+            {
+              "text": "Conservative measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tendon balancing surgery",
+          "cells": [
+            {
+              "text": "Flexor-to-extensor transfer or lengthening for passively correctable deformity"
+            },
+            {
+              "text": "Flexible deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bony correction",
+          "cells": [
+            {
+              "text": "Interphalangeal arthrodesis and metatarsophalangeal release"
+            },
+            {
+              "text": "Fixed deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology referral and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Charcot-Marie-Tooth or other neuropathy"
+            },
+            {
+              "text": "Underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic foot care",
+          "cells": [
+            {
+              "text": "Protective-sensation assessment to prevent ulceration"
+            },
+            {
+              "text": "Diabetes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "claw_toe-dx-mgmt",
+      "title": "Diagnosis and management of Claw toe",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected claw toe: MTP hyperextension with IP flexion, often several toes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive clawing, ulceration, sensory loss, new deficit)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology or vascular review for ulceration or deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Standing examination, weight-bearing radiographs and neurological examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clawing still passively correctable on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Accommodative footwear, toe sleeves and metatarsal pads first",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check hammer toe, mallet toe and cavus foot",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tendon balancing surgery for flexible deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bony correction with arthrodesis or release for fixed deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurology referral and nerve studies where neuromuscular cause suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Diabetic foot care and podiatry follow-up given the tendency to recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,325 @@
       "caption": "Overview comparison matrix for eosinophilic granulomatosis with polyangiitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_granulomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, a hallmark"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA testing (anti-MPO and anti-PR3)",
+          "cells": [
+            {
+              "text": "ANCA specificity; positive in a minority, usually anti-MPO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging and sinus assessment",
+          "cells": [
+            {
+              "text": "Pulmonary infiltrates and sinus disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG, troponin, echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Cardiac involvement, as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Mononeuritis multiplex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis, renal function and tissue biopsy",
+          "cells": [
+            {
+              "text": "Glomerulonephritis; biopsy of an affected organ where feasible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_granulomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Granulomatosis with polyangiitis and microscopic polyangiitis",
+          "cells": [
+            {
+              "text": "The degree of eosinophilia helps distinguish EGPA from these"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypereosinophilic syndrome",
+          "cells": [
+            {
+              "text": "Avoid confusion by using ANCA testing and biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_granulomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Cornerstone of treatment to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclophosphamide or rituximab",
+          "cells": [
+            {
+              "text": "Organ-threatening vasculitis of the heart, kidneys, nerves or gut"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mepolizumab",
+          "cells": [
+            {
+              "text": "Relapsing or refractory non-organ-threatening disease; reduces steroid dependence and controls asthma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine, methotrexate or rituximab after remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Control of asthma and rhinosinusitis",
+          "cells": [
+            {
+              "text": "Optimised with inhaled therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and renal treatment",
+          "cells": [
+            {
+              "text": "Eosinophilic myocarditis and heart failure; plasma exchange and renal support for severe glomerulonephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Immunology or rheumatology, cardiology, nephrology, neurology and respiratory medicine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_granulomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic granulomatosis with polyangiitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Asthma, rhinosinusitis and peripheral eosinophilia in an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cardiac involvement, progressive glomerulonephritis, mononeuritis multiplex)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunosuppression for organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ANCA testing, ECG, troponin, echocardiography and nerve conduction studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Eosinophilic vasculitis supported by ANCA or tissue biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider hypereosinophilic syndrome or other eosinophilic lung disease; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids as the cornerstone of treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cyclophosphamide or rituximab for organ-threatening vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mepolizumab for relapsing or refractory non-organ-threatening disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Azathioprine, methotrexate or rituximab for maintenance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Cardiac assessment and treatment of myocarditis and heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Remission achievable in most patients; monitor for relapse and organ damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

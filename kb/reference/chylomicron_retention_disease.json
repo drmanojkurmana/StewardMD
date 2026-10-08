@@ -147,5 +147,312 @@
       "caption": "Overview comparison matrix for chylomicron retention disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chylomicron_retention_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fasting lipid profile",
+          "cells": [
+            {
+              "text": "Low total and LDL cholesterol with reduced apolipoprotein B"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fat-soluble vitamin levels",
+          "cells": [
+            {
+              "text": "Particularly vitamin E"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel biopsy",
+          "cells": [
+            {
+              "text": "Chylomicron-laden enterocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SAR1B genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Complications of vitamin E deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylomicron_retention_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Abetalipoproteinaemia (MTTP deficiency)",
+          "cells": [
+            {
+              "text": "Earlier and more severe neurological and retinal complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis with pancreatic insufficiency",
+          "cells": [
+            {
+              "text": "Pancreatic cause of fat malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Malabsorptive enteropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylomicron_retention_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-fat diet with medium-chain triglycerides",
+          "cells": [
+            {
+              "text": "Limits steatorrhoea; essential fatty acid supplementation"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose vitamin E with vitamins A, D and K",
+          "cells": [
+            {
+              "text": "Fat-soluble vitamin replacement"
+            },
+            {
+              "text": "Vitamin E especially"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian-led nutritional support",
+          "cells": [
+            {
+              "text": "Growth and weight monitoring through childhood"
+            },
+            {
+              "text": "Infancy and childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and ophthalmological surveillance",
+          "cells": [
+            {
+              "text": "Neuropathy and retinopathy from vitamin E deficiency"
+            },
+            {
+              "text": "Vitamin E complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring",
+          "cells": [
+            {
+              "text": "Hepatic steatosis and fibrosis"
+            },
+            {
+              "text": "Hepatic risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chylomicron_retention_disease-dx-mgmt",
+      "title": "Diagnosis and management of Chylomicron retention disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chylomicron retention disease: infant with steatorrhoea and failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (marked failure to thrive, neuromuscular signs, coagulopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric gastroenterology review for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lipid profile, fat-soluble vitamins, small-bowel biopsy and SAR1B testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low lipids with chylomicron-laden enterocytes and SAR1B variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong low-fat diet with medium-chain triglycerides",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check abetalipoproteinaemia, cystic fibrosis and coeliac disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-dose vitamin E with vitamins A, D and K replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietitian-led nutrition support and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurological, ophthalmological and liver surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for autosomal recessive SAR1B disorder with family testing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

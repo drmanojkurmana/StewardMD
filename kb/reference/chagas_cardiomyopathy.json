@@ -149,5 +149,298 @@
       "caption": "Overview comparison matrix for chagas cardiomyopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / ESC guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chagas_cardiomyopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serology for Trypanosoma cruzi antibodies",
+          "cells": [
+            {
+              "text": "Detects chronic infection; more than one assay is typically used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Conduction abnormalities and arrhythmia; right bundle branch block with left anterior fascicular block is characteristic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function and apical aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Ventricular arrhythmia and conduction block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Fibrosis and regional dysfunction, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chagas_cardiomyopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Beta-blockers, ACE inhibitors or ARBs, mineralocorticoid antagonists and diuretics"
+            },
+            {
+              "text": "For systolic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antitrypanosomal therapy",
+          "cells": [
+            {
+              "text": "Benznidazole or nifurtimox"
+            },
+            {
+              "text": "Limited benefit once cardiomyopathy is established; greater role in earlier disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bradyarrhythmia and conduction disease",
+          "cells": [
+            {
+              "text": "Pacing; amiodarone and implantable defibrillator in selected patients"
+            },
+            {
+              "text": "Reduces sudden-death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "For apical aneurysm, mural thrombus, atrial fibrillation or prior embolism"
+            },
+            {
+              "text": "Prevents systemic thromboembolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rhythm and function monitoring",
+          "cells": [
+            {
+              "text": "Periodic ECG, ambulatory rhythm monitoring and echocardiography"
+            },
+            {
+              "text": "Tracks ventricular function and arrhythmic burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced therapy",
+          "cells": [
+            {
+              "text": "Catheter ablation for refractory ventricular tachycardia; transplantation in end-stage failure"
+            },
+            {
+              "text": "Refractory or end-stage disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family and gastrointestinal screening",
+          "cells": [
+            {
+              "text": "Screen family members and donors; evaluate for mega-oesophagus and megacolon"
+            },
+            {
+              "text": "Associated gastrointestinal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chagas_cardiomyopathy-dx-mgmt",
+      "title": "Diagnosis and management of Chagas cardiomyopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Chagas cardiomyopathy: unexplained cardiomyopathy or heart block, endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (high-grade AV block, sustained VT, severe heart failure, embolism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiology for block, sustained VT or embolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "T. cruzi serology with ECG, echocardiography and ambulatory monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "T. cruzi antibodies with conduction or ventricular disease confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Heart failure therapy: beta-blocker, ACE inhibitor or ARB, and MRA",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check ischaemic, idiopathic dilated and arrhythmogenic RV cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benznidazole or nifurtimox, with greater benefit in earlier disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pacing for bradyarrhythmia; amiodarone and ICD in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulate for apical aneurysm, mural thrombus or atrial fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outlook worsens with ventricular dysfunction, arrhythmia and heart failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

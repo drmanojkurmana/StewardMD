@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for congenital portosystemic shunt (abernethy malformation)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / paediatric hepatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_portosystemic_shunt-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Shunt identified; intrahepatic portal flow assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast CT or MR angiography",
+          "cells": [
+            {
+              "text": "Shunt anatomy and classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ammonia and bile-acid measurement",
+          "cells": [
+            {
+              "text": "Hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Associated cardiac anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for hepatopulmonary syndrome and portopulmonary hypertension",
+          "cells": [
+            {
+              "text": "Complications screened"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_portosystemic_shunt-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urea-cycle or other inherited metabolic causes of hyperammonaemia",
+          "cells": [
+            {
+              "text": "Metabolic cause; pitfall of missing the vascular anomaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired portosystemic collaterals from portal hypertension",
+          "cells": [
+            {
+              "text": "Acquired collaterals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic arteriovenous malformation",
+          "cells": [
+            {
+              "text": "Named vascular look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_portosystemic_shunt-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Shunt closure",
+          "cells": [
+            {
+              "text": "Endovascular embolisation or surgical ligation; definitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrahepatic portal patency",
+          "cells": [
+            {
+              "text": "Assessed before closure; staged closure where portal pressures require it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperammonaemia management",
+          "cells": [
+            {
+              "text": "Protein-modified diet, lactulose and rifaximin pending correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver nodule surveillance",
+          "cells": [
+            {
+              "text": "Cross-sectional imaging for benign and malignant nodules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary complications",
+          "cells": [
+            {
+              "text": "Hepatopulmonary syndrome and portopulmonary hypertension screened and managed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac evaluation",
+          "cells": [
+            {
+              "text": "Associated congenital heart disease and other anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "For type-1 lesions with absent intrahepatic portal supply"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_portosystemic_shunt-dx-mgmt",
+      "title": "Diagnosis and management of Congenital portosystemic shunt (Abernethy malformation)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital portosystemic shunt: hyperammonaemia or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive encephalopathy, hypoxaemia, nodules, cardiac disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hyperammonaemia and encephalopathy management; treat hypoxaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler; CT or MR angiography; ammonia and bile acids; echo; pulmonary screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does angiography confirm an extrahepatic or intrahepatic shunt?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider urea-cycle disorder, acquired collaterals or AV malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Shunt closure by embolisation or ligation as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Check intrahepatic portal patency before closing; stage if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Protein-modified diet, lactulose and rifaximin for hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance for liver nodules and pulmonary complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many type-2 and intrahepatic shunts do well after closure as the portal system recruits",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

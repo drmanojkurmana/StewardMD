@@ -149,5 +149,327 @@
       "caption": "Overview comparison matrix for asherman syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology and reproductive surgery texts / international guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "asherman_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnostic hysteroscopy",
+          "cells": [
+            {
+              "text": "Visualises and grades adhesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hysterosalpingography",
+          "cells": [
+            {
+              "text": "Cavity and tubal patency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Endometrial thickness and pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal profile",
+          "cells": [
+            {
+              "text": "Excludes endocrine causes of amenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy test",
+          "cells": [
+            {
+              "text": "Any woman with amenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asherman_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothalamic or other endocrine amenorrhoea",
+          "cells": [
+            {
+              "text": "Excluded by the hormonal profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Excluded by pregnancy test in amenorrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asherman_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hysteroscopic adhesiolysis",
+          "cells": [
+            {
+              "text": "Under direct vision; definitive treatment"
+            },
+            {
+              "text": "Restores the uterine cavity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention of re-adhesion",
+          "cells": [
+            {
+              "text": "Intrauterine balloon, intrauterine device or barrier gel"
+            },
+            {
+              "text": "Separates the cavity walls after surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical oestrogen therapy",
+          "cells": [
+            {
+              "text": "Promotes endometrial regeneration over treated surfaces"
+            },
+            {
+              "text": "Endometrial regeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up hysteroscopy or imaging",
+          "cells": [
+            {
+              "text": "Confirms cavity restoration and treats recurrent adhesions"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reproductive medicine referral",
+          "cells": [
+            {
+              "text": "Subfertility; restore menstruation and fertility"
+            },
+            {
+              "text": "Goals of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal surveillance",
+          "cells": [
+            {
+              "text": "Enhanced surveillance for placenta accreta and recurrent loss"
+            },
+            {
+              "text": "Subsequent pregnancies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention",
+          "cells": [
+            {
+              "text": "Minimise and gently perform intrauterine instrumentation"
+            },
+            {
+              "text": "Especially after pregnancy loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "asherman_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Asherman syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Amenorrhoea or infertility after uterine procedures or pregnancy loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Cyclical pelvic pain suggesting trapped menstruation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for haematometra (trapped menstrual blood)",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pregnancy test, hormones, hysteroscopy, sonohysterography, HSG, ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Adhesions graded on diagnostic hysteroscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Hysteroscopic adhesiolysis under direct vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intrauterine balloon, device or barrier gel to prevent re-adhesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclical oestrogen for endometrial regeneration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Enhanced antenatal surveillance for placenta accreta and loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Follow-up hysteroscopy confirms restoration; fertility referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

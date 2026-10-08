@@ -147,5 +147,312 @@
       "caption": "Overview comparison matrix for cobb syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Adams and Victor's Principles of Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cobb_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the spine with contrast",
+          "cells": [
+            {
+              "text": "Cord vascular malformation and cord signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal catheter angiography",
+          "cells": [
+            {
+              "text": "Vascular anatomy and feeding vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical mapping of the cutaneous lesion to the dermatome",
+          "cells": [
+            {
+              "text": "Segmental match"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Spinal level and grade of deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Extensive metameric syndrome suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cobb_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated spinal arteriovenous malformation or dural fistula",
+          "cells": [
+            {
+              "text": "No segmental cutaneous lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "Capillary and venous malformation syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sturge-Weber syndrome",
+          "cells": [
+            {
+              "text": "Cephalic metameric analogue"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cobb_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endovascular embolisation and or microsurgical resection",
+          "cells": [
+            {
+              "text": "Decompresses and protects the cord"
+            },
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent neurosurgical intervention",
+          "cells": [
+            {
+              "text": "Cord compression, venous hypertension or haemorrhage"
+            },
+            {
+              "text": "Acute or progressive myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, spasticity care and bladder and bowel programmes",
+          "cells": [
+            {
+              "text": "Neurogenic dysfunction"
+            },
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser therapy for the cutaneous vascular lesion",
+          "cells": [
+            {
+              "text": "Angioma or capillary malformation if symptomatic or cosmetically troubling"
+            },
+            {
+              "text": "Dermatological care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial neurological examination and interval spinal MRI",
+          "cells": [
+            {
+              "text": "Monitors the malformation and detects recurrence"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cobb_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cobb syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cobb syndrome: progressive myelopathy with a segmental cutaneous vascular stain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute paraparesis, new bladder or bowel loss, sudden back pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurovascular intervention for haemorrhage or cord compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast spinal MRI and catheter angiography of the vascular lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cord vascular malformation matches the cutaneous dermatome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Endovascular embolisation and or microsurgical resection of the lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check isolated spinal AVM, Klippel-Trenaunay and Sturge-Weber",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, spasticity care and bladder and bowel programmes",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Laser therapy for the cutaneous vascular lesion if symptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial neurological examination and interval spinal MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary neurovascular care; escalate for acute deterioration",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

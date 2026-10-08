@@ -146,5 +146,85 @@
       "caption": "Overview comparison matrix for becker naevus syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "becker_nevus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Becker naevus syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical examination and dermoscopy", "cells": [{"text": "Becker naevus together with underlying developmental defects"}], "cite": "c1"},
+        {"parameter": "Skin biopsy", "cells": [{"text": "Used if the diagnosis is uncertain or malignancy is suspected"}], "cite": "c1"},
+        {"parameter": "Comparative examination for breast or pectoral hypoplasia", "cells": [{"text": "Ipsilateral hypoplasia, typically of the breast and pectoral muscle"}], "cite": "c1"},
+        {"parameter": "Spinal and limb radiographs", "cells": [{"text": "Scoliosis, vertebral defects or limb asymmetry"}], "cite": "c1"},
+        {"parameter": "Ultrasound or imaging of breast and chest wall", "cells": [{"text": "Defines the extent of hypoplasia"}], "cite": "c1"},
+        {"parameter": "Orthopaedic assessment", "cells": [{"text": "Skeletal anomalies where identified"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "becker_nevus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Becker naevus syndrome",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Isolated Becker naevus", "cells": [{"text": "Lacks the associated hypoplasia and skeletal anomalies"}], "cite": "c1"},
+        {"parameter": "Congenital melanocytic naevus", "cells": [{"text": "Becker naevus has negligible malignant potential, so melanoma risk is not overestimated"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "becker_nevus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Becker naevus syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Cutaneous naevus", "cells": [{"text": "Laser hair removal for hypertrichosis; pigment-directed laser for hyperpigmentation"}, {"text": "Managed as cosmetically indicated"}], "cite": "c1"},
+        {"parameter": "Breast and pectoral hypoplasia", "cells": [{"text": "Assess; consider reconstructive or plastic surgery"}, {"text": "Considered once breast development is complete"}], "cite": "c1"},
+        {"parameter": "Skeletal anomalies", "cells": [{"text": "Orthopaedic monitoring and treatment of scoliosis or limb asymmetry, with bracing or surgery where needed"}, {"text": "Applies to scoliosis and limb asymmetry"}], "cite": "c1"},
+        {"parameter": "Physiotherapy", "cells": [{"text": "Physiotherapy for musculoskeletal asymmetry and functional limitation"}, {"text": "Supports function"}], "cite": "c1"},
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the naevus itself is benign"}, {"text": "Negligible malignant potential"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care", "cells": [{"text": "Coordinate dermatology, orthopaedics and plastic or reconstructive surgery"}, {"text": "Multidisciplinary management"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "becker_nevus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Becker naevus syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Hairy unilateral hyperpigmented patch on shoulder or upper trunk, with underlying defects", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive scoliosis, limb discrepancy, marked breast asymmetry or atypical lesion?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: orthopaedic and plastic surgery review; exclude melanoma if lesion is atypical", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Examine for breast or pectoral hypoplasia and skeletal anomalies", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Spine and limb radiographs; imaging of breast and chest wall; biopsy if uncertain", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Skeletal or breast anomaly present?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Orthopaedic input, bracing or surgery; reconstructive surgery once breast development is complete", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Cosmetic options: laser hair removal and pigment-directed laser", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Naevus is benign; main issues are cosmetic appearance and asymmetry", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

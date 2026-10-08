@@ -175,5 +175,511 @@
       "caption": "Overview comparison matrix for infertility and contraception."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC U.S. Selected Practice Recommendations for Contraceptive Use 2024, Emergency Contraception",
+      "kind": "web",
+      "url": "https://www.cdc.gov/contraception/hcp/usspr/emergency-contraception.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infertility_and_contraception-diagnostic",
+      "kind": "diagnostic",
+      "title": "Evaluating infertility",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Definition",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "No conception after 12 months of unprotected intercourse",
+              "op": ">=",
+              "value": 12
+            },
+            {
+              "text": "About 85% conceive in 12 months, 95% in 24 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:When to start evaluation}}",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "After 6 months if woman over 35; immediately if over 40",
+              "op": ">",
+              "value": 35
+            },
+            {
+              "text": "Otherwise after 12 months; evaluate both partners"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attributable factor",
+          "cells": [
+            {
+              "text": "Female only 30 to 40%, male only 40 to 50%, combined 20 to 30%"
+            },
+            {
+              "text": "Unexplained up to about 30%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sperm concentration",
+          "unit": "million/mL",
+          "cells": [
+            {
+              "text": "Below 15 million/mL abnormal (WHO)",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "Below 5 million/mL needs karyotype and Y microdeletion testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sperm motility",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Below 40% abnormal",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Single abnormal parameter is not predictive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal sperm morphology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Below 4% abnormal",
+              "op": "<",
+              "value": 4
+            },
+            {
+              "text": "Risk rises with several abnormal parameters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovulation",
+          "cells": [
+            {
+              "text": "Urinary LH kit or mid-luteal serum progesterone about 7 days after ovulation"
+            },
+            {
+              "text": "Basal temperature rise only confirms ovulation after the event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian reserve",
+          "cells": [
+            {
+              "text": "Day 2 to 3 FSH and estradiol, AMH, antral follicle count"
+            },
+            {
+              "text": "Guides prognosis and IVF dosing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubal patency",
+          "cells": [
+            {
+              "text": "Hysterosalpingogram or saline sonography"
+            },
+            {
+              "text": "High negative but low positive predictive value for occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irregular menses",
+          "cells": [
+            {
+              "text": "TSH, prolactin, total and free testosterone"
+            },
+            {
+              "text": "Screens anovulatory endocrine causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infertility_and_contraception-ddx",
+      "kind": "ddx",
+      "title": "Causes of infertility to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Most common anovulatory cause, hyperandrogenism"
+            },
+            {
+              "text": "Testosterone, ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diminished ovarian reserve or premature ovarian insufficiency",
+          "cells": [
+            {
+              "text": "Age-related or early loss of follicles"
+            },
+            {
+              "text": "FSH, AMH, antral follicle count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothalamic amenorrhoea",
+          "cells": [
+            {
+              "text": "Low weight or heavy exercise"
+            },
+            {
+              "text": "Low gonadotropins and estradiol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperprolactinaemia or thyroid disease",
+          "cells": [
+            {
+              "text": "Anovulation with endocrine features"
+            },
+            {
+              "text": "Prolactin and TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometriosis",
+          "cells": [
+            {
+              "text": "Present in 25 to 50% of infertile women; pain, dysmenorrhoea"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubal disease or hydrosalpinx",
+          "cells": [
+            {
+              "text": "Prior pelvic infection"
+            },
+            {
+              "text": "Hysterosalpingogram"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uterine cavity lesion",
+          "cells": [
+            {
+              "text": "Fibroid, polyp or adhesions"
+            },
+            {
+              "text": "Saline sonography or hysteroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Male factor (obstructive or nonobstructive azoospermia)",
+          "cells": [
+            {
+              "text": "Abnormal semen analysis"
+            },
+            {
+              "text": "Semen analysis, hormones, genetics; CFTR if absent vas"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infertility_and_contraception-treatment",
+      "kind": "treatment",
+      "title": "Treating infertility and choosing contraception",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle optimisation",
+          "cells": [
+            {
+              "text": "Both partners"
+            },
+            {
+              "text": "Stop smoking, optimise weight, limit alcohol, intercourse every 1 to 2 days in fertile window"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovulation induction",
+          "cells": [
+            {
+              "text": "Anovulation, PCOS"
+            },
+            {
+              "text": "Letrozole or clomifene; dopamine agonist for hyperprolactinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Hydrosalpinx, cavity-distorting fibroids, adhesions"
+            },
+            {
+              "text": "Salpingectomy of hydrosalpinx improves IVF outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IUI, IVF or ICSI",
+          "cells": [
+            {
+              "text": "Failure of simpler measures, older age, severe male factor"
+            },
+            {
+              "text": "Main risk is multiple pregnancy; GnRH trigger lowers OHSS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:Long-acting reversible contraception}}",
+          "cells": [
+            {
+              "text": "First choice for most, including adolescents and nulliparous women"
+            },
+            {
+              "text": "IUDs and implants rival sterilisation in effectiveness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined hormonal contraception",
+          "cells": [
+            {
+              "text": "No USMEC category 3 or 4 condition"
+            },
+            {
+              "text": "Avoid in smokers 35 or older, prior VTE, migraine with aura, BP 160/100 or higher"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency copper IUD",
+          "cells": [
+            {
+              "text": "Within 5 days of unprotected sex"
+            },
+            {
+              "text": "Most effective emergency method"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ulipristal acetate",
+          "cells": [
+            {
+              "text": "Within 5 days"
+            },
+            {
+              "text": "30 mg once; better than levonorgestrel at 3 to 5 days and possibly with obesity; start hormonal method no sooner than 5 days after"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Levonorgestrel",
+          "cells": [
+            {
+              "text": "Within 5 days, ideally within 3"
+            },
+            {
+              "text": "1.5 mg once, or 0.75 mg twice 12 h apart"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infertility_and_contraception-dx-mgmt",
+      "title": "Diagnosis and management of infertility",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Couple unable to conceive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Duration meets threshold for female age?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Counsel on fertile window and lifestyle; review later",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Evaluate both: semen analysis, ovulation, ovarian reserve",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Tubal and uterine assessment by HSG or sonography",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Anovulation found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Treat endocrine cause; letrozole or clomifene",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Severe male factor or tubal disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "IVF or ICSI; salpingectomy for hydrosalpinx",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Unexplained: IUI then IVF",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

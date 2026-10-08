@@ -149,5 +149,315 @@
       "caption": "Overview comparison matrix for choledocholithiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choledocholithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Cholestatic pattern with raised bilirubin, alkaline phosphatase and gamma-GT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transabdominal ultrasound",
+          "cells": [
+            {
+              "text": "Ductal dilatation and gallbladder stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "Non-invasive delineation of ductal stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Equivocal or intermediate-probability cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERCP",
+          "cells": [
+            {
+              "text": "Combined diagnostic and therapeutic intervention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choledocholithiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute cholecystitis or biliary colic",
+          "cells": [
+            {
+              "text": "Gallbladder stones without ductal stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant biliary obstruction",
+          "cells": [
+            {
+              "text": "Progressive obstructive jaundice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choledocholithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic clearance",
+          "cells": [
+            {
+              "text": "ERCP with biliary sphincterotomy and stone extraction"
+            },
+            {
+              "text": "Mainstay of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholecystectomy",
+          "cells": [
+            {
+              "text": "Remove the gallbladder source, after endoscopic clearance or with combined laparoscopic duct exploration"
+            },
+            {
+              "text": "Prevents recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lithotripsy for large stones",
+          "cells": [
+            {
+              "text": "Mechanical lithotripsy or cholangioscopy-guided laser or electrohydraulic lithotripsy"
+            },
+            {
+              "text": "Large or impacted stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascending cholangitis",
+          "cells": [
+            {
+              "text": "Urgent broad-spectrum antibiotics and emergency biliary decompression"
+            },
+            {
+              "text": "Infected, obstructed duct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallstone pancreatitis",
+          "cells": [
+            {
+              "text": "Supportive care and early biliary decompression if obstruction persists"
+            },
+            {
+              "text": "Persisting obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Liver function tests to confirm resolution of the cholestatic pattern"
+            },
+            {
+              "text": "Adequate duct clearance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choledocholithiasis-dx-mgmt",
+      "title": "Diagnosis and management of Choledocholithiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choledocholithiasis: biliary pain, obstructive jaundice, cholestatic tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cholangitis, severe pancreatitis, coagulopathy, septic shock)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent antibiotics and emergency biliary decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Liver tests, ultrasound, MRCP or endoscopic ultrasound for ductal stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ductal stones confirmed with cholestatic pattern on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ERCP with sphincterotomy and stone extraction as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check acute cholecystitis, malignant obstruction and gallstone pancreatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Mechanical or laser lithotripsy for large or impacted stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cholecystectomy to remove the gallbladder source of stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early biliary decompression if pancreatitis obstruction persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver tests confirm resolution of cholestasis and adequate duct clearance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

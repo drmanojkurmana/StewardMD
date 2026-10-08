@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for apparent mineralocorticoid excess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oxford Handbook of Nephrology and Hypertension / Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apparent_mineralocorticoid_excess-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma renin activity and aldosterone",
+          "cells": [
+            {
+              "text": "Both suppressed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium and bicarbonate",
+          "cells": [
+            {
+              "text": "Hypokalaemic alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary steroid metabolite profile",
+          "cells": [
+            {
+              "text": "Increased cortisol-to-cortisone ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for liquorice, carbenoxolone and enzyme-inhibiting exposures",
+          "cells": [
+            {
+              "text": "Enzyme-inhibiting exposures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and cardiac end-organ assessment",
+          "cells": [
+            {
+              "text": "Severe hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of HSD11B2",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apparent_mineralocorticoid_excess-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Liddle syndrome",
+          "cells": [
+            {
+              "text": "ENaC gain-of-function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary hyperaldosteronism",
+          "cells": [
+            {
+              "text": "Suppressed aldosterone argues against it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apparent_mineralocorticoid_excess-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mineralocorticoid receptor antagonist",
+          "cells": [
+            {
+              "text": "Spironolactone or eplerenone"
+            },
+            {
+              "text": "Controls hypertension and corrects potassium and bicarbonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary sodium restriction",
+          "cells": [
+            {
+              "text": "Reduces the volume expansion driving the disease"
+            },
+            {
+              "text": "Driving mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and epithelial sodium channel blockade",
+          "cells": [
+            {
+              "text": "Potassium supplementation; amiloride where needed"
+            },
+            {
+              "text": "Hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid enzyme-inhibiting exposures",
+          "cells": [
+            {
+              "text": "Liquorice and carbenoxolone"
+            },
+            {
+              "text": "These reproduce or worsen the phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dexamethasone in resistant cases",
+          "cells": [
+            {
+              "text": "Suppresses ACTH-driven cortisol"
+            },
+            {
+              "text": "Selected resistant cases; conventional antihypertensives added"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Blood pressure, electrolyte and renal surveillance"
+            },
+            {
+              "text": "Hypertensive end-organ damage and CKD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and transplantation",
+          "cells": [
+            {
+              "text": "Autosomal recessive HSD11B2 inheritance; renal transplantation"
+            },
+            {
+              "text": "Transplant can be curative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apparent_mineralocorticoid_excess-dx-mgmt",
+      "title": "Diagnosis and management of Apparent mineralocorticoid excess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe hypertension with hypokalaemia in childhood or young adulthood",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Profound hypokalaemia with weakness or arrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium correction and cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renin, aldosterone, potassium, urinary cortisol-to-cortisone ratio, HSD11B2",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised cortisol-to-cortisone ratio with suppressed renin and aldosterone?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Mineralocorticoid receptor antagonist to control hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat steroid profiling",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sodium restriction and potassium correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid liquorice and carbenoxolone exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dexamethasone in selected resistant cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal transplantation can be curative; monitor end-organ damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -156,5 +156,327 @@
       "caption": "Overview comparison matrix for choroid plexus carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choroid_plexus_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Intraventricular mass and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal MRI",
+          "cells": [
+            {
+              "text": "CSF dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF cytology",
+          "cells": [
+            {
+              "text": "Staging once safe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with INI1 staining",
+          "cells": [
+            {
+              "text": "Excludes rhabdoid tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline TP53 testing",
+          "cells": [
+            {
+              "text": "Li-Fraumeni syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroid_plexus_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choroid plexus papilloma",
+          "cells": [
+            {
+              "text": "Lacks high cellularity, mitotic activity, necrosis and brain invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical teratoid/rhabdoid tumour",
+          "cells": [
+            {
+              "text": "Excluded by INI1 staining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroid_plexus_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Maximal safe surgical resection",
+          "cells": [
+            {
+              "text": "Cornerstone; gross total resection gives better outcomes"
+            },
+            {
+              "text": "Vascular intraventricular location"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraoperative planning",
+          "cells": [
+            {
+              "text": "Plan for brisk bleeding; anticipate CSF diversion for hydrocephalus"
+            },
+            {
+              "text": "Rich vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniospinal radiotherapy",
+          "cells": [
+            {
+              "text": "Used after resection given CSF seeding risk; weighed against radiotherapy risk in young children"
+            },
+            {
+              "text": "CSF dissemination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "No single agreed regimen; platinum, alkylating agents, etoposide, methotrexate or anthracycline-based therapy"
+            },
+            {
+              "text": "Unlike the benign papilloma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delay irradiation in infants",
+          "cells": [
+            {
+              "text": "Chemotherapy to delay or avoid irradiation until the child is older"
+            },
+            {
+              "text": "Very young children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat surgery or radiotherapy",
+          "cells": [
+            {
+              "text": "Repeat surgery for resectable residual or recurrent disease; radiotherapy after subtotal resection"
+            },
+            {
+              "text": "Residual or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance and genetics",
+          "cells": [
+            {
+              "text": "Serial MRI of brain and spine; TP53 genetic evaluation; care at a paediatric neuro-oncology centre"
+            },
+            {
+              "text": "Recurrence and Li-Fraumeni"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choroid_plexus_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Choroid plexus carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choroid plexus carcinoma: infant with intraventricular mass and hydrocephalus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid hydrocephalus, haemorrhage, CSF dissemination, TP53 risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgical review for hydrocephalus and CSF diversion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI, craniospinal MRI, CSF cytology, INI1 staining and TP53 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Malignant intraventricular tumour with CSF dissemination assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Maximal safe surgical resection with planning for brisk bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check choroid plexus papilloma, atypical teratoid rhabdoid tumour and ependymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Craniospinal radiotherapy weighed against risk in young children",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Chemotherapy with no single agreed regimen; may delay irradiation in infants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat surgery or radiotherapy for residual or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial MRI of the full neuraxis; TP53 evaluation and family counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,312 @@
       "caption": "Overview comparison matrix for cloves syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cloves_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep sequencing of lesional tissue",
+          "cells": [
+            {
+              "text": "Mosaic PIK3CA variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of affected regions and the spine",
+          "cells": [
+            {
+              "text": "Lipomatous overgrowth and vascular malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Capillary, venous, lymphatic and arteriovenous components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal and skeletal assessment",
+          "cells": [
+            {
+              "text": "Scoliosis and spinal anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and abdominal imaging",
+          "cells": [
+            {
+              "text": "Wilms tumour association in the overgrowth spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cloves_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Klippel-Trenaunay syndrome",
+          "cells": [
+            {
+              "text": "Other PIK3CA-related overgrowth phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proteus syndrome",
+          "cells": [
+            {
+              "text": "AKT1 mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkes Weber syndrome",
+          "cells": [
+            {
+              "text": "Arteriovenous malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cloves_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Alpelisib or sirolimus",
+          "cells": [
+            {
+              "text": "Targets the PI3K/AKT/mTOR pathway to control overgrowth and malformation"
+            },
+            {
+              "text": "Targeted therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerotherapy, embolisation or resection",
+          "cells": [
+            {
+              "text": "Combined capillary, venous, lymphatic and arteriovenous malformations"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation and thrombosis-risk management",
+          "cells": [
+            {
+              "text": "Extensive venous or lymphatic malformation with localised coagulopathy"
+            },
+            {
+              "text": "Around procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and spinal correction",
+          "cells": [
+            {
+              "text": "Lipomatous overgrowth, limb asymmetry and scoliosis"
+            },
+            {
+              "text": "Debulking"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and abdominal imaging surveillance",
+          "cells": [
+            {
+              "text": "Wilms tumour association within the spectrum"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cloves_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of CLOVES syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CLOVES syndrome: truncal lipomatous overgrowth with vascular malformations",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (high-flow AVM, thromboembolism, cord compression, abdominal mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for cord compression or suspected Wilms tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Deep sequencing of lesional tissue with MRI of the trunk and spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mosaic PIK3CA variant confirmed in affected tissue?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Alpelisib or sirolimus to target the PI3K/AKT/mTOR pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Klippel-Trenaunay, Proteus syndrome and Parkes Weber syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sclerotherapy, embolisation or resection for combined malformations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation and thrombosis risk management around procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic and spinal correction for lipomatous overgrowth and scoliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Renal and abdominal surveillance for Wilms tumour; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for cushing disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cushing_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Late-night salivary cortisol and 24-hour urinary free cortisol",
+          "cells": [
+            {
+              "text": "Hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose dexamethasone suppression test",
+          "cells": [
+            {
+              "text": "Non-suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ACTH",
+          "cells": [
+            {
+              "text": "ACTH dependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose dexamethasone and CRH testing",
+          "cells": [
+            {
+              "text": "Pituitary source supported"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI and inferior petrosal sinus sampling",
+          "cells": [
+            {
+              "text": "Adenoma localised when needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Exogenous glucocorticoid use",
+          "cells": [
+            {
+              "text": "Pitfall: missed exposure; excluded first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectopic ACTH-secreting tumours",
+          "cells": [
+            {
+              "text": "ACTH-dependent but non-pituitary source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-Cushing states (obesity, alcohol excess, depression)",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal selective adenomectomy",
+          "cells": [
+            {
+              "text": "First-line definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat surgery or pituitary radiotherapy",
+          "cells": [
+            {
+              "text": "Persistent or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroidogenesis inhibitors",
+          "cells": [
+            {
+              "text": "Metyrapone, ketoconazole or osilodrostat; pasireotide or cabergoline as bridging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilateral adrenalectomy",
+          "cells": [
+            {
+              "text": "Refractory disease; lifelong replacement and watch for Nelson syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative glucocorticoid cover",
+          "cells": [
+            {
+              "text": "Secondary adrenal insufficiency after surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Hypertension, diabetes, osteoporosis; thromboprophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Biochemical recurrence monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cushing_disease-dx-mgmt",
+      "title": "Diagnosis and management of Cushing disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cushing disease: ACTH-dependent hypercortisolism",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (severe hypokalaemia, uncontrolled glucose, infection, thromboembolism)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent control of severe hypertension, hypokalaemia or hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Late-night cortisol; dexamethasone suppression; ACTH; CRH test; MRI; IPSS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ACTH-dependent hypercortisolism localise to the pituitary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ectopic ACTH, adrenal tumour or exogenous steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal selective adenomectomy as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroidogenesis inhibitors when surgery is delayed or incomplete",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Radiotherapy or bilateral adrenalectomy for persistent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Glucocorticoid cover after surgery and thromboprophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery achieves remission in a large proportion; recurrence needs long-term follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

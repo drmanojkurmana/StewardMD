@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for coronin-1a deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coronin1a_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subset enumeration with naive and memory T cells",
+          "cells": [
+            {
+              "text": "Low naive T cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TREC quantification, including on newborn screening",
+          "cells": [
+            {
+              "text": "Low T-cell receptor excision circles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell proliferation and activation assays",
+          "cells": [
+            {
+              "text": "Defective T-cell function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBV load monitoring",
+          "cells": [
+            {
+              "text": "Lymphoproliferation assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CORO1A sequencing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronin1a_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other actin-regulation defects such as DOCK2 and DOCK8 deficiency",
+          "cells": [
+            {
+              "text": "Named look-alikes with immune defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "X-linked lymphoproliferative disease",
+          "cells": [
+            {
+              "text": "EBV-susceptibility disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ataxia-telangiectasia",
+          "cells": [
+            {
+              "text": "Combined immunodeficiency with lymphopenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronin1a_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allogeneic haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive; life-saving in severe infantile disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis",
+          "cells": [
+            {
+              "text": "Pneumocystis, fungal and viral pathogens while immunodeficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "For impaired antibody responses and recurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBV-driven lymphoproliferation",
+          "cells": [
+            {
+              "text": "Pre-emptive rituximab; lymphoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccine and blood product precautions",
+          "cells": [
+            {
+              "text": "Avoid live vaccines; irradiated, CMV-safe blood products"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family testing; newborn screening detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Clinical immunology and transplant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coronin1a_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Coronin-1A deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coronin-1A deficiency: infant with severe infection and low naive T cells",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (EBV lymphoproliferation, opportunistic infection, failure to thrive)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent immunology review; opportunistic infection prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "T-cell subsets; TRECs; proliferation assays; EBV load; immunoglobulins; CORO1A",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CORO1A sequencing confirm a defect with T-cell lymphopenia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DOCK8 deficiency, XLP or other combined immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Allogeneic haematopoietic stem cell transplantation as definitive therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antimicrobial prophylaxis for Pneumocystis, fungi and viruses",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunoglobulin replacement for antibody deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pre-emptive rituximab for EBV-driven lymphoproliferation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Life-threatening in severe infantile disease without transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

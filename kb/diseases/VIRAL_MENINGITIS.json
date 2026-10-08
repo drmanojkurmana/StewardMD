@@ -283,5 +283,486 @@
       "caption": "Diagnostic and clinical overview matrix for viral (aseptic) meningitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Viral Meningitis",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/meningitis/viral-meningitis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Review of adult meningitis, PMC6303447, 2018",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6303447/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "VIRAL_MENINGITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "CSF and clinical findings in viral meningitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Viral meningitis",
+        "Bacterial meningitis"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF white cells",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Raised, 5 to 1000",
+              "range": [
+                5,
+                1000
+              ]
+            },
+            {
+              "text": "Usually >100",
+              "op": ">",
+              "value": 100
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Predominant cell",
+          "cells": [
+            {
+              "text": "{{hy:Lymphocytes}}; neutrophils can predominate in the first 48 h"
+            },
+            {
+              "text": "Neutrophils"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF:blood glucose ratio",
+          "cells": [
+            {
+              "text": "Normal or slightly low"
+            },
+            {
+              "text": "Ratio <0.36 is 93% accurate for bacterial",
+              "op": "<",
+              "value": 0.36
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF protein",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Mildly raised"
+            },
+            {
+              "text": "Raised; <0.6 g/L largely rules out bacterial"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF protein (Merck)",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Usually <150 mg/dL; can be very high in West Nile",
+              "op": "<",
+              "value": 150
+            },
+            {
+              "text": "Higher than viral"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opening pressure",
+          "unit": "cm CSF",
+          "cells": [
+            {
+              "text": "Normal (12 to 20) or mildly raised"
+            },
+            {
+              "text": "Raised"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Enterovirus RT-PCR of CSF",
+          "cells": [
+            {
+              "text": "Test of choice; best within 48 h, falls after day 5"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum procalcitonin",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": ">0.5 ng/mL favours bacterial",
+              "op": ">",
+              "value": 0.5
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consciousness and focal signs",
+          "cells": [
+            {
+              "text": "Preserved; no seizures or focal deficits"
+            },
+            {
+              "text": "May be impaired"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No CSF combination excludes bacterial meningitis; only negative bacterial cultures do (Merck). Up to 15% of enteroviral cases, mostly young infants, have a normal CSF cell count. Low CSF glucose occurs in 10% to 30% of mumps or LCMV meningitis."
+    },
+    {
+      "id": "VIRAL_MENINGITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic viral meningitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Partially treated bacterial meningitis",
+          "cells": [
+            {
+              "text": "{{hy:Prior antibiotics can turn CSF lymphocytic}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSV or other encephalitis",
+          "cells": [
+            {
+              "text": "Altered consciousness, seizures, focal signs or parenchymal imaging change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous or fungal meningitis",
+          "cells": [
+            {
+              "text": "Lymphocytic CSF with low glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Listeria meningoencephalitis",
+          "cells": [
+            {
+              "text": "Lymphocytic CSF with low glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosyphilis or Lyme disease",
+          "cells": [
+            {
+              "text": "Aseptic meningitis from spirochaetes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parameningeal infection",
+          "cells": [
+            {
+              "text": "PMN pleocytosis without a diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced aseptic meningitis",
+          "cells": [
+            {
+              "text": "Temporal link to a medication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neoplastic meningitis, sarcoidosis, SLE, Behcet",
+          "cells": [
+            {
+              "text": "Noninfectious; low glucose possible in sarcoid or neoplastic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "VIRAL_MENINGITIS-treatment",
+      "kind": "treatment",
+      "title": "Management of viral meningitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical antibiotics and glucocorticoids",
+          "cells": [
+            {
+              "text": "{{hy:Seriously ill patient where bacterial meningitis is possible}}"
+            },
+            {
+              "text": "Start immediately; continue until CSF cultures show no bacterial growth"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dexamethasone",
+          "cells": [
+            {
+              "text": "With or just before antibiotics when bacterial meningitis is possible"
+            },
+            {
+              "text": "10 mg IV every 6 h; stop once another cause is probable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Confirmed or probable viral meningitis"
+            },
+            {
+              "text": "Mainstay of treatment; illness resolves over weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acyclovir",
+          "cells": [
+            {
+              "text": "HSV or VZV meningitis, or any suspicion of HSV encephalitis"
+            },
+            {
+              "text": "Stop if PCR is negative; proven benefit is in encephalitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "HIV meningitis"
+            },
+            {
+              "text": "Repeat HIV testing if seronegative and suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Outpatient care",
+          "cells": [
+            {
+              "text": "Immunocompetent, classic CSF, no focal signs, normal consciousness"
+            },
+            {
+              "text": "Only if home monitoring and follow-up are assured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Admission and MRI",
+          "cells": [
+            {
+              "text": "Atypical CSF, immunocompromise, altered consciousness, seizures or focal signs"
+            },
+            {
+              "text": "MRI preferred over CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Acyclovir dose is not stated in the sources opened. Source difference: Merck starts acyclovir empirically when HSV is suspected; the 2018 review limits it to patients with encephalitic features."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "VIRAL_MENINGITIS-dx-mgmt",
+      "title": "Diagnosis and management of viral meningitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, headache, neck stiffness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Raised ICP or mass lesion suspected?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Neuroimaging before lumbar puncture",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LP: cells, protein, glucose ratio, Gram stain, culture, viral PCR",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Seriously ill or bacterial meningitis possible?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Empirical antibiotics plus dexamethasone now",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Encephalitic features or HSV suspected?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start acyclovir; stop if HSV and VZV PCR negative",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Bacterial cultures negative and viral profile?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Viral meningitis: supportive care, stop antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat as bacterial, TB or fungal meningitis per result",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

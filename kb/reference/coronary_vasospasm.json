@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for coronary vasospasm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coronary_vasospasm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Twelve-lead ECG during an episode",
+          "cells": [
+            {
+              "text": "Transient ST changes during attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory ST-segment monitoring",
+          "cells": [
+            {
+              "text": "Transient ST elevation detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive angiography with intracoronary provocation",
+          "cells": [
+            {
+              "text": "Spasm provoked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac troponin",
+          "cells": [
+            {
+              "text": "Associated myonecrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine toxicology for sympathomimetics",
+          "cells": [
+            {
+              "text": "Cocaine or similar exposure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_vasospasm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Obstructive atherosclerotic angina",
+          "cells": [
+            {
+              "text": "Fixed stenosis rather than spasm; coronary CT for plaque"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular angina",
+          "cells": [
+            {
+              "text": "Named look-alike of non-obstructive angina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cocaine-induced myocardial ischaemia",
+          "cells": [
+            {
+              "text": "Urine toxicology identifies it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_vasospasm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium-channel blockers",
+          "cells": [
+            {
+              "text": "Cornerstone of prophylaxis, often with long-acting nitrates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute attack relief",
+          "cells": [
+            {
+              "text": "Sublingual or intravenous nitrates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid non-selective beta-blockers",
+          "cells": [
+            {
+              "text": "Can worsen spasm through unopposed alpha vasoconstriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation and magnesium",
+          "cells": [
+            {
+              "text": "Most important modifiable measure; correct magnesium deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Cocaine, sumatriptan, cold exposure, hyperventilation and emotional stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refractory spasm",
+          "cells": [
+            {
+              "text": "Second calcium-channel blocker, nicorandil and statin; consider defibrillator"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology follow-up",
+          "cells": [
+            {
+              "text": "Arrhythmia and infarction risk in refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coronary_vasospasm-dx-mgmt",
+      "title": "Diagnosis and management of coronary vasospasm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coronary vasospasm: rest chest pain with transient ST elevation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (prolonged rest pain with ST elevation, syncope, arrhythmia, arrest)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency PCI pathway for evolving infarction; treat arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG during attack; ambulatory ST monitoring; provocation angiography; troponin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does provocation testing reproduce spasm in a coronary artery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider microvascular angina, plaque rupture or oesophageal spasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Calcium-channel blockers with long-acting nitrates for prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sublingual or IV nitrates to abort acute attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid non-selective beta-blockers; stop smoking; correct magnesium",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate refractory spasm with nicorandil and statin; avoid precipitants",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With smoking cessation and calcium-channel blockers the outlook is generally favourable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

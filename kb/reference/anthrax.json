@@ -153,5 +153,286 @@
       "caption": "Overview comparison matrix for anthrax."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO / India national programmes",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anthrax-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gram stain and culture of skin lesion fluid, blood, pleural fluid or CSF",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Widened mediastinum and pleural effusions in inhalational anthrax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR and toxin or antigen detection",
+          "cells": [
+            {
+              "text": "Rapid confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Notification and reference-laboratory testing",
+          "cells": [
+            {
+              "text": "Public-health laboratory confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anthrax-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antibacterial therapy",
+          "cells": [
+            {
+              "text": "Fluoroquinolone such as ciprofloxacin, or doxycycline"
+            },
+            {
+              "text": "Combination IV regimens with a protein-synthesis inhibitor for systemic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antitoxin therapy",
+          "cells": [
+            {
+              "text": "Monoclonal anti-protective-antigen agent or anthrax immune globulin"
+            },
+            {
+              "text": "Inhalational, gastrointestinal or meningeal forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive supportive care",
+          "cells": [
+            {
+              "text": "Fluid resuscitation, vasopressors and organ support"
+            },
+            {
+              "text": "Toxaemic shock and vascular leak"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage of haemorrhagic collections",
+          "cells": [
+            {
+              "text": "Pleural effusions and other collections to remove toxin"
+            },
+            {
+              "text": "Relieves compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended antibacterial course",
+          "cells": [
+            {
+              "text": "CNS-penetrating agents"
+            },
+            {
+              "text": "Where meningitis is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Notification and prophylaxis",
+          "cells": [
+            {
+              "text": "Public-health notification; post-exposure prophylaxis and vaccination for contacts"
+            },
+            {
+              "text": "Exposed contacts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anthrax-dx-mgmt",
+      "title": "Diagnosis and management of Anthrax",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Caused by Bacillus anthracis, a spore-forming Gram-positive rod zoonosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Widened mediastinum with dyspnoea or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Medical emergency: urgent treatment for inhalational anthrax",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gram stain and culture, blood cultures, chest imaging, PCR and toxin tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PCR or toxin detection confirms Bacillus anthracis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Combination IV antibacterial therapy with ciprofloxacin or doxycycline",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat laboratory tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add antitoxin: anti-protective-antigen agent or anthrax immune globulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive support for toxaemic shock; drain haemorrhagic collections",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Notify public health; prophylaxis and vaccination for exposed contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Extend course with CNS-penetrating agents where meningitis is present",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

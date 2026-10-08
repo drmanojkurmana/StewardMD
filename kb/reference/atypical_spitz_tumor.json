@@ -159,5 +159,336 @@
       "caption": "Overview comparison matrix for atypical spitz tumour."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atypical_spitz_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete excision biopsy",
+          "cells": [
+            {
+              "text": "Architectural and cytological assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry with melanocytic markers, proliferation index and p16",
+          "cells": [
+            {
+              "text": "Proliferation index and p16"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescence in situ hybridisation",
+          "cells": [
+            {
+              "text": "Melanoma-associated copy-number changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Array comparative genomic hybridisation",
+          "cells": [
+            {
+              "text": "Chromosomal aberrations for risk stratification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing for kinase fusions and HRAS",
+          "cells": [
+            {
+              "text": "Kinase fusions (ALK, ROS1, NTRK, BRAF, RET, MET) and HRAS status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sentinel lymph node biopsy",
+          "cells": [
+            {
+              "text": "Selected higher-risk lesions; a positive node is interpreted cautiously"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_spitz_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spitzoid melanoma",
+          "cells": [
+            {
+              "text": "Large size, ulceration, deep extension or high mitotic rate suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pigmented spindle cell naevus",
+          "cells": [
+            {
+              "text": "Separated by ancillary testing; accumulated chromosomal aberrations suggest melanoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_spitz_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-thickness excisional biopsy",
+          "cells": [
+            {
+              "text": "Adequate tissue for diagnosis"
+            },
+            {
+              "text": "A thin shave is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complete excision with clear margins",
+          "cells": [
+            {
+              "text": "Mainstay of primary management"
+            },
+            {
+              "text": "Clear histologic margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-excision or wider local excision",
+          "cells": [
+            {
+              "text": "If margins are involved or excision was incomplete"
+            },
+            {
+              "text": "Incomplete initial excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sentinel lymph node biopsy",
+          "cells": [
+            {
+              "text": "Higher-risk lesions"
+            },
+            {
+              "text": "A positive node does not carry the same prognosis as melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No systemic therapy for the lesion itself",
+          "cells": [
+            {
+              "text": "Atypical Spitz tumour"
+            },
+            {
+              "text": "No systemic therapy algorithm applies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melanoma pathway if reclassified",
+          "cells": [
+            {
+              "text": "Manage and stage as melanoma if reclassified or behaving aggressively"
+            },
+            {
+              "text": "Standard melanoma care applies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical surveillance",
+          "cells": [
+            {
+              "text": "Excision site and regional nodal basins"
+            },
+            {
+              "text": "Biological uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atypical_spitz_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Atypical Spitz tumour",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pigmented melanocytic lesion with atypical features on biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Large size, ulceration, deep extension or high mitotic rate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer ambiguous or worrying lesions to a melanoma-capable centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-thickness excision, IHC with p16, FISH, array CGH, kinase fusion and HRAS testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Chromosomal aberrations or kinase fusion on ancillary testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reclassify and manage as melanoma with standard staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision with clear margins as primary treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Re-excise or widen if margins are involved",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider sentinel node biopsy in higher-risk lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Clinical surveillance of excision site and regional nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "No systemic or radiotherapy role for the atypical lesion itself",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

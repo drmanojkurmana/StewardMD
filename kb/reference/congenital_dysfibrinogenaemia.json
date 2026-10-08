@@ -153,5 +153,305 @@
       "caption": "Overview comparison matrix for congenital dysfibrinogenaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical haematology and haemostasis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_dysfibrinogenaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clauss functional fibrinogen with antigen fibrinogen",
+          "cells": [
+            {
+              "text": "Reduced activity-to-antigen ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombin time and reptilase time",
+          "cells": [
+            {
+              "text": "Characteristically prolonged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular analysis of FGA, FGB and FGG",
+          "cells": [
+            {
+              "text": "Causative variant identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Acquired cause excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dysfibrinogenaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital afibrinogenaemia and hypofibrinogenaemia",
+          "cells": [
+            {
+              "text": "Quantitative defect; antigen low as well as function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired dysfibrinogenaemia of chronic liver disease",
+          "cells": [
+            {
+              "text": "Acquired cause; liver function tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Consumptive fibrinogen abnormality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dysfibrinogenaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phenotype-tailored management",
+          "cells": [
+            {
+              "text": "Asymptomatic, bleeding or thrombotic phenotype, guided by variant and family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrinogen replacement for bleeding",
+          "cells": [
+            {
+              "text": "Concentrate or cryoprecipitate around surgery, trauma and delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation for thrombotic variants",
+          "cells": [
+            {
+              "text": "Treat venous or arterial events; long-term anticoagulation by recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tranexamic acid",
+          "cells": [
+            {
+              "text": "Mucosal bleeding or as surgical adjunct where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy planning",
+          "cells": [
+            {
+              "text": "Joint haematology care; bleeding and thrombotic complications, including placental problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peri-operative planning and alert card",
+          "cells": [
+            {
+              "text": "Documents the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant; cascade testing; coagulation centre referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_dysfibrinogenaemia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital dysfibrinogenaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital dysfibrinogenaemia: prolonged thrombin time, bleeding or thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unexplained thrombosis, major bleeding, pregnancy loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent coagulation review; fibrinogen replacement for active bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clauss and antigen fibrinogen; thrombin and reptilase times; FGA, FGB, FGG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the activity-to-antigen ratio reduced with prolonged thrombin time?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider afibrinogenaemia, DIC or acquired dysfibrinogenaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Phenotype-tailored management guided by variant and family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fibrinogen replacement for bleeding around surgery and delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation for thrombotic variants",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Tranexamic acid for mucosal bleeding; joint pregnancy planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many remain asymptomatic with normal lifespan; outcome depends on the variant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

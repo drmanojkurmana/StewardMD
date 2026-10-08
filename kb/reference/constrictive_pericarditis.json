@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for constrictive pericarditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ESC guidelines on pericardial diseases / Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "constrictive_pericarditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography with Doppler",
+          "cells": [
+            {
+              "text": "Respiratory variation in filling, septal bounce and annular tissue velocity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT and MRI",
+          "cells": [
+            {
+              "text": "Pericardial thickening, calcification and interdependence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pericardial calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Equalisation of diastolic pressures; discordant ventricular pressures with respiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Natriuretic peptides",
+          "cells": [
+            {
+              "text": "Often only modestly elevated; helps separate from restrictive cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "constrictive_pericarditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Restrictive cardiomyopathy including amyloidosis",
+          "cells": [
+            {
+              "text": "Management diverges sharply; imaging and haemodynamics separate them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cirrhosis with ascites",
+          "cells": [
+            {
+              "text": "Pitfall: ascites and hepatic congestion mistaken for cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricuspid valve disease",
+          "cells": [
+            {
+              "text": "Right heart failure from another cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "constrictive_pericarditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardiectomy",
+          "cells": [
+            {
+              "text": "Definitive treatment for established chronic constriction in suitable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics",
+          "cells": [
+            {
+              "text": "Relieve congestion, used cautiously to avoid compromising diastolic filling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Anti-tuberculous therapy for tuberculous pericarditis; connective tissue disease management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-inflammatory trial",
+          "cells": [
+            {
+              "text": "NSAID, colchicine or corticosteroid in transient or subacute post-viral constriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Differentiation",
+          "cells": [
+            {
+              "text": "Imaging and haemodynamics to separate constriction from restrictive cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical risk",
+          "cells": [
+            {
+              "text": "Poorer outcomes in radiation-induced disease and with myocardial or hepatic involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "constrictive_pericarditis-dx-mgmt",
+      "title": "Diagnosis and management of Constrictive pericarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected constrictive pericarditis: raised venous pressure, ascites, oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory ascites, cachexia, low output, renal or hepatic failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review; relieve congestion cautiously",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo Doppler; cardiac CT or MRI; catheterisation; natriuretic peptides; cause screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do imaging and haemodynamics confirm constriction, not restriction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider restrictive cardiomyopathy, amyloidosis or cirrhosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pericardiectomy for established chronic constriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cautious diuretics to relieve systemic and pulmonary congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-tuberculous therapy or connective tissue disease treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-inflammatory trial in transient post-viral constriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive if untreated; pericardiectomy can relieve symptoms in suitable patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

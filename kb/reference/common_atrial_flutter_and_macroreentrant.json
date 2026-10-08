@@ -156,5 +156,467 @@
       "caption": "Overview comparison matrix for common atrial flutter and macroreentrant and multifocal atrial tachycardias."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Atrial Flutter",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/arrhythmias-and-conduction-disorders/atrial-flutter",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "common_atrial_flutter_and_macroreentrant-diagnostic",
+      "kind": "diagnostic",
+      "title": "ECG diagnosis of atrial flutter and MAT",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical counterclockwise flutter",
+          "cells": [
+            {
+              "text": "{{hy:Negative sawtooth waves in II, III, aVF; positive in V1}}"
+            },
+            {
+              "text": "Cavotricuspid isthmus-dependent circuit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reverse typical (clockwise) flutter",
+          "cells": [
+            {
+              "text": "Opposite flutter wave vectors"
+            },
+            {
+              "text": "Same isthmus circuit, reversed rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial rate, typical flutter",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "240 to 300",
+              "range": [
+                240,
+                300
+              ]
+            },
+            {
+              "text": "Slower with atrial disease or antiarrhythmic drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventricular rate with 2:1 block",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "About 140 to 150",
+              "range": [
+                140,
+                150
+              ]
+            },
+            {
+              "text": "Flutter waves may hide in the T wave"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid sinus massage or adenosine",
+          "cells": [
+            {
+              "text": "Increases AV block, unmasks flutter waves"
+            },
+            {
+              "text": "Adenosine usually does not terminate flutter"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multifocal atrial tachycardia",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": "3 or more P-wave morphologies, rate 100 to 150",
+              "range": [
+                100,
+                150
+              ]
+            },
+            {
+              "text": "Isoelectric baseline between P waves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical (non-isthmus) flutter",
+          "cells": [
+            {
+              "text": "Different P-wave morphology; linked to atrial scar"
+            },
+            {
+              "text": "Electrophysiology study with electroanatomic mapping confirms circuit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CHA2DS2-VASc score",
+          "cells": [
+            {
+              "text": "Thromboembolic risk in flutter"
+            },
+            {
+              "text": "Guides anticoagulation as for AF"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Atrial rate differs by source: Harrison 240 to 300 beats/min; Merck 250 to 350 beats/min (typically 300)."
+    },
+    {
+      "id": "common_atrial_flutter_and_macroreentrant-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of flutter and MAT",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrial fibrillation",
+          "cells": [
+            {
+              "text": "Irregular, no isoelectric baseline; faster chaotic atrial activity than MAT"
+            },
+            {
+              "text": "12-lead ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal atrial tachycardia",
+          "cells": [
+            {
+              "text": "Discrete P waves; may mimic left atrial or perimitral flutter"
+            },
+            {
+              "text": "{{hy:Electrophysiology study}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinus tachycardia",
+          "cells": [
+            {
+              "text": "Normal P-wave axis and morphology, gradual onset"
+            },
+            {
+              "text": "12-lead ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other regular narrow-complex tachycardia",
+          "cells": [
+            {
+              "text": "2:1 flutter at about 150 beats/min with hidden flutter waves"
+            },
+            {
+              "text": "Vagal manoeuvre or adenosine to raise AV block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical left atrial flutter",
+          "cells": [
+            {
+              "text": "After AF ablation, mitral surgery or atriotomy; scar-based"
+            },
+            {
+              "text": "Electroanatomic mapping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "common_atrial_flutter_and_macroreentrant-treatment",
+      "kind": "treatment",
+      "title": "Treatment of atrial flutter and MAT",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Synchronised cardioversion",
+          "cells": [
+            {
+              "text": "{{hy:Initial episode; mandatory with 1:1 conduction or haemodynamic compromise}}"
+            },
+            {
+              "text": "Low energy, typically 50 J, is usually effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rate control: beta-blocker, verapamil or diltiazem",
+          "cells": [
+            {
+              "text": "Stable patient"
+            },
+            {
+              "text": "Rate control is harder than in AF"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation (warfarin INR 2 to 3, DOAC)",
+          "cells": [
+            {
+              "text": "Before cardioversion; chronic or recurrent flutter"
+            },
+            {
+              "text": "Stratify with CHA2DS2-VASc"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cavotricuspid isthmus ablation",
+          "cells": [
+            {
+              "text": "Typical flutter, definitive therapy"
+            },
+            {
+              "text": "Cure over 95%; AF may follow in up to 60% over 10 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiarrhythmic drugs",
+          "cells": [
+            {
+              "text": "Rhythm maintenance when ablation not done"
+            },
+            {
+              "text": "Over 70% recur on drugs alone; flecainide, propafenone and amiodarone can convert AF into flutter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiology mapping and ablation",
+          "cells": [
+            {
+              "text": "Atypical macroreentrant flutter"
+            },
+            {
+              "text": "Circuits tied to atrial scar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying lung or metabolic illness; correct low potassium and magnesium",
+          "cells": [
+            {
+              "text": "Multifocal atrial tachycardia"
+            },
+            {
+              "text": "Electrical cardioversion is ineffective"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison reports up to half of patients develop atrial arrhythmias, mostly AF, after isthmus ablation; Merck gives up to 60% AF over 10 years."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "common_atrial_flutter_and_macroreentrant-dx-mgmt",
+      "title": "Diagnosis and management of atrial flutter and MAT",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Regular or irregular narrow-complex tachycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "12-lead ECG; vagal manoeuvre or adenosine to unmask atrial activity",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Three or more P-wave morphologies with isoelectric baseline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "MAT: treat lung or metabolic cause, correct K and Mg; no cardioversion",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Flutter waves present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Evaluate other tachycardia (AF, focal AT, sinus)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Haemodynamic compromise or 1:1 conduction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent synchronised cardioversion, often 50 J",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rate control with beta-blocker, verapamil or diltiazem",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "CHA2DS2-VASc; anticoagulate as for AF",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Typical isthmus-dependent pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cavotricuspid isthmus ablation; watch for later AF",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "EP study with electroanatomic mapping and ablation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -158,5 +158,314 @@
       "caption": "Overview comparison matrix for congenital afibrinogenaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_afibrinogenaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Functional (Clauss) fibrinogen assay with antigenic fibrinogen level",
+          "cells": [
+            {
+              "text": "Fibrinogen absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombin time and reptilase time",
+          "cells": [
+            {
+              "text": "Prolonged clotting times"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of FGA, FGB and FGG",
+          "cells": [
+            {
+              "text": "Causative gene variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregation studies",
+          "cells": [
+            {
+              "text": "Impaired aggregation despite normal platelet count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies with parental fibrinogen levels",
+          "cells": [
+            {
+              "text": "Carrier status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_afibrinogenaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dysfibrinogenaemia and hypodysfibrinogenaemia",
+          "cells": [
+            {
+              "text": "Fibrinogen function assessed against antigenic level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated intravascular coagulation",
+          "cells": [
+            {
+              "text": "Acquired hypofibrinogenaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XIII deficiency",
+          "cells": [
+            {
+              "text": "Normal routine clotting tests with poor clot stability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_afibrinogenaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibrinogen concentrate or cryoprecipitate",
+          "cells": [
+            {
+              "text": "Active bleeding and surgical or high-risk prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy prophylaxis",
+          "cells": [
+            {
+              "text": "Fibrinogen replacement through pregnancy to reduce miscarriage and abruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytics",
+          "cells": [
+            {
+              "text": "Tranexamic acid as adjunct for mucosal bleeding; avoid antiplatelet drugs and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombosis risk",
+          "cells": [
+            {
+              "text": "Balance replacement; consider thromboprophylaxis for paradoxical thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent escalation",
+          "cells": [
+            {
+              "text": "Fibrinogen replacement and imaging for suspected intracranial haemorrhage or splenic rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist centre",
+          "cells": [
+            {
+              "text": "Haemostasis or haemophilia centre with individualised plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive FGA, FGB or FGG inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_afibrinogenaemia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital afibrinogenaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital afibrinogenaemia: prolonged clotting times and serious bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intracranial bleed, splenic rupture, unexplained thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent fibrinogen replacement and imaging for intracranial or splenic bleed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clauss and antigenic fibrinogen; thrombin and reptilase times; FGA, FGB, FGG testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is fibrinogen absent on functional and antigenic assays?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dysfibrinogenaemia, DIC or factor XIII deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Fibrinogen concentrate or cryoprecipitate for bleeding and surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fibrinogen replacement through pregnancy to reduce miscarriage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tranexamic acid for mucosal bleeding; avoid antiplatelet drugs and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider thromboprophylaxis given paradoxical thrombosis risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good outlook with replacement; intracranial haemorrhage is a leading cause of death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

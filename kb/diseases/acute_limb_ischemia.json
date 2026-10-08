@@ -134,5 +134,441 @@
       "caption": "Diagnostic and clinical overview matrix for acute limb ischaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison 22e, Vascular Diseases of the Extremities (entry text)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Peripheral Arterial Occlusion",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/peripheral-arterial-disorders/acute-peripheral-arterial-occlusion",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "UK Defence Clinical Guidelines for Operations, Acute Limb Ischaemia",
+      "url": "https://cgo.mod.uk/clinical-guidelines-for-operations/treatment-guidelines/surgery/acute-limb-ischaemia/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_limb_ischemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising acute limb ischaemia and grading viability (Rutherford)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Sensory and motor",
+        "Doppler and prognosis"
+      ],
+      "rows": [
+        {
+          "parameter": "Six Ps",
+          "cells": [
+            {
+              "text": "Pain, pallor, paraesthesia, poikilothermia, pulselessness, paralysis"
+            },
+            {
+              "text": "Pain may be out of proportion to findings"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Time course",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Onset within 14 days",
+              "op": "<=",
+              "value": 14
+            },
+            {
+              "text": "Sudden fall in perfusion threatening the limb"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Level of occlusion",
+          "cells": [
+            {
+              "text": "Bifurcation just distal to the last palpable pulse"
+            },
+            {
+              "text": "Rough bedside localisation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rutherford I, viable",
+          "cells": [
+            {
+              "text": "No sensory loss, no weakness"
+            },
+            {
+              "text": "Arterial and venous Doppler audible; no immediate threat"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rutherford IIa, marginally threatened",
+          "cells": [
+            {
+              "text": "None or minimal sensory loss (toes), no weakness"
+            },
+            {
+              "text": "Arterial Doppler inaudible, venous audible; salvageable if treated promptly"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rutherford IIb, immediately threatened",
+          "cells": [
+            {
+              "text": "Sensory loss beyond toes, mild to moderate weakness"
+            },
+            {
+              "text": "{{hy:Salvageable only with immediate revascularisation}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rutherford III, irreversible",
+          "cells": [
+            {
+              "text": "Profound anaesthesia, paralysis, rigor"
+            },
+            {
+              "text": "Arterial and venous Doppler inaudible; major tissue loss"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "CT angiography first line; duplex or MRA if expertise"
+            },
+            {
+              "text": "Must not delay heparin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Baseline tests",
+          "cells": [
+            {
+              "text": "ECG for atrial fibrillation, FBC, coagulation, group and save"
+            },
+            {
+              "text": "Find embolic source and prepare for surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_limb_ischemia-ddx",
+      "kind": "ddx",
+      "title": "Causes and mimics of acute limb ischaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Embolism",
+          "cells": [
+            {
+              "text": "Cardiac or aortic source such as atrial fibrillation or aneurysm"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "In-situ thrombosis",
+          "cells": [
+            {
+              "text": "Underlying atherosclerotic plaque or aneurysm"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aortic dissection",
+          "cells": [
+            {
+              "text": "Chest or back pain with limb ischaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Compartment syndrome",
+          "cells": [
+            {
+              "text": "Tense tender compartment after trauma or reperfusion"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Low-flow states",
+          "cells": [
+            {
+              "text": "Low cardiac output rather than a focal occlusion"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Phlegmasia cerulea or alba dolens",
+          "cells": [
+            {
+              "text": "Massive venous thrombosis with a swollen limb"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cholesterol embolisation",
+          "cells": [
+            {
+              "text": "Painful blue toes after angiography or stenting"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "acute_limb_ischemia-treatment",
+      "kind": "treatment",
+      "title": "Management of acute limb ischaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Unfractionated heparin",
+          "cells": [
+            {
+              "text": "{{hy:As soon as ALI is suspected}}, unless contraindicated"
+            },
+            {
+              "text": "75 units/kg IV bolus, then infusion with 4-hourly APTT; LMWH if infusion not feasible"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oxygen, IV access, correct dehydration",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Titrate oxygen to SpO2 above 96%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Catheter-directed thrombolysis",
+          "cells": [
+            {
+              "text": "Occlusion under 2 weeks with intact motor and sensory function"
+            },
+            {
+              "text": "tPA usually, over 4 to 24 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thrombectomy or embolectomy",
+          "cells": [
+            {
+              "text": "Threatened limb; choice by severity and thrombus extent"
+            },
+            {
+              "text": "Catheter or surgical"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bypass surgery",
+          "cells": [
+            {
+              "text": "Unsuitable for catheter therapy"
+            },
+            {
+              "text": "Depends on thrombus extent and patient condition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasciotomy",
+          "cells": [
+            {
+              "text": "Compartment syndrome or after prolonged ischaemia"
+            },
+            {
+              "text": "Watch for reperfusion hyperkalaemia, acidosis, myoglobinuria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Primary amputation or palliation",
+          "cells": [
+            {
+              "text": "Rutherford III"
+            },
+            {
+              "text": "Senior team decision"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "About 11% of treated patients still need amputation and 1-year mortality is about 40% (Merck). Thrombolytic dose is not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_limb_ischemia-dx-mgmt",
+      "title": "Diagnosis and management of acute limb ischaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden painful, pale, pulseless limb",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "IV heparin bolus now; Doppler; ECG for AF",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Rutherford grade?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Grade I: urgent CT angiography and planned revascularisation",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Grade IIa: urgent imaging, thrombolysis or thrombectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Grade IIb: immediate surgical revascularisation",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Grade III: primary amputation or palliation",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Compartment syndrome after reperfusion?",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Fasciotomy; treat hyperkalaemia and acidosis",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Continue anticoagulation; treat embolic source",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "I"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "IIa"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "IIb"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "III"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

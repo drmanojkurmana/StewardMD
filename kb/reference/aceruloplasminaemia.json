@@ -157,5 +157,352 @@
       "caption": "Overview comparison matrix for aceruloplasminaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inborn errors of metabolism references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aceruloplasminaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum caeruloplasmin with serum copper",
+          "cells": [
+            {
+              "text": "Absent or markedly reduced caeruloplasmin; low copper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies",
+          "cells": [
+            {
+              "text": "Low serum iron, low transferrin saturation and markedly raised ferritin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Microcytic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes mellitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI with T2, T2* and susceptibility-weighted imaging; hepatic iron by MRI",
+          "cells": [
+            {
+              "text": "Iron deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CP gene sequencing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology with retinal imaging and urinary copper",
+          "cells": [
+            {
+              "text": "Retinal degeneration; urinary copper helps distinguish Wilson disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aceruloplasminaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Copper overload rather than iron overload"
+            },
+            {
+              "text": "Urinary copper measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pantothenate kinase-associated neurodegeneration",
+          "cells": [
+            {
+              "text": "Another brain iron accumulation disorder"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aceruloplasminaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron chelation with deferasirox, deferoxamine or deferiprone",
+          "cells": [
+            {
+              "text": "Disease-specific mainstay; lowers tissue iron"
+            },
+            {
+              "text": "Retards progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin monitoring during chelation",
+          "cells": [
+            {
+              "text": "Underlying microcytic anaemia may worsen"
+            },
+            {
+              "text": "Adjust therapy or add erythropoietin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin E antioxidant supplementation",
+          "cells": [
+            {
+              "text": "Limits iron-mediated oxidative injury"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard antidiabetic therapy, including insulin",
+          "cells": [
+            {
+              "text": "Diabetes mellitus"
+            },
+            {
+              "text": "Insulin where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment of movement disorder; neurology support; retinal monitoring",
+          "cells": [
+            {
+              "text": "Extrapyramidal disease, cognitive decline and ataxia"
+            },
+            {
+              "text": "Support through neurology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance of iron studies, glycaemia, neurology and eyes",
+          "cells": [
+            {
+              "text": "Monitoring"
+            },
+            {
+              "text": "Ferritin and neurological function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder"
+            },
+            {
+              "text": "Enables early treatment of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aceruloplasminaemia-dx-mgmt",
+      "title": "Diagnosis and management of Aceruloplasminaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult-onset extrapyramidal disease, diabetes and microcytic anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Progressive visual loss, cognitive decline or craniofacial dyskinesia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and ophthalmology review; plan iron chelation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Caeruloplasmin, serum copper, iron studies and ferritin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low caeruloplasmin with low serum iron and raised ferritin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm with CP gene sequencing and brain MRI for iron deposition",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review Wilson disease, PKAN and haemochromatosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron chelation with deferasirox, deferoxamine or deferiprone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor haemoglobin during chelation; erythropoietin if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage diabetes; neurology and retinal monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progressive neurodegeneration; early chelation may slow progression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

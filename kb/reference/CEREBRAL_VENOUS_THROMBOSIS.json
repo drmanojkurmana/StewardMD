@@ -163,5 +163,501 @@
       "caption": "Overview comparison matrix for cerebral venous sinus thrombosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Pathophysiology, diagnosis and management of cerebral venous thrombosis, Medicine (Baltimore) 2023",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10695550/fullTextXML",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CEREBRAL_VENOUS_THROMBOSIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in cerebral venous thrombosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Headache",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "70 to 90",
+              "range": [
+                70,
+                90
+              ]
+            },
+            {
+              "text": "{{hy:Commonest symptom; may mimic idiopathic intracranial hypertension}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Seizures",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 40",
+              "range": [
+                30,
+                40
+              ]
+            },
+            {
+              "text": "More frequent than in arterial stroke"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Papilloedema",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 60",
+              "range": [
+                30,
+                60
+              ]
+            },
+            {
+              "text": "Raised intracranial pressure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Focal deficits",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 50",
+              "range": [
+                30,
+                50
+              ]
+            },
+            {
+              "text": "Venous infarction, often haemorrhagic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Onset",
+          "cells": [
+            {
+              "text": "Acute 48 h or less, subacute up to 30 days, chronic 1 month or more"
+            },
+            {
+              "text": "Subacute in about half"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Cord sign, dense triangle, empty delta sign, oedema"
+            },
+            {
+              "text": "Insensitive; normal CT does not exclude"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT venography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 95, specificity 91",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "Bone artefact and arachnoid granulations can mislead"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI with MR venography",
+          "cells": [
+            {
+              "text": "Thrombus signal; T2* or SWI most sensitive"
+            },
+            {
+              "text": "Preferred confirmatory imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk factors",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Oral contraceptives 54 to 71; pregnancy or puerperium 11 to 59; inherited thrombophilia 34 to 41"
+            },
+            {
+              "text": "No cause found in about 12.5%"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "CEREBRAL_VENOUS_THROMBOSIS-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of cerebral venous thrombosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic intracranial hypertension",
+          "cells": [
+            {
+              "text": "Headache and papilloedema with patent sinuses"
+            },
+            {
+              "text": "{{hy:MR venography must show no thrombus}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial ischaemic stroke",
+          "cells": [
+            {
+              "text": "Infarct in an arterial territory, sudden onset"
+            },
+            {
+              "text": "MRI with angiography and venography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subarachnoid haemorrhage",
+          "cells": [
+            {
+              "text": "Thunderclap headache; cisternal blood"
+            },
+            {
+              "text": "CT and CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningitis or encephalitis",
+          "cells": [
+            {
+              "text": "Fever, meningism"
+            },
+            {
+              "text": "Lumbar puncture after imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior reversible encephalopathy syndrome",
+          "cells": [
+            {
+              "text": "Hypertension, posterior white matter oedema"
+            },
+            {
+              "text": "MRI with venography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain tumour with mass effect",
+          "cells": [
+            {
+              "text": "Progressive course, enhancing mass"
+            },
+            {
+              "text": "Contrast MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging mimics",
+          "cells": [
+            {
+              "text": "Transverse sinus hypoplasia, arachnoid granulations, flow artefact"
+            },
+            {
+              "text": "Combine MRV sequences or CTV; DSA if unclear"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "CEREBRAL_VENOUS_THROMBOSIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of cerebral venous thrombosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low molecular weight heparin",
+          "cells": [
+            {
+              "text": "{{hy:Acute phase, even with haemorrhagic venous infarct}}"
+            },
+            {
+              "text": "Preferred by ESO 2017 over unfractionated heparin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral anticoagulation (warfarin)",
+          "cells": [
+            {
+              "text": "After the acute phase"
+            },
+            {
+              "text": "Usually 3 to 12 months, INR 2.0 to 3.0; longer with APS or thrombophilia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dabigatran or rivaroxaban",
+          "cells": [
+            {
+              "text": "Alternative to warfarin after acute phase"
+            },
+            {
+              "text": "Dabigatran similar to warfarin in a 120-patient trial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endovascular thrombectomy or thrombolysis",
+          "cells": [
+            {
+              "text": "Deterioration despite anticoagulation"
+            },
+            {
+              "text": "TO-ACT trial showed no clear benefit in severe CVT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Decompressive craniectomy",
+          "cells": [
+            {
+              "text": "Impending herniation from large infarct or haematoma"
+            },
+            {
+              "text": "Life-saving"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Patients who have had seizures"
+            },
+            {
+              "text": "Not routine prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acetazolamide or therapeutic lumbar puncture",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure threatening vision"
+            },
+            {
+              "text": "Steroids not recommended"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove precipitants",
+          "cells": [
+            {
+              "text": "Oestrogen contraception, infection"
+            },
+            {
+              "text": "Stop combined hormonal contraception"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Complete recovery in 57% to 86%; mortality 5% to 18% across the review's figures."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CEREBRAL_VENOUS_THROMBOSIS-dx-mgmt",
+      "title": "Diagnosis and management of cerebral venous thrombosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New headache with papilloedema, seizure or focal deficit; risk factors",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Non-contrast CT, then MRI with MRV or CT venography",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Sinus or cortical vein thrombus shown?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider IIH, SAH, stroke, PRES, infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Start LMWH even if haemorrhagic infarct present",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat seizures; remove precipitants",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Impending herniation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Decompressive craniectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Worsening despite anticoagulation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider endovascular thrombectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oral anticoagulation 3 to 12 months; longer if APS or thrombophilia",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

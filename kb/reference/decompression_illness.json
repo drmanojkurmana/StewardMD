@@ -152,5 +152,287 @@
       "caption": "Overview comparison matrix for decompression illness."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Bove and Davis' Diving Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "decompression_illness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed dive profile review",
+          "cells": [
+            {
+              "text": "Depth, bottom time, ascent rate and decompression stops; missed stops or rapid ascent raise risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full neurological examination",
+          "cells": [
+            {
+              "text": "Spinal cord and cerebral involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and joint examination",
+          "cells": [
+            {
+              "text": "Cutis marmorata may herald serious disease; joint pain is the bends"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bubble contrast echocardiography",
+          "cells": [
+            {
+              "text": "Patent foramen ovale, in appropriate cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "decompression_illness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial gas embolism",
+          "cells": [
+            {
+              "text": "Stroke-like onset within minutes of surfacing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary barotrauma",
+          "cells": [
+            {
+              "text": "Respiratory distress or chest pain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "decompression_illness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-flow surface oxygen",
+          "cells": [
+            {
+              "text": "Given immediately, with the patient lying flat while transfer is arranged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid resuscitation",
+          "cells": [
+            {
+              "text": "Oral or intravenous, to counter haemoconcentration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent recompression",
+          "cells": [
+            {
+              "text": "Hyperbaric chamber with hyperbaric oxygen as the definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early specialist input",
+          "cells": [
+            {
+              "text": "Diving medicine or hyperbaric service to guide management and transfer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No flying until cleared",
+          "cells": [
+            {
+              "text": "Avoid further pressure reduction; investigate patent foramen ovale where appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prevention counselling",
+          "cells": [
+            {
+              "text": "Review the dive profile; safe ascent and adequate pre-flight surface intervals"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "decompression_illness-dx-mgmt",
+      "title": "Diagnosis and management of Decompression illness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected decompression illness: symptoms after diving or pressure exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neurological deficit, stroke-like onset, respiratory distress)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: high-flow oxygen and urgent recompression; arterial embolism is an emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dive profile review and full neurological and skin examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the dive profile and examination fit decompression illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider inner ear barotrauma, immersion oedema, stroke or cardiac causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High-flow surface oxygen; lie the patient flat during transfer",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fluid resuscitation, oral or intravenous, to counter haemoconcentration",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Urgent hyperbaric recompression as the definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid flying until cleared; investigate patent foramen ovale where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prompt recompression gives many a good recovery; delay raises the risk of deficit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

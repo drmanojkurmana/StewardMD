@@ -241,5 +241,442 @@
       "caption": "Diagnostic and clinical overview matrix for upper respiratory tract infection (common cold)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Outpatient Clinical Care for Adults, 2024",
+      "url": "https://www.cdc.gov/antibiotic-use/hcp/clinical-care/adult-outpatient.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "URTI-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising the common cold (nonspecific URI)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom pattern",
+          "cells": [
+            {
+              "text": "No single symptom predominates"
+            },
+            {
+              "text": "Separates it from pharyngitis, sinusitis or otitis media"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "2 to 8",
+              "range": [
+                2,
+                8
+              ]
+            },
+            {
+              "text": "Gradual onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Usual duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "5 to 10, up to 14",
+              "range": [
+                5,
+                14
+              ]
+            },
+            {
+              "text": "Infectious while symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal mucus colour",
+          "cells": [
+            {
+              "text": "Watery to frankly purulent"
+            },
+            {
+              "text": "{{hy:Purulence alone does not mean bacterial infection}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral testing",
+          "cells": [
+            {
+              "text": "Not needed"
+            },
+            {
+              "text": "Multiplex PCR may be falsely positive from a recent prior infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">38.9",
+              "op": ">",
+              "value": 38.9
+            },
+            {
+              "text": "Red flag; reassess for another diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom duration red flag",
+          "unit": "days",
+          "cells": [
+            {
+              "text": ">14",
+              "op": ">",
+              "value": 14
+            },
+            {
+              "text": "Look for sinusitis or another cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other red flags",
+          "cells": [
+            {
+              "text": "Dyspnoea, chest pain, confusion, dizziness, new ear or sinus pain"
+            },
+            {
+              "text": "Reassess for complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequency",
+          "cells": [
+            {
+              "text": "Adults 2 to 4 a year; children 6 to 10 a year"
+            },
+            {
+              "text": "Reinfection common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Diagnosis is clinical."
+    },
+    {
+      "id": "URTI-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic the common cold",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Influenza",
+          "cells": [
+            {
+              "text": "More prominent myalgia and systemic symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COVID-19",
+          "cells": [
+            {
+              "text": "{{hy:New loss of taste or smell}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streptococcal pharyngitis",
+          "cells": [
+            {
+              "text": "Sore throat predominates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute bacterial sinusitis",
+          "cells": [
+            {
+              "text": "Over 10 days, severe onset with fever 39 deg C or more, or double sickening"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute otitis media",
+          "cells": [
+            {
+              "text": "New ear pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measles",
+          "cells": [
+            {
+              "text": "Cough, coryza and conjunctivitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute HIV infection",
+          "cells": [
+            {
+              "text": "Sore throat and rash predominate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergic rhinitis",
+          "cells": [
+            {
+              "text": "Non-infectious upper respiratory symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources give no single separating test for each mimic, so that column was dropped."
+    },
+    {
+      "id": "URTI-treatment",
+      "kind": "treatment",
+      "title": "Management of the common cold in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No antibiotic",
+          "cells": [
+            {
+              "text": "{{hy:All uncomplicated colds}}"
+            },
+            {
+              "text": "Does not shorten illness or prevent complications; risks adverse effects, C. difficile and resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid delayed antibiotic prescription",
+          "cells": [
+            {
+              "text": "Self-limited respiratory infection"
+            },
+            {
+              "text": "Harrison advises against it as a mixed message"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAID",
+          "cells": [
+            {
+              "text": "Pain or fever"
+            },
+            {
+              "text": "Symptom relief"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Decongestant with first-generation antihistamine",
+          "cells": [
+            {
+              "text": "Nasal symptoms and cough"
+            },
+            {
+              "text": "Pseudoephedrine combination may give short-term relief"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Remedies without proven benefit",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Echinacea, zinc, steam, vitamin C or D, garlic, intranasal steroids, saline irrigation, antivirals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review",
+          "cells": [
+            {
+              "text": "Red flags or symptoms beyond 14 days"
+            },
+            {
+              "text": "Look for sinusitis, otitis or another diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources conflict on antihistamines: CDC says a decongestant plus first-generation antihistamine may help briefly, while Harrison lists antihistamines among ineffective remedies. Evidence for antihistamines alone is lacking per CDC."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "URTI-dx-mgmt",
+      "title": "Diagnosis and management of the common cold",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Coryza, congestion, sore throat or cough",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flags: fever over 38.9 deg C, dyspnoea, chest pain, confusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess for pneumonia, influenza, COVID-19 or other illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "One symptom predominates (throat, sinus, ear)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Manage as pharyngitis, sinusitis or otitis media",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Explain 5 to 10 day course; no antibiotic",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Symptomatic NSAID or decongestant combination",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Symptoms beyond 14 days or new ear or sinus pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Self-limited recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Reassess for bacterial sinusitis or otitis",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

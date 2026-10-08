@@ -210,5 +210,549 @@
       "caption": "Diagnostic and clinical overview matrix for aortic stenosis (syncope)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Aortic Stenosis",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/aortic-stenosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aortic_stenosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Echocardiographic grading of aortic stenosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Peak velocity",
+        "Mean gradient",
+        "Valve area"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild",
+          "cells": [
+            {
+              "text": "2.5 to 2.9 m/s",
+              "range": [
+                2.5,
+                2.9
+              ]
+            },
+            {
+              "text": "10 to 20 mm Hg",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "1.5 to 2.0 cm2",
+              "range": [
+                1.5,
+                2.0
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate",
+          "cells": [
+            {
+              "text": "3 to 4 m/s",
+              "range": [
+                3,
+                4
+              ]
+            },
+            {
+              "text": "20 to 40 mm Hg",
+              "range": [
+                20,
+                40
+              ]
+            },
+            {
+              "text": "1.0 to 1.5 cm2",
+              "range": [
+                1.0,
+                1.5
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe",
+          "cells": [
+            {
+              "text": "{{hy:>4 m/s}}",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": ">40 mm Hg",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "<1.0 cm2",
+              "op": "<",
+              "value": 1.0
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Very severe",
+          "cells": [
+            {
+              "text": ">5 m/s",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": ">60 mm Hg",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "Not specified"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Critical",
+          "cells": [
+            {
+              "text": "Not specified"
+            },
+            {
+              "text": "Not specified"
+            },
+            {
+              "text": "<0.6 cm2",
+              "op": "<",
+              "value": 0.6
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-flow low-gradient, reduced EF",
+          "cells": [
+            {
+              "text": "<4.0 m/s",
+              "op": "<",
+              "value": 4.0
+            },
+            {
+              "text": "LVEF <50%"
+            },
+            {
+              "text": "<=1.0 cm2",
+              "op": "<=",
+              "value": 1.0
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Paradoxical low-flow, normal EF",
+          "cells": [
+            {
+              "text": "<4.0 m/s",
+              "op": "<",
+              "value": 4.0
+            },
+            {
+              "text": "Stroke volume index <35 mL/m2"
+            },
+            {
+              "text": "<=1.0 cm2",
+              "op": "<=",
+              "value": 1.0
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doppler velocity index",
+          "cells": [
+            {
+              "text": "<0.25",
+              "op": "<",
+              "value": 0.25
+            },
+            {
+              "text": "Suggests true severe AS"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT calcium score, men",
+          "unit": "AU",
+          "cells": [
+            {
+              "text": ">2000 suggests severe",
+              "op": ">",
+              "value": 2000
+            },
+            {
+              "text": ">3000 very likely"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT calcium score, women",
+          "unit": "AU",
+          "cells": [
+            {
+              "text": ">1300 suggests severe",
+              "op": ">",
+              "value": 1300
+            },
+            {
+              "text": ">1600 very likely"
+            },
+            {
+              "text": "Not applicable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Signs of severe AS",
+          "cells": [
+            {
+              "text": "Slow-rising small carotid pulse"
+            },
+            {
+              "text": "Soft or absent A2, late-peaking murmur"
+            },
+            {
+              "text": "Paradoxical S2 split, apical S4"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Dobutamine stress echo separates true severe from pseudo-severe AS in low-flow states (Harrison). Gradients underestimate severity when LV function is poor."
+    },
+    {
+      "id": "aortic_stenosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic aortic stenosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic sclerosis",
+          "cells": [
+            {
+              "text": "Same murmur but Doppler velocity 2.5 m/s or less"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertrophic obstructive cardiomyopathy",
+          "cells": [
+            {
+              "text": "{{hy:Murmur responds oppositely to dynamic manoeuvres}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mitral regurgitation",
+          "cells": [
+            {
+              "text": "Constant murmur beat to beat; AS murmur louder after an ectopic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo-severe AS",
+          "cells": [
+            {
+              "text": "Low valve area from LV dysfunction; valve opens more on dobutamine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subaortic membrane or supravalvular stenosis",
+          "cells": [
+            {
+              "text": "Obstruction above or below the valve on echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonic stenosis or ASD flow murmur",
+          "cells": [
+            {
+              "text": "Left upper sternal border; fixed S2 split in ASD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow murmur",
+          "cells": [
+            {
+              "text": "Anaemia, fever, pregnancy, thyrotoxicosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortic_stenosis-treatment",
+      "kind": "treatment",
+      "title": "Management of aortic stenosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic valve replacement",
+          "cells": [
+            {
+              "text": "{{hy:Severe AS with symptoms}}, LVEF <50%, or symptoms on exercise test"
+            },
+            {
+              "text": "Mean survival about 3 years after symptoms start"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "AVR in asymptomatic severe AS",
+          "cells": [
+            {
+              "text": "Low surgical risk plus Vmax >5 m/s, BNP >3 x normal, severe pulmonary hypertension or LVEF <60%"
+            },
+            {
+              "text": "Earlier intervention"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical AVR",
+          "cells": [
+            {
+              "text": "Age <65, or unsuitable arteries for transfemoral access"
+            },
+            {
+              "text": "Ages 65 to 80 decided individually"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TAVI/TAVR",
+          "cells": [
+            {
+              "text": "Age >80 or life expectancy <10 years with suitable arteries"
+            },
+            {
+              "text": "More pacemakers and paravalvular leaks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Balloon valvuloplasty",
+          "cells": [
+            {
+              "text": "Young congenital AS; bridge in older patients"
+            },
+            {
+              "text": "Benefit temporary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No intervention",
+          "cells": [
+            {
+              "text": "Life expectancy <1 year even after procedure"
+            },
+            {
+              "text": "Futility threshold"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surveillance echo",
+          "cells": [
+            {
+              "text": "Asymptomatic severe AS with normal LV"
+            },
+            {
+              "text": "Every 6 months; limit heavy exertion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cautious diuretics, nitrates and vasodilators",
+          "cells": [
+            {
+              "text": "Heart failure awaiting valve treatment"
+            },
+            {
+              "text": "Risk of hypotension and syncope"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Statins do not slow progression (Merck)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aortic_stenosis-dx-mgmt",
+      "title": "Diagnosis and management of aortic stenosis with syncope",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exertional syncope, angina or dyspnoea with ejection systolic murmur",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Transthoracic echo: Vmax, mean gradient, valve area, LVEF",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe AS?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Low flow with reduced EF?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Dobutamine stress echo or CT calcium score",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Not severe: other cause of syncope; repeat echo",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Symptoms or LVEF <50%?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "AVR: SAVR or TAVI by age and anatomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Echo every 6 months; AVR if high-risk features",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "True severe"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Pseudo-severe"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,298 @@
       "caption": "Overview comparison matrix for cerebellar ataxia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebellar_ataxia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Intention tremor, dysdiadochokinesia, dysmetria on finger-nose and heel-shin testing",
+          "cells": [
+            {
+              "text": "Characteristic signs of cerebellar dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Romberg test",
+          "cells": [
+            {
+              "text": "Positive Romberg (worse with eyes closed) points to sensory ataxia instead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain, focused on the posterior fossa",
+          "cells": [
+            {
+              "text": "Structural, vascular or demyelinating lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood tests including vitamin B12 and E",
+          "cells": [
+            {
+              "text": "Metabolic, endocrine, nutritional and toxic causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic antibody panel and CSF analysis",
+          "cells": [
+            {
+              "text": "When subacute cerebellar degeneration or an inflammatory cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebellar_ataxia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Thiamine for alcohol-related disease; vitamin B12 or E for deficiency; directed treatment of tumour or stroke"
+            },
+            {
+              "text": "Cause-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw toxins and drugs",
+          "cells": [
+            {
+              "text": "Withdraw alcohol, anticonvulsants or chemotherapy toxicity"
+            },
+            {
+              "text": "Offending agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic management",
+          "cells": [
+            {
+              "text": "Treat the underlying malignancy and give immunotherapy"
+            },
+            {
+              "text": "Paraneoplastic cerebellar degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balance and gait rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and symptomatic management of tremor and incoordination"
+            },
+            {
+              "text": "Gait and balance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech, swallowing and falls",
+          "cells": [
+            {
+              "text": "Occupational therapy, speech and language therapy, falls prevention"
+            },
+            {
+              "text": "Dysarthria and swallowing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Counselling and family testing for hereditary ataxias"
+            },
+            {
+              "text": "Hereditary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent escalation",
+          "cells": [
+            {
+              "text": "Posterior fossa decompression for acute cerebellar stroke with mass effect"
+            },
+            {
+              "text": "Brainstem compression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebellar_ataxia-dx-mgmt",
+      "title": "Diagnosis and management of Cerebellar ataxia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cerebellar ataxia: wide-based gait, dysmetria and intention tremor",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (headache, vomiting, reduced consciousness, rapid progression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency neurosurgery for cerebellar stroke or haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Posterior fossa MRI and blood tests including vitamin B12 and E",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cerebellar signs with a treatable structural, toxic or deficiency cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause: thiamine, vitamin B12 or E, or directed tumour or stroke therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check sensory ataxia, vestibular disorders and intoxication",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw alcohol, anticonvulsants or other toxic drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunotherapy and treatment of malignancy for paraneoplastic degeneration",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Balance and gait rehabilitation with physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on cause; hereditary and degenerative ataxias progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

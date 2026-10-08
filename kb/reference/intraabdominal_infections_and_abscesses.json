@@ -177,5 +177,522 @@
       "caption": "Overview comparison matrix for intraabdominal infections and abscesses."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Intra-abdominal Abscesses",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/acute-abdomen-and-surgical-gastroenterology/intra-abdominal-abscesses"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 209-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "intraabdominal_infections_and_abscesses-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key tests in peritonitis and intraabdominal abscess",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascitic fluid PMN count",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Above 250 PMN/uL",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "{{hy:Diagnostic of spontaneous bacterial peritonitis; not used for secondary peritonitis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal peritoneal fluid",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "WBC under 300/uL, protein under 30 g/L",
+              "op": "<",
+              "value": 300
+            },
+            {
+              "text": "Mostly mononuclear cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascitic fluid culture",
+          "cells": [
+            {
+              "text": "About 10 mL inoculated into blood culture bottles, before antibiotics"
+            },
+            {
+              "text": "Single organism expected; multiple organisms or anaerobes suggest a secondary source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Draw with paracentesis"
+            },
+            {
+              "text": "Bacteraemia often accompanies peritonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT abdomen and pelvis with oral contrast",
+          "cells": [
+            {
+              "text": "Preferred test for suspected abscess"
+            },
+            {
+              "text": "Indium-labelled leukocyte scan largely replaced by CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Upright chest or abdominal film",
+          "cells": [
+            {
+              "text": "Free air under the diaphragm"
+            },
+            {
+              "text": "Perforation; raised hemidiaphragm or effusion suggests subphrenic or liver abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum alkaline phosphatase",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Raised in about 70% of liver abscess",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "Most reliable single laboratory clue to liver abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CAPD dialysate",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Cloudy fluid with over 100 WBC/uL",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "Over 50% neutrophils supports peritoneal dialysis peritonitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Ascitic PMN cutoff and culture rules apply to spontaneous peritonitis only. Merck prefers CT with oral contrast for abscess localisation; Harrison also lists ultrasound, MRI and nuclear scans."
+    },
+    {
+      "id": "intraabdominal_infections_and_abscesses-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from intraabdominal infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Spontaneous bacterial peritonitis",
+          "cells": [
+            {
+              "text": "Cirrhotic ascites, single organism, no visceral source"
+            },
+            {
+              "text": "Ascitic PMN count and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary peritonitis",
+          "cells": [
+            {
+              "text": "Mixed enteric flora with anaerobes from a perforated viscus"
+            },
+            {
+              "text": "CT and free air on upright film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sterile acute pancreatitis",
+          "cells": [
+            {
+              "text": "Fever and leukocytosis without infected necrosis"
+            },
+            {
+              "text": "CT-guided needle aspiration for culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amebic liver abscess",
+          "cells": [
+            {
+              "text": "Travel or endemic exposure; serology positive in over 95%"
+            },
+            {
+              "text": "Amebic serology and PCR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous peritonitis",
+          "cells": [
+            {
+              "text": "Subacute course, lymphocytic ascites"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uncomplicated pyelonephritis",
+          "cells": [
+            {
+              "text": "Fever settles within 4 to 5 days of therapy"
+            },
+            {
+              "text": "CT or ultrasound if fever persists to exclude perinephric abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemical peritonitis from perforated gastric ulcer",
+          "cells": [
+            {
+              "text": "Low bacterial load, acid irritation"
+            },
+            {
+              "text": "Free air with upper GI source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant ascites",
+          "cells": [
+            {
+              "text": "Known or occult intraabdominal cancer"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "intraabdominal_infections_and_abscesses-treatment",
+      "kind": "treatment",
+      "title": "Management of peritonitis and intraabdominal abscess",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "{{hy:Almost every abscess needs percutaneous or surgical drainage}}"
+            },
+            {
+              "text": "Small pericolic or periappendiceal abscess under 2 cm may be treated without drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous catheter drainage",
+          "cells": [
+            {
+              "text": "Few cavities, safe route, controlled source, thin pus"
+            },
+            {
+              "text": "CT or ultrasound guided"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Community-acquired, low risk",
+          "cells": [
+            {
+              "text": "Ertapenem alone, or metronidazole with cefotaxime or ceftriaxone"
+            },
+            {
+              "text": "IV antibiotics before and after drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Community-acquired, high risk",
+          "cells": [
+            {
+              "text": "Piperacillin/tazobactam, cefepime with metronidazole, imipenem/cilastatin or meropenem"
+            },
+            {
+              "text": "Broader gram-negative cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hospital-acquired or prior antibiotics",
+          "cells": [
+            {
+              "text": "Cover resistant gram-negatives such as Pseudomonas and anaerobes"
+            },
+            {
+              "text": "Narrow by culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spontaneous bacterial peritonitis",
+          "cells": [
+            {
+              "text": "Third-generation cephalosporin with IV albumin"
+            },
+            {
+              "text": "Albumin reduces renal impairment; secondary prophylaxis afterwards"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amebic liver abscess",
+          "cells": [
+            {
+              "text": "Metronidazole 750 mg tid PO or IV for 5 to 10 days, or tinidazole 2 g/d PO for 3 days"
+            },
+            {
+              "text": "Follow with a luminal agent such as paromomycin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Fluid resuscitation, haemodynamic support, enteral nutrition"
+            },
+            {
+              "text": "Parenteral nutrition early if enteral route not possible"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck regimens are named without doses; give doses per local protocol."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "intraabdominal_infections_and_abscesses-dx-mgmt",
+      "title": "Diagnosis and management of intraabdominal infections and abscesses",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, abdominal pain or sepsis with suspected intraabdominal source",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood cultures, CBC, LFTs; upright film for free air",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Cirrhotic ascites without a visceral source?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Diagnostic paracentesis, fluid into blood culture bottles",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ascitic PMN above 250/uL with a single organism?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat SBP: third-generation cephalosporin plus albumin, then prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Free air or haemodynamic instability?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Urgent surgery for source control with broad IV antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CT abdomen and pelvis with oral contrast",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Abscess larger than 2 cm with a safe drainage route?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Percutaneous drainage plus IV antibiotics by risk group",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "IV antibiotics; surgery if drainage not feasible",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Narrow to cultures; reimage if fever persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

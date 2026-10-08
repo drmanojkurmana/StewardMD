@@ -148,5 +148,367 @@
       "caption": "Overview comparison matrix for adrenal incidentaloma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenal_incidentaloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Overnight dexamethasone suppression test, with late-night salivary or 24-hour urinary cortisol when indicated",
+          "cells": [
+            {
+              "text": "Autonomous cortisol secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary metanephrines",
+          "cells": [
+            {
+              "text": "Excludes phaeochromocytoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma aldosterone-to-renin ratio in hypertension or hypokalaemia",
+          "cells": [
+            {
+              "text": "Primary aldosteronism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unenhanced CT attenuation, with washout or chemical-shift MRI",
+          "cells": [
+            {
+              "text": "Indeterminate lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial imaging of non-operated lesions",
+          "cells": [
+            {
+              "text": "Growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal vein sampling before surgery when indicated",
+          "cells": [
+            {
+              "text": "Lateralises aldosterone excess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_incidentaloma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cortisol-secreting adenoma (Cushing syndrome)",
+          "cells": [
+            {
+              "text": "Secretes cortisol"
+            },
+            {
+              "text": "Dexamethasone suppression test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aldosterone-producing adenoma (Conn syndrome)",
+          "cells": [
+            {
+              "text": "Hypertension with hypokalaemia"
+            },
+            {
+              "text": "Aldosterone-to-renin ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Catecholamine secretion"
+            },
+            {
+              "text": "Plasma or urinary metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenocortical carcinoma",
+          "cells": [
+            {
+              "text": "Large, heterogeneous or poorly washing-out mass"
+            },
+            {
+              "text": "Unenhanced CT attenuation and washout"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_incidentaloma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biochemical screen for cortisol excess, phaeochromocytoma and primary aldosteronism",
+          "cells": [
+            {
+              "text": "Every incidentaloma"
+            },
+            {
+              "text": "Hypertensive or hypokalaemic patients for aldosterone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Characterisation by unenhanced CT attenuation, washout or chemical-shift MRI",
+          "cells": [
+            {
+              "text": "Indeterminate masses"
+            },
+            {
+              "text": "Imaging characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alpha-blockade before any biopsy or surgery for phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Medical preparation"
+            },
+            {
+              "text": "Before biopsy or surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic adrenalectomy",
+          "cells": [
+            {
+              "text": "Functional tumours, suspicious imaging or large masses"
+            },
+            {
+              "text": "Usually laparoscopic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal vein sampling before surgery",
+          "cells": [
+            {
+              "text": "Lateralising aldosterone excess"
+            },
+            {
+              "text": "When indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging and biochemical review",
+          "cells": [
+            {
+              "text": "Benign non-operated non-functioning lesions"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated endocrinology and endocrine surgery assessment",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenal_incidentaloma-dx-mgmt",
+      "title": "Diagnosis and management of Adrenal incidentaloma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adrenal mass found on imaging for an unrelated reason",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Large heterogeneous mass or suspected phaeochromocytoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Alpha-blockade and specialist surgical review before any intervention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Overnight dexamethasone test, metanephrines, aldosterone-to-renin ratio",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hormone excess or phaeochromocytoma found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Specialist endocrine surgery review for a hormone-secreting lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Unenhanced CT attenuation; washout or MRI for indeterminate lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laparoscopic adrenalectomy for functional or suspicious tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adrenal vein sampling to lateralise aldosterone excess before surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interval imaging and biochemical review for benign non-functioning lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most are benign and stable; functional lesions often improve after surgery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -174,5 +174,547 @@
       "caption": "Overview comparison matrix for genetic cardiomyopathies."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypertrophic Cardiomyopathy",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/cardiomyopathies/hypertrophic-cardiomyopathy"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "genetic_cardiomyopathies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing genetic cardiomyopathies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "HCM wall thickness (adult)",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Maximal LV wall 15 mm or more with no other cause",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "Diagnostic on echo or MRI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HCM wall thickness, family history or sarcomere variant",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "13 mm or more",
+              "op": ">=",
+              "value": 13
+            },
+            {
+              "text": "Lower threshold in relatives"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Obstructive HCM",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Peak LVOT gradient 30 mmHg or more",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "Gradient 50 mmHg or more usually causes symptoms; provoke if under 50"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dilated cardiomyopathy",
+          "unit": "LVEF",
+          "cells": [
+            {
+              "text": "LVEF 0.50 or less and/or LV diastolic size above 95th percentile",
+              "op": "<=",
+              "value": 0.5
+            },
+            {
+              "text": "Exclude ischaemic and other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcomere variant yield in HCM",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Found in about 40 to 50%",
+              "range": [
+                40,
+                50
+              ]
+            },
+            {
+              "text": "About 80% are MYH7 or MYBPC3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTN truncating variant in familial DCM",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 25%",
+              "op": "<=",
+              "value": 25
+            },
+            {
+              "text": "Commonest genetic cause of DCM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Storage-disease phenocopy clue",
+          "cells": [
+            {
+              "text": "Short PR interval with LV thickening"
+            },
+            {
+              "text": "Consider Fabry (GLA, alpha-galactosidase A), Danon, PRKAG2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI late gadolinium enhancement",
+          "cells": [
+            {
+              "text": "Fibrosis"
+            },
+            {
+              "text": "Common in genetic cardiomyopathy; high burden adds sudden-death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HCM Risk-SCD (ESC) 5-year risk",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "ICD advised at 6% or more, considered 4 to 6%, not advised under 4%",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "{{hy:Guides primary-prevention ICD}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "genetic_cardiomyopathies-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes for genetic cardiomyopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Athlete's heart",
+          "cells": [
+            {
+              "text": "Wall about 12 to 15 mm, larger cavity, normal diastolic function, VO2max over 50 mL/kg/min"
+            },
+            {
+              "text": "Regression with detraining, MRI, exercise test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypertensive heart disease or aortic stenosis",
+          "cells": [
+            {
+              "text": "Secondary hypertrophy from pressure load"
+            },
+            {
+              "text": "BP history, echo of aortic valve"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fabry disease",
+          "cells": [
+            {
+              "text": "X-linked; female carriers affected; short PR"
+            },
+            {
+              "text": "Alpha-galactosidase A activity or GLA sequencing; biopsy lamellar inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthyretin amyloidosis",
+          "cells": [
+            {
+              "text": "Restrictive physiology"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmogenic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Ventricular arrhythmia with RV or LV involvement"
+            },
+            {
+              "text": "Cardiac MRI and desmosomal gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LV noncompaction",
+          "cells": [
+            {
+              "text": "Trabeculated LV myocardium"
+            },
+            {
+              "text": "Echo or cardiac MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conduction disease with DCM (LMNA, SCN5A)",
+          "cells": [
+            {
+              "text": "Early AV block or AF with dilation; high arrhythmic risk"
+            },
+            {
+              "text": "Genetic panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "genetic_cardiomyopathies-treatment",
+      "kind": "treatment",
+      "title": "Treating genetic cardiomyopathies",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blocker or verapamil or diltiazem",
+          "cells": [
+            {
+              "text": "First line for symptomatic obstructive HCM"
+            },
+            {
+              "text": "Avoid verapamil with rest dyspnoea, hypotension or gradient 100 mmHg or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mavacamten, aficamten or disopyramide",
+          "cells": [
+            {
+              "text": "Persistent symptoms with gradient 50 mmHg or more on first-line drugs",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Disopyramide with an AV nodal blocker"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Septal myectomy or alcohol septal ablation",
+          "cells": [
+            {
+              "text": "Symptoms despite medical therapy"
+            },
+            {
+              "text": "Myectomy preferred if surgical candidate; ablation has more heart block"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid in obstruction",
+          "cells": [
+            {
+              "text": "Obstructive HCM"
+            },
+            {
+              "text": "{{hy:Avoid digoxin, nitrates, vasodilators, high-dose diuretics, dehydration}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Guideline heart failure therapy",
+          "cells": [
+            {
+              "text": "Dilated cardiomyopathy"
+            },
+            {
+              "text": "Beta-blocker, ACE inhibitor or ARNI, mineralocorticoid antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD",
+          "cells": [
+            {
+              "text": "Prior arrest, sustained VT or high Risk-SCD score"
+            },
+            {
+              "text": "Many recipients never get appropriate shocks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Atrial fibrillation in HCM"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enzyme replacement",
+          "cells": [
+            {
+              "text": "Fabry disease"
+            },
+            {
+              "text": "Can reduce deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and cascade screening",
+          "cells": [
+            {
+              "text": "Pathogenic variant in proband"
+            },
+            {
+              "text": "Confirm pathogenicity before testing relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant or mechanical support",
+          "cells": [
+            {
+              "text": "End-stage disease"
+            },
+            {
+              "text": "Includes burned-out HCM with EF under 50%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "genetic_cardiomyopathies-dx-mgmt",
+      "title": "Diagnosis and management of genetic cardiomyopathies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unexplained LV hypertrophy, dilation, arrhythmia or family sudden death",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Three-generation family history, ECG, echo, cardiac MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Loading condition or athletic remodelling explains it?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat secondary cause; reassess after detraining",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Storage or infiltrative clue (short PR, multisystem)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Test for Fabry and phenocopies; specific therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Genetic counselling and multigene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Phenotype hypertrophic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blocker or calcium blocker; myosin inhibitor or septal reduction",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Guideline-directed heart failure therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "High sudden-death risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "ICD plus cascade screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Periodic Holter and imaging; cascade screening",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No, dilated"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

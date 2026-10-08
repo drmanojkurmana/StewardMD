@@ -198,5 +198,580 @@
       "caption": "Diagnostic and clinical overview matrix for polymyalgia rheumatica."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Polymyalgia Rheumatica, 2024",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/vasculitis/polymyalgia-rheumatica",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Dasgupta et al, 2012 EULAR/ACR provisional classification criteria for PMR, Ann Rheum Dis 2012",
+      "url": "https://eprints.whiterose.ac.uk/86925",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pmr-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and classifying polymyalgia rheumatica",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or points",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Entry requirement",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age 50 or over with bilateral shoulder pain and raised CRP and or ESR",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Needed before scoring the 2012 criteria"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Morning stiffness over 45 min",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "2",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "2012 EULAR/ACR item"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hip pain or limited hip movement",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "2012 EULAR/ACR item"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "RF and or ACPA negative",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "2",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "2012 EULAR/ACR item"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "No peripheral joint pain",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "1",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "2012 EULAR/ACR item"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Score without ultrasound",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "4 or more",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Classifies PMR: 68% sensitive, 78% specific"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Score with ultrasound",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "5 or more",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "66% sensitive, 81% specific"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ESR (Westergren)",
+          "unit": "mm/h",
+          "cells": [
+            {
+              "text": "Usually over 50, often over 100",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Markedly raised in over 80% of patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Morning stiffness in clinical practice",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Over 60",
+              "op": ">",
+              "value": 60
+            },
+            {
+              "text": "Bilateral shoulder and hip girdle aching, no true weakness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exclusion tests",
+          "cells": [
+            {
+              "text": "CBC, TSH, creatine kinase; RF, EMG and biopsy normal"
+            },
+            {
+              "text": "Diagnosis is clinical after excluding mimics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Steroid response",
+          "cells": [
+            {
+              "text": "Rapid relief within hours to days of prednisone"
+            },
+            {
+              "text": "{{hy:Supports the diagnosis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Giant cell arteritis overlap",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 20% of isolated PMR later develop GCA",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "Ask about headache, jaw claudication, visual change at every visit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Morning stiffness threshold differs by source: the 2012 classification criteria use over 45 minutes, the Merck clinical description over 60 minutes. The 2012 criteria are for classification, not diagnosis."
+    },
+    {
+      "id": "pmr-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic polymyalgia rheumatica",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Rheumatoid arthritis (seronegative, elderly onset)",
+          "cells": [
+            {
+              "text": "Small-joint synovitis, erosions, nodules"
+            },
+            {
+              "text": "Rheumatoid factor, ACPA, joint imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inflammatory myositis",
+          "cells": [
+            {
+              "text": "Weakness predominates over pain"
+            },
+            {
+              "text": "{{hy:Creatine kinase, EMG, muscle biopsy (normal in PMR)}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Myalgia and stiffness"
+            },
+            {
+              "text": "TSH and muscle enzymes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple myeloma",
+          "cells": [
+            {
+              "text": "Bone pain with raised ESR"
+            },
+            {
+              "text": "Search for monoclonal protein (absent in PMR)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Widespread pain, normal ESR, pain eases with distraction"
+            },
+            {
+              "text": "ESR and CRP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RS3PE syndrome",
+          "cells": [
+            {
+              "text": "Prominent pitting oedema of hands and feet"
+            },
+            {
+              "text": "Clinical; prompt response to low-dose prednisone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant cell arteritis",
+          "cells": [
+            {
+              "text": "Headache, jaw claudication, visual symptoms"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Osteoarthritis or shoulder bursitis",
+          "cells": [
+            {
+              "text": "Brief stiffness 45 min or less, worse with activity"
+            },
+            {
+              "text": "Duration and pattern of stiffness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pmr-treatment",
+      "kind": "treatment",
+      "title": "Treatment of polymyalgia rheumatica",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "{{hy:First line}}"
+            },
+            {
+              "text": "15 to 20 mg PO once daily; higher if GCA suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Taper",
+          "cells": [
+            {
+              "text": "As symptoms resolve"
+            },
+            {
+              "text": "Lowest effective dose guided by symptoms; CRP more useful than ESR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Often about 2 years"
+            },
+            {
+              "text": "Some need small doses for years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Relapse on steroid taper"
+            },
+            {
+              "text": "Steroid sparing; limited data; no dose stated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sarilumab (IL-6 inhibitor)",
+          "cells": [
+            {
+              "text": "Inadequate steroid response or cannot taper"
+            },
+            {
+              "text": "No dose stated in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bisphosphonate",
+          "cells": [
+            {
+              "text": "Long-term prednisone"
+            },
+            {
+              "text": "Prevent osteoporosis; monitor glucose and blood pressure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NSAIDs alone",
+          "cells": [
+            {
+              "text": "Rarely sufficient"
+            },
+            {
+              "text": "Not a substitute for steroids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TNF inhibitors",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Trials showed no benefit"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pmr-dx-mgmt",
+      "title": "Diagnosis and management of polymyalgia rheumatica",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Age 50+, bilateral shoulder or hip girdle aching and morning stiffness",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Headache, jaw claudication or visual symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Treat as possible giant cell arteritis urgently",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ESR, CRP, CBC, TSH, CK, RF and ACPA",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CRP or ESR raised?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "PMR unlikely; consider fibromyalgia or other cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Mimic found (RA, myositis, thyroid, myeloma)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Treat the alternative diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prednisone 15 to 20 mg daily",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Rapid response?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reconsider the diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Slow taper; bisphosphonate; recheck for GCA each visit",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Relapse on taper: add methotrexate or sarilumab",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Relapse"
+        }
+      ]
+    }
+  ]
 }

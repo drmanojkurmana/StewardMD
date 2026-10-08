@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for alg6-cdg (cdg type ic)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alg6_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type 1 pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid-linked oligosaccharide analysis in fibroblasts",
+          "cells": [
+            {
+              "text": "Assembly defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALG6 gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic ALG6 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation panel with antithrombin, protein C and protein S",
+          "cells": [
+            {
+              "text": "Low antithrombin, protein C and protein S"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and EEG",
+          "cells": [
+            {
+              "text": "Structural anomalies and epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Retinopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg6_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "PMM2-CDG and other type 1 CDGs",
+          "cells": [
+            {
+              "text": "Same transferrin screening pattern"
+            },
+            {
+              "text": "Gene sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic or idiopathic epilepsy with developmental delay",
+          "cells": [
+            {
+              "text": "Epilepsy without glycosylation defect"
+            },
+            {
+              "text": "Transferrin screen and gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited thrombophilias and bleeding disorders",
+          "cells": [
+            {
+              "text": "Coagulopathy without transferrin change"
+            },
+            {
+              "text": "Coagulation panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alg6_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication under neurology guidance",
+          "cells": [
+            {
+              "text": "Epilepsy"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and speech and language therapy",
+          "cells": [
+            {
+              "text": "Hypotonia and developmental delay"
+            },
+            {
+              "text": "Developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietetic support for feeding difficulty and failure to thrive",
+          "cells": [
+            {
+              "text": "Feeding failure"
+            },
+            {
+              "text": "Dietetic input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of coagulopathy and thromboprophylaxis around surgery",
+          "cells": [
+            {
+              "text": "Low antithrombin, protein C and protein S"
+            },
+            {
+              "text": "Peri-operative plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological surveillance for retinopathy",
+          "cells": [
+            {
+              "text": "Retinopathy"
+            },
+            {
+              "text": "Ongoing surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alg6_cdg-dx-mgmt",
+      "title": "Diagnosis and management of ALG6-CDG (CDG type Ic)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Developmental delay, hypotonia and epilepsy with failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Status epilepticus, deep vein thrombosis or bleeding with procedures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review; seizure control and thromboprophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin pattern; LLO analysis; ALG6 sequencing; coagulation panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Type 1 pattern with biallelic ALG6 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antiseizure medication and developmental therapies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review PMM2-CDG, other type 1 CDGs and mitochondrial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietetic support for feeding difficulty and failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct coagulopathy; plan thromboprophylaxis around surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology surveillance; genetic counselling for family",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Milder than PMM2-CDG, but intellectual disability and epilepsy often persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

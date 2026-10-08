@@ -294,5 +294,605 @@
       "caption": "Diagnostic and clinical overview matrix for acute cholangitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "MDCalc, Tokyo Guidelines for Acute Cholangitis 2018",
+      "url": "https://www.mdcalc.com/calc/10142/tokyo-guidelines-acute-cholangitis-2018",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Choledocholithiasis and Cholangitis",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/choledocholithiasis-and-cholangitis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CHOLANGITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria and grading of acute cholangitis (TG18)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "A. Systemic inflammation: fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Fever or shaking chills, >38",
+              "op": ">",
+              "value": 38
+            },
+            {
+              "text": "TG18 part A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "A. Systemic inflammation: WBC",
+          "unit": "/mm3",
+          "cells": [
+            {
+              "text": "<4,000 or >10,000"
+            },
+            {
+              "text": "TG18 part A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "A. Systemic inflammation: CRP",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=1 (10 mg/L)",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "TG18 part A"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. Cholestasis: total bilirubin",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=2 (34.2 umol/L)",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "TG18 part B"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "B. Cholestasis: ALP, GGT, AST, ALT",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": ">1.5 times upper limit of normal",
+              "op": ">",
+              "value": 1.5
+            },
+            {
+              "text": "TG18 part B"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C. Imaging",
+          "cells": [
+            {
+              "text": "Biliary dilatation or a cause seen (stone, stricture, stent)"
+            },
+            {
+              "text": "{{hy:TG18 part C; with A and B gives a definite diagnosis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Common bile duct on ultrasound",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": ">6 with gallbladder, >10 after cholecystectomy",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Duct may not be dilated on day 1; normal calibre does not exclude"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Charcot triad (pain, jaundice, fever with rigors)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in about 70%",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "About 90% specific, not sensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reynolds pentad",
+          "cells": [
+            {
+              "text": "Charcot triad plus shock and confusion"
+            },
+            {
+              "text": "{{hy:Suppurative cholangitis; urgent drainage}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade III (severe)",
+          "cells": [
+            {
+              "text": "Organ dysfunction; thresholds needs-source"
+            },
+            {
+              "text": "Organ support; emergent drainage once stable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Grade II (moderate)",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Early drainage within 48 h of admission"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Grade I (mild)",
+          "cells": [
+            {
+              "text": "Meets neither Grade II nor III"
+            },
+            {
+              "text": "Antibiotics; drain if no response within 24 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aminotransferases",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "May reach 1000",
+              "op": "<=",
+              "value": 1000
+            },
+            {
+              "text": "Often from microabscesses"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bile cultures",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 75% early",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Blood cultures frequently positive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Grade II and III numeric criteria were not available on the pages opened (the TG18 paper was paywalled); thresholds are marked needs-source. If no definite diagnosis at presentation, reassess every 6 to 12 h."
+    },
+    {
+      "id": "CHOLANGITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute cholangitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Choledocholithiasis without infection",
+          "cells": [
+            {
+              "text": "Biliary pain without fever or rigors"
+            },
+            {
+              "text": "MRCP; inflammation markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cholecystitis",
+          "cells": [
+            {
+              "text": "Murphy sign, gallbladder inflammation; jaundice less prominent"
+            },
+            {
+              "text": "{{hy:Ultrasound of gallbladder and duct}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallstone pancreatitis",
+          "cells": [
+            {
+              "text": "Epigastric pain radiating to back"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant biliary obstruction",
+          "cells": [
+            {
+              "text": "Often painless jaundice"
+            },
+            {
+              "text": "MRCP or EUS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyogenic liver abscess",
+          "cells": [
+            {
+              "text": "Fever and tender liver with focal collection"
+            },
+            {
+              "text": "CT"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IgG4-related sclerosing cholangitis",
+          "cells": [
+            {
+              "text": "Biliary strictures, steroid responsive"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis from another source",
+          "cells": [
+            {
+              "text": "Shock before the biliary source is evident"
+            },
+            {
+              "text": "Liver tests and biliary imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Separating tests marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "CHOLANGITIS-treatment",
+      "kind": "treatment",
+      "title": "Management of acute cholangitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluids, electrolytes, analgesia, IV antibiotics",
+          "cells": [
+            {
+              "text": "All grades"
+            },
+            {
+              "text": "Blood cultures first; bile and blood cultures in Grade II and III"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Piperacillin-tazobactam, cefotaxime or meropenem",
+          "cells": [
+            {
+              "text": "Empiric antibiotic options"
+            },
+            {
+              "text": "Choice depends on severity, community vs hospital onset, local susceptibility; no doses in source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Meropenem plus ciprofloxacin plus metronidazole",
+          "cells": [
+            {
+              "text": "Very ill patients"
+            },
+            {
+              "text": "Adds anaerobic cover"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Biliary drainage, Grade I",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "No response to antibiotics within 24 h",
+              "op": ">",
+              "value": 24
+            },
+            {
+              "text": "Most mild cases need no drainage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biliary drainage, Grade II",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "{{hy:Early, within 48 h of admission}}",
+              "op": "<=",
+              "value": 48
+            },
+            {
+              "text": "Endoscopic or percutaneous transhepatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biliary drainage, Grade III",
+          "cells": [
+            {
+              "text": "Emergent, once haemodynamically stable"
+            },
+            {
+              "text": "With intubation and vasopressors as needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ERCP with sphincterotomy and stone removal",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Preferred drainage procedure",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Success over 95%; about 5% short-term complications"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Laparoscopic cholecystectomy",
+          "cells": [
+            {
+              "text": "Gallstone disease after the acute illness"
+            },
+            {
+              "text": "Sphincterotomy alone in high-risk older patients"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison describes a window of about 24 h of stabilisation before drainage; TG18 times drainage by grade. Both are kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CHOLANGITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute cholangitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever or rigors with jaundice or right upper quadrant pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CBC, CRP, liver tests, blood cultures, abdominal ultrasound",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Inflammation plus cholestasis plus imaging (TG18 A, B, C)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Suspected only: reassess every 6 to 12 h; MRCP or EUS",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Fluids, analgesia, IV antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severity grade?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Grade III: organ support, emergent drainage when stable",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Grade II: ERCP or PTBD within 48 h",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Grade I: response within 24 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain by ERCP",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Complete antibiotics; tailor to cultures",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treat cause; elective cholecystectomy for gallstones",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n3",
+          "label": "Reassess"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Grade III"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Grade II"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "Grade I"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

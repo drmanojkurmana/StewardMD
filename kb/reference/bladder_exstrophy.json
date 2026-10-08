@@ -144,5 +144,86 @@
       "caption": "Overview comparison matrix for bladder exstrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bladder_exstrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in bladder exstrophy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Renal and bladder ultrasound", "cells": [{"text": "Upper-tract anatomy and bladder plate size"}], "cite": "c1"},
+        {"parameter": "Micturating cystourethrogram after closure", "cells": [{"text": "Vesicoureteric reflux"}], "cite": "c1"},
+        {"parameter": "MAG3 renogram", "cells": [{"text": "Differential renal function and drainage"}], "cite": "c1"},
+        {"parameter": "Pelvic imaging", "cells": [{"text": "Pubic diastasis, for surgical planning"}], "cite": "c1"},
+        {"parameter": "Examination and imaging for associated anomalies", "cells": [{"text": "Genital and skeletal anomalies"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bladder_exstrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike anterior abdominal wall and bladder anomalies",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Epispadias without exstrophy", "cells": [{"text": "No open, everted bladder plate exposed on the lower abdominal wall at birth"}], "cite": "c1"},
+        {"parameter": "Cloacal exstrophy", "cells": [{"text": "A more severe variant with bowel involvement"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bladder_exstrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options in bladder exstrophy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Abdominal wall and bladder closure", "cells": [{"text": "Staged or single-stage reconstruction for secure closure"}, {"text": "Foundation of management"}], "cite": "c1"},
+        {"parameter": "Epispadias repair and bladder neck reconstruction", "cells": [{"text": "Epispadias repair, then bladder neck reconstruction"}, {"text": "For continence and genital reconstruction"}], "cite": "c1"},
+        {"parameter": "Pelvic osteotomy", "cells": [{"text": "Approximates the separated pubic symphysis"}, {"text": "Supports a tension-free closure"}], "cite": "c1"},
+        {"parameter": "Upper tract protection", "cells": [{"text": "Post-closure micturating cystourethrography and management of reflux"}, {"text": "Protects the upper tracts"}], "cite": "c1"},
+        {"parameter": "Long-term surveillance", "cells": [{"text": "Renal function, continence, sexual and fertility outcomes, and bladder cancer risk"}, {"text": "Lifelong"}], "cite": "c1"},
+        {"parameter": "Coordinated care", "cells": [{"text": "Specialist paediatric urology and reconstructive team"}, {"text": "Lifelong follow-up"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bladder_exstrophy-dx-mgmt",
+      "title": "Diagnosis and management of bladder exstrophy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Newborn with an open, everted bladder plate and pubic diastasis", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: bowel involvement suggesting cloacal exstrophy, or upper-tract dilatation?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: paediatric urology and surgical team; assess for cloacal variant", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Ultrasound of kidneys and bladder plate; examine genitalia and pelvis", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Staged or single-stage abdominal wall and bladder closure; pelvic osteotomy if needed", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Secure closure achieved without dehiscence or prolapse?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Epispadias repair, then bladder neck reconstruction", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "No: revise closure and manage the wound or prolapse with the surgical team", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Post-closure micturating cystourethrogram for reflux; MAG3 renogram", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Most achieve continence with preserved renal function; lifelong bladder cancer surveillance", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

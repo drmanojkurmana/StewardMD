@@ -151,5 +151,336 @@
       "caption": "Overview comparison matrix for aplastic anaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aplastic_anemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Pancytopenia; exclude abnormal cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine biopsy",
+          "cells": [
+            {
+              "text": "Hypocellularity; exclude infiltration or dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetic and molecular studies",
+          "cells": [
+            {
+              "text": "Differentiates from myelodysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood flow cytometry",
+          "cells": [
+            {
+              "text": "PNH clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal fragility testing and telomere length",
+          "cells": [
+            {
+              "text": "Suspected inherited syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral serology including hepatitis, and autoimmune screen",
+          "cells": [
+            {
+              "text": "Associated viral or autoimmune disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aplastic_anemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypoplastic myelodysplastic syndrome",
+          "cells": [
+            {
+              "text": "Separated by cytogenetic and molecular studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal haemoglobinuria",
+          "cells": [
+            {
+              "text": "Separated by flow cytometry for the PNH clone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aplastic_anemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Allogeneic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Definitive treatment, favoured with a matched sibling donor"
+            },
+            {
+              "text": "Younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppressive therapy",
+          "cells": [
+            {
+              "text": "Antithymocyte globulin with a calcineurin inhibitor such as ciclosporin"
+            },
+            {
+              "text": "Where transplant is not appropriate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive transfusion",
+          "cells": [
+            {
+              "text": "Irradiated, leucodepleted red cells and platelets"
+            },
+            {
+              "text": "Minimise exposure to preserve transplant options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection management",
+          "cells": [
+            {
+              "text": "Prompt broad-spectrum antibiotics for febrile episodes; antimicrobial prophylaxis"
+            },
+            {
+              "text": "Neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug and toxin withdrawal",
+          "cells": [
+            {
+              "text": "Withdraw implicated drugs; remove toxins such as benzene; treat seronegative hepatitis"
+            },
+            {
+              "text": "Implicated exposures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited and PNH testing",
+          "cells": [
+            {
+              "text": "Test for PNH clone, Fanconi anaemia or dyskeratosis congenita"
+            },
+            {
+              "text": "Inherited syndromes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity grading and monitoring",
+          "cells": [
+            {
+              "text": "Blood counts and marrow cellularity; monitor for clonal evolution"
+            },
+            {
+              "text": "Prioritises urgency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aplastic_anemia-dx-mgmt",
+      "title": "Diagnosis and management of Aplastic anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pancytopenia with infection, bleeding or anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe neutropenia with fever or profound thrombocytopenia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent broad-spectrum antibiotics for febrile neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, marrow biopsy, cytogenetics, PNH flow, fragility and telomere tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypocellular marrow without infiltration or dysplasia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Allogeneic transplant for younger patients with a matched sibling donor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat marrow studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antithymocyte globulin with ciclosporin where transplant is unsuitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Irradiated, leucodepleted blood products; antimicrobial prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Withdraw implicated drugs; test for PNH and inherited syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Grade severity by counts and cellularity; monitor for clonal evolution",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

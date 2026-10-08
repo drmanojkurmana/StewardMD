@@ -154,5 +154,336 @@
       "caption": "Overview comparison matrix for charcot-marie-tooth disease type 2c."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_2c-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Axonal pattern with reduced CMAP amplitudes and preserved velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TRPV4 sequencing or hereditary neuropathy panel",
+          "cells": [
+            {
+              "text": "Confirms a pathogenic TRPV4 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Vocal cord movement and paresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary function testing with overnight oximetry or sleep study",
+          "cells": [
+            {
+              "text": "Diaphragmatic weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_2c-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT2D (GARS1)",
+          "cells": [
+            {
+              "text": "Upper-limb predominant wasting, hand-first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyotrophic lateral sclerosis",
+          "cells": [
+            {
+              "text": "Vocal cord and respiratory weakness dominate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMT2E (NEFL)",
+          "cells": [
+            {
+              "text": "Axonal or intermediate features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_2c-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Neuromuscular multidisciplinary coordination; no disease-specific drug"
+            },
+            {
+              "text": "Core care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Pulmonary function, overnight oximetry and non-invasive ventilation for diaphragmatic weakness"
+            },
+            {
+              "text": "Principal threat to life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngeal management",
+          "cells": [
+            {
+              "text": "Laryngological assessment; airway protection and tracheostomy for severe stridor"
+            },
+            {
+              "text": "Vocal cord paresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing support",
+          "cells": [
+            {
+              "text": "Audiology review and hearing aids"
+            },
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and ankle-foot orthoses for distal weakness and foot deformity"
+            },
+            {
+              "text": "Limb disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic agents"
+            },
+            {
+              "text": "Neuropathic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant counselling; skeletal assessment if bone dysplasia suspected"
+            },
+            {
+              "text": "Allelic bone dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_2c-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease type 2C",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 2C (TRPV4): vocal cord paresis with axonal neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (breathlessness, stridor, aspiration, recurrent chest infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent airway and respiratory assessment; ventilatory support as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies; TRPV4 sequencing; laryngoscopy; lung function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Axonal neuropathy with vocal cord or diaphragm involvement and TRPV4 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Respiratory surveillance; non-invasive ventilation for diaphragmatic weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CMT2D, CMT2E and ALS with respiratory weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laryngological care and tracheostomy if severe stridor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Audiology review and hearing aids for sensorineural hearing loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and ankle-foot orthoses for distal weakness and foot deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Respiratory involvement, not limb disability, is the main threat to life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

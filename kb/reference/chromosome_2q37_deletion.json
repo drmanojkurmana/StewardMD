@@ -150,5 +150,327 @@
       "caption": "Overview comparison matrix for 2q37 deletion syndrome (brachydactyly-mental retardation)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chromosome_2q37_deletion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "First-line test to detect and size the terminal deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or MLPA",
+          "cells": [
+            {
+              "text": "Confirms the deletion and assesses for a parental rearrangement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium, phosphate and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Normal values distinguish it from pseudohypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and foot radiographs",
+          "cells": [
+            {
+              "text": "Characterises brachydactyly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and autism assessment",
+          "cells": [
+            {
+              "text": "Associated neurodevelopmental features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_2q37_deletion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Albright hereditary osteodystrophy and pseudohypoparathyroidism",
+          "cells": [
+            {
+              "text": "Biochemical disturbance; normal PTH, calcium and phosphate here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Turner syndrome",
+          "cells": [
+            {
+              "text": "Short stature with short metacarpals"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_2q37_deletion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Developmental and behavioural support",
+          "cells": [
+            {
+              "text": "Therapies for intellectual disability and behavioural support for frequent autism"
+            },
+            {
+              "text": "Developmental and autism features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and speech therapy",
+          "cells": [
+            {
+              "text": "Occupational therapy, physiotherapy and speech-and-language input"
+            },
+            {
+              "text": "Hypotonia and developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biochemistry check",
+          "cells": [
+            {
+              "text": "Confirm normal calcium, phosphate and parathyroid levels to avoid unnecessary hormonal treatment"
+            },
+            {
+              "text": "Distinguishes from pseudohypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal features",
+          "cells": [
+            {
+              "text": "Orthopaedic input only where function is affected"
+            },
+            {
+              "text": "Brachydactyly usually not disabling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "Echocardiography where a congenital anomaly is suspected"
+            },
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental studies to exclude an inherited translocation; recurrence risk"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team coordination",
+          "cells": [
+            {
+              "text": "Developmental and genetics team"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chromosome_2q37_deletion-dx-mgmt",
+      "title": "Diagnosis and management of 2q37 deletion syndrome (brachydactyly-mental retardation)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected 2q37 deletion: brachydactyly with developmental delay and autism features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seizures, congenital heart disease, feeding problems, behaviour risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurology and cardiology review as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray, FISH or MLPA, parental studies and calcium-phosphate tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Terminal 2q37 deletion confirmed with normal calcium and PTH?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Developmental and educational support with behavioural support for autism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check pseudohypoparathyroidism, acrodysostosis and Turner syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and speech-language input",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic input only where brachydactyly affects function",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Echocardiography where a congenital anomaly is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Parental studies and counselling on recurrence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for cone-rod dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cone_rod_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-field electroretinography",
+          "cells": [
+            {
+              "text": "Cone responses reduced disproportionately to rod responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multifocal electroretinography",
+          "cells": [
+            {
+              "text": "Central cone dysfunction mapped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spectral-domain OCT of the macula",
+          "cells": [
+            {
+              "text": "Outer retinal and ellipsoid zone loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Bull's-eye or ring abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colour vision and perimetry",
+          "cells": [
+            {
+              "text": "Functional deficit characterised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cone_rod_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rod-cone dystrophy (retinitis pigmentosa)",
+          "cells": [
+            {
+              "text": "Rod-first pattern; cone-first pattern on ERG points to cone-rod"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stargardt disease and ABCA4-related maculopathy",
+          "cells": [
+            {
+              "text": "Macular disease with bull's-eye or ring abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine or other toxic bull's-eye maculopathy",
+          "cells": [
+            {
+              "text": "Drug history needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cone_rod_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Low-vision rehabilitation",
+          "cells": [
+            {
+              "text": "Magnification and adaptive technology; no established disease-modifying treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photophobia",
+          "cells": [
+            {
+              "text": "Tinted lenses and ultraviolet protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "Retinal dystrophy gene panel; gene-specific therapeutic trials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "ERG, OCT and perimetry as rod involvement supervenes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction",
+          "cells": [
+            {
+              "text": "Correct refractive error; optimise remaining vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Certification and support",
+          "cells": [
+            {
+              "text": "Visual impairment certification; educational, occupational and social support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relative screening",
+          "cells": [
+            {
+              "text": "According to the inheritance pattern identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cone_rod_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Cone-rod dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cone-rod dystrophy: early central vision loss, cone-first ERG pattern",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid central acuity loss, syndromic features, night blindness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent genetic and electrophysiological assessment; syndromic systemic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-field and multifocal ERG; macular OCT; autofluorescence; retinal gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ERG show cone responses reduced more than rod responses?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider rod-cone dystrophy, Stargardt or toxic maculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Low-vision rehabilitation with magnification and adaptive technology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tinted lenses and ultraviolet protection for photophobia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gene panel testing, counselling and gene-specific trial referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor with ERG, OCT and perimetry as rod involvement develops",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally worse than many rod-cone dystrophies; central vision lost early",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

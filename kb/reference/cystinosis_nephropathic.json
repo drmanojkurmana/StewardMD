@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for nephropathic cystinosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystinosis_nephropathic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Leucocyte cystine concentration",
+          "cells": [
+            {
+              "text": "Cystine accumulation confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CTNS testing with large-deletion analysis",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Corneal cystine crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubular function panel and urinary profile",
+          "cells": [
+            {
+              "text": "Fanconi pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and glucose",
+          "cells": [
+            {
+              "text": "Extrarenal involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystinosis_nephropathic-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dent disease",
+          "cells": [
+            {
+              "text": "Named Fanconi look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lowe syndrome",
+          "cells": [
+            {
+              "text": "Named Fanconi look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tyrosinaemia type 1",
+          "cells": [
+            {
+              "text": "Named inherited tubulopathy look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystinosis_nephropathic-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral cysteamine",
+          "cells": [
+            {
+              "text": "Started early and sustained lifelong to deplete cystine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cysteamine eye drops",
+          "cells": [
+            {
+              "text": "Corneal crystals and photophobia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tubular replacement",
+          "cells": [
+            {
+              "text": "Water, bicarbonate, phosphate, potassium; vitamin D for rickets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement",
+          "cells": [
+            {
+              "text": "Dialysis and transplantation; cystinosis does not recur in the kidney"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrarenal care",
+          "cells": [
+            {
+              "text": "Levothyroxine, insulin and growth hormone; swallowing support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystine monitoring",
+          "cells": [
+            {
+              "text": "Leucocyte cystine guides dosing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive CTNS including the common deletion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystinosis_nephropathic-dx-mgmt",
+      "title": "Diagnosis and management of Nephropathic cystinosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected nephropathic cystinosis: infant with polyuria, rickets and poor growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (falling filtration, severe photophobia, non-adherence, endocrine failure)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cysteamine adherence review and tubular replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Leucocyte cystine; CTNS testing; slit-lamp; tubular panel; bone and thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does leucocyte cystine confirm cystine overload with CTNS variants?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Dent disease, Lowe syndrome or other tubulopathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Oral cysteamine started early and sustained lifelong",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cysteamine eye drops for corneal crystals",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace renal tubular losses and treat rickets",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Dialysis and transplant with extrarenal endocrine treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early and lifelong cystine-depleting therapy can substantially delay end-stage disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

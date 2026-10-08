@@ -147,5 +147,298 @@
       "caption": "Overview comparison matrix for adnp syndrome (helsmoortel-van der aa)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adnp_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Developmental and autism-specific assessment",
+          "cells": [
+            {
+              "text": "Global delay and autistic behaviour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental review",
+          "cells": [
+            {
+              "text": "Premature primary dentition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological evaluation",
+          "cells": [
+            {
+              "text": "Visual problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and EEG where clinically indicated",
+          "cells": [
+            {
+              "text": "Structural change or seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray and gene panel or exome sequencing including ADNP",
+          "cells": [
+            {
+              "text": "ADNP variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adnp_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention (speech, occupational and physiotherapy; special education)",
+          "cells": [
+            {
+              "text": "Global developmental delay"
+            },
+            {
+              "text": "Individualised support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured behavioural interventions",
+          "cells": [
+            {
+              "text": "Autistic features and behavioural difficulty"
+            },
+            {
+              "text": "Behavioural strategies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding support and nutritional monitoring",
+          "cells": [
+            {
+              "text": "Infantile feeding problems and hypotonia"
+            },
+            {
+              "text": "Monitor growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review, dental review and sleep management",
+          "cells": [
+            {
+              "text": "Visual problems, premature dentition and sleep disturbance"
+            },
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection management and EEG for seizures",
+          "cells": [
+            {
+              "text": "Recurrent infection and seizures"
+            },
+            {
+              "text": "EEG when indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong multidisciplinary neurodevelopmental care",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Usually de novo autosomal dominant cause"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adnp_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of ADNP syndrome (Helsmoortel-Van der Aa)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with feeding problems, hypotonia and developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Feeding failure, faltering growth or recurrent severe infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent feeding and nutrition review; treat infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Developmental and autism assessment; dental review; chromosomal array and exome",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ADNP variant confirmed on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Genetic counselling; ophthalmology, dental and sleep review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review idiopathic autism, Pitt-Hopkins, Fragile X and Rett syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early speech, occupational and physiotherapy with special education",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Structured behavioural interventions for autistic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Feeding support, nutritional monitoring; EEG if seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong intellectual disability and autism of variable severity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

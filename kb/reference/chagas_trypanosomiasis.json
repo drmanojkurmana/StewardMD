@@ -186,5 +186,479 @@
       "caption": "Overview comparison matrix for trypanosomiasis (chagas & sleeping sickness)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Chagas Disease, 2024",
+      "url": "https://www.cdc.gov/chagas/hcp/clinical-care/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 213-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 213-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chagas_trypanosomiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of Chagas disease and African trypanosomiasis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Test or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute Chagas or reactivation",
+          "cells": [
+            {
+              "text": "Blood microscopy after concentration (Strout, microhaematocrit) or PCR"
+            },
+            {
+              "text": "Parasites detectable in blood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic Chagas",
+          "cells": [
+            {
+              "text": "{{hy:Two positive IgG serologies by different methods}}"
+            },
+            {
+              "text": "Third test if discordant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic Chagas outcome",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "60 to 70% indeterminate; 30 to 40% progress",
+              "range": [
+                60,
+                70
+              ]
+            },
+            {
+              "text": "Cardiac 20 to 30%, digestive 5 to 20%, mixed 5 to 10%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG with 30-s strip",
+          "cells": [
+            {
+              "text": "RBBB, left anterior fascicular block, VPBs, Q waves, low voltage"
+            },
+            {
+              "text": "Screens for Chagas cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barium swallow and enema",
+          "cells": [
+            {
+              "text": "Megaoesophagus or megacolon"
+            },
+            {
+              "text": "Digestive staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital Chagas",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Serology at 9 months"
+            },
+            {
+              "text": "Microscopy or PCR in first weeks; PCR most accurate after 4 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HAT gambiense screening",
+          "cells": [
+            {
+              "text": "CATT or lateral flow serology"
+            },
+            {
+              "text": "Confirm by microscopy of node, blood or CSF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HAT second stage (CSF)",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "WBC >5 or trypanosomes",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Lumbar puncture stages disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Winterbottom sign (cervical nodes)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "38 to 85% of HAT",
+              "range": [
+                38,
+                85
+              ]
+            },
+            {
+              "text": "Palpate posterior cervical chain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chagas_trypanosomiasis-ddx",
+      "kind": "ddx",
+      "title": "Gambiense versus rhodesiense HAT and Chagas mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing features"
+      ],
+      "rows": [
+        {
+          "parameter": "West African HAT (T. b. gambiense)",
+          "cells": [
+            {
+              "text": "Palpalis tsetse; human reservoir; chronic illness with late CNS disease over months to years; prominent nodes; low parasitaemia; no rodent inoculation diagnosis; rural populations"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "East African HAT (T. b. rhodesiense)",
+          "cells": [
+            {
+              "text": "Morsitans tsetse; antelope and cattle reservoir; {{hy:acute illness with early CNS disease, under 9 months}}; minimal nodes; high parasitaemia; rodent inoculation possible; wild-area workers and game-park tourists"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "Suspect rhodesiense HAT when malaria tests are negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Achalasia",
+          "cells": [
+            {
+              "text": "Mimics Chagas megaoesophagus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Mimics Chagas megacolon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic or other dilated cardiomyopathy",
+          "cells": [
+            {
+              "text": "Chagas gives apical aneurysm and conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary psychiatric illness",
+          "cells": [
+            {
+              "text": "HAT neuropsychiatric features with sleep disturbance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chagas_trypanosomiasis-treatment",
+      "kind": "treatment",
+      "title": "Antiparasitic treatment of trypanosomiasis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benznidazole",
+          "cells": [
+            {
+              "text": "{{hy:Acute, reactivated, congenital Chagas}}; chronic Chagas in children and adults up to 50"
+            },
+            {
+              "text": "Ages 2 to 12: 5 to 8 mg/kg/day in 2 doses for 60 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nifurtimox",
+          "cells": [
+            {
+              "text": "Chagas, birth to under 18 years, at least 2.5 kg"
+            },
+            {
+              "text": "41 kg or more: 8 to 10 mg/kg/day; under 41 kg: 10 to 20 mg/kg/day; 3 doses, 60 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Individual decision",
+          "cells": [
+            {
+              "text": "Chronic Chagas over age 50 or advanced cardiomyopathy"
+            },
+            {
+              "text": "Withhold in severe liver or kidney disease and breastfeeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pentamidine (alternative suramin)",
+          "cells": [
+            {
+              "text": "Gambiense HAT stage I (normal CSF)"
+            },
+            {
+              "text": "Per Tables PDF"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Eflornithine (alternative melarsoprol)",
+          "cells": [
+            {
+              "text": "Gambiense HAT stage II (abnormal CSF)"
+            },
+            {
+              "text": "Per Tables PDF"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Suramin",
+          "cells": [
+            {
+              "text": "Rhodesiense HAT stage I"
+            },
+            {
+              "text": "Per Tables PDF"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Melarsoprol",
+          "cells": [
+            {
+              "text": "Rhodesiense HAT stage II"
+            },
+            {
+              "text": "Per Tables PDF"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Cardiac care",
+          "cells": [
+            {
+              "text": "Chagas cardiomyopathy"
+            },
+            {
+              "text": "Arrhythmia and conduction disease management; sudden death risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Tables PDF HAT regimens predate newer oral options; check current WHO guidance. Benznidazole and nifurtimox side effects rise with age."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chagas_trypanosomiasis-dx-mgmt",
+      "title": "Diagnosis and management of trypanosomiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Exposure in Latin America (triatomine) or sub-Saharan Africa (tsetse)",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Latin American exposure (Chagas)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Acute or reactivation phase?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood concentration microscopy or PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Two IgG serologies; ECG; barium studies if GI symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Benznidazole or nifurtimox if indicated; cardiac follow-up",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "HAT: serology screen, microscopy of node, blood or chancre",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lumbar puncture to stage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "CSF WBC >5/uL or trypanosomes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Stage II drug by species (eflornithine or melarsoprol)",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stage I drug by species (pentamidine or suramin)",
+          "cite": "c4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No, Africa"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No, chronic"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Positive"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Positive"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Confirmed"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

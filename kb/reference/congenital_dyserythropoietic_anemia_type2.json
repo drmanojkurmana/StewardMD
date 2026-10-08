@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for congenital dyserythropoietic anaemia type ii (sec23b)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_dyserythropoietic_anemia_type2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and reticulocyte count",
+          "cells": [
+            {
+              "text": "Anaemia with inadequate reticulocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate",
+          "cells": [
+            {
+              "text": "Bi- and multinucleate erythroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidified-serum (Ham) test with patient's own serum as control",
+          "cells": [
+            {
+              "text": "Positive acidified-serum test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SDS-PAGE of red-cell membrane proteins",
+          "cells": [
+            {
+              "text": "Abnormal band 3 pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for GPI-anchored proteins",
+          "cells": [
+            {
+              "text": "PNH excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dyserythropoietic_anemia_type2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital dyserythropoietic anaemia type I (CDAN1)",
+          "cells": [
+            {
+              "text": "Separated by gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal haemoglobinuria",
+          "cells": [
+            {
+              "text": "Excluded by GPI-anchored protein flow cytometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis and other membrane disorders",
+          "cells": [
+            {
+              "text": "Band 3 pattern on SDS-PAGE"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_dyserythropoietic_anemia_type2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferasirox, deferiprone or desferrioxamine; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Sustains chronic ineffective erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenotype-matched transfusion",
+          "cells": [
+            {
+              "text": "Leucodepleted; symptomatic or transfusion-dependent anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Reduces haemolysis; prior vaccination and thrombotic awareness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron and gallstone monitoring",
+          "cells": [
+            {
+              "text": "Ferritin and MRI; pigment gallstones and jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SEC23B; cascade testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Stem cell transplantation considered in severe childhood disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_dyserythropoietic_anemia_type2-dx-mgmt",
+      "title": "Diagnosis and management of Congenital dyserythropoietic anaemia type II (SEC23B)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CDA type II (SEC23B): anaemia with binucleate erythroblasts",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive iron overload, transfusion dependence, aplastic crisis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat aplastic crisis; start chelation for organ iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Marrow; acidified-serum test; band 3 SDS-PAGE; GPI flow cytometry; SEC23B",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is SEC23B confirmed with PNH excluded by flow cytometry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider PNH, membrane disorders or autoimmune haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Iron chelation as the therapeutic mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid; phenotype-matched transfusion when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider splenectomy with vaccination and thrombotic awareness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor hepatic and cardiac iron by MRI; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severity varies; iron overload is the major long-term threat",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

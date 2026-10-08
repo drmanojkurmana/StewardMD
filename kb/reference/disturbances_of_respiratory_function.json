@@ -170,5 +170,512 @@
       "caption": "Overview comparison matrix for disturbances of respiratory function."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Vanderbilt Internal Medicine Book, Pulmonary Function Tests",
+      "url": "https://vimbook.vumc.org/pulmonary/pulmonary-function-tests",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "BTS Guideline for oxygen use, 2019 update",
+      "url": "https://www.brit-thoracic.org.uk/clinical-resources/guidelines/emergency-oxygen",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disturbances_of_respiratory_function-diagnostic",
+      "kind": "diagnostic",
+      "title": "Interpreting respiratory function tests",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "FEV1/FVC",
+          "cells": [
+            {
+              "text": "0.7 or less, or below LLN",
+              "op": "<=",
+              "value": 0.7
+            },
+            {
+              "text": "{{hy:Airflow obstruction}}; can be falsely normal if RV raised"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total lung capacity",
+          "unit": "% predicted",
+          "cells": [
+            {
+              "text": "<80, or below LLN",
+              "op": "<",
+              "value": 80
+            },
+            {
+              "text": "Restriction; low FVC alone only suggestive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal lung function values",
+          "unit": "% predicted",
+          "cells": [
+            {
+              "text": "85 to 115",
+              "range": [
+                85,
+                115
+              ]
+            },
+            {
+              "text": "Volumes scale together in health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchodilator response",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "FEV1 or FVC up 12% and 200 mL",
+              "op": ">=",
+              "value": 12
+            },
+            {
+              "text": "Reversible obstruction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low DLCO",
+          "unit": "% predicted",
+          "cells": [
+            {
+              "text": "<80, or below LLN",
+              "op": "<",
+              "value": 80
+            },
+            {
+              "text": "Emphysema, fibrosis, pulmonary vascular disease, anaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High DLCO",
+          "unit": "% predicted",
+          "cells": [
+            {
+              "text": ">120 to 140",
+              "op": ">",
+              "value": 120
+            },
+            {
+              "text": "Asthma, polycythaemia, alveolar haemorrhage, left-to-right shunt"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PaCO2",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Set point about 40"
+            },
+            {
+              "text": "Above 40 hypoventilation, below 40 hyperventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supine FVC fall",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">10 to 25 (normal 3 to 8)",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Diaphragmatic or neuromuscular weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow-volume loop inspiratory plateau",
+          "cells": [
+            {
+              "text": "Inspiratory flow limitation"
+            },
+            {
+              "text": "Extrathoracic upper-airway obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoxaemia not corrected by oxygen",
+          "cells": [
+            {
+              "text": "True shunt"
+            },
+            {
+              "text": "V/Q mismatch usually improves with oxygen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "GOLD uses fixed cutoffs (0.7, 80%); ATS/ERS uses the lower limit of normal (z-score -1.645). Both are given here."
+    },
+    {
+      "id": "disturbances_of_respiratory_function-ddx",
+      "kind": "ddx",
+      "title": "Physiological patterns and their causes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Obstruction with low DLCO",
+          "cells": [
+            {
+              "text": "Emphysema, late COPD, bronchiectasis, CF"
+            },
+            {
+              "text": "Spirometry plus DLCO"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Obstruction with normal or high DLCO",
+          "cells": [
+            {
+              "text": "Asthma, early COPD"
+            },
+            {
+              "text": "Bronchodilator response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Restriction with low DLCO",
+          "cells": [
+            {
+              "text": "{{hy:Interstitial lung disease}}, pneumonitis, resection"
+            },
+            {
+              "text": "Lung volumes, CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Restriction with normal DLCO",
+          "cells": [
+            {
+              "text": "Chest wall (obesity, kyphoscoliosis), pleura, neuromuscular"
+            },
+            {
+              "text": "Mouth pressures, supine FVC"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Isolated low DLCO",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension, PE, anaemia, early ILD"
+            },
+            {
+              "text": "Echocardiography, CT angiography, haemoglobin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Upper airway obstruction",
+          "cells": [
+            {
+              "text": "Tracheal lesion, post-tracheostomy stricture"
+            },
+            {
+              "text": "Flow-volume loop, bronchoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shunt",
+          "cells": [
+            {
+              "text": "Refractory hypoxaemia"
+            },
+            {
+              "text": "Response to 100% oxygen"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disturbances_of_respiratory_function-treatment",
+      "kind": "treatment",
+      "title": "Management principles",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying disease",
+          "cells": [
+            {
+              "text": "All patterns"
+            },
+            {
+              "text": "The physiological pattern is not disease-specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen to SpO2 94 to 98%",
+          "cells": [
+            {
+              "text": "Acutely ill, not at risk of hypercapnia"
+            },
+            {
+              "text": "Titrate to target"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oxygen to SpO2 88 to 92%",
+          "cells": [
+            {
+              "text": "{{hy:COPD or other hypercapnia risk}}"
+            },
+            {
+              "text": "Pending blood gas results"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-invasive ventilation",
+          "cells": [
+            {
+              "text": "Ventilatory failure from hypoventilation, neuromuscular or chest wall weakness"
+            },
+            {
+              "text": "Escalate to invasive ventilation if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchodilators",
+          "cells": [
+            {
+              "text": "Reversible expiratory airflow limitation"
+            },
+            {
+              "text": "Confirm reversibility on spirometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relieve upper airway obstruction",
+          "cells": [
+            {
+              "text": "Inspiratory flow limitation"
+            },
+            {
+              "text": "Prompt"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary rehabilitation and airway clearance",
+          "cells": [
+            {
+              "text": "Chronic mechanical defects"
+            },
+            {
+              "text": "Tailored to the defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disturbances_of_respiratory_function-dx-mgmt",
+      "title": "Approach to abnormal respiratory function",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dyspnoea or abnormal gas exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Spirometry with flow-volume loop, lung volumes, DLCO, ABG",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "FEV1/FVC 0.7 or less (or below LLN)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Obstruction: test bronchodilator response and DLCO",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "TLC below 80% (or LLN)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "DLCO low?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Parenchymal disease: CT, consider ILD",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Extraparenchymal: chest wall or neuromuscular workup",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Isolated low DLCO?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Pulmonary vascular disease or anaemia workup",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal study: consider non-respiratory causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Treat cause; bronchodilators if reversible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

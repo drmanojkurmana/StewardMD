@@ -164,5 +164,461 @@
       "caption": "Overview comparison matrix for focal segmental glomerulosclerosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Focal Segmental Glomerulosclerosis",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/focal-segmental-glomerulosclerosis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 283-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "FSGS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in focal segmental glomerulosclerosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Presentation",
+          "cells": [
+            {
+              "text": "Heavy proteinuria, oedema, hypertension, reduced kidney function"
+            },
+            {
+              "text": "Commonest cause of primary nephrotic syndrome in US adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sub-nephrotic proteinuria",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Sometimes below 3",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "Can be the only finding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proteinuria type",
+          "cells": [
+            {
+              "text": "Non-selective; microscopic haematuria at times"
+            },
+            {
+              "text": "Unlike minimal change disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biopsy, light microscopy",
+          "cells": [
+            {
+              "text": "Segmental sclerosis in some glomeruli; IgM and C3 deposits"
+            },
+            {
+              "text": "Can be missed if lesions not sampled"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Electron microscopy",
+          "cells": [
+            {
+              "text": "{{hy:Diffuse foot process effacement in primary, patchy in secondary}}"
+            },
+            {
+              "text": "Guides whether to give immunosuppression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney failure",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "About half within 8",
+              "op": "=",
+              "value": 8
+            },
+            {
+              "text": "Faster in adults than children"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrence after transplant",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 40 lose the graft within 5 years",
+              "op": "<=",
+              "value": 40
+            },
+            {
+              "text": "Recurrent primary FSGS"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "FSGS-ddx",
+      "kind": "ddx",
+      "title": "Forms and causes of FSGS to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Examples",
+        "Clue"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary (idiopathic) FSGS",
+          "cells": [
+            {
+              "text": "No secondary cause"
+            },
+            {
+              "text": "Nephrotic, diffuse effacement"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary, viral",
+          "cells": [
+            {
+              "text": "HIV, hepatitis B, parvovirus"
+            },
+            {
+              "text": "Serology"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary, haemodynamic or nephron loss",
+          "cells": [
+            {
+              "text": "Hypertensive nephropathy, reflux, oligomeganephronia, renal dysgenesis, obesity"
+            },
+            {
+              "text": "{{hy:Sub-nephrotic proteinuria, patchy effacement}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary, drugs and toxins",
+          "cells": [
+            {
+              "text": "Heroin, analgesics, pamidronate, lithium, interferon alfa, ciclosporin"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Secondary, other",
+          "cells": [
+            {
+              "text": "Cholesterol emboli, sickle cell disease, lymphoma, radiation nephritis, Alport syndrome"
+            },
+            {
+              "text": "Systemic context"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Familial podocytopathies",
+          "cells": [
+            {
+              "text": "NPHS1 nephrin, NPHS2 podocin, TRPC6, ACTN4, alpha-galactosidase A or NAGA deficiency"
+            },
+            {
+              "text": "Family history; steroid resistance"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Minimal change disease",
+          "cells": [
+            {
+              "text": "Selective proteinuria, normal light microscopy"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "FSGS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of FSGS",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "All, unless contraindicated"
+            },
+            {
+              "text": "Statin if nephrotic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose corticosteroids",
+          "cells": [
+            {
+              "text": "{{hy:Primary FSGS with nephrotic syndrome}}"
+            },
+            {
+              "text": "At least 2 months, some use up to 9; taper after 2 weeks of remission; 30% to 70% respond"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Calcineurin inhibitor (ciclosporin or tacrolimus)",
+          "cells": [
+            {
+              "text": "Steroid resistance, partial response or relapse"
+            },
+            {
+              "text": "At least 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lower-dose steroid plus calcineurin inhibitor",
+          "cells": [
+            {
+              "text": "Diabetes, osteoporosis or other steroid risk"
+            },
+            {
+              "text": "Reduces steroid exposure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mycophenolate mofetil",
+          "cells": [
+            {
+              "text": "Selected cases"
+            },
+            {
+              "text": "Alternative agent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "With immunosuppression in selected cases"
+            },
+            {
+              "text": "Also used for post-transplant recurrence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat secondary cause",
+          "cells": [
+            {
+              "text": "Secondary FSGS"
+            },
+            {
+              "text": "Immunosuppression not indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Spontaneous remission occurs in under 10%."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "FSGS-dx-mgmt",
+      "title": "Diagnosis and management of FSGS",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Proteinuria or nephrotic syndrome in an adult",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urine protein quantification, creatinine, viral serology",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Kidney biopsy with immunostaining and electron microscopy",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Segmental sclerosis present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Manage the other glomerular disease found",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Secondary cause or patchy effacement?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Treat cause; ACE inhibitor or ARB",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ACE inhibitor or ARB plus high-dose steroids",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Remission?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Slow taper; monitor for relapse",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Calcineurin inhibitor for at least 6 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Consider genetic testing; plan for kidney failure",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

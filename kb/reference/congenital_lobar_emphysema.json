@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for congenital lobar emphysema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Ashcraft Pediatric Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_lobar_emphysema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Hyperlucent overexpanded lobe with mediastinal shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT of the chest",
+          "cells": [
+            {
+              "text": "Lobe involved; compressing lesion or vessel sought"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Associated cardiac anomalies and vascular compression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Intraluminal or extrinsic obstruction, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_lobar_emphysema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tension pneumothorax",
+          "cells": [
+            {
+              "text": "Pitfall: the hyperlucent lobe is mistaken for pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital pulmonary airway malformation (macrocystic)",
+          "cells": [
+            {
+              "text": "Named look-alike on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchial foreign body causing air trapping",
+          "cells": [
+            {
+              "text": "Air trapping from an obstructing object"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_lobar_emphysema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lobectomy",
+          "cells": [
+            {
+              "text": "Definitive for symptomatic infants with progressive respiratory distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative observation",
+          "cells": [
+            {
+              "text": "Mildly symptomatic or incidentally detected cases, with serial imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious ventilation",
+          "cells": [
+            {
+              "text": "Avoid positive pressure that worsens air trapping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid needle decompression",
+          "cells": [
+            {
+              "text": "The lobe must not be mistaken for a pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive oxygen",
+          "cells": [
+            {
+              "text": "Respiratory support pending definitive management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Where a correctable obstruction is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac review",
+          "cells": [
+            {
+              "text": "Echocardiography for associated anomalies or vascular compression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_lobar_emphysema-dx-mgmt",
+      "title": "Diagnosis and management of Congenital lobar emphysema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital lobar emphysema: hyperlucent lobe with mediastinal shift",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive distress, cardiovascular compromise, cyanosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review; cautious ventilation; do not drain as pneumothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph; contrast CT; echocardiography; bronchoscopy if obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging show an overexpanded lobe with mediastinal shift?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital airway malformation, foreign body or pneumatocele",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lobectomy for symptomatic infants with progressive distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Conservative observation with serial imaging for mild cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid positive-pressure ventilation that worsens air trapping",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bronchoscopy and echocardiography where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lobectomy in symptomatic infants is generally curative; the remaining lung compensates",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

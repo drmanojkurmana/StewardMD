@@ -162,5 +162,460 @@
       "caption": "Overview comparison matrix for erythema nodosum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "DermNet, Erythema nodosum",
+      "url": "https://dermnetnz.org/topics/erythema-nodosum",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ERYTHEMA_NODOSUM-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising erythema nodosum and finding its cause",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Lesions",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Tender red bilateral nodules 3 to 20 on the shins",
+              "range": [
+                3,
+                20
+              ]
+            },
+            {
+              "text": "Fade through a bruise-like stage without scarring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Resolve within 8",
+              "op": "<=",
+              "value": 8
+            },
+            {
+              "text": "{{hy:Ulceration, non-leg sites or over 8 weeks suggest another diagnosis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Associated features",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Painful swollen ankle in 50",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Fever and arthralgia common"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Idiopathic",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 55",
+              "op": "<=",
+              "value": 55
+            },
+            {
+              "text": "After work-up is negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "11 to 25",
+              "range": [
+                11,
+                25
+              ]
+            },
+            {
+              "text": "Chest X-ray for hilar nodes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drugs",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "3 to 10",
+              "range": [
+                3,
+                10
+              ]
+            },
+            {
+              "text": "Review medication history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pregnancy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "2 to 5",
+              "range": [
+                2,
+                5
+              ]
+            },
+            {
+              "text": "Also oral contraceptives"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection screen",
+          "cells": [
+            {
+              "text": "Throat swab and ASO, Mantoux or IGRA, stool tests if GI symptoms"
+            },
+            {
+              "text": "Streptococcal infection and TB are key causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Septal panniculitis without vasculitis"
+            },
+            {
+              "text": "Deep incisional or excisional biopsy if atypical"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "ERYTHEMA_NODOSUM-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of erythema nodosum",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Erythema induratum (nodular vasculitis)",
+          "cells": [
+            {
+              "text": "{{hy:Ulcerating draining nodules on the posterior calves}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infective panniculitis",
+          "cells": [
+            {
+              "text": "Fluctuant, ulcerated, draining abscesses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipodermatosclerosis",
+          "cells": [
+            {
+              "text": "Chronic venous insufficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pancreatic panniculitis",
+          "cells": [
+            {
+              "text": "Raised lipase and amylase"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cutaneous polyarteritis nodosa",
+          "cells": [
+            {
+              "text": "Vasculitis on biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lupus panniculitis",
+          "cells": [
+            {
+              "text": "Lobular panniculitis; other lupus features"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Usually unilateral, spreading, with fever"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ERYTHEMA_NODOSUM-treatment",
+      "kind": "treatment",
+      "title": "Treatment of erythema nodosum",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat underlying cause",
+          "cells": [
+            {
+              "text": "{{hy:Always first}}"
+            },
+            {
+              "text": "For example antibiotics for streptococcal infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rest, leg elevation and compression",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Symptom relief"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Pain and inflammation"
+            },
+            {
+              "text": "No dose in source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colchicine",
+          "cells": [
+            {
+              "text": "Painful or persistent lesions"
+            },
+            {
+              "text": "1 to 2 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium iodide",
+          "cells": [
+            {
+              "text": "Persistent disease, where available"
+            },
+            {
+              "text": "400 to 900 mg/day for 1 month"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Severe disease once infection, sepsis and malignancy are excluded"
+            },
+            {
+              "text": "1 mg/kg daily until resolution"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Relapse occurs in about one-third."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ERYTHEMA_NODOSUM-dx-mgmt",
+      "title": "Diagnosis and management of erythema nodosum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tender red nodules on both shins",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ulcerating, non-leg site or lasting over 8 weeks?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Deep skin biopsy for other panniculitis",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood count, CRP, ASO and throat swab, chest X-ray, TB test",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Review drugs, pregnancy, gut symptoms",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Cause found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat cause: infection, sarcoidosis, IBD, stop drug",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rest, compression, NSAIDs",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Persistent or severe?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Colchicine, potassium iodide, or steroids after excluding infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Expect resolution within 8 weeks",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

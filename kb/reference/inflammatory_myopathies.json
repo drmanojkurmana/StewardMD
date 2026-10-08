@@ -170,5 +170,536 @@
       "caption": "Overview comparison matrix for inflammatory myopathies."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Autoimmune Myositis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/autoimmune-rheumatic-disorders/autoimmune-myositis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 387-11",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "inflammatory_myopathies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing inflammatory myopathies",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase",
+          "unit": "U/L",
+          "cells": [
+            {
+              "text": "Markedly raised, for example above 2000 U/L",
+              "op": ">",
+              "value": 2000
+            },
+            {
+              "text": "Almost always myopathic; over 10 times normal in IMNM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal or mildly raised CK with distal asymmetric weakness",
+          "cells": [
+            {
+              "text": "Finger flexor and quadriceps weakness over age 50"
+            },
+            {
+              "text": "{{hy:Think inclusion body myositis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heliotrope rash plus Gottron papules plus nailfold capillary dilatation",
+          "cells": [
+            {
+              "text": "Diagnostic for dermatomyositis"
+            },
+            {
+              "text": "Biopsy not usually needed with characteristic skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myositis-specific antibodies",
+          "cells": [
+            {
+              "text": "DM: Mi-2, TIF1-gamma, MDA5, NXP-2, SAE; IMNM: HMGCR, SRP; ASyS: Jo-1; IBM: cN-1A"
+            },
+            {
+              "text": "Define subtype, cancer and lung risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in up to 80% of DM and PM",
+              "op": "<=",
+              "value": 80
+            },
+            {
+              "text": "Negative ANA does not exclude myositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "EMG and muscle MRI (STIR)",
+          "cells": [
+            {
+              "text": "Localise to muscle, show oedema, guide biopsy"
+            },
+            {
+              "text": "IBM spares rectus femoris"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Affected but not end-stage muscle (MRC 4/5)"
+            },
+            {
+              "text": "Needed in every suspected PM to exclude IBM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-TIF1-gamma for cancer-associated DM",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Specificity 89%, sensitivity 70%",
+              "op": "=",
+              "value": 89
+            },
+            {
+              "text": "Adult DM carries about 15% cancer risk in first 2 to 3 years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-MDA5",
+          "cells": [
+            {
+              "text": "Palmar rash, skin ulcers"
+            },
+            {
+              "text": "Rapidly progressive interstitial lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myopathies-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic inflammatory myopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "Distal asymmetric weakness, older age, steroid-refractory"
+            },
+            {
+              "text": "Biopsy: rimmed vacuoles, p62, COX-negative fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "Older age, pain and stiffness, high ESR and CRP"
+            },
+            {
+              "text": "Normal CK and EMG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic or drug-induced myopathy",
+          "cells": [
+            {
+              "text": "Statins, fibrates, niacin, glucocorticoids, zidovudine, colchicine, amiodarone, chloroquine, hydroxychloroquine, d-penicillamine"
+            },
+            {
+              "text": "Improves when drug stopped (unlike anti-HMGCR myopathy)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Steroid myopathy during treatment",
+          "cells": [
+            {
+              "text": "Weakness with normal CK on high-dose steroids"
+            },
+            {
+              "text": "CK and MRI oedema absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Muscular dystrophy or metabolic myopathy",
+          "cells": [
+            {
+              "text": "Family history, chronic course; may show inflammation"
+            },
+            {
+              "text": "Genetic testing and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable weakness, ptosis"
+            },
+            {
+              "text": "Acetylcholine receptor antibodies, repetitive stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor neurone disease",
+          "cells": [
+            {
+              "text": "Atrophy with fasciculations"
+            },
+            {
+              "text": "EMG neurogenic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia",
+          "cells": [
+            {
+              "text": "Pain and fatigue with normal strength"
+            },
+            {
+              "text": "Normal laboratory work-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_myopathies-treatment",
+      "kind": "treatment",
+      "title": "Treating inflammatory myopathies",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "{{hy:Oral prednisone}}",
+          "cells": [
+            {
+              "text": "First line for DM, PM, IMNM, ASyS"
+            },
+            {
+              "text": "About 1 mg/kg daily, maximum 80 mg; taper once strength normalises"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV methylprednisolone",
+          "cells": [
+            {
+              "text": "Severe disease, dysphagia or respiratory weakness"
+            },
+            {
+              "text": "0.5 to 1 g daily for 3 to 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Steroid-sparing agent",
+          "cells": [
+            {
+              "text": "Start with or soon after steroids"
+            },
+            {
+              "text": "Methotrexate, azathioprine or tacrolimus; prefer non-methotrexate agents with ILD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG",
+          "cells": [
+            {
+              "text": "Dysphagia, respiratory muscle weakness, poor steroid response, anti-HMGCR myopathy"
+            },
+            {
+              "text": "Often effective as monotherapy in anti-HMGCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory disease or ASyS with ILD"
+            },
+            {
+              "text": "Early use advised with ILD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclophosphamide and plasma exchange",
+          "cells": [
+            {
+              "text": "Anti-MDA5 rapidly progressive ILD"
+            },
+            {
+              "text": "Consider"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inclusion body myositis",
+          "cells": [
+            {
+              "text": "IBM"
+            },
+            {
+              "text": "No effective immunotherapy; physiotherapy, occupational and swallowing therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cancer screening",
+          "cells": [
+            {
+              "text": "Adult DM, especially over 40 or with TIF1-gamma or NXP-2"
+            },
+            {
+              "text": "Age-appropriate screening; CT chest, abdomen, pelvis, ovarian ultrasound, colonoscopy in high risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring and prophylaxis",
+          "cells": [
+            {
+              "text": "All on immunosuppression"
+            },
+            {
+              "text": "Serial CK (normalises in 6 to 12 weeks), bone protection, Pneumocystis prophylaxis, vaccines"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "inflammatory_myopathies-dx-mgmt",
+      "title": "Diagnosis and management of inflammatory myopathies",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symmetric proximal weakness or myositis rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CK, myositis antibody panel, EMG and muscle MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "CK and EMG myopathic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider PMR, fibromyalgia, neuropathy or myasthenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Classic DM rash or defining antibody?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Muscle biopsy of affected, not end-stage, muscle",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Biopsy shows IBM?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Supportive therapy, swallowing and physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen lungs, heart, swallowing and cancer",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prednisone 1 mg/kg plus steroid-sparing agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Severe, ILD or refractory?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "IV methylprednisolone, IVIG or rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Taper steroids guided by strength and CK",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

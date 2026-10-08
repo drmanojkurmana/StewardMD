@@ -165,5 +165,457 @@
       "caption": "Overview comparison matrix for blastomycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Blastomycosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/blastomycosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blastomycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in blastomycosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Performance or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Yeast morphology",
+          "cells": [
+            {
+              "text": "{{hy:Broad-based budding yeast, double refractile wall}}, 4 to 29 micrometres"
+            },
+            {
+              "text": "Distinguishes from other fungi"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct microscopy (calcofluor, KOH, Pap)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 50 to 90%",
+              "range": [
+                50,
+                90
+              ]
+            },
+            {
+              "text": "Sputum, BAL, pus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology (GMS or PAS)",
+          "cells": [
+            {
+              "text": "Pyogranulomatous inflammation with yeast"
+            },
+            {
+              "text": "Gram and H&E show yeast poorly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "5 to 28 days to grow",
+              "range": [
+                5,
+                28
+              ]
+            },
+            {
+              "text": "Definitive; warn lab of biohazard"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine antigen",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 85 to 93% (serum 57 to 82%)",
+              "range": [
+                85,
+                93
+              ]
+            },
+            {
+              "text": "Cross-reacts with Histoplasma; tracks response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-BAD1 antibody",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 87%, specificity 94 to 99%"
+            },
+            {
+              "text": "Older CF 9% and ID 28% are dispensable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary involvement",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "69 to 93% of symptomatic cases",
+              "range": [
+                69,
+                93
+              ]
+            },
+            {
+              "text": "From asymptomatic to ARDS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dissemination",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "15 to 48%",
+              "range": [
+                15,
+                48
+              ]
+            },
+            {
+              "text": "Skin commonest, then bone; CNS and GU under 10%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ARDS",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "4 to 15% of pulmonary cases",
+              "range": [
+                4,
+                15
+              ]
+            },
+            {
+              "text": "Mortality 40 to 89%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "blastomycosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of blastomycosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bacterial or viral pneumonia",
+          "cells": [
+            {
+              "text": "{{hy:Suspect blasto when pneumonia fails antibiotics}} in endemic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Can mimic lung, skin and genital disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Mass-like infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histoplasmosis",
+          "cells": [
+            {
+              "text": "Antigen cross-reactivity; small B. helicus yeast can look similar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin cancer (including basal cell carcinoma)",
+          "cells": [
+            {
+              "text": "Verrucous or ulcerated skin lesions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sporotrichosis",
+          "cells": [
+            {
+              "text": "Skin lesion mimic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyoderma gangrenosum or sarcoidosis",
+          "cells": [
+            {
+              "text": "Cutaneous mimics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "blastomycosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of blastomycosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Duration and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral itraconazole",
+          "cells": [
+            {
+              "text": "{{hy:Mild to moderate disease, no CNS}}, including skin"
+            },
+            {
+              "text": "6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV liposomal amphotericin B",
+          "cells": [
+            {
+              "text": "Severe or life-threatening disease"
+            },
+            {
+              "text": "1 to 2 weeks or until improved, then oral itraconazole"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV liposomal amphotericin B",
+          "cells": [
+            {
+              "text": "CNS disease, pregnancy, immunocompromised"
+            },
+            {
+              "text": "Same initial schedule"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose fluconazole",
+          "cells": [
+            {
+              "text": "Mild disease, itraconazole intolerant"
+            },
+            {
+              "text": "Less effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Voriconazole, isavuconazonium, posaconazole",
+          "cells": [
+            {
+              "text": "Alternatives"
+            },
+            {
+              "text": "Limited data; role not defined"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat all cases",
+          "cells": [
+            {
+              "text": "All diagnosed patients"
+            },
+            {
+              "text": "No criteria predict self-resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine antigen monitoring",
+          "cells": [
+            {
+              "text": "During therapy"
+            },
+            {
+              "text": "Falling levels show response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No drug doses were stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blastomycosis-dx-mgmt",
+      "title": "Diagnosis and management of blastomycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pneumonia, skin or bone lesions after endemic soil exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Sputum or BAL microscopy and fungal culture; urine antigen",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Broad-based budding yeast or culture positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy lesion with GMS or PAS; anti-BAD1 serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider TB, cancer, histoplasmosis, bacterial pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severe, CNS, pregnant or immunocompromised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Liposomal amphotericin B, then itraconazole",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Itraconazole 6 to 12 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Monitor clinical and antigen response",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Confirmed"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Not confirmed"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for deficiency of il1 receptor antagonist."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immune Deficiencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deficiency_of_il1_receptor_antagonist-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "IL1RN gene sequencing",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function IL1RN variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Multifocal osteolytic lesions, periostitis and rib-end widening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Intraepidermal and subcorneal neutrophilic pustules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone biopsy and cultures",
+          "cells": [
+            {
+              "text": "Sterile lesions, which exclude infective osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants and full blood count",
+          "cells": [
+            {
+              "text": "Neutrophilic leucocytosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deficiency_of_il1_receptor_antagonist-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infectious multifocal osteomyelitis",
+          "cells": [
+            {
+              "text": "Bone cultures are sterile in the autoinflammatory form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis",
+          "cells": [
+            {
+              "text": "Widespread pustulosis with systemic inflammation can mimic overwhelming sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deficiency of IL-36 receptor antagonist (DITRA)",
+          "cells": [
+            {
+              "text": "Clinically overlapping phenotype; a common pitfall"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deficiency_of_il1_receptor_antagonist-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anakinra",
+          "cells": [
+            {
+              "text": "Recombinant IL-1 receptor antagonist; definitive replacement with rapid remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Canakinumab or rilonacept",
+          "cells": [
+            {
+              "text": "Longer-acting IL-1 blockade where adherence or sustained control is a problem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Skin and wound care for pustulosis, analgesia for bone pain, nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Acute-phase reactants and skeletal imaging to titrate therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection exclusion",
+          "cells": [
+            {
+              "text": "Blood and tissue cultures before and during immunomodulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Paediatric rheumatology, dermatology, orthopaedics and neonatology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; IL1RN sequencing and screening of at-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deficiency_of_il1_receptor_antagonist-dx-mgmt",
+      "title": "Diagnosis and management of deficiency of il1 receptor antagonist",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DIRA: neonatal pustulosis with multifocal sterile bone lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal lung disease, sepsis-like illness, or poor response)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude infection and start anakinra, the receptor-level antagonist",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IL1RN sequencing, skeletal survey, skin biopsy, bone cultures, acute-phase reactants",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are biallelic IL1RN loss-of-function variants present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider DITRA, infectious osteomyelitis, CRMO or neonatal sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start anakinra for definitive receptor-level IL-1 blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Consider canakinumab or rilonacept where adherence or control is poor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Exclude and treat intercurrent infection before and during immunomodulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial acute-phase reactants and skeletal imaging to titrate therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and screening of at-risk relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated carries high risk of death; prompt anakinra usually gives rapid remission",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

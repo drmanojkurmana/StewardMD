@@ -154,5 +154,324 @@
       "caption": "Overview comparison matrix for chronic mesenteric ischaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery and Endovascular Therapy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_mesenteric_ischaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mesenteric duplex ultrasound with fasting and postprandial velocities",
+          "cells": [
+            {
+              "text": "Screening for stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography of the mesenteric vessels",
+          "cells": [
+            {
+              "text": "Confirms diagnosis and plans revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter angiography with lateral aortogram",
+          "cells": [
+            {
+              "text": "Often with intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal endoscopy and cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Excludes malignancy or ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional assessment and baseline blood tests",
+          "cells": [
+            {
+              "text": "Malnutrition and weight loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mesenteric_ischaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peptic ulcer disease or gastritis",
+          "cells": [
+            {
+              "text": "Epigastric pain without postprandial pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-abdominal malignancy",
+          "cells": [
+            {
+              "text": "Gastric or pancreatic cancer causing weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Median arcuate ligament syndrome",
+          "cells": [
+            {
+              "text": "Compression of the coeliac axis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mesenteric_ischaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "Endovascular angioplasty and stenting; surgical bypass or endarterectomy for complex disease"
+            },
+            {
+              "text": "Relieves intestinal angina and prevents infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor modification",
+          "cells": [
+            {
+              "text": "Smoking cessation, antiplatelet therapy and statin"
+            },
+            {
+              "text": "Atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Nutritional repletion before and after intervention"
+            },
+            {
+              "text": "Weight loss and malnutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-on-chronic presentation",
+          "cells": [
+            {
+              "text": "Emergency surgical management for bowel infarction"
+            },
+            {
+              "text": "Acute-on-chronic ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude malignancy",
+          "cells": [
+            {
+              "text": "Endoscopy and cross-sectional imaging for other causes of weight loss"
+            },
+            {
+              "text": "Weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stent surveillance",
+          "cells": [
+            {
+              "text": "Duplex surveillance of stent and graft patency"
+            },
+            {
+              "text": "Restenosis after endovascular treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_mesenteric_ischaemia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic mesenteric ischaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic mesenteric ischaemia: postprandial pain, food fear and weight loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe constant pain, peritonism, bleeding, lactic acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency surgical review for acute-on-chronic ischaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mesenteric duplex, then CT angiography; endoscopy to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Stenosis of two or more mesenteric vessels confirmed on angiography?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Smoking cessation, antiplatelet therapy and statin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check peptic disease, pancreatic disease and median arcuate ligament syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutritional repletion before and after revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovascular angioplasty and stenting as first-line revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical bypass or endarterectomy for complex disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Duplex surveillance for restenosis after endovascular treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

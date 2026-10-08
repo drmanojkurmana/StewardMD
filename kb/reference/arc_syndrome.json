@@ -152,5 +152,327 @@
       "caption": "Overview comparison matrix for arc syndrome (arthrogryposis–renal dysfunction–cholestasis syndrome)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Inherited cholestasis references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arc_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular genetic testing of VPS33B and VIPAS39",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular assessment",
+          "cells": [
+            {
+              "text": "Urine electrolytes, acidification, glucose, amino acids and phosphate handling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum GGT and bile acids",
+          "cells": [
+            {
+              "text": "Low-GGT cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregation and alpha-granule electron microscopy",
+          "cells": [
+            {
+              "text": "Alpha-granule platelet dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin examination and hearing assessment",
+          "cells": [
+            {
+              "text": "Ichthyosis and hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Structural malformation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arc_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "PFIC type 1 and type 2",
+          "cells": [
+            {
+              "text": "Low-GGT cholestasis without the renal and joint features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arc_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive and palliative care",
+          "cells": [
+            {
+              "text": "No curative therapy"
+            },
+            {
+              "text": "Poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid invasive procedures",
+          "cells": [
+            {
+              "text": "Liver biopsy and surgery where possible"
+            },
+            {
+              "text": "Alpha-granule platelet dysfunction and high haemorrhage risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ursodeoxycholic acid and vitamins",
+          "cells": [
+            {
+              "text": "For low-GGT cholestasis and pruritus; fat-soluble vitamins; medium-chain triglycerides"
+            },
+            {
+              "text": "Nutritional support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal tubular correction",
+          "cells": [
+            {
+              "text": "Bicarbonate for renal tubular acidosis; electrolyte and phosphate replacement"
+            },
+            {
+              "text": "Concentrating defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition for failure to thrive",
+          "cells": [
+            {
+              "text": "High-calorie nutrition; prompt management of infection and dehydration"
+            },
+            {
+              "text": "Severe failure to thrive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and hearing care",
+          "cells": [
+            {
+              "text": "Ichthyosis skin care; hearing support"
+            },
+            {
+              "text": "Associated features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary and genetic care",
+          "cells": [
+            {
+              "text": "Hepatology, nephrology, genetics and palliative care; family screening"
+            },
+            {
+              "text": "Genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arc_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of ARC Syndrome (Arthrogryposis-Renal Dysfunction-Cholestasis Syndrome)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arthrogryposis, renal tubular disease and low-GGT cholestasis in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Bleeding risk, severe failure to thrive or recurrent infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Avoid liver biopsy; check bleeding risk and treat dehydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "VPS33B and VIPAS39 testing, tubular studies, GGT and bile acids, platelet studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "VPS33B or VIPAS39 variant confirms ARC syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care with ursodeoxycholic acid and fat-soluble vitamins",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bicarbonate for renal tubular acidosis; electrolyte and phosphate replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-calorie nutrition for failure to thrive",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Skin care and hearing support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Palliative and multidisciplinary care; genetic counselling for families",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

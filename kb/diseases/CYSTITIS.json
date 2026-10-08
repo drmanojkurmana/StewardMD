@@ -255,5 +255,486 @@
       "caption": "Diagnostic and clinical overview matrix for acute uncomplicated cystitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Colgan and Williams, Diagnosis and Treatment of Acute Uncomplicated Cystitis, Am Fam Physician 2011",
+      "url": "https://www.aafp.org/pubs/afp/issues/2011/1001/p771.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "CYSTITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing acute uncomplicated cystitis in women",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "One classic symptom of acute onset",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Dysuria, frequency or urgency raises probability to about 50%",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "From a pretest probability of about 5%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Frequency and dysuria without vaginal discharge or irritation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive predictive value 90%",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "{{hy:Treat on history alone in a healthy non-pregnant woman}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vaginal discharge or irritation",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Makes cystitis less likely; consider vaginitis, cervicitis or STI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever, rigors, flank or costovertebral pain",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Not cystitis; evaluate for pyelonephritis or infection beyond the bladder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suprapubic tenderness",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 20% of patients",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "Examination is usually normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dipstick nitrite and leukocyte esterase",
+          "cells": [
+            {
+              "text": "Both negative"
+            },
+            {
+              "text": "Consider non-UTI causes, though a negative test does not fully exclude UTI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyuria and haematuria",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Pyuria in nearly all; haematuria in about 30%",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Microscopy supports diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine culture threshold",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": ">10^2 in a symptomatic woman",
+              "op": ">",
+              "value": 100
+            },
+            {
+              "text": "More sensitive than 10^5/mL; AAFP uses >=10^3 as the general threshold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "When to culture",
+          "cells": [
+            {
+              "text": "Suspected pyelonephritis, atypical symptoms, recurrence within 2 to 4 weeks, prior failure, any male UTI"
+            },
+            {
+              "text": "Not needed for typical cystitis or after cure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Asymptomatic bacteriuria",
+          "cells": [
+            {
+              "text": "Bacteriuria or pyuria without symptoms"
+            },
+            {
+              "text": "Not UTI; usually no treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Culture threshold differs by source: Harrison 22e favours >10^2 bacteria/mL in symptomatic women; AAFP 2011 gives >=10^3 CFU/mL generally and >10^2 with typical symptoms."
+    },
+    {
+      "id": "CYSTITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute cystitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyelonephritis",
+          "cells": [
+            {
+              "text": "{{hy:Fever, tachycardia, flank or costovertebral angle tenderness, ill appearance}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vaginitis (Candida, Trichomonas)",
+          "cells": [
+            {
+              "text": "Vaginal discharge or irritation with dysuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervicitis or urethritis (chlamydia, gonorrhoea, Mycoplasma genitalium)",
+          "cells": [
+            {
+              "text": "STI risk, vaginal discharge; needs STI testing and pelvic examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpetic urethritis",
+          "cells": [
+            {
+              "text": "Dysuria with genital herpes lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostatitis in men",
+          "cells": [
+            {
+              "text": "Perineal, pelvic or prostatic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interstitial cystitis or bladder pain syndrome",
+          "cells": [
+            {
+              "text": "Non-infectious bladder pain; cultures negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asymptomatic bacteriuria in older adults",
+          "cells": [
+            {
+              "text": "Isolated confusion without urinary symptoms; seek other causes of delirium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Sources did not give a specific separating test for most rows, so that column was dropped."
+    },
+    {
+      "id": "CYSTITIS-treatment",
+      "kind": "treatment",
+      "title": "Antibiotic options for acute uncomplicated cystitis in women",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nitrofurantoin macrocrystals",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "100 mg twice daily for 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trimethoprim-sulfamethoxazole",
+          "cells": [
+            {
+              "text": "First line where local E. coli resistance is under 20%"
+            },
+            {
+              "text": "160/800 mg twice daily for 3 days; avoid after use or travel abroad in prior 3 to 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fosfomycin",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "3 g single dose; may be less effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluoroquinolone (ciprofloxacin 250 mg twice daily, levofloxacin 250 mg daily, ofloxacin 200 mg daily)",
+          "cells": [
+            {
+              "text": "Second line: allergy or first-line agents unsuitable"
+            },
+            {
+              "text": "3 days; more collateral damage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-lactam (amoxicillin-clavulanate 500/125 mg twice daily 7 days, cefpodoxime 100 mg twice daily 7 days, cefdinir 300 mg twice daily 10 days)",
+          "cells": [
+            {
+              "text": "Third line"
+            },
+            {
+              "text": "Generally not recommended because of resistance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "No routine follow-up test",
+          "cells": [
+            {
+              "text": "Symptoms resolved"
+            },
+            {
+              "text": "Relief usually starts within 36 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Culture and reassess",
+          "cells": [
+            {
+              "text": "No resolution or recurrence within 2 to 4 weeks"
+            },
+            {
+              "text": "Imaging for atypical cases or non-response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Withholding antibiotics (NSAID alone or strict delay)",
+          "cells": [
+            {
+              "text": "Not preferred"
+            },
+            {
+              "text": "Longer symptoms and small added risk of pyelonephritis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Doses as stated in AAFP 2011; that review predates newer guidance and does not address renal dose limits for nitrofurantoin."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "CYSTITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute uncomplicated cystitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Woman with dysuria, frequency or urgency",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fever, rigors, flank pain or ill appearance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Manage as pyelonephritis or complicated UTI; culture urine",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Vaginal discharge or irritation, or STI risk?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Pelvic examination and STI or vaginitis testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Typical symptoms, healthy, not pregnant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dipstick or urinalysis; culture if atypical",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nitrofurantoin 5 days, TMP-SMX 3 days or fosfomycin single dose",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Symptoms resolved?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "No follow-up testing needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Urine culture, change agent, consider imaging",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "UTI likely"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

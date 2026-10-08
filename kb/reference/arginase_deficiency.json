@@ -153,5 +153,336 @@
       "caption": "Overview comparison matrix for arginase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arginase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma amino acids",
+          "cells": [
+            {
+              "text": "Markedly elevated arginine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ammonia",
+          "cells": [
+            {
+              "text": "Particularly during symptomatic episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary orotic acid and guanidino compounds",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red cell or fibroblast arginase activity",
+          "cells": [
+            {
+              "text": "Enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ARG1 gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "White matter and other changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arginase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebral palsy of non-metabolic cause",
+          "cells": [
+            {
+              "text": "Progressive spasticity with regression argues against it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other urea cycle disorders such as OTC deficiency or citrullinaemia",
+          "cells": [
+            {
+              "text": "Separated by plasma arginine and arginase testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arginase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Protein-restricted, arginine-restricted diet",
+          "cells": [
+            {
+              "text": "Essential amino acid supplements as needed"
+            },
+            {
+              "text": "Unusual among urea cycle disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nitrogen scavengers",
+          "cells": [
+            {
+              "text": "Sodium benzoate or sodium phenylbutyrate"
+            },
+            {
+              "text": "Alternative routes for waste nitrogen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperammonaemic crisis management",
+          "cells": [
+            {
+              "text": "Stop protein; high-calorie glucose; IV scavengers; haemodialysis"
+            },
+            {
+              "text": "Reverses catabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity treatment",
+          "cells": [
+            {
+              "text": "Physiotherapy, baclofen, orthopaedic and rehabilitation input"
+            },
+            {
+              "text": "Progressive spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticonvulsants",
+          "cells": [
+            {
+              "text": "Control seizures while avoiding valproate"
+            },
+            {
+              "text": "Valproate avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Ammonia, plasma amino acids including arginine, growth and neurodevelopment"
+            },
+            {
+              "text": "Regular monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Consider in severe or refractory disease"
+            },
+            {
+              "text": "Specialist metabolic team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arginase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Arginase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive spasticity and regression in a child labelled as cerebral palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Acute hyperammonaemic encephalopathy with vomiting or coma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency ammonia lowering: stop protein, glucose, scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma amino acids, ammonia, orotic acid, arginase activity, ARG1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Markedly raised arginine with ARG1 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Protein and arginine restriction with nitrogen scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat amino acid analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium benzoate or sodium phenylbutyrate as scavenger therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy and baclofen for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticonvulsants avoiding valproate; regular ammonia monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver transplantation considered in severe or refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

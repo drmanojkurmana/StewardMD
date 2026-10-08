@@ -150,5 +150,86 @@
       "caption": "Overview comparison matrix for bejel."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bejel-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in bejel",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Dark-field microscopy of lesion exudate", "cells": [{"text": "Spirochaetes"}], "cite": "c1"},
+        {"parameter": "Non-treponemal serology (RPR or VDRL)", "cells": [{"text": "Activity, and follow-up after treatment"}], "cite": "c1"},
+        {"parameter": "Treponemal serology (TPPA or TPHA)", "cells": [{"text": "Confirms infection"}], "cite": "c1"},
+        {"parameter": "PCR of lesion material", "cells": [{"text": "Supports the subspecies context, where available"}], "cite": "c1"},
+        {"parameter": "Radiographs of symptomatic bones", "cells": [{"text": "Osteoperiostitis of long bones"}], "cite": "c1"},
+        {"parameter": "Assessment of household and community contacts", "cells": [{"text": "Need for screening and treatment"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bejel-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for bejel",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Venereal syphilis", "cells": [{"text": "Serologically identical; bejel is non-sexual and lacks cardiovascular, neurological and congenital features"}], "cite": "c1"},
+        {"parameter": "Yaws and pinta", "cells": [{"text": "Separated by geographic and clinical context"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bejel-treatment",
+      "kind": "treatment",
+      "title": "Management options in bejel",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "First-line penicillin", "cells": [{"text": "Long-acting intramuscular benzathine penicillin"}, {"text": "First-line curative therapy"}], "cite": "c1"},
+        {"parameter": "Alternative antibiotics", "cells": [{"text": "Macrolide such as azithromycin, or doxycycline"}, {"text": "Doxycycline for penicillin-allergic non-pregnant patients"}], "cite": "c1"},
+        {"parameter": "Contact screening and treatment", "cells": [{"text": "Screen and treat household and community contacts"}, {"text": "Interrupts transmission"}], "cite": "c1"},
+        {"parameter": "Post-treatment serology", "cells": [{"text": "Non-treponemal serology (RPR or VDRL) after treatment"}, {"text": "Confirms response and detects relapse"}], "cite": "c1"},
+        {"parameter": "Late gummatous disease", "cells": [{"text": "Reconstructive and supportive care"}, {"text": "For disfiguring oronasopharyngeal and bone destruction"}], "cite": "c1"},
+        {"parameter": "Hygiene and public health", "cells": [{"text": "Improve hygiene and reduce sharing of eating and drinking utensils"}, {"text": "Coordinate with endemic treponematosis elimination programmes"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bejel-dx-mgmt",
+      "title": "Diagnosis and management of bejel",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Mouth mucous patches, angular stomatitis or moist skin-fold lesions in a dry-region child", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: nasopharyngeal (gangosa) destruction, airway compromise or bone destruction?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: airway and reconstructive assessment; treat without delay", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Dark-field microscopy of exudate and non-treponemal serology (RPR or VDRL)", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Treponemal serology (TPPA or TPHA); radiographs for osteoperiostitis of symptomatic bones", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Treponemal serology confirms an endemic treponematosis?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Benzathine penicillin intramuscular first line; macrolide or doxycycline if allergic", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider other mucous patch causes such as aphthous or candidal stomatitis", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Screen and treat household and community contacts to interrupt transmission", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Early bejel recovers fully with penicillin; check RPR or VDRL after treatment", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

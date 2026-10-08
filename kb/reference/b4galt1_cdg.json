@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for b4galt1-cdg (cdg-iid)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "b4galt1_cdg-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transferrin isoelectric focusing or mass spectrometry",
+          "cells": [
+            {
+              "text": "Type II pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B4GALT1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Dandy-Walker malformation and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile",
+          "cells": [
+            {
+              "text": "Coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase and neuromuscular assessment",
+          "cells": [
+            {
+              "text": "Myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and growth evaluation",
+          "cells": [
+            {
+              "text": "Development and growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "b4galt1_cdg-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "MGAT2-CDG",
+          "cells": [
+            {
+              "text": "Another type II CDG subtype; separated by gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dandy-Walker malformation of other genetic or sporadic cause",
+          "cells": [
+            {
+              "text": "Separated by B4GALT1 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "b4galt1_cdg-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive coordinated care",
+          "cells": [
+            {
+              "text": "No therapy corrects the glycosylation defect"
+            },
+            {
+              "text": "Metabolic medicine and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurosurgical shunting",
+          "cells": [
+            {
+              "text": "For hydrocephalus complicating Dandy-Walker malformation"
+            },
+            {
+              "text": "Hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapy",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy, speech and language therapy"
+            },
+            {
+              "text": "Hypotonia and developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clotting factor replacement",
+          "cells": [
+            {
+              "text": "Clotting factor replacement or fresh frozen plasma before surgery and to manage bleeding"
+            },
+            {
+              "text": "Coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and growth support",
+          "cells": [
+            {
+              "text": "Dietetic input; enteral feeding if intake is inadequate"
+            },
+            {
+              "text": "Feeding and growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myopathy surveillance",
+          "cells": [
+            {
+              "text": "Serial creatine kinase and neuromuscular assessment"
+            },
+            {
+              "text": "Myopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; carrier and prenatal testing offered"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "b4galt1_cdg-dx-mgmt",
+      "title": "Diagnosis and management of B4GALT1-CDG (CDG-IId)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dandy-Walker malformation with hypotonia and developmental delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Raised pressure from hydrocephalus or bleeding from factor deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neurosurgical shunting for hydrocephalus; correct coagulopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin IEF (type II), B4GALT1 testing, MRI, coagulation, CK, growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "B4GALT1 variant with a type II transferrin pattern confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care coordinated through metabolic medicine and genetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat glycosylation screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Clotting factor or fresh frozen plasma for bleeding or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Feeding support with enteral feeding if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial creatine kinase for myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling with carrier and prenatal testing offered to the family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

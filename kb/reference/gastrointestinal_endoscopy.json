@@ -170,5 +170,518 @@
       "caption": "Overview comparison matrix for gastrointestinal endoscopy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ACG 2021 upper GI and ulcer bleeding guideline, HMP Global summary",
+      "url": "https://www.hmpgloballearningnetwork.com/site/gastro/news/acg-updates-guideline-low-risk-gi-bleeding",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastrointestinal_endoscopy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Endoscopic findings and thresholds that guide action",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Ulcer: clean base",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "3 to 5",
+              "range": [
+                3,
+                5
+              ]
+            },
+            {
+              "text": "No endoscopic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: flat pigmented spot",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "About 10"
+            },
+            {
+              "text": "Low risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: adherent clot",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "About 20"
+            },
+            {
+              "text": "Intermediate risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: nonbleeding visible vessel",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "About 40"
+            },
+            {
+              "text": "Endoscopic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcer: active spurting",
+          "unit": "% rebleed",
+          "cells": [
+            {
+              "text": "{{hy:About 90}}"
+            },
+            {
+              "text": "Endoscopic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glasgow-Blatchford score for discharge",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "0 to 1",
+              "range": [
+                0,
+                1
+              ]
+            },
+            {
+              "text": "Very low risk; outpatient follow-up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Caecal diameter in pseudo-obstruction",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">12",
+              "op": ">",
+              "value": 12
+            },
+            {
+              "text": "Perforation risk; neostigmine or decompression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsule endoscopy yield",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 55 in small-bowel bleeding"
+            },
+            {
+              "text": "After negative upper and lower endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GERD duration before Barrett screening",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "10 or more",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Consider screening EGD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_endoscopy-ddx",
+      "kind": "ddx",
+      "title": "Choosing the source and the test in GI bleeding and related problems",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper GI bleeding with melena",
+          "cells": [
+            {
+              "text": "Over 90% of melena arises above the ligament of Treitz"
+            },
+            {
+              "text": "EGD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brisk upper GI bleed presenting as haematochezia",
+          "cells": [
+            {
+              "text": "Haemodynamic instability with rapid transit"
+            },
+            {
+              "text": "Urgent EGD first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonic bleeding",
+          "cells": [
+            {
+              "text": "About 85% of haematochezia"
+            },
+            {
+              "text": "Colonoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel bleeding",
+          "cells": [
+            {
+              "text": "Negative upper and lower endoscopy"
+            },
+            {
+              "text": "Capsule endoscopy, then enteroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonerosive reflux disease",
+          "cells": [
+            {
+              "text": "Symptoms with normal endoscopy"
+            },
+            {
+              "text": "24-h pH and impedance monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile duct stone vs no stone",
+          "cells": [
+            {
+              "text": "Gallstone pancreatitis; only about 20% retain a stone"
+            },
+            {
+              "text": "MRCP or EUS before ERCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical obstruction vs pseudo-obstruction",
+          "cells": [
+            {
+              "text": "Colonic dilatation"
+            },
+            {
+              "text": "Plain film, contrast enema or CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_endoscopy-treatment",
+      "kind": "treatment",
+      "title": "Endoscopic and supportive therapy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic haemostasis",
+          "cells": [
+            {
+              "text": "{{hy:Active spurting or oozing, nonbleeding visible vessel}}"
+            },
+            {
+              "text": "Bipolar electrocoagulation, heater probe, ethanol injection, clips"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid epinephrine monotherapy",
+          "cells": [
+            {
+              "text": "Ulcer haemostasis"
+            },
+            {
+              "text": "Combine with thermal or mechanical method"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose PPI after endoscopic therapy",
+          "cells": [
+            {
+              "text": "High-risk ulcer treated endoscopically"
+            },
+            {
+              "text": "Continuous or intermittent for 3 days, then oral twice daily for 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Haemoglobin threshold 7",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "Hospitalised upper GI bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Variceal band ligation",
+          "cells": [
+            {
+              "text": "Acute oesophageal variceal bleeding"
+            },
+            {
+              "text": "Controls bleeding in up to 90%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Argon plasma coagulation",
+          "cells": [
+            {
+              "text": "Bleeding vascular ectasias"
+            },
+            {
+              "text": "Endoscopic ablation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent ERCP drainage",
+          "cells": [
+            {
+              "text": "Cholangitis with Reynolds pentad"
+            },
+            {
+              "text": "High mortality without drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency endoscopic removal",
+          "cells": [
+            {
+              "text": "Oesophageal food or foreign-body impaction"
+            },
+            {
+              "text": "Avoid contrast study before endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct coagulopathy",
+          "cells": [
+            {
+              "text": "Marked coagulopathy or thrombocytopenia"
+            },
+            {
+              "text": "Correction may itself stop bleeding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastrointestinal_endoscopy-dx-mgmt",
+      "title": "Endoscopic approach to acute upper GI bleeding",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematemesis or melena",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Resuscitate; Glasgow-Blatchford score; transfuse if Hb <7 g/dL",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Glasgow-Blatchford score 0 to 1?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Discharge with outpatient follow-up",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Correct coagulopathy; upper endoscopy within 12 to 24 h",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Varices bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Band ligation and variceal bleeding pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Spurting, oozing or visible vessel?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination endoscopic haemostasis",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "High-dose PPI 3 days then oral twice daily 2 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-risk stigmata: no endoscopic therapy needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rebleeding risk after therapy falls to about 5 to 10%",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

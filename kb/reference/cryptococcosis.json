@@ -165,5 +165,489 @@
       "caption": "Overview comparison matrix for cryptococcosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cryptococcosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/cryptococcosis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "WHO, rapid advice on cryptococcal disease treatment, 2022",
+      "url": "https://www.who.int/news/item/20-04-2022-rapid-advice-new-guidelines-for-simpler-safer-treatment-for-cryptococcal-disease-in-plhiv",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cryptococcosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of cryptococcosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Test or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "CSF or serum cryptococcal antigen (lateral flow assay)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred test; sensitivity and specificity over 99%}}"
+            },
+            {
+              "text": "Often negative in isolated pulmonary disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "India ink stain of CSF",
+          "cells": [
+            {
+              "text": "Encapsulated budding yeast"
+            },
+            {
+              "text": "Can be falsely negative with low burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF opening pressure",
+          "cells": [
+            {
+              "text": "Often raised"
+            },
+            {
+              "text": "Drives need for therapeutic lumbar punctures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF profile",
+          "cells": [
+            {
+              "text": "High protein, lymphocytic pleocytosis, low glucose"
+            },
+            {
+              "text": "Classic meningism may be absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fungal cultures of CSF, blood, urine, sputum",
+          "cells": [
+            {
+              "text": "Blood often positive in advanced HIV"
+            },
+            {
+              "text": "Urine often positive in disseminated disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CD4 count in HIV-associated meningitis",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Usually <100",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "High-risk hosts also include transplant, steroids, haematologic cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum CRAg screening in HIV",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "CD4 <100 to 200",
+              "range": [
+                100,
+                200
+              ]
+            },
+            {
+              "text": "Identifies antigenaemia before meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture in any cryptococcal infection",
+          "cells": [
+            {
+              "text": "Required before calling disease non-CNS"
+            },
+            {
+              "text": "Defines treatment intensity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptococcosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of cryptococcal meningitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculous meningitis",
+          "cells": [
+            {
+              "text": "Subacute course, basal meningitis"
+            },
+            {
+              "text": "{{hy:CSF CRAg negative}}; TB tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other fungal meningitis (Coccidioides, Histoplasma)",
+          "cells": [
+            {
+              "text": "Endemic exposure"
+            },
+            {
+              "text": "Fungal antigen and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carcinomatous meningitis",
+          "cells": [
+            {
+              "text": "Known cancer"
+            },
+            {
+              "text": "CSF cytology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningitis",
+          "cells": [
+            {
+              "text": "Acute onset with classic meningism"
+            },
+            {
+              "text": "Gram stain and culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute dementia or depression",
+          "cells": [
+            {
+              "text": "Indolent CNS cryptococcosis can mimic"
+            },
+            {
+              "text": "Lumbar puncture with CRAg"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung cancer",
+          "cells": [
+            {
+              "text": "Nodule or mass on chest imaging"
+            },
+            {
+              "text": "Biopsy and culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptococcosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of cryptococcosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Duration and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Liposomal amphotericin B plus flucytosine (induction)",
+          "cells": [
+            {
+              "text": "{{hy:Meningitis or severe disease}}"
+            },
+            {
+              "text": "2 weeks in advanced HIV; 2 to 4 weeks without HIV; deoxycholate if lipid form unavailable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single high-dose liposomal amphotericin B plus flucytosine and fluconazole",
+          "cells": [
+            {
+              "text": "WHO preferred induction in people with HIV"
+            },
+            {
+              "text": "Flucytosine and fluconazole for 2 weeks; less toxic, as effective as older standard"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fluconazole consolidation",
+          "cells": [
+            {
+              "text": "After induction"
+            },
+            {
+              "text": "8 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole maintenance",
+          "cells": [
+            {
+              "text": "After consolidation"
+            },
+            {
+              "text": "6 to 12 months without HIV; in HIV continue until CD4 >100 cells/uL on ART"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluconazole alone",
+          "cells": [
+            {
+              "text": "Mild to moderate pulmonary disease with normal CSF"
+            },
+            {
+              "text": "6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serial therapeutic lumbar punctures or shunt",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure"
+            },
+            {
+              "text": "Mannitol and acetazolamide not effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Start ART",
+          "cells": [
+            {
+              "text": "HIV"
+            },
+            {
+              "text": "4 to 6 weeks after starting antifungals to limit IRIS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-emptive fluconazole",
+          "cells": [
+            {
+              "text": "CRAg-positive without meningitis on screening"
+            },
+            {
+              "text": "Dose not stated in opened sources"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Avoid echinocandins (inactive) and prophylactic dexamethasone in HIV-associated disease (higher mortality). Doses for amphotericin, flucytosine and fluconazole were not stated in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cryptococcosis-dx-mgmt",
+      "title": "Diagnosis and management of cryptococcosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute headache, fever or lung lesion in an at-risk host",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Serum CRAg, blood cultures, chest imaging",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "CRAg or culture positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Seek other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Lumbar puncture: opening pressure, CRAg, India ink, culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "CNS involvement or severe disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Fluconazole 6 to 12 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Induction: liposomal amphotericin B plus flucytosine",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Raised intracranial pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial therapeutic lumbar punctures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Fluconazole consolidation 8 weeks then maintenance",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "In HIV, start ART 4 to 6 weeks after antifungals",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Stop maintenance when CD4 over 100 on ART",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

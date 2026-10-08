@@ -206,5 +206,461 @@
       "caption": "Diagnostic and clinical overview matrix for cardiac tamponade."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 239-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Pericarditis (cardiac tamponade section)",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/pericarditis/pericarditis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tamponade-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical, ECG and echo findings in cardiac tamponade",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic triad",
+          "cells": [
+            {
+              "text": "Hypotension, raised JVP, muffled heart sounds"
+            },
+            {
+              "text": "{{hy:Tamponade is a clinical diagnosis in an unstable patient}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulsus paradoxus",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Inspiratory systolic fall >10 mm Hg",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Nearly always present in severe tamponade; also in COPD, asthma, PE, RV infarction"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pulsus paradoxus with large effusion",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": ">12 mm Hg",
+              "op": ">",
+              "value": 12
+            },
+            {
+              "text": "Highly predictive: sensitivity about 98%, specificity about 83%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Jugular venous waveform",
+          "cells": [
+            {
+              "text": "Prominent x descent, y descent absent"
+            },
+            {
+              "text": "Kussmaul sign absent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Sinus tachycardia, low voltage, electrical alternans"
+            },
+            {
+              "text": "Suggestive but neither sensitive nor specific"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Echo: right heart chambers",
+          "cells": [
+            {
+              "text": "Right atrial collapse and RV diastolic collapse; small RV"
+            },
+            {
+              "text": "Compression by effusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo: respiratory flow variation",
+          "cells": [
+            {
+              "text": "Exaggerated variation of transvalvular and venous flow"
+            },
+            {
+              "text": "Supports tamponade physiology"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Echo: IVC on deep inspiration",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Diameter falls <50%",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "IVC plethora"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Effusion volume, rapid accumulation",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "As little as 150 mL",
+              "op": "=",
+              "value": 150
+            },
+            {
+              "text": "Can cause tamponade (usually blood)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Effusion volume, slow accumulation",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "Up to 1500 mL",
+              "op": "<=",
+              "value": 1500
+            },
+            {
+              "text": "May not cause tamponade; rate matters more than volume"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Catheterisation",
+          "cells": [
+            {
+              "text": "Equal diastolic pressures, no early diastolic dip"
+            },
+            {
+              "text": "Usually present in tamponade"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Echo findings alone do not mandate drainage; decide on the clinical picture."
+    },
+    {
+      "id": "tamponade-ddx",
+      "kind": "ddx",
+      "title": "Distinguishing tamponade from similar disorders",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Kussmaul sign, prominent y descent, pericardial knock; pulsus paradoxus usually absent"
+            },
+            {
+              "text": "{{hy:Echo, CT or MRI: thickened or calcified pericardium, no effusion}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Restrictive cardiomyopathy",
+          "cells": [
+            {
+              "text": "Kussmaul sign present; myocardial thickness usually increased"
+            },
+            {
+              "text": "Echo; cardiac biopsy sometimes helpful"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Right ventricular infarction",
+          "cells": [
+            {
+              "text": "Kussmaul sign, S3 may be present, no electrical alternans"
+            },
+            {
+              "text": "Echo: enlarged RV, no effusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "COPD, asthma or pulmonary embolism",
+          "cells": [
+            {
+              "text": "Can produce pulsus paradoxus without tamponade"
+            },
+            {
+              "text": "Echo: no pericardial effusion"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "tamponade-treatment",
+      "kind": "treatment",
+      "title": "Management of cardiac tamponade",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate pericardiocentesis",
+          "cells": [
+            {
+              "text": "Suspected tamponade with haemodynamic compromise"
+            },
+            {
+              "text": "{{hy:Do not delay for tests if unstable}}; echo first unless delay is life-threatening; small volumes can save life"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Echo-guided needle drainage",
+          "cells": [
+            {
+              "text": "Cause known or tamponade uncertain"
+            },
+            {
+              "text": "Head up 30 degrees; drain until pericardial pressure is below right atrial pressure; send fluid for chemistry, cytology, microbiology"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drain catheter",
+          "cells": [
+            {
+              "text": "After needle drainage"
+            },
+            {
+              "text": "Remove when output is under 25 to 50 mL per 24 h, usually 2 to 4 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Surgical drainage or window",
+          "cells": [
+            {
+              "text": "Tamponade certain but cause unclear (allows biopsy); traumatic effusion"
+            },
+            {
+              "text": "Also needed for haemopericardium from rupture or dissection"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Malignant, tuberculous, uraemic or purulent effusion"
+            },
+            {
+              "text": "Malignant effusions recur in about 20% after catheter drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor after drainage",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "ECG, right atrial pressure; watch for post-drainage low output"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tamponade-dx-mgmt",
+      "title": "Diagnosis and management of cardiac tamponade",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypotension, tachycardia, raised JVP, dyspnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Check pulsus paradoxus; ECG; bedside echo",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Pericardial effusion with right heart collapse or plethoric IVC?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Seek other cause: constriction, restriction, RV infarction",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Shock or rapid decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Immediate pericardiocentesis without waiting for more tests",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Trauma, rupture or dissection (haemopericardium)?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Surgical drainage and repair",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Cause known?",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Echo-guided needle drainage with catheter; treat cause",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgical drainage with pericardial biopsy",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

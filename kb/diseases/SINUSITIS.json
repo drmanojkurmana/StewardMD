@@ -296,5 +296,451 @@
       "caption": "Diagnostic and clinical overview matrix for acute sinusitis (rhinosinusitis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Sinusitis",
+      "url": "https://www.merckmanuals.com/professional/ear-nose-and-throat-disorders/nose-and-paranasal-sinus-disorders/sinusitis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Outpatient Clinical Care for Adults, 2024",
+      "url": "https://www.cdc.gov/antibiotic-use/hcp/clinical-care/adult-outpatient.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "SINUSITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "When to suspect bacterial rhinosinusitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute sinusitis duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Resolves in <4",
+              "op": "<",
+              "value": 4
+            },
+            {
+              "text": "Chronic if over 12 weeks; most acute cases are viral"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Persistent symptoms",
+          "unit": "days",
+          "cells": [
+            {
+              "text": ">10 without improvement",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "{{hy:Suggests bacterial cause}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Severe onset",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Fever >=39 with purulent discharge or facial pain for 3 to 4 days",
+              "op": ">=",
+              "value": 39
+            },
+            {
+              "text": "Suggests bacterial cause"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Double sickening",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "New or worse fever, cough or discharge for 3 to 4 days after a 5 to 6 day viral illness improves",
+              "range": [
+                3,
+                4
+              ]
+            },
+            {
+              "text": "Suggests bacterial cause"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Not routine"
+            },
+            {
+              "text": "CT only when complications are suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cultures",
+          "cells": [
+            {
+              "text": "Rarely useful"
+            },
+            {
+              "text": "Use after empirical failure, immunocompromise or hospital-acquired infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Red flags",
+          "cells": [
+            {
+              "text": "Periorbital swelling, proptosis, ophthalmoplegia, vision change, confusion, severe headache"
+            },
+            {
+              "text": "Suspect orbital or intracranial spread; urgent CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrent acute sinusitis",
+          "cells": [
+            {
+              "text": "4 or more episodes a year, each under 30 days"
+            },
+            {
+              "text": "At least 10 days symptom free between episodes"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Diagnosis of acute sinusitis is clinical. CDC and Merck agree on the 10 day, severe onset and double sickening patterns."
+    },
+    {
+      "id": "SINUSITIS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute bacterial sinusitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Viral rhinosinusitis or common cold",
+          "cells": [
+            {
+              "text": "Improves within 10 days without double sickening"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Allergic or nonallergic rhinitis",
+          "cells": [
+            {
+              "text": "Rhinitis without the bacterial patterns of duration or fever"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dental periapical abscess",
+          "cells": [
+            {
+              "text": "Dental source of maxillary sinusitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Invasive fungal sinusitis",
+          "cells": [
+            {
+              "text": "{{hy:Immunocompromised patient}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allergic fungal sinusitis",
+          "cells": [
+            {
+              "text": "Chronic course"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nasopharyngeal cancer",
+          "cells": [
+            {
+              "text": "Unilateral obstruction, pain, epistaxis or reduced vision"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Sources give no single separating test for each mimic, so that column was dropped."
+    },
+    {
+      "id": "SINUSITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute rhinosinusitis in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "{{hy:Uncomplicated cases with reliable follow-up}}"
+            },
+            {
+              "text": "Symptomatic care first"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Amoxicillin-clavulanate",
+          "cells": [
+            {
+              "text": "First-line antibiotic when bacterial pattern present"
+            },
+            {
+              "text": "875 mg orally every 12 hours for 5 to 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-dose amoxicillin-clavulanate",
+          "cells": [
+            {
+              "text": "Age over 65, antibiotics in past month, recent admission, immunocompromise"
+            },
+            {
+              "text": "2 g orally every 12 hours for 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline or respiratory fluoroquinolone",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "Levofloxacin or moxifloxacin as fluoroquinolone options"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Agents not recommended",
+          "cells": [
+            {
+              "text": "Empirical therapy"
+            },
+            {
+              "text": "Macrolides (about 40% pneumococcal resistance), trimethoprim-sulfamethoxazole, cephalosporin monotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Switch agent",
+          "cells": [
+            {
+              "text": "No improvement in 3 to 5 days"
+            },
+            {
+              "text": "Change antibiotic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Topical decongestant",
+          "cells": [
+            {
+              "text": "Nasal congestion"
+            },
+            {
+              "text": "Oxymetazoline every 8 to 12 hours or phenylephrine 0.25% every 3 hours, no longer than 5 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Saline irrigation, intranasal steroid, antihistamine",
+          "cells": [
+            {
+              "text": "Symptom relief"
+            },
+            {
+              "text": "Modest benefit; steroids take at least 15 days"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "CDC names amoxicillin or amoxicillin-clavulanate as first line without a dose; the dose shown is from Merck."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "SINUSITIS-dx-mgmt",
+      "title": "Diagnosis and management of acute sinusitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nasal congestion, purulent discharge or facial pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Orbital swelling, vision change, confusion or severe headache?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent CT and specialist care for complications",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Over 10 days, severe onset, or double sickening?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Viral: symptomatic care, no antibiotic",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Uncomplicated with reliable follow-up?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Watchful waiting with symptomatic care and follow-up",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Amoxicillin-clavulanate; doxycycline or fluoroquinolone if allergic",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Improving within 3 to 5 days?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Complete 5 to 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Switch antibiotic; consider culture or CT",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

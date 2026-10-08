@@ -149,5 +149,346 @@
       "caption": "Overview comparison matrix for achilles tendinopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "achilles_tendinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment, including the Thompson test",
+          "cells": [
+            {
+              "text": "Largely a clinical diagnosis; Thompson test checks for rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Tendon thickening, hypoechoic areas, neovascularity and partial tears"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Refractory or surgical cases and insertional pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs for insertional disease",
+          "cells": [
+            {
+              "text": "Calcification, Haglund deformity or spur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic and inflammatory screening",
+          "cells": [
+            {
+              "text": "Used in atypical, bilateral or young patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "achilles_tendinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete or partial Achilles tendon rupture",
+          "cells": [
+            {
+              "text": "Sudden pain with a palpable gap"
+            },
+            {
+              "text": "Thompson calf-squeeze test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haglund deformity",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Plain radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic enthesitis from seronegative spondyloarthropathy",
+          "cells": [
+            {
+              "text": "Inflammatory or bilateral enthesitis"
+            },
+            {
+              "text": "Metabolic and inflammatory screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "achilles_tendinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Progressive mechanical loading",
+          "cells": [
+            {
+              "text": "Cornerstone of management"
+            },
+            {
+              "text": "Eccentric or heavy slow-resistance calf loading; limited-dorsiflexion loading for insertional disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relative rest, activity modification and analgesia",
+          "cells": [
+            {
+              "text": "Pain control and graded return"
+            },
+            {
+              "text": "Short-term NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Footwear and biomechanical correction",
+          "cells": [
+            {
+              "text": "Contributory factors"
+            },
+            {
+              "text": "Heel raise for insertional disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extracorporeal shockwave therapy",
+          "cells": [
+            {
+              "text": "Adjunct for refractory cases"
+            },
+            {
+              "text": "Adjunct only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Injections, cautiously",
+          "cells": [
+            {
+              "text": "Selected cases"
+            },
+            {
+              "text": "Avoid intratendinous corticosteroid because of rupture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent referral for suspected complete rupture",
+          "cells": [
+            {
+              "text": "Positive Thompson test and palpable gap"
+            },
+            {
+              "text": "Refer urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery: debridement or Haglund excision",
+          "cells": [
+            {
+              "text": "Failed prolonged conservative treatment"
+            },
+            {
+              "text": "Insertional disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "achilles_tendinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Achilles tendinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Posterior heel or calf pain, worst on starting activity and after rest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden pain, palpable gap or positive Thompson test?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent referral for suspected complete tendon rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical assessment; ultrasound for thickening, neovascularity, partial tears",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Atypical, bilateral or inflammatory features present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Metabolic and inflammatory screening; consider spondyloarthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Mid-portion or insertional disease: radiographs or MRI if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Progressive eccentric or heavy slow-resistance calf loading",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Relative rest, activity modification and heel raise for insertional disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Shockwave therapy for refractory cases; avoid intratendinous steroid",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most improve over three to six months; surgery only after failed conservative care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

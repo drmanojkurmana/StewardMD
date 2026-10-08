@@ -148,5 +148,298 @@
       "caption": "Overview comparison matrix for cervical dystonia (spasmodic torticollis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cervical_dystonia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment of the movement pattern and sensory trick",
+          "cells": [
+            {
+              "text": "The sensory trick (geste antagoniste) characteristically reduces the abnormal posture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and cervical spine",
+          "cells": [
+            {
+              "text": "Where a secondary cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Copper studies",
+          "cells": [
+            {
+              "text": "Excludes Wilson's disease in younger patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Where features of an inherited dystonia are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electromyography",
+          "cells": [
+            {
+              "text": "Identifies the muscles involved and guides treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cervical_dystonia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Botulinum toxin",
+          "cells": [
+            {
+              "text": "Injection into overactive muscles such as the sternocleidomastoid, guided by electromyography"
+            },
+            {
+              "text": "First-line, repeatable treatment of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral adjuncts",
+          "cells": [
+            {
+              "text": "Anticholinergics, benzodiazepines and baclofen"
+            },
+            {
+              "text": "Adjunct agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and physiotherapy",
+          "cells": [
+            {
+              "text": "Analgesia and physiotherapy for neck pain; teach the sensory trick"
+            },
+            {
+              "text": "Neck pain is often the most disabling feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep brain stimulation",
+          "cells": [
+            {
+              "text": "Globus pallidus internus stimulation"
+            },
+            {
+              "text": "Refractory, disabling disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary cause review",
+          "cells": [
+            {
+              "text": "Review dopamine-blocking drugs; copper studies in younger patients"
+            },
+            {
+              "text": "Exclude secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Where an inherited dystonia is identified"
+            },
+            {
+              "text": "Inherited dystonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist and rehabilitation",
+          "cells": [
+            {
+              "text": "Movement disorders neurologist and multidisciplinary rehabilitation"
+            },
+            {
+              "text": "Multidisciplinary support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cervical_dystonia-dx-mgmt",
+      "title": "Diagnosis and management of Cervical dystonia (spasmodic torticollis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cervical dystonia: involuntary head turning or tilt with neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fixed posture from birth, rapid spread, myelopathy, Wilson features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: assess for structural, congenital or Wilson disease causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Movement pattern and sensory trick assessment; EMG; copper studies if young",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Idiopathic pattern with secondary causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Botulinum toxin into overactive muscles, guided by electromyography",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check drug-induced dystonia, torticollis and atlantoaxial subluxation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Review and withdraw dopamine-blocking drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral adjuncts: anticholinergics, benzodiazepines or baclofen",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Analgesia, physiotherapy and sensory trick training for neck pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but does not shorten life; botulinum toxin gives repeatable benefit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,327 @@
       "caption": "Overview comparison matrix for bartholin gland cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology textbook and vulval surgery guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bartholin_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical inspection and palpation for fluctuance",
+          "cells": [
+            {
+              "text": "Characterises the swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swab of purulent discharge including STI screening",
+          "cells": [
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy or excision histology of solid or atypical lesions",
+          "cells": [
+            {
+              "text": "Excludes carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic or vulval ultrasound if uncertain",
+          "cells": [
+            {
+              "text": "Anatomy or diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes and immunosuppression assessment",
+          "cells": [
+            {
+              "text": "Recurrent abscess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartholin_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bartholin gland abscess",
+          "cells": [
+            {
+              "text": "Infection and fluctuance on examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bartholin gland carcinoma",
+          "cells": [
+            {
+              "text": "Solid or irregular mass; excluded by histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartholin_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation with sitz baths",
+          "cells": [
+            {
+              "text": "Small asymptomatic cysts may drain spontaneously"
+            },
+            {
+              "text": "Small asymptomatic cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marsupialisation or Word catheter",
+          "cells": [
+            {
+              "text": "Lasting drainage tract for symptomatic cysts"
+            },
+            {
+              "text": "Symptomatic cyst"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid simple incision and drainage alone",
+          "cells": [
+            {
+              "text": "Tends to recur as the duct reseals"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary infection",
+          "cells": [
+            {
+              "text": "Swab and treat; screen for sexually transmitted organisms where relevant"
+            },
+            {
+              "text": "Secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gland excision",
+          "cells": [
+            {
+              "text": "For recurrent cysts resistant to fistulising procedures"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Biopsy or excision of solid, atypical or recurrent lesions"
+            },
+            {
+              "text": "Older women"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes and immunosuppression assessment",
+          "cells": [
+            {
+              "text": "In recurrent disease"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bartholin_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Bartholin gland cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft, usually painless swelling at the posterior labium majus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Solid mass in a woman over forty or spreading cellulitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy for solid or irregular mass; sepsis review for cellulitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination, discharge swab with STI screen, histology, ultrasound if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fluctuant cyst or abscess with carcinoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Marsupialisation or Word catheter to create a lasting drainage tract",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and biopsy the lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observation with sitz baths for small asymptomatic cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid simple incision and drainage alone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gland excision for recurrent cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Assess diabetes and immune status in recurrent disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

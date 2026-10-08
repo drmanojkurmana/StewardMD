@@ -167,5 +167,522 @@
       "caption": "Overview comparison matrix for hemolytic anemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Autoimmune Hemolytic Anemia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/anemias-caused-by-hemolysis/autoimmune-hemolytic-anemia"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 106-6",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 106-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hemolytic_anemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory picture of haemolysis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Reticulocytes",
+          "cells": [
+            {
+              "text": "Raised percentage and absolute count"
+            },
+            {
+              "text": "{{hy:Key early clue, often neglected}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MCV and smear",
+          "cells": [
+            {
+              "text": "Raised MCV, macrocytes, polychromasia"
+            },
+            {
+              "text": "Reticulocytosis, not megaloblastic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unconjugated bilirubin and AST",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Mainly extravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Up to about 10 times normal",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "Marked rise points to intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haptoglobin",
+          "cells": [
+            {
+              "text": "Low to absent"
+            },
+            {
+              "text": "Binds free haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine",
+          "cells": [
+            {
+              "text": "Haemoglobinuria, haemosiderinuria"
+            },
+            {
+              "text": "Intravascular haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "IgG with or without C3 in warm AIHA; C3 alone in cold agglutinin disease"
+            },
+            {
+              "text": "Positive broad DAT is almost diagnostic of AIHA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Smear morphology",
+          "cells": [
+            {
+              "text": "Schistocytes (MAHA), spherocytes (AIHA, spherocytosis), bite cells (G6PD)"
+            },
+            {
+              "text": "Schistocytes mean urgent TTP, HUS, DIC work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk AIHA",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Haemoglobin below 6 g/dL, renal failure, infection, Evans syndrome",
+              "op": "<",
+              "value": 6
+            },
+            {
+              "text": "Warm AIHA mortality about 5 to 10%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "G6PD screening tests can be falsely normal right after a haemolytic attack; use a quantitative assay."
+    },
+    {
+      "id": "hemolytic_anemia-ddx",
+      "kind": "ddx",
+      "title": "Causes of predominantly intravascular haemolysis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Tempo and feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "ABO-mismatched transfusion",
+          "cells": [
+            {
+              "text": "Abrupt"
+            },
+            {
+              "text": "Repeat cross-match"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxysmal nocturnal haemoglobinuria",
+          "cells": [
+            {
+              "text": "Chronic with acute flares"
+            },
+            {
+              "text": "Flow cytometry for CD59-negative red cells"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paroxysmal cold haemoglobinuria",
+          "cells": [
+            {
+              "text": "Acute"
+            },
+            {
+              "text": "Donath-Landsteiner antibody"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Septicaemia (C. perfringens)",
+          "cells": [
+            {
+              "text": "Acute, life-threatening, exotoxin-driven"
+            },
+            {
+              "text": "Blood cultures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Microangiopathic haemolysis",
+          "cells": [
+            {
+              "text": "Acute or chronic; TTP, HUS, DIC, prosthetic valve"
+            },
+            {
+              "text": "Blood smear for schistocytes"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "March haemoglobinuria",
+          "cells": [
+            {
+              "text": "After prolonged marching or running"
+            },
+            {
+              "text": "History"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Favism (G6PD deficiency)",
+          "cells": [
+            {
+              "text": "Acute after fava beans or oxidant drugs such as primaquine, dapsone, nitrofurantoin"
+            },
+            {
+              "text": "Quantitative G6PD assay"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Warm AIHA",
+          "cells": [
+            {
+              "text": "Extravascular, spherocytes"
+            },
+            {
+              "text": "DAT positive for IgG"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "hemolytic_anemia-treatment",
+      "kind": "treatment",
+      "title": "Treating haemolytic anaemia by mechanism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "Warm AIHA, first line"
+            },
+            {
+              "text": "{{hy:1 mg/kg orally daily, slow taper once stable; two-thirds to 80% respond}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Severe, relapsed or steroid-refractory warm AIHA; primary cold agglutinin disease"
+            },
+            {
+              "text": "375 mg/m2 IV weekly for 4 weeks, or fixed-dose regimens"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Splenectomy",
+          "cells": [
+            {
+              "text": "Refractory warm AIHA; severe hereditary spherocytosis"
+            },
+            {
+              "text": "Sustained response in one-third to one-half of warm AIHA; no value in cold agglutinin disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cold agglutinin disease measures",
+          "cells": [
+            {
+              "text": "Cold agglutinin disease"
+            },
+            {
+              "text": "Avoid cold, warm blood; sutimlimab raises haemoglobin; steroids should not be used"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transfusion",
+          "cells": [
+            {
+              "text": "Symptomatic, rapidly falling severe anaemia"
+            },
+            {
+              "text": "Do not withhold for lack of compatible units"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Remove trigger",
+          "cells": [
+            {
+              "text": "G6PD deficiency, drug-induced, infection"
+            },
+            {
+              "text": "Stop oxidant drugs; avoid definite-risk drugs listed in Table 106-5"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Chronic haemolysis"
+            },
+            {
+              "text": "Meets increased erythropoietic demand"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microangiopathic causes",
+          "cells": [
+            {
+              "text": "TTP or atypical HUS"
+            },
+            {
+              "text": "Plasma exchange for TTP; complement inhibition for atypical HUS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hemolytic_anemia-dx-mgmt",
+      "title": "Diagnosis and management of hemolytic anemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anaemia with jaundice, dark urine or splenomegaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Reticulocytes, bilirubin, LDH, haptoglobin, smear",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Haemolysis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Investigate other anaemia causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Schistocytes on smear?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Urgent MAHA work-up: TTP, HUS, DIC",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Direct antiglobulin test",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "DAT positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "IgG (warm) or C3 only (cold)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Warm AIHA: prednisone, add rituximab if severe",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cold agglutinin disease: avoid cold, rituximab",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "G6PD assay, flow for PNH, membrane tests, history",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Treat cause, folic acid, transfuse if severe",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "IgG"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "C3 only"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

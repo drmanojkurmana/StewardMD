@@ -150,5 +150,89 @@
       "caption": "Overview comparison matrix for bipolar disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bipolar_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic elements in bipolar disorder",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Manic episode duration", "cells": [{"text": "A distinct sustained period of about a week, or any duration requiring hospitalisation"}], "cite": "c1"},
+        {"parameter": "Bipolar I versus bipolar II", "cells": [{"text": "Bipolar I needs at least one full manic episode; bipolar II has hypomania with major depression"}], "cite": "c1"},
+        {"parameter": "Collateral history", "cells": [{"text": "Identifies prior manic or hypomanic episodes"}], "cite": "c1"},
+        {"parameter": "Thyroid, renal function and pregnancy testing", "cells": [{"text": "Before mood stabiliser use"}], "cite": "c1"},
+        {"parameter": "Serum drug levels for lithium", "cells": [{"text": "Monitored because of the narrow therapeutic index"}], "cite": "c1"},
+        {"parameter": "Substance use screening", "cells": [{"text": "Substance-induced mood or psychotic disorder"}], "cite": "c1"},
+        {"parameter": "Structured mood charting", "cells": [{"text": "Episode pattern over time"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bipolar_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike mood disorders",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Major depressive disorder (unipolar)", "cells": [{"text": "A past episode of mania or hypomania makes it bipolar; a history of highs is essential"}], "cite": "c1"},
+        {"parameter": "Substance-induced mood or psychotic disorder", "cells": [{"text": "Separated by substance use screening"}], "cite": "c1"},
+        {"parameter": "Hyperthyroidism or steroid-induced mood elevation", "cells": [{"text": "Excluded by thyroid and medication history"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bipolar_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options in bipolar disorder",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Mood stabilisers and antipsychotics", "cells": [{"text": "Lithium or certain anticonvulsants, with atypical antipsychotics, for acute mania and maintenance"}, {"text": "Principles only; no dosing given"}], "cite": "c1"},
+        {"parameter": "Bipolar depression", "cells": [{"text": "Mood-stabiliser or antipsychotic-based regimens; avoid antidepressant monotherapy"}, {"text": "Monotherapy can precipitate mania or rapid cycling"}], "cite": "c1"},
+        {"parameter": "Psychoeducation and routine", "cells": [{"text": "Psychoeducation, structured psychotherapy and regular sleep and daily routine"}, {"text": "Central to relapse prevention"}], "cite": "c1"},
+        {"parameter": "Substance misuse", "cells": [{"text": "Screen for and address substance misuse"}, {"text": "A common episode precipitant"}], "cite": "c1"},
+        {"parameter": "Lithium monitoring", "cells": [{"text": "Serum levels with renal and thyroid function"}, {"text": "Narrow therapeutic index"}], "cite": "c1"},
+        {"parameter": "Admission", "cells": [{"text": "Severe mania, psychosis or high suicide risk"}, {"text": "Lithium has an anti-suicidal effect in maintenance"}], "cite": "c1"},
+        {"parameter": "Relapse-prevention planning", "cells": [{"text": "Mood charting and coordinated psychiatric follow-up"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bipolar_disorder-dx-mgmt",
+      "title": "Diagnosis and management of bipolar disorder",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Episode of elevated, expansive or irritable mood, or depression with a history of highs", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: suicidal ideation, psychosis, dangerous behaviour or lithium toxicity signs?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent psychiatric assessment; admission if risk is severe", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Collateral history for past hypomania; screen for substances and medical causes", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Thyroid, renal function and pregnancy testing before mood stabilisers", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Prior manic or hypomanic episode established?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Mood stabiliser or antipsychotic; avoid antidepressant monotherapy", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider unipolar depression, substance-induced or medical causes", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Psychoeducation, sleep regularity and lithium level monitoring if used", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Lifelong recurrent illness; relapse prevention improves outcome", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

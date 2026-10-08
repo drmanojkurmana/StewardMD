@@ -144,5 +144,507 @@
       "caption": "Overview comparison matrix for bladder & urinary tract cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Bladder Cancer",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/genitourinary-cancer/bladder-cancer",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bladder_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and staging of urothelial cancer",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Painless haematuria",
+          "cells": [
+            {
+              "text": "{{hy:Commonest first sign; in men almost always abnormal}}"
+            },
+            {
+              "text": "Persistent haematuria after UTI treatment needs work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking history",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "90% of new cases are current or former smokers"
+            },
+            {
+              "text": "About one-third preventable by cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystoscopy with biopsy or TURBT",
+          "cells": [
+            {
+              "text": "Diagnosis and T stage"
+            },
+            {
+              "text": "Blue-light cystoscopy improves detection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine cytology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Detects about 50% of high-grade tumours"
+            },
+            {
+              "text": "Negative cytology does not exclude cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT urogram (MR if renal impairment)",
+          "cells": [
+            {
+              "text": "Upper tract and kidneys"
+            },
+            {
+              "text": "Ureteroscopy if upper tract suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urothelial histology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90%"
+            },
+            {
+              "text": "Squamous, adeno, small-cell 10% or less"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NMIBC (Tis, Ta, T1)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 75% at presentation"
+            },
+            {
+              "text": "Recurs often, rarely metastasises if low grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MIBC (T2 and above)",
+          "cells": [
+            {
+              "text": "Invades muscularis propria"
+            },
+            {
+              "text": "About 18% at presentation; 3% metastatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "5-year survival, stage I to II",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "70 to 90",
+              "range": [
+                70,
+                90
+              ]
+            },
+            {
+              "text": "Outcome tracks stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine molecular tests (FISH, NMP, BTA)",
+          "cells": [
+            {
+              "text": "Adjunct"
+            },
+            {
+              "text": "Mainly for recurrence; false positives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bladder_cancer-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of haematuria with suspected bladder cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary tract infection",
+          "cells": [
+            {
+              "text": "{{hy:Haematuria persisting after treatment still needs cystoscopy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Menstrual bleeding",
+          "cells": [
+            {
+              "text": "Women; cyclical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper tract urothelial cancer",
+          "cells": [
+            {
+              "text": "Flank pain, normal bladder; CT urogram or ureteroscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCG cystitis",
+          "cells": [
+            {
+              "text": "Dysuria and frequency after intravesical BCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Schistosomiasis-related squamous carcinoma",
+          "cells": [
+            {
+              "text": "Endemic exposure; squamous histology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Other haematuria causes (stones, renal cell cancer, glomerular disease) were not covered in the sources opened."
+    },
+    {
+      "id": "bladder_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treatment of bladder cancer by stage",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete TURBT",
+          "cells": [
+            {
+              "text": "NMIBC"
+            },
+            {
+              "text": "Repeat resection in 4 to 8 weeks if more invasive than expected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single postoperative intravesical mitomycin C or gemcitabine",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Within 24 h of TURBT",
+              "op": "<=",
+              "value": 24
+            },
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intravesical BCG",
+          "cells": [
+            {
+              "text": "{{hy:High-grade NMIBC or carcinoma in situ}}"
+            },
+            {
+              "text": "Weekly to monthly over 1 to 3 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BCG-unresponsive options",
+          "cells": [
+            {
+              "text": "Recurrence or intolerance"
+            },
+            {
+              "text": "Intravesical gemcitabine-docetaxel, nadofaragene, IV pembrolizumab, or cystectomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neoadjuvant cisplatin chemotherapy plus radical cystectomy",
+          "cells": [
+            {
+              "text": "MIBC, cisplatin eligible"
+            },
+            {
+              "text": "Partial cystectomy possible in under 5%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjuvant nivolumab",
+          "cells": [
+            {
+              "text": "Residual disease after neoadjuvant chemo or cisplatin-ineligible"
+            },
+            {
+              "text": "After cystectomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trimodal bladder preservation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Selected MIBC"
+            },
+            {
+              "text": "5-year survival 36 to 74%; 10 to 20% need salvage cystectomy",
+              "range": [
+                36,
+                74
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Enfortumab vedotin plus pembrolizumab, or cisplatin-based chemo",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "Avelumab maintenance after chemo; erdafitinib for FGFR2 or 3 alterations"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "All stages"
+            },
+            {
+              "text": "Reduces recurrence and new tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance cystoscopy and cytology",
+          "cells": [
+            {
+              "text": "After treatment"
+            },
+            {
+              "text": "Every 3 to 6 months after invasive cancer"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bladder_cancer-dx-mgmt",
+      "title": "Diagnosis and management of bladder cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless haematuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urine culture; treat UTI if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Cystoscopy, urine cytology, CT urogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Bladder tumour seen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Evaluate upper tract or other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "TURBT for histology and T stage",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Muscle invasive (T2 or above)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "High grade or carcinoma in situ?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Single intravesical chemo; cystoscopic surveillance",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Intravesical BCG; cystectomy if BCG fails",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Metastatic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Neoadjuvant cisplatin then cystectomy, or trimodal therapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Enfortumab vedotin plus pembrolizumab or platinum chemo",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

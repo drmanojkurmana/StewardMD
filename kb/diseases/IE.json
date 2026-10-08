@@ -314,5 +314,565 @@
       "caption": "Diagnostic and clinical overview matrix for infective endocarditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Fowler et al, 2023 Duke-ISCVID Criteria for Infective Endocarditis, Clin Infect Dis 2023",
+      "url": "https://academic.oup.com/cid/article/77/4/518/7151107",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Infective Endocarditis, 2025",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/endocarditis/infective-endocarditis",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 135-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 146-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c6",
+      "label": "Tables PDF, Table 124-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "IE-diagnostic",
+      "kind": "diagnostic",
+      "title": "2023 Duke-ISCVID criteria and key tests for infective endocarditis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Major: blood cultures, typical organism",
+          "unit": "sets",
+          "cells": [
+            {
+              "text": ">=2 separate sets with S. aureus, S. lugdunensis, E. faecalis, most streptococci, HACEK and others",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Major microbiologic criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Major: blood cultures, non-typical organism",
+          "unit": "sets",
+          "cells": [
+            {
+              "text": ">=3 separate sets",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Major microbiologic criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Major: Coxiella burnetii",
+          "cells": [
+            {
+              "text": "Phase I IgG titre >1:800 or one positive blood culture"
+            },
+            {
+              "text": "Major microbiologic criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Major: imaging",
+          "cells": [
+            {
+              "text": "Vegetation, perforation, abscess, pseudoaneurysm, fistula, new significant regurgitation, new prosthetic dehiscence, or abnormal FDG PET/CT"
+            },
+            {
+              "text": "Echo, cardiac CT or PET/CT; worsening of old regurgitation does not count"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Major: surgical",
+          "cells": [
+            {
+              "text": "IE seen at heart surgery"
+            },
+            {
+              "text": "When no major imaging criterion or later confirmation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: fever",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">38.0",
+              "op": ">",
+              "value": 38.0
+            },
+            {
+              "text": "Minor criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: predisposition",
+          "cells": [
+            {
+              "text": "Prior IE, prosthetic valve, valve disease, congenital heart disease, CIED, HOCM, injection drug use"
+            },
+            {
+              "text": "Minor criterion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor: vascular and immunologic",
+          "cells": [
+            {
+              "text": "Emboli, septic infarcts, mycotic aneurysm, Janeway lesions; Osler nodes, Roth spots, GN, positive RF"
+            },
+            {
+              "text": "Minor criteria; stigmata seen in only 2 to 15%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definite IE (clinical)",
+          "cells": [
+            {
+              "text": "{{hy:2 major, or 1 major plus 3 minor, or 5 minor}}"
+            },
+            {
+              "text": "Or pathologic proof"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Possible IE",
+          "cells": [
+            {
+              "text": "1 major plus 1 minor, or 3 minor"
+            },
+            {
+              "text": "Continue evaluation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood culture technique",
+          "unit": "mL per bottle",
+          "cells": [
+            {
+              "text": "At least 2, ideally 3 sets from separate venipunctures, 8 to 10 mL per bottle",
+              "range": [
+                8,
+                10
+              ]
+            },
+            {
+              "text": "At least one positive in 90% without prior antibiotics"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "TTE sensitivity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "50 to 90",
+              "range": [
+                50,
+                90
+              ]
+            },
+            {
+              "text": "Initial test; specificity >90%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "TEE sensitivity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "90 to 100",
+              "range": [
+                90,
+                100
+              ]
+            },
+            {
+              "text": "Use for prosthetic valve, nondiagnostic TTE, or complications"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "IE-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic infective endocarditis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-bacterial thrombotic (marantic) endocarditis",
+          "cells": [
+            {
+              "text": "Sterile platelet-fibrin vegetations; malignancy or chronic wasting"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Atrial myxoma",
+          "cells": [
+            {
+              "text": "Embolic phenomena with a cardiac mass and sterile cultures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vasculitis",
+          "cells": [
+            {
+              "text": "Systemic and immunologic features without bacteraemia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Culture-negative IE",
+          "cells": [
+            {
+              "text": "Prior antibiotics or fastidious organisms (Coxiella, Bartonella, Brucella, Tropheryma)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "S. aureus bacteraemia without IE",
+          "cells": [
+            {
+              "text": "IE present in 8 to 14%; echo routinely, TEE if persistent bacteraemia or device"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "IE-treatment",
+      "kind": "treatment",
+      "title": "Antibiotic and surgical treatment of infective endocarditis (adults, IV)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "Vancomycin plus ceftriaxone",
+          "cells": [
+            {
+              "text": "Typical US empiric regimen after cultures"
+            },
+            {
+              "text": "Cover staphylococci and streptococci; adjust for local MRSA"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Penicillin G or ceftriaxone",
+          "cells": [
+            {
+              "text": "Penicillin-susceptible streptococci, native valve"
+            },
+            {
+              "text": "Penicillin G 12 to 18 million units/day or ceftriaxone 2 g daily for 4 weeks; 2 weeks if gentamicin 3 mg/kg daily added"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ampicillin plus ceftriaxone",
+          "cells": [
+            {
+              "text": "Enterococci"
+            },
+            {
+              "text": "Ampicillin 2 g q4h plus ceftriaxone 2 g q12h for 6 weeks"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nafcillin or oxacillin",
+          "cells": [
+            {
+              "text": "MSSA, native valve"
+            },
+            {
+              "text": "2 g q4h for 6 weeks; cefazolin 2 g q8h if no penicillin anaphylaxis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vancomycin",
+          "cells": [
+            {
+              "text": "MRSA or susceptibility unknown"
+            },
+            {
+              "text": "15 to 20 mg/kg q8 to 12h; daptomycin 6 mg/kg q24h alternative"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Add gentamicin and rifampin",
+          "cells": [
+            {
+              "text": "Staphylococcal prosthetic valve IE"
+            },
+            {
+              "text": "Gentamicin 1 mg/kg q8h for 2 weeks plus rifampin 300 mg q8h for 6 to 8 weeks"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ceftriaxone",
+          "cells": [
+            {
+              "text": "HACEK organisms"
+            },
+            {
+              "text": "2 g/d; ampicillin/sulbactam or fluoroquinolone alternatives; 4 weeks native, 6 weeks prosthetic"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Cardiac surgery",
+          "cells": [
+            {
+              "text": "{{hy:Heart failure from valve dysfunction, uncontrolled infection, abscess, heart block, vegetation >10 mm with emboli}}"
+            },
+            {
+              "text": "May be needed after only 24 to 72 h of antibiotics"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Device removal",
+          "cells": [
+            {
+              "text": "Cardiac device infection"
+            },
+            {
+              "text": "Remove generator and all leads"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prophylaxis: amoxicillin",
+          "cells": [
+            {
+              "text": "High-risk cardiac lesion before a procedure"
+            },
+            {
+              "text": "2 g PO 1 h before; clindamycin 600 mg or azithromycin 500 mg if penicillin allergic"
+            }
+          ],
+          "cite": "c6"
+        }
+      ],
+      "footnote": "Cefazolin may be hydrolysed by type A beta-lactamase and lose efficacy in endocarditis (Tables PDF, Table 135-3)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "IE-dx-mgmt",
+      "title": "Diagnosis and management of infective endocarditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with murmur, emboli, prosthetic valve, device or drug injection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "2 to 3 blood culture sets from separate venipunctures before antibiotics",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Septic or haemodynamically unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Start empiric vancomycin plus ceftriaxone after cultures",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Withhold antibiotics until cultures are back if stable subacute",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "TTE; TEE if prosthetic valve, nondiagnostic TTE or complications",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Duke-ISCVID: 2 major, 1 major + 3 minor, or 5 minor?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Possible or rejected IE: seek alternative diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Organism-directed IV therapy for 4 to 6 weeks",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Heart failure, abscess, uncontrolled infection or large emboligenic vegetation?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early cardiac surgery; remove infected device",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete antibiotics; repeat cultures and echo as needed",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

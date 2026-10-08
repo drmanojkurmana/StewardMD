@@ -146,5 +146,286 @@
       "caption": "Overview comparison matrix for central sleep apnoea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_sleep_apnea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Attended polysomnography",
+          "cells": [
+            {
+              "text": "Characterises and quantifies central versus obstructive events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac assessment",
+          "cells": [
+            {
+              "text": "When heart failure is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Daytime arterial or capillary blood gas",
+          "cells": [
+            {
+              "text": "Identifies chronic hypercapnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain and brainstem imaging",
+          "cells": [
+            {
+              "text": "If a central neurological cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of opioid and sedative medication",
+          "cells": [
+            {
+              "text": "A reversible contributor"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_sleep_apnea-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Optimise guideline-directed heart failure therapy"
+            },
+            {
+              "text": "Reduces Cheyne-Stokes central events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reduce opioids and sedatives",
+          "cells": [
+            {
+              "text": "Review and reduce opioids and sedatives"
+            },
+            {
+              "text": "Contribute to hypercapnic central apnoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal supplemental oxygen",
+          "cells": [
+            {
+              "text": "Oxygen for non-hypercapnic (high loop gain) forms"
+            },
+            {
+              "text": "Stabilises ventilatory control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adaptive servo-ventilation",
+          "cells": [
+            {
+              "text": "In selected patients"
+            },
+            {
+              "text": "Avoid in heart failure with reduced ejection fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilevel ventilation or CPAP",
+          "cells": [
+            {
+              "text": "Non-invasive bilevel ventilation for hypoventilation; CPAP where obstructive events coexist"
+            },
+            {
+              "text": "Depends on the form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep medicine review",
+          "cells": [
+            {
+              "text": "Refer to sleep medicine; repeat polysomnography to confirm response"
+            },
+            {
+              "text": "Confirms treatment response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_sleep_apnea-dx-mgmt",
+      "title": "Diagnosis and management of Central sleep apnoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central sleep apnoea: pauses with absent effort, Cheyne-Stokes breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (Cheyne-Stokes, focal neurology, opioid-related events, hypercapnia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cardiac evaluation for heart failure; neurology for brainstem lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Attended polysomnography, echocardiography and daytime blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Central events confirmed on polysomnography, separated from obstructive events?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Optimise guideline-directed heart failure therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check obstructive sleep apnoea, mixed apnoea and obesity hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reduce opioids and sedatives that drive hypercapnic apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nocturnal oxygen or adaptive servo-ventilation, avoiding it in reduced ejection fraction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bilevel ventilation for hypoventilation; CPAP where obstructive events coexist",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis set by cause; heart-failure-related central apnoea marks poorer outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

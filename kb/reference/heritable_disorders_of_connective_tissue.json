@@ -172,5 +172,471 @@
       "caption": "Overview comparison matrix for heritable disorders of connective tissue."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Marfan Syndrome",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pediatrics/connective-tissue-disorders-in-children/marfan-syndrome"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heritable_disorders_of_connective_tissue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic anchors in heritable connective tissue disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Criterion",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Marfan: aortic root Z-score",
+          "unit": "Z",
+          "cells": [
+            {
+              "text": "2 or more (no family history)",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "With family history: 2 or more over age 20, 3 or more under 20"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marfan: systemic score",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "7 points or more is positive",
+              "op": ">=",
+              "value": 7
+            },
+            {
+              "text": "Revised Ghent nosology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marfan: revised Ghent combinations",
+          "cells": [
+            {
+              "text": "Aortic root dilation plus FBN1, ectopia lentis, or systemic score 7 or more; or FBN1 plus ectopia lentis; or family history plus one cardinal feature"
+            },
+            {
+              "text": "{{hy:Aortic root dilation and ectopia lentis are cardinal}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Marfan: FBN1 mutation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Found in about 95%",
+              "op": "=",
+              "value": 95
+            },
+            {
+              "text": "Some patients are FBN1-negative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ectopia lentis in Marfan",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 60%",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Slit-lamp examination required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteogenesis imperfecta genes",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "COL1A1 or COL1A2 in 80 to 85%",
+              "range": [
+                80,
+                85
+              ]
+            },
+            {
+              "text": "Blue sclerae, dentinogenesis imperfecta, hearing loss; Sillence types I to IV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OI bone density",
+          "cells": [
+            {
+              "text": "DXA low"
+            },
+            {
+              "text": "Bone is actually hypermineralised and brittle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ehlers-Danlos syndromes",
+          "cells": [
+            {
+              "text": "13 clinical types, about 20 genes"
+            },
+            {
+              "text": "Hypermobile EDS has no known gene: clinical diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Classic EDS",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "COL5A1 or COL5A2 in about 90%",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Hyperextensible skin, atrophic scars, hypermobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular EDS",
+          "cells": [
+            {
+              "text": "COL3A1; thin translucent skin"
+            },
+            {
+              "text": "Arterial, colonic and uterine rupture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heritable_disorders_of_connective_tissue-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes of heritable connective tissue disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Homocystinuria",
+          "cells": [
+            {
+              "text": "Marfanoid habitus with lens dislocation (typically downward)"
+            },
+            {
+              "text": "{{hy:Urine homocystine or plasma amino acids}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loeys-Dietz syndrome",
+          "cells": [
+            {
+              "text": "Arterial tortuosity, aneurysms beyond the root, hypertelorism, bifid uvula; no ectopia lentis"
+            },
+            {
+              "text": "TGFBR1/2, SMAD3, TGFB2/3 gene panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury",
+          "cells": [
+            {
+              "text": "Infant fractures without blue sclerae or Wormian bones"
+            },
+            {
+              "text": "Skeletal survey, collagen gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rickets or hypophosphatasia",
+          "cells": [
+            {
+              "text": "Metabolic bone disease with fractures or deformity"
+            },
+            {
+              "text": "Calcium, phosphate, alkaline phosphatase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporosis of other cause",
+          "cells": [
+            {
+              "text": "Can mimic mild adult OI"
+            },
+            {
+              "text": "Secondary osteoporosis work-up, gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-syndromic familial thoracic aortic aneurysm",
+          "cells": [
+            {
+              "text": "Aortic disease without systemic features"
+            },
+            {
+              "text": "HTAD gene panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heritable_disorders_of_connective_tissue-treatment",
+      "kind": "treatment",
+      "title": "Managing heritable connective tissue disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-blocker and/or ARB (losartan)",
+          "cells": [
+            {
+              "text": "Marfan or Loeys-Dietz with aortic dilation"
+            },
+            {
+              "text": "Maximally tolerated dose in adults; children start when Z-score 2 or more (under 16) or root 3.5 cm or more (16 and over)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prophylactic aortic root replacement",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "{{hy:Adult root above 5.0 cm, or above 4.5 cm with high-risk features}}",
+              "op": ">",
+              "value": 5.0
+            },
+            {
+              "text": "Tissues friable; operate in experienced centres"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pregnancy planning",
+          "cells": [
+            {
+              "text": "Marfan women"
+            },
+            {
+              "text": "Vaginal delivery if root under 4.0 cm; caesarean if above 4.5 cm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Activity advice",
+          "cells": [
+            {
+              "text": "Aortic dilation"
+            },
+            {
+              "text": "Avoid peak-intensity, heavy Valsalva and contact sport"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bisphosphonates and rodding",
+          "cells": [
+            {
+              "text": "Osteogenesis imperfecta"
+            },
+            {
+              "text": "Reduce fractures; intramedullary rods for deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Joint and skin protection",
+          "cells": [
+            {
+              "text": "Ehlers-Danlos syndromes"
+            },
+            {
+              "text": "Physiotherapy, bracing, tension-free wound closure, delayed suture removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "All types"
+            },
+            {
+              "text": "Serial echocardiography, eye, hearing and bone checks; genetic counselling and cascade screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heritable_disorders_of_connective_tissue-dx-mgmt",
+      "title": "Diagnosis and management of heritable connective tissue disorders",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tall habitus, lens dislocation, aortic dilation, fractures or hypermobility",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Predominant feature?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Echo for aortic Z-score, slit-lamp exam, systemic score",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exclude homocystinuria with urine homocystine",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Revised Ghent criteria met?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Marfan: beta-blocker or ARB, yearly aortic imaging",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Root replacement when above 5.0 cm (4.5 cm high risk)",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Gene panel for Loeys-Dietz or other HTAD",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "OI: COL1A1/2 testing, bisphosphonates, orthopaedic care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "EDS: classify type; vascular EDS needs rupture precautions",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Aortic or eye"
+        },
+        {
+          "from": "n2",
+          "to": "n9",
+          "label": "Fractures"
+        },
+        {
+          "from": "n2",
+          "to": "n10",
+          "label": "Skin or joints"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,296 @@
       "caption": "Overview comparison matrix for congenital absence of pericardium."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_absence_of_pericardium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Pericardial absence and lung interposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG-gated cardiac CT",
+          "cells": [
+            {
+              "text": "Defect delineation and chamber herniation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiography",
+          "cells": [
+            {
+              "text": "Leftward cardiac shift and lung interposition signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Rightward axis, poor R-wave progression, incomplete RBBB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated anomalies",
+          "cells": [
+            {
+              "text": "Bronchogenic cysts, congenital heart disease, pulmonary sequestration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_absence_of_pericardium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrial septal defect or other left-to-right shunt",
+          "cells": [
+            {
+              "text": "Radiographic pulmonary appearance can mimic it; displaced silhouette and RV prominence mislead"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmogenic right ventricular cardiomyopathy",
+          "cells": [
+            {
+              "text": "Apparent RV enlargement can suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_absence_of_pericardium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation of complete or asymptomatic defects",
+          "cells": [
+            {
+              "text": "Haemodynamics generally preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical correction of partial defects",
+          "cells": [
+            {
+              "text": "Pericardioplasty, primary closure or extension, to prevent herniation and strangulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom-directed treatment",
+          "cells": [
+            {
+              "text": "Positional atypical chest pain and palpitations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac imaging surveillance",
+          "cells": [
+            {
+              "text": "MRI or CT to characterise the defect and monitor herniation risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent surgery",
+          "cells": [
+            {
+              "text": "If chamber incarceration or strangulation suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Bronchogenic cysts, congenital heart disease and pulmonary sequestration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_absence_of_pericardium-dx-mgmt",
+      "title": "Diagnosis and management of congenital absence of pericardium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital absence of pericardium: displaced heart silhouette on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (positional pain with syncope, new arrhythmia, abrupt severe pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac surgery review for chamber incarceration or strangulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cardiac MRI; ECG-gated CT; chest radiograph; 12-lead ECG; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show pericardial absence with lung interposition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ASD, ARVC or other mediastinal or cardiac causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe complete or asymptomatic defects; haemodynamics preserved",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Surgical correction of partial defects to prevent herniation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptom-directed treatment for positional chest pain and palpitations",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cardiac imaging surveillance and screening for associated anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete absence is usually benign; partial defects have less predictable course",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

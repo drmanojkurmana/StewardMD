@@ -149,5 +149,312 @@
       "caption": "Overview comparison matrix for citrate toxicity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "AABB Technical Manual",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "citrate_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ionised calcium during rapid or massive transfusion",
+          "cells": [
+            {
+              "text": "Guides treatment; citrate binds the ionised fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum magnesium",
+          "cells": [
+            {
+              "text": "Hypomagnesaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG with corrected QT interval and rhythm",
+          "cells": [
+            {
+              "text": "Prolonged QT or arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Metabolic alkalosis after large citrate loads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total calcium and albumin",
+          "cells": [
+            {
+              "text": "Context only"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrate_toxicity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypocalcaemia from other causes, such as hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Independent calcium disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypomagnesaemia of independent cause",
+          "cells": [
+            {
+              "text": "Low magnesium without a citrate load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemolytic transfusion reaction",
+          "cells": [
+            {
+              "text": "Transfusion reaction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrate_toxicity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Slow or interrupt the transfusion or apheresis",
+          "cells": [
+            {
+              "text": "Allows hepatic citrate metabolism to catch up"
+            },
+            {
+              "text": "Immediate step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous calcium gluconate or calcium chloride",
+          "cells": [
+            {
+              "text": "Titrated to the ionised calcium"
+            },
+            {
+              "text": "Guided by ionised calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium replacement",
+          "cells": [
+            {
+              "text": "If hypomagnesaemia is present"
+            },
+            {
+              "text": "If deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warming and a controlled infusion rate",
+          "cells": [
+            {
+              "text": "Neonates, hepatic impairment, hypothermia, poor perfusion"
+            },
+            {
+              "text": "Prevention in high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous cardiac monitoring with corrected QT",
+          "cells": [
+            {
+              "text": "During high-volume transfusion or apheresis"
+            },
+            {
+              "text": "Electrocardiographic monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "citrate_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Citrate toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected citrate toxicity: tingling or tetany during rapid or massive transfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tetany, prolonged QT, hypotension, seizures)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: stop infusion and treat arrhythmia or haemodynamic compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ionised calcium, magnesium, ECG with corrected QT and blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ionised hypocalcaemia from citrate load confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Slow or interrupt the transfusion or apheresis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check hypoparathyroidism, hypomagnesaemia and haemolytic reaction",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravenous calcium replacement titrated to ionised calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Magnesium replacement if hypomagnesaemia is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Warm and control infusion rate in neonates and hepatic impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continuous cardiac monitoring; watch for metabolic alkalosis after load",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

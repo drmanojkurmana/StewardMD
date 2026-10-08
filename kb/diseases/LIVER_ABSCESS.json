@@ -274,5 +274,437 @@
       "caption": "Diagnostic and clinical overview matrix for liver abscess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Kim et al, Maximal diameter of pyogenic liver abscess and prognosis, BMC Infect Dis 2021",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7879520",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 209-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "LIVER_ABSCESS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in pyogenic liver abscess",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Fever",
+          "cells": [
+            {
+              "text": "Most common presenting feature"
+            },
+            {
+              "text": "About half have no localising liver signs; may present as FUO in the elderly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkaline phosphatase",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Raised in about 70%",
+              "op": "=",
+              "value": 70
+            },
+            {
+              "text": "{{hy:Most reliable laboratory abnormality}}; bilirubin and transaminases often near normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Ultrasound, CT or MRI; more than one may be needed"
+            },
+            {
+              "text": "Most reliable diagnostic modality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abscess size",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Mean maximal diameter 5.4 in a 648-patient cohort",
+              "op": "=",
+              "value": 5.4
+            },
+            {
+              "text": "Larger diameter predicts longer stay and death"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Giant abscess",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">=10",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "In-hospital mortality 11.6% vs 1.4% for <5 cm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Culture yield",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 50.4%",
+              "op": "=",
+              "value": 50.4
+            },
+            {
+              "text": "K. pneumoniae 36.4%, E. coli 5.2% in Korean cohort"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Organism by source",
+          "cells": [
+            {
+              "text": "Biliary: enteric gram-negatives and enterococci; pelvic: mixed with B. fragilis; haematogenous: S. aureus or S. milleri group"
+            },
+            {
+              "text": "Guides empiric cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypervirulent K. pneumoniae",
+          "cells": [
+            {
+              "text": "Endophthalmitis, meningitis or septic lung nodules"
+            },
+            {
+              "text": "Look for metastatic spread urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amoebic serology",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in >95% of amoebic abscesses",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Separates amoebic from pyogenic abscess"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "LIVER_ABSCESS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pyogenic liver abscess",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Amoebic liver abscess",
+          "cells": [
+            {
+              "text": "Single right-lobe lesion, positive amoebic serology, jaundice rare, diarrhoea in under one-third"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candida liver abscess",
+          "cells": [
+            {
+              "text": "After chemotherapy fungaemia; appears as neutrophils recover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic abscess",
+          "cells": [
+            {
+              "text": "Usually linked to bacterial endocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatic actinomycosis",
+          "cells": [
+            {
+              "text": "Multiple hepatic abscesses, sometimes with a contiguous splenic lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "LIVER_ABSCESS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of liver abscess",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV antibiotics",
+          "cells": [
+            {
+              "text": "All pyogenic abscesses"
+            },
+            {
+              "text": "Cover organisms expected from the source; specific agents not stated in sources opened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percutaneous catheter drainage",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "{{hy:Abscess >=5 cm}}; drainage considered from >=3 cm if mainly cystic"
+            },
+            {
+              "text": "Catheter drainage beats needle aspiration at >=5 cm"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cautious drainage",
+          "cells": [
+            {
+              "text": "Giant abscess >10 cm"
+            },
+            {
+              "text": "Higher complication rate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotic duration",
+          "cells": [
+            {
+              "text": "Pyogenic abscess"
+            },
+            {
+              "text": "Typically 2 to 3 weeks IV then 1 to 2 months oral"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metronidazole",
+          "cells": [
+            {
+              "text": "Amoebic liver abscess"
+            },
+            {
+              "text": "750 mg tid PO or IV for 5 to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tinidazole",
+          "cells": [
+            {
+              "text": "Amoebic liver abscess, alternative"
+            },
+            {
+              "text": "2 g/d PO with food for 3 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Paromomycin",
+          "cells": [
+            {
+              "text": "Luminal clearance after amoebic tissue treatment"
+            },
+            {
+              "text": "30 mg/kg/d PO in 3 divided doses for 5 to 10 days; iodoquinol 650 mg tid for 20 days alternative"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Antibiotic duration is from the cited cohort's summary of usual practice, not a guideline; tailor to drainage and response."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "LIVER_ABSCESS-dx-mgmt",
+      "title": "Diagnosis and management of liver abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever with or without right upper quadrant pain; raised ALP",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Ultrasound or CT of liver; blood cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Liver abscess seen?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Search other causes of fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Amoebic serology positive, single right-lobe lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Metronidazole or tinidazole, then luminal paromomycin",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV antibiotics covering likely source organisms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Abscess >=5 cm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Percutaneous catheter drainage and culture",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Check for endophthalmitis or meningitis if Klebsiella",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "IV 2 to 3 weeks then oral 1 to 2 months, guided by response",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

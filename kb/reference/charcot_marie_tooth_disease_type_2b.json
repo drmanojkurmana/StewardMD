@@ -150,5 +150,327 @@
       "caption": "Overview comparison matrix for charcot-marie-tooth disease type 2b."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_2b-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Axonal sensorimotor pattern with relatively preserved velocities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary neuropathy gene panel including RAB7A",
+          "cells": [
+            {
+              "text": "Identifies RAB7A missense variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot radiographs",
+          "cells": [
+            {
+              "text": "Osteomyelitis and neuropathic (Charcot) joint changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured skin and wound assessment of the feet",
+          "cells": [
+            {
+              "text": "Painless ulceration and acral complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative sensory testing",
+          "cells": [
+            {
+              "text": "Characterises the sensory deficit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_2b-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary sensory and autonomic neuropathy types I and II",
+          "cells": [
+            {
+              "text": "Marked phenotypic overlap; some pedigrees are hard to classify"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic distal sensory neuropathy",
+          "cells": [
+            {
+              "text": "Acquired cause, excluded by screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_2b-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive rehabilitative care",
+          "cells": [
+            {
+              "text": "Neuromuscular multidisciplinary team; no disease-modifying drug"
+            },
+            {
+              "text": "Core care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective foot care",
+          "cells": [
+            {
+              "text": "Regular podiatry, cushioned footwear and daily skin surveillance"
+            },
+            {
+              "text": "Pre-empts painless ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and infection management",
+          "cells": [
+            {
+              "text": "Offloading, debridement and anti-staphylococcal antibiotics"
+            },
+            {
+              "text": "Infected ulcers and osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot joints and acral deformity",
+          "cells": [
+            {
+              "text": "Orthopaedic management; reconstructive surgery considered to avert autoamputation"
+            },
+            {
+              "text": "Acral deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and physiotherapy",
+          "cells": [
+            {
+              "text": "Physiotherapy, stretching and ankle-foot orthoses for distal weakness"
+            },
+            {
+              "text": "Distal weakness and pes cavus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic agents"
+            },
+            {
+              "text": "Neuropathic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug caution and counselling",
+          "cells": [
+            {
+              "text": "Avoid vincristine; autosomal dominant counselling and relative screening"
+            },
+            {
+              "text": "Neurotoxicity; inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_2b-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease type 2B",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 2B (RAB7A): painless foot ulcers with severe sensory loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deep ulcer with cellulitis, sepsis, rapid sensory loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent wound and infection management; exclude osteomyelitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, RAB7A gene panel, foot radiographs, wound review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Axonal sensorimotor pattern with RAB7A variant or osteomyelitis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Protective foot care with podiatry, cushioned footwear and daily skin checks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check HSAN types I and II and diabetic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Offloading, debridement and anti-staphylococcal antibiotics for infected ulcers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic care of Charcot joints; reconstructive surgery to avert autoamputation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and ankle-foot orthoses for distal weakness and pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Foot injury prevention is the cornerstone; counsel on autosomal dominant inheritance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,473 @@
       "caption": "Overview comparison matrix for anemia due to acute blood loss."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Blood Products",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/transfusion-medicine/blood-products",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 113-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anemia_due_to_acute_blood-diagnostic",
+      "kind": "diagnostic",
+      "title": "Severity and findings in acute blood loss",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Loss of about 20% of blood volume",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About one donated unit"
+            },
+            {
+              "text": "Usually minimally symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loss of 25% or more",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Signs of vascular instability",
+              "op": ">=",
+              "value": 25
+            },
+            {
+              "text": "Tachycardia, narrowed pulse pressure, cold pale skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sudden loss over 30%",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Postural hypotension and tachycardia",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Compensation overwhelmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loss over 40% (about 2 L in an adult)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Hypovolaemic shock",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Confusion, dyspnoea, sweating, hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early haemoglobin",
+          "cells": [
+            {
+              "text": "{{hy:Often normal in the first hours}}"
+            },
+            {
+              "text": "Falls over hours to days as volume is restored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin about 7 g/dL at day 3",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Suggests about half of blood volume lost"
+            },
+            {
+              "text": "Rough guide only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reticulocyte count",
+          "cells": [
+            {
+              "text": "Rises during marrow recovery"
+            },
+            {
+              "text": "Raised reticulocytes: blood loss or haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grey Turner sign",
+          "cells": [
+            {
+              "text": "Flank bruising"
+            },
+            {
+              "text": "Retroperitoneal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cullen sign",
+          "cells": [
+            {
+              "text": "Periumbilical bruising"
+            },
+            {
+              "text": "Intraperitoneal or retroperitoneal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest dullness",
+          "cells": [
+            {
+              "text": "On percussion"
+            },
+            {
+              "text": "Haemothorax"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anemia_due_to_acute_blood-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of acute posthaemorrhagic anaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemolytic anaemia",
+          "cells": [
+            {
+              "text": "{{hy:Also anaemia with raised reticulocytes}}; no evident bleeding source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron-deficiency anaemia from chronic loss",
+          "cells": [
+            {
+              "text": "Protracted bleeding with depleted iron stores"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoproliferative anaemia",
+          "cells": [
+            {
+              "text": "Reticulocyte count not raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-haemorrhagic hypovolaemic shock",
+          "cells": [
+            {
+              "text": "Dehydration or fluid sequestration; haemoglobin does not fall after resuscitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anemia_due_to_acute_blood-treatment",
+      "kind": "treatment",
+      "title": "Management of acute blood loss anaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Control the bleeding source",
+          "cells": [
+            {
+              "text": "{{hy:First priority}}"
+            },
+            {
+              "text": "Endoscopy, embolisation or surgery by site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV crystalloid",
+          "cells": [
+            {
+              "text": "Hypovolaemia"
+            },
+            {
+              "text": "Treats the dominant early threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Packed red cells",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Hb as low as 7 may be adequate in healthy patients; higher with ongoing bleeding or poor cardiopulmonary reserve",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "One unit 180 to 200 mL raises Hb about 1 g/dL and Hct about 3%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Coagulopathic bleeding in massive transfusion, DIC or liver failure"
+            },
+            {
+              "text": "200 to 250 mL; raises factors about 2%; not for volume"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Platelets",
+          "unit": "x10^9/L",
+          "cells": [
+            {
+              "text": "Bleeding with count <50",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Random donor 50 to 70 mL (5.5 x 10^10); apheresis 200 to 400 mL (3 x 10^11)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cryoprecipitate",
+          "cells": [
+            {
+              "text": "Hypofibrinogenaemia with bleeding"
+            },
+            {
+              "text": "10 to 15 mL; fibrinogen, FVIII, vWF; about 80 IU FVIII per unit"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reverse anticoagulants and correct coagulopathy",
+          "cells": [
+            {
+              "text": "Patients on anticoagulant or antiplatelet drugs"
+            },
+            {
+              "text": "4F-PCC preferred over FFP for urgent warfarin reversal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Iron replacement",
+          "cells": [
+            {
+              "text": "After bleeding is controlled"
+            },
+            {
+              "text": "Supports marrow recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Critical care",
+          "cells": [
+            {
+              "text": "Shock, reduced consciousness or acute kidney injury"
+            },
+            {
+              "text": "Organ hypoperfusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Platelet threshold, PRBC response and FFP indications from Merck; component volumes from Tables PDF Table 113-2, which also lists post-transfusion platelet CCI of at least 10 x 10^9/L at 1 h."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anemia_due_to_acute_blood-dx-mgmt",
+      "title": "Diagnosis and management of acute blood loss anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known or suspected acute haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Shock: hypotension, confusion, tachycardia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Resuscitate with IV fluid; activate major haemorrhage protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial Hb and vitals; examine for concealed bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Locate source: ultrasound, endoscopy, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Ongoing bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop the source: endoscopy, embolisation or surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Hb below threshold or unstable?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfuse red cells; plasma, platelets, cryo for coagulopathy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Iron replacement and monitor reticulocyte recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

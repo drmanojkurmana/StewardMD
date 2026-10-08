@@ -150,5 +150,327 @@
       "caption": "Overview comparison matrix for arterial tortuosity syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews / Emery and Rimoin's Principles and Practice of Medical Genetics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arterial_tortuosity_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "SLC2A10 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body MR or CT angiography",
+          "cells": [
+            {
+              "text": "Arterial tortuosity and stenoses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Aortic root, pulmonary arteries and cardiac function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and skeletal evaluation",
+          "cells": [
+            {
+              "text": "Connective-tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline and periodic vascular imaging",
+          "cells": [
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arterial_tortuosity_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Loeys-Dietz syndrome",
+          "cells": [
+            {
+              "text": "Separated by SLC2A10 molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marfan syndrome",
+          "cells": [
+            {
+              "text": "Separated by SLC2A10 molecular testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arterial_tortuosity_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antihypertensive therapy",
+          "cells": [
+            {
+              "text": "Beta-blockers and angiotensin receptor blockers such as losartan"
+            },
+            {
+              "text": "Reduces arterial wall stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body arterial imaging",
+          "cells": [
+            {
+              "text": "MR or CT angiography for aneurysm, stenosis and dissection"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endovascular or surgical repair",
+          "cells": [
+            {
+              "text": "Haemodynamically significant stenoses, aneurysms or dissection"
+            },
+            {
+              "text": "When significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Activity modification",
+          "cells": [
+            {
+              "text": "Avoid isometric straining and contact activities"
+            },
+            {
+              "text": "Raises arterial wall stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiographic monitoring",
+          "cells": [
+            {
+              "text": "Aortic root and pulmonary arteries"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Connective-tissue care",
+          "cells": [
+            {
+              "text": "Hernia repair, joint protection and ophthalmological review"
+            },
+            {
+              "text": "Connective-tissue features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SLC2A10 disorder; family screening"
+            },
+            {
+              "text": "Confirmatory testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arterial_tortuosity_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Arterial tortuosity syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Arterial tortuosity on imaging, possibly with connective-tissue features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Pain suggesting dissection or new neurological deficit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular imaging and repair for dissection or stroke",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "SLC2A10 testing, whole-body MR or CT angiography, echo, limb pressures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SLC2A10 variants confirm arterial tortuosity syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Beta-blockers or losartan to reduce arterial wall stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid isometric straining and contact activities",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Endovascular or surgical repair of significant stenosis or aneurysm",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial aortic root and arterial imaging surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated genetics, cardiology and vascular surgery; family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

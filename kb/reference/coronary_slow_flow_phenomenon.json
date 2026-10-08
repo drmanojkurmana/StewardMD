@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for coronary slow flow phenomenon."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coronary_slow_flow_phenomenon-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Quantitative coronary angiography with corrected TIMI frame count",
+          "cells": [
+            {
+              "text": "Slow flow pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Twelve-lead ECG during symptomatic episodes",
+          "cells": [
+            {
+              "text": "Ischaemic changes during episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac troponin during chest pain",
+          "cells": [
+            {
+              "text": "Troponin rise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coronary flow reserve or index of microcirculatory resistance",
+          "cells": [
+            {
+              "text": "Microvascular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Alternative myocardial pathology excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_slow_flow_phenomenon-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Microvascular angina",
+          "cells": [
+            {
+              "text": "Named look-alike with microvascular ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasospastic angina",
+          "cells": [
+            {
+              "text": "Named look-alike with spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No-reflow following percutaneous coronary intervention",
+          "cells": [
+            {
+              "text": "Pitfall: distinct cause and treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coronary_slow_flow_phenomenon-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Risk factor modification",
+          "cells": [
+            {
+              "text": "Smoking cessation and metabolic syndrome treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium-channel blockers",
+          "cells": [
+            {
+              "text": "First-line antianginal therapy to reduce microvascular tone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nicorandil, ranolazine or dipyridamole",
+          "cells": [
+            {
+              "text": "Added for refractory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Statin and endothelial care",
+          "cells": [
+            {
+              "text": "Part of secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Favourable survival; not entirely benign and can recur"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology follow-up",
+          "cells": [
+            {
+              "text": "Avoid repeated unnecessary angiography once diagnosed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiology assessment",
+          "cells": [
+            {
+              "text": "Index of microcirculatory resistance to guide refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coronary_slow_flow_phenomenon-dx-mgmt",
+      "title": "Diagnosis and management of coronary slow flow phenomenon",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coronary slow flow phenomenon: chest pain with normal-appearing arteries",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (troponin rise, arrhythmia or syncope, haemodynamic compromise)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology review for troponin rise or arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corrected TIMI frame count; ECG during pain; troponin; flow reserve; MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does angiography show slow flow with normal epicardial arteries?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider vasospastic angina, microvascular angina or obstructive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Risk factor modification, prioritising smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calcium-channel blockers as first-line antianginal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nicorandil, ranolazine or dipyridamole for refractory symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Statin and secondary prevention; avoid repeated angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Favourable survival, but recurrent chest pain and reduced quality of life are common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

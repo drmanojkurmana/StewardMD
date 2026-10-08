@@ -172,5 +172,484 @@
       "caption": "Overview comparison matrix for igg4-related disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Validation of the 2019 ACR/EULAR IgG4-RD classification criteria, PMC8453617",
+      "kind": "web",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8453617"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "igg4_related_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Classifying and diagnosing IgG4-related disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "ACR/EULAR step 1, entry",
+          "cells": [
+            {
+              "text": "Typical organ involved or suggestive tissue inflammation"
+            },
+            {
+              "text": "Pancreas, salivary or lacrimal glands, bile ducts, kidney, orbit, retroperitoneum, aorta"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACR/EULAR step 2, exclusion",
+          "cells": [
+            {
+              "text": "Fever, steroid resistance, eosinophilia, ANCA, anti-dsDNA, prominent neutrophilic inflammation"
+            },
+            {
+              "text": "Any exclusion item blocks classification"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ACR/EULAR step 3, weighted inclusion",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "{{hy:Score of 20 points or more}}",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "Domains: pathology, IgG4 immunostaining, serum IgG4, gland, thorax, pancreas and biliary, kidney, retroperitoneum"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum IgG4",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Normal in about 30% of biopsy-proven cases",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Very high levels can read falsely low (prozone); dilute and retest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Lymphoplasmacytic infiltrate, storiform fibrosis, obliterative phlebitis"
+            },
+            {
+              "text": "Never diagnostic alone; correlate clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Features against IgG4-RD",
+          "cells": [
+            {
+              "text": "Neutrophilic infiltrate, granulomas, giant cells, fibrinoid necrosis"
+            },
+            {
+              "text": "Look for vasculitis, infection or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic imaging",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Diffuse sausage-shaped pancreas; 20 to 50% present with new glucose intolerance and mass",
+              "range": [
+                20,
+                50
+              ]
+            },
+            {
+              "text": "Type 1 autoimmune pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement",
+          "cells": [
+            {
+              "text": "Low C3 and C4"
+            },
+            {
+              "text": "Points to tubulointerstitial nephritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Demographics",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "Men to women about 2 to 1, middle-aged to elderly",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Head and neck disease closer to 1 to 1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_related_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic IgG4-related disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreatic adenocarcinoma",
+          "cells": [
+            {
+              "text": "Focal mass, progressive"
+            },
+            {
+              "text": "EUS biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary sclerosing cholangitis or cholangiocarcinoma",
+          "cells": [
+            {
+              "text": "Biliary strictures without other organ disease"
+            },
+            {
+              "text": "Biopsy, IgG4 and imaging pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Sicca with anti-Ro/La; Mikulicz disease is IgG4-RD"
+            },
+            {
+              "text": "Salivary gland biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Nodes or mass, B symptoms"
+            },
+            {
+              "text": "Biopsy with flow cytometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Destructive sinus disease with ANCA"
+            },
+            {
+              "text": "ANCA and biopsy showing necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic retroperitoneal fibrosis",
+          "cells": [
+            {
+              "text": "Often normal IgG4, advanced fibrosis"
+            },
+            {
+              "text": "Biopsy and search for other organs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Non-caseating granulomas"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "igg4_related_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating IgG4-related disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy to exclude cancer",
+          "cells": [
+            {
+              "text": "Before immunosuppression"
+            },
+            {
+              "text": "{{hy:Avoids needless Whipple or thyroidectomy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "First-line induction for symptomatic or organ-threatening disease"
+            },
+            {
+              "text": "Prompt treatment prevents fibrotic organ loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Aggressive disease, relapse or steroid intolerance"
+            },
+            {
+              "text": "B-cell depletion, often with a steroid-sparing agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Asymptomatic, non-organ-threatening disease such as lymphadenopathy"
+            },
+            {
+              "text": "Close imaging follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ support",
+          "cells": [
+            {
+              "text": "Exocrine or endocrine pancreatic failure, biliary obstruction"
+            },
+            {
+              "text": "Enzymes, insulin, biliary drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse monitoring",
+          "cells": [
+            {
+              "text": "All treated patients"
+            },
+            {
+              "text": "Serial imaging, serum IgG4, organ function; relapse common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Doses and taper schedules for glucocorticoids and rituximab were not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "igg4_related_disease-dx-mgmt",
+      "title": "Diagnosis and management of IgG4-related disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tumefactive mass, sclerosing cholangitis, gland swelling or RPF",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Serum IgG4 (dilute if needed), complement, CT or MRI staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Exclusion feature (fever, ANCA, neutrophilic inflammation)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Pursue infection, vasculitis or malignancy",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Biopsy with IgG4 immunostaining to exclude cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "ACR/EULAR score 20 points or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Not classified; reassess and rebiopsy if suspicion high",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Organ-threatening or symptomatic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Watchful waiting with imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Glucocorticoid induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Relapse or steroid intolerance?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Rituximab with monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Taper and monitor for relapse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

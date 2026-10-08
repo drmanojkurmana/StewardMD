@@ -166,5 +166,471 @@
       "caption": "Overview comparison matrix for disorders of ventilation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ATS guideline on obesity hypoventilation syndrome, 2019 (Newswise summary)",
+      "url": "https://www.newswise.com/articles/ats-publishes-clinical-guideline-on-obesity-hypoventilation-syndrome/sc-rsmn",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_ventilation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic thresholds in disorders of ventilation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Normal PaCO2 at sea level",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "37 to 43",
+              "range": [
+                37,
+                43
+              ]
+            },
+            {
+              "text": "All ventilatory disorders show abnormal PaCO2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoventilation",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaCO2 45 or more",
+              "op": ">=",
+              "value": 45
+            },
+            {
+              "text": "{{hy:Diagnostic hallmark}}; venous PCO2 runs a few points higher"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum bicarbonate screen",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "<27 makes hypoventilation very unlikely",
+              "op": "<",
+              "value": 27
+            },
+            {
+              "text": "27 or more: measure PaCO2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obesity hypoventilation syndrome",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": "BMI 30 or more with PaCO2 45 or more",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "No other cause; OSA in nearly 90%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seated to supine FVC fall",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "15 to 25",
+              "range": [
+                15,
+                25
+              ]
+            },
+            {
+              "text": "Diaphragmatic weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe OSA",
+          "unit": "events/h",
+          "cells": [
+            {
+              "text": "AHI >30",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "On polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercapnic COPD for home ventilation",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaCO2 >52 with normal pH",
+              "op": ">",
+              "value": 52
+            },
+            {
+              "text": "High-intensity NIV considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PHOX2B testing",
+          "cells": [
+            {
+              "text": "Congenital central hypoventilation"
+            },
+            {
+              "text": "Absent hypoxic and hypercapnic responses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_ventilation-ddx",
+      "kind": "ddx",
+      "title": "Causes of hypercapnic hypoventilation and look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Depressed drive: opioids, sedatives, hypothyroidism",
+          "cells": [
+            {
+              "text": "{{hy:Exclude before primary drive disorder}}"
+            },
+            {
+              "text": "Drug history, TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem lesion",
+          "cells": [
+            {
+              "text": "Pontine or medullary stroke or tumour"
+            },
+            {
+              "text": "Brain MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular disease",
+          "cells": [
+            {
+              "text": "Orthopnoea, paradoxical breathing"
+            },
+            {
+              "text": "Seated and supine FVC, mouth pressures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest wall disease",
+          "cells": [
+            {
+              "text": "Kyphoscoliosis, massive ascites"
+            },
+            {
+              "text": "Chest imaging, PFT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COPD or other lung disease",
+          "cells": [
+            {
+              "text": "Raised dead space despite high minute ventilation"
+            },
+            {
+              "text": "Spirometry, CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obesity hypoventilation",
+          "cells": [
+            {
+              "text": "BMI 30 or more with coexisting OSA"
+            },
+            {
+              "text": "ABG and polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic hyperventilation (opposite state)",
+          "cells": [
+            {
+              "text": "Low PaCO2, sighing, yawning"
+            },
+            {
+              "text": "ABG; exclude asthma and ketoacidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_ventilation-treatment",
+      "kind": "treatment",
+      "title": "Treatment of hypoventilation syndromes",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positive airway pressure during sleep",
+          "cells": [
+            {
+              "text": "Stable ambulatory OHS"
+            },
+            {
+              "text": "Conditional ATS recommendation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CPAP first line",
+          "cells": [
+            {
+              "text": "{{hy:OHS with severe OSA}}"
+            },
+            {
+              "text": "Switch to NIV if gas exchange or symptoms do not improve"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Discharge on NIV",
+          "cells": [
+            {
+              "text": "Hospitalised with respiratory failure and suspected OHS"
+            },
+            {
+              "text": "Until sleep lab titration, ideally within 2 to 3 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sustained weight loss of 25 to 30%",
+          "cells": [
+            {
+              "text": "OHS"
+            },
+            {
+              "text": "Bariatric surgery most likely to achieve it"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nocturnal NIPPV",
+          "cells": [
+            {
+              "text": "Daytime hypercapnia in neuromuscular or chest wall disease, hypercapnic COPD"
+            },
+            {
+              "text": "Improves gas exchange, survival and quality of life"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious oxygen, avoid sedatives",
+          "cells": [
+            {
+              "text": "All hypoventilating patients"
+            },
+            {
+              "text": "Even low-flow oxygen can worsen hypercapnia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tracheostomy ventilation",
+          "cells": [
+            {
+              "text": "Failure of non-invasive support"
+            },
+            {
+              "text": "Advanced neuromuscular failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_ventilation-dx-mgmt",
+      "title": "Diagnosis and management of hypoventilation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected hypoventilation: orthopnoea, morning headache, sleepiness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Serum bicarbonate 27 mmol/L or more, or high suspicion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Hypoventilation very unlikely",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Arterial blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "PaCO2 45 mmHg or more?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Look for drugs, hypothyroidism; imaging, PFT, supine FVC, polysomnography",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Obese (BMI 30 or more) with severe OSA?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CPAP; aim for 25 to 30% weight loss",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nocturnal NIV; treat underlying cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Monitor gases and vital capacity; escalate if failing",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

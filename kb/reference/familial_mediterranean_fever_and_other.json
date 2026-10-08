@@ -163,5 +163,510 @@
       "caption": "Overview comparison matrix for familial mediterranean fever and other hereditary autoinflammatory diseases."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "EULAR/PReS FMF recommendations 2024, RheumNow summary",
+      "url": "https://rheumnow.com/news/2024-management-familial-mediterranean-fever-recommendations",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "familial_mediterranean_fever_and_other-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of FMF and related autoinflammatory diseases",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Age at first attack",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "About 90% by age 20",
+              "op": "<=",
+              "value": 20
+            },
+            {
+              "text": "Late onset makes FMF less likely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attack duration (FMF)",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "{{hy:About 24 to 72}}",
+              "range": [
+                24,
+                72
+              ]
+            },
+            {
+              "text": "Arthritic attacks last longer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attack duration (TRAPS)",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Often >7",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Migratory myalgia with overlying erythema, periorbital oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peritoneal attacks",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">90% of patients",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Sterile neutrophil-rich exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erysipelas-like erythema",
+          "cells": [
+            {
+              "text": "Dorsum of foot, ankle, lower leg"
+            },
+            {
+              "text": "Most characteristic skin sign; M694V homozygotes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute-phase reactants in attacks",
+          "cells": [
+            {
+              "text": "Raised ESR, CRP, fibrinogen, leukocytosis"
+            },
+            {
+              "text": "Normalise between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MEFV genetic testing",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% of typical cases have two mutations"
+            },
+            {
+              "text": "Single mutation does not exclude FMF; exon 10 severe variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary mevalonate in attacks",
+          "cells": [
+            {
+              "text": "Markedly raised in HIDS/MKD"
+            },
+            {
+              "text": "More reliable than serum IgD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent proteinuria between attacks",
+          "cells": [
+            {
+              "text": "Suggests AA amyloidosis"
+            },
+            {
+              "text": "Confirm by renal or rectal biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "familial_mediterranean_fever_and_other-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of recurrent fever syndromes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "TRAPS",
+          "cells": [
+            {
+              "text": "Dominant; attacks often >7 days; periorbital oedema, migratory myalgia"
+            },
+            {
+              "text": "TNFRSF1A genotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIDS/MKD",
+          "cells": [
+            {
+              "text": "Recessive; painful cervical nodes, oral ulcers"
+            },
+            {
+              "text": "MVK genotyping; urinary mevalonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryopyrinopathies (FCAS, MWS, NOMID)",
+          "cells": [
+            {
+              "text": "Urticaria-like rash; cold trigger, hearing loss, aseptic meningitis"
+            },
+            {
+              "text": "NLRP3 testing including somatic mosaicism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PFAPA",
+          "cells": [
+            {
+              "text": "{{hy:Clock-like fevers with aphthae, pharyngitis, cervical adenitis}} in children"
+            },
+            {
+              "text": "Clinical pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult Still disease or systemic JIA",
+          "cells": [
+            {
+              "text": "Quotidian fever, salmon rash, arthritis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary angioedema",
+          "cells": [
+            {
+              "text": "Abdominal attacks with swelling, no fever"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyria",
+          "cells": [
+            {
+              "text": "Abdominal pain with neuropsychiatric features"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Persistent bowel symptoms"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison names these mimics but the opened sources do not give a specific test for the last four rows."
+    },
+    {
+      "id": "familial_mediterranean_fever_and_other-treatment",
+      "kind": "treatment",
+      "title": "Treatment of FMF and related autoinflammatory diseases",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Colchicine",
+          "cells": [
+            {
+              "text": "{{hy:First line, start as soon as FMF is diagnosed clinically}}"
+            },
+            {
+              "text": "Prevents attacks and AA amyloidosis; single or divided doses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colchicine dose escalation",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "Persistent attacks or subclinical inflammation"
+            },
+            {
+              "text": "Maximum 2 mg/day in children, 3 mg/day in adults"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IL-1 blockade (anakinra, canakinumab)",
+          "cells": [
+            {
+              "text": "Inadequate response to maximum tolerated colchicine; first choice in CAPS and MKD"
+            },
+            {
+              "text": "Highest evidence among add-on options"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NSAIDs during attacks",
+          "cells": [
+            {
+              "text": "Characteristic FMF attack"
+            },
+            {
+              "text": "Continue usual colchicine dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids for attacks; IL-1 blockade or etanercept for prophylaxis",
+          "cells": [
+            {
+              "text": "TRAPS"
+            },
+            {
+              "text": "Genotype-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continue colchicine in pregnancy",
+          "cells": [
+            {
+              "text": "Conception, pregnancy, lactation"
+            },
+            {
+              "text": "Amniocentesis not routinely recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amyloidosis surveillance",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Aim for sustained normal SAA or CRP; urinalysis for proteinuria"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Colchicine overdose can be fatal. Starting doses by age are not stated in the opened source."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "familial_mediterranean_fever_and_other-dx-mgmt",
+      "title": "Diagnosis and management of familial Mediterranean fever",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent self-limited fever with serositis, arthritis or rash",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Record attack length, triggers, ethnicity; CRP and ESR in and between attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Attacks 1 to 3 days with peritonitis, pleuritis or monoarthritis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Consider TRAPS, MKD, CAPS, PFAPA; targeted genotyping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "MEFV testing; start colchicine on clinical diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Attacks or raised CRP or SAA persist despite adherence?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Increase colchicine up to 2 mg/day child, 3 mg/day adult",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Still uncontrolled at maximum tolerated dose?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add IL-1 blockade",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urinalysis for proteinuria; biopsy if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong colchicine and amyloidosis surveillance",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Genotype-directed therapy, IL-1 blockade in CAPS and MKD",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

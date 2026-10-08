@@ -260,5 +260,533 @@
       "caption": "Diagnostic and clinical overview matrix for sarcoidosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Sarcoidosis",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/sarcoidosis/sarcoidosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sarcoidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis, staging and baseline screen in sarcoidosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Three diagnostic requirements",
+          "cells": [
+            {
+              "text": "Compatible clinical picture, non-necrotising granulomas, other granulomatous causes excluded"
+            },
+            {
+              "text": "{{hy:Diagnosis is one of exclusion; re-evaluate if new features}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy may be deferred",
+          "cells": [
+            {
+              "text": "Classic Lofgren, Heerfordt, lupus pernio, or asymptomatic symmetric hilar nodes"
+            },
+            {
+              "text": "Close follow-up still needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBUS-TBNA yield",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90%",
+              "op": "=",
+              "value": 90
+            },
+            {
+              "text": "Preferred when hilar or mediastinal nodes dominate; transbronchial biopsy about 50% in stage I"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BAL lymphocytes and CD4:CD8",
+          "cells": [
+            {
+              "text": "Lymphocytes over 15% and/or CD4:CD8 over 3.5",
+              "op": ">",
+              "value": 3.5
+            },
+            {
+              "text": "Supportive; a normal ratio does not exclude"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum ACE",
+          "cells": [
+            {
+              "text": "Raised in many conditions"
+            },
+            {
+              "text": "Low sensitivity and nonspecific; use to monitor, not diagnose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium",
+          "cells": [
+            {
+              "text": "Hypercalcaemia with suppressed PTH; hypercalciuria up to about 50%"
+            },
+            {
+              "text": "Granuloma calcitriol production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scadding stage 1",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Hilar nodes only; resolution about 55 to 90%",
+              "range": [
+                55,
+                90
+              ]
+            },
+            {
+              "text": "Stages describe resolution rates, not individual activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scadding stage 2",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Hilar nodes plus parenchyma; resolution about 40 to 70%",
+              "range": [
+                40,
+                70
+              ]
+            },
+            {
+              "text": "As above"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scadding stage 3",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Parenchyma without nodes; resolution about 10 to 20%",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "As above"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scadding stage 4",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Fibrosis with distortion; resolution about 0%",
+              "op": "=",
+              "value": 0
+            },
+            {
+              "text": "As above"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline screen for every patient",
+          "cells": [
+            {
+              "text": "PFTs, chest imaging, eye exam, ECG, creatinine, ALP, calcium, CBC"
+            },
+            {
+              "text": "Lung severity does not predict cardiac or eye disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcoidosis-ddx",
+      "kind": "ddx",
+      "title": "Other granulomatous diseases to exclude",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Tuberculosis and atypical mycobacteria",
+          "cells": [
+            {
+              "text": "{{hy:Necrotising granulomas; stains and cultures; exclude before steroids}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal infection (histoplasmosis and others)",
+          "cells": [
+            {
+              "text": "Necrosis on biopsy; fungal stains, cultures"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypersensitivity pneumonitis",
+          "cells": [
+            {
+              "text": "Loosely formed granulomas; antigen exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic beryllium disease and other metals, silicosis",
+          "cells": [
+            {
+              "text": "Occupational exposure history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphoma (Hodgkin, non-Hodgkin)",
+          "cells": [
+            {
+              "text": "Nodal biopsy histology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "ANCA-associated vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced sarcoid-like reaction",
+          "cells": [
+            {
+              "text": "Checkpoint inhibitors, TNF antagonists, interferon, antiretrovirals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related disease, Crohn disease, CVID-related GLILD",
+          "cells": [
+            {
+              "text": "Associated systemic disease features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sarcoidosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of sarcoidosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Imaging abnormality alone without symptoms or organ decline"
+            },
+            {
+              "text": "Serial CXR, PFTs with DLCO, renal and liver tests, yearly slit-lamp exam"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Lofgren syndrome"
+            },
+            {
+              "text": "Self-limited, low relapse rate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone 20 to 40 mg once daily",
+          "cells": [
+            {
+              "text": "{{hy:Symptoms, falling lung function, cardiac, neuro or eye disease, hypercalcaemia}}"
+            },
+            {
+              "text": "Reassess at 6 to 12 weeks; taper to 10 to 15 mg/day; continue 6 to 9 months more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methotrexate 10 to 15 mg/week plus folic acid 1 mg daily",
+          "cells": [
+            {
+              "text": "Steroid intolerance, refractory disease, or cannot taper below 10 to 15 mg after 3 months"
+            },
+            {
+              "text": "6-month trial; check hepatitis B and C; monitor counts and liver enzymes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azathioprine, mycophenolate, leflunomide",
+          "cells": [
+            {
+              "text": "Alternative steroid-sparing agents"
+            },
+            {
+              "text": "Relapse common after stopping"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Hypercalcaemia, arthralgia, skin disease, troublesome nodes"
+            },
+            {
+              "text": "Eye exam at baseline and yearly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infliximab (adalimumab for eye or skin)",
+          "cells": [
+            {
+              "text": "Refractory or intolerant of steroids and non-biologics"
+            },
+            {
+              "text": "Screen latent TB first; response over 3 to 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICD and pacemaker",
+          "cells": [
+            {
+              "text": "Cardiac sarcoid with heart block or ventricular arrhythmia"
+            },
+            {
+              "text": "Plus drug therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PJP prophylaxis and bone protection",
+          "cells": [
+            {
+              "text": "Prednisone over 20 mg/day for over 1 month or on immunosuppressants"
+            },
+            {
+              "text": "Bisphosphonate if at risk of osteoporosis"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sarcoidosis-dx-mgmt",
+      "title": "Diagnosis and management of sarcoidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral hilar nodes, cough, skin or eye lesions suggesting sarcoidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Classic Lofgren, Heerfordt, lupus pernio or asymptomatic hilar nodes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Biopsy most accessible site, EBUS-TBNA for nodes; BAL to exclude infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Non-necrotising granulomas, TB, fungi, lymphoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat alternative diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Baseline PFTs, eye exam, ECG, calcium, creatinine, ALP, CBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Organ-threatening disease or significant symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Observe with serial monitoring; NSAIDs for Lofgren",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prednisone 20 to 40 mg daily, reassess at 6 to 12 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Tolerated and tapered below 10 to 15 mg/day?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue taper, monitor every 3 to 6 months for relapse",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Add methotrexate; infliximab if refractory",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "Yes, defer biopsy"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

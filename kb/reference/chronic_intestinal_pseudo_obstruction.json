@@ -146,5 +146,336 @@
       "caption": "Overview comparison matrix for chronic intestinal pseudo-obstruction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cross-sectional imaging and contrast studies",
+          "cells": [
+            {
+              "text": "Excludes mechanical obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal transit and manometric studies",
+          "cells": [
+            {
+              "text": "Characterises dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full-thickness biopsy in selected cases",
+          "cells": [
+            {
+              "text": "Neuropathic versus myopathic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for secondary causes",
+          "cells": [
+            {
+              "text": "Connective-tissue disease, diabetes and amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breath testing for bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Small intestinal bacterial overgrowth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical bowel obstruction",
+          "cells": [
+            {
+              "text": "Obstructing lesion present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute colonic pseudo-obstruction (Ogilvie syndrome)",
+          "cells": [
+            {
+              "text": "Acute, not chronic, course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastroparesis",
+          "cells": [
+            {
+              "text": "Regional dysmotility"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Enteral feeding where tolerated; parenteral nutrition when intestinal failure supervenes"
+            },
+            {
+              "text": "Priority of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prokinetics and diet",
+          "cells": [
+            {
+              "text": "Prokinetic agents with small, low-residue, low-fat meals"
+            },
+            {
+              "text": "Promotes propulsion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclical antibiotics",
+          "cells": [
+            {
+              "text": "For small intestinal bacterial overgrowth"
+            },
+            {
+              "text": "Malabsorption and diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompression",
+          "cells": [
+            {
+              "text": "Nasogastric tube or venting gastrostomy during acute episodes"
+            },
+            {
+              "text": "Avoid surgery that risks further dysmotility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary causes",
+          "cells": [
+            {
+              "text": "Treat systemic sclerosis, diabetes, amyloidosis, paraneoplastic and mitochondrial disease"
+            },
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition complications",
+          "cells": [
+            {
+              "text": "Monitor catheter sepsis and liver disease; intestinal failure or transplant centre"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Gastroenterology, nutrition, dietetics and surgery"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_intestinal_pseudo_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of Chronic intestinal pseudo-obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic intestinal pseudo-obstruction: recurrent obstruction without a lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (ischaemia or perforation, malnutrition, line sepsis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent surgical review for ischaemia or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cross-sectional imaging to exclude mechanical obstruction; transit studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dilated bowel without mechanical cause and secondary causes screened?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nutritional support, enteral first and parenteral when needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check mechanical obstruction, Ogilvie syndrome and gastroparesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prokinetic agents with small, low-residue, low-fat meals",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cyclical antibiotics for small intestinal bacterial overgrowth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Decompression during acute episodes; avoid unnecessary surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor parenteral nutrition complications; refer to intestinal failure centre",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

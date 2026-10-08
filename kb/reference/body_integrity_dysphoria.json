@@ -149,5 +149,87 @@
       "caption": "Overview comparison matrix for body integrity dysphoria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "New Oxford Textbook of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "body_integrity_dysphoria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessment elements in body integrity dysphoria",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Developmental and psychosexual history", "cells": [{"text": "Desire for a specific limb, often stable since childhood"}], "cite": "c1"},
+        {"parameter": "Mental state examination", "cells": [{"text": "Confirms the belief is not delusional"}], "cite": "c1"},
+        {"parameter": "Self-harm and self-amputation risk assessment", "cells": [{"text": "Previous attempts and current plans"}], "cite": "c1"},
+        {"parameter": "Screening for depression, anxiety, OCD and body dysmorphic disorder", "cells": [{"text": "Comorbid conditions"}], "cite": "c1"},
+        {"parameter": "Capacity and ethical review", "cells": [{"text": "Where surgical amputation is requested"}], "cite": "c1"},
+        {"parameter": "Neuropsychological assessment of body representation", "cells": [{"text": "Body schema, where available"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "body_integrity_dysphoria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for body integrity dysphoria",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Body dysmorphic disorder", "cells": [{"text": "The concern is not about ugliness; the desire is for a disabling change"}], "cite": "c1"},
+        {"parameter": "Somatic delusional disorder or psychosis", "cells": [{"text": "The belief is not delusional in this condition"}], "cite": "c1"},
+        {"parameter": "Factitious disorder", "cells": [{"text": "No deception is used to obtain the sick role"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "body_integrity_dysphoria-treatment",
+      "kind": "treatment",
+      "title": "Management options in body integrity dysphoria",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Psychological support", "cells": [{"text": "Cognitive-behavioural and supportive therapy to reduce distress and improve functioning"}, {"text": "No treatment reliably removes the desire"}], "cite": "c1"},
+        {"parameter": "Self-harm and self-amputation risk", "cells": [{"text": "Assess risk and agree a safety plan"}, {"text": "Dangerous self-injury attempts occur in a minority"}], "cite": "c1"},
+        {"parameter": "Comorbid conditions", "cells": [{"text": "Treat comorbid depression, anxiety and obsessive-compulsive features; serotonergic agents where indicated"}, {"text": "Treatable"}], "cite": "c1"},
+        {"parameter": "Distress management", "cells": [{"text": "Adaptive strategies for distress"}, {"text": "Some patients use pretending or mobility aids"}], "cite": "c1"},
+        {"parameter": "Ethical review of surgical requests", "cells": [{"text": "Capacity assessment with ethical and multidisciplinary review"}, {"text": "Do not accede to unsafe self-directed procedures"}], "cite": "c1"},
+        {"parameter": "Follow-up", "cells": [{"text": "Psychiatric and multidisciplinary follow-up"}, {"text": "The condition is persistent and stable"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "body_integrity_dysphoria-dx-mgmt",
+      "title": "Diagnosis and management of body integrity dysphoria",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Persistent desire for a specific limb to be disabled, stable since childhood", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: self-amputation attempts, use of cold or trauma on a limb, or suicidal ideation?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent risk assessment and safety plan", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Developmental and psychosexual history; mental state examination for a non-delusional belief", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Screen for depression, anxiety, OCD and body dysmorphic disorder; exclude factitious disorder", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Belief is non-delusional and comorbid conditions identified?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Psychological support and comorbidity treatment; no reliable cure for the desire", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider somatic delusional disorder, psychosis or factitious disorder", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Ethical multidisciplinary review of any surgical request; agreed safety plan", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Desire is persistent over years; safety and distress can improve", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -150,5 +150,85 @@
       "caption": "Overview comparison matrix for benign cephalic histiocytosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_cephalic_histiocytosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benign cephalic histiocytosis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Skin biopsy with immunohistochemistry", "cells": [{"text": "CD68 positive; CD1a and langerin negative"}], "cite": "c1"},
+        {"parameter": "Electron microscopy", "cells": [{"text": "Comma-shaped or worm-like bodies; no Birbeck granules"}], "cite": "c1"},
+        {"parameter": "Clinical review for systemic involvement", "cells": [{"text": "Absence of visceral, ocular and bony involvement"}], "cite": "c1"},
+        {"parameter": "Blood glucose and assessment for diabetes insipidus", "cells": [{"text": "Only if suggestive symptoms arise"}], "cite": "c1"},
+        {"parameter": "Dermoscopy", "cells": [{"text": "Distinguishes from mastocytosis and other papular disorders"}], "cite": "c1"},
+        {"parameter": "Serial photography", "cells": [{"text": "Documents the characteristic evolution and regression"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_cephalic_histiocytosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign cephalic histiocytosis",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Langerhans cell histiocytosis", "cells": [{"text": "CD1a and langerin are negative here, and Birbeck granules are absent"}], "cite": "c1"},
+        {"parameter": "Cutaneous mastocytosis (urticaria pigmentosa)", "cells": [{"text": "Separated by dermoscopy"}], "cite": "c1"},
+        {"parameter": "Juvenile xanthogranuloma", "cells": [{"text": "Histiocytes contain little or no lipid early in the course, unlike xanthomatous histiocytoses"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_cephalic_histiocytosis-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign cephalic histiocytosis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the condition is benign and self-limiting, resolving over months to a few years"}, {"text": "No treatment required"}], "cite": "c1"},
+        {"parameter": "Watchful observation", "cells": [{"text": "Observe with serial photography"}, {"text": "Documents evolution and regression"}], "cite": "c1"},
+        {"parameter": "Exclude systemic involvement", "cells": [{"text": "Confirm absence of visceral, ocular and bony involvement"}, {"text": "Distinguishes it from Langerhans cell histiocytosis"}], "cite": "c1"},
+        {"parameter": "Endocrine monitoring", "cells": [{"text": "Monitor for diabetes insipidus or diabetes mellitus; check blood glucose if features arise"}, {"text": "Rare reports of coexisting diabetes"}], "cite": "c1"},
+        {"parameter": "Avoid unnecessary intervention", "cells": [{"text": "Avoid unnecessary or aggressive intervention"}, {"text": "Excellent prognosis"}], "cite": "c1"},
+        {"parameter": "Dermatology referral", "cells": [{"text": "Confirm the diagnosis by biopsy and immunohistochemistry where uncertain"}, {"text": "Applies when clinically uncertain"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_cephalic_histiocytosis-dx-mgmt",
+      "title": "Diagnosis and management of benign cephalic histiocytosis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Red-brown or yellowish macules and flat papules on the face of a child under three", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: polyuria or polydipsia, organ enlargement, mucosal or palmar lesions?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: exclude diabetes insipidus and other systemic histiocytosis", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Dermoscopy to separate from mastocytosis and other papular disorders", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Confirm no visceral, ocular or bony involvement; check glucose if symptoms arise", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Biopsy shows CD68 positive, CD1a and langerin negative histiocytes?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Watchful observation with serial photographs; no treatment needed", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: reconsider Langerhans cell histiocytosis, mastocytosis or flat warts", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Resolves spontaneously over months to years, usually without scarring", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

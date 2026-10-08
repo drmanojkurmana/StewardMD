@@ -140,5 +140,80 @@
       "caption": "Overview comparison matrix for black hairy tongue."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oral medicine and dermatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "black_hairy_tongue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic elements in black hairy tongue",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical appearance", "cells": [{"text": "Elongated filiform papillae; matted brown to black dorsum"}], "cite": "c1"},
+        {"parameter": "Medication and habit history", "cells": [{"text": "Tobacco, mouthwashes and antibiotics as contributors"}], "cite": "c1"},
+        {"parameter": "Oral hygiene and salivary flow", "cells": [{"text": "Hygiene and dry mouth as predisposing factors"}], "cite": "c1"},
+        {"parameter": "Biopsy", "cells": [{"text": "Only if an alternative pigmented or keratotic lesion is suspected"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "black_hairy_tongue-ddx",
+      "kind": "ddx",
+      "title": "Look-alike tongue lesions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Pseudo-black hairy tongue (bismuth or food staining)", "cells": [{"text": "Colour comes from an exogenous staining substance"}], "cite": "c1"},
+        {"parameter": "Oral hairy leukoplakia", "cells": [{"text": "Immunosuppression raises concern for this diagnosis"}], "cite": "c1"},
+        {"parameter": "Melanotic or other pigmented mucosal lesion", "cells": [{"text": "A rapidly changing pigmented lesion warrants biopsy"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "black_hairy_tongue-treatment",
+      "kind": "treatment",
+      "title": "Management options in black hairy tongue",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Mechanical debridement", "cells": [{"text": "Brushing or scraping the tongue dorsum regularly"}, {"text": "Removes keratin-laden elongated papillae"}], "cite": "c1"},
+        {"parameter": "Hygiene and diet", "cells": [{"text": "Improve oral hygiene and increase dietary roughage"}, {"text": "Promotes normal desquamation"}], "cite": "c1"},
+        {"parameter": "Precipitant removal", "cells": [{"text": "Stop smoking; review offending medications and oxidising mouthwashes; treat xerostomia"}, {"text": "Addresses precipitating factors"}], "cite": "c1"},
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the condition is entirely benign and reversible"}, {"text": "No further treatment needed"}], "cite": "c1"},
+        {"parameter": "Biopsy", "cells": [{"text": "Only where an alternative pigmented or keratotic lesion is suspected"}, {"text": "Not routine"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "black_hairy_tongue-dx-mgmt",
+      "title": "Diagnosis and management of black hairy tongue",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Matted brown or black elongated filiform papillae on the tongue dorsum; often asymptomatic", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: persists despite hygiene, immunosuppression, ulceration or rapidly changing pigment?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: biopsy and review for oral hairy leukoplakia or a pigmented lesion", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Review tobacco, mouthwashes, antibiotics and hygiene; check salivary flow", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Alternative pigmented or keratotic lesion confirmed on biopsy?", "cite": "c1"},
+        {"id": "n6", "type": "outcome", "text": "Yes: treat the alternative diagnosis", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Debride the tongue dorsum and remove precipitating factors", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Benign and reversible; resolves with debridement and better hygiene", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n4", "to": "n7", "label": "Next"},
+        {"from": "n7", "to": "n8", "label": "Next"}
+      ]
+    }
+  ]
 }

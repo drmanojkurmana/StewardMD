@@ -204,5 +204,544 @@
       "caption": "Diagnostic and clinical overview matrix for panic attack / anxiety."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Generalized Anxiety Disorder and Panic Disorder in Adults, 2022",
+      "url": "https://www.aafp.org/pubs/afp/issues/2022/0800/generalized-anxiety-disorder-panic-disorder.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "panic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing panic disorder (DSM-5) and excluding organic causes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Comment"
+      ],
+      "rows": [
+        {
+          "parameter": "Panic attack",
+          "cells": [
+            {
+              "text": "Abrupt surge of intense fear or discomfort that peaks within minutes"
+            },
+            {
+              "text": "May start from a calm or an anxious state"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Symptom count per attack",
+          "unit": "of 13 symptoms",
+          "cells": [
+            {
+              "text": "4 or more",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Palpitations, sweating, tremor, dyspnoea, choking, chest pain, nausea, dizziness, chills or heat, paraesthesia, derealization, fear of losing control, fear of dying"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Recurrence and trigger",
+          "cells": [
+            {
+              "text": "Recurrent attacks without an obvious trigger"
+            },
+            {
+              "text": "Palpitations are the most common symptom"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration of consequences",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "1 month or more of worry about further attacks or maladaptive behaviour change",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "Follows at least one attack"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exclusions",
+          "cells": [
+            {
+              "text": "Not due to a substance or medical condition, not better explained by another mental disorder"
+            },
+            {
+              "text": "{{hy:Panic disorder is a diagnosis of exclusion}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Screening tool",
+          "cells": [
+            {
+              "text": "PHQ panic disorder module"
+            },
+            {
+              "text": "Most accurate screen when patients report sudden episodes of fear; universal screening not supported"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Palpitation duration",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Longer than 15 minutes with extra symptoms favours a psychiatric cause",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Most arrhythmic palpitations are briefer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas in hyperventilation",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "PaCO2 often 15 to 30 with no hypoxaemia",
+              "range": [
+                15,
+                30
+              ]
+            },
+            {
+              "text": "Hypoxaemia with normocapnia is a red flag for respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG",
+          "cells": [
+            {
+              "text": "Exclude arrhythmia and ischaemia"
+            },
+            {
+              "text": "Hyperventilation can cause nonspecific ST and T changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical attacks",
+          "cells": [
+            {
+              "text": "Nocturnal attacks or attacks without fear"
+            },
+            {
+              "text": "Warrant a more extensive workup"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "panic-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic panic attacks",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Aching, heavy, squeezing retrosternal discomfort"
+            },
+            {
+              "text": "Serial ECGs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Chest discomfort with sinus tachycardia, ECG axis shift or S1Q3T3"
+            },
+            {
+              "text": "ECG; arterial blood gas showing hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tachyarrhythmia",
+          "cells": [
+            {
+              "text": "Palpitations, often briefer than in panic"
+            },
+            {
+              "text": "{{hy:Ambulatory rhythm monitoring (Holter, event or loop recorder)}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperthyroidism",
+          "cells": [
+            {
+              "text": "Palpitations and hyperdynamic state"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pheochromocytoma",
+          "cells": [
+            {
+              "text": "Catecholamine-driven palpitations and hyperdynamic circulation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Tremor, palpitations, sweating, hunger, paraesthesia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or substance effect",
+          "cells": [
+            {
+              "text": "Caffeine, alcohol, cocaine, amphetamines, cannabinoids, albuterol, levothyroxine, decongestants; use or withdrawal"
+            },
+            {
+              "text": "Medication and substance history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Asthma or COPD",
+          "cells": [
+            {
+              "text": "Dyspnoea with known airway disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vasovagal syncope",
+          "cells": [
+            {
+              "text": "Trigger by fear or stress with hypotension or bradycardia during the event"
+            },
+            {
+              "text": "Haemodynamic change during the episode; absent in psychogenic pseudo-syncope"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "panic-treatment",
+      "kind": "treatment",
+      "title": "Treatment of panic disorder",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "First line, alone or with medication"
+            },
+            {
+              "text": "Strongest evidence; interoceptive exposure is the most useful component"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SSRI or SNRI (escitalopram, sertraline, citalopram, paroxetine, venlafaxine)",
+          "cells": [
+            {
+              "text": "{{hy:First-line drug treatment}}"
+            },
+            {
+              "text": "NNT 10 for remission after 2 to 6 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Combination CBT plus antidepressant",
+          "cells": [
+            {
+              "text": "When either alone gives partial response"
+            },
+            {
+              "text": "Likely more effective than either alone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Continue antidepressant",
+          "cells": [
+            {
+              "text": "6 to 12 months after response"
+            },
+            {
+              "text": "Stopping before 1 year: relapse in up to 50%; about 16% relapse even on treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tricyclic antidepressant",
+          "cells": [
+            {
+              "text": "Alternative when SSRI or SNRI unsuitable"
+            },
+            {
+              "text": "Comparable effect but more adverse effects"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Benzodiazepine",
+          "cells": [
+            {
+              "text": "Not first line; avoid long-term use"
+            },
+            {
+              "text": "Not better than antidepressants; tolerance, withdrawal and mortality risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Not recommended",
+          "cells": [
+            {
+              "text": "Antipsychotics, sedating antihistamines"
+            },
+            {
+              "text": "Beta blockers often used for attacks without evidence; buspirone uncertain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Suicide risk assessment",
+          "cells": [
+            {
+              "text": "At diagnosis and follow-up"
+            },
+            {
+              "text": "Panic disorder is linked to suicidal ideation and attempts"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "The AAFP review states no drug doses; none are given here."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "panic-dx-mgmt",
+      "title": "Diagnosis and management of panic disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden episode of fear with palpitations, chest discomfort or dyspnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flags: chest pain features of ACS, PE, syncope or hypoxaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency cardiopulmonary workup first (ECG, blood gas, imaging)",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, review drugs and substances, test for medical mimics",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organic or substance cause found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat the underlying cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Recurrent attacks with 4+ symptoms and 1 month of worry or behaviour change?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Isolated panic attack; reassure and reassess if recurrent",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Diagnose panic disorder; assess suicide risk and comorbid depression",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Start CBT and or an SSRI or SNRI",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Response after an adequate trial?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue drug 6 to 12 months after response",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Combine CBT with medication or switch agent",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,324 @@
       "caption": "Overview comparison matrix for balint syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Walsh and Hoyt Clinical Neuro-Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "balint_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain focused on bilateral parieto-occipital regions",
+          "cells": [
+            {
+              "text": "Bilateral parieto-occipital lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropsychological testing of visuospatial attention and visuomotor function",
+          "cells": [
+            {
+              "text": "Visuospatial attention and visuomotor function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal visual field assessment",
+          "cells": [
+            {
+              "text": "Preserved primary vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging and evaluation for watershed infarction",
+          "cells": [
+            {
+              "text": "Watershed infarction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for neurodegenerative disease when onset is insidious",
+          "cells": [
+            {
+              "text": "Insidious onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for a precipitating hypotensive or hypoxic event",
+          "cells": [
+            {
+              "text": "Hypotension or hypoxia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balint_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anton syndrome and cortical blindness",
+          "cells": [
+            {
+              "text": "Visual fields are intact in Balint syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior cortical atrophy as an underlying cause",
+          "cells": [
+            {
+              "text": "A progressive course suggests it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balint_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Stroke risk factors and watershed infarction; correct hypotension or hypoxia"
+            },
+            {
+              "text": "Underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Occupational therapy for visuospatial attention, reaching and daily living"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Environmental adaptation",
+          "cells": [
+            {
+              "text": "Decluttering; single objects; verbal and tactile cues"
+            },
+            {
+              "text": "Simultanagnosia and optic ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety assessment",
+          "cells": [
+            {
+              "text": "Fitness to drive and fall prevention"
+            },
+            {
+              "text": "Functional visual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology care for degenerative causes",
+          "cells": [
+            {
+              "text": "Where posterior cortical atrophy or Alzheimer disease underlies it; cognitive-supportive drugs"
+            },
+            {
+              "text": "Degenerative cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support and carers",
+          "cells": [
+            {
+              "text": "Low-vision referral; carer education and support"
+            },
+            {
+              "text": "Support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "balint_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Balint syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Impaired visual attention and reaching with intact primary vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Acute onset after hypotension or progressive decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular assessment for watershed infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bilateral parieto-occipital MRI, neuropsychology, visual fields, vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bilateral parieto-occipital lesion with intact visual fields?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause and start occupational neurorehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adapt the environment with single objects and cues",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess driving fitness and fall risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Neurology review for posterior cortical atrophy or Alzheimer disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-vision support and carer education",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

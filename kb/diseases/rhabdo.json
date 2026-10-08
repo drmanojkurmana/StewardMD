@@ -192,5 +192,519 @@
       "caption": "Diagnostic and clinical overview matrix for rhabdomyolysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Rhabdomyolysis",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/acute-kidney-injury/rhabdomyolysis",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "AAST Critical Care Committee consensus on rhabdomyolysis, 2022 (Guideline Central summary)",
+      "url": "https://guidelinecentral.com/guideline/1552056",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "rhabdo-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing rhabdomyolysis and its complications",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Creatine kinase",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "Over 5 times upper limit of normal, for example over 1000 IU/L",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "{{hy:Usual diagnostic threshold}}; no firm cutoff established"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Creatine kinase linked to AKI risk",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "Over 15,000 IU/L",
+              "op": ">",
+              "value": 15000
+            },
+            {
+              "text": "Higher AKI risk, also with dehydration or sepsis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CK trend",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Peak typically at 24 to 72 h",
+              "range": [
+                24,
+                72
+              ]
+            },
+            {
+              "text": "Repeat CK until peak passed and reliably falling"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Urine dipstick and microscopy",
+          "cells": [
+            {
+              "text": "Dipstick positive for blood, no or few red cells"
+            },
+            {
+              "text": "Points to myoglobinuria rather than haematuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine myoglobin",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "Over 250 mcg/mL",
+              "op": ">",
+              "value": 250
+            },
+            {
+              "text": "Confirms myoglobinuria; absence does not exclude rhabdomyolysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Classic triad (myalgia, weakness, dark urine)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in under 10%",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Do not rely on the triad"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Electrolytes",
+          "cells": [
+            {
+              "text": "Hyperkalaemia, hyperphosphataemia, hyperuricaemia, early hypocalcaemia"
+            },
+            {
+              "text": "Hyperkalaemia is the most dangerous early complication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Muddy-brown granular casts, tubular epithelial cells"
+            },
+            {
+              "text": "Pigment-induced acute tubular necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FENa",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "May be under 1%",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "A low FENa does not exclude ATN here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AKI frequency",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "15 to 55% of cases",
+              "range": [
+                15,
+                55
+              ]
+            },
+            {
+              "text": "Monitor creatinine and urine output"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "McMahon score at admission",
+          "cells": [
+            {
+              "text": "6 or more",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Predicts need for high-volume fluid, RRT or death"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "rhabdo-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes and causes to consider",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "True haematuria",
+          "cells": [
+            {
+              "text": "Red cells seen on urine microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory myopathy (for example dermatomyositis)",
+          "cells": [
+            {
+              "text": "Subacute proximal weakness; rash in dermatomyositis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug-induced myopathy (especially statins)",
+          "cells": [
+            {
+              "text": "Temporal link to drug; stop the inciting drug"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metabolic myopathy or muscular dystrophy",
+          "cells": [
+            {
+              "text": "Recurrent episodes or inherited weakness"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypothyroidism",
+          "cells": [
+            {
+              "text": "Raised CK with hypothyroid features"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neuroleptic malignant syndrome, serotonin syndrome, malignant hyperthermia",
+          "cells": [
+            {
+              "text": "Hyperthermia with rigidity or clonus after a trigger drug"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "rhabdo-treatment",
+      "kind": "treatment",
+      "title": "Management of rhabdomyolysis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV lactated Ringer's or saline (0.9% or 0.45%), start 400 mL/h",
+          "cells": [
+            {
+              "text": "All patients, to prevent AKI"
+            },
+            {
+              "text": "{{hy:Titrate to urine output 1 to 3 mL/kg/h, up to 300 mL/h}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Always"
+            },
+            {
+              "text": "Stop statins or other inciting drugs; antimicrobials for infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperkalaemia correction",
+          "cells": [
+            {
+              "text": "Raised potassium"
+            },
+            {
+              "text": "Correct promptly to reduce arrhythmia risk"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Calcium replacement",
+          "cells": [
+            {
+              "text": "Hypocalcaemia"
+            },
+            {
+              "text": "Correct carefully; rebound hypercalcaemia can occur in recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bicarbonate, mannitol, loop diuretics",
+          "cells": [
+            {
+              "text": "Not for AKI prevention"
+            },
+            {
+              "text": "Not recommended by AAST consensus"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Usual AKI indications"
+            },
+            {
+              "text": "No role for preventing AKI; CRRT or intermittent both acceptable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fasciotomy",
+          "cells": [
+            {
+              "text": "Compartment syndrome"
+            },
+            {
+              "text": "Early, with supportive care"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fresh frozen plasma",
+          "cells": [
+            {
+              "text": "DIC"
+            },
+            {
+              "text": "Treat the complication"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Calcium: AAST advises meticulous correction of hypocalcaemia, while Harrison warns against over-correcting early because rebound hypercalcaemia can follow in recovery. Both views are kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "rhabdo-dx-mgmt",
+      "title": "Diagnosis and management of rhabdomyolysis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Muscle injury, crush, seizures, drugs or heat with myalgia or dark urine",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Check CK, potassium, creatinine, calcium, phosphate, urinalysis",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "CK over 5 times upper limit of normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Seek another cause of symptoms",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "IV fluid 400 mL/h, titrate to urine output 1 to 3 mL/kg/h",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Hyperkalaemia present?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct potassium urgently, ECG monitoring",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Tense painful compartment?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early fasciotomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "AKI meeting usual RRT indications?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Start renal replacement therapy",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue fluids, serial CK until falling, treat cause",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

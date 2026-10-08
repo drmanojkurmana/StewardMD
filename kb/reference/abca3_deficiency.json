@@ -145,5 +145,334 @@
       "caption": "Overview comparison matrix for abca3 deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric respiratory and genetic references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "abca3_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "ABCA3 genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic ABCA3 variants, the cause of the disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT of the chest",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung biopsy with electron microscopy",
+          "cells": [
+            {
+              "text": "Small, abnormal lamellar bodies with dense inclusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunostaining for surfactant proteins",
+          "cells": [
+            {
+              "text": "Excludes related surfactant disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of infection and cardiac disease",
+          "cells": [
+            {
+              "text": "Alternative causes of respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abca3_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Surfactant protein B deficiency",
+          "cells": [
+            {
+              "text": "Also a neonatal surfactant disorder that ABCA3 can mimic"
+            },
+            {
+              "text": "Surfactant protein immunostaining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital pneumonia",
+          "cells": [
+            {
+              "text": "Excluded, with cardiac disease, before attributing failure to ABCA3"
+            },
+            {
+              "text": "Infection and cardiac exclusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abca3_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive respiratory care",
+          "cells": [
+            {
+              "text": "Foundation of care; oxygen and ventilation titrated to severity"
+            },
+            {
+              "text": "Phenotype-guided support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids with hydroxychloroquine or azithromycin",
+          "cells": [
+            {
+              "text": "Empirical trial in childhood interstitial lung disease"
+            },
+            {
+              "text": "Responses are variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition, growth and immunisation including RSV prophylaxis",
+          "cells": [
+            {
+              "text": "Prevents respiratory infection"
+            },
+            {
+              "text": "Prompt treatment of intercurrent infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous surfactant replacement",
+          "cells": [
+            {
+              "text": "Intrinsic surfactant disorder"
+            },
+            {
+              "text": "At best transient benefit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung transplantation",
+          "cells": [
+            {
+              "text": "Severe or progressive loss-of-function disease"
+            },
+            {
+              "text": "The only definitive option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive disorder"
+            },
+            {
+              "text": "Includes reproductive-genetics advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist multidisciplinary team care",
+          "cells": [
+            {
+              "text": "Paediatric respiratory or neonatal team"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "abca3_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of ABCA3 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe neonatal respiratory failure or childhood interstitial lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal respiratory failure without another explanation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review; consider lung transplant referral if severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABCA3 genetic testing and high-resolution chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic ABCA3 variants found on genetic testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm with electron microscopy of lamellar bodies on lung biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude infection, cardiac disease and surfactant protein B or C deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive respiratory care with oxygen or ventilation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Trial corticosteroids with hydroxychloroquine or azithromycin in childhood ILD",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunisation including RSV prophylaxis; family genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complete loss of function is often fatal in infancy without transplant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

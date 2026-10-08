@@ -150,5 +150,86 @@
       "caption": "Overview comparison matrix for blue rubber bleb naevus syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ISSVA classification / Mulliken and Young's Vascular Anomalies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in blue rubber bleb naevus syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Full blood count and iron studies", "cells": [{"text": "Chronic blood-loss anaemia"}], "cite": "c1"},
+        {"parameter": "Coagulation screen with D-dimer and fibrinogen", "cells": [{"text": "Localised intravascular coagulopathy"}], "cite": "c1"},
+        {"parameter": "MRI", "cells": [{"text": "Extent and depth of the venous malformations"}], "cite": "c1"},
+        {"parameter": "Upper and lower endoscopy and capsule endoscopy", "cells": [{"text": "Small-bowel lesions"}], "cite": "c1"},
+        {"parameter": "Faecal occult blood testing", "cells": [{"text": "Gastrointestinal blood loss"}], "cite": "c1"},
+        {"parameter": "Histopathology", "cells": [{"text": "When the diagnosis is uncertain"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike vascular anomalies",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Maffucci syndrome", "cells": [{"text": "Venous malformations with enchondromas; enchondromas are not part of this syndrome"}], "cite": "c1"},
+        {"parameter": "Multifocal lymphatic or venolymphatic malformations", "cells": [{"text": "Lesions here are slow-flow venous malformations, not lymphatic"}], "cite": "c1"},
+        {"parameter": "Isolated sporadic venous malformation", "cells": [{"text": "Multifocal skin and gastrointestinal lesions rather than a single lesion"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in blue rubber bleb naevus syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Sirolimus", "cells": [{"text": "Sirolimus, an mTOR inhibitor, to control bleeding and reduce lesion burden"}, {"text": "For extensive or bleeding disease"}], "cite": "c1"},
+        {"parameter": "Iron replacement and transfusion", "cells": [{"text": "Iron replacement and transfusion for chronic bleeding and anaemia"}, {"text": "Iron-deficiency anaemia"}], "cite": "c1"},
+        {"parameter": "Endoscopic or surgical treatment", "cells": [{"text": "Sclerotherapy, band ligation or argon plasma coagulation; surgical resection of dominant small-bowel lesions"}, {"text": "Bowel lesions"}], "cite": "c1"},
+        {"parameter": "Coagulopathy", "cells": [{"text": "Monitor with D-dimer and fibrinogen; low-molecular-weight heparin where indicated"}, {"text": "Localised intravascular coagulopathy"}], "cite": "c1"},
+        {"parameter": "Acute complications", "cells": [{"text": "Urgent surgery for life-threatening haemorrhage, intussusception or volvulus"}, {"text": "Emergency"}], "cite": "c1"},
+        {"parameter": "Cutaneous lesions", "cells": [{"text": "Sclerotherapy for symptomatic cutaneous lesions"}, {"text": "Symptomatic only"}], "cite": "c1"},
+        {"parameter": "Vascular anomalies service", "cells": [{"text": "Multidisciplinary care with long-term surveillance of anaemia and bleeding"}, {"text": "Ongoing"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "blue_rubber_bleb_nevus_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of blue rubber bleb naevus syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Soft blue rubbery skin nodules with chronic occult bleeding and iron-deficiency anaemia", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: acute haemorrhage, intussusception or volvulus, or consumptive coagulopathy?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent resuscitation and surgical review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "FBC, iron studies, D-dimer, fibrinogen; faecal occult blood", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "MRI for extent; upper, lower and capsule endoscopy for small-bowel lesions", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Multifocal venous malformations confirmed with gastrointestinal lesions?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Iron replacement; sirolimus for bleeding; endoscopic ablation of dominant lesions", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Maffucci syndrome, lymphatic malformation or angiodysplasia", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Most do well with iron and targeted treatment; extensive bowel disease is hard to control", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

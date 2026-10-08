@@ -149,5 +149,355 @@
       "caption": "Overview comparison matrix for albright hereditary osteodystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "albright_hereditary_osteodystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate and corrected calcium",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and hyperphosphataemia in the resistance form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact parathyroid hormone",
+          "cells": [
+            {
+              "text": "Raised despite hypocalcaemia in the resistance form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "TSH resistance when present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand and skeletal radiographs",
+          "cells": [
+            {
+              "text": "Brachydactyly and ectopic ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNAS molecular genetic testing with methylation studies where indicated",
+          "cells": [
+            {
+              "text": "GNAS variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family evaluation of the parent of origin",
+          "cells": [
+            {
+              "text": "Imprinting for counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "albright_hereditary_osteodystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary or surgical hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Low PTH rather than raised"
+            },
+            {
+              "text": "Intact PTH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Turner syndrome",
+          "cells": [
+            {
+              "text": "Short stature and short metacarpals"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "albright_hereditary_osteodystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral calcium with calcitriol or alfacalcidol",
+          "cells": [
+            {
+              "text": "Hypocalcaemia and hyperphosphataemia in the resistance form"
+            },
+            {
+              "text": "Active vitamin D analogues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "Hypothyroidism from TSH resistance"
+            },
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for additional hormone resistances",
+          "cells": [
+            {
+              "text": "Gonadotrophin and GHRH resistance"
+            },
+            {
+              "text": "As they emerge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of calcium, phosphate and PTH; avoidance of hypercalciuria",
+          "cells": [
+            {
+              "text": "Titration and nephrocalcinosis risk"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight management and support for obesity, short stature and brachydactyly",
+          "cells": [
+            {
+              "text": "Associated features"
+            },
+            {
+              "text": "Support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic or dermatological input for ectopic ossification",
+          "cells": [
+            {
+              "text": "Subcutaneous and ectopic ossifications"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and genetics multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Coordinated care"
+            },
+            {
+              "text": "Multidisciplinary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling on parent-of-origin imprinting",
+          "cells": [
+            {
+              "text": "Recurrence risk"
+            },
+            {
+              "text": "Testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "albright_hereditary_osteodystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Albright hereditary osteodystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Short stature, round face, brachydactyly and subcutaneous ossifications",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Tetany, seizures, prolonged QT or disabling ectopic ossification?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent calcium correction and endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, intact PTH, thyroid tests, hand radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised PTH with hypocalcaemia and GNAS variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral calcium with calcitriol or alfacalcidol; screen other resistances",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review hypoparathyroidism, Kenny-Caffey, Turner and vitamin D deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levothyroxine where TSH resistance causes hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor calcium, phosphate and PTH while avoiding hypercalciuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Weight management; orthopaedic or dermatological input for ossifications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Metabolic disturbance manageable; ectopic ossification and short stature persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

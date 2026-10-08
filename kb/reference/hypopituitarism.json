@@ -160,5 +160,495 @@
       "caption": "Overview comparison matrix for hypopituitarism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Generalized Hypopituitarism",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/generalized-hypopituitarism"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypopituitarism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Testing pituitary reserve",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Morning cortisol (7:30 to 9:00)",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Below 3.5 mcg/dL (96.6 nmol/L)",
+              "op": "<",
+              "value": 3.5
+            },
+            {
+              "text": "Strongly suggests cortisol deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Morning cortisol, exclusion",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Above 18 mcg/dL polyclonal, or above 15 mcg/dL monoclonal or LC-MS/MS",
+              "op": ">",
+              "value": 18
+            },
+            {
+              "text": "Excludes adrenal insufficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Short ACTH (cosyntropin) test peak",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Below 18 mcg/dL (500 nmol/L) polyclonal is abnormal",
+              "op": "<",
+              "value": 18
+            },
+            {
+              "text": "{{hy:Falsely normal in the first 2 to 4 weeks of secondary deficiency}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin tolerance test",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Cortisol rise above 7 mcg/dL or to above 18 mcg/dL when glucose below 40 mg/dL",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Contraindicated in coronary disease or epilepsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central hypothyroidism",
+          "cells": [
+            {
+              "text": "Low free T4 with low or normal TSH"
+            },
+            {
+              "text": "TSH alone misses it"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypogonadotropic hypogonadism",
+          "cells": [
+            {
+              "text": "Low sex steroid without raised LH or FSH"
+            },
+            {
+              "text": "Postmenopausal LH and FSH should be above 30 IU/L"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adult GH deficiency",
+          "unit": "ug/L",
+          "cells": [
+            {
+              "text": "Peak GH below 3 ug/L on insulin hypoglycaemia",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "Near-certain with 3 or more other deficiencies plus low IGF-1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Up to 5 times normal from stalk compression",
+              "op": "<=",
+              "value": 5
+            },
+            {
+              "text": "Does not prove a prolactinoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Mass, haemorrhage, stalk lesion or empty sella"
+            },
+            {
+              "text": "Lymphocytic hypophysitis can look like adenoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypopituitarism-ddx",
+      "kind": "ddx",
+      "title": "Causes and look-alikes of hypopituitarism",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary target-organ failure",
+          "cells": [
+            {
+              "text": "Trophic hormone high, not low"
+            },
+            {
+              "text": "TSH, LH and FSH, ACTH levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary adenoma",
+          "cells": [
+            {
+              "text": "Mass effect, gradual axis loss"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary apoplexy",
+          "cells": [
+            {
+              "text": "Sudden headache, visual loss, ophthalmoplegia"
+            },
+            {
+              "text": "Urgent MRI or CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sheehan syndrome",
+          "cells": [
+            {
+              "text": "Peripartum shock, failure of lactation"
+            },
+            {
+              "text": "Obstetric history plus axis tests"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphocytic hypophysitis",
+          "cells": [
+            {
+              "text": "Postpartum woman, high prolactin, new mass"
+            },
+            {
+              "text": "MRI and clinical context before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Checkpoint inhibitor hypophysitis",
+          "cells": [
+            {
+              "text": "Up to 20% on CTLA-4 inhibitors"
+            },
+            {
+              "text": "ACTH and cortisol, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infiltrative disease (sarcoidosis, haemochromatosis, LCH)",
+          "cells": [
+            {
+              "text": "Systemic features, often diabetes insipidus"
+            },
+            {
+              "text": "Systemic work-up and MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypopituitarism-treatment",
+      "kind": "treatment",
+      "title": "Treating hypopituitarism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydrocortisone",
+          "cells": [
+            {
+              "text": "ACTH deficiency"
+            },
+            {
+              "text": "{{hy:Start before levothyroxine to avoid adrenal crisis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules and emergency hydrocortisone",
+          "cells": [
+            {
+              "text": "All on glucocorticoid replacement"
+            },
+            {
+              "text": "Escalate for illness, surgery, trauma, dental work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "TSH deficiency"
+            },
+            {
+              "text": "Titrate to free T4, not TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex steroids",
+          "cells": [
+            {
+              "text": "Gonadotropin deficiency without fertility wish"
+            },
+            {
+              "text": "Gonadotropins when fertility desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "Confirmed adult GH deficiency"
+            },
+            {
+              "text": "Start 0.3 mg SC daily in women, 0.2 mg in men, 0.1 mg in older people; titrate to mid-normal IGF-1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "AVP deficiency (diabetes insipidus)"
+            },
+            {
+              "text": "Posterior pituitary involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apoplexy decompression",
+          "cells": [
+            {
+              "text": "Sudden visual loss, oculomotor palsy or falling consciousness"
+            },
+            {
+              "text": "Transsphenoidal surgery plus high-dose glucocorticoid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-radiation surveillance",
+          "cells": [
+            {
+              "text": "After pituitary or cranial radiotherapy"
+            },
+            {
+              "text": "Hormones at 3 and 6 months, then yearly for at least 10 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypopituitarism-dx-mgmt",
+      "title": "Diagnosis and management of hypopituitarism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigue, hypogonadism, low sodium, pituitary mass or apoplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden headache, visual loss or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Apoplexy: IV hydrocortisone, urgent imaging, surgical review",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Test ACTH and TSH axes first: 8 am cortisol, free T4, TSH",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Morning cortisol equivocal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Short ACTH or insulin tolerance test",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Check LH, FSH, sex steroid, prolactin, IGF-1",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pituitary MRI to find the cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace hydrocortisone first, then levothyroxine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Add sex steroids, GH and desmopressin as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Sick-day education and lifelong axis follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,336 @@
       "caption": "Overview comparison matrix for bartter syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bartter_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum potassium, bicarbonate, magnesium and chloride",
+          "cells": [
+            {
+              "text": "Alkalosis and electrolyte losses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Typically both elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary calcium-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Separates from Gitelman syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine electrolytes and screen for surreptitious diuretic use",
+          "cells": [
+            {
+              "text": "Diuretic exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing when diagnosis is uncertain",
+          "cells": [
+            {
+              "text": "Family counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartter_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gitelman syndrome",
+          "cells": [
+            {
+              "text": "Separated by urinary calcium-to-creatinine ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surreptitious loop diuretic use",
+          "cells": [
+            {
+              "text": "Separated by urine screen for diuretics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bartter_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral potassium supplementation",
+          "cells": [
+            {
+              "text": "To correct chronic hypokalaemia"
+            },
+            {
+              "text": "Chronic hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium-sparing diuretics",
+          "cells": [
+            {
+              "text": "Spironolactone or amiloride to reduce renal potassium wasting"
+            },
+            {
+              "text": "Renal potassium wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAID prostaglandin inhibition",
+          "cells": [
+            {
+              "text": "Indometacin to reduce salt wasting, polyuria and metabolic alkalosis"
+            },
+            {
+              "text": "Salt wasting and alkalosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium chloride and fluid replacement",
+          "cells": [
+            {
+              "text": "Generous replacement to counter renal salt wasting"
+            },
+            {
+              "text": "Renal salt wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium supplementation",
+          "cells": [
+            {
+              "text": "Where hypomagnesaemia coexists"
+            },
+            {
+              "text": "Hypomagnesaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte, renal and growth monitoring",
+          "cells": [
+            {
+              "text": "Renal ultrasound surveillance for nephrocalcinosis"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance and family assessment"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bartter_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Bartter syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypokalaemic alkalosis with raised renin and aldosterone in a child or adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Arrhythmia, profound weakness or severe dehydration?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium correction for severe hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes, renin and aldosterone, urinary calcium-to-creatinine ratio, diuretic screen, renal US",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypokalaemic alkalosis with high renin and aldosterone and no diuretic use?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Potassium supplementation with prostaglandin inhibition and salt replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and screen for diuretic or laxative abuse",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium-sparing diuretics to reduce potassium wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Magnesium supplementation where hypomagnesaemia coexists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal ultrasound surveillance for nephrocalcinosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

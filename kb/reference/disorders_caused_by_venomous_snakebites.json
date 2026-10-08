@@ -185,5 +185,566 @@
       "caption": "Overview comparison matrix for disorders caused by venomous snakebites and marine animal exposures."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Indian Pediatrics 2007, National Snakebite Management Protocol (India) editorial",
+      "url": "https://indianpediatrics.net/mar2007/mar-173-176.htm",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_caused_by_venomous_snakebites-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessment of snake envenomation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "20-minute whole-blood clotting test",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "{{hy:Blood still liquid at 20 min}}",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Venom-induced coagulopathy; viper bite"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dry bite",
+          "cells": [
+            {
+              "text": "Fang marks without envenomation"
+            },
+            {
+              "text": "About 20 to 25% of pit viper bites, up to 75% of sea snake bites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity: mild",
+          "cells": [
+            {
+              "text": "Local pain, bruising, non-progressive swelling"
+            },
+            {
+              "text": "Harrison pit viper grading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity: moderate",
+          "cells": [
+            {
+              "text": "Progressing swelling, systemic signs or lab abnormality"
+            },
+            {
+              "text": "Antivenom indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severity: severe",
+          "cells": [
+            {
+              "text": "Neurological dysfunction, respiratory distress, shock"
+            },
+            {
+              "text": "Antivenom and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe local envenomation",
+          "cells": [
+            {
+              "text": "Swelling crossing a joint or involving half the limb"
+            },
+            {
+              "text": "ASV indication even without systemic signs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neurotoxic signs",
+          "cells": [
+            {
+              "text": "Ptosis, dysphagia, descending paralysis"
+            },
+            {
+              "text": "Herald respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Labs",
+          "cells": [
+            {
+              "text": "CBC, PT, fibrinogen, D-dimer, CK, renal function, urine myoglobin"
+            },
+            {
+              "text": "Repeat for recurrent coagulopathy up to 2 to 3 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Limb circumference",
+          "cells": [
+            {
+              "text": "Three points every 15 min"
+            },
+            {
+              "text": "Until local effects stabilise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment pressure",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "30 to 40",
+              "range": [
+                30,
+                40
+              ]
+            },
+            {
+              "text": "Fasciotomy needed in under 1% of bites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_caused_by_venomous_snakebites-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of snakebite and marine envenomation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Dry bite or non-venomous snake",
+          "cells": [
+            {
+              "text": "No progression over observation"
+            },
+            {
+              "text": "Serial exam and 20WBCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Spreading erythema, fever"
+            },
+            {
+              "text": "Clinical course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis to venom or antivenom",
+          "cells": [
+            {
+              "text": "Urticaria, bronchospasm, hypotension"
+            },
+            {
+              "text": "Clinical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulism or Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Descending or ascending paralysis without bite"
+            },
+            {
+              "text": "History, nerve studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scombroid poisoning",
+          "cells": [
+            {
+              "text": "{{hy:Mimics allergy}}: flushing, urticaria after spoiled fish"
+            },
+            {
+              "text": "History; responds to antihistamines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciguatera",
+          "cells": [
+            {
+              "text": "GI upset then hot-cold reversal, loose-teeth feeling"
+            },
+            {
+              "text": "History of large reef fish"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paralytic shellfish or tetrodotoxin poisoning",
+          "cells": [
+            {
+              "text": "Rapid flaccid paralysis with intact mentation"
+            },
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_caused_by_venomous_snakebites-treatment",
+      "kind": "treatment",
+      "title": "Treatment of snakebite and marine envenomation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or detail"
+      ],
+      "rows": [
+        {
+          "parameter": "First aid",
+          "cells": [
+            {
+              "text": "All bites"
+            },
+            {
+              "text": "Immobilise limb, remove rings; no incision, suction or arterial tourniquet"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-snake venom (ASV)",
+          "cells": [
+            {
+              "text": "{{hy:Systemic envenomation or severe local swelling}}"
+            },
+            {
+              "text": "Initial 8 to 10 vials over 1 h, adults and children; no test dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repeat ASV, haemotoxic",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Repeat 20WBCT every 6 h"
+            },
+            {
+              "text": "Further ASV only if still non-clotting"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repeat ASV, neurotoxic",
+          "cells": [
+            {
+              "text": "No improvement or worse at 1 to 2 h"
+            },
+            {
+              "text": "Second and final dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neostigmine with atropine",
+          "cells": [
+            {
+              "text": "Postsynaptic (cobra-type) neurotoxicity"
+            },
+            {
+              "text": "Neostigmine test guides use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "Neurotoxic paralysis"
+            },
+            {
+              "text": "Patient may be aware while paralysed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline",
+          "cells": [
+            {
+              "text": "Antivenom reaction"
+            },
+            {
+              "text": "Skin testing and pretreatment not useful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood products",
+          "cells": [
+            {
+              "text": "Active bleeding"
+            },
+            {
+              "text": "Only after adequate antivenom"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "Acute kidney injury"
+            },
+            {
+              "text": "Rhabdomyolysis care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hot water immersion",
+          "cells": [
+            {
+              "text": "Stingray, stonefish"
+            },
+            {
+              "text": "Stonefish antivenom where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vinegar",
+          "cells": [
+            {
+              "text": "Box jellyfish and Irukandji"
+            },
+            {
+              "text": "Avoid for Physalia; no beta-blockers in Irukandji"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison favours species-specific antivenom with doses per product; the Indian protocol uses polyvalent ASV with the vial counts above."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_caused_by_venomous_snakebites-dx-mgmt",
+      "title": "Diagnosis and management of venomous snakebite",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Snakebite",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Immobilise limb, transfer; no incision or tourniquet",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "20WBCT, labs, serial limb and neuro checks",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Systemic signs or severe local swelling?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Observe at least 24 h, repeat 20WBCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ASV 8 to 10 vials over 1 h; adrenaline ready",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Neurotoxic or haemotoxic picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Neostigmine test, airway support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Improved at 1 to 2 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Second and final ASV dose",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "20WBCT still non-clotting at 6 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Repeat ASV dose",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Supportive care, renal monitoring, wound care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Neurotoxic"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Haemotoxic"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

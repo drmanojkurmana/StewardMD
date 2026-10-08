@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for deep gluteal syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "DeLee, Drez & Miller's Orthopaedic Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deep_gluteal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MR neurography of the sciatic nerve",
+          "cells": [
+            {
+              "text": "Confirms the entrapment site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar spine MRI",
+          "cells": [
+            {
+              "text": "Excludes a discogenic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dynamic ultrasound of the sciatic nerve",
+          "cells": [
+            {
+              "text": "Dynamic assessment; entrapment is often posture-dependent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided perineural diagnostic injection",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic response in the deep gluteal space"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_gluteal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lumbar radiculopathy",
+          "cells": [
+            {
+              "text": "Separated by lumbar spine MRI for a discogenic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Piriformis syndrome",
+          "cells": [
+            {
+              "text": "Anchoring on it misses other deep gluteal entrapment sites"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deep_gluteal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative care",
+          "cells": [
+            {
+              "text": "Avoid prolonged sitting; physiotherapy with sciatic nerve gliding and stretching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "NSAIDs and neuropathic agents for the neuropathic component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Image-guided perineural injection",
+          "cells": [
+            {
+              "text": "Local anaesthetic with corticosteroid or botulinum toxin to the piriformis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirm before invasive treatment",
+          "cells": [
+            {
+              "text": "MR neurography and lumbar imaging first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic decompression",
+          "cells": [
+            {
+              "text": "Selected patients with a clearly identified entrapment refractory to conservative care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling",
+          "cells": [
+            {
+              "text": "Recovery of a longstanding neurological deficit may be incomplete"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deep_gluteal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of deep gluteal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected deep gluteal syndrome: buttock pain with sciatic-type symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive weakness or foot drop, bladder or bowel change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: exclude cauda equina syndrome or a pelvic or presacral mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI pelvis and hip with MR neurography; lumbar spine MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MR neurography confirm sciatic nerve entrapment in the deep gluteal space?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lumbar radiculopathy, labral tear or sacroiliac dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid prolonged sitting; physiotherapy with sciatic nerve gliding",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "NSAIDs and neuropathic agents for pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Image-guided perineural injection, diagnostic and therapeutic",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic sciatic nerve decompression for selected refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with conservative care and injection; deficits may not fully recover",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

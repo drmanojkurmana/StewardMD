@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for cow's milk protein allergy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cows_milk_protein_allergy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Trial of dietary elimination and planned reintroduction",
+          "cells": [
+            {
+              "text": "Response to elimination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific IgE or skin prick testing",
+          "cells": [
+            {
+              "text": "IgE-mediated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supervised oral food challenge",
+          "cells": [
+            {
+              "text": "Tolerance or reaction confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool examination for blood",
+          "cells": [
+            {
+              "text": "Allergic proctocolitis when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth monitoring",
+          "cells": [
+            {
+              "text": "Nutritional status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cows_milk_protein_allergy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lactose intolerance",
+          "cells": [
+            {
+              "text": "Pitfall: confused with milk protein allergy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastro-oesophageal reflux disease",
+          "cells": [
+            {
+              "text": "Named look-alike of infant symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious gastroenteritis",
+          "cells": [
+            {
+              "text": "Named look-alike of diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cows_milk_protein_allergy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict elimination",
+          "cells": [
+            {
+              "text": "Extensively hydrolysed formula; amino-acid formula for severe or non-responsive cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal exclusion",
+          "cells": [
+            {
+              "text": "For breastfed infants, with maternal calcium and vitamin D"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline auto-injector",
+          "cells": [
+            {
+              "text": "For IgE-mediated disease with anaphylaxis risk, with an emergency plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamine",
+          "cells": [
+            {
+              "text": "Mild acute IgE-mediated reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietitian and growth monitoring",
+          "cells": [
+            {
+              "text": "Adequate nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Planned reintroduction",
+          "cells": [
+            {
+              "text": "Milk ladder or supervised oral food challenge for acquired tolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy referral",
+          "cells": [
+            {
+              "text": "Diagnostic uncertainty, severe reactions or multiple food allergies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cows_milk_protein_allergy-dx-mgmt",
+      "title": "Diagnosis and management of Cow's Milk Protein Allergy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cow's milk protein allergy: infant with reactions to milk exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (anaphylaxis, GI bleeding, faltering growth, shock)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency anaphylaxis treatment; urgent review for shock or bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dietary elimination trial; specific IgE or skin prick; oral food challenge",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does supervised oral food challenge reproduce the reaction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider lactose intolerance, reflux or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict elimination with extensively hydrolysed or amino-acid formula",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adrenaline auto-injector and emergency plan for IgE-mediated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietitian input and growth monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Planned reintroduction by milk ladder or oral food challenge",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most children achieve tolerance during the preschool years; IgE allergy can persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

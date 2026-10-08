@@ -153,5 +153,343 @@
       "caption": "Overview comparison matrix for activated pi3k-delta syndrome (apds)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "activated_pi3k_delta_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Reduced naive T cells with expanded senescent effector T cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins and specific antibody responses",
+          "cells": [
+            {
+              "text": "Often elevated IgM with reduced IgG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PI3K-AKT-mTOR pathway activity",
+          "cells": [
+            {
+              "text": "Pathway over-activity where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EBV and CMV viral load monitoring",
+          "cells": [
+            {
+              "text": "Persistent or severe herpesvirus infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PIK3CD and PIK3R1 targeted sequencing",
+          "cells": [
+            {
+              "text": "Gain-of-function or splice variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution chest imaging and lymphoid organ imaging",
+          "cells": [
+            {
+              "text": "Bronchiectasis and lymphoid organs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "activated_pi3k_delta_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic active EBV infection",
+          "cells": [
+            {
+              "text": "Persistent EBV without the PI3K-delta variant"
+            },
+            {
+              "text": "PIK3CD and PIK3R1 sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nodal lymphoma of other cause",
+          "cells": [
+            {
+              "text": "Rapidly enlarging or asymmetric nodes"
+            },
+            {
+              "text": "Imaging of lymphoid organs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "activated_pi3k_delta_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Leniolisib (selective PI3K-delta inhibition)",
+          "cells": [
+            {
+              "text": "Disease-specific therapy"
+            },
+            {
+              "text": "Targeted selective inhibition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sirolimus",
+          "cells": [
+            {
+              "text": "Alternative for lymphoproliferation"
+            },
+            {
+              "text": "mTOR inhibition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Dysregulated antibody response and impaired IgG"
+            },
+            {
+              "text": "Replacement therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial prophylaxis and antiviral therapy",
+          "cells": [
+            {
+              "text": "Bacterial infection and EBV or CMV disease"
+            },
+            {
+              "text": "Prompt treatment of infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance physiotherapy",
+          "cells": [
+            {
+              "text": "Bronchiectasis"
+            },
+            {
+              "text": "Aggressive treatment of exacerbations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for B-cell lymphoma",
+          "cells": [
+            {
+              "text": "EBV and CMV viral loads and lymphoid organ imaging"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Selected severe or transformation-prone cases"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "activated_pi3k_delta_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Activated PI3K-delta syndrome (APDS)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent sinopulmonary infection, bronchiectasis and lymphadenopathy in a young patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly enlarging or asymmetric nodes, or rising EBV load?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent lymphoma assessment and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lymphocyte subsets, immunoglobulins and EBV and CMV viral loads",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Senescent effector T-cell expansion with PIK3CD or PIK3R1 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start leniolisib, a selective PI3K-delta inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review CVID, ALPS, CTLA4 or LRBA deficiency and chronic EBV",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunoglobulin replacement and antimicrobial prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway clearance physiotherapy for bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lymphoma surveillance; sirolimus as alternative for lymphoproliferation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrent infection causes chronic morbidity; lymphoma is a major cause of death",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -233,5 +233,527 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Aortic Dissection",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/aortic-dissection",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aortic_dissection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical clues, imaging accuracy and classification of aortic dissection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or accuracy",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Pain",
+          "cells": [
+            {
+              "text": "Sudden severe tearing or knifelike chest or interscapular pain that migrates"
+            },
+            {
+              "text": "Classic presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse or BP difference between limbs",
+          "cells": [
+            {
+              "text": "Pulse deficit or unequal BP"
+            },
+            {
+              "text": "{{hy:Strong clue to dissection}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "New aortic regurgitation murmur",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "In over 50% of proximal dissections"
+            },
+            {
+              "text": "Suggests type A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertension",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in about 70%"
+            },
+            {
+              "text": "Common association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 90% to 100%, specificity 87% to 100%",
+              "range": [
+                90,
+                100
+              ]
+            },
+            {
+              "text": "First-line test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transoesophageal echo",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 97% to 99%",
+              "range": [
+                97,
+                99
+              ]
+            },
+            {
+              "text": "Bedside in unstable patients; misses arch"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transthoracic echo",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 60% to 85%",
+              "range": [
+                60,
+                85
+              ]
+            },
+            {
+              "text": "Negative TTE does not exclude dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR angiography",
+          "cells": [
+            {
+              "text": "Nearly 100% sensitive and specific"
+            },
+            {
+              "text": "Slow; for stable patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "cells": [
+            {
+              "text": "Widened mediastinum, left pleural effusion"
+            },
+            {
+              "text": "Supportive only"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECG and troponin",
+          "cells": [
+            {
+              "text": "Help separate from MI"
+            },
+            {
+              "text": "Inferior STEMI with new AR can mean dissection into the right coronary"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stanford A",
+          "cells": [
+            {
+              "text": "Involves the ascending aorta"
+            },
+            {
+              "text": "Surgical"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stanford B",
+          "cells": [
+            {
+              "text": "Confined to arch or descending aorta"
+            },
+            {
+              "text": "Usually medical"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "aortic_dissection-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic aortic dissection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "{{hy:Ischaemic ECG; thrombolysis in a dissection can be fatal}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Hypoxia, dyspnoea; CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericarditis",
+          "cells": [
+            {
+              "text": "Pleuritic positional pain, rub, diffuse ST elevation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal spasm",
+          "cells": [
+            {
+              "text": "Can mimic angina"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intramural haematoma or penetrating aortic ulcer",
+          "cells": [
+            {
+              "text": "Acute aortic syndrome variants seen on CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke",
+          "cells": [
+            {
+              "text": "Dissection can present with hemiplegia from carotid involvement"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "aortic_dissection-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute aortic dissection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV beta-blocker (metoprolol, esmolol or labetalol)",
+          "cells": [
+            {
+              "text": "{{hy:First-line in all}}"
+            },
+            {
+              "text": "Target heart rate 60 to 80/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood pressure target",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Systolic <=120 mm Hg",
+              "op": "<=",
+              "value": 120
+            },
+            {
+              "text": "Or lowest pressure that keeps organs perfused"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Verapamil or diltiazem",
+          "cells": [
+            {
+              "text": "Beta-blocker not tolerated"
+            },
+            {
+              "text": "Nondihydropyridine CCB"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitroprusside infusion",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "SBP stays >110 after rate control",
+              "op": ">",
+              "value": 110
+            },
+            {
+              "text": "Never without a beta-blocker or nondihydropyridine CCB"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Reduces pain and shear stress"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emergency open surgery",
+          "cells": [
+            {
+              "text": "Stanford type A"
+            },
+            {
+              "text": "Endovascular only if open repair impossible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Medical therapy alone",
+          "cells": [
+            {
+              "text": "Uncomplicated stable type B"
+            },
+            {
+              "text": "Long-term BP control"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TEVAR",
+          "cells": [
+            {
+              "text": "Complicated type B: malperfusion, refractory pain or hypertension, enlargement, extension, rupture"
+            },
+            {
+              "text": "Endovascular repair"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Drug doses are not stated in the source opened. Untreated mortality is about 1% to 2% per hour early; treated in-hospital mortality is about 20% for type A and 10% for type B."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aortic_dissection-dx-mgmt",
+      "title": "Diagnosis and management of acute aortic dissection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden tearing chest or back pain, pulse or BP difference",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG and troponin; avoid thrombolysis until excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Haemodynamically stable?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bedside TEE",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CT angiography",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Dissection confirmed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Look for MI, PE, pericarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV beta-blocker to HR 60 to 80; SBP <=120; analgesia",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Stanford type?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Type A: emergency surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Complicated type B?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "TEVAR",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Medical therapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "A"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "B"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
   ]
 }

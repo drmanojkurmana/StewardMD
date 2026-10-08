@@ -154,5 +154,336 @@
       "caption": "Overview comparison matrix for catecholaminergic polymorphic ventricular tachycardia type 2."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical cardiology and genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "catecholaminergic_polymorphic_vt_type_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Exercise stress testing",
+          "cells": [
+            {
+              "text": "Reproduces bidirectional or polymorphic ventricular ectopy and tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory ECG monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia during daily and stressful activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resting 12-lead ECG",
+          "cells": [
+            {
+              "text": "Characteristically normal; helps exclude long QT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Confirms a structurally normal heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of CASQ2",
+          "cells": [
+            {
+              "text": "Biallelic CASQ2 variants; RYR2 and other CPVT genes on the panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "catecholaminergic_polymorphic_vt_type_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CPVT type 1",
+          "cells": [
+            {
+              "text": "RYR2, autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andersen-Tawil syndrome",
+          "cells": [
+            {
+              "text": "KCNJ2 with bidirectional ventricular tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long QT syndrome",
+          "cells": [
+            {
+              "text": "Exercise-triggered, particularly type 1"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "catecholaminergic_polymorphic_vt_type_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-selective beta-blockade",
+          "cells": [
+            {
+              "text": "Nadolol, a non-selective agent, as the cornerstone of therapy"
+            },
+            {
+              "text": "Suppresses adrenergically triggered arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flecainide",
+          "cells": [
+            {
+              "text": "Add to suppress calcium-driven ventricular ectopy"
+            },
+            {
+              "text": "When beta-blockade is insufficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid exertion and emotional stress",
+          "cells": [
+            {
+              "text": "Avoid strenuous exertion and intense emotional stress"
+            },
+            {
+              "text": "Arrhythmic triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left cardiac sympathetic denervation",
+          "cells": [
+            {
+              "text": "For drug-refractory disease"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "For aborted sudden death or recurrent syncope despite optimal drugs"
+            },
+            {
+              "text": "Use with adequate beta-blockade; shocks may trigger storms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Exercise and ambulatory monitoring to confirm control"
+            },
+            {
+              "text": "Guides treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Test parents as carriers and screen siblings for CASQ2 variants"
+            },
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "catecholaminergic_polymorphic_vt_type_2-dx-mgmt",
+      "title": "Diagnosis and management of Catecholaminergic Polymorphic Ventricular Tachycardia Type 2",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CPVT type 2: exertion-triggered collapse in a child with a normal heart",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bidirectional VT, family sudden death, electrical storm)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent arrhythmia care; manage shock storm or cardiac arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exercise stress testing, ambulatory ECG, echo, cardiac MRI and CASQ2 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bidirectional or polymorphic VT with biallelic CASQ2 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-selective beta-blocker, particularly nadolol, as cornerstone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check RYR2-related CPVT, Andersen-Tawil syndrome and long QT",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add flecainide when beta-blockade alone is insufficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid strenuous exertion and intense emotional stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Left cardiac sympathetic denervation for drug-refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early treatment gives a favourable outcome; untreated sudden death risk is high",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

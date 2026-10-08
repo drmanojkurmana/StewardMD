@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for cyanide poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cyanide_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial and mixed venous blood gases with lactate",
+          "cells": [
+            {
+              "text": "Acidosis and oxygen extraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carboxyhaemoglobin and co-oximetry",
+          "cells": [
+            {
+              "text": "Concurrent carbon monoxide in fire victims"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basic metabolic panel and anion gap",
+          "cells": [
+            {
+              "text": "High anion-gap acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-blood cyanide concentration",
+          "cells": [
+            {
+              "text": "Later confirmation, not acute decisions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyanide_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbon monoxide poisoning",
+          "cells": [
+            {
+              "text": "Co-exposure in smoke inhalation; co-oximetry separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydrogen sulphide poisoning",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic shock with profound lactic acidosis",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyanide_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Empirical hydroxocobalamin",
+          "cells": [
+            {
+              "text": "Chelates cyanide; given without waiting for confirmatory levels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium thiosulphate",
+          "cells": [
+            {
+              "text": "Sulphur donor for rhodanese detoxification; alone or after hydroxocobalamin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methaemoglobin-inducing agents",
+          "cells": [
+            {
+              "text": "Sodium nitrite or amyl nitrite for isolated poisoning only; avoid in smoke inhalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and airway",
+          "cells": [
+            {
+              "text": "High-flow oxygen, airway protection and ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulatory and seizure support",
+          "cells": [
+            {
+              "text": "IV fluids, vasopressors, benzodiazepines; treat anion-gap acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Cardiac monitoring with serial gases and lactate; decontamination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicology involvement",
+          "cells": [
+            {
+              "text": "Poisons centre; monitor for delayed neurological sequelae"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cyanide_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Cyanide poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cyanide poisoning: collapse or seizures after smoke or chemical exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (falling consciousness, high lactate, shock, apnoea or arrest)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate empirical hydroxocobalamin; airway and oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood gases with lactate; co-oximetry; anion gap; ECG; cyanide level later",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the clinical picture with high anion-gap acidosis support cyanide toxicity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider carbon monoxide, hydrogen sulphide or septic shock",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Empirical hydroxocobalamin without waiting for levels",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium thiosulphate alone or after hydroxocobalamin",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nitrites only for isolated poisoning, not smoke inhalation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "High-flow oxygen, airway protection and circulatory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated severe poisoning can be fatal within minutes; prompt antidote aids recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,265 @@
       "caption": "Overview comparison matrix for colchicine toxicity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "colchicine_toxicity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial full blood count",
+          "cells": [
+            {
+              "text": "Evolving bone-marrow suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase",
+          "cells": [
+            {
+              "text": "Rhabdomyolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation profile, troponin and ECG",
+          "cells": [
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colchicine_toxicity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antidote",
+          "cells": [
+            {
+              "text": "No widely available antidote; colchicine-specific Fab remains investigational"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early decontamination",
+          "cells": [
+            {
+              "text": "Activated charcoal for early presentation after significant ingestion; airway protection as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive resuscitation",
+          "cells": [
+            {
+              "text": "Intravenous fluids for GI losses; vasopressors and inotropes in intensive care for cardiovascular collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-marrow support",
+          "cells": [
+            {
+              "text": "G-CSF during the pancytopenic phase; transfusion and neutropenic-sepsis precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and metabolic correction",
+          "cells": [
+            {
+              "text": "Calcium, phosphate, glucose and acidosis; renal replacement largely ineffective because of large volume of distribution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Full blood count, renal and liver function, creatine kinase, lactate, troponin and ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Do not discharge early",
+          "cells": [
+            {
+              "text": "Apparent recovery after the GI phase may be followed by multi-organ failure; admit and observe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early escalation",
+          "cells": [
+            {
+              "text": "Critical care and clinical toxicology for significant ingestions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "colchicine_toxicity-dx-mgmt",
+      "title": "Diagnosis and management of Colchicine toxicity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected colchicine toxicity: GI upset after ingestion or plant or tablet exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (large ingestion, falling counts, shock, AKI or lactic acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to critical care and clinical toxicology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial FBC, renal and liver function, lactate, CK, troponin and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the patient stable on serial monitoring with no multi-organ failure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Not reassured by GI improvement; keep observing and repeat the labs",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early activated charcoal and airway protection after significant ingestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV fluids; vasopressors and inotropes for cardiovascular collapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "G-CSF for pancytopenia; correct electrolytes, calcium and acidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Significant overdose: high mortality from cardiovascular collapse and multi-organ failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

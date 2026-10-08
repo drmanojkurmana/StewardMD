@@ -142,5 +142,77 @@
       "caption": "Overview comparison matrix for biceps tendon rupture."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biceps_tendon_rupture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in biceps tendon rupture",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical bulge", "cells": [{"text": "Distal Popeye bulge in proximal rupture; proximal retracted bulge in distal rupture"}], "cite": "c1"},
+        {"parameter": "Hook test", "cells": [{"text": "Inability to hook a finger under the distal tendon suggests complete distal rupture"}], "cite": "c1"},
+        {"parameter": "Strength assessment", "cells": [{"text": "Loss of supination and flexion strength in distal rupture"}], "cite": "c1"},
+        {"parameter": "Ultrasound", "cells": [{"text": "Confirms and localises the rupture"}], "cite": "c1"},
+        {"parameter": "MRI (flexed-abducted-supinated view)", "cells": [{"text": "Evaluates the distal tendon"}], "cite": "c1"},
+        {"parameter": "Radiographs", "cells": [{"text": "Excludes bony avulsion"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biceps_tendon_rupture-treatment",
+      "kind": "treatment",
+      "title": "Management options in biceps tendon rupture",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Proximal rupture, non-operative", "cells": [{"text": "Analgesia, relative rest and progressive physiotherapy"}, {"text": "Cosmetic Popeye deformity accepted; minimal functional loss"}], "cite": "c1"},
+        {"parameter": "Distal rupture, surgical reattachment", "cells": [{"text": "Early reattachment to the radial tuberosity"}, {"text": "Especially in active patients; restores supination and flexion"}], "cite": "c1"},
+        {"parameter": "Analgesia", "cells": [{"text": "Simple analgesics or non-steroidal anti-inflammatory drugs with early graded rehabilitation"}, {"text": "Symptom control"}], "cite": "c1"},
+        {"parameter": "Prompt assessment", "cells": [{"text": "Hook test and imaging, with timely surgical referral"}, {"text": "Chronic retracted distal tears are far harder to repair"}], "cite": "c1"},
+        {"parameter": "Postoperative rehabilitation", "cells": [{"text": "Staged range-of-movement and strengthening protocols"}, {"text": "Structured recovery after repair"}], "cite": "c1"},
+        {"parameter": "Orthopaedic or sports-medicine referral", "cells": [{"text": "Operative versus conservative decision"}, {"text": "Guided by functional demand"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biceps_tendon_rupture-dx-mgmt",
+      "title": "Diagnosis and management of biceps tendon rupture",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Sudden pop and antecubital pain; proximal retracted bulge (distal) or Popeye bulge (proximal)", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: neurovascular symptoms, rapidly enlarging haematoma or tendon-weakening drugs?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent neurovascular check and orthopaedic review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Hook test and strength testing of supination and elbow flexion", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Ultrasound or MRI (flexed-abducted-supinated view); radiographs to exclude avulsion", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Complete distal rupture confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Early surgical reattachment to the radial tuberosity, especially in active patients", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Proximal or partial tear: analgesia, relative rest and progressive physiotherapy", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Staged postoperative rehabilitation", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Early distal repair restores supination and flexion strength", "cite": "c1"},
+        {"id": "n11", "type": "outcome", "text": "Proximal rupture: cosmetic deformity with good function and minimal strength loss", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"},
+        {"from": "n8", "to": "n11", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for akinetic mutism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Adams and Victor's Principles of Neurology / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "akinetic_mutism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI brain for mesial frontal, paramedian thalamic or midbrain lesions",
+          "cells": [
+            {
+              "text": "Localises the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging for anterior cerebral or communicating artery pathology",
+          "cells": [
+            {
+              "text": "Vascular cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Non-convulsive status and arousal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis where infection or inflammation suspected",
+          "cells": [
+            {
+              "text": "Infective or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for hydrocephalus",
+          "cells": [
+            {
+              "text": "Shunting need"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bloods and metabolic screen",
+          "cells": [
+            {
+              "text": "Metabolic contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "akinetic_mutism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-convulsive status epilepticus",
+          "cells": [
+            {
+              "text": "Unresponsiveness from seizure activity"
+            },
+            {
+              "text": "Electroencephalography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe depression with psychomotor retardation",
+          "cells": [
+            {
+              "text": "Psychomotor retardation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "akinetic_mutism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treatment of the underlying cause",
+          "cells": [
+            {
+              "text": "CSF diversion for hydrocephalus, securing a ruptured aneurysm, or tumour or infection"
+            },
+            {
+              "text": "Cause-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dopaminergic therapy (bromocriptine, levodopa or amantadine)",
+          "cells": [
+            {
+              "text": "Restores drive"
+            },
+            {
+              "text": "Dopamine agonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive nursing care",
+          "cells": [
+            {
+              "text": "Nutrition, hydration, pressure areas, bowel and bladder"
+            },
+            {
+              "text": "Immobile patient care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venous thromboembolism prophylaxis and physiotherapy",
+          "cells": [
+            {
+              "text": "Akinetic state risks"
+            },
+            {
+              "text": "Prevents contractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion and treatment of non-convulsive status and metabolic contributors",
+          "cells": [
+            {
+              "text": "Mimics and worsens the state"
+            },
+            {
+              "text": "Treat contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech, occupational and physical therapy",
+          "cells": [
+            {
+              "text": "Re-initiation of purposeful activity"
+            },
+            {
+              "text": "Encourages activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and neuropsychiatric follow-up",
+          "cells": [
+            {
+              "text": "Recovery of drive"
+            },
+            {
+              "text": "Ongoing follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "akinetic_mutism-dx-mgmt",
+      "title": "Diagnosis and management of Akinetic mutism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Profound loss of spontaneous movement and speech with eyes open",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute deterioration, fever or signs of raised pressure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurosurgical and infectious review; treat hydrocephalus or bleed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for mesial frontal, thalamic or midbrain lesion; EEG; vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Non-convulsive status or hydrocephalus found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the cause, then dopaminergic therapy to restore drive",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review structural, depressive and parkinsonian causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Shunting or CSF diversion for hydrocephalus when present",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dopamine agonists such as bromocriptine, levodopa or amantadine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nursing care, VTE prophylaxis, physiotherapy against contractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery varies with cause; hydrocephalus correction and dopaminergic therapy help",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

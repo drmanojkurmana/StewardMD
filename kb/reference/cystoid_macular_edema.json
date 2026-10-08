@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for cystoid macular edema."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystoid_macular_edema-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Intraretinal cysts and central macular thickness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Petalloid leakage when uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Underlying vascular or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug and surgical history",
+          "cells": [
+            {
+              "text": "Prostaglandin analogue use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic evaluation for diabetes or vascular disease",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystoid_macular_edema-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic macular oedema",
+          "cells": [
+            {
+              "text": "Named look-alike; systemic evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central serous chorioretinopathy",
+          "cells": [
+            {
+              "text": "Named look-alike with subretinal fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Macular oedema from retinal vein occlusion",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystoid_macular_edema-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical NSAID and corticosteroid drops",
+          "cells": [
+            {
+              "text": "For post-surgical (Irvine-Gass) oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periocular or intravitreal steroid",
+          "cells": [
+            {
+              "text": "Persistent or refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF or laser",
+          "cells": [
+            {
+              "text": "Diabetic or vein occlusion oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uveitis control",
+          "cells": [
+            {
+              "text": "Anti-inflammatory and immunosuppressive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop prostaglandin drops",
+          "cells": [
+            {
+              "text": "If implicated as a trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitrectomy",
+          "cells": [
+            {
+              "text": "Where traction or membrane contributes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT monitoring",
+          "cells": [
+            {
+              "text": "Central thickness and cyst resolution"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystoid_macular_edema-dx-mgmt",
+      "title": "Diagnosis and management of Cystoid macular edema",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cystoid macular oedema: poor central vision after cataract surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (progressive loss, bilateral oedema, uveitis, neovascularisation)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retina review for neovascularisation or detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT for intraretinal cysts; fluorescein angiography; fundus exam; drug history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does OCT confirm intraretinal cysts with central thickening?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider diabetic oedema, CSC or vein occlusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Topical NSAID with corticosteroid drops for post-surgical oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to periocular or intravitreal steroid for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anti-VEGF or laser for diabetic or vein occlusion oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stop implicated prostaglandin drops; OCT monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Post-surgical oedema often resolves with treatment; diabetic and vein oedema vary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

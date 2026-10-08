@@ -155,5 +155,314 @@
       "caption": "Overview comparison matrix for combined pituitary hormone deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrine genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "combined_pituitary_hormone_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Baseline anterior pituitary profile",
+          "cells": [
+            {
+              "text": "Further axes commonly fail over subsequent years"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Gland size, stalk and posterior pituitary bright spot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with optic disc examination",
+          "cells": [
+            {
+              "text": "Midline or optic-nerve defect when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph",
+          "cells": [
+            {
+              "text": "Skeletal maturation and growth potential"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "combined_pituitary_hormone_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Craniopharyngioma and other sellar tumours",
+          "cells": [
+            {
+              "text": "Rapidly evolving visual failure or headache suggests an expanding lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septo-optic dysplasia and midline malformations",
+          "cells": [
+            {
+              "text": "Midline defect on MRI or optic-disc examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated growth hormone deficiency",
+          "cells": [
+            {
+              "text": "Progresses to further axis involvement over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "combined_pituitary_hormone_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Glucocorticoid first",
+          "cells": [
+            {
+              "text": "Hydrocortisone commenced before levothyroxine to avoid precipitating adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "For thyroid-stimulating hormone deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recombinant growth hormone",
+          "cells": [
+            {
+              "text": "For growth-hormone deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex-steroid replacement",
+          "cells": [
+            {
+              "text": "Where the gonadal axis is deficient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin",
+          "cells": [
+            {
+              "text": "For coexisting cranial diabetes insipidus, with fluid balance monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day rules",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone for illness; steroid emergency card"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "For newly evolving deficiencies; growth and puberty monitoring in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "Pituitary transcription-factor genes; counselling for heritable forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "combined_pituitary_hormone_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Combined pituitary hormone deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected combined pituitary deficiency: growth failure, hypogonadism, hypoglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal hypoglycaemia, adrenal crisis, visual failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: immediate glucocorticoid for adrenal crisis; check for sellar lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anterior pituitary profile; pituitary MRI; genetic testing; ophthalmology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is more than one pituitary axis deficient on testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated deficiency; reassess as further axes may fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Hydrocortisone before levothyroxine to avoid precipitating adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levothyroxine and recombinant growth hormone as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Desmopressin for coexisting diabetes insipidus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sick-day rules and a steroid emergency card",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With timely diagnosis and sequenced replacement, most achieve near-normal growth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

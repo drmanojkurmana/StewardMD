@@ -220,5 +220,558 @@
       "caption": "Diagnostic and clinical overview matrix for myasthenic crisis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Myasthenia Gravis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/peripheral-nervous-system-and-motor-unit-disorders/myasthenia-gravis"
+    },
+    {
+      "id": "c3",
+      "label": "Mount Sinai Emergency Medicine, Myasthenia Gravis: Disease Overview",
+      "kind": "web",
+      "url": "https://sinaiem.org/?p=19001"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myasthenic_crisis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising myasthenic crisis and confirming MG",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Crisis definition",
+          "cells": [
+            {
+              "text": "Weakness needing intubation or noninvasive ventilation to avoid intubation"
+            },
+            {
+              "text": "{{hy:Lesser worsening is an exacerbation, not a crisis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forced vital capacity",
+          "unit": "mL/kg",
+          "cells": [
+            {
+              "text": "Concerning below 1 L or below 20 to 25 mL/kg",
+              "range": [
+                20,
+                25
+              ]
+            },
+            {
+              "text": "Trend serially; do not intubate on FVC alone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Negative inspiratory force",
+          "unit": "cm H2O",
+          "cells": [
+            {
+              "text": "Concerning if weaker than 20 cm H2O",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "Effort dependent; less reliable in a tired patient"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pulse oximetry and gases",
+          "cells": [
+            {
+              "text": "Hypoxaemia or CO2 retention"
+            },
+            {
+              "text": "Late signs; intubate for severe distress"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bulbar and neck weakness",
+          "cells": [
+            {
+              "text": "Dysphagia, nasal speech, head drop"
+            },
+            {
+              "text": "Aspiration and airway risk, prominent in MuSK MG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AChR antibodies",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 80 to 90% of generalised and about 50% of ocular MG",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "Level does not track severity; negative test does not exclude MG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MuSK antibodies",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 30 to 60% of AChR-negative patients",
+              "range": [
+                30,
+                60
+              ]
+            },
+            {
+              "text": "MuSK MG may respond poorly or worsen with anticholinesterases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Repetitive nerve stimulation at 2 to 3 Hz",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "CMAP decrement over 10%",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Seen in about 60%; stop anticholinesterase 12 to 24 h before"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Single-fibre EMG",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Abnormal in over 95%",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Sensitive but not specific"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ice pack test",
+          "cells": [
+            {
+              "text": "Ice on closed lids for 2 minutes; ptosis improves"
+            },
+            {
+              "text": "Sensitivity about 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest CT or MRI",
+          "cells": [
+            {
+              "text": "Thymic hyperplasia or thymoma"
+            },
+            {
+              "text": "Thymoma in about 10% of MG"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "AChR positivity: Merck gives 80 to 90% of generalised MG, Harrison 22e gives about 85%. Sinai EM gives FVC concern below 20 to 25 mL/kg and no fixed intubation cutoff."
+    },
+    {
+      "id": "myasthenic_crisis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic myasthenic crisis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cholinergic crisis",
+          "cells": [
+            {
+              "text": "Fasciculations, lacrimation, salivation, diarrhoea after excess anticholinesterase"
+            },
+            {
+              "text": "Clinical; stop anticholinesterase and support breathing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lambert-Eaton myasthenic syndrome",
+          "cells": [
+            {
+              "text": "Proximal leg weakness, absent reflexes, dry mouth; strength improves with effort"
+            },
+            {
+              "text": "{{hy:Increment after high-rate stimulation or brief exercise}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulism",
+          "cells": [
+            {
+              "text": "Bulbar weakness with dilated, poorly reactive pupils and autonomic features"
+            },
+            {
+              "text": "CMAP increases after high-frequency stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Checkpoint inhibitor myositis or myocarditis",
+          "cells": [
+            {
+              "text": "Ocular and bulbar weakness after immunotherapy"
+            },
+            {
+              "text": "No decrement on repetitive nerve stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid disease",
+          "cells": [
+            {
+              "text": "Graves disease can mimic or aggravate MG"
+            },
+            {
+              "text": "Thyroid function tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intracranial mass",
+          "cells": [
+            {
+              "text": "Compressive lesion causing diplopia, such as sphenoid ridge meningioma"
+            },
+            {
+              "text": "MRI brain and orbits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital myasthenic syndrome",
+          "cells": [
+            {
+              "text": "Onset in infancy or childhood, not immune"
+            },
+            {
+              "text": "AChR and MuSK antibodies absent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "myasthenic_crisis-treatment",
+      "kind": "treatment",
+      "title": "Managing myasthenic crisis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "Severe distress, hypoxaemia, poor effort or CO2 retention"
+            },
+            {
+              "text": "BiPAP for mild to moderate distress; intubate for severe"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Rapid sequence intubation",
+          "cells": [
+            {
+              "text": "Half-dose nondepolarising paralytic, for example rocuronium 0.6 mg/kg"
+            },
+            {
+              "text": "Succinylcholine may fail with reduced receptor density"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Find and treat the trigger",
+          "cells": [
+            {
+              "text": "{{hy:Infection is the commonest trigger}}"
+            },
+            {
+              "text": "Treat as an immunocompromised host; review drugs and recent taper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV immunoglobulin",
+          "cells": [
+            {
+              "text": "400 mg/kg once daily for 5 days"
+            },
+            {
+              "text": "About 70% improve in 1 to 2 weeks; effect lasts 1 to 2 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Course over 7 to 14 days"
+            },
+            {
+              "text": "Effect similar to IVIG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticholinesterase",
+          "cells": [
+            {
+              "text": "If deterioration after initial response, stop for several days"
+            },
+            {
+              "text": "Possible cholinergic crisis; neostigmine replaces oral pyridostigmine if swallowing fails"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Little immediate effect; over half worsen acutely on high doses"
+            },
+            {
+              "text": "Start prednisone 10 mg daily, rising 10 mg weekly to 60 mg, under neurology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid precipitating drugs",
+          "cells": [
+            {
+              "text": "Aminoglycosides, quinine, magnesium sulfate, procainamide, calcium channel blockers, checkpoint inhibitors"
+            },
+            {
+              "text": "Harrison also lists fluoroquinolones, macrolides, beta-blockers"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myasthenic_crisis-dx-mgmt",
+      "title": "Diagnosis and management of myasthenic crisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known or suspected MG with worsening bulbar or breathing weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Serial FVC and NIF, gases, swallow and neck strength",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe distress, hypoxaemia or CO2 retention?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Intubate with half-dose nondepolarising paralytic",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FVC below 20 to 25 mL/kg or NIF weaker than 20 cm H2O?",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ICU care; BiPAP if secretions are cleared",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Exacerbation: ward monitoring, trend FVC and NIF",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Fasciculations, salivation, diarrhoea after high anticholinesterase dose?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cholinergic crisis: stop anticholinesterase, support breathing",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Search for infection and stop precipitating drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "IVIG 400 mg/kg daily for 5 days or plasma exchange",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Neurology: steroids started cautiously, thymoma imaging",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Wean ventilation as FVC and NIF recover",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

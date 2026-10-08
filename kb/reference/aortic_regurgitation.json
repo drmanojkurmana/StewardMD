@@ -149,5 +149,503 @@
       "caption": "Overview comparison matrix for aortic regurgitation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Aortic Regurgitation",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/valvular-disorders/aortic-regurgitation",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aortic_regurgitation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Echo criteria for severe aortic regurgitation and key signs",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Severe AR value",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Central jet width",
+          "unit": "% of LVOT",
+          "cells": [
+            {
+              "text": ">65%",
+              "op": ">",
+              "value": 65
+            },
+            {
+              "text": "Colour Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vena contracta",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">0.6",
+              "op": ">",
+              "value": 0.6
+            },
+            {
+              "text": "Colour Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regurgitant volume",
+          "unit": "mL/beat",
+          "cells": [
+            {
+              "text": ">=60",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regurgitant fraction",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">=50",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Effective regurgitant orifice",
+          "unit": "cm2",
+          "cells": [
+            {
+              "text": ">=0.3",
+              "op": ">=",
+              "value": 0.3
+            },
+            {
+              "text": "Quantitative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Descending aorta flow",
+          "cells": [
+            {
+              "text": "{{hy:Holodiastolic flow reversal}}"
+            },
+            {
+              "text": "Proximal descending thoracic aorta"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Murmur",
+          "cells": [
+            {
+              "text": "High-pitched blowing decrescendo diastolic, left sternal border, sitting forward in expiration"
+            },
+            {
+              "text": "Louder at right sternal border suggests root disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse pressure",
+          "cells": [
+            {
+              "text": "Wide in chronic severe AR"
+            },
+            {
+              "text": "Acute AR: only slight widening with tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Austin Flint murmur",
+          "cells": [
+            {
+              "text": "Low-pitched mid to late diastolic rumble"
+            },
+            {
+              "text": "Not true mitral stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "LVH with lateral strain pattern"
+            },
+            {
+              "text": "Supports chronic volume overload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "LV volumes, aorta, fibrosis"
+            },
+            {
+              "text": "When echo is limited"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aortic_regurgitation-ddx",
+      "kind": "ddx",
+      "title": "Causes and look-alikes of aortic regurgitation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic dissection (acute AR)",
+          "cells": [
+            {
+              "text": "{{hy:Sudden AR with chest pain; surgical emergency}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infective endocarditis",
+          "cells": [
+            {
+              "text": "Acute or chronic AR with fever and vegetations"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bicuspid valve or degenerative root disease",
+          "cells": [
+            {
+              "text": "Commonest chronic adult causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aortic root aneurysm, Marfan or Ehlers-Danlos",
+          "cells": [
+            {
+              "text": "Murmur louder at right sternal border"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatic heart disease",
+          "cells": [
+            {
+              "text": "Often combined AS and AR, mitral involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic stenosis",
+          "cells": [
+            {
+              "text": "Systolic ejection murmur in AR alone does not mean AS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitral regurgitation",
+          "cells": [
+            {
+              "text": "Pansystolic apical murmur; can coexist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory aortitis (spondyloarthropathy, Takayasu, giant cell arteritis, syphilis)",
+          "cells": [
+            {
+              "text": "Rare causes with systemic features"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "aortic_regurgitation-treatment",
+      "kind": "treatment",
+      "title": "Management of aortic regurgitation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aortic valve replacement or repair",
+          "cells": [
+            {
+              "text": "{{hy:Severe AR with symptoms}}"
+            },
+            {
+              "text": "Operative mortality about 1 to 2% for isolated AVR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Valve surgery for LV dysfunction",
+          "cells": [
+            {
+              "text": "Severe AR with LVEF <=55%, LVESD >50 mm or >25 mm/m2",
+              "op": "<=",
+              "value": 55
+            },
+            {
+              "text": "Surgery even if asymptomatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Valve surgery for progressive change",
+          "cells": [
+            {
+              "text": "3 serial studies: LVEF falling to 55 to 60% or LVEDD >65 mm"
+            },
+            {
+              "text": "Consider before irreversible dysfunction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ascending aorta replacement",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Diameter >55 (lower in Marfan or bicuspid with risk)",
+              "op": ">",
+              "value": 55
+            },
+            {
+              "text": ">=45 mm if surgery done for other reasons"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Emergency surgery",
+          "cells": [
+            {
+              "text": "Acute severe AR"
+            },
+            {
+              "text": "Usually within 24 h; avoid balloon pump and beta blockers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasodilators (ACE inhibitor, ARB, dihydropyridine CCB)",
+          "cells": [
+            {
+              "text": "Hypertension, or symptomatic patients unfit for surgery"
+            },
+            {
+              "text": "ARBs may slow root dilation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Heart failure, especially if not operable"
+            },
+            {
+              "text": "Beta blockers with caution"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echo surveillance",
+          "cells": [
+            {
+              "text": "Severe AR not meeting surgery criteria"
+            },
+            {
+              "text": "Every 6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "TAVI",
+          "cells": [
+            {
+              "text": "Not recommended for surgical candidates"
+            },
+            {
+              "text": "Annular dilation and little calcium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aortic_regurgitation-dx-mgmt",
+      "title": "Diagnosis and management of aortic regurgitation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diastolic murmur, wide pulse pressure or dilated LV",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute presentation: pulmonary oedema or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Urgent echo; look for dissection or endocarditis",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Emergency valve surgery; no balloon pump",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Transthoracic echo: severity, LV size and EF, aorta",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severe AR?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Echo follow-up; control blood pressure",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Symptoms, LVEF <=55% or LVESD >50 mm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aortic valve replacement or repair, root surgery if dilated",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Echo every 6 to 12 months; vasodilator if hypertensive",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -171,5 +171,538 @@
       "caption": "Overview comparison matrix for gastrointestinal neuroendocrine tumors."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Carcinoid Syndrome",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/carcinoid-tumors/carcinoid-syndrome"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gastrointestinal_neuroendocrine_tumors-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading and diagnosing GI neuroendocrine tumors",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Grade 1, well differentiated",
+          "unit": "Ki-67 %",
+          "cells": [
+            {
+              "text": "Under 2 mitoses/10 HPF, Ki-67 under 3%",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "Low grade, indolent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade 2, well differentiated",
+          "unit": "Ki-67 %",
+          "cells": [
+            {
+              "text": "2 to 20 mitoses/10 HPF, Ki-67 3 to 20%",
+              "range": [
+                3,
+                20
+              ]
+            },
+            {
+              "text": "Intermediate grade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Grade 3 or neuroendocrine carcinoma",
+          "unit": "Ki-67 %",
+          "cells": [
+            {
+              "text": "Over 20 mitoses/10 HPF, Ki-67 over 20%",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "{{hy:Poorly differentiated carcinoma is the most aggressive group}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24 h urinary 5-HIAA",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "Carcinoid syndrome usually over 50 mg/day (normal under 10 mg/day)",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Avoid serotonin-rich foods and interfering drugs for 3 days before"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chromogranin A",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Neither sensitive nor specific; false rise with renal impairment and PPIs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma glucagon",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "Generally over 1000 pg/mL in glucagonoma",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "With necrolytic migratory erythema and diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulinoma work-up",
+          "cells": [
+            {
+              "text": "Fasting hypoglycaemia with raised insulin, proinsulin and C-peptide"
+            },
+            {
+              "text": "Check sulfonylurea level to exclude surreptitious use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting gastrin",
+          "cells": [
+            {
+              "text": "Raised in gastrinoma"
+            },
+            {
+              "text": "Interpret off PPI; achlorhydria also raises gastrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Somatostatin-receptor PET (Ga-68 dotatate)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 90% of NETs express somatostatin receptors",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Best for primary and metastases; weaker in high grade and insulinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "cells": [
+            {
+              "text": "Small pancreatic primaries"
+            },
+            {
+              "text": "Preferred for insulinoma localisation (usually under 2 cm)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_neuroendocrine_tumors-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic GI NETs and their syndromes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic mastocytosis",
+          "cells": [
+            {
+              "text": "Flushing like carcinoid syndrome"
+            },
+            {
+              "text": "Urinary histamine metabolites and serum tryptase; normal 5-HIAA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other causes of flushing",
+          "cells": [
+            {
+              "text": "Menopause, ethanol, niacin, medullary thyroid or renal cell carcinoma"
+            },
+            {
+              "text": "Normal 5-HIAA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Small-bowel NETs are misattributed to IBS for years"
+            },
+            {
+              "text": "CT for mesenteric spoke-and-wheel mass, 5-HIAA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surreptitious insulin or sulfonylurea",
+          "cells": [
+            {
+              "text": "Mimics insulinoma"
+            },
+            {
+              "text": "Low C-peptide and proinsulin with exogenous insulin; sulfonylurea level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PPI use or atrophic gastritis",
+          "cells": [
+            {
+              "text": "Raised gastrin without gastrinoma"
+            },
+            {
+              "text": "Gastric pH and repeat gastrin off PPI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secretory diarrhoea from other causes",
+          "cells": [
+            {
+              "text": "IBD, short bowel, radiation enteritis, laxative use mimic VIPoma"
+            },
+            {
+              "text": "Plasma VIP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic ductal adenocarcinoma",
+          "cells": [
+            {
+              "text": "Non-neuroendocrine pancreatic mass"
+            },
+            {
+              "text": "Histology with chromogranin and synaptophysin stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced valvulopathy",
+          "cells": [
+            {
+              "text": "Fenfluramine or ergot dopamine agonists mimic carcinoid heart disease"
+            },
+            {
+              "text": "Drug history, 5-HIAA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gastrointestinal_neuroendocrine_tumors-treatment",
+      "kind": "treatment",
+      "title": "Treating GI neuroendocrine tumors",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Localised well-differentiated tumour"
+            },
+            {
+              "text": "{{hy:Can be curative}}; hepatic debulking may relieve symptoms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Somatostatin analogue (octreotide or lanreotide, long-acting)",
+          "cells": [
+            {
+              "text": "First line for flushing and diarrhoea"
+            },
+            {
+              "text": "Also antiproliferative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Telotristat",
+          "cells": [
+            {
+              "text": "Diarrhoea not controlled by somatostatin analogue"
+            },
+            {
+              "text": "Oral tryptophan hydroxylase inhibitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hormone-specific control",
+          "cells": [
+            {
+              "text": "Functional pancreatic NET"
+            },
+            {
+              "text": "PPI for gastrinoma; diazoxide for insulinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver-directed therapy",
+          "cells": [
+            {
+              "text": "Liver-dominant metastases"
+            },
+            {
+              "text": "Embolisation, chemoembolisation, Y-90 radioembolisation or ablation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PRRT with lutetium-177 dotatate",
+          "cells": [
+            {
+              "text": "Advanced somatostatin-receptor-positive disease"
+            },
+            {
+              "text": "Risk of carcinoid crisis during treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Everolimus or sunitinib",
+          "cells": [
+            {
+              "text": "Progressive advanced disease"
+            },
+            {
+              "text": "Everolimus for metastatic or recurrent NET"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platinum plus etoposide",
+          "cells": [
+            {
+              "text": "Poorly differentiated high-grade carcinoma"
+            },
+            {
+              "text": "Streptozotocin-based chemotherapy for selected grade 2 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Carcinoid syndrome"
+            },
+            {
+              "text": "Niacin to prevent pellagra; echocardiography for carcinoid heart disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gastrointestinal_neuroendocrine_tumors-dx-mgmt",
+      "title": "Diagnosis and management of GI neuroendocrine tumors",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Flushing, diarrhoea, hypoglycaemia, ulcers, rash or incidental mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Hormone tests by syndrome: 5-HIAA, insulin, gastrin, glucagon, VIP",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "CT or MRI, Ga-68 dotatate PET, EUS for small pancreatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with Ki-67 and mitotic count to grade",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Poorly differentiated neuroendocrine carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Platinum plus etoposide chemotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Localised and resectable?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Surgical resection, then surveillance",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Somatostatin analogue for symptoms and growth control",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Progression despite somatostatin analogue?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue analogue; monitor imaging and echocardiogram",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "PRRT, everolimus, sunitinib or liver-directed therapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for aldosterone-producing adenoma (conn adenoma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology reference texts and primary aldosteronism consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aldosterone_producing_adenoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma aldosterone-to-renin ratio as initial screen, noting interfering drugs",
+          "cells": [
+            {
+              "text": "Aldosterone excess with suppressed renin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmatory suppression testing (saline infusion or oral salt loading)",
+          "cells": [
+            {
+              "text": "Non-suppressible aldosterone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium, acid-base status and end-organ damage assessment",
+          "cells": [
+            {
+              "text": "Hypokalaemia and target-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal CT",
+          "cells": [
+            {
+              "text": "Nodule characterisation and carcinoma exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal vein sampling before surgery",
+          "cells": [
+            {
+              "text": "Lateralises the source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for familial hyperaldosteronism",
+          "cells": [
+            {
+              "text": "Young patients or family history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aldosterone_producing_adenoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral adrenal hyperplasia (idiopathic hyperaldosteronism)",
+          "cells": [
+            {
+              "text": "Bilateral adrenal source"
+            },
+            {
+              "text": "Adrenal vein sampling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hyperaldosteronism",
+          "cells": [
+            {
+              "text": "Family history and young age"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liddle syndrome and other apparent mineralocorticoid excess",
+          "cells": [
+            {
+              "text": "Apparent mineralocorticoid excess"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aldosterone_producing_adenoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Unilateral laparoscopic adrenalectomy",
+          "cells": [
+            {
+              "text": "Lateralised aldosterone-producing adenoma"
+            },
+            {
+              "text": "Cure or marked improvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spironolactone or eplerenone",
+          "cells": [
+            {
+              "text": "Unsuitable for or declining surgery, or bilateral disease"
+            },
+            {
+              "text": "Mineralocorticoid receptor antagonists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correction of hypokalaemia and additional antihypertensives",
+          "cells": [
+            {
+              "text": "Hypertension and hypokalaemia"
+            },
+            {
+              "text": "As needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal vein sampling before committing to surgery",
+          "cells": [
+            {
+              "text": "Confirms lateralisation"
+            },
+            {
+              "text": "Before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre- and postoperative monitoring of blood pressure and potassium",
+          "cells": [
+            {
+              "text": "Contralateral hypoaldosteronism and hyperkalaemia"
+            },
+            {
+              "text": "Postoperative monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance of blood pressure, potassium and renal function",
+          "cells": [
+            {
+              "text": "Persistent hypertension"
+            },
+            {
+              "text": "Ongoing surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aldosterone_producing_adenoma-dx-mgmt",
+      "title": "Diagnosis and management of Aldosterone-producing adenoma (Conn adenoma)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypertension with spontaneous or diuretic-provoked hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe resistant hypertension, profound hypokalaemia or arrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent potassium correction and specialist endocrine review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Aldosterone-to-renin ratio (stop interfering drugs first); confirm by suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Aldosterone not suppressible on saline or salt loading?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "CT adrenals and adrenal vein sampling for lateralisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review renovascular, Cushing, Liddle and familial hyperaldosteronism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Laparoscopic adrenalectomy for lateralised adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Spironolactone or eplerenone if surgery unsuitable or bilateral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor potassium and blood pressure after surgery for hypoaldosteronism",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Unilateral adenomas often cured; long-standing hypertension may persist",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

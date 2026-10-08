@@ -149,5 +149,90 @@
       "caption": "Overview comparison matrix for behavioural variant frontotemporal dementia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "behavioral_variant_ftd-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in behavioural variant frontotemporal dementia",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Neuropsychological assessment", "cells": [{"text": "Executive and social cognition impairment; episodic memory relatively preserved early"}], "cite": "c1"},
+        {"parameter": "MRI brain", "cells": [{"text": "Frontal and anterior temporal atrophy, often asymmetric"}], "cite": "c1"},
+        {"parameter": "FDG-PET", "cells": [{"text": "Frontotemporal hypometabolism when MRI is equivocal"}], "cite": "c1"},
+        {"parameter": "CSF or amyloid PET biomarkers", "cells": [{"text": "Helps exclude underlying Alzheimer pathology"}], "cite": "c1"},
+        {"parameter": "Genetic testing for C9orf72, MAPT and GRN", "cells": [{"text": "Pathogenic variants where family history is suggestive"}], "cite": "c1"},
+        {"parameter": "Neurophysiology", "cells": [{"text": "Screens for motor neurone disease when clinically indicated"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "behavioral_variant_ftd-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for behavioural variant frontotemporal dementia",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Alzheimer's disease", "cells": [{"text": "Memory and visuospatial skills are relatively preserved early here; executive dysfunction dominates"}], "cite": "c1"},
+        {"parameter": "Primary psychiatric illness", "cells": [{"text": "Insight is lost and the course is progressive; collateral history from carers is essential"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "behavioral_variant_ftd-treatment",
+      "kind": "treatment",
+      "title": "Management options in behavioural variant frontotemporal dementia",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Disease-modifying therapy", "cells": [{"text": "None available; care is symptomatic and supportive"}, {"text": "No disease-modifying therapy"}], "cite": "c1"},
+        {"parameter": "Non-pharmacological strategies", "cells": [{"text": "Structured routine, environmental modification and behavioural approaches"}, {"text": "Tried first for problem behaviours"}], "cite": "c1"},
+        {"parameter": "SSRIs", "cells": [{"text": "Target disinhibition, compulsions and altered eating"}, {"text": "Behavioural symptoms"}], "cite": "c1"},
+        {"parameter": "Atypical antipsychotics", "cells": [{"text": "Reserve for severe agitation"}, {"text": "Use cautiously"}], "cite": "c1"},
+        {"parameter": "Carer support and safety", "cells": [{"text": "Carer education on loss of insight; safety for driving, finances and safeguarding"}, {"text": "Addresses safety"}], "cite": "c1"},
+        {"parameter": "Speech-and-language therapy and dietetics", "cells": [{"text": "For altered eating behaviour and later swallowing difficulty"}, {"text": "Later swallowing difficulty"}], "cite": "c1"},
+        {"parameter": "Genetic counselling and testing", "cells": [{"text": "Counselling and testing for C9orf72, MAPT and GRN where family history is suggestive"}, {"text": "Family history of dementia or motor neurone disease"}], "cite": "c1"},
+        {"parameter": "Motor neurone disease screening", "cells": [{"text": "Screen for and manage coexisting motor neurone disease"}, {"text": "Worsens prognosis"}], "cite": "c1"},
+        {"parameter": "Advance care planning", "cells": [{"text": "Plan early while capacity allows, with palliative care as the disease progresses"}, {"text": "Timing set by capacity"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "behavioral_variant_ftd-dx-mgmt",
+      "title": "Diagnosis and management of behavioural variant frontotemporal dementia",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Insidious change in conduct from the sixth or seventh decade: disinhibition, apathy, lost empathy", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: rapid course, prominent memory loss, bulbar or limb signs, or focal deficits?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: exclude Alzheimer's and check for motor neurone disease overlap", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Collateral history from family or carers; note carbohydrate craving and family history", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Neuropsychological testing and MRI for frontal and anterior temporal atrophy", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Frontotemporal atrophy or hypometabolism consistent on imaging?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Genetic testing for C9orf72, MAPT or GRN where family history suggests it", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "FDG-PET or CSF and amyloid PET to clarify and exclude Alzheimer pathology", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "SSRIs for disinhibition and eating; antipsychotics only for severe agitation", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Progressive and incurable; supportive care and early advance care planning", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n8", "to": "n7", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

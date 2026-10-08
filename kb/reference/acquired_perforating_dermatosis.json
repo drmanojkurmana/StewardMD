@@ -149,5 +149,295 @@
       "caption": "Overview comparison matrix for acquired perforating dermatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_perforating_dermatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy with elastic and connective tissue stains",
+          "cells": [
+            {
+              "text": "Perforating channel and eliminated material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests (urea, creatinine, eGFR)",
+          "cells": [
+            {
+              "text": "Renal impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose and HbA1c",
+          "cells": [
+            {
+              "text": "Diabetes mellitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis for proteinuria",
+          "cells": [
+            {
+              "text": "Renal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and thyroid function tests",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age-appropriate malignancy screening",
+          "cells": [
+            {
+              "text": "Occult neoplasm where indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_perforating_dermatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tight glycaemic control; dialysis or renal transplantation",
+          "cells": [
+            {
+              "text": "Underlying disorder"
+            },
+            {
+              "text": "Diabetes and chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients, topical corticosteroids, gabapentinoids or narrowband UVB",
+          "cells": [
+            {
+              "text": "Driving pruritus"
+            },
+            {
+              "text": "Control of itch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics and retinoids",
+          "cells": [
+            {
+              "text": "Hyperkeratotic plugs"
+            },
+            {
+              "text": "Address the plugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interrupt the itch-scratch cycle",
+          "cells": [
+            {
+              "text": "Limits Koebnerisation and new lesions"
+            },
+            {
+              "text": "Stop scratching"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for occult renal or metabolic disease",
+          "cells": [
+            {
+              "text": "At presentation"
+            },
+            {
+              "text": "Initial screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary dermatology and nephrology input",
+          "cells": [
+            {
+              "text": "Chronic, relapsing eruption"
+            },
+            {
+              "text": "Specialist input"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_perforating_dermatosis-dx-mgmt",
+      "title": "Diagnosis and management of acquired perforating dermatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy umbilicated papules with keratotic plugs in an adult with CKD or diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New eruption without known renal or metabolic disease, or systemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Screen for occult systemic illness or malignancy; urgent review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with elastic and connective tissue stains",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Transepidermal elimination channel shown on biopsy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Check renal function, glucose, HbA1c and urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review prurigo nodularis, folliculitis and other mimics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tight glycaemic control, dialysis or renal transplant as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Emollients, topical steroids, gabapentinoids or narrowband UVB for itch",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Keratolytics and retinoids for keratotic plugs; stop scratching",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic and relapsing; mirrors underlying renal or metabolic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

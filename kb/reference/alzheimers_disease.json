@@ -177,5 +177,551 @@
       "caption": "Overview comparison matrix for alzheimer's disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Alzheimer Disease",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/delirium-and-dementia/alzheimer-disease",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 371-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alzheimers_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of Alzheimer disease: criteria and biomarkers",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical criteria",
+          "cells": [
+            {
+              "text": "Dementia on formal mental status testing, deficits in 2 or more cognitive areas, gradual onset over months to years, clear consciousness"
+            },
+            {
+              "text": "Clinical criteria about 85% accurate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Age at onset",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "After 40, most often after 65",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Earlier onset raises the question of autosomal dominant disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Typical first symptom",
+          "cells": [
+            {
+              "text": "Insidious loss of episodic memory"
+            },
+            {
+              "text": "About 20% present with non-memory variants (posterior cortical, logopenic, corticobasal, frontal)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core 1 biomarkers",
+          "cells": [
+            {
+              "text": "Amyloid PET, CSF or plasma Abeta42/40 ratio low, p-Tau181 or p-Tau217 high"
+            },
+            {
+              "text": "{{hy:Sufficient for biological diagnosis}} under revised Alzheimer's Association criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Negative amyloid PET",
+          "cells": [
+            {
+              "text": "In a patient with dementia"
+            },
+            {
+              "text": "Makes AD unlikely"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Positive amyloid PET in unimpaired older adults",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 25%"
+            },
+            {
+              "text": "Positivity alone is not specific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tau PET (core 2)",
+          "cells": [
+            {
+              "text": "Density and spread of tangles"
+            },
+            {
+              "text": "Used for staging; negative scan does not exclude Braak I to III"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or CT",
+          "cells": [
+            {
+              "text": "Medial temporal and posterior cortical atrophy; may be normal early"
+            },
+            {
+              "text": "Mainly to exclude other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET",
+          "cells": [
+            {
+              "text": "Temporoparietal hypometabolism"
+            },
+            {
+              "text": "Supports AD pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine bloods",
+          "cells": [
+            {
+              "text": "TSH and vitamin B12"
+            },
+            {
+              "text": "Exclude reversible causes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ApoE genotyping",
+          "cells": [
+            {
+              "text": "Not routine for diagnosis"
+            },
+            {
+              "text": "Test before anti-amyloid antibody therapy for ARIA risk"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Clinical diagnosis is confirmed at autopsy in only about 70 to 80% (Harrison)."
+    },
+    {
+      "id": "alzheimers_disease-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of Alzheimer disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Vascular dementia",
+          "cells": [
+            {
+              "text": "Early prominent gait disturbance with only mild memory loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia with Lewy bodies",
+          "cells": [
+            {
+              "text": "Early parkinsonism, fluctuating alertness, visual hallucinations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frontotemporal dementia",
+          "cells": [
+            {
+              "text": "Prominent behaviour change, navigation intact, anterior-predominant atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creutzfeldt-Jakob disease",
+          "cells": [
+            {
+              "text": "{{hy:Rapid decline over weeks to months with myoclonus and rigidity}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LATE or PART",
+          "cells": [
+            {
+              "text": "Amnestic dementia in older patients with negative amyloid biomarkers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Loss of joint position and vibration sense with Babinski signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal-pressure hydrocephalus",
+          "cells": [
+            {
+              "text": "Gait disturbance early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression-related cognitive impairment",
+          "cells": [
+            {
+              "text": "Mood disorder driving cognitive complaints"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain tumour",
+          "cells": [
+            {
+              "text": "Early focal seizure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic drug intoxication",
+          "cells": [
+            {
+              "text": "History of sedative, anticonvulsant or psychotropic use"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Tables PDF Table 371-4 compares AD, FTD, DLB, CJD and vascular dementia by first symptom, mental status, neuropsychiatry, neurology and imaging; its cell text is not in the inventory, so features here come from Harrison text."
+    },
+    {
+      "id": "alzheimers_disease-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Alzheimer disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Donepezil",
+          "cells": [
+            {
+              "text": "{{hy:First-line cholinesterase inhibitor}}, mild to moderate disease"
+            },
+            {
+              "text": "Once daily; titrate slowly; stop if no functional benefit after several months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rivastigmine or galantamine",
+          "cells": [
+            {
+              "text": "Alternative cholinesterase inhibitors"
+            },
+            {
+              "text": "Rivastigmine as liquid or patch; GI side effects common"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Memantine",
+          "cells": [
+            {
+              "text": "Moderate to severe disease, alone or with a cholinesterase inhibitor"
+            },
+            {
+              "text": "Reduce dose or avoid in renal impairment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lecanemab",
+          "cells": [
+            {
+              "text": "MCI or mild AD with amyloid confirmed by PET or CSF"
+            },
+            {
+              "text": "27% less decline at 18 months; ARIA-E 12.6%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Donanemab",
+          "cells": [
+            {
+              "text": "MCI or mild AD with confirmed amyloid"
+            },
+            {
+              "text": "35% less decline at 18 months; ARIA-E 24%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ApoE testing and serial MRI",
+          "cells": [
+            {
+              "text": "Before and during anti-amyloid therapy"
+            },
+            {
+              "text": "Epsilon4 homozygotes have highest ARIA risk; thrombolysis contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-drug care",
+          "cells": [
+            {
+              "text": "All stages"
+            },
+            {
+              "text": "Routine, carer support, safety, advance care planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid anticholinergic drugs",
+          "cells": [
+            {
+              "text": "All stages"
+            },
+            {
+              "text": "For example diphenhydramine, oxybutynin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antipsychotics",
+          "cells": [
+            {
+              "text": "Refractory agitation or psychosis only"
+            },
+            {
+              "text": "Boxed warning for increased death in elderly dementia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison cites about 22 to 27% slowing for anti-amyloid antibodies; Merck gives 27% (lecanemab) and 35% (donanemab) on different scales. No drug doses were stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alzheimers_disease-dx-mgmt",
+      "title": "Diagnosis and management of Alzheimer disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive memory or cognitive decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid progression over weeks to months?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Work up rapidly progressive dementia, including CJD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Mental status testing, TSH, B12, MRI or CT, medication review",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reversible cause found (B12, thyroid, NPH, depression, drugs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Treat the reversible cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "MCI or mild dementia, candidate for anti-amyloid therapy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm amyloid by PET or CSF; ApoE genotype",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Amyloid positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lecanemab or donanemab with serial MRI for ARIA",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "AD unlikely; consider LATE, PART, FTD, DLB",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Cholinesterase inhibitor; add memantine when moderate to severe",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Carer support, safety, advance care planning",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Also"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

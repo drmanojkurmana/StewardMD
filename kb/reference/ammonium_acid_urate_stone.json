@@ -148,5 +148,367 @@
       "caption": "Overview comparison matrix for ammonium acid urate stones."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ammonium_acid_urate_stone-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Stones poorly seen on plain films"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone analysis identifying ammonium acid urate",
+          "cells": [
+            {
+              "text": "Stone composition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urine for volume, urate, pH and ammonium",
+          "cells": [
+            {
+              "text": "High urate and ammonium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes",
+          "cells": [
+            {
+              "text": "Hypokalaemia and metabolic acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for laxative misuse or eating disorder",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine culture",
+          "cells": [
+            {
+              "text": "Coexisting infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ammonium_acid_urate_stone-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Uric acid stones",
+          "cells": [
+            {
+              "text": "Radiolucent urate stone"
+            },
+            {
+              "text": "Stone analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Struvite stones",
+          "cells": [
+            {
+              "text": "Infection-related stone"
+            },
+            {
+              "text": "Urine culture and stone analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium oxalate stones",
+          "cells": [
+            {
+              "text": "Radiopaque stone"
+            },
+            {
+              "text": "Stone analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xanthine stones",
+          "cells": [
+            {
+              "text": "Rare purine stone"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ammonium_acid_urate_stone-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stopping laxative misuse and treating any eating disorder",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            },
+            {
+              "text": "Corrects the trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High fluid intake and rehydration",
+          "cells": [
+            {
+              "text": "Low urine volume"
+            },
+            {
+              "text": "Dilutes solutes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium repletion and correction of acidosis",
+          "cells": [
+            {
+              "text": "Ammonium production"
+            },
+            {
+              "text": "Reduces ammonium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ureteroscopy or percutaneous nephrolithotomy",
+          "cells": [
+            {
+              "text": "Existing stones poorly responsive to lithotripsy"
+            },
+            {
+              "text": "Endourological removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary purine moderation and allopurinol where appropriate",
+          "cells": [
+            {
+              "text": "Raised urate"
+            },
+            {
+              "text": "Urate reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric and dietetic support",
+          "cells": [
+            {
+              "text": "Concealed misuse or eating disorder"
+            },
+            {
+              "text": "Sensitive support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic imaging and metabolic urine studies",
+          "cells": [
+            {
+              "text": "Recurrence prevention"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ammonium_acid_urate_stone-dx-mgmt",
+      "title": "Diagnosis and management of Ammonium acid urate stones",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stones in a patient with chronic diarrhoea, laxative misuse or eating disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe hypokalaemia, acidosis, obstruction or infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent electrolyte correction; treat obstruction and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Non-contrast CT; stone analysis; 24-hour urine; electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Ammonium acid urate stone with laxative misuse confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop laxatives; rehydrate; correct potassium",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review uric acid, struvite and calcium oxalate stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ureteroscopy or PCNL for stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Allopurinol and purine moderation where appropriate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sensitive psychiatric and dietetic support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prevention depends on stopping concealed misuse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

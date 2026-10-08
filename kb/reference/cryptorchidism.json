@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for cryptorchidism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cryptorchidism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Warm-handed physical examination",
+          "cells": [
+            {
+              "text": "Testis palpable or retractile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and sex-development assessment",
+          "cells": [
+            {
+              "text": "Bilateral impalpable gonads or ambiguity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum LH, FSH, testosterone and AMH or inhibin B",
+          "cells": [
+            {
+              "text": "Testicular tissue assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "hCG stimulation test",
+          "cells": [
+            {
+              "text": "Functioning testicular tissue in bilateral non-palpable cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy",
+          "cells": [
+            {
+              "text": "Intra-abdominal testis localised or absence confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptorchidism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retractile testis",
+          "cells": [
+            {
+              "text": "Normal variant; observed rather than operated on"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorchia or vanishing testis",
+          "cells": [
+            {
+              "text": "Testicular regression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disorder of sex development with bilateral impalpable gonads",
+          "cells": [
+            {
+              "text": "Karyotype and endocrine evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptorchidism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Orchidopexy",
+          "cells": [
+            {
+              "text": "Mobilise and fix the testis in the scrotum, ideally in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy and Fowler-Stephens orchidopexy",
+          "cells": [
+            {
+              "text": "For an intra-abdominal testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation of retractile testis",
+          "cells": [
+            {
+              "text": "Distinguished from true undescended testis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent karyotype and endocrine evaluation",
+          "cells": [
+            {
+              "text": "Bilateral impalpable testes or genital ambiguity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility and self-examination counselling",
+          "cells": [
+            {
+              "text": "Raised relative risk of germ cell tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Paediatric surgery or urology; endocrinology and genetics for disorders of sex development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cryptorchidism-dx-mgmt",
+      "title": "Diagnosis and management of Cryptorchidism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cryptorchidism: testis not in the scrotum on examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (bilateral impalpable testes, genital ambiguity, torsion pain, mass)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine and karyotype evaluation for bilateral impalpable testes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Warm-handed exam; karyotype; LH, FSH, testosterone, AMH; hCG test; laparoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the testis palpable or retractile on repeat warm examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider retractile testis or disorder of sex development",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Orchidopexy ideally in infancy for a true undescended testis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diagnostic laparoscopy and staged Fowler-Stephens orchidopexy for intra-abdominal testis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Observe retractile testis rather than operate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Karyotype and endocrine evaluation; fertility and self-examination counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early orchidopexy improves fertility outlook; malignancy risk remains raised",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

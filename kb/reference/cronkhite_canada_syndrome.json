@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for cronkhite-canada syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cronkhite_canada_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper and lower endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Diffuse polyposis characterised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin, immunoglobulins and micronutrients",
+          "cells": [
+            {
+              "text": "Hypoalbuminaemia and deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal alpha-1-antitrypsin clearance",
+          "cells": [
+            {
+              "text": "Protein-losing enteropathy confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes and trace elements including zinc and copper",
+          "cells": [
+            {
+              "text": "Deficiencies assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cronkhite_canada_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial adenomatous polyposis",
+          "cells": [
+            {
+              "text": "Inherited polyposis; ectodermal clues absent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peutz-Jeghers syndrome",
+          "cells": [
+            {
+              "text": "Named inherited polyposis look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile polyposis syndrome",
+          "cells": [
+            {
+              "text": "Named inherited polyposis look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cronkhite_canada_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for immune-mediated inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine and related agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "High-protein feeding; correct electrolytes, vitamins, zinc and copper"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-losing enteropathy",
+          "cells": [
+            {
+              "text": "Managed; acid suppression and H pylori eradication where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Endoscopic and imaging surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Reserved for bleeding, obstruction or malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serum albumin, electrolytes and micronutrients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cronkhite_canada_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cronkhite-Canada syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cronkhite-Canada syndrome: diffuse GI polyposis with ectodermal change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (severe hypoalbuminaemia, malnutrition, bleeding or suspicious polyp)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nutritional and albumin support; polyp biopsy if suspicious",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with biopsy; albumin and micronutrients; faecal alpha-1-antitrypsin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy confirm diffuse polyposis with protein-losing enteropathy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider FAP, Peutz-Jeghers or juvenile polyposis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids first-line, with steroid-sparing immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High-protein nutrition and micronutrient correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Manage protein-losing enteropathy and H pylori where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Endoscopic surveillance for malignancy; surgery for complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Can be serious; many improve with nutritional support and immunosuppression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

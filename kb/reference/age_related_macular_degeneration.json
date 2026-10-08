@@ -150,5 +150,324 @@
       "caption": "Overview comparison matrix for age-related macular degeneration."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "age_related_macular_degeneration-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination and colour fundus photography",
+          "cells": [
+            {
+              "text": "Drusen and macular changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Intraretinal or subretinal fluid and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT angiography or fluorescein angiography",
+          "cells": [
+            {
+              "text": "Choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amsler grid self-monitoring",
+          "cells": [
+            {
+              "text": "Distortion or central scotoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity and near vision testing",
+          "cells": [
+            {
+              "text": "Central visual function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "age_related_macular_degeneration-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Diabetic maculopathy",
+          "cells": [
+            {
+              "text": "Fundus examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polypoidal choroidal vasculopathy",
+          "cells": [
+            {
+              "text": "OCT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central serous chorioretinopathy",
+          "cells": [
+            {
+              "text": "Optical coherence tomography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "age_related_macular_degeneration-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intravitreal anti-VEGF injections (ranibizumab, aflibercept or bevacizumab)",
+          "cells": [
+            {
+              "text": "Neovascular (wet) disease"
+            },
+            {
+              "text": "Regular or treat-and-extend regimen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AREDS-type antioxidant and zinc supplementation",
+          "cells": [
+            {
+              "text": "Intermediate or advanced dry disease"
+            },
+            {
+              "text": "Slows progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation and cardiovascular risk control",
+          "cells": [
+            {
+              "text": "Modifiable risk factors"
+            },
+            {
+              "text": "Smoking is the most important"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amsler grid self-monitoring with urgent re-referral",
+          "cells": [
+            {
+              "text": "New distortion or central scotoma"
+            },
+            {
+              "text": "Signals conversion to wet disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT-guided retreatment",
+          "cells": [
+            {
+              "text": "Recurrent fluid"
+            },
+            {
+              "text": "Detects recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision rehabilitation and magnifiers",
+          "cells": [
+            {
+              "text": "Established central loss"
+            },
+            {
+              "text": "Registration as sight-impaired where appropriate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "age_related_macular_degeneration-dx-mgmt",
+      "title": "Diagnosis and management of Age-related macular degeneration",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gradual central blur in an older adult; drusen on fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "New distortion, central scotoma or sudden central loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal referral for suspected neovascular AMD",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fundus photography, OCT, and OCT angiography or fluorescein",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Choroidal neovascularisation with fluid on OCT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intravitreal anti-VEGF; OCT-guided retreatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Dry AMD: review diabetic, central serous and polypoidal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "AREDS-type antioxidant and zinc for intermediate or advanced dry disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stop smoking; control cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Amsler grid self-monitoring; low-vision support for established loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Dry AMD progresses slowly; untreated wet AMD causes rapid central loss",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

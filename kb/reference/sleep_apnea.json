@@ -170,5 +170,515 @@
       "caption": "Overview comparison matrix for sleep apnea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Obstructive Sleep Apnea",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/sleep-apnea/obstructive-sleep-apnea"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sleep_apnea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading obstructive sleep apnoea",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "AHI with symptoms",
+          "unit": "events/h",
+          "cells": [
+            {
+              "text": "AHI 5/h or more plus a qualifying symptom",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Diagnostic of OSA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "AHI without symptoms",
+          "unit": "events/h",
+          "cells": [
+            {
+              "text": "AHI 15/h or more",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "{{hy:Diagnostic and a treatment threshold even without symptoms}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mild OSA",
+          "unit": "events/h",
+          "cells": [
+            {
+              "text": "AHI 5 to 14/h",
+              "range": [
+                5,
+                14
+              ]
+            },
+            {
+              "text": "Symptoms guide treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate OSA",
+          "unit": "events/h",
+          "cells": [
+            {
+              "text": "AHI 15 to 29/h",
+              "range": [
+                15,
+                29
+              ]
+            },
+            {
+              "text": "Treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe OSA",
+          "unit": "events/h",
+          "cells": [
+            {
+              "text": "AHI 30/h or more",
+              "op": ">=",
+              "value": 30
+            },
+            {
+              "text": "Treat; highest cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "Gold standard; measures sleep stages and position"
+            },
+            {
+              "text": "Needed before surgery or non-PAP therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Home sleep test",
+          "cells": [
+            {
+              "text": "Estimates breathing events; cannot measure sleep"
+            },
+            {
+              "text": "Negative test with high suspicion needs polysomnography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "STOP-BANG, Berlin, Epworth",
+          "cells": [
+            {
+              "text": "Risk screening only"
+            },
+            {
+              "text": "Not for diagnosis or directing therapy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison grades moderate as AHI 15 to 29/h and severe as 30/h or more; Merck grades moderate as 15 to 30/h and severe as over 30/h. Harrison values shown."
+    },
+    {
+      "id": "sleep_apnea-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic sleep apnoea",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Narcolepsy",
+          "cells": [
+            {
+              "text": "Cataplexy, sleep-onset REM"
+            },
+            {
+              "text": "Multiple sleep latency test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insufficient sleep or poor sleep hygiene",
+          "cells": [
+            {
+              "text": "Short sleep time, normal breathing"
+            },
+            {
+              "text": "Sleep diary, polysomnography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Central sleep apnoea or Cheyne-Stokes",
+          "cells": [
+            {
+              "text": "Absent respiratory effort; heart failure, opioids"
+            },
+            {
+              "text": "Polysomnography with effort channels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obesity hypoventilation",
+          "cells": [
+            {
+              "text": "Daytime hypercapnia"
+            },
+            {
+              "text": "Awake arterial blood gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal asthma or paroxysmal nocturnal dyspnoea",
+          "cells": [
+            {
+              "text": "Wheeze or orthopnoea at night"
+            },
+            {
+              "text": "Spirometry, echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic limb movement or restless legs",
+          "cells": [
+            {
+              "text": "Leg kicks or urge to move"
+            },
+            {
+              "text": "Polysomnography leg EMG"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sedatives, opioids, alcohol, hypothyroidism, depression",
+          "cells": [
+            {
+              "text": "Fatigue or sleepiness from drug or illness"
+            },
+            {
+              "text": "History, TSH, mood screen"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "sleep_apnea-treatment",
+      "kind": "treatment",
+      "title": "Treating obstructive sleep apnoea",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "CPAP or auto-PAP",
+          "unit": "cm H2O",
+          "cells": [
+            {
+              "text": "First line, moderate to severe OSA"
+            },
+            {
+              "text": "Typical pressure 5 to 15 cm H2O",
+              "range": [
+                5,
+                15
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mandibular advancement appliance",
+          "cells": [
+            {
+              "text": "Mild to moderate OSA or PAP intolerance"
+            },
+            {
+              "text": "Equivalent to CPAP in mild to moderate disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Weight loss",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Overweight patients"
+            },
+            {
+              "text": "Loss of 15% or more may be meaningful",
+              "op": ">=",
+              "value": 15
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Positional therapy, avoid alcohol and sedatives",
+          "cells": [
+            {
+              "text": "Supine-predominant or mild OSA"
+            },
+            {
+              "text": "Adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper-airway surgery",
+          "cells": [
+            {
+              "text": "Anatomic obstruction such as large tonsils or polyps"
+            },
+            {
+              "text": "First line when a fixable lesion exists"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypoglossal nerve stimulation",
+          "cells": [
+            {
+              "text": "Moderate to severe, CPAP intolerant, oral appliance failed"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Modafinil or solriamfetol",
+          "cells": [
+            {
+              "text": "Residual sleepiness on treatment"
+            },
+            {
+              "text": "Not a substitute for airway therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tracheostomy",
+          "cells": [
+            {
+              "text": "Last resort"
+            },
+            {
+              "text": "Most effective option"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Supplemental oxygen alone is not recommended for OSA. Treatment goal is AHI under 10/h, ideally under 5/h."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sleep_apnea-dx-mgmt",
+      "title": "Diagnosis and management of obstructive sleep apnoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Snoring, witnessed apnoeas, sleepiness or resistant hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Screen risk; check drugs, thyroid, mood",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Home sleep test or polysomnography",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Home test negative but suspicion high?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "In-laboratory polysomnography",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "AHI 15/h or more, or 5/h or more with symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "No OSA: look for another sleep disorder",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Weight loss, positional therapy, avoid alcohol and sedatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Fixable anatomic obstruction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Tonsillectomy or other targeted surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Tolerates CPAP?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue CPAP; aim AHI under 10/h, ideally under 5/h",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Oral appliance, then hypoglossal nerve stimulation",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,327 @@
       "caption": "Overview comparison matrix for arterial ulcer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rutherford's Vascular Surgery / ESVS guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arterial_ulcer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ankle-brachial index",
+          "cells": [
+            {
+              "text": "Falsely elevated in calcified vessels; interpret with care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography, or catheter digital subtraction angiography",
+          "cells": [
+            {
+              "text": "Plans revascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid profile and glycaemic status",
+          "cells": [
+            {
+              "text": "Cardiovascular risk factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound tissue culture",
+          "cells": [
+            {
+              "text": "Where infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transcutaneous oxygen pressure",
+          "cells": [
+            {
+              "text": "Healing potential, where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arterial_ulcer-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Venous leg ulcer",
+          "cells": [
+            {
+              "text": "Compression is wrong for arterial ulcers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixed arteriovenous (neuroischaemic) ulcer",
+          "cells": [
+            {
+              "text": "Compression must not be applied to mixed ulcers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "arterial_ulcer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Revascularisation",
+          "cells": [
+            {
+              "text": "Endovascular angioplasty and stenting, or surgical bypass to restore inflow"
+            },
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk factor modification",
+          "cells": [
+            {
+              "text": "Statin, antiplatelet, blood pressure and glycaemic control, smoking cessation"
+            },
+            {
+              "text": "Cardiovascular risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Non-adherent dressings; avoid compression and debridement of dry stable eschar"
+            },
+            {
+              "text": "Ischaemic tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Effective analgesia for ischaemic rest pain"
+            },
+            {
+              "text": "Rest pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-guided antibiotics",
+          "cells": [
+            {
+              "text": "Prompt treatment of wound infection"
+            },
+            {
+              "text": "Infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot protection and offloading",
+          "cells": [
+            {
+              "text": "Offloading of pressure areas; podiatry input"
+            },
+            {
+              "text": "Pressure areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amputation",
+          "cells": [
+            {
+              "text": "When the limb is unsalvageable or infection is uncontrolled"
+            },
+            {
+              "text": "Vascular surgery referral and healing monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "arterial_ulcer-dx-mgmt",
+      "title": "Diagnosis and management of Arterial ulcer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Non-healing ulcer in a limb with ischaemic rest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Gangrene, spreading necrosis or sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular referral for a threatened limb",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABI (falsely high in calcified vessels), duplex, CT or MR angiography, culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Arterial inflow compromise confirmed for revascularisation planning?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Revascularise by angioplasty, stenting or bypass",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat vascular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Statin, antiplatelet, glycaemic and blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Non-adherent dressings; avoid compression bandaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Culture-guided antibiotics for infection; offloading",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Amputation if the limb is unsalvageable or infection is uncontrolled",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

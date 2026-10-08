@@ -149,5 +149,88 @@
       "caption": "Overview comparison matrix for body dysmorphic disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "New Oxford Textbook of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "body_dysmorphic_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessment elements in body dysmorphic disorder",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Structured assessment (BDD-YBOCS)", "cells": [{"text": "Severity of appearance preoccupation"}], "cite": "c1"},
+        {"parameter": "Suicide risk assessment", "cells": [{"text": "Essential; suicidality is high in this disorder"}], "cite": "c1"},
+        {"parameter": "Screening for depression, social anxiety, OCD and eating disorder", "cells": [{"text": "Co-occurring conditions"}], "cite": "c1"},
+        {"parameter": "Assessment of insight and delusionality", "cells": [{"text": "Insight is often poor and may be delusional in intensity"}], "cite": "c1"},
+        {"parameter": "History of cosmetic or dermatological procedures", "cells": [{"text": "Procedures sought or undergone"}], "cite": "c1"},
+        {"parameter": "Substance use and collateral history", "cells": [{"text": "Substance use and functioning"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "body_dysmorphic_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike psychiatric conditions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Obsessive-compulsive disorder", "cells": [{"text": "Shares fronto-striatal mechanisms; the concern here is focused on appearance"}], "cite": "c1"},
+        {"parameter": "Eating disorders", "cells": [{"text": "Concern in eating disorders is weight or shape; this disorder targets other appearance features"}], "cite": "c1"},
+        {"parameter": "Delusional disorder, somatic type", "cells": [{"text": "Insight can reach delusional intensity as a specifier; insight is assessed"}], "cite": "c1"},
+        {"parameter": "Gender dysphoria", "cells": [{"text": "Distress centres on sex characteristics"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "body_dysmorphic_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options in body dysmorphic disorder",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Serotonergic antidepressants", "cells": [{"text": "SSRIs at the higher end of dosing for an adequate duration"}, {"text": "First-line pharmacotherapy; prolonged trials often needed"}], "cite": "c1"},
+        {"parameter": "Cognitive-behavioural therapy", "cells": [{"text": "Exposure and response prevention with cognitive work on appearance beliefs"}, {"text": "Combined with SSRI treatment"}], "cite": "c1"},
+        {"parameter": "Suicide risk", "cells": [{"text": "Structured suicide risk assessment with a crisis and safety plan"}, {"text": "High suicidality"}], "cite": "c1"},
+        {"parameter": "Cosmetic procedures", "cells": [{"text": "Counsel against cosmetic, dermatological and surgical procedures"}, {"text": "Rarely satisfy and may worsen the disorder"}], "cite": "c1"},
+        {"parameter": "Comorbidities and augmentation", "cells": [{"text": "Treat comorbid depression, social anxiety and substance use; augment with an antipsychotic in refractory or delusional cases"}, {"text": "Refractory or delusional disease"}], "cite": "c1"},
+        {"parameter": "Referral and relapse prevention", "cells": [{"text": "Psychiatric referral; intensive or inpatient care when risk is high"}, {"text": "Continue medication to prevent relapse"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "body_dysmorphic_disorder-dx-mgmt",
+      "title": "Diagnosis and management of body dysmorphic disorder",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Preoccupation with a slight or imagined appearance flaw, with checking, grooming or cosmetic requests", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: active suicidal ideation, escalating self-procedures or severe isolation?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: suicide risk assessment with safety plan; consider inpatient care", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Structured assessment (BDD-YBOCS); screen for depression, social anxiety, OCD and eating disorder", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Assess insight and delusionality; history of cosmetic procedures; substance use", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Appearance preoccupation is primary, not OCD, eating or delusional disorder?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "SSRI at an adequate dose plus CBT with exposure and response prevention", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: treat the primary disorder such as OCD, eating disorder, delusional disorder or depression", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Counsel against cosmetic procedures; augment with an antipsychotic if refractory", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Chronic without treatment; often improves with sustained SSRI and CBT", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

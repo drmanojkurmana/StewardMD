@@ -143,5 +143,327 @@
       "caption": "Overview comparison matrix for axial spondyloarthritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rheumatology references / ASAS classification",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "axial_spondyloarthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Assessment of inflammatory back pain features",
+          "cells": [
+            {
+              "text": "Inflammatory back pain features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B27 testing",
+          "cells": [
+            {
+              "text": "HLA-B27 status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the sacroiliac joints",
+          "cells": [
+            {
+              "text": "Active inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of the sacroiliac joints and spine",
+          "cells": [
+            {
+              "text": "Radiographic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers and screening for extra-articular disease",
+          "cells": [
+            {
+              "text": "Extra-articular disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "axial_spondyloarthritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical (non-inflammatory) back pain",
+          "cells": [
+            {
+              "text": "Dismissing back pain in a young adult as mechanical misses axial spondyloarthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriatic or enteropathic spondyloarthritis",
+          "cells": [
+            {
+              "text": "Associated with psoriasis or inflammatory bowel disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "axial_spondyloarthritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured exercise and physiotherapy",
+          "cells": [
+            {
+              "text": "Preserve spinal mobility, posture and function"
+            },
+            {
+              "text": "Cornerstone of management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "First-line for inflammatory pain and stiffness"
+            },
+            {
+              "text": "First-line pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologic or JAK inhibitor",
+          "cells": [
+            {
+              "text": "TNF inhibitor or IL-17 inhibitor; JAK inhibitor as an alternative"
+            },
+            {
+              "text": "Active disease refractory to NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sulfasalazine",
+          "cells": [
+            {
+              "text": "Conventional DMARD for peripheral arthritis"
+            },
+            {
+              "text": "Does not control axial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extra-articular disease",
+          "cells": [
+            {
+              "text": "Acute anterior uveitis, psoriasis and inflammatory bowel disease with relevant specialists"
+            },
+            {
+              "text": "Co-managed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporosis and cardiovascular risk",
+          "cells": [
+            {
+              "text": "Screen and treat"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal surgery referral",
+          "cells": [
+            {
+              "text": "Severe fixed deformity"
+            },
+            {
+              "text": "Physiotherapy and surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "axial_spondyloarthritis-dx-mgmt",
+      "title": "Diagnosis and management of Axial spondyloarthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Inflammatory back pain and stiffness in a young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Painful red eye, infective sacroiliitis or spinal fracture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology for acute uveitis; infection or malignancy screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inflammatory back pain features, HLA-B27, sacroiliac MRI, radiographs, markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Active sacroiliac inflammation on MRI with inflammatory back pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "NSAIDs first-line with structured exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "TNF or IL-17 inhibitor, or JAK inhibitor, when NSAIDs fail",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sulfasalazine only for peripheral arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Co-manage uveitis, psoriasis and inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor disease activity, osteoporosis and cardiovascular risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

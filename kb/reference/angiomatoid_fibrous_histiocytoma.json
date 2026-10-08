@@ -157,5 +157,324 @@
       "caption": "Overview comparison matrix for angiomatoid fibrous histiocytoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angiomatoid_fibrous_histiocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunohistochemistry for desmin, EMA, CD68 and CD99",
+          "cells": [
+            {
+              "text": "Excludes endothelial and melanocytic markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or molecular testing for EWSR1 (and ATF1/CREB1) or FUS",
+          "cells": [
+            {
+              "text": "Rearrangement confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD31 and ERG markers",
+          "cells": [
+            {
+              "text": "Confirms pseudovascular spaces lack a true endothelial lining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count and inflammatory markers",
+          "cells": [
+            {
+              "text": "Document reversible systemic effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Characterises the superficial soft-tissue mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angiomatoid_fibrous_histiocytoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nodal metastasis or reactive lymph node",
+          "cells": [
+            {
+              "text": "The lymphoid cuff can be mistaken for a lymph node"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other EWSR1-rearranged tumours such as clear cell sarcoma",
+          "cells": [
+            {
+              "text": "EWSR1 rearrangement does not by itself indicate Ewing or clear cell sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular tumours such as haemangioma and angiosarcoma",
+          "cells": [
+            {
+              "text": "Pseudovascular spaces can be mistaken for a true vascular tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angiomatoid_fibrous_histiocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Mainstay of treatment"
+            },
+            {
+              "text": "Clear margins; curative in most patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy for molecular confirmation",
+          "cells": [
+            {
+              "text": "EWSR1 or FUS rearrangement"
+            },
+            {
+              "text": "Excludes Ewing sarcoma or clear cell sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-excision",
+          "cells": [
+            {
+              "text": "Preferred next step if initial excision is incomplete"
+            },
+            {
+              "text": "When feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Considered for incomplete or infiltrative margins, or deep or truncal tumour"
+            },
+            {
+              "text": "Not routine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Individualised through a sarcoma tumour board"
+            },
+            {
+              "text": "No established regimen specific to metastatic AFH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist sarcoma referral",
+          "cells": [
+            {
+              "text": "Deep, large, truncal, incompletely excised or metastatic disease"
+            },
+            {
+              "text": "For surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angiomatoid_fibrous_histiocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Angiomatoid fibrous histiocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Superficial extremity mass in a child or young adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Deep, large or infiltrative tumour?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to sarcoma team for surgical planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Immunohistochemistry, EWSR1 or FUS testing, CD31 and ERG, MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "EWSR1 or FUS rearrangement confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Complete surgical excision with clear margins, the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Re-excision if the initial excision is incomplete",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for incomplete margins or deep or truncal tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Systemic therapy only through sarcoma tumour board; not routine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally cured by complete excision; local recurrence in a minority",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

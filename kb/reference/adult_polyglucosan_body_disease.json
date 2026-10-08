@@ -150,5 +150,367 @@
       "caption": "Overview comparison matrix for adult polyglucosan body disease (gbe1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adult_polyglucosan_body_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain and spinal cord",
+          "cells": [
+            {
+              "text": "White matter change and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Predominantly axonal neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glycogen branching enzyme activity assay in leucocytes or fibroblasts",
+          "cells": [
+            {
+              "text": "Reduced enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GBE1 gene testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic assessment",
+          "cells": [
+            {
+              "text": "Neurogenic bladder dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve or tissue biopsy when required",
+          "cells": [
+            {
+              "text": "Polyglucosan bodies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adult_polyglucosan_body_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hereditary spastic paraparesis",
+          "cells": [
+            {
+              "text": "Progressive spastic paraparesis"
+            },
+            {
+              "text": "GBE1 gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Demyelinating neuropathy"
+            },
+            {
+              "text": "Nerve conduction studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenomyeloneuropathy",
+          "cells": [
+            {
+              "text": "X-linked, with very-long-chain fatty acid accumulation"
+            },
+            {
+              "text": "Very-long-chain fatty acid profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subacute combined degeneration from vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Posterior column involvement"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adult_polyglucosan_body_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antispasticity agents (baclofen or tizanidine) with physiotherapy and stretching",
+          "cells": [
+            {
+              "text": "Spasticity"
+            },
+            {
+              "text": "Alongside physiotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder care: anticholinergics, timed voiding or self-catheterisation",
+          "cells": [
+            {
+              "text": "Bladder dysfunction"
+            },
+            {
+              "text": "Guided by urodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gait aids, orthoses, occupational therapy and falls prevention",
+          "cells": [
+            {
+              "text": "Mobility"
+            },
+            {
+              "text": "Preserves function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents and protective foot care",
+          "cells": [
+            {
+              "text": "Peripheral neuropathy"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive, caregiver and psychological support",
+          "cells": [
+            {
+              "text": "Dementia in some patients"
+            },
+            {
+              "text": "Support as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for infection, pressure injury and swallowing difficulty",
+          "cells": [
+            {
+              "text": "Progressive course complications"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and GBE1 carrier testing",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "At-risk relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adult_polyglucosan_body_disease-dx-mgmt",
+      "title": "Diagnosis and management of Adult polyglucosan body disease (GBE1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mid-life progressive leg stiffness, neuropathy and early bladder symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid weakness, bulbar signs or recurrent retention or infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology and urology review; treat retention or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and spine; nerve conduction studies; urodynamics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Predominantly axonal neuropathy with GBE1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Genetic counselling and carrier testing of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review HSP, ALS, CIDP, B12 deficiency and adrenomyeloneuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Baclofen or tizanidine with physiotherapy for spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurogenic bladder care: anticholinergics, timed voiding or self-catheterisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gait aids, falls prevention, neuropathic pain agents and foot care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow progression over years; supportive care targets spasticity and bladder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

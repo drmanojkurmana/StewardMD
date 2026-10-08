@@ -151,5 +151,479 @@
       "caption": "Overview comparison matrix for frontotemporal dementia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Rascovsky et al, Brain 2011, revised bvFTD criteria (PMC)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/3170532",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Frontotemporal Dementia",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/delirium-and-dementia/frontotemporal-dementia",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "frontotemporal_dementia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of behavioural variant FTD (2011 international criteria)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Requirement",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Possible bvFTD",
+          "unit": "features",
+          "cells": [
+            {
+              "text": "{{hy:3 of 6 core features}}",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Plus progressive decline and no exclusion features"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Core features",
+          "cells": [
+            {
+              "text": "Disinhibition; apathy or inertia; loss of sympathy or empathy"
+            },
+            {
+              "text": "Perseverative or compulsive behaviour; hyperorality; dysexecutive profile"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Probable bvFTD",
+          "cells": [
+            {
+              "text": "Possible criteria plus significant functional decline"
+            },
+            {
+              "text": "Frontal or anterior temporal atrophy on MRI or CT, or hypometabolism on PET or SPECT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Definite bvFTD",
+          "cells": [
+            {
+              "text": "Histopathology or pathogenic mutation"
+            },
+            {
+              "text": "C9orf72, GRN, MAPT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sensitivity of possible criteria",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "86 in pathology-proven cases"
+            },
+            {
+              "text": "Probable 76%; older 1998 criteria 53%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Typical age of onset",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "55 to 65",
+              "range": [
+                55,
+                65
+              ]
+            },
+            {
+              "text": "Fifth to seventh decades; younger than Alzheimer disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "FDG-PET pattern",
+          "cells": [
+            {
+              "text": "Anterior hypometabolism (frontal, anterior temporal, anterior cingulate)"
+            },
+            {
+              "text": "Alzheimer disease is posterior"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PPA variants",
+          "cells": [
+            {
+              "text": "Semantic: loss of word and object meaning; nonfluent: agrammatism, motor speech deficit"
+            },
+            {
+              "text": "Parietal function spared"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frontotemporal_dementia-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of frontotemporal dementia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Alzheimer disease",
+          "cells": [
+            {
+              "text": "Early memory and parietal deficits"
+            },
+            {
+              "text": "FDG-PET posterior pattern; amyloid PET"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Primary psychiatric disease",
+          "cells": [
+            {
+              "text": "Later onset or cognitive deficit favours FTD"
+            },
+            {
+              "text": "Neuropsychology and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive supranuclear palsy",
+          "cells": [
+            {
+              "text": "Falls, vertical gaze palsy, axial rigidity"
+            },
+            {
+              "text": "Eye movement examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticobasal syndrome",
+          "cells": [
+            {
+              "text": "Asymmetric rigidity, apraxia, alien limb"
+            },
+            {
+              "text": "Clinical examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parkinson disease",
+          "cells": [
+            {
+              "text": "No downgaze paresis"
+            },
+            {
+              "text": "Eye movement examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural frontal lesion",
+          "cells": [
+            {
+              "text": "Trauma, tumour, hydrocephalus, aneurysm"
+            },
+            {
+              "text": "MRI brain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FTD with motor neuron disease",
+          "cells": [
+            {
+              "text": "Fasciculations, weakness, bulbar signs"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "frontotemporal_dementia-treatment",
+      "kind": "treatment",
+      "title": "Management of frontotemporal dementia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "{{hy:All patients; no disease-modifying therapy}}"
+            },
+            {
+              "text": "Familiar environment, orientation aids, safety"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SSRIs",
+          "cells": [
+            {
+              "text": "Disinhibition, compulsivity, overeating"
+            },
+            {
+              "text": "Symptomatic only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atypical antipsychotics",
+          "cells": [
+            {
+              "text": "Severe agitation or aggression, short term"
+            },
+            {
+              "text": "Caution: parkinsonism worsens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid cholinesterase inhibitors",
+          "cells": [
+            {
+              "text": "All FTD"
+            },
+            {
+              "text": "Cholinergic system spared; ineffective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Speech and language therapy",
+          "cells": [
+            {
+              "text": "Primary progressive aphasia"
+            },
+            {
+              "text": "Communication strategies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow assessment",
+          "cells": [
+            {
+              "text": "FTD with motor neuron disease and bulbar signs"
+            },
+            {
+              "text": "Aspiration pneumonia risk"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Familial cases"
+            },
+            {
+              "text": "About half of cases inherited"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Caregiver support and advance care planning",
+          "cells": [
+            {
+              "text": "All stages"
+            },
+            {
+              "text": "High caregiver burden"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "frontotemporal_dementia-dx-mgmt",
+      "title": "Diagnosis and management of frontotemporal dementia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Middle-aged adult with new behaviour change or language decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "History from informant, cognitive and neurological exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Better explained by psychiatric, structural or medical cause?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the alternative cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "3 of 6 bvFTD features or progressive aphasia?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Reassess; consider Alzheimer or other dementia",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "MRI; FDG-PET if unclear; genetic testing if familial",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Motor neuron disease features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Swallow and respiratory assessment",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "SSRIs, speech therapy, safety, carer support; avoid cholinesterase inhibitors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Advance care planning and palliative care as disease progresses",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

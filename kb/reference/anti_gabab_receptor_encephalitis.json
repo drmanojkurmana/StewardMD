@@ -151,5 +151,324 @@
       "caption": "Overview comparison matrix for anti-gaba-b receptor encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_gabab_receptor_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "GABA-B receptor IgG assay in serum and CSF",
+          "cells": [
+            {
+              "text": "Antibody confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest and whole-body cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Seeks small-cell lung carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SOX1 and other onconeural antibody testing",
+          "cells": [
+            {
+              "text": "Coexisting antibodies that reinforce the cancer search"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Medial temporal signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Characterises seizures and detects subclinical status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional imaging",
+          "cells": [
+            {
+              "text": "Where structural imaging is unrevealing and malignancy is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_gabab_receptor_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-LGI1 and other antibody-mediated limbic encephalitides",
+          "cells": [
+            {
+              "text": "Separated by the GABA-B receptor IgG assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paraneoplastic encephalitis with onconeural antibodies such as Hu",
+          "cells": [
+            {
+              "text": "Separated by the GABA-B receptor IgG and onconeural panel"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_gabab_receptor_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour detection and treatment",
+          "cells": [
+            {
+              "text": "Urgent treatment of underlying small-cell lung carcinoma"
+            },
+            {
+              "text": "The key determinant of outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            },
+            {
+              "text": "Escalate to rituximab or cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combination antiseizure medication",
+          "cells": [
+            {
+              "text": "Aggressive seizure control"
+            },
+            {
+              "text": "Refractory epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Status epilepticus management",
+          "cells": [
+            {
+              "text": "High-dependency or intensive-care setting"
+            },
+            {
+              "text": "Prompt management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SOX1 antibody testing",
+          "cells": [
+            {
+              "text": "Coexisting SOX1 antibodies"
+            },
+            {
+              "text": "Reinforces the search for small cell lung cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour surveillance",
+          "cells": [
+            {
+              "text": "Neurology, oncology and respiratory follow-up"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_gabab_receptor_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-GABA-B receptor encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New severe seizures and amnesia in an older smoker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Refractory seizures or status epilepticus at presentation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent high-dependency care for status epilepticus",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GABA-B IgG assay, urgent chest imaging, SOX1 testing, MRI, EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "GABA-B receptor IgG confirmed on serum or CSF assay?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids, IVIG or plasma exchange as first-line immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat malignancy screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Detect and treat small-cell lung carcinoma urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Combination antiseizure medication for refractory epilepsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate to rituximab or cyclophosphamide if response is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome is determined mainly by treating the underlying cancer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

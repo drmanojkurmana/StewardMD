@@ -150,5 +150,88 @@
       "caption": "Overview comparison matrix for beta-ureidopropionase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta_ureidopropionase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beta-ureidopropionase deficiency",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Urine amino acid and organic acid analysis", "cells": [{"text": "Raised N-carbamyl-beta-alanine and N-carbamyl-beta-aminoisobutyric acid"}], "cite": "c1"},
+        {"parameter": "Tandem mass spectrometry of pyrimidine metabolites", "cells": [{"text": "Quantifies the metabolites in urine and plasma"}], "cite": "c1"},
+        {"parameter": "UPB1 sequencing with deletion and duplication analysis", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"},
+        {"parameter": "Plasma and CSF amino acid profiling", "cells": [{"text": "Used when a central phenotype is present"}], "cite": "c1"},
+        {"parameter": "MRI brain", "cells": [{"text": "Structural or white-matter changes"}], "cite": "c1"},
+        {"parameter": "EEG", "cells": [{"text": "Where seizures or paroxysmal events are suspected"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_ureidopropionase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike pyrimidine and metabolic conditions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Dihydropyrimidine dehydrogenase deficiency", "cells": [{"text": "Upstream first-step defect; this disorder is the most distal of the three"}], "cite": "c1"},
+        {"parameter": "Dihydropyrimidinase deficiency", "cells": [{"text": "Second-step defect, with raised dihydrouracil and dihydrothymine"}], "cite": "c1"},
+        {"parameter": "Beta-aminoisobutyric aciduria", "cells": [{"text": "A common benign biochemical trait that should not be attributed to this enzyme deficiency"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_ureidopropionase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta-ureidopropionase deficiency",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Disease-specific therapy", "cells": [{"text": "None exists; supportive care directed at the neurological phenotype"}, {"text": "No treatment is known to reverse the enzymatic block"}], "cite": "c1"},
+        {"parameter": "Antiepileptic drugs", "cells": [{"text": "Chosen according to seizure type"}, {"text": "For seizures"}], "cite": "c1"},
+        {"parameter": "Developmental therapy", "cells": [{"text": "Early physiotherapy, occupational therapy and speech and language therapy"}, {"text": "For hypotonia, delay and speech"}], "cite": "c1"},
+        {"parameter": "Movement disorder and autistic features", "cells": [{"text": "Behavioural and pharmacological support"}, {"text": "When these features occur"}], "cite": "c1"},
+        {"parameter": "Fluoropyrimidine chemotherapy", "cells": [{"text": "Avoid fluorouracil and capecitabine, or use only with extreme caution"}, {"text": "Impaired pyrimidine catabolism"}], "cite": "c1"},
+        {"parameter": "Follow-up", "cells": [{"text": "Metabolic medicine and neurology follow-up"}, {"text": "Reassurance and monitoring only for asymptomatic people found biochemically"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling for autosomal recessive UPB1 inheritance; testing of at-risk relatives"}, {"text": "Relatives at risk"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta_ureidopropionase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of beta-ureidopropionase deficiency",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Developmental delay, hypotonia, seizures or autistic features, or an abnormal urine screen", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: new or poorly controlled seizures, regression, or feeding difficulty with hypotonia?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: EEG, MRI and metabolic review; avoid fluoropyrimidine chemotherapy", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Urine amino and organic acids with tandem MS for N-carbamyl-beta-alanine", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Confirm with UPB1 sequencing and deletion or duplication analysis", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Biallelic UPB1 variants with raised N-carbamyl metabolites?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Antiepileptic drugs for seizures; early developmental therapy; avoid fluoropyrimidines", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider DPD or dihydropyrimidinase deficiency, or benign beta-aminoisobutyric aciduria", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Genetic counselling; test relatives; drug safety advice for the family", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Outcome depends on neurological phenotype; many are asymptomatic; no treatment reverses the block", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

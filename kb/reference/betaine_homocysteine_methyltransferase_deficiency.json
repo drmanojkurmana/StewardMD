@@ -149,5 +149,85 @@
       "caption": "Overview comparison matrix for betaine-homocysteine methyltransferase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "betaine_homocysteine_methyltransferase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests for suspected BHMT deficiency",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Plasma total homocysteine", "cells": [{"text": "Would be expected to be raised; common causes are excluded first"}], "cite": "c1"},
+        {"parameter": "Plasma amino acids including methionine", "cells": [{"text": "Methionine low or normal in a remethylation defect"}], "cite": "c1"},
+        {"parameter": "Vitamin B12 and folate status", "cells": [{"text": "Nutritional deficiency, the far more common cause"}], "cite": "c1"},
+        {"parameter": "Urine organic acids", "cells": [{"text": "Excludes methylmalonic aciduria"}], "cite": "c1"},
+        {"parameter": "Renal and hepatic function tests", "cells": [{"text": "Renal impairment as an acquired cause"}], "cite": "c1"},
+        {"parameter": "BHMT gene analysis", "cells": [{"text": "Only where an isolated defect is suspected after common causes are excluded"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "betaine_homocysteine_methyltransferase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of raised homocysteine",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Classical homocystinuria (CBS deficiency)", "cells": [{"text": "A far more common cause, excluded before attributing the finding to BHMT"}], "cite": "c1"},
+        {"parameter": "Cobalamin remethylation defects", "cells": [{"text": "Excluded by urine organic acids, which exclude methylmalonic aciduria"}], "cite": "c1"},
+        {"parameter": "Nutritional vitamin B12 or folate deficiency", "cells": [{"text": "The far more common cause of raised homocysteine; correct first"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "betaine_homocysteine_methyltransferase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options for suspected BHMT deficiency",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Remethylation support", "cells": [{"text": "Support the methionine synthase route with vitamin B12 and folate"}, {"text": "No established disease-specific therapy"}], "cite": "c1"},
+        {"parameter": "Nutritional correction", "cells": [{"text": "Correct any deficiency of folate, vitamin B12 and vitamin B6"}, {"text": "Common, treatable causes of raised homocysteine"}], "cite": "c1"},
+        {"parameter": "Exclude common causes", "cells": [{"text": "Exclude and treat cystathionine beta-synthase, MTHFR and cobalamin disorders"}, {"text": "Far more likely than BHMT deficiency"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Plasma total homocysteine and methionine"}, {"text": "Gauges response to remethylation support"}], "cite": "c1"},
+        {"parameter": "Specialist referral", "cells": [{"text": "Metabolic medicine and clinical genetics for a genuinely suspected isolated defect"}, {"text": "For confirmation"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling for presumed autosomal recessive inheritance if a defect is confirmed"}, {"text": "Only once confirmed"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "betaine_homocysteine_methyltransferase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of suspected BHMT deficiency",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Raised plasma total homocysteine with no obvious cause", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: thromboembolism, neurological decline, or rise during catabolic stress?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent metabolic and haematology review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Methionine, B12, folate, renal and hepatic function, urine organic acids", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Common cause found (nutritional, renal, CBS, MTHFR or cobalamin)?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Correct nutritional deficiency and treat the cause; monitor homocysteine", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Metabolic referral and BHMT gene analysis for a genuinely suspected isolated defect", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "Response judged by plasma homocysteine and methionine", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Isolated BHMT deficiency is not firmly established; natural history cannot be defined", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

@@ -148,5 +148,322 @@
       "caption": "Overview comparison matrix for actinic granuloma (annular elastolytic giant cell granuloma)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "actinic_granuloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Elastophagocytosis within a granulomatous infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elastic tissue stains",
+          "cells": [
+            {
+              "text": "Central loss and giant-cell engulfment of elastic fibres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycological examination of annular lesions",
+          "cells": [
+            {
+              "text": "Excludes dermatophyte infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for sarcoidosis when granulomatous histology is found",
+          "cells": [
+            {
+              "text": "Systemic sarcoidosis to be excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of cumulative sun exposure",
+          "cells": [
+            {
+              "text": "Photodamage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "actinic_granuloma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Tinea corporis and other annular infections",
+          "cells": [
+            {
+              "text": "Dermatophyte infection"
+            },
+            {
+              "text": "Mycological examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous sarcoidosis",
+          "cells": [
+            {
+              "text": "Granulomatous histology"
+            },
+            {
+              "text": "Assessment for sarcoidosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "actinic_granuloma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Photoprotection: sun avoidance, broad-spectrum sunscreen, protective clothing",
+          "cells": [
+            {
+              "text": "Addresses the ultraviolet-driven elastolytic process"
+            },
+            {
+              "text": "Rigorous photoprotection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical or intralesional corticosteroids",
+          "cells": [
+            {
+              "text": "First-line; suppresses granulomatous inflammation"
+            },
+            {
+              "text": "First-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical calcineurin inhibitors, hydroxychloroquine or systemic agents",
+          "cells": [
+            {
+              "text": "Persistent disease"
+            },
+            {
+              "text": "Alternative options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Confirms elastophagocytosis; excludes mimics"
+            },
+            {
+              "text": "Excludes sarcoidosis, granuloma annulare and dermatophytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign and indolent course"
+            },
+            {
+              "text": "Some lesions resolve spontaneously; response variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic clinical review",
+          "cells": [
+            {
+              "text": "Lesion progression or enlargement"
+            },
+            {
+              "text": "Monitors progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "actinic_granuloma-dx-mgmt",
+      "title": "Diagnosis and management of Actinic granuloma (annular elastolytic giant cell granuloma)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Slowly expanding annular plaques on sun-damaged skin of face or forearms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid enlargement, ulceration or atypical features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent biopsy to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy with elastic stains; mycology for annular lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Elastophagocytosis on biopsy with dermatophytes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Diagnose actinic granuloma; start photoprotection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review granuloma annulare, sarcoidosis, SCLE and tinea",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Strict sun avoidance, broad-spectrum sunscreen and protective clothing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical or intralesional corticosteroids as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calcineurin inhibitors, hydroxychloroquine or systemic agents if persistent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and indolent; some resolve spontaneously, responses variable",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

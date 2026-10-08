@@ -147,5 +147,346 @@
       "caption": "Overview comparison matrix for ainhum (dactylolysis spontanea)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ainhum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiographs of the digit",
+          "cells": [
+            {
+              "text": "Soft-tissue constriction and phalangeal osteolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical staging of the constricting band and distal viability",
+          "cells": [
+            {
+              "text": "Band stage and viability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for secondary causes (scleroderma serology, leprosy, keratoderma)",
+          "cells": [
+            {
+              "text": "Pseudo-ainhum causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of peripheral circulation and neuropathy",
+          "cells": [
+            {
+              "text": "Neurovascular status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of the band in atypical cases",
+          "cells": [
+            {
+              "text": "Excludes other pathology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ainhum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudo-ainhum secondary to scleroderma or systemic sclerosis",
+          "cells": [
+            {
+              "text": "Systemic sclerosis"
+            },
+            {
+              "text": "Scleroderma serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leprosy with digital changes",
+          "cells": [
+            {
+              "text": "Digital changes in leprosy"
+            },
+            {
+              "text": "Leprosy assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriasis or hereditary keratoderma with constricting bands",
+          "cells": [
+            {
+              "text": "Keratoderma"
+            },
+            {
+              "text": "Skin examination for keratoderma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ainhum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early surgical release of the band with Z-plasty",
+          "cells": [
+            {
+              "text": "Preserves the digit"
+            },
+            {
+              "text": "Interrupts the fibrous ring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical keratolytics and emollients",
+          "cells": [
+            {
+              "text": "Early disease with hyperkeratotic groove"
+            },
+            {
+              "text": "Softens the groove"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amputation of the digit",
+          "cells": [
+            {
+              "text": "Imminent autoamputation, non-viable or infected digit"
+            },
+            {
+              "text": "When necessary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of pseudo-ainhum underlying disorder",
+          "cells": [
+            {
+              "text": "Scleroderma, leprosy, psoriasis, keratoderma or neuropathy"
+            },
+            {
+              "text": "Treat the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Footwear advice and foot protection",
+          "cells": [
+            {
+              "text": "Chronic trauma from barefoot walking"
+            },
+            {
+              "text": "Preventive advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care and prevention of secondary infection",
+          "cells": [
+            {
+              "text": "Strangulated digit"
+            },
+            {
+              "text": "Infection prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular review of band progression and distal viability",
+          "cells": [
+            {
+              "text": "Staging and circulation"
+            },
+            {
+              "text": "Ongoing review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ainhum-dx-mgmt",
+      "title": "Diagnosis and management of Ainhum (dactylolysis spontanea)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive constricting groove at the base of a digit, often a fifth toe",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Secondary infection, gangrene or several digits involved?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical and wound review; consider amputation if non-viable",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs of the digit; staging of band; circulation and neuropathy check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary cause found (scleroderma, leprosy, keratoderma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the underlying disorder; pseudo-ainhum",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "True ainhum: early surgical release with Z-plasty",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical keratolytics and emollients in early disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Footwear advice and foot protection to prevent chronic trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wound care and monitoring of band progression and distal viability",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Untreated true ainhum leads to autoamputation; early release can save digit",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

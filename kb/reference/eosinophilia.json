@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for eosinophilia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeat full blood count",
+          "cells": [
+            {
+              "text": "Confirms and quantifies the absolute eosinophil count"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and parasite serology",
+          "cells": [
+            {
+              "text": "Parasitic cause; Strongyloides testing before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum tryptase, vitamin B12, IgE and medication review",
+          "cells": [
+            {
+              "text": "Associated causes of eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FIP1L1-PDGFRA molecular testing, marrow and cytogenetics",
+          "cells": [
+            {
+              "text": "Clonal disease when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Troponin and echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac involvement; cardiac MRI if indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Helminth and other parasitic infection",
+          "cells": [
+            {
+              "text": "Worldwide the leading cause; travel and exposure history guides testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug hypersensitivity, including DRESS",
+          "cells": [
+            {
+              "text": "Careful medication review can reveal the culprit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clonal myeloid disease (FIP1L1-PDGFRA)",
+          "cells": [
+            {
+              "text": "Fusion defines an imatinib-responsive variant; molecular testing is pivotal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Withdraw culprit drugs, treat atopic disease, and give targeted anthelmintics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical ivermectin",
+          "cells": [
+            {
+              "text": "Covers Strongyloides before corticosteroids, to prevent disseminated hyperinfection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imatinib",
+          "cells": [
+            {
+              "text": "FIP1L1-PDGFRA and other PDGFR-rearranged clonal eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for symptomatic idiopathic hypereosinophilic syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing agents and anti-IL-5 biologics",
+          "cells": [
+            {
+              "text": "Mepolizumab for maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ monitoring and anticoagulation",
+          "cells": [
+            {
+              "text": "Troponin and echocardiography for cardiac involvement; anticoagulation for eosinophil-related thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology referral",
+          "cells": [
+            {
+              "text": "Marrow examination, cytogenetics and molecular testing for suspected clonal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent treatment",
+          "cells": [
+            {
+              "text": "Severe hypereosinophilia threatening the heart or other organs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilia-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised absolute eosinophil count on full blood count",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (cardiac involvement, neurological deficit, thrombosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent treatment when severe hypereosinophilia threatens the heart or organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy, parasite serology, drug review, troponin and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Reactive cause identified (parasite, atopy or drug)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Haematology referral: FIP1L1-PDGFRA testing, marrow examination, cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Withdraw culprit drugs, treat atopic disease and parasites",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Empirical ivermectin before corticosteroids to cover Strongyloides",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Imatinib for FIP1L1-PDGFRA clonal eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids for symptomatic idiopathic hypereosinophilic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor troponin and echocardiography; anticoagulate eosinophil-related thrombosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Reactive eosinophilia resolves with the trigger; HES outcome depends on organ involvement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -247,5 +247,616 @@
       "caption": "Diagnostic and clinical overview matrix for multiple sclerosis (relapse)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Multiple Sclerosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/demyelinating-disorders/multiple-sclerosis-ms"
+    },
+    {
+      "id": "c3",
+      "label": "GPnotebook, MS steroids and acute relapse (summarising NICE NG220, 2022)",
+      "kind": "web",
+      "url": "https://gpnotebook.com/pages/ophthalmology/multiple-sclerosis-ms-steroids-and-management-of-acute-relapse"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ms-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing MS and confirming a relapse",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Dissemination in space",
+          "unit": "areas",
+          "cells": [
+            {
+              "text": "Lesions in 2 or more of 5 areas: periventricular, cortical or juxtacortical, infratentorial, spinal cord, optic nerve",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "By MRI or clinical examination"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dissemination in time",
+          "cells": [
+            {
+              "text": "History of relapses and remissions, simultaneous enhancing and nonenhancing lesions, or a new lesion on follow-up MRI"
+            },
+            {
+              "text": "{{hy:Diagnosis needs separation in both time and space}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Relapse definition",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "New symptoms lasting more than 24 hours after a stable period of at least 1 month, without infection",
+              "op": ">",
+              "value": 24
+            },
+            {
+              "text": "Symptoms present over 3 months are not routinely called a relapse"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "CSF oligoclonal bands",
+          "cells": [
+            {
+              "text": "Positive in over 90%"
+            },
+            {
+              "text": "Supports intrathecal IgG synthesis; CSF is not routine if MRI and clinical picture are clear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF IgG",
+          "unit": "% of CSF protein",
+          "cells": [
+            {
+              "text": "IgG raised above the normal <11% of total protein (or <27% of albumin)",
+              "op": "<",
+              "value": 11
+            },
+            {
+              "text": "Usually increased in MS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CSF cells and protein",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Pleocytosis >75 cells/uL, neutrophils, or protein >1 g/L",
+              "op": ">",
+              "value": 75
+            },
+            {
+              "text": "Argues against MS; mild pleocytosis >5 cells/uL occurs in about 25%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gadolinium-enhanced MRI",
+          "cells": [
+            {
+              "text": "Enhancing lesions mark active blood-brain barrier disruption"
+            },
+            {
+              "text": "Enhancement usually lasts under 1 month"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI lesion pattern",
+          "cells": [
+            {
+              "text": "Ovoid lesions perpendicular to ventricles (Dawson fingers); central vein sign on T2*"
+            },
+            {
+              "text": "Typical of perivenous demyelination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evoked potentials",
+          "cells": [
+            {
+              "text": "Visual, somatosensory, brainstem auditory"
+            },
+            {
+              "text": "Visual evoked responses help when no cranial lesion is seen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Screen for mimics",
+          "cells": [
+            {
+              "text": "ESR, serum B12, ANA, treponemal antibody; AQP4 and MOG antibodies when atypical"
+            },
+            {
+              "text": "Excludes B12 deficiency, connective tissue disease, syphilis, NMOSD, MOGAD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "EDSS",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "Scale 0 (normal) to 10 (death); below 3.5 usually normal walking",
+              "range": [
+                0,
+                10
+              ]
+            },
+            {
+              "text": "Above 4.0 indicates gait-impaired progressive disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "CSF and mimic screen combine Harrison 22e (ESR, B12, ANA, treponemal antibody) and Merck (AQP4, MOG). Relapse definition follows NICE NG220 as summarised by GPnotebook."
+    },
+    {
+      "id": "ms-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic MS or an MS relapse",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pseudo-relapse (Uhthoff phenomenon)",
+          "cells": [
+            {
+              "text": "Transient worsening with heat, fever or infection from conduction block, not a new lesion"
+            },
+            {
+              "text": "Look for infection, especially urinary and respiratory"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Neuromyelitis optica spectrum disorder",
+          "cells": [
+            {
+              "text": "Bilateral or severe optic neuritis, myelitis over 3 or more vertebral segments, oligoclonal bands in under 20%"
+            },
+            {
+              "text": "{{hy:AQP4 antibody}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MOG antibody-associated disease",
+          "cells": [
+            {
+              "text": "Similar to NMOSD; brain lesions cloud-like and may fully resolve"
+            },
+            {
+              "text": "MOG antibody"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute disseminated encephalomyelitis",
+          "cells": [
+            {
+              "text": "Hyperacute or postinfectious demyelinating illness"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin B12 deficiency",
+          "cells": [
+            {
+              "text": "Subacute combined degeneration of the cord"
+            },
+            {
+              "text": "Serum B12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis, SLE, Sjogren syndrome",
+          "cells": [
+            {
+              "text": "Systemic features; uveitis points to sarcoidosis or lymphoma rather than MS"
+            },
+            {
+              "text": "ESR and ANA screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foramen magnum or cord-medulla junction lesion",
+          "cells": [
+            {
+              "text": "Nondemyelinating lesion such as subarachnoid cyst or tumour"
+            },
+            {
+              "text": "MRI of the craniocervical junction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cervical spondylosis",
+          "cells": [
+            {
+              "text": "Lhermitte symptom also occurs with other cervical cord disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic optic neuropathy",
+          "cells": [
+            {
+              "text": "Arteritic or nonarteritic; MS optic neuritis has pain on eye movement and colour desaturation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ms-treatment",
+      "kind": "treatment",
+      "title": "Treating an MS relapse",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Assess and decide on steroids",
+          "cells": [
+            {
+              "text": "Relapse affecting usual tasks; assess within 14 days of onset"
+            },
+            {
+              "text": "Not every relapse needs steroids; exclude infection first"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral methylprednisolone",
+          "cells": [
+            {
+              "text": "{{hy:First line: 0.5 g daily for 5 days}}"
+            },
+            {
+              "text": "Do not use lower doses than this; no home supply for future relapses"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV methylprednisolone",
+          "cells": [
+            {
+              "text": "1 g daily for 3 to 5 days"
+            },
+            {
+              "text": "Oral failed or not tolerated, or admission for severe relapse or for monitoring diabetes or depression"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "With short-term high-dose steroids"
+            },
+            {
+              "text": "Reduces peptic ulcer risk"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Plasma exchange",
+          "cells": [
+            {
+              "text": "Relapse not responding to glucocorticoids"
+            },
+            {
+              "text": "Not used for primary progressive MS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Spasticity",
+          "cells": [
+            {
+              "text": "Baclofen or tizanidine in escalating doses"
+            },
+            {
+              "text": "Botulinum toxin if oral drugs fail"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Painful paresthesias",
+          "cells": [
+            {
+              "text": "Gabapentin or pregabalin"
+            },
+            {
+              "text": "Alternatives: amitriptyline, carbamazepine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fatigue",
+          "cells": [
+            {
+              "text": "Amantadine, modafinil or armodafinil"
+            },
+            {
+              "text": "Fatigue is the leading cause of work disability in MS"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gait impairment",
+          "cells": [
+            {
+              "text": "Extended-release 4-aminopyridine (dalfampridine)"
+            },
+            {
+              "text": "Symptomatic only"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Merck states oral and IV methylprednisolone have similar efficacy over 3 to 5 days; NICE NG220 prefers oral as first line. Steroids shorten relapses but do not change long-term outcome."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ms-dx-mgmt",
+      "title": "Diagnosis and management of an MS relapse",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New or worse neurological symptoms in known or suspected MS",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Symptoms over 24 h after at least 1 month stable?",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Not a relapse; review for fluctuation or progression",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Infection, fever or heat exposure present?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Pseudo-relapse: treat infection, no steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Relapse impairs usual tasks?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Observe; not every relapse needs steroids",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "MRI with gadolinium; CSF if picture is unclear",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Atypical: long myelitis, bilateral optic neuritis, CSF >75 cells/uL?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Test AQP4 and MOG antibodies for NMOSD or MOGAD",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Oral methylprednisolone 0.5 g daily for 5 days, within 14 days",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Oral failed, not tolerated or admission needed?",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "IV methylprednisolone 1 g daily for 3 to 5 days",
+          "cite": "c3"
+        },
+        {
+          "id": "n14",
+          "type": "decision",
+          "text": "Response to steroids?",
+          "cite": "c2"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Symptomatic care and MS team follow-up",
+          "cite": "c2"
+        },
+        {
+          "id": "n16",
+          "type": "outcome",
+          "text": "Plasma exchange for steroid-refractory relapse",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n15",
+          "label": "No"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
+        },
+        {
+          "from": "n14",
+          "to": "n15",
+          "label": "Yes"
+        },
+        {
+          "from": "n14",
+          "to": "n16",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

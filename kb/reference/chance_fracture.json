@@ -146,5 +146,298 @@
       "caption": "Overview comparison matrix for chance fracture (flexion-distraction)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rockwood and Green's Fractures in Adults",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chance_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anteroposterior and lateral spinal radiographs",
+          "cells": [
+            {
+              "text": "Increased interspinous distance indicates the distraction component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Defines the bony injury and involvement of the spinal columns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Posterior ligamentous complex, spinal cord and soft tissues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Screens for associated visceral injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Documented baseline neurological status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chance_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immobilisation for stable osseous injury",
+          "cells": [
+            {
+              "text": "Hyperextension thoracolumbosacral orthosis with serial radiographs"
+            },
+            {
+              "text": "Stable, purely osseous injuries"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior instrumented fixation",
+          "cells": [
+            {
+              "text": "Fixation and fusion"
+            },
+            {
+              "text": "Ligamentous or unstable variants, or neurological deficit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visceral injury screening",
+          "cells": [
+            {
+              "text": "CT for hollow viscus, mesenteric and pancreatic injury"
+            },
+            {
+              "text": "Seatbelt-sign bruise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological monitoring and precautions",
+          "cells": [
+            {
+              "text": "Full neurological examination; spinal precautions and log-rolling"
+            },
+            {
+              "text": "Until stability is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and prophylaxis",
+          "cells": [
+            {
+              "text": "Analgesia, venous thromboembolism prophylaxis and early mobilisation"
+            },
+            {
+              "text": "Once the injury is stabilised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Orthopaedic or spinal trauma services with trauma and general surgery input"
+            },
+            {
+              "text": "Concomitant visceral injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and brace monitoring",
+          "cells": [
+            {
+              "text": "Monitor for loss of reduction or progressive deformity"
+            },
+            {
+              "text": "Brace-treated fractures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chance_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Chance fracture (flexion-distraction)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Chance fracture: flexion-distraction injury after lap-belt deceleration",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (seatbelt sign, neurological deficit, unstable variant, kyphosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: trauma review for visceral injury and spinal precautions",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Spinal radiographs for interspinous distance; CT; MRI; CT abdomen and pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bony injury with stable columns and no visceral injury confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Immobilise in hyperextension thoracolumbosacral orthosis with serial films",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check burst, compression and purely ligamentous flexion-distraction injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Posterior instrumented fixation for unstable or neurological injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for hollow viscus, mesenteric and pancreatic injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Rehabilitation and monitoring for loss of reduction or deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Stable osseous injuries can heal in a brace; unstable injuries need fixation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,327 @@
       "caption": "Overview comparison matrix for aphthous stomatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aphthous_stomatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of frequency, pattern and triggers",
+          "cells": [
+            {
+              "text": "Pattern and triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematinics (iron, folate, vitamin B12) and full blood count",
+          "cells": [
+            {
+              "text": "Underlying haematinic deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology",
+          "cells": [
+            {
+              "text": "When gastrointestinal features or deficiency are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for Behcet or inflammatory bowel disease features",
+          "cells": [
+            {
+              "text": "Systemic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of any solitary ulcer that fails to heal",
+          "cells": [
+            {
+              "text": "Excludes malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aphthous_stomatitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral manifestations of Behcet disease",
+          "cells": [
+            {
+              "text": "Systemic features suggest Behcet disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulceration from coeliac or inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Gastrointestinal features prompt coeliac serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aphthous_stomatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Betamethasone mouthwash, triamcinolone in dental paste, or hydrocortisone mucoadhesive pellets"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic relief",
+          "cells": [
+            {
+              "text": "Topical local anaesthetic, chlorhexidine or antiseptic mouthwash, barrier agents"
+            },
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Minimise oral trauma; sodium lauryl sulphate-free toothpaste; avoid identified precipitant foods"
+            },
+            {
+              "text": "Identified triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematinic correction",
+          "cells": [
+            {
+              "text": "Iron, folate or vitamin B12"
+            },
+            {
+              "text": "Underlying deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy",
+          "cells": [
+            {
+              "text": "Colchicine or a short course of systemic corticosteroids"
+            },
+            {
+              "text": "Severe or refractory ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying systemic cause",
+          "cells": [
+            {
+              "text": "Coeliac disease, inflammatory bowel disease or Behcet disease"
+            },
+            {
+              "text": "When features suggest it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy of non-healing solitary ulcer",
+          "cells": [
+            {
+              "text": "Excludes malignancy"
+            },
+            {
+              "text": "Fails to heal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aphthous_stomatitis-dx-mgmt",
+      "title": "Diagnosis and management of Aphthous stomatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent painful oral ulceration with a pattern and triggers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Solitary ulcer persisting beyond two to three weeks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy the solitary ulcer to exclude oral cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History, FBC, haematinics, coeliac serology, Behcet or IBD features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Haematinic deficiency or systemic disease found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Correct haematinic deficiency and treat the systemic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table); biopsy if the ulcer persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic relief with local anaesthetic or chlorhexidine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Colchicine or systemic steroids for severe or refractory ulceration",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Biopsy any non-healing ulcer; trigger avoidance and symptomatic care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

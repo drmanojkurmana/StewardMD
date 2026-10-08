@@ -168,5 +168,454 @@
       "caption": "Overview comparison matrix for enterococcal infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Enterococcal Infections",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-positive-cocci/enterococcal-infections",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enterococcal_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of enterococcal infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Gram stain",
+          "cells": [
+            {
+              "text": "Gram-positive cocci, singly, in pairs or short chains"
+            },
+            {
+              "text": "Catalase-negative; group D antisera reactive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bile esculin and salt tolerance",
+          "cells": [
+            {
+              "text": "Hydrolyses esculin in 40% bile; grows in 6.5% NaCl and at 46 degrees C"
+            },
+            {
+              "text": "Separates enterococci from most streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PYR test",
+          "cells": [
+            {
+              "text": "{{hy:PYR-positive}}"
+            },
+            {
+              "text": "Separates from S. gallolyticus (S. bovis) group and Leuconostoc"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative urine culture",
+          "unit": "CFU/mL",
+          "cells": [
+            {
+              "text": ">=10^5 with pyuria and symptoms or signs",
+              "op": ">=",
+              "value": 100000
+            },
+            {
+              "text": "Without these, often catheter colonisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures",
+          "cells": [
+            {
+              "text": "Often device or gut source; may be polymicrobial"
+            },
+            {
+              "text": "Persistent bacteraemia suggests endocarditis or deep focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Look for endocarditis in bacteraemia"
+            },
+            {
+              "text": "DENOVA score helps select who needs echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF in meningitis",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "Neutrophil pleocytosis, average about 500"
+            },
+            {
+              "text": "Protein usually >100 mg/dL; glucose low (average about 28 mg/dL); Gram stain positive in about half"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species ID and susceptibility",
+          "cells": [
+            {
+              "text": "E. faecalis vs E. faecium; ampicillin, vancomycin, high-level aminoglycoside resistance"
+            },
+            {
+              "text": "vanA or vanB genes confirm vancomycin resistance; MALDI-TOF or PCR for rapid ID"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enterococcal_infections-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of enterococcal infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Viridans streptococcal endocarditis",
+          "cells": [
+            {
+              "text": "Similar subacute fever, malaise, murmur"
+            },
+            {
+              "text": "Blood culture speciation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "S. gallolyticus (S. bovis) bacteraemia",
+          "cells": [
+            {
+              "text": "Group D streptococcus linked to colonic pathology"
+            },
+            {
+              "text": "PYR test negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal device bacteraemia or endocarditis",
+          "cells": [
+            {
+              "text": "Catheter or prosthetic-valve infection"
+            },
+            {
+              "text": "Blood culture speciation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polymicrobial intra-abdominal infection",
+          "cells": [
+            {
+              "text": "Enteric gram-negatives and anaerobes with enterococci"
+            },
+            {
+              "text": "Cultures of drained material"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catheter colonisation or asymptomatic bacteriuria",
+          "cells": [
+            {
+              "text": "No pyuria, symptoms or systemic signs"
+            },
+            {
+              "text": "Catheterised specimen after catheter change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enterococcal_infections-treatment",
+      "kind": "treatment",
+      "title": "Treatment of enterococcal infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ampicillin or amoxicillin",
+          "cells": [
+            {
+              "text": "{{hy:Agent of choice for susceptible E. faecalis}}; uncomplicated UTI"
+            },
+            {
+              "text": "Single agent enough for UTI"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ampicillin plus ceftriaxone",
+          "cells": [
+            {
+              "text": "E. faecalis endocarditis, or when aminoglycoside cannot be used"
+            },
+            {
+              "text": "Synergistic double beta-lactam"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cell wall-active agent plus gentamicin or streptomycin",
+          "cells": [
+            {
+              "text": "Endocarditis without high-level aminoglycoside resistance"
+            },
+            {
+              "text": "Bactericidal synergy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Linezolid, tedizolid or daptomycin",
+          "cells": [
+            {
+              "text": "VRE (mainly E. faecium) if susceptible"
+            },
+            {
+              "text": "Guided by susceptibility testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oritavancin, tigecycline, eravacycline, chloramphenicol",
+          "cells": [
+            {
+              "text": "VRE alternatives with in vitro activity"
+            },
+            {
+              "text": "Quinupristin-dalfopristin no longer recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitrofurantoin or fosfomycin",
+          "cells": [
+            {
+              "text": "Cystitis, including VRE cystitis"
+            },
+            {
+              "text": "Lower urinary tract only"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Infected urinary catheter, central line or hardware"
+            },
+            {
+              "text": "Catheter removal alone may clear bacteriuria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Cephalosporins alone lack reliable enterococcal activity. Trimethoprim-sulfamethoxazole may fail despite in vitro susceptibility. Doses are not stated in the cited sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enterococcal_infections-dx-mgmt",
+      "title": "Diagnosis and management of enterococcal infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Enterococcus isolated from urine, blood or sterile site",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Signs of true infection rather than colonisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Colonisation: no antibiotic; change or remove catheter",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Speciate and test ampicillin, vancomycin, high-level aminoglycoside",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bacteraemia present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove lines; echocardiography guided by DENOVA score",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Endocarditis confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ampicillin plus ceftriaxone, or beta-lactam plus aminoglycoside",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Ampicillin and vancomycin resistant (VRE)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Linezolid, tedizolid or daptomycin per susceptibility",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Ampicillin or amoxicillin; cystitis may use nitrofurantoin or fosfomycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Complete course; image for deep focus if bacteraemia persists",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

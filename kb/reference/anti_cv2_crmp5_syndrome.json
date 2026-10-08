@@ -158,5 +158,354 @@
       "caption": "Overview comparison matrix for anti-cv2/crmp5 paraneoplastic syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_cv2_crmp5_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF anti-CV2/CRMP5 with confirmatory assays",
+          "cells": [
+            {
+              "text": "Antibody confirmation with onconeural panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the chest and whole-body FDG-PET",
+          "cells": [
+            {
+              "text": "Small cell lung carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI of the anterior mediastinum",
+          "cells": [
+            {
+              "text": "Thymoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain and spinal cord",
+          "cells": [
+            {
+              "text": "Striatal, white-matter or cord signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and electromyography",
+          "cells": [
+            {
+              "text": "Characterises the neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment with OCT and electroretinography",
+          "cells": [
+            {
+              "text": "Optic neuritis, retinitis or uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Pleocytosis, raised protein and oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_cv2_crmp5_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-Hu paraneoplastic encephalomyelitis",
+          "cells": [
+            {
+              "text": "May coexist; test for it at diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic neuritis from multiple sclerosis or neuromyelitis optica",
+          "cells": [
+            {
+              "text": "Visual symptoms here reflect optic neuritis or retinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Huntington disease and other chorea",
+          "cells": [
+            {
+              "text": "Chorea wrongly attributed to a primary movement disorder misses the paraneoplastic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_cv2_crmp5_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour search",
+          "cells": [
+            {
+              "text": "Urgent search for small cell lung carcinoma or thymoma"
+            },
+            {
+              "text": "High-risk antibody with over 70% cancer association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour-directed therapy with immunotherapy",
+          "cells": [
+            {
+              "text": "Run in parallel"
+            },
+            {
+              "text": "Tumour control alone is less effective"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard tumour pathway",
+          "cells": [
+            {
+              "text": "Histology-specific staging and treatment"
+            },
+            {
+              "text": "For the identified malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat malignancy screening",
+          "cells": [
+            {
+              "text": "Periodically for about two years"
+            },
+            {
+              "text": "If no tumour found on initial screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroid pulse, IVIG or plasma exchange"
+            },
+            {
+              "text": "Once infectious mimics are reasonably excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line immunotherapy",
+          "cells": [
+            {
+              "text": "Rituximab, azathioprine, mycophenolate mofetil or cyclophosphamide"
+            },
+            {
+              "text": "For non-responders; tocilizumab as an option after rituximab"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chorea and visual symptoms",
+          "cells": [
+            {
+              "text": "Antidopaminergic agents for chorea; early ophthalmology for visual complaints"
+            },
+            {
+              "text": "Risk of optic neuritis, retinitis or uveitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_cv2_crmp5_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Anti-CV2/CRMP5 Paraneoplastic Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Subacute neurological decline with chorea, ataxia or visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Subacute painless visual loss or rapid encephalomyelitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent tumour search for small cell lung carcinoma or thymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CV2/CRMP5 assay, chest CT and FDG-PET, mediastinal CT, MRI, EMG, eye tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anti-CV2/CRMP5 confirmed with small cell lung carcinoma or thymoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Tumour-directed therapy with immunotherapy in parallel",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat malignancy screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroid pulse, IVIG or plasma exchange started early",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab, azathioprine, mycophenolate or cyclophosphamide for non-responders",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antidopaminergic agents for chorea; physiotherapy for ataxia and neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually partial stabilisation rather than full reversal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

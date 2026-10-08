@@ -148,5 +148,312 @@
       "caption": "Overview comparison matrix for clonorchiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "clonorchiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with concentration",
+          "cells": [
+            {
+              "text": "Small operculated eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenal or bile aspirate",
+          "cells": [
+            {
+              "text": "When stool is negative but suspicion is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Cholestasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound, CT or MRCP",
+          "cells": [
+            {
+              "text": "Ductal dilatation, flukes, stones or mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clonorchiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Opisthorchiasis",
+          "cells": [
+            {
+              "text": "Clinically and morphologically very similar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fascioliasis or other liver flukes",
+          "cells": [
+            {
+              "text": "Other liver fluke infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choledocholithiasis or biliary stricture",
+          "cells": [
+            {
+              "text": "Ductal stones or strictures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clonorchiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Praziquantel",
+          "cells": [
+            {
+              "text": "First-line anthelmintic; albendazole as an alternative"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ERCP biliary drainage",
+          "cells": [
+            {
+              "text": "Ductal obstruction, intrahepatic stones or worm blockage"
+            },
+            {
+              "text": "Relieves obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for cholangitis",
+          "cells": [
+            {
+              "text": "Recurrent pyogenic cholangitis and biliary sepsis"
+            },
+            {
+              "text": "Biliary sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid raw, undercooked or pickled freshwater fish",
+          "cells": [
+            {
+              "text": "Public-health and dietary education"
+            },
+            {
+              "text": "Prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for cholangiocarcinoma and biliary fibrosis",
+          "cells": [
+            {
+              "text": "Chronic or heavy infection; liver imaging"
+            },
+            {
+              "text": "Long-term risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "clonorchiasis-dx-mgmt",
+      "title": "Diagnosis and management of Clonorchiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected clonorchiasis: freshwater fish eaten in an endemic area with biliary symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cholangitis, progressive jaundice, biliary mass, weight loss)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent biliary review for cholangitis or suspected cholangiocarcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy, bile aspirate, full blood count and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Operculated eggs or flukes on aspirate or imaging confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Praziquantel as first-line anthelmintic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check opisthorchiasis, fascioliasis and choledocholithiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ERCP biliary drainage for obstruction or intrahepatic stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics for recurrent pyogenic cholangitis and biliary sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid raw or undercooked fish; screen household contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver imaging surveillance for cholangiocarcinoma and biliary fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,367 @@
       "caption": "Overview comparison matrix for accidental hypothermia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Auerbach's Wilderness Medicine / Tintinalli's Emergency Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "accidental_hypothermia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous core temperature with a low-reading thermometer",
+          "cells": [
+            {
+              "text": "Core temperature below 35 degrees Celsius"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Osborn waves and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose, electrolytes and renal function",
+          "cells": [
+            {
+              "text": "Metabolic and renal status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, coagulation studies and arterial blood gas",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid and cortisol testing",
+          "cells": [
+            {
+              "text": "Secondary causes of hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for trauma, infection or intoxication",
+          "cells": [
+            {
+              "text": "Underlying precipitant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accidental_hypothermia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothyroidism or myxoedema coma",
+          "cells": [
+            {
+              "text": "Causes secondary hypothermia"
+            },
+            {
+              "text": "Thyroid function testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Depressed consciousness and impaired thermogenesis"
+            },
+            {
+              "text": "Blood glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Endocrine cause of secondary hypothermia"
+            },
+            {
+              "text": "Cortisol testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis",
+          "cells": [
+            {
+              "text": "Hypothermia rather than fever"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accidental_hypothermia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Passive external rewarming",
+          "cells": [
+            {
+              "text": "Mild cases"
+            },
+            {
+              "text": "Mild hypothermia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active external and active internal (core) rewarming",
+          "cells": [
+            {
+              "text": "Moderate to severe hypothermia"
+            },
+            {
+              "text": "Tailored to severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle handling with minimal movement",
+          "cells": [
+            {
+              "text": "Avoids precipitating ventricular fibrillation"
+            },
+            {
+              "text": "Irritable myocardium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Remove wet clothing, insulate, warmed oxygen and warmed IV fluids",
+          "cells": [
+            {
+              "text": "Counters cold diuresis and volume depletion"
+            },
+            {
+              "text": "Warmed humidified oxygen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged resuscitation with extracorporeal rewarming",
+          "cells": [
+            {
+              "text": "Cardiac arrest or severe hypothermia"
+            },
+            {
+              "text": "ECMO or cardiopulmonary bypass; rewarm before declaring death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticipate afterdrop and rewarming-related hypotension",
+          "cells": [
+            {
+              "text": "Complications during rewarming"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying precipitants",
+          "cells": [
+            {
+              "text": "Hypothyroidism, hypoglycaemia, sepsis, intoxication, trauma"
+            },
+            {
+              "text": "Identify and treat each"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "accidental_hypothermia-dx-mgmt",
+      "title": "Diagnosis and management of Accidental hypothermia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Core temperature below 35 C with cold exposure and impaired consciousness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Absent or severely depressed consciousness or malignant arrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Prolonged resuscitation; extracorporeal rewarming for arrest",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Low-reading core thermometer, ECG for Osborn waves, glucose and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mild hypothermia with consciousness preserved?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Passive external rewarming, insulation and warmed oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Active external and core rewarming; gentle handling to avoid VF",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gentle handling with minimal movement to avoid ventricular fibrillation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat precipitants: hypothyroidism, hypoglycaemia, sepsis, intoxication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticipate afterdrop and rewarming hypotension; continue cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent recovery possible with appropriate rewarming and resuscitation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

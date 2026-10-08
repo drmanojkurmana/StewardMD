@@ -156,5 +156,484 @@
       "caption": "Overview comparison matrix for candidiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Invasive Candidiasis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/candidiasis-invasive",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 130-5",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Table 52-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "candidiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic features of candidiasis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral thrush",
+          "cells": [
+            {
+              "text": "White plaques on tongue or buccal mucosa; angular cheilitis"
+            },
+            {
+              "text": "Look for predisposing factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intertriginous candidiasis",
+          "cells": [
+            {
+              "text": "{{hy:Red macerated plaques with satellite pustules}}; may involve scrotum"
+            },
+            {
+              "text": "Pseudohyphae on KOH"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Vulvovaginal candidiasis",
+          "cells": [
+            {
+              "text": "Itch, scant white clumped adherent discharge, vulvar erythema and fissures"
+            },
+            {
+              "text": "No amine odour"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vaginal pH in candidiasis",
+          "cells": [
+            {
+              "text": "Usually <=4.5",
+              "op": "<=",
+              "value": 4.5
+            },
+            {
+              "text": "Trichomonas usually >=5; bacterial vaginosis >4.5"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vaginal microscopy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Pseudohyphae in up to 80% of symptomatic culture-positive women",
+              "op": "<=",
+              "value": 80
+            },
+            {
+              "text": "Culture isolates Candida"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Blood or sterile-site culture",
+          "cells": [
+            {
+              "text": "Gold standard for invasive disease"
+            },
+            {
+              "text": "Non-sterile site growth less definitive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-D-glucan",
+          "cells": [
+            {
+              "text": "Often positive in invasive disease"
+            },
+            {
+              "text": "Negative makes systemic infection unlikely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PCR plus blood cultures",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "98% sensitive combined"
+            },
+            {
+              "text": "PCR alone more sensitive than culture"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dilated fundoscopy",
+          "cells": [
+            {
+              "text": "Endophthalmitis in candidaemia"
+            },
+            {
+              "text": "Visual loss may be the only symptom"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated candidiasis triad",
+          "cells": [
+            {
+              "text": "Fever, myalgia, eruptive nodules"
+            },
+            {
+              "text": "Often C. tropicalis in neutropenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "candidiasis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of candidiasis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dermatophytosis (tinea)",
+          "cells": [
+            {
+              "text": "Annular scaly plaques; groin spares scrotum; hyphae on KOH"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Tinea versicolor",
+          "cells": [
+            {
+              "text": "Trunk patches; hyphae and spores on KOH"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Trichomonal vaginitis",
+          "cells": [
+            {
+              "text": "Profuse yellow discharge, pH >=5, motile trichomonads"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial vaginosis",
+          "cells": [
+            {
+              "text": "{{hy:Fishy amine odour, clue cells}}, pH >4.5, little inflammation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Psoriasis or eczema of flexures",
+          "cells": [
+            {
+              "text": "No satellite pustules or pseudohyphae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral lichen planus or leukoplakia",
+          "cells": [
+            {
+              "text": "White lesions not scraped off"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspergillosis or other moulds in neutropenia",
+          "cells": [
+            {
+              "text": "Necrotic nodules, mould on culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "candidiasis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of candidiasis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Remove predisposing factors",
+          "cells": [
+            {
+              "text": "All forms"
+            },
+            {
+              "text": "Antibiotics, moisture, catheters, immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical nystatin or azoles",
+          "cells": [
+            {
+              "text": "Cutaneous candidiasis"
+            },
+            {
+              "text": "Systemic azoles for resistant disease"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Fluconazole 150 mg orally once",
+          "cells": [
+            {
+              "text": "Vulvovaginal candidiasis"
+            },
+            {
+              "text": "Or miconazole 100 mg suppository or clotrimazole 100 mg tablet daily for 7 days; partner not treated"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fluconazole oral or IV",
+          "cells": [
+            {
+              "text": "Oesophageal candidiasis"
+            },
+            {
+              "text": "14 to 21 days; itraconazole, voriconazole, posaconazole or echinocandin if failing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echinocandin (caspofungin, micafungin, anidulafungin, rezafungin)",
+          "cells": [
+            {
+              "text": "{{hy:Candidaemia, moderately severe or critical}}, or C. glabrata or C. auris suspected"
+            },
+            {
+              "text": "Step down to fluconazole when stable and susceptible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Remove IV catheters",
+          "cells": [
+            {
+              "text": "Candidaemia without neutropenia"
+            },
+            {
+              "text": "Source control"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipid amphotericin B",
+          "cells": [
+            {
+              "text": "Refractory or resistant disease"
+            },
+            {
+              "text": "More toxic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treatment duration, candidaemia",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "14 after blood clearance"
+            },
+            {
+              "text": "If no metastatic foci"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral nystatin",
+          "cells": [
+            {
+              "text": "GI tract candidiasis only"
+            },
+            {
+              "text": "Not for systemic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "candidiasis-dx-mgmt",
+      "title": "Diagnosis and management of candidiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Candida infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Candida in blood or sterile site, or septic high-risk host?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Echinocandin; remove catheters; fundoscopy",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat blood cultures until clear",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Step down to fluconazole; treat 14 days after clearance",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Mucosal or skin disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "KOH, culture; vaginal pH and microscopy if vaginal",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Oesophageal or immunosuppressed host?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Systemic fluconazole",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Topical azole or nystatin; single-dose fluconazole for vaginal",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n3",
+          "label": "Unclear, unwell"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

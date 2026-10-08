@@ -169,5 +169,562 @@
       "caption": "Overview comparison matrix for acute liver failure."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Liver Failure",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/approach-to-the-patient-with-liver-disease/acute-liver-failure",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ACUTE_LIVER_FAILURE-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and assessing acute liver failure",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "INR",
+          "cells": [
+            {
+              "text": "1.5 or more",
+              "op": ">=",
+              "value": 1.5
+            },
+            {
+              "text": "{{hy:With encephalopathy and no prior liver disease, defines acute liver failure}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration of illness",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Under 26",
+              "op": "<",
+              "value": 26
+            },
+            {
+              "text": "Longer course points to chronic disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Encephalopathy after jaundice (acute, fulminant)",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Within 2",
+              "op": "<=",
+              "value": 2
+            },
+            {
+              "text": "Or within 8 weeks of illness onset without prior liver disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subacute course",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Encephalopathy later than acute but within 6",
+              "op": "<=",
+              "value": 6
+            },
+            {
+              "text": "Subacute liver failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Arterial ammonia",
+          "unit": "ug/dL",
+          "cells": [
+            {
+              "text": "Above 150 to 200",
+              "range": [
+                150,
+                200
+              ]
+            },
+            {
+              "text": "Predicts cerebral oedema risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wilson disease clues",
+          "cells": [
+            {
+              "text": "Age under 40 years, haemolysis, ALP to bilirubin ratio under 4, AST above ALT"
+            },
+            {
+              "text": "Check ceruloplasmin and urinary copper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cause workup",
+          "cells": [
+            {
+              "text": "Paracetamol level and drug history, viral serologies (A, B, D, E), HSV PCR, autoimmune markers, pregnancy test, ultrasound"
+            },
+            {
+              "text": "Cause undetermined in 5% to 70% depending on region"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring bloods",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "INR, blood count, chemistry, glucose, blood gas every 4 to 6",
+              "range": [
+                4,
+                6
+              ]
+            },
+            {
+              "text": "Encephalopathy can mask hypoglycaemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "King's College transplant criteria are named in the source opened but their thresholds were not stated, so they are not listed."
+    },
+    {
+      "id": "ACUTE_LIVER_FAILURE-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute liver failure",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute-on-chronic liver failure",
+          "cells": [
+            {
+              "text": "{{hy:Known or underlying chronic liver disease or cirrhosis}}"
+            },
+            {
+              "text": "History, imaging for cirrhosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe acute hepatitis without encephalopathy",
+          "cells": [
+            {
+              "text": "Coagulopathy and jaundice but normal mentation"
+            },
+            {
+              "text": "Serial mental status assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic hepatitis",
+          "cells": [
+            {
+              "text": "Preceding shock or hypotension"
+            },
+            {
+              "text": "Clinical context"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Budd-Chiari syndrome",
+          "cells": [
+            {
+              "text": "Hepatic vein thrombosis with ascites and hepatomegaly"
+            },
+            {
+              "text": "Doppler ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute fatty liver of pregnancy or HELLP",
+          "cells": [
+            {
+              "text": "Late pregnancy"
+            },
+            {
+              "text": "Pregnancy test; delivery is treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignant infiltration of the liver",
+          "cells": [
+            {
+              "text": "Known cancer, hepatomegaly"
+            },
+            {
+              "text": "Imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sepsis or heatstroke",
+          "cells": [
+            {
+              "text": "Multi-organ failure from a systemic cause"
+            },
+            {
+              "text": "Cultures, clinical history"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "ACUTE_LIVER_FAILURE-treatment",
+      "kind": "treatment",
+      "title": "Management of acute liver failure",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "N-acetylcysteine",
+          "cells": [
+            {
+              "text": "{{hy:Paracetamol toxicity}}; also advised for other causes"
+            },
+            {
+              "text": "Evidence weaker outside paracetamol"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cause-specific therapy",
+          "cells": [
+            {
+              "text": "Hepatitis B, HSV, autoimmune, Wilson, pregnancy-related"
+            },
+            {
+              "text": "Antivirals, aciclovir, immunosuppression, chelation, delivery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early transfer to a transplant centre",
+          "cells": [
+            {
+              "text": "All patients with acute liver failure"
+            },
+            {
+              "text": "Transplant 1-year survival about 84% to 90%, 5-year 80%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intracranial pressure control",
+          "cells": [
+            {
+              "text": "Advanced encephalopathy"
+            },
+            {
+              "text": "Target ICP under 20 mm Hg and CPP above 50 mm Hg; head up 30 degrees"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mannitol",
+          "cells": [
+            {
+              "text": "Raised ICP"
+            },
+            {
+              "text": "0.5 to 1 g/kg, repeat once or twice; avoid in acute kidney injury"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "10% dextrose infusion",
+          "cells": [
+            {
+              "text": "Prevent hypoglycaemia"
+            },
+            {
+              "text": "Frequent glucose checks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Norepinephrine, then vasopressin",
+          "cells": [
+            {
+              "text": "Hypotension after adequate filling"
+            },
+            {
+              "text": "Norepinephrine first line"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal replacement therapy",
+          "cells": [
+            {
+              "text": "Very high ammonia or progressive encephalopathy, kidney injury"
+            },
+            {
+              "text": "Also clears ammonia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Bleeding or invasive procedure only"
+            },
+            {
+              "text": "Do not correct INR alone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nutrition",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Protein 60",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Severe protein restriction unnecessary"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ACUTE_LIVER_FAILURE-dx-mgmt",
+      "title": "Diagnosis and management of acute liver failure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute hepatitis with jaundice or raised transaminases",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Check INR and mental status",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "INR 1.5 or more with encephalopathy, no prior liver disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Severe acute liver injury: monitor INR and mentation closely",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Admit to ICU; contact transplant centre early",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cause workup: paracetamol level, viral tests, autoimmune, Wilson, pregnancy",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Paracetamol toxicity?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "N-acetylcysteine",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cause-specific therapy; consider N-acetylcysteine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Support: dextrose, pressors, renal replacement, FFP only if bleeding",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Worsening encephalopathy or raised ICP?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Intubate, head up 30 degrees, mannitol, head CT",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "decision",
+          "text": "Poor prognosis and continued progression?",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Emergency liver transplantation",
+          "cite": "c2"
+        },
+        {
+          "id": "n15",
+          "type": "outcome",
+          "text": "Continue support until spontaneous recovery",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n13",
+          "to": "n15",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

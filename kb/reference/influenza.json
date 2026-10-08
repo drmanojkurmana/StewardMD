@@ -159,5 +159,426 @@
       "caption": "Overview comparison matrix for influenza."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC Influenza Antiviral Medications: Summary for Clinicians",
+      "kind": "web",
+      "url": "https://www.cdc.gov/flu/hcp/antivirals/summary-clinicians.html"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "influenza-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing influenza",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture",
+          "cells": [
+            {
+              "text": "Abrupt fever, myalgia, fatigue, sore throat, headache, cough in winter season"
+            },
+            {
+              "text": "Do not wait for testing before treating priority groups"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:Molecular test (RT-PCR or multiplex)}}",
+          "cells": [
+            {
+              "text": "Most sensitive and specific; multiplex separates influenza A, B and SARS-CoV-2"
+            },
+            {
+              "text": "Positive for one virus does not exclude co-infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RT-PCR persistence",
+          "cells": [
+            {
+              "text": "Genome can persist in nasal secretions for weeks"
+            },
+            {
+              "text": "Positive may reflect a recent rather than current infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid antigen test",
+          "cells": [
+            {
+              "text": "Detects viral protein in nasopharyngeal secretions"
+            },
+            {
+              "text": "Best predictive value in high-risk seasonal samples"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lower respiratory RT-PCR",
+          "cells": [
+            {
+              "text": "Severely ill hospitalised patients"
+            },
+            {
+              "text": "Helps decide on extending treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "All with suspected pneumonia"
+            },
+            {
+              "text": "Look for primary viral or secondary bacterial pneumonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial superinfection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 10% of influenza pneumonia in some series",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "S. aureus including MRSA, S. pneumoniae, S. pyogenes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "influenza-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic influenza",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "COVID-19",
+          "cells": [
+            {
+              "text": "Overlapping symptoms; loss of smell may occur"
+            },
+            {
+              "text": "Multiplex molecular test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RSV, metapneumovirus, parainfluenza, adenovirus, rhinovirus",
+          "cells": [
+            {
+              "text": "Similar respiratory syndrome"
+            },
+            {
+              "text": "Multiplex respiratory panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial community-acquired pneumonia",
+          "cells": [
+            {
+              "text": "Focal consolidation, purulent sputum"
+            },
+            {
+              "text": "Chest radiograph and cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COPD or chronic bronchitis exacerbation",
+          "cells": [
+            {
+              "text": "Known lung disease, may be triggered by influenza"
+            },
+            {
+              "text": "Clinical history; test for influenza"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Decompensated heart disease",
+          "cells": [
+            {
+              "text": "Fever and dyspnoea with fluid overload"
+            },
+            {
+              "text": "Clinical exam, echocardiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "influenza-treatment",
+      "kind": "treatment",
+      "title": "Treating and preventing influenza (CDC)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "{{hy:Oseltamivir oral}}",
+          "cells": [
+            {
+              "text": "Hospitalised, severe or progressive illness, or higher risk; start as soon as possible"
+            },
+            {
+              "text": "75 mg twice daily for 5 days (adults over 40 kg); benefit in hospitalised even after 48 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zanamivir inhaled",
+          "cells": [
+            {
+              "text": "Outpatients without airway disease"
+            },
+            {
+              "text": "10 mg (two 5 mg inhalations) twice daily for 5 days; avoid in asthma or COPD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peramivir IV",
+          "cells": [
+            {
+              "text": "Cannot take oral therapy"
+            },
+            {
+              "text": "600 mg once if creatinine clearance 50 mL/min or more"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baloxavir oral",
+          "cells": [
+            {
+              "text": "Uncomplicated influenza within 2 days of onset"
+            },
+            {
+              "text": "40 mg if 20 to under 80 kg, 80 mg if 80 kg or more, single dose; not in pregnancy or severe immunosuppression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adamantanes",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Widespread resistance in circulating influenza A"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Secondary bacterial pneumonia only"
+            },
+            {
+              "text": "Cover S. aureus and streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-exposure prophylaxis",
+          "cells": [
+            {
+              "text": "Vulnerable contacts"
+            },
+            {
+              "text": "Oseltamivir 75 mg once daily for 7 days after last exposure; outbreaks at least 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Annual vaccination",
+          "cells": [
+            {
+              "text": "Everyone eligible"
+            },
+            {
+              "text": "Reformulated yearly for antigenic drift"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "influenza-dx-mgmt",
+      "title": "Diagnosis and management of influenza",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute fever, cough and myalgia in flu season",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hospitalised, severe or progressive illness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Start oseltamivir now; molecular test; chest X-ray",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Signs of bacterial pneumonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Add antibiotics covering S. aureus and streptococci",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Continue oseltamivir and supportive care",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Higher risk for complications?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Treat early with oseltamivir regardless of test result",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Within 2 days of onset?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Consider oseltamivir, zanamivir or baloxavir",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive care and safety-net advice",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

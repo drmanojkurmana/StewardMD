@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for congenital diaphragmatic hernia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_diaphragmatic_hernia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal ultrasound and fetal MRI with lung volume estimation",
+          "cells": [
+            {
+              "text": "Lung volume estimated antenatally"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest and abdominal radiograph",
+          "cells": [
+            {
+              "text": "Thoracic bowel loops and mediastinal shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Pulmonary hypertension and associated cardiac lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas and pre- and post-ductal saturations",
+          "cells": [
+            {
+              "text": "Degree of shunting"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_diaphragmatic_hernia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital pulmonary airway malformation",
+          "cells": [
+            {
+              "text": "Named look-alike on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital lobar emphysema",
+          "cells": [
+            {
+              "text": "Lung overinflation rather than herniated bowel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary sequestration",
+          "cells": [
+            {
+              "text": "Named look-alike with lung mass"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_diaphragmatic_hernia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Elective intubation at birth",
+          "cells": [
+            {
+              "text": "Avoid bag-mask ventilation; decompress stomach by nasogastric tube"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung-protective ventilation",
+          "cells": [
+            {
+              "text": "Permissive hypercapnia to limit barotrauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension treatment",
+          "cells": [
+            {
+              "text": "Inhaled nitric oxide and pulmonary vasodilators; ECMO for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Circulatory support",
+          "cells": [
+            {
+              "text": "Fluids, inotropes or vasopressors; correct acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed surgical repair",
+          "cells": [
+            {
+              "text": "Once physiologically stable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist delivery",
+          "cells": [
+            {
+              "text": "Neonatal surgery and intensive care; foetal tracheal occlusion considered in severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Chronic lung disease, feeding and growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_diaphragmatic_hernia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital Diaphragmatic Hernia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital diaphragmatic hernia: respiratory distress and bowel in chest",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (severe hypoxaemia, refractory pulmonary hypertension, acidosis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intubate; avoid bag-mask; treat pulmonary hypertension; consider ECMO",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antenatal imaging; chest radiograph; echo; pre- and post-ductal saturations",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm herniated bowel loops and mediastinal shift?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital airway malformation, lobar emphysema or sequestration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Elective intubation and nasogastric decompression at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lung-protective ventilation with permissive hypercapnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled nitric oxide; ECMO for refractory pulmonary hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Delayed surgical repair once physiologically stable",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on pulmonary hypoplasia, pulmonary hypertension and associated anomalies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,336 @@
       "caption": "Overview comparison matrix for barth syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "barth_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiolipin analysis with monolysocardiolipin-to-cardiolipin ratio",
+          "cells": [
+            {
+              "text": "Tafazzin deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of TAZ",
+          "cells": [
+            {
+              "text": "Pathogenic TAZ variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine organic acids",
+          "cells": [
+            {
+              "text": "Raised 3-methylglutaconic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial full blood counts",
+          "cells": [
+            {
+              "text": "Cyclical or persistent neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Cardiomyopathy and non-compaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatine kinase and skeletal muscle assessment",
+          "cells": [
+            {
+              "text": "Skeletal myopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "barth_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Left ventricular non-compaction from other genetic causes",
+          "cells": [
+            {
+              "text": "Separated by TAZ testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary mitochondrial cardiomyopathy",
+          "cells": [
+            {
+              "text": "Separated by TAZ testing and cardiolipin analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "barth_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "ACE inhibitors, beta-blockers and diuretics for dilated cardiomyopathy"
+            },
+            {
+              "text": "Dilated cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulocyte colony-stimulating factor",
+          "cells": [
+            {
+              "text": "To correct neutropenia"
+            },
+            {
+              "text": "Neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotic treatment and prophylaxis",
+          "cells": [
+            {
+              "text": "Prompt treatment of intercurrent bacterial infection; consider prophylaxis"
+            },
+            {
+              "text": "Recurrent life-threatening sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and physiotherapy",
+          "cells": [
+            {
+              "text": "Support for skeletal myopathy and growth delay"
+            },
+            {
+              "text": "Myopathy and growth delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "Regular echocardiography and rhythm monitoring"
+            },
+            {
+              "text": "Progression, non-compaction and arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac transplantation",
+          "cells": [
+            {
+              "text": "Consideration for refractory end-stage heart failure"
+            },
+            {
+              "text": "Refractory heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance; carrier testing of female relatives and family screening"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "barth_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Barth syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dilated cardiomyopathy with neutropenia in a male infant or child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Heart failure, serious infection or ventricular arrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent heart-failure management and treatment of serious infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cardiolipin analysis, TAZ sequencing, urine organic acids, FBC, echocardiography, CK",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "TAZ variant confirmed with raised 3-methylglutaconic acid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Standard heart-failure therapy with cardiac surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat TAZ and cardiolipin testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Granulocyte colony-stimulating factor for neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider antibiotic prophylaxis and treat infection promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutrition and physiotherapy for myopathy and growth delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for X-linked inheritance; consider transplantation if refractory",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,298 @@
       "caption": "Overview comparison matrix for dermatosis papulosa nigra."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dermatosis_papulosa_nigra-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis by morphology and distribution",
+          "cells": [
+            {
+              "text": "Diagnosed clinically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermoscopy",
+          "cells": [
+            {
+              "text": "Seborrhoeic-keratosis-like features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test-spot treatment",
+          "cells": [
+            {
+              "text": "Pigmentary response before wider therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography",
+          "cells": [
+            {
+              "text": "Monitors cosmetic treatment outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatosis_papulosa_nigra-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Seborrhoeic keratosis",
+          "cells": [
+            {
+              "text": "Clinical variant of it; dermoscopy shows similar features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verruca plana (flat warts)",
+          "cells": [
+            {
+              "text": "Confusing them leads to inappropriate therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Melanoma within the field",
+          "cells": [
+            {
+              "text": "Asymmetry, irregular pigmentation or ulceration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dermatosis_papulosa_nigra-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Entirely benign with no malignant potential; treatment is cosmetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cosmetic removal",
+          "cells": [
+            {
+              "text": "Light electrodesiccation, curettage, scissor snip, cryotherapy or laser"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Test-spot treatment",
+          "cells": [
+            {
+              "text": "Before treating widely, given the dyspigmentation risk in pigmented skin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gentle technique and photoprotection",
+          "cells": [
+            {
+              "text": "Minimises post-inflammatory hyperpigmentation and scarring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photographic monitoring",
+          "cells": [
+            {
+              "text": "Tracks the cosmetic outcome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dermatosis_papulosa_nigra-dx-mgmt",
+      "title": "Diagnosis and management of dermatosis papulosa nigra",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dermatosis papulosa nigra: multiple small dark papules",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (asymmetry, irregular pigment, ulceration or rapid change)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy the atypical lesion to exclude melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis by morphology; dermoscopy for seborrhoeic keratosis-like features",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do dermoscopic features match a benign seborrhoeic keratosis-like lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider verruca plana, melanocytic naevus or other benign lesions; biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure: entirely benign; treatment is purely cosmetic",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cosmetic removal by electrodesiccation, curettage, snip, cryotherapy or laser",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Test-spot treatment first, given dyspigmentation risk in pigmented skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gentle technique and photoprotection to limit hyperpigmentation and scarring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Clinical photography to monitor the cosmetic outcome",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Entirely benign; lesions accumulate slowly; cosmetic treatment risks dyspigmentation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

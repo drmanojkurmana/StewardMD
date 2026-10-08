@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for ankle sprain."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon / standard sports medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ankle_sprain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ottawa ankle and foot rules",
+          "cells": [
+            {
+              "text": "Select patients for plain radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight-bearing or stress radiographs",
+          "cells": [
+            {
+              "text": "Syndesmotic disruption or instability suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Osteochondral lesions, occult injury or persistent symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Peroneal tendon and ligament integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Proximal fibula imaging",
+          "cells": [
+            {
+              "text": "Maisonneuve injury suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankle_sprain-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lateral malleolus, fifth metatarsal base or other fracture",
+          "cells": [
+            {
+              "text": "Bony tenderness meeting Ottawa criteria suggests fracture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maisonneuve fracture",
+          "cells": [
+            {
+              "text": "Proximal fibular tenderness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndesmotic (high ankle) injury",
+          "cells": [
+            {
+              "text": "Syndesmotic disruption on weight-bearing or stress radiographs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankle_sprain-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute injury care",
+          "cells": [
+            {
+              "text": "Relative rest, ice, compression, elevation, early protected weight-bearing"
+            },
+            {
+              "text": "As pain allows"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Paracetamol or non-steroidal anti-inflammatory drugs"
+            },
+            {
+              "text": "Pain relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early functional rehabilitation",
+          "cells": [
+            {
+              "text": "Range-of-motion, proprioceptive and balance training, progressive strengthening"
+            },
+            {
+              "text": "Started early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "External support",
+          "cells": [
+            {
+              "text": "Bracing or taping"
+            },
+            {
+              "text": "Stabilises the joint and reduces re-injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syndesmotic sprains",
+          "cells": [
+            {
+              "text": "Longer protected weight-bearing or immobilisation"
+            },
+            {
+              "text": "Orthopaedic review if unstable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical opinion",
+          "cells": [
+            {
+              "text": "Complete unstable rupture, Maisonneuve injury or associated fracture"
+            },
+            {
+              "text": "Surgical referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Persistent instability",
+          "cells": [
+            {
+              "text": "Continued physiotherapy; consider ligament reconstruction"
+            },
+            {
+              "text": "Persistent or recurrent instability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ankle_sprain-dx-mgmt",
+      "title": "Diagnosis and management of Ankle sprain",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute ankle injury with pain, swelling and bony tenderness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Cannot bear weight with bony tenderness (Ottawa)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Radiograph for possible fracture; check for Maisonneuve signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ottawa rules, weight-bearing or stress films, MRI or ultrasound if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Syndesmotic disruption or instability confirmed on radiographs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Longer protected weight-bearing or immobilisation; orthopaedic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Relative rest, ice, compression, elevation, early protected weight-bearing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing or taping with early proprioceptive and balance training",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical opinion for complete unstable rupture or Maisonneuve injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most low-grade sprains recover in weeks; up to a third have residual symptoms",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

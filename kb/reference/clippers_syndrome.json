@@ -148,5 +148,312 @@
       "caption": "Overview comparison matrix for clippers."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "clippers_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain with contrast",
+          "cells": [
+            {
+              "text": "Punctate pontine and cerebellar enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis with cytology and flow cytometry",
+          "cells": [
+            {
+              "text": "Excludes lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum and CSF markers for sarcoidosis, vasculitis and infection",
+          "cells": [
+            {
+              "text": "Mimic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body imaging",
+          "cells": [
+            {
+              "text": "Occult lymphoma or systemic inflammatory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain biopsy",
+          "cells": [
+            {
+              "text": "Atypical, tumefactive or steroid-unresponsive cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clippers_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Central nervous system lymphoma",
+          "cells": [
+            {
+              "text": "Tumefactive or steroid-unresponsive lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective rhombencephalitis",
+          "cells": [
+            {
+              "text": "Infection of the brainstem"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple sclerosis or other demyelination",
+          "cells": [
+            {
+              "text": "Demyelinating pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clippers_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroid therapy",
+          "cells": [
+            {
+              "text": "Mainstay; rapid improvement also helps confirm diagnosis"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, azathioprine, mycophenolate or rituximab"
+            },
+            {
+              "text": "Maintains remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gradual steroid tapering",
+          "cells": [
+            {
+              "text": "Under maintenance therapy"
+            },
+            {
+              "text": "Relapse on withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic brain biopsy",
+          "cells": [
+            {
+              "text": "Atypical, tumefactive or steroid-unresponsive cases"
+            },
+            {
+              "text": "Excludes lymphoma and vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and symptomatic support",
+          "cells": [
+            {
+              "text": "Ataxia, diplopia, dysarthria and sensory disturbance"
+            },
+            {
+              "text": "Symptomatic care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "clippers_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of CLIPPERS",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CLIPPERS: subacute ataxia, diplopia and dysarthria with pontine signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tumefactive lesion, poor steroid response, bulbar compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for bulbar or respiratory compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI, CSF cytology and flow cytometry, and whole-body imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Punctate pontine and cerebellar enhancement with lymphoma excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroid therapy as mainstay with rapid improvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CNS lymphoma, neurosarcoidosis and infective rhombencephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Brain biopsy for atypical, tumefactive or steroid-unresponsive cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gradual steroid tapering under maintenance therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Steroid-sparing immunosuppression to maintain remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial MRI and rehabilitation for diplopia, dysarthria and ataxia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

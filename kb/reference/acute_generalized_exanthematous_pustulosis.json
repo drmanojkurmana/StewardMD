@@ -152,5 +152,343 @@
       "caption": "Overview comparison matrix for acute generalised exanthematous pustulosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed drug timeline",
+          "cells": [
+            {
+              "text": "Agents introduced in the days before onset"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Sterile spongiform pustules with dermal oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Neutrophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pustule swab culture",
+          "cells": [
+            {
+              "text": "Negative; sterile pustules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and renal function tests",
+          "cells": [
+            {
+              "text": "Uncommon systemic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing after recovery",
+          "cells": [
+            {
+              "text": "Helps confirm the culprit drug"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Generalised pustular psoriasis",
+          "cells": [
+            {
+              "text": "Does not resolve on drug withdrawal"
+            },
+            {
+              "text": "Response to drug withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial folliculitis or impetigo",
+          "cells": [
+            {
+              "text": "Culture-positive; AGEP pustules are sterile"
+            },
+            {
+              "text": "Pustule swab culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate withdrawal of the culprit drug",
+          "cells": [
+            {
+              "text": "Definitive intervention"
+            },
+            {
+              "text": "Commonly an aminopenicillin or macrolide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and emollients, with antipyretics",
+          "cells": [
+            {
+              "text": "Settles the pustular eruption and fever"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Extensive or systemically involved disease"
+            },
+            {
+              "text": "Reserved for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care through the desquamative phase",
+          "cells": [
+            {
+              "text": "Prevents secondary bacterial infection"
+            },
+            {
+              "text": "Skin protection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid and electrolyte balance",
+          "cells": [
+            {
+              "text": "Widespread eruption"
+            },
+            {
+              "text": "Where the eruption is widespread"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of full blood count, liver and renal function",
+          "cells": [
+            {
+              "text": "Uncommon systemic involvement"
+            },
+            {
+              "text": "Serial checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document the reaction and counsel lifelong avoidance",
+          "cells": [
+            {
+              "text": "Culprit and related agents"
+            },
+            {
+              "text": "Patch testing after recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_generalized_exanthematous_pustulosis-dx-mgmt",
+      "title": "Diagnosis and management of Acute generalised exanthematous pustulosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Numerous sterile non-follicular pustules on oedematous erythema within days of a drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "High fever with internal organ involvement or rapid spread?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent admission; organ support and dermatology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Drug timeline, skin biopsy, FBC with neutrophilia and sterile pustule swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sterile pustules that resolve after drug withdrawal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm AGEP; withdraw culprit (aminopenicillin or macrolide)",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider generalised pustular psoriasis or other pustular disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids, emollients and antipyretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids only for extensive or systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor FBC, liver and renal function; prevent secondary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Clears within one to two weeks of stopping the drug",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

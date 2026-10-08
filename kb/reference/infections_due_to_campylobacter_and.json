@@ -173,5 +173,447 @@
       "caption": "Overview comparison matrix for infections due to campylobacter and related organisms."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Overview of Campylobacter",
+      "kind": "web",
+      "url": "https://www.cdc.gov/campylobacter/hcp/clinical-overview/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, foodborne illness by incubation period (p61 to 162 inventory)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infections_due_to_campylobacter_and-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Campylobacter infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "2 to 4 days, range 1 to 7",
+              "range": [
+                1,
+                7
+              ]
+            },
+            {
+              "text": "Fever, headache and myalgia prodrome 12 to 48 h before diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure",
+          "cells": [
+            {
+              "text": "Undercooked poultry (30 to 70%), raw milk, untreated water, pets, travel"
+            },
+            {
+              "text": "Food-borne inflammatory diarrhoea with incubation over 16 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stool pattern",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Visible blood in about 10% of adults; often 10 or more stools on worst day",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Cramping pain may dominate; can mimic appendicitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool culture on Campylobacter-selective media",
+          "cells": [
+            {
+              "text": "Gold standard"
+            },
+            {
+              "text": "{{hy:Routine culture misses it without selective media}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CIDT (PCR or antigen)",
+          "cells": [
+            {
+              "text": "Rapid and more sensitive"
+            },
+            {
+              "text": "Positive CIDT needs culture for susceptibility and sequencing; may detect nonviable organisms"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood culture",
+          "cells": [
+            {
+              "text": "Positive mainly with C. jejuni or C. fetus"
+            },
+            {
+              "text": "Low metabolic activity can delay detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C. fetus pattern",
+          "cells": [
+            {
+              "text": "Bacteraemia, endocarditis, mycotic aneurysm, septic thrombophlebitis"
+            },
+            {
+              "text": "Compromised hosts, pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre after infection",
+          "unit": "per 1000",
+          "cells": [
+            {
+              "text": "About 1 per 1000 to 2000 infections",
+              "op": "=",
+              "value": 1
+            },
+            {
+              "text": "Campylobacter causes 20 to 40% of GBS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Incubation: Harrison 22e gives 2 to 4 days (range 1 to 7); CDC gives 2 to 5 days. GBS share: Harrison 20 to 40% of GBS; CDC 5 to 41% of GBS and 0.2 to 1.7 per 1000 infections. Both kept."
+    },
+    {
+      "id": "infections_due_to_campylobacter_and-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Campylobacter enteritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Salmonella enteritis",
+          "cells": [
+            {
+              "text": "Eggs, poultry, dairy; similar inflammatory diarrhoea"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Shigellosis",
+          "cells": [
+            {
+              "text": "Dysentery, small infectious dose"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Enterohaemorrhagic E. coli",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea, often little fever, HUS risk"
+            },
+            {
+              "text": "Shiga toxin test"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Yersinia enterocolitica",
+          "cells": [
+            {
+              "text": "Pseudoappendicitis and mesenteric adenitis"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute appendicitis",
+          "cells": [
+            {
+              "text": "Localised peritonism without diarrhoea prodrome"
+            },
+            {
+              "text": "Imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulcerative colitis or Crohn disease",
+          "cells": [
+            {
+              "text": "Biopsy can overlap; exclude infection first"
+            },
+            {
+              "text": "Stool culture before labelling IBD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early typhoid fever",
+          "cells": [
+            {
+              "text": "Isolated fever early on"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infections_due_to_campylobacter_and-treatment",
+      "kind": "treatment",
+      "title": "Treating Campylobacter infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral or IV rehydration",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Mainstay; deaths relate to volume depletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azithromycin (macrolide)",
+          "cells": [
+            {
+              "text": "Severe, bloody, prolonged or systemic illness; pregnancy; immunocompromise"
+            },
+            {
+              "text": "{{hy:Preferred agent}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid empirical fluoroquinolone",
+          "cells": [
+            {
+              "text": "Any"
+            },
+            {
+              "text": "Resistance common in the United States; use susceptibility results"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Parenteral aminoglycoside or carbapenem",
+          "cells": [
+            {
+              "text": "C. fetus bacteraemia or extraintestinal infection"
+            },
+            {
+              "text": "Prompt, possibly prolonged course in compromised hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antimotility drugs",
+          "cells": [
+            {
+              "text": "Bloody or inflammatory diarrhoea"
+            },
+            {
+              "text": "Linked to prolonged illness, toxic megacolon and death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor sequelae",
+          "cells": [
+            {
+              "text": "After enteritis"
+            },
+            {
+              "text": "Guillain-Barre syndrome, reactive arthritis, IBS"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Azithromycin dose and duration were not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infections_due_to_campylobacter_and-dx-mgmt",
+      "title": "Diagnosis and management of Campylobacter infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute diarrhoea, often bloody, after poultry or raw milk",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Rehydrate; stool culture on selective media or PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Campylobacter detected?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Pursue other enteric pathogens or IBD",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe, bloody, prolonged, pregnant or immunocompromised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Supportive care only; no antimotility drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Bacteraemia or endovascular infection (C. fetus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azithromycin, guided by susceptibility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Parenteral aminoglycoside or carbapenem",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Watch for Guillain-Barre syndrome and reactive arthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

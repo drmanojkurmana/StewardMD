@@ -182,5 +182,576 @@
       "caption": "Overview comparison matrix for diseases of the aorta."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Aortic Dissection",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/aortic-dissection",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Abdominal Aortic Aneurysms",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/abdominal-aortic-aneurysms-aaa",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diseases_of_the_aorta-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic thresholds and imaging in aortic disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascending aortic aneurysm",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">=4.5 cm",
+              "op": ">=",
+              "value": 4.5
+            },
+            {
+              "text": "4.0 to 4.4 cm is aortic dilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal aortic aneurysm",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">=3 cm",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Harrison: dilation >=50% beyond adjacent normal segment"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stanford classification",
+          "cells": [
+            {
+              "text": "Type A involves ascending aorta; type B arch or descending only"
+            },
+            {
+              "text": "{{hy:Type A needs surgery}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity >90%",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Most used for dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transoesophageal echo",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 98% sensitive, 90% specific"
+            },
+            {
+              "text": "Poor view of the arch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echo",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 60 to 85%",
+              "range": [
+                60,
+                85
+              ]
+            },
+            {
+              "text": ">80% for proximal ascending dissection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest x-ray",
+          "cells": [
+            {
+              "text": "Widened mediastinum, left effusion"
+            },
+            {
+              "text": "Normal film does not exclude disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "No ischaemic change helps separate from MI"
+            },
+            {
+              "text": "Right coronary ostium may be involved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "cells": [
+            {
+              "text": "AAA sizing, surveillance and screening"
+            },
+            {
+              "text": "About 25% of AAA are uncalcified and invisible on x-ray"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood cultures, ESR, CRP",
+          "cells": [
+            {
+              "text": "Mycotic aneurysm or aortitis"
+            },
+            {
+              "text": "Raised in active Takayasu"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diseases_of_the_aorta-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of acute aortic syndrome",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute myocardial infarction",
+          "cells": [
+            {
+              "text": "{{hy:Ischaemic ECG changes}}"
+            },
+            {
+              "text": "ECG, troponin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Dyspnoea, hypoxaemia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pericarditis with effusion",
+          "cells": [
+            {
+              "text": "Pleuritic positional pain"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal rupture or spasm",
+          "cells": [
+            {
+              "text": "Vomiting or swallowing related"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric ischaemia",
+          "cells": [
+            {
+              "text": "Abdominal pain predominates"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal colic",
+          "cells": [
+            {
+              "text": "Flank pain, haematuria"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Takayasu or giant cell arteritis",
+          "cells": [
+            {
+              "text": "Large-vessel vasculitis, pulse loss"
+            },
+            {
+              "text": "ESR, CRP, vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycotic aneurysm or syphilitic aortitis",
+          "cells": [
+            {
+              "text": "Fever, sepsis; luetic disease of ascending aorta"
+            },
+            {
+              "text": "Blood cultures; syphilis serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diseases_of_the_aorta-treatment",
+      "kind": "treatment",
+      "title": "Treatment of aortic dissection and aneurysm",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Detail"
+      ],
+      "rows": [
+        {
+          "parameter": "IV beta-blocker (esmolol, labetalol, metoprolol)",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "{{hy:Acute dissection: SBP <=120, HR 60 to 80}}",
+              "op": "<=",
+              "value": 120
+            },
+            {
+              "text": "Non-dihydropyridine CCB if beta-blocker not tolerated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitroprusside infusion",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "SBP >110 despite beta-blockade",
+              "op": ">",
+              "value": 110
+            },
+            {
+              "text": "Never without beta-blocker; hydralazine alone contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Open surgical repair",
+          "cells": [
+            {
+              "text": "Type A dissection"
+            },
+            {
+              "text": "Mortality about 20%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Medical therapy",
+          "cells": [
+            {
+              "text": "Uncomplicated type B dissection"
+            },
+            {
+              "text": "Intra-arterial BP monitoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endovascular repair",
+          "cells": [
+            {
+              "text": "Complicated type B: malperfusion, rupture, expansion, refractory pain or hypertension"
+            },
+            {
+              "text": "Surgery also for distal dissection in Marfan"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Elective AAA repair",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Men >5.5 cm; women >5 cm",
+              "op": ">",
+              "value": 5.5
+            },
+            {
+              "text": "Or growth >0.5 cm in 6 months, symptoms, Marfan >4.5 cm"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "AAA surveillance",
+          "cells": [
+            {
+              "text": "Below 5 cm"
+            },
+            {
+              "text": "Ultrasound or CT every 6 to 12 months"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "EVAR vs open repair",
+          "cells": [
+            {
+              "text": "Elective AAA"
+            },
+            {
+              "text": "EVAR lower early morbidity and mortality; needs more follow-up"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "AAA screening",
+          "cells": [
+            {
+              "text": "Men over 65 who ever smoked"
+            },
+            {
+              "text": "Single abdominal ultrasound"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Beta-blocker, ARB (Marfan), statin, stop smoking",
+          "cells": [
+            {
+              "text": "Chronic aneurysm"
+            },
+            {
+              "text": "Avoid heavy isometric exertion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diseases_of_the_aorta-dx-mgmt",
+      "title": "Diagnosis and management of acute aortic syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden tearing chest or back pain, pulse deficit or new AR murmur",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG and troponin; IV access, arterial line",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Haemodynamically stable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bedside TOE or TTE, urgent surgical team",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CT angiography of whole aorta",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Dissection, intramural haematoma or ulcer present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Pursue other cause: MI, PE, pericarditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV beta-blocker to SBP <=120 and HR 60 to 80",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Ascending aorta involved (type A)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Emergency open surgical repair",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Complications: malperfusion, rupture, expansion, refractory pain?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Endovascular repair",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Medical therapy with serial imaging",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

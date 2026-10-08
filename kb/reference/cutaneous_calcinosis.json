@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for cutaneous calcinosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Bolognia Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cutaneous_calcinosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum calcium, phosphate, PTH, vitamin D and alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Metabolic type defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function tests",
+          "cells": [
+            {
+              "text": "Chronic kidney disease identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiography or CT",
+          "cells": [
+            {
+              "text": "Distribution and burden of calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy with von Kossa or alizarin red",
+          "cells": [
+            {
+              "text": "Calcium deposition confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear and myositis-specific antibodies",
+          "cells": [
+            {
+              "text": "Connective tissue disease when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_calcinosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calciphylaxis",
+          "cells": [
+            {
+              "text": "Painful retiform ulceration; urgent treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoma cutis",
+          "cells": [
+            {
+              "text": "Cutaneous ossification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gouty tophi",
+          "cells": [
+            {
+              "text": "Crystal deposition rather than calcium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutaneous_calcinosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct calcium-phosphate disturbance",
+          "cells": [
+            {
+              "text": "Phosphate binders, treatment of hyperparathyroidism; stop calcium or vitamin D if implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for dystrophic calcinosis",
+          "cells": [
+            {
+              "text": "Dermatomyositis or systemic sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical trial",
+          "cells": [
+            {
+              "text": "Diltiazem, sodium thiosulfate, bisphosphonates or colchicine for symptomatic deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Painful, ulcerating or functionally limiting deposits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent calciphylaxis care",
+          "cells": [
+            {
+              "text": "Sodium thiosulfate, wound care and mineral correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound and infection care",
+          "cells": [
+            {
+              "text": "Ulcerated deposits with chalky extrusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Dermatology with rheumatology or nephrology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cutaneous_calcinosis-dx-mgmt",
+      "title": "Diagnosis and management of cutaneous calcinosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cutaneous calcinosis: firm calcific nodules in skin or subcutis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (painful retiform ulceration, sepsis, widespread metastatic calcification)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent calciphylaxis treatment with sodium thiosulfate and wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Calcium, phosphate, PTH, vitamin D; renal tests; imaging; biopsy with von Kossa",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show calcium deposition with metabolic type defined?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider gouty tophi, osteoma cutis or foreign-body granuloma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct calcium-phosphate disturbance with phosphate binders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Immunosuppression for dystrophic calcinosis of dermatomyositis or systemic sclerosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Medical trial of diltiazem, sodium thiosulfate or bisphosphonates",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Excision of painful or ulcerating deposits; wound care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on type; idiopathic deposits may stay stable, dystrophic disease varies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

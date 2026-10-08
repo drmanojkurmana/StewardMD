@@ -148,5 +148,296 @@
       "caption": "Overview comparison matrix for enhanced s-cone syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "enhanced_s_cone_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-field electroretinography",
+          "cells": [
+            {
+              "text": "Enhanced S-cone responses and reduced rod responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spectral-domain optical coherence tomography",
+          "cells": [
+            {
+              "text": "Cystoid spaces and schisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence and colour imaging",
+          "cells": [
+            {
+              "text": "Nummular pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NR2E3 molecular genetic testing",
+          "cells": [
+            {
+              "text": "NR2E3 mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enhanced_s_cone_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital stationary night blindness",
+          "cells": [
+            {
+              "text": "Night blindness from early life; enhanced S-cone electroretinogram response separates it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinitis pigmentosa with cystoid macular oedema",
+          "cells": [
+            {
+              "text": "Cystoid change is not inflammatory oedema; enhanced S-cone response is the discriminator"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "enhanced_s_cone_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "No disease-modifying drug",
+          "cells": [
+            {
+              "text": "Management targets complications and residual vision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carbonic anhydrase inhibitors",
+          "cells": [
+            {
+              "text": "Mainstay for associated cystoid macular oedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinoschisis and detachment surveillance",
+          "cells": [
+            {
+              "text": "Vitreoretinal surgery for detachment or severe schisis, particularly Goldmann-Favre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision aids and refractive correction",
+          "cells": [
+            {
+              "text": "Structured visual rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Optical coherence tomography, electroretinography and visual fields"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NR2E3 testing and genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited retinal disease service",
+          "cells": [
+            {
+              "text": "Ophthalmic genetics referral; emerging gene-directed therapies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "enhanced_s_cone_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Enhanced S-cone syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Lifelong night blindness with central visual disturbance and nummular pigmentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (progressive schisis, marked vitreous degeneration, affected siblings)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vitreoretinal surgery for detachment or severe schisis, especially Goldmann-Favre",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-field ERG, spectral-domain OCT, fundus autofluorescence and NR2E3 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Enhanced S-cone response with reduced rod response on ERG?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reconsider congenital stationary night blindness or retinitis pigmentosa",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Carbonic anhydrase inhibitors for cystoid macular oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor schisis and detachment risk with serial OCT and fields",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-vision aids, refractive correction and visual rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "NR2E3 genetic counselling for autosomal recessive inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; many keep useful central vision for years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -169,5 +169,456 @@
       "caption": "Overview comparison matrix for filariasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 218-1",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Clinical Care of Lymphatic Filariasis",
+      "url": "https://www.cdc.gov/filarial-worms/hcp/clinical-care/index.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "filariasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of filarial infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood microfilariae timed to periodicity",
+          "cells": [
+            {
+              "text": "W. bancrofti and B. malayi nocturnal; Loa loa diurnal; Onchocerca none (skin)"
+            },
+            {
+              "text": "Use membrane filtration or Knott concentration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "W. bancrofti circulating antigen",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 93 to 100",
+              "range": [
+                93,
+                100
+              ]
+            },
+            {
+              "text": "{{hy:No antigen test for Brugia}}; false positive with Loa loa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Filarial PCR",
+          "cells": [
+            {
+              "text": "W. bancrofti and B. malayi DNA"
+            },
+            {
+              "text": "Sensitivity equal to or better than microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Adult worms seen in up to 80% of infected men",
+              "op": "<=",
+              "value": 80
+            },
+            {
+              "text": "Filarial dance sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TPE eosinophil count",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": ">3000",
+              "op": ">",
+              "value": 3000
+            },
+            {
+              "text": "Very high IgE; blood usually free of microfilariae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin snip",
+          "cells": [
+            {
+              "text": "Onchocerciasis"
+            },
+            {
+              "text": "Microfilariae emerge in 2 to 4 h or overnight"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loa loa microfilarial load",
+          "unit": "mf/mL",
+          "cells": [
+            {
+              "text": ">30,000",
+              "op": ">",
+              "value": 30000
+            },
+            {
+              "text": "Risk of encephalopathy with ivermectin or DEC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifilarial antibody",
+          "cells": [
+            {
+              "text": "Supports exposure only"
+            },
+            {
+              "text": "Cross-reacts with other helminths; not proof of active infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "filariasis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of filarial syndromes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascending bacterial lymphangitis",
+          "cells": [
+            {
+              "text": "Spreads centrally; filarial lymphangitis is retrograde"
+            },
+            {
+              "text": "Clinical course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial cellulitis",
+          "cells": [
+            {
+              "text": "Often confused with dermatolymphangioadenitis"
+            },
+            {
+              "text": "Entry lesion and lymphoedema history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-filarial lymphoedema",
+          "cells": [
+            {
+              "text": "Malignancy, surgery, trauma, congenital"
+            },
+            {
+              "text": "Antigen test, ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asthma",
+          "cells": [
+            {
+              "text": "No marked eosinophilia or antifilarial antibody"
+            },
+            {
+              "text": "Eosinophil count, IgE, filarial serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABPA, EGPA, eosinophilic pneumonia, HES",
+          "cells": [
+            {
+              "text": "Other causes of pulmonary eosinophilia"
+            },
+            {
+              "text": "Response to DEC favours TPE"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Thrombophlebitis",
+          "cells": [
+            {
+              "text": "Venous rather than lymphatic"
+            },
+            {
+              "text": "Doppler ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "filariasis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of lymphatic filariasis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Diethylcarbamazine (DEC)",
+          "cells": [
+            {
+              "text": "{{hy:Drug of choice}}; adults and children over 18 months"
+            },
+            {
+              "text": "6 mg/kg/day as a 1-day or 12-day course"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "DEC prolonged course",
+          "cells": [
+            {
+              "text": "Tropical pulmonary eosinophilia"
+            },
+            {
+              "text": "14 to 21 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Doxycycline",
+          "cells": [
+            {
+              "text": "Anti-Wolbachia; possibly lymphoedema"
+            },
+            {
+              "text": "200 mg/day for 4 to 6 weeks"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ivermectin",
+          "cells": [
+            {
+              "text": "Kills W. bancrofti microfilariae"
+            },
+            {
+              "text": "No effect on adult worm"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Exclude onchocerciasis before DEC",
+          "cells": [
+            {
+              "text": "Exposure to Onchocerca"
+            },
+            {
+              "text": "DEC contraindicated; Mazzotti reaction risk"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Specialist caution with DEC in loiasis",
+          "cells": [
+            {
+              "text": "Loa loa microfilariae >8000/mm3"
+            },
+            {
+              "text": "Encephalopathy and renal failure; steroids do not prevent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lymphoedema care",
+          "cells": [
+            {
+              "text": "Chronic lymphoedema or elephantiasis (not a DEC indication)"
+            },
+            {
+              "text": "Hygiene, exercise, elevation, wound care, decongestive physiotherapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hydrocele surgery",
+          "cells": [
+            {
+              "text": "Hydrocele and genital lymphatic disease"
+            },
+            {
+              "text": "Surgical repair"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Loa loa thresholds differ: Harrison flags >30,000 mf/mL for encephalopathy risk with ivermectin or DEC; CDC advises extreme caution with DEC above 8000/mm3. Both values kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "filariasis-dx-mgmt",
+      "title": "Diagnosis and management of lymphatic filariasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Endemic exposure with lymphangitis, hydrocele, lymphoedema or eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Timed blood film, W. bancrofti antigen, PCR, ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Active infection shown?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Chronic lymphoedema without active infection?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Lymphoedema care; no DEC",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Seek other cause of lymphoedema or eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Onchocerciasis or high Loa loa load possible?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Tropical medicine specialist; avoid DEC",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "DEC 6 mg/kg/day; doxycycline 200 mg/day 4 to 6 weeks",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hydrocele surgery and lymphoedema care as needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

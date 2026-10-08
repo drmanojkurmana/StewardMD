@@ -147,5 +147,358 @@
       "caption": "Overview comparison matrix for allergic bronchopulmonary aspergillosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / GOLD & ATS guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Total serum IgE",
+          "cells": [
+            {
+              "text": "Very high in ABPA and used to monitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspergillus-specific IgE and IgG (precipitins) and skin testing",
+          "cells": [
+            {
+              "text": "Sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral blood eosinophil count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT for central bronchiectasis and mucoid impaction",
+          "cells": [
+            {
+              "text": "Central bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum examination for Aspergillus and eosinophils",
+          "cells": [
+            {
+              "text": "Fungal burden and eosinophils"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Poorly controlled asthma without ABPA",
+          "cells": [
+            {
+              "text": "Asthma without fungal sensitisation"
+            },
+            {
+              "text": "Aspergillus-specific IgE"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystic fibrosis exacerbation",
+          "cells": [
+            {
+              "text": "Exacerbation in cystic fibrosis"
+            },
+            {
+              "text": "Sputum and IgE testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Vasculitic features and asthma"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive or semi-invasive aspergillosis and aspergilloma",
+          "cells": [
+            {
+              "text": "Immunocompromise or cavitary disease"
+            },
+            {
+              "text": "CT and sputum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oral corticosteroids",
+          "cells": [
+            {
+              "text": "Suppress immune and inflammatory response and treat exacerbations"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Itraconazole or voriconazole",
+          "cells": [
+            {
+              "text": "Reduces fungal burden and spares corticosteroid"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled corticosteroids, bronchodilators and airway clearance",
+          "cells": [
+            {
+              "text": "Underlying asthma or cystic fibrosis and mucoid impaction"
+            },
+            {
+              "text": "Optimise underlying disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of total serum IgE and symptoms",
+          "cells": [
+            {
+              "text": "Response and relapse"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omalizumab",
+          "cells": [
+            {
+              "text": "Relapsing or corticosteroid-dependent disease"
+            },
+            {
+              "text": "Biologic option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance and prompt treatment of infective exacerbations",
+          "cells": [
+            {
+              "text": "Central bronchiectasis"
+            },
+            {
+              "text": "Ongoing management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of corticosteroid and azole adverse effects and interactions",
+          "cells": [
+            {
+              "text": "Treatment toxicity"
+            },
+            {
+              "text": "Specialist review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "allergic_bronchopulmonary_aspergillosis-dx-mgmt",
+      "title": "Diagnosis and management of Allergic bronchopulmonary aspergillosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Poorly controlled asthma or cystic fibrosis with mucus plugs and infiltrates",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Fixed airflow obstruction, lobar collapse or immunocompromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory review; treat collapse and exacerbation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Total IgE; Aspergillus IgE and IgG; eosinophils; HRCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Very high IgE with central bronchiectasis and sensitisation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral corticosteroids to suppress the immune response",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review asthma without ABPA, CF exacerbation and invasive aspergillosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add itraconazole or voriconazole in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise inhaled therapy and airway clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor IgE, symptoms and drug toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good control possible; repeated flares cause bronchiectasis and fibrosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

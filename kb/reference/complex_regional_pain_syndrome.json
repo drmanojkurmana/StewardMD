@@ -153,5 +153,305 @@
       "caption": "Overview comparison matrix for complex regional pain syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complex_regional_pain_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical assessment against the Budapest criteria",
+          "cells": [
+            {
+              "text": "Primary basis for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Patchy periarticular osteopenia in established disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Three-phase bone scintigraphy",
+          "cells": [
+            {
+              "text": "Periarticular uptake in supportive cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative sensory testing and infrared thermography",
+          "cells": [
+            {
+              "text": "Sensory and temperature asymmetry"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complex_regional_pain_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Deep vein thrombosis",
+          "cells": [
+            {
+              "text": "Rapid swelling, erythema or systemic features point away from CRPS; venous Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis or other soft-tissue infection",
+          "cells": [
+            {
+              "text": "Rapidly spreading swelling and erythema; inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Compartment syndrome",
+          "cells": [
+            {
+              "text": "Acutely painful, tense limb"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complex_regional_pain_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early mobilisation and functional restoration",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy as the cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded motor imagery and mirror therapy",
+          "cells": [
+            {
+              "text": "Cortical remapping and body-perception disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain agents",
+          "cells": [
+            {
+              "text": "Gabapentinoids or tricyclic antidepressants; bisphosphonate in early disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Cognitive behavioural therapy for distress, fear-avoidance and disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interventional options",
+          "cells": [
+            {
+              "text": "Sympathetic nerve blocks or spinal cord stimulation for refractory pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid immobilisation",
+          "cells": [
+            {
+              "text": "Prolonged immobilisation perpetuates the syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary pain team",
+          "cells": [
+            {
+              "text": "Early diagnosis using the Budapest criteria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complex_regional_pain_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Complex regional pain syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CRPS: disproportionate limb pain after injury, with swelling or colour change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spreading swelling, fixed contracture, tense limb, refractory pain)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude infection, DVT or compartment syndrome urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Budapest criteria; three-phase bone scan; thermography; venous Doppler; markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do the Budapest criteria support CRPS after mimics are excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider peripheral nerve injury, vascular or thoracic outlet causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early mobilisation and functional restoration with physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Graded motor imagery and mirror therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gabapentinoids or tricyclics for neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cognitive behavioural therapy; avoid prolonged immobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with early diagnosis and rehabilitation; a minority develop chronic disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

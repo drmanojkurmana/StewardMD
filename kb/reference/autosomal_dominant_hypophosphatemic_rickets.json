@@ -147,5 +147,327 @@
       "caption": "Overview comparison matrix for autosomal dominant hypophosphataemic rickets (fgf23)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Primer on the Metabolic Bone Diseases / Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autosomal_dominant_hypophosphatemic_rickets-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum phosphate with tubular reabsorption of phosphate indices",
+          "cells": [
+            {
+              "text": "Renal phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intact FGF23 measurement",
+          "cells": [
+            {
+              "text": "Elevated or inappropriately normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies",
+          "cells": [
+            {
+              "text": "Iron deficiency can precipitate or worsen phosphate wasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs of the wrists, knees and long bones",
+          "cells": [
+            {
+              "text": "Rachitic or osteomalacic change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FGF23 gene sequencing",
+          "cells": [
+            {
+              "text": "Activating cleavage-site mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_hypophosphatemic_rickets-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked hypophosphataemic rickets (PHEX)",
+          "cells": [
+            {
+              "text": "X-linked, not autosomal dominant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal recessive hypophosphataemic rickets (DMP1/ENPP1)",
+          "cells": [
+            {
+              "text": "Recessive, not dominant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_hypophosphatemic_rickets-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron repletion",
+          "cells": [
+            {
+              "text": "Lowers FGF23 production"
+            },
+            {
+              "text": "May reduce phosphate wasting; a unique therapeutic lever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral phosphate with active vitamin D",
+          "cells": [
+            {
+              "text": "Calcitriol or alfacalcidol to heal rickets"
+            },
+            {
+              "text": "Conventional replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burosumab",
+          "cells": [
+            {
+              "text": "Anti-FGF23 monoclonal antibody"
+            },
+            {
+              "text": "Where conventional replacement is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Phosphate, calcium, alkaline phosphatase, PTH; renal ultrasound"
+            },
+            {
+              "text": "Nephrocalcinosis and hyperparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and dental care",
+          "cells": [
+            {
+              "text": "Physiotherapy, orthopaedic review of deformity, dental surveillance"
+            },
+            {
+              "text": "Limb deformity and spontaneous abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with variable penetrance; family screening"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic bone service",
+          "cells": [
+            {
+              "text": "Paediatric input during growth"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autosomal_dominant_hypophosphatemic_rickets-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant hypophosphataemic rickets (FGF23)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rickets or growth failure with renal phosphate wasting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Progressive limb deformity or worsening in iron deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Check and correct iron status",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Phosphate and tubular indices, FGF23, iron studies, skeletal radiographs, FGF23 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised intact FGF23 with renal phosphate wasting confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral phosphate with an active vitamin D analogue",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat FGF23 and gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron repletion to lower FGF23 production",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Burosumab where conventional replacement is inadequate",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor phosphate, PTH and renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Metabolic bone service with genetic counselling for the family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

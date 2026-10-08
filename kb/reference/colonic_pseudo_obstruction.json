@@ -148,5 +148,276 @@
       "caption": "Overview comparison matrix for acute colonic pseudo-obstruction."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / AASLD & ACG",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "colonic_pseudo_obstruction-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiograph",
+          "cells": [
+            {
+              "text": "Colonic and caecal diameter"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or water-soluble contrast enema",
+          "cells": [
+            {
+              "text": "Excludes mechanical cause; assesses ischaemia or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiological monitoring of caecal size",
+          "cells": [
+            {
+              "text": "Progressive caecal dilatation, a high-risk sign beyond a critical diameter"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colonic_pseudo_obstruction-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mechanical large-bowel obstruction",
+          "cells": [
+            {
+              "text": "Excluded by imaging and water-soluble contrast study before drug treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxic megacolon from severe colitis",
+          "cells": [
+            {
+              "text": "Excluded by water-soluble contrast study"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colonic_pseudo_obstruction-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Correct electrolytes; stop opioids and anticholinergics; nil by mouth with nasogastric decompression; mobilise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude mechanical cause",
+          "cells": [
+            {
+              "text": "Imaging and water-soluble contrast study before pharmacological treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous neostigmine",
+          "cells": [
+            {
+              "text": "When conservative measures fail, with cardiac monitoring and atropine to hand"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopic decompression",
+          "cells": [
+            {
+              "text": "Where neostigmine is ineffective or contraindicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Caecal diameter and abdominal signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Caecostomy or resection if ischaemia or perforation develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early specialist involvement",
+          "cells": [
+            {
+              "text": "Surgical and gastroenterology input for refractory or complicated cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "colonic_pseudo_obstruction-dx-mgmt",
+      "title": "Diagnosis and management of Acute colonic pseudo-obstruction",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected acute colonic pseudo-obstruction: progressive distension, dilated caecum",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (caecal dilatation, peritonism, rising lactate, no response in 24-48 h)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency surgical review for ischaemia or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Abdominal radiograph for caecal diameter; CT or contrast enema; electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a mechanical cause excluded on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the mechanical cause; surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Correct electrolytes; stop opioids and anticholinergics; nasogastric decompression",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV neostigmine with cardiac monitoring if conservative care fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Colonoscopic decompression where neostigmine is ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Most recover; prognosis worsens substantially if ischaemia or perforation develops",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,75 @@
       "caption": "Overview comparison matrix for berylliosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "berylliosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in berylliosis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Beryllium lymphocyte proliferation test (blood or lavage)", "cells": [{"text": "Specific beryllium sensitisation; central to diagnosis"}], "cite": "c1"},
+        {"parameter": "High-resolution CT of the chest", "cells": [{"text": "Extent of lung disease"}], "cite": "c1"},
+        {"parameter": "Bronchoscopy with lavage and biopsy", "cells": [{"text": "Non-caseating granulomas"}], "cite": "c1"},
+        {"parameter": "Pulmonary function tests with gas transfer", "cells": [{"text": "Impaired gas exchange in progressive disease"}], "cite": "c1"},
+        {"parameter": "Occupational exposure history", "cells": [{"text": "Exposure to beryllium-containing materials; key to separating it from sarcoidosis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "berylliosis-treatment",
+      "kind": "treatment",
+      "title": "Management options in berylliosis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Removal from exposure", "cells": [{"text": "Remove from further beryllium exposure"}, {"text": "Essential first step to limit progression"}], "cite": "c1"},
+        {"parameter": "Systemic corticosteroids", "cells": [{"text": "For symptomatic or progressive chronic beryllium disease"}, {"text": "Mainstay immunosuppressive therapy"}], "cite": "c1"},
+        {"parameter": "Steroid-sparing immunosuppressant", "cells": [{"text": "Methotrexate or azathioprine"}, {"text": "For corticosteroid-dependent or refractory disease"}], "cite": "c1"},
+        {"parameter": "Supportive care", "cells": [{"text": "Supplemental oxygen for hypoxaemia; pulmonary rehabilitation for breathlessness"}, {"text": "Symptom control"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Serial pulmonary function tests including gas transfer, and interval chest imaging"}, {"text": "Tracks progression"}], "cite": "c1"},
+        {"parameter": "Specialist referral", "cells": [{"text": "Respiratory medicine and occupational health"}, {"text": "Lung transplantation considered for end-stage fibrotic disease"}], "cite": "c1"},
+        {"parameter": "Co-worker screening", "cells": [{"text": "Screen exposed co-workers with the beryllium lymphocyte proliferation test"}, {"text": "Detects sensitisation early"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "berylliosis-dx-mgmt",
+      "title": "Diagnosis and management of berylliosis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Progressive exertional breathlessness and cough in a worker exposed to beryllium", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: acute high-level exposure, rapidly progressive hypoxaemia or cor pulmonale?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: oxygen and urgent respiratory care; remove from exposure", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Detailed occupational history of beryllium-containing materials", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Beryllium lymphocyte proliferation test; HRCT chest; PFTs with gas transfer", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Positive beryllium test with non-caseating granulomas on biopsy?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Remove further exposure; systemic corticosteroids for symptomatic or progressive disease", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: not chronic beryllium disease; consider sarcoidosis or other causes", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Add methotrexate or azathioprine if steroid-dependent; oxygen and pulmonary rehabilitation", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Not curable; exposure removal and immunosuppression can slow progression", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

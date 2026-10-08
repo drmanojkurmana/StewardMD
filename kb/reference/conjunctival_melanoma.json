@@ -154,5 +154,314 @@
       "caption": "Overview comparison matrix for conjunctival melanoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / WHO Classification of Eye Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "conjunctival_melanoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Pigmentation, nodularity and feeder vessels mapped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Thickness, invasion and margins assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Map biopsies",
+          "cells": [
+            {
+              "text": "Extent of primary acquired melanosis with atypia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regional lymph node examination and imaging",
+          "cells": [
+            {
+              "text": "Nodal staging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conjunctival_melanoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Conjunctival naevus",
+          "cells": [
+            {
+              "text": "Benign pigmented lesion; histology separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary acquired melanosis without atypia",
+          "cells": [
+            {
+              "text": "Flat pigmentation without atypia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular surface squamous neoplasia",
+          "cells": [
+            {
+              "text": "Pigmented or amelanotic overlap"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conjunctival_melanoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide local excision, no-touch technique",
+          "cells": [
+            {
+              "text": "Standard primary approach; avoids tumour seeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive cryotherapy",
+          "cells": [
+            {
+              "text": "To surgical margins after excision to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localised bulbar disease",
+          "cells": [
+            {
+              "text": "Complete excision with clear margins, curative intent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extrabulbar or diffuse disease",
+          "cells": [
+            {
+              "text": "Palpebral, forniceal, caruncular or tarsal involvement; topical chemotherapy such as mitomycin C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regional nodal disease",
+          "cells": [
+            {
+              "text": "Surgical clearance of nodal basin; sentinel node biopsy in selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "For thick tumours, close or involved margins, or local recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "Systemic therapy, including immune checkpoint inhibitors, under medical oncology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Recurrence, new primary acquired melanosis and nodes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "conjunctival_melanoma-dx-mgmt",
+      "title": "Diagnosis and management of Conjunctival melanoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected conjunctival melanoma: nodular or growing conjunctival pigmented lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (nodularity, rapid growth, fornix or caruncle, nodal disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oculoplastic and oncology referral; regional node assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp mapping; excisional biopsy; histology of thickness and margins; staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology confirm melanoma with invasion and margins assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider naevus, primary acquired melanosis without atypia or SSN",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Wide local excision with no-touch technique and adjunctive cryotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Map biopsies and topical chemotherapy for diffuse atypical melanosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sentinel node biopsy or nodal clearance for regional disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for thick or close-margin tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Depends on thickness, location and completeness of excision; thin ones fare better",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

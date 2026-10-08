@@ -153,5 +153,337 @@
       "caption": "Overview comparison matrix for aneurysmal bone cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aneurysmal_bone_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plain radiography",
+          "cells": [
+            {
+              "text": "Expansile lytic pattern and cortical shell"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Fluid-fluid levels and internal septation; soft-tissue extension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Cortical detail and pre-operative planning, especially spine and pelvis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy with histological confirmation",
+          "cells": [
+            {
+              "text": "Excludes a malignant mimic before definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "USP6 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms a primary lesion when the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "aneurysmal_bone_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Telangiectatic osteosarcoma",
+          "cells": [
+            {
+              "text": "Rapid growth, permeative margin or soft-tissue mass; biopsy excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant cell tumour of bone with secondary cystic change",
+          "cells": [
+            {
+              "text": "Secondary aneurysmal change is managed by treating the underlying lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondroblastoma with secondary aneurysmal change",
+          "cells": [
+            {
+              "text": "Secondary aneurysmal change is managed by treating the underlying lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aneurysmal_bone_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy before definitive treatment",
+          "cells": [
+            {
+              "text": "Confirm the diagnosis"
+            },
+            {
+              "text": "Telangiectatic osteosarcoma can mimic ABC on imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Separate primary from secondary ABC",
+          "cells": [
+            {
+              "text": "Primary ABC has USP6 rearrangement; secondary arises within another bone tumour"
+            },
+            {
+              "text": "Secondary cases are managed by treating the underlying lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intralesional curettage with bone grafting or bone-void filler",
+          "cells": [
+            {
+              "text": "First-line surgical treatment for accessible lesions"
+            },
+            {
+              "text": "Local control rather than systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percutaneous sclerotherapy",
+          "cells": [
+            {
+              "text": "Alternative to surgery or adjunct, especially spinal or pelvic lesions"
+            },
+            {
+              "text": "Useful in young children where surgery carries higher morbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective arterial embolisation",
+          "cells": [
+            {
+              "text": "Pre-operative bleeding control, or standalone in difficult spinal or pelvic lesions"
+            },
+            {
+              "text": "For highly vascular lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "En bloc resection",
+          "cells": [
+            {
+              "text": "Lesions not amenable to curettage or refractory to repeated intralesional treatment"
+            },
+            {
+              "text": "Greater functional cost"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, asymptomatic, incidental lesions in non-critical sites"
+            },
+            {
+              "text": "Treat actively if there is structural risk such as cortical thinning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aneurysmal_bone_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Aneurysmal bone cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive pain and swelling in the metaphysis of a long bone or spine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid growth, permeative margin or soft-tissue mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to bone tumour service; exclude telangiectatic osteosarcoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs, MRI for fluid-fluid levels, CT, then biopsy with USP6 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology excludes malignancy and confirms a primary lesion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intralesional curettage with bone grafting or bone-void filler",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging or biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sclerotherapy or embolisation for spinal or pelvic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "En bloc resection if refractory to repeated intralesional treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial radiographs and MRI to check healing and recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recurrence is not uncommon, especially in young children; follow up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -205,5 +205,523 @@
       "caption": "Diagnostic and clinical overview matrix for giant cell (temporal) arteritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "RheumNow, 2022 ACR/EULAR GCA classification criteria",
+      "url": "https://rheumnow.com/news/2022-acreular-giant-cell-arteritis-classification-criteria",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Giant Cell Arteritis",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/vasculitis/giant-cell-arteritis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "temporal_arteritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "2022 ACR/EULAR classification criteria and key tests for giant cell arteritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Points or meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Age at diagnosis (entry requirement)",
+          "unit": "years",
+          "cells": [
+            {
+              "text": ">=50",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Mandatory before scoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Positive temporal artery biopsy or ultrasound halo sign",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "{{hy:+5}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ESR or CRP",
+          "cells": [
+            {
+              "text": "ESR >=50 mm/h or CRP >=10 mg/L"
+            },
+            {
+              "text": "+3 (counted once)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sudden visual loss",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "+3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cranial and PMR features",
+          "cells": [
+            {
+              "text": "Shoulder or neck morning stiffness, jaw or tongue claudication, new temporal headache, scalp tenderness, abnormal temporal artery"
+            },
+            {
+              "text": "+2 each"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Large-vessel imaging",
+          "cells": [
+            {
+              "text": "Bilateral axillary involvement, or FDG-PET activity throughout the aorta"
+            },
+            {
+              "text": "+2 each"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total score",
+          "unit": "points",
+          "cells": [
+            {
+              "text": ">=6",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Classified as GCA; sensitivity 87%, specificity 95%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ESR and CRP in practice",
+          "cells": [
+            {
+              "text": "Raised in most patients"
+            },
+            {
+              "text": "A normal ESR does not exclude GCA; CRP is better for monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal artery biopsy length",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Long segment, 3 to 5 cm, serial sections",
+              "range": [
+                3,
+                5
+              ]
+            },
+            {
+              "text": "Skip lesions; one negative biopsy does not exclude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy timing after steroids",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Up to 2 weeks",
+              "op": "<=",
+              "value": 2
+            },
+            {
+              "text": "Do not delay treatment for biopsy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ultrasound timing after steroids",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Before or within 5 days",
+              "op": "<=",
+              "value": 5
+            },
+            {
+              "text": "Steroids reduce halo sign sensitivity"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Classification criteria are built for research, not bedside diagnosis. Biopsy length differs slightly: Harrison gives 3 to 5 cm, Merck says up to 5 cm."
+    },
+    {
+      "id": "temporal_arteritis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic giant cell arteritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Migraine",
+          "cells": [
+            {
+              "text": "Common in the elderly and also improves with prednisone"
+            },
+            {
+              "text": "Steroid response does not confirm GCA; biopsy or ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nonarteritic anterior ischaemic optic neuropathy",
+          "cells": [
+            {
+              "text": "Crowded disc at risk, small optic cup; steroids should not be given"
+            },
+            {
+              "text": "{{hy:ESR and CRP with temporal artery biopsy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated polymyalgia rheumatica",
+          "cells": [
+            {
+              "text": "Shoulder and hip girdle stiffness without cranial ischaemia"
+            },
+            {
+              "text": "Ultrasound or biopsy if cranial symptoms appear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fever of unknown origin from other causes",
+          "cells": [
+            {
+              "text": "Some GCA presents as FUO in older adults"
+            },
+            {
+              "text": "Temporal artery biopsy or vascular imaging"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other inflammatory headache (sarcoidosis, Behcet)",
+          "cells": [
+            {
+              "text": "Systemic features of the other disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "temporal_arteritis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of giant cell arteritis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV methylprednisolone",
+          "cells": [
+            {
+              "text": "Visual loss or threatened vision"
+            },
+            {
+              "text": "{{hy:Start immediately without waiting for biopsy}}; 500 to 1000 mg daily for 3 to 5 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral prednisone",
+          "cells": [
+            {
+              "text": "Suspected GCA without visual loss"
+            },
+            {
+              "text": "40 to 60 mg once daily for 4 weeks, then taper"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Steroid taper",
+          "cells": [
+            {
+              "text": "After initial control"
+            },
+            {
+              "text": "Cut 5 to 10 mg weekly to 40 mg, then 2.5 to 5 mg weekly to 10 to 20 mg, then slowly off; most need at least 2 years"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tocilizumab",
+          "cells": [
+            {
+              "text": "Steroid-sparing, relapse prevention"
+            },
+            {
+              "text": "Faster taper and better sustained remission; caution with diverticulitis; ESR and CRP become unusable for monitoring"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Methotrexate (low dose)",
+          "cells": [
+            {
+              "text": "Tocilizumab contraindicated"
+            },
+            {
+              "text": "Limited evidence"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aspirin",
+          "cells": [
+            {
+              "text": "Critical or flow-limiting carotid or vertebral disease"
+            },
+            {
+              "text": "81 to 100 mg orally once daily"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bone protection",
+          "cells": [
+            {
+              "text": "Older patients on long-term prednisone"
+            },
+            {
+              "text": "Antiresorptive agent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "TNF inhibitors",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Not effective and may harm"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aortic surveillance",
+          "cells": [
+            {
+              "text": "All patients long term"
+            },
+            {
+              "text": "18-fold higher thoracic aortic aneurysm risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Relapse during taper occurs in 60 to 85% (Harrison). Tocilizumab dose is not stated by these sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "temporal_arteritis-dx-mgmt",
+      "title": "Diagnosis and management of giant cell arteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Age 50 or over with new headache, jaw claudication, scalp pain or PMR",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ESR, CRP, CBC; check vision and temporal arteries",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Visual loss or other ischaemic symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "IV methylprednisolone 500 to 1000 mg daily for 3 to 5 days now",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Prednisone 40 to 60 mg daily now; do not wait for tests",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Ultrasound within 5 days or biopsy within 2 weeks",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Halo sign or positive biopsy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Clinical suspicion still high?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider contralateral biopsy or large-vessel imaging",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Reconsider diagnosis; taper steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Taper over 2 years or more; add tocilizumab; bone protection",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Positive"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Negative"
+        }
+      ]
+    }
+  ]
 }

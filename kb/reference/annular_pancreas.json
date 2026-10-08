@@ -146,5 +146,324 @@
       "caption": "Overview comparison matrix for annular pancreas."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "annular_pancreas-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal radiography in neonates",
+          "cells": [
+            {
+              "text": "Double-bubble sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contrast-enhanced CT",
+          "cells": [
+            {
+              "text": "Pancreatic tissue encircling the duodenum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with MRCP",
+          "cells": [
+            {
+              "text": "Defines the annular duct and biliary anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper gastrointestinal contrast study",
+          "cells": [
+            {
+              "text": "Level and degree of obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Duodenal lumen and mucosal pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum amylase and lipase",
+          "cells": [
+            {
+              "text": "Where pancreatitis is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "annular_pancreas-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malrotation with midgut volvulus",
+          "cells": [
+            {
+              "text": "Bilious vomiting in a neonate needs evaluation for malrotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duodenal atresia",
+          "cells": [
+            {
+              "text": "Coexisting duodenal atresia must not be overlooked"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "annular_pancreas-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Asymptomatic disease",
+          "cells": [
+            {
+              "text": "Reassurance and no intervention"
+            },
+            {
+              "text": "Incidental finding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical bypass for symptomatic obstruction",
+          "cells": [
+            {
+              "text": "Duodenoduodenostomy or gastrojejunostomy"
+            },
+            {
+              "text": "Rather than dividing the ring, which risks fistula and pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal stabilisation",
+          "cells": [
+            {
+              "text": "Nasogastric decompression and fluid and electrolyte resuscitation"
+            },
+            {
+              "text": "Before surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for pancreatitis",
+          "cells": [
+            {
+              "text": "Fluids, analgesia, rest of oral intake"
+            },
+            {
+              "text": "Associated pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for associated anomalies",
+          "cells": [
+            {
+              "text": "Down syndrome, malrotation, duodenal atresia"
+            },
+            {
+              "text": "Actively screen and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Paediatric or hepatobiliary surgery; pancreatology follow-up"
+            },
+            {
+              "text": "Refer"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "annular_pancreas-dx-mgmt",
+      "title": "Diagnosis and management of Annular pancreas",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with duodenal obstruction, often bilious vomiting",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Complete high-grade obstruction or malrotation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for obstruction and malrotation; decompress",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neonatal radiograph, contrast study, CT or MRCP, endoscopy, amylase",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pancreatic tissue encircling the duodenum on CT or MRCP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Surgical bypass such as duodenoduodenostomy or gastrojejunostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nasogastric decompression and fluid and electrolyte resuscitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supportive care for associated pancreatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for Down syndrome, malrotation and duodenal atresia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Asymptomatic cases need reassurance only; dividing the ring risks fistula",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

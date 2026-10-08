@@ -148,5 +148,355 @@
       "caption": "Overview comparison matrix for adrenocortical carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology and oncology reference texts and adrenal tumour consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenocortical_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full hormonal profiling for cortisol, adrenal androgens, mineralocorticoids and precursors",
+          "cells": [
+            {
+              "text": "Pattern of secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary metanephrines before any intervention",
+          "cells": [
+            {
+              "text": "Excludes phaeochromocytoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal-protocol CT or MRI",
+          "cells": [
+            {
+              "text": "Size, attenuation, washout and local invasion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT and FDG-PET where available",
+          "cells": [
+            {
+              "text": "Metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with Weiss criteria and Ki-67 index after resection",
+          "cells": [
+            {
+              "text": "Malignant features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline genetic assessment for Li-Fraumeni and related syndromes",
+          "cells": [
+            {
+              "text": "Predisposition when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenocortical_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign cortisol-secreting adrenal adenoma",
+          "cells": [
+            {
+              "text": "Smaller, with imaging favouring benignity"
+            },
+            {
+              "text": "Adrenal-protocol imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Catecholamine secretion"
+            },
+            {
+              "text": "Metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal metastasis from another primary",
+          "cells": [
+            {
+              "text": "Metastatic deposit"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenocortical_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete open en bloc surgical resection at a specialist centre",
+          "cells": [
+            {
+              "text": "Only potentially curative treatment"
+            },
+            {
+              "text": "Specialist centre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant mitotane after resection",
+          "cells": [
+            {
+              "text": "High-risk disease"
+            },
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitotane with etoposide, doxorubicin and cisplatin",
+          "cells": [
+            {
+              "text": "Advanced or metastatic disease"
+            },
+            {
+              "text": "Cytotoxic chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroidogenesis inhibitors and glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Hormone excess and mitotane-induced insufficiency"
+            },
+            {
+              "text": "Covers adrenal insufficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metanephrines before any intervention",
+          "cells": [
+            {
+              "text": "Phaeochromocytoma exclusion"
+            },
+            {
+              "text": "Before intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial cross-sectional imaging and hormonal tumour markers",
+          "cells": [
+            {
+              "text": "Recurrence"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Germline genetic testing and counselling for Li-Fraumeni",
+          "cells": [
+            {
+              "text": "Cancer predisposition"
+            },
+            {
+              "text": "Specialist multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenocortical_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Adrenocortical carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Large adrenal mass with abnormal cortisol or androgen excess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapid Cushing with virilisation, local invasion or metastases?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist adrenal surgery and oncology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full hormone profile; metanephrines; adrenal-protocol CT or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Imaging features of malignancy (size over 4 to 6 cm, slow washout)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Staging chest CT and FDG-PET; complete en bloc resection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review benign cortisol adenoma, phaeochromocytoma and metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant mitotane after resection for high-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mitotane with etoposide, doxorubicin and cisplatin for advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Steroidogenesis inhibitors and glucocorticoid cover; recurrence imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis poor and stage-dependent; localised disease does best",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for cholesteryl ester storage disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cholesteryl_ester_storage_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lysosomal acid lipase enzyme activity assay",
+          "cells": [
+            {
+              "text": "Low activity supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LIPA molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting lipid profile",
+          "cells": [
+            {
+              "text": "High LDL and low HDL cholesterol"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests and liver imaging",
+          "cells": [
+            {
+              "text": "Steatosis and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Lipid-laden hepatocytes and characteristic storage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholesteryl_ester_storage_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-alcoholic fatty liver disease",
+          "cells": [
+            {
+              "text": "Steatosis on biopsy can be misread as NAFLD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial hypercholesterolaemia",
+          "cells": [
+            {
+              "text": "High LDL cholesterol mimics this dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wolman disease",
+          "cells": [
+            {
+              "text": "Severe infantile LIPA deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cholesteryl_ester_storage_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enzyme replacement therapy",
+          "cells": [
+            {
+              "text": "Sebelipase alfa, recombinant human lysosomal acid lipase"
+            },
+            {
+              "text": "Disease-specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipid-lowering therapy",
+          "cells": [
+            {
+              "text": "Statin, with or without ezetimibe"
+            },
+            {
+              "text": "Atherogenic dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diet",
+          "cells": [
+            {
+              "text": "Low-fat, low-cholesterol diet"
+            },
+            {
+              "text": "Hepatic and lipid burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver monitoring",
+          "cells": [
+            {
+              "text": "Liver function tests and imaging or elastography for steatosis and fibrosis"
+            },
+            {
+              "text": "Progression monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular risk",
+          "cells": [
+            {
+              "text": "Assess and manage cardiovascular risk from premature atherosclerosis"
+            },
+            {
+              "text": "Premature atherosclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Consider for decompensated cirrhosis, with enzyme replacement continued"
+            },
+            {
+              "text": "Decompensated cirrhosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; family screening"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cholesteryl_ester_storage_disease-dx-mgmt",
+      "title": "Diagnosis and management of Cholesteryl ester storage disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cholesteryl ester storage disease: hepatomegaly with high LDL dyslipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fibrosis or cirrhosis, premature cardiovascular disease, cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: hepatology review for advancing fibrosis or portal hypertension",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Lysosomal acid lipase activity assay, LIPA testing, lipids and liver biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low lipase activity with LIPA variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Enzyme replacement therapy with sebelipase alfa",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check NAFLD, familial hypercholesterolaemia and Wolman disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Statin with or without ezetimibe for atherogenic dyslipidaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Low-fat, low-cholesterol diet to reduce hepatic burden",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver monitoring with tests, imaging or elastography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transplant for decompensated cirrhosis, with enzyme replacement continued",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

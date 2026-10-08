@@ -164,5 +164,336 @@
       "caption": "Overview comparison matrix for atypical haemolytic uraemic syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology and haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atypical_haemolytic_uraemic_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood film for schistocytes with LDH, haptoglobin, reticulocytes and DAT",
+          "cells": [
+            {
+              "text": "Schistocytes and haemolysis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADAMTS13 activity",
+          "cells": [
+            {
+              "text": "Not severely deficient in aHUS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool culture and Shiga toxin or PCR testing",
+          "cells": [
+            {
+              "text": "Excludes STEC-associated HUS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement studies: C3, C4, factor H, factor I, factor H autoantibodies, CD46",
+          "cells": [
+            {
+              "text": "Complement status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of complement regulators and CFHR arrangements",
+          "cells": [
+            {
+              "text": "Constitutional defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy where unclear",
+          "cells": [
+            {
+              "text": "Thrombotic microangiopathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_haemolytic_uraemic_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Shiga toxin-associated (typical) haemolytic uraemic syndrome",
+          "cells": [
+            {
+              "text": "Excluded by stool Shiga toxin or PCR testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombotic thrombocytopenic purpura",
+          "cells": [
+            {
+              "text": "Severe ADAMTS13 deficiency; ADAMTS13 is not severely deficient in aHUS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_haemolytic_uraemic_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Terminal complement blockade",
+          "cells": [
+            {
+              "text": "Anti-C5 monoclonal antibody such as eculizumab or ravulizumab"
+            },
+            {
+              "text": "Treatment of choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange or plasma infusion",
+          "cells": [
+            {
+              "text": "Initial or interim measure"
+            },
+            {
+              "text": "While thrombotic thrombocytopenic purpura is excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Fluid and electrolytes; renal replacement for AKI; transfusion for anaemia"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Anti-factor H autoantibody-mediated disease"
+            },
+            {
+              "text": "Autoantibody-driven disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger management",
+          "cells": [
+            {
+              "text": "Infection, pregnancy and offending drugs"
+            },
+            {
+              "text": "Precipitating triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse and transplant planning",
+          "cells": [
+            {
+              "text": "Monitor relapse during and after blockade; recurrence risk with renal transplantation"
+            },
+            {
+              "text": "Recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "Complement genes; family implications"
+            },
+            {
+              "text": "Constitutional defect"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atypical_haemolytic_uraemic_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Atypical Haemolytic Uraemic Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Microangiopathic haemolysis, thrombocytopenia and acute kidney injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Full triad with neurological involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist referral; plasma exchange while TTP is excluded",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Film, ADAMTS13, stool Shiga toxin, complement studies, genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ADAMTS13 not severely deficient and Shiga toxin negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Anti-C5 monoclonal antibody such as eculizumab or ravulizumab",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat ADAMTS13 and Shiga toxin testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Plasma exchange as an interim measure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Renal replacement for acute kidney injury; transfusion for anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Identify triggers and monitor for relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Complement genetic testing and counselling; transplant recurrence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,82 @@
       "caption": "Overview comparison matrix for biliary hamartoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biliary_hamartoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Imaging and tests for biliary hamartoma",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "MRI with MRCP", "cells": [{"text": "Numerous tiny, uniform cystic foci that do not communicate with the biliary tree"}], "cite": "c1"},
+        {"parameter": "Abdominal ultrasound", "cells": [{"text": "Tiny hyperechoic or hypoechoic foci, sometimes with comet-tail artefact"}], "cite": "c1"},
+        {"parameter": "Contrast-enhanced CT", "cells": [{"text": "Enhancement pattern"}], "cite": "c1"},
+        {"parameter": "Liver biochemistry", "cells": [{"text": "Normal in typical cases"}], "cite": "c1"},
+        {"parameter": "Renal imaging", "cells": [{"text": "Associated polycystic kidney disease"}], "cite": "c1"},
+        {"parameter": "Liver biopsy", "cells": [{"text": "Reserved for genuinely indeterminate lesions"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biliary_hamartoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike liver lesions",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Hepatic metastases", "cells": [{"text": "Tiny uniform cystic foci that do not communicate with the biliary tree, shown on MRI and MRCP"}], "cite": "c1"},
+        {"parameter": "Hepatic microabscesses", "cells": [{"text": "Separated by MRI and MRCP; a mimic mainly in septic or immunocompromised patients"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biliary_hamartoma-treatment",
+      "kind": "treatment",
+      "title": "Management options for biliary hamartoma",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "No treatment for these benign, incidental lesions"}, {"text": "Benign course"}], "cite": "c1"},
+        {"parameter": "MRI with MRCP", "cells": [{"text": "Distinguishes the lesions from metastases or microabscesses"}, {"text": "Avoids unnecessary intervention"}], "cite": "c1"},
+        {"parameter": "Liver biopsy", "cells": [{"text": "Only for genuinely indeterminate lesions"}, {"text": "Particularly with known malignancy"}], "cite": "c1"},
+        {"parameter": "Biochemical check", "cells": [{"text": "Check liver biochemistry; avoid further investigation when normal and imaging is characteristic"}, {"text": "Normal tests are typical"}], "cite": "c1"},
+        {"parameter": "Fibropolycystic screening", "cells": [{"text": "Screen for polycystic liver or kidney disease and Caroli disease"}, {"text": "Renal and hepatic imaging"}], "cite": "c1"},
+        {"parameter": "Hepatology follow-up", "cells": [{"text": "Hepatology input and reassurance-based follow-up where uncertainty persists"}, {"text": "Counsel on the exceptionally rare cholangiocarcinoma risk"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biliary_hamartoma-dx-mgmt",
+      "title": "Diagnosis and management of biliary hamartoma",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Multiple small liver cysts found incidentally; usually asymptomatic", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: enlarging lesion, mural nodule, obstructive jaundice or constitutional symptoms?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: exclude malignancy; liver biopsy for an indeterminate lesion", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "MRI with MRCP: tiny uniform cysts not communicating with the biliary tree", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Check liver biochemistry; screen kidneys for polycystic disease", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Characteristic MRI and normal liver biochemistry?", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "Benign biliary hamartomas: reassurance, no treatment", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Biopsy an indeterminate lesion; consider metastases or microabscess", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"}
+      ]
+    }
+  ]
 }

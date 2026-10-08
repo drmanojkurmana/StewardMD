@@ -147,5 +147,327 @@
       "caption": "Overview comparison matrix for christianson syndrome (slc9a6)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "christianson_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Cerebellar atrophy, sometimes progressive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Epilepsy characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and eye-movement assessment",
+          "cells": [
+            {
+              "text": "Eye-movement abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylation and UBE3A studies",
+          "cells": [
+            {
+              "text": "Excludes Angelman syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC9A6 sequencing or gene panel",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "christianson_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angelman syndrome",
+          "cells": [
+            {
+              "text": "Static course rather than progressive decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurodegenerative disorders of childhood",
+          "cells": [
+            {
+              "text": "Progressive loss of acquired skills"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "christianson_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Tailored to seizure types"
+            },
+            {
+              "text": "Epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and drooling",
+          "cells": [
+            {
+              "text": "Feeding assessment, antimuscarinic for drooling, gastrostomy if oral intake is unsafe; treat reflux and constipation"
+            },
+            {
+              "text": "Feeding difficulty and drooling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapies",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech-language input with augmentative communication"
+            },
+            {
+              "text": "Absent speech"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ataxia and mobility",
+          "cells": [
+            {
+              "text": "Mobility aids and physiotherapy; monitor for progressive decline and cerebellar atrophy"
+            },
+            {
+              "text": "Ataxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology",
+          "cells": [
+            {
+              "text": "Assessment and support for the eye-movement disorder"
+            },
+            {
+              "text": "Eye-movement disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked inheritance with carrier testing of female relatives"
+            },
+            {
+              "text": "Variable carrier features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Paediatric neurology and neurodisability team"
+            },
+            {
+              "text": "Lifelong care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "christianson_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Christianson syndrome (SLC9A6)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Christianson syndrome: Angelman-like male with eye-movement disorder and ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (skill loss, drug-resistant seizures, feeding failure, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: epilepsy and feeding review; urgent neurology assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI, EEG, eye-movement assessment, UBE3A testing and SLC9A6 sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SLC9A6 variant with Angelman-like features and regression confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antiseizure medication tailored to seizure types",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Angelman syndrome, Rett syndrome and Mowat-Wilson syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Feeding assessment, antimuscarinic for drooling and gastrostomy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and augmentative communication",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mobility aids and monitoring for progressive cerebellar decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong neurodisability care; carrier testing and counselling for relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

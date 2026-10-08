@@ -150,5 +150,324 @@
       "caption": "Overview comparison matrix for apeced."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apeced-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AIRE genetic testing",
+          "cells": [
+            {
+              "text": "Genetic confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibodies against type 1 interferons and Th17 cytokines",
+          "cells": [
+            {
+              "text": "Interferon and Th17 cytokine autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific autoantibody panels and endocrine function tests",
+          "cells": [
+            {
+              "text": "Calcium, parathyroid hormone, adrenal axis, thyroid, glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal cultures and clinical assessment",
+          "cells": [
+            {
+              "text": "Mucocutaneous candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic screening for evolving autoimmune components",
+          "cells": [
+            {
+              "text": "Surveillance over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for oral squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Chronic oral candidiasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apeced-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune polyendocrine syndrome type 2",
+          "cells": [
+            {
+              "text": "Polygenic, adult-onset, rather than AIRE-related"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated chronic mucocutaneous candidiasis",
+          "cells": [
+            {
+              "text": "Isolated candidiasis, without the wider endocrine syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apeced-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Replacement of failing endocrine axes",
+          "cells": [
+            {
+              "text": "Glucocorticoid and mineralocorticoid for adrenal insufficiency; calcium and an activated vitamin D analogue"
+            },
+            {
+              "text": "Hypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azole antifungals",
+          "cells": [
+            {
+              "text": "Fluconazole, cycling agents to manage emerging azole resistance"
+            },
+            {
+              "text": "Chronic mucocutaneous candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis prevention",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone and fluids; stress-dosing education; emergency steroid card"
+            },
+            {
+              "text": "Adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other autoimmune components",
+          "cells": [
+            {
+              "text": "Immunosuppression for autoimmune hepatitis; vitamin B12 for pernicious anaemia"
+            },
+            {
+              "text": "As they arise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong screening",
+          "cells": [
+            {
+              "text": "Evolving endocrine and organ-specific autoimmunity; oral squamous cell carcinoma surveillance"
+            },
+            {
+              "text": "Periodic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive AIRE disorder; screen affected siblings"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apeced-dx-mgmt",
+      "title": "Diagnosis and management of APECED",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic candidiasis with adrenal or parathyroid autoimmunity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Adrenal crisis or symptomatic hypocalcaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency parenteral hydrocortisone and fluids for adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AIRE testing, interferon and Th17 autoantibodies, endocrine panels, fungal cultures",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AIRE mutation confirmed with organ-specific autoimmunity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Replace failing endocrine axes with hormone replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat AIRE and endocrine tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azole antifungals and cycling agents for candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stress-dose education and emergency steroid card",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong screening for evolving autoimmunity and oral cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Coordinated endocrinology, immunology and dermatology care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

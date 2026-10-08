@@ -145,5 +145,315 @@
       "caption": "Overview comparison matrix for autoimmune enteropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autoimmune_enteropathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-enterocyte and anti-goblet-cell antibody testing",
+          "cells": [
+            {
+              "text": "Autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel biopsy",
+          "cells": [
+            {
+              "text": "Villous architecture and intraepithelial lymphocyte density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and response to gluten withdrawal",
+          "cells": [
+            {
+              "text": "Excludes coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin levels and immune workup",
+          "cells": [
+            {
+              "text": "Associated immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing for IPEX and related syndromes",
+          "cells": [
+            {
+              "text": "In appropriate patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_enteropathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Coeliac disease and refractory coeliac disease",
+          "cells": [
+            {
+              "text": "Mislabelled as refractory coeliac disease when a gluten-free diet fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency enteropathy",
+          "cells": [
+            {
+              "text": "Assessed by immunoglobulin levels and immune workup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_enteropathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids, then steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Calcineurin inhibitors such as tacrolimus as escalation"
+            },
+            {
+              "text": "First-line escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parenteral nutrition",
+          "cells": [
+            {
+              "text": "Severe malabsorption; correction of fluid and electrolyte losses"
+            },
+            {
+              "text": "Severe malabsorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "Consider in IPEX and related monogenic disease"
+            },
+            {
+              "text": "Definitive treatment in IPEX"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation for refractory disease",
+          "cells": [
+            {
+              "text": "Biologic therapy or further immunosuppression"
+            },
+            {
+              "text": "Disease refractory to first-line therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, infection and immunosuppression monitoring",
+          "cells": [
+            {
+              "text": "Growth and nutrition; vigilance for infection and adverse effects"
+            },
+            {
+              "text": "Long-term immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "FOXP3 and IPEX testing with counselling of affected families"
+            },
+            {
+              "text": "Affected children"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autoimmune_enteropathy-dx-mgmt",
+      "title": "Diagnosis and management of Autoimmune enteropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Intractable high-volume diarrhoea with malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Dehydration, electrolyte collapse or severe malnutrition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Fluids, electrolyte correction and parenteral nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-enterocyte antibodies, small-bowel biopsy, coeliac serology, immunoglobulins, IPEX testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Villous change with raised intraepithelial lymphocytes and coeliac excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids first-line, escalating to steroid-sparing agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Calcineurin inhibitor such as tacrolimus for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biologic therapy for disease refractory to first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider stem cell transplant in IPEX",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Growth monitoring and vigilance for infection on immunosuppression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

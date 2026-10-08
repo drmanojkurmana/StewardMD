@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for cryptococcus gattii infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas, and Bennett's Principles and Practice of Infectious Diseases / IDSA cryptococcosis guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cryptococcus_gattii_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryptococcal antigen on serum and CSF",
+          "cells": [
+            {
+              "text": "Cryptococcal infection confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "India ink microscopy and CSF culture",
+          "cells": [
+            {
+              "text": "Organism seen and grown"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture with opening pressure",
+          "cells": [
+            {
+              "text": "Raised intracranial pressure measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI brain",
+          "cells": [
+            {
+              "text": "Cryptococcomas and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest",
+          "cells": [
+            {
+              "text": "Pulmonary nodules or masses characterised"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptococcus_gattii_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryptococcus neoformans infection",
+          "cells": [
+            {
+              "text": "Species identification separates the two"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis, pulmonary or CNS",
+          "cells": [
+            {
+              "text": "Named look-alike with nodules or meningitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial brain abscess",
+          "cells": [
+            {
+              "text": "Named look-alike mass lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cryptococcus_gattii_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Induction antifungal therapy",
+          "cells": [
+            {
+              "text": "Amphotericin B with flucytosine, then azole consolidation and maintenance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Raised intracranial pressure",
+          "cells": [
+            {
+              "text": "Repeated therapeutic lumbar punctures; drainage or shunting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Large cryptococcomas responding slowly or incompletely to antifungals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged treatment",
+          "cells": [
+            {
+              "text": "Slower response than C neoformans; longer courses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial neuroimaging, CSF analysis and antigen titres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune assessment",
+          "cells": [
+            {
+              "text": "HIV testing and anti-GM-CSF autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary team",
+          "cells": [
+            {
+              "text": "Infectious diseases and neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cryptococcus_gattii_infection-dx-mgmt",
+      "title": "Diagnosis and management of Cryptococcus gattii infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected C gattii infection: headache or lung nodule in an immunocompetent host",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (reduced consciousness, papilloedema, cryptococcomas, respiratory compromise)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent lumbar puncture, pressure control and antifungal induction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum and CSF antigen; CSF culture; opening pressure; MRI brain; CT chest",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does CSF culture or antigen confirm cryptococcal disease with species identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider C neoformans, TB, abscess or tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Amphotericin B with flucytosine induction, then azole consolidation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeated lumbar punctures and CSF diversion for raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical resection of large cryptococcomas responding poorly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial neuroimaging and CSF monitoring; HIV and immune assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many recover with prompt therapy and pressure control; large lesions respond slowly",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -161,5 +161,523 @@
       "caption": "Overview comparison matrix for gonorrhea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC STI Treatment Guidelines 2021, Gonococcal Infections Among Adolescents and Adults",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/gonorrhea-adults.htm"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gonorrhea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing gonorrhea",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Incubation of male urethritis",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "2 to 7 days, scant mucoid discharge turning purulent within 1 to 2 days",
+              "range": [
+                2,
+                7
+              ]
+            },
+            {
+              "text": "Most common presentation in men; some men stay asymptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urethral Gram stain in symptomatic men",
+          "cells": [
+            {
+              "text": "Gram-negative intracellular diplococci"
+            },
+            {
+              "text": "{{hy:Highly sensitive and specific in symptomatic men}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cervical Gram stain",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 50% sensitive",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Too insensitive in women; use NAAT or culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NAAT",
+          "cells": [
+            {
+              "text": "Urine, urethral, cervical or self-collected vaginal swab"
+            },
+            {
+              "text": "More sensitive than culture and detects chlamydia at the same time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture on selective (modified Thayer-Martin) medium",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Single endocervical culture 80 to 90% sensitive",
+              "range": [
+                80,
+                90
+              ]
+            },
+            {
+              "text": "Needed for susceptibility testing and medicolegal cases in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extragenital sites in MSM",
+          "cells": [
+            {
+              "text": "Rectal and pharyngeal swabs in addition to urine"
+            },
+            {
+              "text": "Urine alone misses most infections in MSM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharyngeal Gram stain",
+          "cells": [
+            {
+              "text": "Gram-negative diplococci not diagnostic"
+            },
+            {
+              "text": "Commensal Neisseria are normal throat flora"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disseminated infection (DGI)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Fever, tenosynovitis, polyarthralgia, 5 to 40 haemorrhagic pustules on limbs in about 75%",
+              "op": "=",
+              "value": 75
+            },
+            {
+              "text": "Blood and synovial cultures; blood positivity falls after 48 h"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrent DGI",
+          "cells": [
+            {
+              "text": "More than one episode"
+            },
+            {
+              "text": "Screen total haemolytic complement (C5 to C9 deficiency, eculizumab)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gonorrhea-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic gonorrhea",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Nongonococcal urethritis (chlamydia, Mycoplasma genitalium, Trichomonas, HSV)",
+          "cells": [
+            {
+              "text": "Often clinically identical to gonococcal urethritis"
+            },
+            {
+              "text": "Multiplex NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cystitis or urethral syndrome in women",
+          "cells": [
+            {
+              "text": "Dysuria with frequency and urgency, bacteriuria"
+            },
+            {
+              "text": "Urine culture plus NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive arthritis",
+          "cells": [
+            {
+              "text": "Different joint distribution, skin and genital lesions than DGI"
+            },
+            {
+              "text": "Negative gonococcal cultures and NAAT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meningococcaemia",
+          "cells": [
+            {
+              "text": "Can cause dermatitis-arthritis syndrome like DGI"
+            },
+            {
+              "text": "Blood culture identifies species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic arthritis from other bacteria",
+          "cells": [
+            {
+              "text": "Indistinguishable when genital infection is silent"
+            },
+            {
+              "text": "Synovial fluid culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute HIV or hepatitis B",
+          "cells": [
+            {
+              "text": "Viral illness mimicking the bacteraemic arthritis-dermatitis stage"
+            },
+            {
+              "text": "HIV and hepatitis B serology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gonorrhea-treatment",
+      "kind": "treatment",
+      "title": "Treating gonorrhea (CDC 2021)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Ceftriaxone, first line",
+          "unit": "mg",
+          "cells": [
+            {
+              "text": "Uncomplicated urogenital, rectal or pharyngeal infection"
+            },
+            {
+              "text": "{{hy:500 mg IM once if under 150 kg; 1 g if 150 kg or more}}",
+              "op": "=",
+              "value": 500
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add doxycycline",
+          "cells": [
+            {
+              "text": "Chlamydia not excluded"
+            },
+            {
+              "text": "100 mg orally twice daily for 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gentamicin plus azithromycin",
+          "cells": [
+            {
+              "text": "Cephalosporin allergy, urogenital or rectal"
+            },
+            {
+              "text": "Gentamicin 240 mg IM once plus azithromycin 2 g orally once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cefixime",
+          "cells": [
+            {
+              "text": "Ceftriaxone not available, urogenital or rectal"
+            },
+            {
+              "text": "800 mg orally once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Disseminated infection (arthritis-dermatitis)",
+          "cells": [
+            {
+              "text": "Hospitalise"
+            },
+            {
+              "text": "Ceftriaxone 1 g IM or IV every 24 h, oral step-down after 24 to 48 h of improvement, total at least 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Meningitis or endocarditis",
+          "cells": [
+            {
+              "text": "Rare DGI complications"
+            },
+            {
+              "text": "Ceftriaxone 1 to 2 g IV every 12 to 24 h; 10 to 14 days for meningitis, over 4 weeks for endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Conjunctivitis",
+          "cells": [
+            {
+              "text": "Adult ocular gonorrhea"
+            },
+            {
+              "text": "Ceftriaxone 1 g IM once; consider one saline lavage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Test of cure",
+          "cells": [
+            {
+              "text": "Pharyngeal infection only"
+            },
+            {
+              "text": "Culture or NAAT 7 to 14 days after treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Retest and partners",
+          "cells": [
+            {
+              "text": "All treated patients"
+            },
+            {
+              "text": "Retest at 3 months; expedited partner therapy cefixime 800 mg orally once (add doxycycline if chlamydia not tested)"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison 22e notes azithromycin was dropped from first-line therapy because US resistance rose to 4.7% in 2021; CDC still lists azithromycin 2 g only with gentamicin for cephalosporin allergy."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gonorrhea-dx-mgmt",
+      "title": "Diagnosis and management of gonorrhea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Urethritis, cervicitis, proctitis, pharyngitis, or STI screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "NAAT from urine or swabs; add rectal and throat sites by exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "N. gonorrhoeae detected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider nongonococcal causes; treat per syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Disseminated, meningitis, endocarditis or eye involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Admit; IV ceftriaxone 1 to 2 g for site-based duration",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ceftriaxone 500 mg IM once (1 g if 150 kg or more)",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Chlamydia excluded?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add doxycycline 100 mg twice daily for 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat partners, screen HIV and syphilis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Pharyngeal infection?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Test of cure at 7 to 14 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Retest at 3 months",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

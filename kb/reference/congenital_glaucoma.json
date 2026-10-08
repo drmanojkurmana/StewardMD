@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for primary congenital glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Shields' Textbook of Glaucoma",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination under anaesthesia with intraocular pressure",
+          "cells": [
+            {
+              "text": "Raised pressure assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal diameter and axial length",
+          "cells": [
+            {
+              "text": "Enlargement documented"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Angle development assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc assessment for cup-to-disc ratio",
+          "cells": [
+            {
+              "text": "Disc cupping monitored"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing including CYP1B1",
+          "cells": [
+            {
+              "text": "Causative variant; syndromic associations"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Megalocornea without glaucoma",
+          "cells": [
+            {
+              "text": "Enlarged cornea without raised pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental glaucomas with dysgenesis (Axenfeld-Rieger, Peters)",
+          "cells": [
+            {
+              "text": "Associated anterior segment dysgenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasolacrimal duct obstruction",
+          "cells": [
+            {
+              "text": "Watering alone; glaucoma must not be missed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Angle surgery",
+          "cells": [
+            {
+              "text": "Goniotomy or trabeculotomy; the primary treatment to lower intraocular pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporising pressure-lowering drugs",
+          "cells": [
+            {
+              "text": "Carbonic anhydrase inhibitors, beta-blockers and prostaglandin analogues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further glaucoma surgery",
+          "cells": [
+            {
+              "text": "Trabeculectomy, drainage implant or cyclodestruction if angle surgery fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Pressure, corneal diameter, axial length and disc cupping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia and refraction",
+          "cells": [
+            {
+              "text": "Treated; commonly limit vision after pressure control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "CYP1B1 testing and syndromic assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong specialist review",
+          "cells": [
+            {
+              "text": "Pressure control can fail over time"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Primary congenital glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected primary congenital glaucoma: infant watering, photophobia, large corneas",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive corneal enlargement, rapid disc cupping, asymmetry)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric glaucoma referral and surgery for uncontrolled pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia; corneal diameter; gonioscopy; disc; CYP1B1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does examination show raised pressure with corneal enlargement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nasolacrimal obstruction or megalocornea without glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Angle surgery (goniotomy or trabeculotomy) as the primary treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Temporising pressure-lowering drops and systemic agents",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Further glaucoma surgery for eyes not controlled by angle surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat amblyopia and correct refraction; lifelong surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early angle surgery gives good long-term control; late presentation worsens outcome",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

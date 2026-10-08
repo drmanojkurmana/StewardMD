@@ -167,5 +167,530 @@
       "caption": "Overview comparison matrix for diverticular disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Diverticular Disease: Rapid Evidence Review, 2022",
+      "url": "https://www.aafp.org/pubs/afp/issues/2022/0800/diverticular-disease.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diverticular_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis and staging of diverticulitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical triad",
+          "cells": [
+            {
+              "text": "LLQ pain, no vomiting, CRP >5 mg/dL"
+            },
+            {
+              "text": "LR+ 5.3 to 18; specificity 93 to 98%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CRP",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">20",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Suggests perforation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "WBC",
+          "cells": [
+            {
+              "text": "Normal in 45%"
+            },
+            {
+              "text": "Does not exclude diverticulitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Contrast CT",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 94, specificity 99"
+            },
+            {
+              "text": "{{hy:Test of choice}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT colonic wall thickness",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": ">4 with pericolic fat stranding",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Sigmoid diverticula without extravasation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey I (Ia phlegmon)",
+          "cells": [
+            {
+              "text": "Confined paracolic abscess"
+            },
+            {
+              "text": "Nonoperative first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey II",
+          "cells": [
+            {
+              "text": "Distant pelvic abscess"
+            },
+            {
+              "text": "Nonoperative first"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey III",
+          "cells": [
+            {
+              "text": "Purulent peritonitis"
+            },
+            {
+              "text": "Surgical consultation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hinchey IV",
+          "cells": [
+            {
+              "text": "Faecal peritonitis, free perforation"
+            },
+            {
+              "text": "Surgical consultation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumaturia or stool per vagina",
+          "cells": [
+            {
+              "text": "Fistula"
+            },
+            {
+              "text": "Colovesical or colovaginal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diverticular bleeding",
+          "cells": [
+            {
+              "text": "Painless brisk haematochezia, often right colon"
+            },
+            {
+              "text": "Stops spontaneously in 90% or more; rebleed about 25%"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diverticular_disease-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of diverticulitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Colorectal cancer",
+          "cells": [
+            {
+              "text": "{{hy:Same age group; risk higher after complicated attack}}"
+            },
+            {
+              "text": "Colonoscopy after resolution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appendicitis",
+          "cells": [
+            {
+              "text": "Right-sided pain; right-sided diverticula common in Asians"
+            },
+            {
+              "text": "CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn's disease",
+          "cells": [
+            {
+              "text": "Can mimic clinically and radiologically"
+            },
+            {
+              "text": "Colonoscopy with biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic colitis",
+          "cells": [
+            {
+              "text": "Older, vascular risk, bloody diarrhoea"
+            },
+            {
+              "text": "CT, colonoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Chronic symptoms without inflammation"
+            },
+            {
+              "text": "Normal CRP and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecological disease",
+          "cells": [
+            {
+              "text": "Ovarian torsion, PID, tubo-ovarian abscess"
+            },
+            {
+              "text": "Pelvic ultrasound, pregnancy test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious colitis",
+          "cells": [
+            {
+              "text": "Diarrhoea predominant"
+            },
+            {
+              "text": "Stool studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diverticular_disease-treatment",
+      "kind": "treatment",
+      "title": "Treatment of diverticular disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Outpatient care without routine antibiotics",
+          "cells": [
+            {
+              "text": "{{hy:Uncomplicated, immunocompetent}}, normal vitals, tolerating oral intake"
+            },
+            {
+              "text": "Review at 2 to 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amoxicillin-clavulanate 875/125 mg, or ciprofloxacin 500 mg twice daily plus metronidazole 500 mg three times daily",
+          "cells": [
+            {
+              "text": "Uncomplicated not improving after 48 to 72 h"
+            },
+            {
+              "text": "7 to 10 days; TMP-SMX plus metronidazole alternative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV piperacillin-tazobactam, ertapenem 1 g daily, or cephalosporin plus metronidazole",
+          "cells": [
+            {
+              "text": "Complicated diverticulitis, inpatient"
+            },
+            {
+              "text": "Switch to oral after 2 to 4 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV antibiotics and observation",
+          "cells": [
+            {
+              "text": "Abscess under 3 cm"
+            },
+            {
+              "text": "Drain or operate if worse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous drainage",
+          "cells": [
+            {
+              "text": "Abscess 3 cm or more, stable"
+            },
+            {
+              "text": "Surgery if fails or worsening"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Hinchey III to IV, obstruction, fistula"
+            },
+            {
+              "text": "Elective colectomy not routine; consider after drained abscess"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Resuscitation; colonoscopic haemostasis or embolisation",
+          "cells": [
+            {
+              "text": "Diverticular bleeding"
+            },
+            {
+              "text": "Most stop spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "6 to 8 weeks after complicated attack"
+            },
+            {
+              "text": "Avoid during acute attack"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fibre-rich diet, activity, avoid smoking and NSAIDs",
+          "cells": [
+            {
+              "text": "Prevention"
+            },
+            {
+              "text": "Nuts and seeds need not be avoided; no mesalamine"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison gives colon cancer prevalence under 2% overall and 6 to 8% after complicated diverticulitis; AAFP gives 1.3% and 7.9%. Harrison advises colonoscopy at about 6 weeks, AAFP at 6 to 8 weeks."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diverticular_disease-dx-mgmt",
+      "title": "Diagnosis and management of acute diverticulitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "LLQ pain, fever, suspected diverticulitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Contrast CT abdomen and pelvis, CRP, WBC",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Complicated: abscess, perforation, fistula, obstruction?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Stable vitals and tolerating oral intake?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Outpatient, no routine antibiotics; review at 2 to 3 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Admit; IV antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Peritonitis (Hinchey III to IV)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Emergency surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Abscess 3 cm or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Percutaneous drainage",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Colonoscopy 6 to 8 weeks after resolution",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

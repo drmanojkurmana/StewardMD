@@ -150,5 +150,298 @@
       "caption": "Overview comparison matrix for cartilage-hair hypoplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "OMIM / GeneReviews (NCBI) and standard clinical genetics texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cartilage_hair_hypoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Demonstrates metaphyseal dysplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of RMRP",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis with clinical and hair phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte subsets, proliferation studies and immunoglobulin levels",
+          "cells": [
+            {
+              "text": "Immunodeficiency affecting cellular immunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia and cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Indicated when bowel symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cartilage_hair_hypoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunodeficiency management",
+          "cells": [
+            {
+              "text": "Antimicrobial prophylaxis and immunoglobulin replacement"
+            },
+            {
+              "text": "Haematopoietic stem cell transplantation for severe combined immune impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Live vaccines and viral infection",
+          "cells": [
+            {
+              "text": "Avoid live vaccines; prompt antiviral treatment for severe viral infection"
+            },
+            {
+              "text": "Heightened vigilance for varicella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy surveillance",
+          "cells": [
+            {
+              "text": "Lifelong surveillance with low threshold to investigate lymphadenopathy"
+            },
+            {
+              "text": "Risk of lymphoma and skin cancers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia and cytopenias",
+          "cells": [
+            {
+              "text": "Transfusion or haematological support as needed"
+            },
+            {
+              "text": "Anaemia and impaired erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Surgical management where present"
+            },
+            {
+              "text": "Associated feature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and growth monitoring",
+          "cells": [
+            {
+              "text": "Monitor metaphyseal chondrodysplasia and short stature"
+            },
+            {
+              "text": "Growth assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "RMRP testing and family screening"
+            },
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cartilage_hair_hypoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Cartilage-hair hypoplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cartilage-hair hypoplasia: short limbs with fine, sparse, brittle hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (disseminated viral infection, lymphadenopathy, progressive cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: antiviral treatment for severe viral infection; assess for lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey for metaphyseal dysplasia; RMRP testing and immunology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Metaphyseal dysplasia with RMRP variants and immunodeficiency confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antimicrobial prophylaxis and immunoglobulin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Schmid dysplasia, Shwachman-Diamond and ADA deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid live vaccines; treat varicella promptly with antivirals",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifelong lymphoma and skin-cancer surveillance; check anaemia and cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical management of Hirschsprung disease where present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Outcome depends on immunodeficiency severity; transplant for severe combined impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

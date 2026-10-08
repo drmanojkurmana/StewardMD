@@ -151,5 +151,336 @@
       "caption": "Overview comparison matrix for childhood obesity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "childhood_obesity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "BMI on age- and sex-specific percentile charts, with blood pressure",
+          "cells": [
+            {
+              "text": "Obesity at or above the 95th percentile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose or HbA1c and fasting lipid profile",
+          "cells": [
+            {
+              "text": "Screens for type 2 diabetes and dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Assesses for fatty liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function testing",
+          "cells": [
+            {
+              "text": "Where clinically indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for obstructive sleep apnoea",
+          "cells": [
+            {
+              "text": "When symptoms suggest it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "childhood_obesity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cushing syndrome",
+          "cells": [
+            {
+              "text": "Central obesity, striae, hypertension and growth deceleration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monogenic obesity",
+          "cells": [
+            {
+              "text": "Early-onset severe obesity with hyperphagia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth hormone deficiency",
+          "cells": [
+            {
+              "text": "Short stature or poor linear growth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "childhood_obesity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Family-based lifestyle intervention",
+          "cells": [
+            {
+              "text": "Nutrition, activity, less screen time and better sleep"
+            },
+            {
+              "text": "Foundation of management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural and psychological support",
+          "cells": [
+            {
+              "text": "Address eating behaviour and psychosocial contributors"
+            },
+            {
+              "text": "Psychosocial drivers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity screening",
+          "cells": [
+            {
+              "text": "Type 2 diabetes, dyslipidaemia, hypertension, fatty liver and sleep apnoea"
+            },
+            {
+              "text": "Screen and manage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pharmacotherapy",
+          "cells": [
+            {
+              "text": "GLP-1 receptor agonist or orlistat in selected adolescents, with lifestyle measures"
+            },
+            {
+              "text": "Severe obesity or significant comorbidity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bariatric surgery",
+          "cells": [
+            {
+              "text": "Carefully selected adolescents with severe obesity and complications"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine or genetic work-up",
+          "cells": [
+            {
+              "text": "Monogenic, endocrine or syndromic evaluation where early-onset severe obesity or short stature"
+            },
+            {
+              "text": "Atypical presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist and monitoring",
+          "cells": [
+            {
+              "text": "Specialist weight-management service; track BMI percentile, blood pressure and metabolic markers"
+            },
+            {
+              "text": "Monitoring response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "childhood_obesity-dx-mgmt",
+      "title": "Diagnosis and management of Childhood Obesity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected childhood obesity: BMI at or above the 95th percentile",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (short stature, Cushingoid features, early severe obesity, SCFE)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: endocrine and genetic evaluation for an endocrine or syndromic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BMI percentile, blood pressure, glucose or HbA1c, lipids and liver tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Comorbidity screen done and endocrine cause excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Family-based lifestyle intervention on diet, activity, screen time and sleep",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Cushing syndrome, growth hormone deficiency and monogenic obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Behavioural and psychological support for eating and psychosocial drivers",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen and treat diabetes, dyslipidaemia, hypertension and fatty liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "GLP-1 agonist or orlistat in selected severe cases; bariatric surgery if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist weight-management service with regular BMI and metabolic monitoring",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

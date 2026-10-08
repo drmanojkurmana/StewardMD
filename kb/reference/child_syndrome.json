@@ -147,5 +147,327 @@
       "caption": "Overview comparison matrix for child syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "child_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Psoriasiform hyperkeratosis, parakeratosis and a dermal infiltrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing for NSDHL",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiographs for epiphyseal stippling and limb defects",
+          "cells": [
+            {
+              "text": "Chondrodysplasia punctata and limb defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and renal imaging",
+          "cells": [
+            {
+              "text": "Ipsilateral visceral anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sterol profiling",
+          "cells": [
+            {
+              "text": "Distal cholesterol-pathway abnormality"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "child_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Conradi-Hunermann-Happle syndrome",
+          "cells": [
+            {
+              "text": "X-linked dominant chondrodysplasia punctata"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incontinentia pigmenti",
+          "cells": [
+            {
+              "text": "Verrucous stage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "child_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical pathogenesis-based therapy",
+          "cells": [
+            {
+              "text": "Statin with cholesterol to replace the deficient product and reduce toxic sterol precursors"
+            },
+            {
+              "text": "Ichthyosiform naevus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin-barrier care",
+          "cells": [
+            {
+              "text": "Emollients and keratolytics; attention to hyperkeratotic skin folds"
+            },
+            {
+              "text": "Ptychotropism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic and reconstructive care",
+          "cells": [
+            {
+              "text": "Management of ipsilateral limb hypoplasia with mobility aids or prostheses"
+            },
+            {
+              "text": "Limb defects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visceral anomaly management",
+          "cells": [
+            {
+              "text": "Assessment and management of ipsilateral cardiac, renal and CNS anomalies"
+            },
+            {
+              "text": "Chiefly determine prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist input",
+          "cells": [
+            {
+              "text": "Ophthalmology and other specialists directed by visceral involvement"
+            },
+            {
+              "text": "Pattern of involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology, clinical genetics, orthopaedics and organ specialists"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked dominant inheritance with male lethality in most cases; family assessment"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "child_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of CHILD syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CHILD syndrome: unilateral ichthyosiform erythroderma with limb defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cardiac or renal malformation, extensive erythroderma, decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent cardiac, renal or CNS assessment; barrier and fluid care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, NSDHL genetic testing, radiographs, echo and renal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "NSDHL variant with unilateral features and visceral anomalies confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Topical statin and cholesterol preparation for ichthyosiform naevus",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check epidermal naevus, Conradi-Hunermann-Happle and incontinentia pigmenti",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Emollients and keratolytics with care of skin folds",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic and reconstructive care for ipsilateral limb hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage ipsilateral cardiac, renal and CNS anomalies, which set prognosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "X-linked dominant inheritance with male lethality in most cases; family assessment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

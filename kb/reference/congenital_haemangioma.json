@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for congenital haemangioma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mulliken and Young's Vascular Anomalies: Hemangiomas and Malformations",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_haemangioma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal and postnatal Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Fast-flow mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Deep extent and flow characteristics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GLUT1 immunohistochemistry if biopsied",
+          "cells": [
+            {
+              "text": "Negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and coagulation screen",
+          "cells": [
+            {
+              "text": "Neonatal consumptive coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GNAQ and GNA11 mutation analysis",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_haemangioma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Infantile haemangioma",
+          "cells": [
+            {
+              "text": "Pitfall: wrong natural history and beta-blocker response expected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kaposiform haemangioendothelioma",
+          "cells": [
+            {
+              "text": "More aggressive tumour; diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infantile fibrosarcoma",
+          "cells": [
+            {
+              "text": "More aggressive tumour; diagnostic uncertainty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_haemangioma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation for RICH",
+          "cells": [
+            {
+              "text": "Serial review and photography; rapidly involuting lesions regress over the first year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal monitoring",
+          "cells": [
+            {
+              "text": "Transient consumptive coagulopathy and high-output cardiac failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ulceration and bleeding",
+          "cells": [
+            {
+              "text": "Wound care and local haemostatic measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical excision",
+          "cells": [
+            {
+              "text": "Symptomatic non-involuting lesions or residual skin after RICH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Embolisation",
+          "cells": [
+            {
+              "text": "Large or high-flow lesions causing haemodynamic compromise, or adjunct to surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and referral",
+          "cells": [
+            {
+              "text": "Benign GLUT1-negative tumours; complex cases referred"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_haemangioma-dx-mgmt",
+      "title": "Diagnosis and management of Congenital haemangioma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital haemangioma: fast-flow mass on Doppler at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (high-output failure, coagulopathy, ulceration or bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: check coagulation and cardiac output; treat high-output failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Doppler ultrasound; MRI for extent and flow; GLUT1 staining; coagulation screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the lesion GLUT1-negative with fast flow on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider infantile haemangioma, fibrosarcoma or kaposiform haemangioendothelioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe rapidly involuting (RICH) lesions with serial photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Monitor for transient consumptive coagulopathy and cardiac failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Wound care for ulceration; surgical excision for non-involuting lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Embolisation for large or high-flow lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "RICH commonly involutes within months; NICH persists and may need excision",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

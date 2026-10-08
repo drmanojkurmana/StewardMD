@@ -146,5 +146,331 @@
       "caption": "Overview comparison matrix for acquired hypertrichosis lanuginosa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CT of chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Occult primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age- and sex-appropriate cancer screening",
+          "cells": [
+            {
+              "text": "Mammography, colonoscopy and gynaecological assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin and scalp examination with dermoscopy",
+          "cells": [
+            {
+              "text": "Fine lanugo hair"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers guided by the suspected primary",
+          "cells": [
+            {
+              "text": "Guided by suspected primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review of the drug history",
+          "cells": [
+            {
+              "text": "Iatrogenic causes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced hypertrichosis (ciclosporin, minoxidil, phenytoin, corticosteroids)",
+          "cells": [
+            {
+              "text": "Drug exposure"
+            },
+            {
+              "text": "Drug history review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirsutism from androgen excess (PCOS, adrenal or ovarian tumour)",
+          "cells": [
+            {
+              "text": "Androgen-driven terminal hair, not lanugo"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent search for and treatment of underlying malignancy",
+          "cells": [
+            {
+              "text": "Lanugo hair may regress with tumour control"
+            },
+            {
+              "text": "Commonly lung, colorectal or breast carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shaving or depilation",
+          "cells": [
+            {
+              "text": "Cosmetic relief; no specific drug therapy"
+            },
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Manage paraneoplastic features",
+          "cells": [
+            {
+              "text": "Glossitis and acanthosis nigricans"
+            },
+            {
+              "text": "Coexisting features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Review the drug history",
+          "cells": [
+            {
+              "text": "Excludes medication-induced hypertrichosis"
+            },
+            {
+              "text": "Before attributing to malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oncology-led multidisciplinary care",
+          "cells": [
+            {
+              "text": "Advanced or metastatic disease"
+            },
+            {
+              "text": "Includes palliative input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical surveillance",
+          "cells": [
+            {
+              "text": "Eruption may track tumour activity"
+            },
+            {
+              "text": "Often signifies advanced disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_hypertrichosis_lanuginosa-dx-mgmt",
+      "title": "Diagnosis and management of acquired hypertrichosis lanuginosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rapid growth of fine lanugo hair, starting on the face of an adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Weight loss, glossitis or acanthosis nigricans present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cancer search: CT of chest, abdomen and pelvis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Review drug history; dermoscopy of the fine lanugo hair",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Medication-induced hypertrichosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "CT chest, abdomen and pelvis; age-appropriate cancer screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Stop or change the implicated drug; reassess hair growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat any occult malignancy (lung, colorectal or breast carcinoma)",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Shaving or depilation for cosmetic relief; no drug therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat paraneoplastic glossitis; involve oncology and palliative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually signals advanced malignancy; hair may regress with tumour control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

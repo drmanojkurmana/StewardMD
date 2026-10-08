@@ -148,5 +148,379 @@
       "caption": "Overview comparison matrix for alkaptonuria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alkaptonuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinary homogentisic acid quantification",
+          "cells": [
+            {
+              "text": "Diagnostic test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple test of urine darkening on standing or alkalinisation",
+          "cells": [
+            {
+              "text": "Dark urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HGD gene molecular testing",
+          "cells": [
+            {
+              "text": "Biallelic HGD variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spine and large-joint imaging",
+          "cells": [
+            {
+              "text": "Ochronotic arthropathy and disc calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Aortic valve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and prostate stone assessment where indicated",
+          "cells": [
+            {
+              "text": "Pigmented stones"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alkaptonuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Other causes of dark urine (haematuria, haemoglobinuria, myoglobinuria, porphyria)",
+          "cells": [
+            {
+              "text": "Dark urine without homogentisic acid"
+            },
+            {
+              "text": "Urinary homogentisic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tyrosinaemia and other tyrosine pathway disorders",
+          "cells": [
+            {
+              "text": "Tyrosine pathway defect"
+            },
+            {
+              "text": "Amino acid analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoarthritis and ankylosing spondylitis",
+          "cells": [
+            {
+              "text": "Arthropathy without pigmentation"
+            },
+            {
+              "text": "Imaging and joint assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exogenous ochronosis from hydroquinone or phenol",
+          "cells": [
+            {
+              "text": "Pigmentation from exposure"
+            },
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alkaptonuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nitisinone",
+          "cells": [
+            {
+              "text": "Lowers homogentisic acid production and slows ochronosis"
+            },
+            {
+              "text": "Disease-modifying"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary restriction of phenylalanine and tyrosine",
+          "cells": [
+            {
+              "text": "Limits substrate"
+            },
+            {
+              "text": "Alongside nitisinone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia, physiotherapy and joint replacement",
+          "cells": [
+            {
+              "text": "Ochronotic arthropathy"
+            },
+            {
+              "text": "Joint replacement for advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and aortic valve intervention when significant",
+          "cells": [
+            {
+              "text": "Cardiac valve involvement"
+            },
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening and management of pigmented renal and prostatic stones",
+          "cells": [
+            {
+              "text": "Stones"
+            },
+            {
+              "text": "When present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for tyrosinaemia and keratopathy",
+          "cells": [
+            {
+              "text": "Adverse effects of nitisinone"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care across metabolic, rheumatology, orthopaedic and cardiac teams",
+          "cells": [
+            {
+              "text": "Multisystem disease"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alkaptonuria-dx-mgmt",
+      "title": "Diagnosis and management of Alkaptonuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dark urine on standing; spine and joint pain with pigmented ear cartilage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe valve disease, disabling arthropathy or obstructing stones?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac or urological review as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinary homogentisic acid; HGD testing; spine and joint imaging; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Homogentisic acid raised and HGD variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start nitisinone and tyrosine and phenylalanine restriction",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review pigment disorders, tyrosinaemia and osteoarthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia, physiotherapy and joint replacement for arthropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echocardiography and aortic valve intervention when significant",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and manage renal and prostatic stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Normal lifespan; disability is chiefly later arthropathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

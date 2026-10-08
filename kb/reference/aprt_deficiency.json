@@ -157,5 +157,348 @@
       "caption": "Overview comparison matrix for adenine phosphoribosyltransferase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aprt_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stone analysis by infrared spectroscopy or X-ray crystallography",
+          "cells": [
+            {
+              "text": "Identifies 2,8-dihydroxyadenine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine microscopy under polarised light",
+          "cells": [
+            {
+              "text": "Round brown DHA crystals with Maltese-cross birefringence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary adenine and DHA quantification",
+          "cells": [
+            {
+              "text": "HPLC or mass spectrometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APRT enzyme activity in erythrocyte lysate",
+          "cells": [
+            {
+              "text": "APRT enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing of the APRT gene",
+          "cells": [
+            {
+              "text": "Biallelic pathogenic variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound and non-contrast CT",
+          "cells": [
+            {
+              "text": "Stone burden and nephrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aprt_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Uric acid urolithiasis",
+          "cells": [
+            {
+              "text": "Responds to alkalinisation, unlike DHA stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Xanthinuria",
+          "cells": [
+            {
+              "text": "Hereditary xanthine oxidase deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aprt_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Xanthine oxidase inhibitor",
+          "cells": [
+            {
+              "text": "Allopurinol or febuxostat"
+            },
+            {
+              "text": "Blocks formation of insoluble 2,8-dihydroxyadenine; the definitive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High fluid intake",
+          "cells": [
+            {
+              "text": "Reduces dihydroxyadenine crystal precipitation"
+            },
+            {
+              "text": "Crystal prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Purine-restricted diet",
+          "cells": [
+            {
+              "text": "Useful adjunct"
+            },
+            {
+              "text": "Adjunct only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No urinary alkalinisation",
+          "cells": [
+            {
+              "text": "Ineffective for dihydroxyadenine"
+            },
+            {
+              "text": "Unlike uric acid; do not rely on it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone and nephropathy management",
+          "cells": [
+            {
+              "text": "Treat obstructing calculi"
+            },
+            {
+              "text": "Crystalline nephropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Renal function, crystalluria and stone burden"
+            },
+            {
+              "text": "Urine microscopy and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant",
+          "cells": [
+            {
+              "text": "Continue xanthine oxidase inhibition after transplantation"
+            },
+            {
+              "text": "Prevents recurrence in the graft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive APRT inheritance"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aprt_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Adenine phosphoribosyltransferase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Radiolucent renal stones or unexplained CKD in a stone-former",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Falling renal function or obstruction from radiolucent stones?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent relief of obstruction from calculi",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stone analysis for DHA, urine microscopy, urinary DHA, APRT enzyme and gene",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "2,8-dihydroxyadenine confirmed on stone analysis or urine crystals?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start xanthine oxidase inhibitor: allopurinol or febuxostat",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat stone analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "High fluid intake and purine-restricted diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Do not rely on urinary alkalinisation; it is ineffective",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continue the inhibitor after kidney transplantation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor renal function and stone burden; genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

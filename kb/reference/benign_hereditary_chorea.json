@@ -148,5 +148,89 @@
       "caption": "Overview comparison matrix for benign hereditary chorea."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_hereditary_chorea-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in benign hereditary chorea",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "NKX2-1 molecular genetic testing with deletion analysis", "cells": [{"text": "NKX2-1 variants or deletions"}], "cite": "c1"},
+        {"parameter": "Thyroid function tests", "cells": [{"text": "Congenital or acquired hypothyroidism"}], "cite": "c1"},
+        {"parameter": "Chest imaging and respiratory assessment", "cells": [{"text": "Associated lung disease"}], "cite": "c1"},
+        {"parameter": "Brain MRI", "cells": [{"text": "Typically normal or non-specific"}], "cite": "c1"},
+        {"parameter": "Copper studies and caeruloplasmin", "cells": [{"text": "Excludes Wilson disease"}], "cite": "c1"},
+        {"parameter": "Antistreptococcal and autoimmune screen", "cells": [{"text": "Where post-infectious chorea is possible"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_hereditary_chorea-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign hereditary chorea",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Huntington disease", "cells": [{"text": "Chorea is non-progressive here and often improves with age"}], "cite": "c1"},
+        {"parameter": "Wilson disease", "cells": [{"text": "Excluded by copper studies and caeruloplasmin"}], "cite": "c1"},
+        {"parameter": "Sydenham chorea", "cells": [{"text": "Antistreptococcal and autoimmune screen where post-infectious chorea is possible"}], "cite": "c1"},
+        {"parameter": "Cerebral palsy with a dyskinetic component", "cells": [{"text": "Early-onset chorea with a stable course; NKX2-1 testing separates them"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_hereditary_chorea-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign hereditary chorea",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Explain the chorea is typically non-progressive and often improves with age"}, {"text": "Drug treatment only for movements that impair function"}], "cite": "c1"},
+        {"parameter": "Disabling chorea", "cells": [{"text": "Dopamine-depleting agent such as tetrabenazine"}, {"text": "Trial of levodopa where a dopa-responsive component is suspected"}], "cite": "c1"},
+        {"parameter": "Hypothyroidism", "cells": [{"text": "Lifelong levothyroxine replacement"}, {"text": "Part of the brain-lung-thyroid phenotype"}], "cite": "c1"},
+        {"parameter": "Respiratory disease", "cells": [{"text": "Surveillance for recurrent chest infections and interstitial lung involvement"}, {"text": "Actively managed"}], "cite": "c1"},
+        {"parameter": "Periodic monitoring", "cells": [{"text": "Thyroid function and respiratory status"}, {"text": "Reflects NKX2-1 multisystem involvement"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary input", "cells": [{"text": "Neurology, endocrinology, respiratory medicine, physiotherapy, speech and occupational therapy"}, {"text": "Coordinated care"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling for this autosomal dominant NKX2-1 disorder"}, {"text": "Testing of at-risk relatives"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_hereditary_chorea-dx-mgmt",
+      "title": "Diagnosis and management of benign hereditary chorea",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Chorea from infancy or early childhood, often with delayed motor milestones", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive chorea, cognitive decline, respiratory compromise or hypothyroidism?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: treat hypothyroidism and lung disease; reconsider alternative diagnosis", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Take family history and assess cognition; consider NKX2-1 testing", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "NKX2-1 testing with deletion analysis; thyroid function tests; chest imaging", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "NKX2-1 variant or deletion confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Check thyroid and lung status; lifelong levothyroxine if hypothyroid", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: exclude Huntington disease, Wilson disease, Sydenham chorea and cerebral palsy", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Reassure; tetrabenazine only if chorea is disabling; counsel and test relatives", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Chorea often non-progressive and improves; outlook set by thyroid and lung care", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

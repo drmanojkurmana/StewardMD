@@ -148,5 +148,327 @@
       "caption": "Overview comparison matrix for cerebral amyloid angiopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebral_amyloid_angiopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI with susceptibility-weighted imaging",
+          "cells": [
+            {
+              "text": "Lobar microbleeds and cortical superficial siderosis are key biomarkers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the head in the acute setting",
+          "cells": [
+            {
+              "text": "Identifies and localises haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid PET and CSF amyloid and tau markers",
+          "cells": [
+            {
+              "text": "Where cognitive assessment or Alzheimer overlap is relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis and rarely biopsy",
+          "cells": [
+            {
+              "text": "When the inflammatory subtype is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular imaging",
+          "cells": [
+            {
+              "text": "Excludes an underlying structural lesion in appropriate cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_amyloid_angiopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypertensive deep intracerebral haemorrhage",
+          "cells": [
+            {
+              "text": "Involves deep grey structures, which amyloid angiopathy typically spares"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic stroke or transient ischaemic attack",
+          "cells": [
+            {
+              "text": "Transient focal episodes; amyloid spells can mimic these"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_amyloid_angiopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid antithrombotics",
+          "cells": [
+            {
+              "text": "Generally withhold anticoagulants and antiplatelet agents where possible"
+            },
+            {
+              "text": "High lobar haemorrhage risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "Optimise blood pressure to reduce recurrent lobar haemorrhage"
+            },
+            {
+              "text": "Recurrence prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute haemorrhage care",
+          "cells": [
+            {
+              "text": "Supportive neurocritical care, reversal of anticoagulation, neurosurgical evaluation"
+            },
+            {
+              "text": "Acute lobar haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory subtype",
+          "cells": [
+            {
+              "text": "Corticosteroids and further immunosuppression"
+            },
+            {
+              "text": "Amyloid-related angiitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures and amyloid spells",
+          "cells": [
+            {
+              "text": "Antiseizure medication"
+            },
+            {
+              "text": "Avoids misdiagnosis as TIA and inappropriate anticoagulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-amyloid antibody caution",
+          "cells": [
+            {
+              "text": "Caution, with monitoring for amyloid-related imaging abnormalities"
+            },
+            {
+              "text": "Treatment risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Serial susceptibility-weighted MRI for microbleeds and superficial siderosis"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebral_amyloid_angiopathy-dx-mgmt",
+      "title": "Diagnosis and management of Cerebral amyloid angiopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cerebral amyloid angiopathy: older adult with lobar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute lobar bleed with raised pressure, rebleed, encephalopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurocritical care, reversal of anticoagulation, neurosurgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Susceptibility-weighted MRI for microbleeds and superficial siderosis; CT head",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lobar microbleeds or superficial siderosis present, deep haemorrhage excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Withhold anticoagulants and antiplatelets where possible; lobar bleed risk high",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check hypertensive deep haemorrhage and transient ischaemic attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optimise blood pressure to reduce recurrent lobar haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids and immunosuppression for the inflammatory subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiseizure medication for seizures and amyloid spells",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "High recurrent-bleed risk; no disease-modifying treatment for the angiopathy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

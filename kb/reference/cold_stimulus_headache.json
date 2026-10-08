@@ -141,5 +141,258 @@
       "caption": "Overview comparison matrix for cold-stimulus headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "International Classification of Headache Disorders (ICHD-3)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cold_stimulus_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical history of temporal relationship to a cold stimulus",
+          "cells": [
+            {
+              "text": "Clear temporal link to cold"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological examination",
+          "cells": [
+            {
+              "text": "Confirms no focal signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cold_stimulus_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Migraine attack triggered by cold",
+          "cells": [
+            {
+              "text": "Simple form settles within seconds to a couple of minutes of removing the stimulus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary headache",
+          "cells": [
+            {
+              "text": "Consider if the temporal link to cold is unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cold_stimulus_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid the trigger",
+          "cells": [
+            {
+              "text": "Avoid or slow very cold food and drink; limit sudden cold to head and palate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abort an attack",
+          "cells": [
+            {
+              "text": "Warm the palate, for example by pressing the tongue to the roof of the mouth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Benign, self-limiting physiological phenomenon; no specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No investigation",
+          "cells": [
+            {
+              "text": "When the trigger is clear and neurological examination is normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine management",
+          "cells": [
+            {
+              "text": "Address migraine where relevant, given heightened susceptibility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassess",
+          "cells": [
+            {
+              "text": "Investigate if the headache is atypical, prolonged or has abnormal neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cold_stimulus_headache-dx-mgmt",
+      "title": "Diagnosis and management of Cold-stimulus headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cold-stimulus headache: brief frontal or temporal pain after a cold stimulus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (headache outlasts the cold, focal signs, new pattern)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Investigate and manage as a secondary headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Neurological examination; confirm the temporal link to cold",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the trigger clear with a normal neurological examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassess; consider cold-triggered migraine or a secondary cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid very cold food and drink; limit cold to the head and palate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Warm the palate to abort an attack",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Reassurance; no specific treatment needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Entirely benign and self-limiting; pain resolves once the stimulus is withdrawn",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

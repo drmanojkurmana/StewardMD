@@ -149,5 +149,312 @@
       "caption": "Overview comparison matrix for coal workers' pneumoconiosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Occupational and Environmental Respiratory Medicine reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coal_workers_pneumoconiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest radiograph with ILO classification",
+          "cells": [
+            {
+              "text": "Small opacities and large opacity categories"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution CT",
+          "cells": [
+            {
+              "text": "Nodularity, conglomerate masses and emphysema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed occupational history",
+          "cells": [
+            {
+              "text": "Years underground and job type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry and lung volumes",
+          "cells": [
+            {
+              "text": "Obstructive, restrictive or mixed impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diffusing capacity for carbon monoxide",
+          "cells": [
+            {
+              "text": "Gas transfer impairment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coal_workers_pneumoconiosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Silicosis or mixed-dust pneumoconiosis",
+          "cells": [
+            {
+              "text": "Other dust exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary tuberculosis",
+          "cells": [
+            {
+              "text": "May coexist and complicate the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Alternative granulomatous lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coal_workers_pneumoconiosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Removal from dust exposure and dust control",
+          "cells": [
+            {
+              "text": "No curative treatment; prevention is paramount"
+            },
+            {
+              "text": "Prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation support",
+          "cells": [
+            {
+              "text": "Limits airflow obstruction and emphysema"
+            },
+            {
+              "text": "Additional lung damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inhaled bronchodilators and pulmonary rehabilitation",
+          "cells": [
+            {
+              "text": "Symptomatic treatment of airflow limitation"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term oxygen therapy",
+          "cells": [
+            {
+              "text": "Chronic hypoxaemia and respiratory failure"
+            },
+            {
+              "text": "Hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Influenza and pneumococcal vaccination",
+          "cells": [
+            {
+              "text": "Prompt treatment of respiratory infection"
+            },
+            {
+              "text": "Infection prevention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coal_workers_pneumoconiosis-dx-mgmt",
+      "title": "Diagnosis and management of Coal workers' pneumoconiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected coal workers' pneumoconiosis: coal dust exposure with upper-zone opacities",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cavitating or enlarging mass, haemoptysis, rapid decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for tuberculosis or lung carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph with ILO classification, HRCT and spirometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Coal dust exposure with nodular opacities confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Remove from dust exposure and enforce dust control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check silicosis, tuberculosis, sarcoidosis and lung carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Smoking cessation support to limit emphysema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Inhaled bronchodilators and pulmonary rehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term oxygen for hypoxaemia; vaccination against infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Radiological surveillance for progressive massive fibrosis; occupational referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,331 @@
       "caption": "Overview comparison matrix for neonatal adrenal haemorrhage."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sperling Pediatric Endocrinology / Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenal_hemorrhage_neonatal-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial abdominal ultrasound",
+          "cells": [
+            {
+              "text": "Evolving, involuting suprarenal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematocrit and haemoglobin with bilirubin",
+          "cells": [
+            {
+              "text": "Anaemia and jaundice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coagulation screen and sepsis evaluation",
+          "cells": [
+            {
+              "text": "Coagulopathy and sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinary catecholamine metabolites",
+          "cells": [
+            {
+              "text": "Helps exclude neuroblastoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI when uncertainty persists",
+          "cells": [
+            {
+              "text": "Persistent or indeterminate mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cortisol and electrolytes when bilateral or extensive",
+          "cells": [
+            {
+              "text": "Adrenal function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_hemorrhage_neonatal-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Neuroblastoma",
+          "cells": [
+            {
+              "text": "Suprarenal mass that fails to involute"
+            },
+            {
+              "text": "Serial ultrasound and catecholamine metabolites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal vein thrombosis or renal mass with haemorrhage",
+          "cells": [
+            {
+              "text": "Renal mass or thrombosis"
+            },
+            {
+              "text": "Abdominal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_hemorrhage_neonatal-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management of unilateral haemorrhage",
+          "cells": [
+            {
+              "text": "Usually resolves spontaneously"
+            },
+            {
+              "text": "Most unilateral haemorrhages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion for significant anaemia; phototherapy for prolonged jaundice",
+          "cells": [
+            {
+              "text": "Anaemia and jaundice"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K for haemorrhagic disease of the newborn; treatment of sepsis",
+          "cells": [
+            {
+              "text": "Coagulopathy and sepsis"
+            },
+            {
+              "text": "Correction of coagulopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucocorticoid and mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "Extensive bilateral haemorrhage with adrenal insufficiency"
+            },
+            {
+              "text": "If insufficiency occurs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial ultrasound and urinary catecholamine metabolites",
+          "cells": [
+            {
+              "text": "Confirms involution; excludes neuroblastoma"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric surgical or oncological assessment and MRI",
+          "cells": [
+            {
+              "text": "Suprarenal mass that fails to involute"
+            },
+            {
+              "text": "Refer if mass persists"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenal_hemorrhage_neonatal-dx-mgmt",
+      "title": "Diagnosis and management of Neonatal adrenal haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Neonate with flank mass, anaemia or prolonged jaundice after a difficult delivery",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotension, hypoglycaemia or hyponatraemia with bilateral haemorrhage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric endocrine and ICU review; replace steroids",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial abdominal ultrasound, haematocrit, coagulation screen, sepsis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Suprarenal mass involuting on serial ultrasound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Conservative care; transfusion or phototherapy as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urinary catecholamines and MRI to exclude neuroblastoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Correct coagulopathy with vitamin K; treat sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace glucocorticoid and mineralocorticoid if extensive bilateral disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Transfusion for significant anaemia; phototherapy for prolonged jaundice",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Unilateral haemorrhage resolves; bilateral insufficiency is serious",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

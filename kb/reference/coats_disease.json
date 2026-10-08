@@ -150,5 +150,312 @@
       "caption": "Overview comparison matrix for coats disease (retinal telangiectasia)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "coats_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Telangiectasia, exudate and detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Aneurysmal vessels, non-perfusion and leakage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Detachment; excludes retinoblastoma calcification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Macular exudate and subretinal fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "When retinoblastoma cannot be excluded clinically"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coats_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinoblastoma",
+          "cells": [
+            {
+              "text": "Leukocoria; management and prognosis differ radically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Familial exudative vitreoretinopathy",
+          "cells": [
+            {
+              "text": "Other exudative retinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinopathy of prematurity",
+          "cells": [
+            {
+              "text": "Retinal vascular disease of prematurity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "coats_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Laser photocoagulation or cryotherapy",
+          "cells": [
+            {
+              "text": "Ablation of telangiectatic and aneurysmal vessels"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravitreal anti-VEGF or corticosteroid injection",
+          "cells": [
+            {
+              "text": "Reduces exudation and subretinal fluid"
+            },
+            {
+              "text": "Adjunct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitreoretinal surgery",
+          "cells": [
+            {
+              "text": "Scleral buckling, subretinal fluid drainage or vitrectomy"
+            },
+            {
+              "text": "Advanced exudative detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of retinoblastoma before treatment",
+          "cells": [
+            {
+              "text": "Management and prognosis differ radically"
+            },
+            {
+              "text": "Essential first step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "Blind, painful eye with neovascular glaucoma"
+            },
+            {
+              "text": "Last resort"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "coats_disease-dx-mgmt",
+      "title": "Diagnosis and management of Coats disease (retinal telangiectasia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Coats disease: unilateral leukocoria or reduced vision in a young boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (leukocoria, total detachment, neovascular glaucoma)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent exclusion of retinoblastoma and vitreoretinal review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination under anaesthesia, fluorescein angiography and B-scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Telangiectasia with exudate and no retinoblastoma on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Laser photocoagulation or cryotherapy to ablate abnormal vessels",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check retinoblastoma, familial exudative vitreoretinopathy and ROP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intravitreal anti-VEGF or corticosteroid to reduce exudation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Scleral buckling, subretinal drainage or vitrectomy for detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Enucleation for a blind, painful eye with neovascular glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Amblyopia management and wide-field retinal monitoring under anaesthesia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

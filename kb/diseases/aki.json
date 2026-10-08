@@ -228,6 +228,17 @@
       "id": "c2",
       "label": "Table 61-2, user-supplied; source edition not shown (laboratory findings in acute renal failure)",
       "kind": "user-supplied"
+    },
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Acute Kidney Injury",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/acute-kidney-injury/acute-kidney-injury-aki",
+      "kind": "web"
     }
   ],
   "valueTables": [
@@ -341,6 +352,514 @@
         }
       ],
       "footnote": "FENa (%) = (UNa x PCr x 100) / (PNa x UCr), where U = urine and P = plasma. FENa is unreliable after diuretics, in sepsis, with contrast-associated AKI and in CKD; interpret with the clinical picture."
+    },
+    {
+      "id": "aki-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and staging acute kidney injury (KDIGO)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Creatinine",
+        "Urine output"
+      ],
+      "rows": [
+        {
+          "parameter": "AKI definition",
+          "cells": [
+            {
+              "text": "{{hy:Rise >=0.3 mg/dL within 48 h, or >=1.5 x baseline within 7 days}}"
+            },
+            {
+              "text": "<0.5 mL/kg/h for 6 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 1",
+          "cells": [
+            {
+              "text": "Rise >=0.3 mg/dL or 1.5 to 1.9 x baseline"
+            },
+            {
+              "text": "<0.5 mL/kg/h for 6 to 12 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 2",
+          "cells": [
+            {
+              "text": "2 to 2.9 x baseline",
+              "range": [
+                2,
+                2.9
+              ]
+            },
+            {
+              "text": "<0.5 mL/kg/h for >=12 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stage 3",
+          "cells": [
+            {
+              "text": "Creatinine >=4.0 mg/dL or >=3 x baseline, or RRT started"
+            },
+            {
+              "text": "<0.3 mL/kg/h for >=24 h or anuria >=12 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oliguria",
+          "unit": "mL/day",
+          "cells": [
+            {
+              "text": "Not applicable"
+            },
+            {
+              "text": "24-h output under 400 mL",
+              "op": "<",
+              "value": 400
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anuria",
+          "unit": "mL/day",
+          "cells": [
+            {
+              "text": "Not applicable"
+            },
+            {
+              "text": "24-h output under 100 mL",
+              "op": "<",
+              "value": 100
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Muddy-brown casts suggest ATN; RBC casts suggest GN; WBC casts suggest interstitial nephritis"
+            },
+            {
+              "text": "Key bedside test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound or post-void residual",
+          "cells": [
+            {
+              "text": "Hydronephrosis or retention"
+            },
+            {
+              "text": "Exclude obstruction early"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Staging should not on its own dictate clinical decisions (Merck). Urine indices for prerenal versus ATN are in the separate Table 61-2 above."
+    },
+    {
+      "id": "aki-ddx",
+      "kind": "ddx",
+      "title": "Causes of AKI to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prerenal azotaemia",
+          "cells": [
+            {
+              "text": "{{hy:40% to 80% of cases}}; reverses quickly with restored perfusion; FENa <1%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic or nephrotoxic ATN",
+          "cells": [
+            {
+              "text": "About 90% of intrinsic AKI; muddy-brown casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postrenal obstruction",
+          "cells": [
+            {
+              "text": "Under 5% of cases; dilated collecting system on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute interstitial nephritis",
+          "cells": [
+            {
+              "text": "Drugs such as antibiotics, NSAIDs, PPIs; WBC casts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glomerulonephritis or vasculitis",
+          "cells": [
+            {
+              "text": "RBC casts or dysmorphic red cells; early biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microvascular disease: HUS, TTP, malignant hypertension",
+          "cells": [
+            {
+              "text": "Haemolysis, low platelets or severe hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atheroembolic disease",
+          "cells": [
+            {
+              "text": "Livedo reticularis, distal infarcts, eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic kidney disease",
+          "cells": [
+            {
+              "text": "Small echogenic kidneys, renal osteodystrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myeloma cast nephropathy",
+          "cells": [
+            {
+              "text": "Anuria with paraprotein"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aki-treatment",
+      "kind": "treatment",
+      "title": "Management of acute kidney injury",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat reversible prerenal and postrenal causes",
+          "cells": [
+            {
+              "text": "{{hy:Every patient, first}}"
+            },
+            {
+              "text": "Restore perfusion; relieve obstruction"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stop nephrotoxins and adjust renally cleared drugs",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Use drug levels, for example digoxin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fluid balance",
+          "unit": "mL/day",
+          "cells": [
+            {
+              "text": "Euvolaemic patient"
+            },
+            {
+              "text": "Prior day urine output plus extrarenal losses plus 500 to 1000 mL"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Calcium gluconate, insulin with dextrose",
+          "cells": [
+            {
+              "text": "Hyperkalaemia"
+            },
+            {
+              "text": "10 mL of 10% calcium gluconate IV, 50 g dextrose and 5 to 10 units insulin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Potassium binder",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Keep K <6 mmol/L without dialysis",
+              "op": "<",
+              "value": 6
+            },
+            {
+              "text": "Avoid sodium polystyrene sulfonate with bowel dysmotility"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV bicarbonate",
+          "cells": [
+            {
+              "text": "Severe acidosis, pH <7.20",
+              "op": "<",
+              "value": 7.2
+            },
+            {
+              "text": "Isotonic 150 mEq in 1 L 5% dextrose at 50 to 200 mL/h; 50 mEq bolus if life-threatening"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Phosphate binder",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Keep phosphate <5.5 mg/dL",
+              "op": "<",
+              "value": 5.5
+            },
+            {
+              "text": "Before meals"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Diuretics and vasodilators",
+          "cells": [
+            {
+              "text": "Pulmonary oedema"
+            },
+            {
+              "text": "Diuretics often ineffective in AKI"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dialysis",
+          "cells": [
+            {
+              "text": "K >6 mmol/L uncontrolled, refractory oedema or acidosis, uraemic encephalopathy, pericarditis or seizures"
+            },
+            {
+              "text": "BUN and creatinine alone are not triggers"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nutrition",
+          "unit": "g/kg/day",
+          "cells": [
+            {
+              "text": "Protein about 0.8 g/kg daily"
+            },
+            {
+              "text": "Parenteral only if enteral impossible"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Post-obstructive or recovery diuresis",
+          "cells": [
+            {
+              "text": "Large urine volumes"
+            },
+            {
+              "text": "Replace with 0.45% saline at about 75% of output"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aki-dx-mgmt",
+      "title": "Diagnosis and management of acute kidney injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Creatinine rise or low urine output meeting KDIGO criteria",
+          "cite": "c3"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Life-threatening K, acidosis, oedema or uraemia?",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Emergency treatment; urgent dialysis if refractory",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bladder scan or ultrasound for obstruction",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Relieve obstruction; watch post-obstructive diuresis",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Urine sediment, urine Na and FENa; review drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Prerenal pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Restore perfusion and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "RBC casts or active sediment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "GN work-up and early renal biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "ATN or AIN: stop nephrotoxins, supportive care",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
     }
   ]
 }

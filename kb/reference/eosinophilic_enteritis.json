@@ -150,5 +150,334 @@
       "caption": "Overview comparison matrix for eosinophilic enteritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_enteritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Device-assisted enteroscopy or capsule endoscopy with small-bowel biopsies",
+          "cells": [
+            {
+              "text": "Excess eosinophils on small-bowel biopsy after exclusion of other causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with eosinophil count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, which is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and Strongyloides serology",
+          "cells": [
+            {
+              "text": "Parasitic mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology (tissue transglutaminase IgA) with total IgA",
+          "cells": [
+            {
+              "text": "Coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum albumin and markers of protein-losing enteropathy",
+          "cells": [
+            {
+              "text": "Hypoalbuminaemia and protein loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR enterography",
+          "cells": [
+            {
+              "text": "Wall thickening, obstruction or ascites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA and connective tissue screen",
+          "cells": [
+            {
+              "text": "Vasculitis, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_enteritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parasitic infestation (Strongyloides, Anisakis, hookworm)",
+          "cells": [
+            {
+              "text": "Key mimic; must be excluded before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Confused with eosinophilic enteritis; coeliac serology is part of the workup"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_enteritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Systemic prednisolone or targeted budesonide, first-line to induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary elimination",
+          "cells": [
+            {
+              "text": "Empirical or allergy-guided, amino-acid based in severe cases; a steroid-sparing option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude parasitic mimics before immunosuppression",
+          "cells": [
+            {
+              "text": "Strongyloides, Anisakis and hookworm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Correction of iron deficiency, hypoalbuminaemia and protein-losing enteropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunomodulators or anti-IL-5 biologics",
+          "cells": [
+            {
+              "text": "Frequently relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstruction and ascites",
+          "cells": [
+            {
+              "text": "Subacute obstruction from muscular disease and eosinophilic ascites, managed conservatively where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Symptoms and small-bowel histology with gastroenterology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_enteritis-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic enteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Malabsorption, weight loss or diarrhoea with suspected small-bowel eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (obstruction, severe malabsorption, haemorrhage, lymphoma or vasculitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Assess obstruction and haemorrhage; evaluate for lymphoma or systemic vasculitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Enteroscopy or capsule endoscopy with small-bowel biopsies; Strongyloides serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Excess small-bowel eosinophils after parasites and coeliac excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-biopsy more deeply; consider Crohn's disease, lymphoma or drug injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids (prednisolone or budesonide) to induce remission",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Exclude Strongyloides, Anisakis and hookworm before immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietary elimination as a steroid-sparing option",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct iron deficiency and protein loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Steroid-sparing immunomodulators or anti-IL-5 for relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Responds well to corticosteroids; relapse is common",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

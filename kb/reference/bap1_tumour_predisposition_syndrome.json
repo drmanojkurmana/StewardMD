@@ -156,5 +156,345 @@
       "caption": "Overview comparison matrix for bap1 tumour predisposition syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hereditary cancer syndrome references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bap1_tumour_predisposition_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline sequencing with deletion and duplication analysis of BAP1",
+          "cells": [
+            {
+              "text": "Germline BAP1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BAP1 immunohistochemistry on tumour tissue",
+          "cells": [
+            {
+              "text": "Loss of nuclear staining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundoscopy and ocular imaging",
+          "cells": [
+            {
+              "text": "Uveal melanoma surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-skin examination with dermoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Suspicious melanocytic lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional abdominal and renal imaging",
+          "cells": [
+            {
+              "text": "Renal cell carcinoma and peritoneal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic imaging",
+          "cells": [
+            {
+              "text": "Pleural mesothelioma, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology of excised melanocytic tumours",
+          "cells": [
+            {
+              "text": "BAP1-inactivated features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bap1_tumour_predisposition_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Familial atypical multiple mole melanoma syndrome (CDKN2A)",
+          "cells": [
+            {
+              "text": "Cutaneous melanoma phenotype; separated by BAP1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sporadic uveal melanoma without a germline defect",
+          "cells": [
+            {
+              "text": "Separated by germline BAP1 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bap1_tumour_predisposition_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early detection and standard oncological care",
+          "cells": [
+            {
+              "text": "No treatment for the germline defect; standard care for each cancer"
+            },
+            {
+              "text": "Germline defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephron-sparing surgery",
+          "cells": [
+            {
+              "text": "Localised renal cell carcinoma"
+            },
+            {
+              "text": "Tendency to multifocal and bilateral tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic therapy for advanced RCC",
+          "cells": [
+            {
+              "text": "Standard clear cell RCC pathways"
+            },
+            {
+              "text": "Advanced or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eye-preserving uveal melanoma therapy",
+          "cells": [
+            {
+              "text": "Plaque brachytherapy or radiotherapy; enucleation for larger tumours"
+            },
+            {
+              "text": "Localised uveal melanoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excision of suspicious lesions",
+          "cells": [
+            {
+              "text": "Excisional biopsy"
+            },
+            {
+              "text": "Pigmented lesions and characteristic papules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesothelioma therapy",
+          "cells": [
+            {
+              "text": "Surgical debulking where feasible, with systemic therapy"
+            },
+            {
+              "text": "Localised or peritoneal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance and genetics",
+          "cells": [
+            {
+              "text": "Multi-organ surveillance; cascade testing of at-risk relatives"
+            },
+            {
+              "text": "Confirmed carriers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bap1_tumour_predisposition_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of BAP1 tumour predisposition syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Uveal melanoma or renal cell carcinoma, possibly with mesothelioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? New ocular lesion, ascites, abdominal distension or effusion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ocular or peritoneal oncology review for suspected tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline BAP1 sequencing, BAP1 IHC on tumour, eye, skin, abdominal and thoracic imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Loss of nuclear BAP1 on tumour immunohistochemistry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Refer for germline BAP1 testing and cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat immunohistochemistry",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nephron-sparing surgery for localised renal cell carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Eye-preserving therapy for localised uveal melanoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong multi-organ surveillance for confirmed carriers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance and genetic counselling for at-risk relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

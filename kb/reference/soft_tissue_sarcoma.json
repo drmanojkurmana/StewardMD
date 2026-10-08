@@ -166,5 +166,497 @@
       "caption": "Overview comparison matrix for soft tissue & bone sarcoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "SEOM Clinical Guideline, soft-tissue sarcoma, 2016",
+      "kind": "web",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5138243"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "soft_tissue_sarcoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Suspecting, confirming and staging sarcoma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Mass size",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Over 5 cm",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Suspect sarcoma; refer to a sarcoma centre before biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mass depth or behaviour",
+          "cells": [
+            {
+              "text": "Deep to fascia, enlarging, painful, or recurring after excision"
+            },
+            {
+              "text": "Suspect sarcoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI with contrast",
+          "cells": [
+            {
+              "text": "Limb, trunk wall, pelvis; done before biopsy"
+            },
+            {
+              "text": "CT for retroperitoneal or abdominal tumours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest CT",
+          "cells": [
+            {
+              "text": "Mandatory"
+            },
+            {
+              "text": "Lungs are the commonest metastatic site"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Core-needle biopsy",
+          "cells": [
+            {
+              "text": "Image-guided; tract placed for later resection"
+            },
+            {
+              "text": "{{hy:Excisional biopsy only for superficial lesions under 3 cm}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "AJCC soft tissue T stage",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "T1 5 cm or less; T2 over 5 to 10; T3 over 10 to 15; T4 over 15 cm",
+              "op": "<=",
+              "value": 5
+            },
+            {
+              "text": "Grade G1 to G3 drives stage group"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone sarcoma T stage",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "T1 8 cm or less; T2 over 8 cm; T3 skip lesions",
+              "op": "<=",
+              "value": 8
+            },
+            {
+              "text": "Ewing sarcoma always graded G4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scan or FDG-PET",
+          "cells": [
+            {
+              "text": "Skeletal metastases"
+            },
+            {
+              "text": "Osteosarcoma usually PET-avid"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "soft_tissue_sarcoma-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic sarcoma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Lipoma or atypical lipomatous tumour",
+          "cells": [
+            {
+              "text": "Superficial, small, fatty, no metastatic potential"
+            },
+            {
+              "text": "MRI; biopsy if indeterminate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudocapsule of a sarcoma",
+          "cells": [
+            {
+              "text": "Looks well encapsulated and benign"
+            },
+            {
+              "text": "MRI and core biopsy before any excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enchondroma or osteochondroma",
+          "cells": [
+            {
+              "text": "May transform to chondrosarcoma; new pain or growth"
+            },
+            {
+              "text": "Serial imaging and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma or small-cell carcinoma",
+          "cells": [
+            {
+              "text": "Small round blue cells like Ewing sarcoma"
+            },
+            {
+              "text": "Immunohistochemistry and molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone metastasis or plasmacytoma",
+          "cells": [
+            {
+              "text": "Older patient; plasma cell tumours commonest malignant bone tumour"
+            },
+            {
+              "text": "Biopsy, serum protein electrophoresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporotic vertebral fracture",
+          "cells": [
+            {
+              "text": "Cortical bone preserved"
+            },
+            {
+              "text": "MRI or CT of spine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "soft_tissue_sarcoma-treatment",
+      "kind": "treatment",
+      "title": "Treating soft tissue sarcoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide en bloc resection",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Localised disease"
+            },
+            {
+              "text": "At least 1 cm margin or intact fascial barrier",
+              "op": ">=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Re-excision",
+          "cells": [
+            {
+              "text": "Positive margin"
+            },
+            {
+              "text": "If wide margin achievable without major morbidity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "unit": "Gy",
+          "cells": [
+            {
+              "text": "High-grade, deep, over 5 cm, or close margins"
+            },
+            {
+              "text": "Postoperative 60 to 66 Gy or preoperative 50 Gy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adjuvant or neoadjuvant anthracycline plus ifosfamide",
+          "cells": [
+            {
+              "text": "High-grade, deep, over 5 cm limb tumour"
+            },
+            {
+              "text": "Neoadjuvant for marginally resectable tumours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxorubicin",
+          "unit": "mg/m2",
+          "cells": [
+            {
+              "text": "Metastatic disease, first line"
+            },
+            {
+              "text": "75 mg/m2",
+              "op": "=",
+              "value": 75
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ifosfamide",
+          "cells": [
+            {
+              "text": "Doxorubicin contraindicated or failed"
+            },
+            {
+              "text": "6 to 12 g/m2"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Trabectedin, eribulin, pazopanib, gemcitabine combinations",
+          "cells": [
+            {
+              "text": "Later lines by histology"
+            },
+            {
+              "text": "Trabectedin and eribulin for liposarcoma; pazopanib non-adipocytic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary metastasectomy",
+          "cells": [
+            {
+              "text": "Resectable lung metastases"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Marginal excision (shelling out) gives a 50 to 90% local recurrence rate per Harrison."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "soft_tissue_sarcoma-dx-mgmt",
+      "title": "Diagnosis and management of soft tissue sarcoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Soft tissue mass",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Over 5 cm, deep, growing, painful or recurrent?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Likely benign: clinical review; excise if superficial under 3 cm",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Refer to sarcoma centre; MRI or CT before biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Image-guided core biopsy along future resection tract",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Sarcoma confirmed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Manage the benign or other diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chest CT and staging by size and grade",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Metastatic?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Doxorubicin first line; metastasectomy if resectable",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Wide resection, margin 1 cm or more",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "High grade, deep or over 5 cm?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Surveillance with chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Radiotherapy; consider anthracycline-ifosfamide",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

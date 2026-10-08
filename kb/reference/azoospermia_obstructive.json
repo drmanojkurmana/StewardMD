@@ -151,5 +151,333 @@
       "caption": "Overview comparison matrix for obstructive azoospermia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "azoospermia_obstructive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeat centrifuged semen analysis with volume, pH and fructose",
+          "cells": [
+            {
+              "text": "Volume, pH and fructose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum FSH, LH and testosterone",
+          "cells": [
+            {
+              "text": "Normal in true obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Testes and epididymis; dilated tubules"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transrectal ultrasound",
+          "cells": [
+            {
+              "text": "Ejaculatory duct obstruction, seminal-vesicle dilatation or midline cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFTR gene testing",
+          "cells": [
+            {
+              "text": "When the vasa are absent or distal obstruction is found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-ejaculatory urine analysis",
+          "cells": [
+            {
+              "text": "Retrograde component excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic testicular sampling",
+          "cells": [
+            {
+              "text": "Intact spermatogenesis where doubt remains"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "azoospermia_obstructive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-obstructive azoospermia from spermatogenic failure",
+          "cells": [
+            {
+              "text": "Small testes with raised FSH distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital bilateral absence of the vas deferens",
+          "cells": [
+            {
+              "text": "Absent vasa; CFTR testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "azoospermia_obstructive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Microsurgical reconstruction",
+          "cells": [
+            {
+              "text": "Vasovasostomy or vasoepididymostomy"
+            },
+            {
+              "text": "Where feasible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical sperm retrieval",
+          "cells": [
+            {
+              "text": "Percutaneous or microsurgical epididymal aspiration or testicular sperm extraction"
+            },
+            {
+              "text": "When reconstruction is not possible or unsuccessful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryopreservation",
+          "cells": [
+            {
+              "text": "Retrieved spermatozoa frozen"
+            },
+            {
+              "text": "Avoids repeated procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CFTR testing before treatment",
+          "cells": [
+            {
+              "text": "Man and partner when the vasa are absent; counselling on transmission"
+            },
+            {
+              "text": "Absent vasa"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat reversible factors",
+          "cells": [
+            {
+              "text": "Previous genital tract infection, managed jointly with reproductive medicine"
+            },
+            {
+              "text": "Reversible contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assisted-conception counselling",
+          "cells": [
+            {
+              "text": "Success rates and the donor sperm option"
+            },
+            {
+              "text": "Counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "azoospermia_obstructive-dx-mgmt",
+      "title": "Diagnosis and management of Obstructive azoospermia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Azoospermia with normal FSH and LH and a suspected blockage",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Palpable absence of vasa or a treatable midline cyst?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Genetic counselling before conception where the vasa are absent",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Centrifuged semen, FSH, LH, testosterone, scrotal and transrectal US, CFTR testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Normal hormones, obstruction on imaging and intact spermatogenesis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Microsurgical reconstruction where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat hormone and imaging tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Epididymal aspiration or testicular sperm extraction if reconstruction fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "CFTR testing for man and partner before treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat reversible genital tract infection with the couple",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cryopreservation and assisted-conception counselling, including donor sperm",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

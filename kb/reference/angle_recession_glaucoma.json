@@ -150,5 +150,333 @@
       "caption": "Overview comparison matrix for angle recession glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angle_recession_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gonioscopy of both eyes",
+          "cells": [
+            {
+              "text": "Identifies and quantifies angle recession"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound biomicroscopy or anterior segment OCT",
+          "cells": [
+            {
+              "text": "Imaging of the angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement and diurnal phasing",
+          "cells": [
+            {
+              "text": "Pressure over the day"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the retinal nerve fibre layer",
+          "cells": [
+            {
+              "text": "Nerve fibre layer status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard automated perimetry",
+          "cells": [
+            {
+              "text": "Visual fields"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Coexisting contusion retinopathy or choroidal rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc photography",
+          "cells": [
+            {
+              "text": "Baseline documentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angle_recession_glaucoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Traumatic hyphaema with acute pressure rise",
+          "cells": [
+            {
+              "text": "Acute pressure rise after significant blunt trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-induced glaucoma",
+          "cells": [
+            {
+              "text": "Arises from treatment of the original injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angle_recession_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical IOP-lowering therapy",
+          "cells": [
+            {
+              "text": "Aqueous suppressants such as beta-blockers, alpha-agonists and carbonic anhydrase inhibitors, plus prostaglandin analogues"
+            },
+            {
+              "text": "The scarred meshwork limits outflow-dependent drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incisional glaucoma surgery",
+          "cells": [
+            {
+              "text": "Trabeculectomy or drainage tube when medically uncontrolled"
+            },
+            {
+              "text": "Laser trabeculoplasty responds poorly to the scarred angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong monitoring",
+          "cells": [
+            {
+              "text": "IOP, optic nerve and visual fields"
+            },
+            {
+              "text": "Onset may be delayed years to decades after injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy",
+          "cells": [
+            {
+              "text": "Documents the extent of recession"
+            },
+            {
+              "text": "Greater angle involvement carries higher glaucoma risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fellow-eye surveillance",
+          "cells": [
+            {
+              "text": "The uninjured eye"
+            },
+            {
+              "text": "Increased lifetime risk of primary open-angle glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma specialist referral",
+          "cells": [
+            {
+              "text": "Challenging pressure control"
+            },
+            {
+              "text": "Assess for coexisting contusion injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angle_recession_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of angle recession glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unilateral glaucoma with a history of blunt ocular trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Markedly raised pressure after significant blunt trauma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pressure lowering; refer to a glaucoma specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gonioscopy of both eyes, angle imaging, IOP, nerve fibre OCT, perimetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Angle recession confirmed on gonioscopy of both eyes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Topical IOP-lowering drops, favouring aqueous suppressants",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat gonioscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trabeculectomy or drainage tube if medically uncontrolled",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid relying on laser trabeculoplasty in the scarred angle",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong IOP, optic nerve and visual field monitoring; watch the fellow eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reasonable prognosis with timely control; scarred meshwork responds poorly to laser",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

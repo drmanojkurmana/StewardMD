@@ -152,5 +152,316 @@
       "caption": "Overview comparison matrix for anti-caspr2 encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_caspr2_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF CASPR2 IgG assay",
+          "cells": [
+            {
+              "text": "Antibody confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies and electromyography",
+          "cells": [
+            {
+              "text": "Neuromyotonic and fasciculation-cramp discharges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Medial temporal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional chest imaging",
+          "cells": [
+            {
+              "text": "Thymoma screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing",
+          "cells": [
+            {
+              "text": "Where dysautonomia is prominent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis with oligoclonal bands",
+          "cells": [
+            {
+              "text": "Infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography or sleep assessment",
+          "cells": [
+            {
+              "text": "Suspected agrypnia excitata"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_caspr2_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory or severe disease, such as Morvan syndrome"
+            },
+            {
+              "text": "Escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thymoma removal",
+          "cells": [
+            {
+              "text": "Screen for and remove any thymoma"
+            },
+            {
+              "text": "More common than with LGI1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Membrane-stabilising agents",
+          "cells": [
+            {
+              "text": "Carbamazepine or phenytoin"
+            },
+            {
+              "text": "Peripheral nerve hyperexcitability and neuromyotonia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysautonomia, neuropathic pain and insomnia",
+          "cells": [
+            {
+              "text": "Symptomatic management"
+            },
+            {
+              "text": "Monitor for life-threatening autonomic instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dependency monitoring",
+          "cells": [
+            {
+              "text": "Morvan syndrome"
+            },
+            {
+              "text": "Risk of autonomic crises"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance immunotherapy",
+          "cells": [
+            {
+              "text": "Relapse surveillance with neurology input"
+            },
+            {
+              "text": "Multidisciplinary follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_caspr2_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-CASPR2 encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Peripheral nerve hyperexcitability with neuromyotonia and insomnia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe insomnia, dysautonomia or cardiac dysrhythmia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent high-dependency assessment for autonomic instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CASPR2 IgG assay, nerve conduction and EMG, MRI, chest CT for thymoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CASPR2 IgG confirmed in serum or CSF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids, IVIG or plasma exchange as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the antibody assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Escalate to rituximab in refractory or severe disease, such as Morvan",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Remove any thymoma; screen chest imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Carbamazepine or phenytoin for neuromyotonia; manage dysautonomia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Maintenance immunotherapy and relapse surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

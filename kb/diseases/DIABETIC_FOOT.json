@@ -302,5 +302,522 @@
       "caption": "Diagnostic and clinical overview matrix for diabetic foot infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Mayer Institute, Key updates from the 2023 IWGDF/IDSA diabetes-related foot infection guidelines",
+      "url": "https://themayerinstitute.ca/diabetes-related-foot-infections-key-updates-from-the-2023-iwgdf-idsa-guidelines/",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "NHS Highland Right Decisions, Diabetic Foot Infection (Antimicrobial), 2025",
+      "url": "https://www.rightdecisions.scot.nhs.uk/tam-treatments-and-medicines-nhs-highland/adult-therapeutic-guidelines/antimicrobial-guidance/skin-soft-tissue-antimicrobial/diabetic-foot-infection-antimicrobial/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "DIABETIC_FOOT-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading diabetic foot infection",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical infection",
+          "cells": [
+            {
+              "text": "Erythema, warmth, swelling, pain or purulent discharge"
+            },
+            {
+              "text": "Infection is a clinical diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mild infection",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Superficial; cellulitis <=2 around the wound; no systemic signs",
+              "op": "<=",
+              "value": 2
+            },
+            {
+              "text": "IWGDF/IDSA mild"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moderate infection",
+          "cells": [
+            {
+              "text": "Deeper or more extensive: abscess, fasciitis, septic arthritis, osteomyelitis; no systemic toxicity"
+            },
+            {
+              "text": "IWGDF/IDSA moderate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe infection",
+          "cells": [
+            {
+              "text": "Any foot infection with SIRS or metabolic instability"
+            },
+            {
+              "text": "{{hy:Admit all severe infections}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Probe-to-bone test",
+          "cells": [
+            {
+              "text": "Pooled sensitivity about 0.87, specificity about 0.83"
+            },
+            {
+              "text": "Positive predictive value about 90% when pretest probability is high"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Negative probe-to-bone",
+          "cells": [
+            {
+              "text": "Likelihood ratio about 0.2",
+              "op": "=",
+              "value": 0.2
+            },
+            {
+              "text": "Lowers likelihood of osteomyelitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pretest probability of osteomyelitis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 65% in inpatients with a chronic deep ulcer",
+              "op": "=",
+              "value": 65
+            },
+            {
+              "text": "Positive probe may suffice without imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP, ESR, procalcitonin",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Acceptable support in equivocal cases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MRI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 80 to 100, specificity 80 to 90",
+              "range": [
+                80,
+                100
+              ]
+            },
+            {
+              "text": "Preferred when x-ray and probe are not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures",
+          "cells": [
+            {
+              "text": "Debrided ulcer base, pus, aspirate or bone biopsy"
+            },
+            {
+              "text": "Superficial swabs correlate poorly with bone (about 24% concordance)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ankle-brachial index",
+          "cells": [
+            {
+              "text": "Diabetics over 50 with risk factors"
+            },
+            {
+              "text": "Screens for peripheral arterial disease; early vascular review in moderate to severe infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "DIABETIC_FOOT-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic diabetic foot infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Charcot neuroarthropathy",
+          "cells": [
+            {
+              "text": "{{hy:Bony deformity that can resemble osteomyelitis clinically and on imaging; may coexist}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uninfected neuropathic ulcer",
+          "cells": [
+            {
+              "text": "Ulcer without erythema, warmth, swelling or pus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis without ulcer",
+          "cells": [
+            {
+              "text": "Skin infection without a wound portal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Callus or pressure change",
+          "cells": [
+            {
+              "text": "Related to abnormal foot biomechanics, no infection signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic ulcer",
+          "cells": [
+            {
+              "text": "Peripheral arterial disease causing non-healing; check ankle-brachial index"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "DIABETIC_FOOT-treatment",
+      "kind": "treatment",
+      "title": "Management of diabetic foot infection",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Flucloxacillin 1 g orally four times daily",
+          "cells": [
+            {
+              "text": "Mild soft tissue infection"
+            },
+            {
+              "text": "7 days then review; doxycycline 100 mg twice daily or co-trimoxazole 960 mg twice daily if penicillin allergy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Doxycycline, co-trimoxazole or flucloxacillin, each plus metronidazole 400 mg three times daily",
+          "cells": [
+            {
+              "text": "Moderate soft tissue infection"
+            },
+            {
+              "text": "7 days then review"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "IV aztreonam 1 g three times daily plus IV flucloxacillin 1 g four times daily plus metronidazole",
+          "cells": [
+            {
+              "text": "Severe infection or sepsis"
+            },
+            {
+              "text": "Vancomycin instead of flucloxacillin if penicillin allergy or MRSA; review oral switch at 48 hours"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Surgical debridement and source control",
+          "cells": [
+            {
+              "text": "Abscess, deep infection, necrosis"
+            },
+            {
+              "text": "Debridement with antibiotics avoids amputation in about two thirds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soft tissue infection duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "1 to 2",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "As short as 10 days after adequate debridement of moderate or severe infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Osteomyelitis without bone resection",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "About 6",
+              "op": "=",
+              "value": 6
+            },
+            {
+              "text": "{{hy:Not oral flucloxacillin for bone}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minor amputation with positive bone margin",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Up to 3",
+              "op": "<=",
+              "value": 3
+            },
+            {
+              "text": "Culture-directed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vascular assessment and revascularisation",
+          "cells": [
+            {
+              "text": "Moderate to severe infection or ischaemic limb"
+            },
+            {
+              "text": "Arterial insufficiency drives non-healing and amputation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Remission follow-up for osteomyelitis",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "6",
+              "op": "=",
+              "value": 6
+            },
+            {
+              "text": "Shortened from 12 months"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Empiric drug regimens are from NHS Highland local guidance; adapt to local resistance. Durations follow IWGDF/IDSA 2023 as summarised by the Mayer Institute."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "DIABETIC_FOOT-dx-mgmt",
+      "title": "Diagnosis and management of diabetic foot infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Diabetic foot wound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Erythema, warmth, swelling, pain or pus?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Uninfected: wound care, offloading, no antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Grade severity; deep tissue cultures; probe to bone; x-ray; ABI",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SIRS or metabolic instability?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Admit; IV broad therapy; urgent surgical and vascular review",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Deep or extensive (moderate)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral combination with metronidazole; debride; admit if comorbid",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mild: oral flucloxacillin or alternative for 1 to 2 weeks",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Osteomyelitis (probe positive, imaging, biopsy)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "6 weeks if no resection; up to 3 weeks if positive margin after amputation",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Soft tissue course 1 to 2 weeks; follow healing",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

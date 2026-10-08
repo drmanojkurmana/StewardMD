@@ -160,5 +160,437 @@
       "caption": "Overview comparison matrix for microscopic colitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Microscopic Colitis: A Review Article, 2023",
+      "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10652163/fullTextXML",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "MICROSCOPIC_COLITIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of microscopic colitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical patient",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Mean age 65 at diagnosis, mostly women",
+              "op": "=",
+              "value": 65
+            },
+            {
+              "text": "Chronic watery non-bloody diarrhoea"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug triggers",
+          "cells": [
+            {
+              "text": "NSAIDs, PPIs, SSRIs, beta-blockers, ACE inhibitors, ARBs, statins"
+            },
+            {
+              "text": "Review and stop culprit drugs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Usually normal mucosa"
+            },
+            {
+              "text": "{{hy:Biopsy a normal-looking colon}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biopsy sampling",
+          "cells": [
+            {
+              "text": "2 to 4 samples from right and left colon"
+            },
+            {
+              "text": "Patchy disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Collagenous colitis",
+          "unit": "um",
+          "cells": [
+            {
+              "text": "Subepithelial collagen band 10 or more",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Female to male about 3:1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphocytic colitis",
+          "unit": "per 100 epithelial cells",
+          "cells": [
+            {
+              "text": "20 or more intraepithelial lymphocytes",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "No crypt distortion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exclusion tests",
+          "cells": [
+            {
+              "text": "Stool culture or PCR, ova and parasites, Giardia antigen, coeliac serology"
+            },
+            {
+              "text": "Coeliac disease is associated"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "MICROSCOPIC_COLITIS-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of microscopic colitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "{{hy:Normal colonic biopsies}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Coeliac disease",
+          "cells": [
+            {
+              "text": "Positive serology; can coexist"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bile acid diarrhoea",
+          "cells": [
+            {
+              "text": "Responds to bile acid sequestrant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Crohn disease",
+          "cells": [
+            {
+              "text": "Visible mucosal disease, crypt distortion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infectious colitis",
+          "cells": [
+            {
+              "text": "Positive stool studies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Small intestinal bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Listed alternative cause of watery diarrhoea"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "MICROSCOPIC_COLITIS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of microscopic colitis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop culprit drugs and smoking",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "First step"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loperamide",
+          "cells": [
+            {
+              "text": "Mild or nocturnal symptoms"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Budesonide",
+          "cells": [
+            {
+              "text": "{{hy:First-line induction}}"
+            },
+            {
+              "text": "9 mg daily for 6 to 8 weeks; success 88% collagenous, 84% lymphocytic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose budesonide maintenance",
+          "cells": [
+            {
+              "text": "Relapse after induction"
+            },
+            {
+              "text": "Relapse 30% to 60% after treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bismuth subsalicylate",
+          "cells": [
+            {
+              "text": "Alternative"
+            },
+            {
+              "text": "262 mg daily for 8 weeks in a small study"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholestyramine",
+          "cells": [
+            {
+              "text": "Persistent diarrhoea despite budesonide"
+            },
+            {
+              "text": "4 g every 6 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azathioprine, 6-mercaptopurine, anti-TNF, vedolizumab",
+          "cells": [
+            {
+              "text": "Budesonide-refractory or dependent"
+            },
+            {
+              "text": "Thiopurine remission up to 28% to 46%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ileostomy or colectomy",
+          "cells": [
+            {
+              "text": "Severe refractory disease"
+            },
+            {
+              "text": "Rare"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Mesalamine 3 g daily was found ineffective."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "MICROSCOPIC_COLITIS-dx-mgmt",
+      "title": "Diagnosis and management of microscopic colitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic watery diarrhoea in an older adult",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stool infection studies and coeliac serology; review drugs",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection or coeliac disease found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the cause found",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Colonoscopy with right and left colon biopsies",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Collagen band or lymphocytosis on histology?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Consider IBS or bile acid diarrhoea",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop culprit drugs; budesonide 9 mg daily for 6 to 8 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Relapse after stopping?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Low-dose budesonide maintenance; add cholestyramine if needed",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refractory: thiopurine or biologic",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Remission; review if symptoms return",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "If fails"
+        }
+      ]
+    }
+  ]
 }

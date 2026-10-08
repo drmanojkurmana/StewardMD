@@ -148,5 +148,355 @@
       "caption": "Overview comparison matrix for adenosine deaminase hyperactivity (hereditary haemolytic anaemia)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adenosine_deaminase_hyperactivity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Red-cell adenosine deaminase activity assay",
+          "cells": [
+            {
+              "text": "Raised activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell ATP measurement",
+          "cells": [
+            {
+              "text": "Depletion of adenine nucleotides"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Chronic haemolytic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen with bilirubin, LDH and haptoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family studies",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_deaminase_hyperactivity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyruvate kinase deficiency",
+          "cells": [
+            {
+              "text": "Enzyme deficiency rather than overactivity"
+            },
+            {
+              "text": "Red-cell adenosine deaminase activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Coombs-positive"
+            },
+            {
+              "text": "Direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis and membrane disorders",
+          "cells": [
+            {
+              "text": "Spherocytes on the film"
+            },
+            {
+              "text": "Blood film"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenosine_deaminase_hyperactivity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management (no therapy corrects enzyme overactivity)",
+          "cells": [
+            {
+              "text": "Underlying overactivity"
+            },
+            {
+              "text": "No corrective therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid supplementation",
+          "cells": [
+            {
+              "text": "Demands of chronic haemolysis"
+            },
+            {
+              "text": "Supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red-cell transfusion",
+          "cells": [
+            {
+              "text": "Symptomatic or severe anaemia"
+            },
+            {
+              "text": "As needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Transfusional iron overload"
+            },
+            {
+              "text": "When required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine vaccination and management of intercurrent illness",
+          "cells": [
+            {
+              "text": "Illness that may worsen anaemia"
+            },
+            {
+              "text": "Preventive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring with FBC, reticulocytes and haemolysis markers",
+          "cells": [
+            {
+              "text": "Tracks severity"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family studies",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            },
+            {
+              "text": "Family studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adenosine_deaminase_hyperactivity-dx-mgmt",
+      "title": "Diagnosis and management of Adenosine deaminase hyperactivity (hereditary haemolytic anaemia)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic non-spherocytic, Coombs-negative haemolytic anaemia from early life",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal jaundice or aplastic crisis after parvovirus infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exchange or urgent transfusion; haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Red-cell ADA activity, red-cell ATP, FBC, reticulocytes, blood film",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised ADA activity with red-cell ATP depletion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm dominant inheritance with family studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review pyruvate kinase deficiency, GPI, AIHA and membrane disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid supplementation for chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Red-cell transfusion for symptomatic or severe anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Chelation for transfusional iron overload when required",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild to moderate lifelong anaemia; good prognosis overall",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

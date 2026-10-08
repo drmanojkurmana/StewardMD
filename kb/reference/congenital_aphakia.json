@@ -142,5 +142,296 @@
       "caption": "Overview comparison matrix for congenital aphakia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric ophthalmology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_aphakia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound biomicroscopy and examination",
+          "cells": [
+            {
+              "text": "Lens absence confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for anterior segment dysgenesis and microphthalmia",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refraction and visual development assessment",
+          "cells": [
+            {
+              "text": "High aphakic hyperopia; visual development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia assessment",
+          "cells": [
+            {
+              "text": "Amblyopia risk monitored"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_aphakia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopia lentis with a dislocated lens",
+          "cells": [
+            {
+              "text": "Lens dislocated out of the visual axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior lenticonus or severe lens coloboma",
+          "cells": [
+            {
+              "text": "Lens anomaly rather than absence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical (acquired) aphakia",
+          "cells": [
+            {
+              "text": "Acquired rather than congenital"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_aphakia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical correction",
+          "cells": [
+            {
+              "text": "Spectacles or contact lenses for high aphakic hyperopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aggressive amblyopia therapy",
+          "cells": [
+            {
+              "text": "Occlusion of the better-seeing eye during the critical period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary intraocular lens",
+          "cells": [
+            {
+              "text": "Where the eye is anatomically suitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated anomalies",
+          "cells": [
+            {
+              "text": "Anterior segment dysgenesis and microphthalmia; monitor for glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular refraction",
+          "cells": [
+            {
+              "text": "Visual development assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic evaluation",
+          "cells": [
+            {
+              "text": "Where syndromic features are present"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_aphakia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital aphakia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital aphakia: absent lens with high hyperopia in infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (glaucoma, bilateral involvement, syndromic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent optical correction and amblyopia therapy; check for glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound biomicroscopy; anterior segment and refraction; amblyopia assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does imaging confirm lens absence rather than lens dislocation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ectopia lentis, lenticonus or persistent fetal vasculature",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Optical correction with spectacles or contact lenses",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Aggressive occlusion therapy during the critical period",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Consider secondary intraocular lens where suitable",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor for glaucoma and anterior segment dysgenesis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Visual prognosis depends on malformation severity and timeliness of treatment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

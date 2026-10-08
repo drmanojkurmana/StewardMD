@@ -286,5 +286,598 @@
       "caption": "Diagnostic and clinical overview matrix for sepsis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Singer et al, Sepsis-3 definitions, JAMA 2016",
+      "url": "https://jamanetwork.com/journals/jama/fullarticle/2492881",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Evans et al, Surviving Sepsis Campaign 2021 executive summary, Crit Care Med 2021",
+      "url": "https://www.binasss.sa.cr/novi/13.pdf",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "AFP Practice Guidelines, Surviving Sepsis updated guidelines, 2022",
+      "url": "https://www.aafp.org/pubs/afp/issues/2022/1100/practice-guidelines-sepsis.html",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Guideline Central, SCCM/ESICM sepsis guideline spotlight, March 2026",
+      "url": "https://www.guidelinecentral.com/insights/mar-2026-sccmesicm-sepsis-guideline-spotlight/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "SEPSIS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and screening for sepsis (Sepsis-3)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute rise in SOFA score from infection",
+          "unit": "points",
+          "cells": [
+            {
+              "text": ">=2",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:Defines sepsis: life-threatening organ dysfunction from a dysregulated response to infection}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mortality with SOFA >=2 and suspected infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "General hospital population"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Baseline SOFA",
+          "cells": [
+            {
+              "text": "Assumed 0"
+            },
+            {
+              "text": "Unless organ dysfunction is known to predate the infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SOFA systems",
+          "cells": [
+            {
+              "text": "PaO2/FiO2, platelets, bilirubin, MAP or vasopressors, GCS, creatinine or urine output"
+            },
+            {
+              "text": "Each scored 0 to 4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "qSOFA respiratory rate",
+          "unit": "breaths/min",
+          "cells": [
+            {
+              "text": ">=22",
+              "op": ">=",
+              "value": 22
+            },
+            {
+              "text": "One qSOFA point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "qSOFA systolic BP",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "<=100",
+              "op": "<=",
+              "value": 100
+            },
+            {
+              "text": "One qSOFA point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "qSOFA altered mentation",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "One qSOFA point; 2 or more flags likely poor outcome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "qSOFA as a screen",
+          "cells": [
+            {
+              "text": "Low sensitivity"
+            },
+            {
+              "text": "Not to be used alone; prefer SIRS, NEWS or MEWS"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lactate",
+          "cells": [
+            {
+              "text": "Above normal: positive LR 5; normal: negative LR 0.3"
+            },
+            {
+              "text": "Measure early when sepsis is suspected"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Septic shock",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Lactate >2 with vasopressors for MAP >=65",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Despite adequate fluids; hospital mortality over 40%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Procalcitonin",
+          "cells": [
+            {
+              "text": "Not to decide whether to start antibiotics"
+            },
+            {
+              "text": "Adjunct only"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "SIRS-based criteria and the term severe sepsis are obsolete under Sepsis-3. The 2026 SCCM/ESICM update also recommends NEWS, NEWS2, MEWS or SIRS over qSOFA as a single screening tool."
+    },
+    {
+      "id": "SEPSIS-ddx",
+      "kind": "ddx",
+      "title": "Sepsis mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure or cardiac arrest",
+          "cells": [
+            {
+              "text": "{{hy:Commonest mimic category; about 25% of presumed sepsis ICU admissions are mimics}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis",
+          "cells": [
+            {
+              "text": "Non-infectious distributive, high-output shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis",
+          "cells": [
+            {
+              "text": "Distributive shock from cortisol and aldosterone deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaphylaxis",
+          "cells": [
+            {
+              "text": "Rapid onset after allergen exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Obstructive shock with chest pain, dyspnoea, hypoxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitis or connective tissue disease",
+          "cells": [
+            {
+              "text": "Non-infectious inflammatory febrile syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesenteric ischaemia or inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Non-infectious abdominal syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute liver failure, thyrotoxicosis, burns",
+          "cells": [
+            {
+              "text": "Other causes of high-output hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic shock",
+          "cells": [
+            {
+              "text": "Brain or spinal cord injury disrupting vascular tone"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Keep re-evaluating when infection is not confirmed. Echocardiography or point-of-care ultrasound helps exclude tamponade, PE and pulmonary oedema."
+    },
+    {
+      "id": "SEPSIS-treatment",
+      "kind": "treatment",
+      "title": "Initial management of sepsis in adults",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Target or detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Antimicrobials",
+          "cells": [
+            {
+              "text": "{{hy:Probable sepsis or any shock: within 1 hour}}"
+            },
+            {
+              "text": "Possible sepsis without shock: rapid assessment, give within 3 hours if concern persists"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cultures and lactate",
+          "cells": [
+            {
+              "text": "At recognition"
+            },
+            {
+              "text": "Blood and site cultures, ideally before antimicrobials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crystalloid bolus",
+          "unit": "mL/kg",
+          "cells": [
+            {
+              "text": "Hypoperfusion or septic shock"
+            },
+            {
+              "text": "At least 30 mL/kg IV within the first 3 hours (weak recommendation)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Balanced crystalloid",
+          "cells": [
+            {
+              "text": "Fluid resuscitation"
+            },
+            {
+              "text": "Preferred over 0.9% saline"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Guide further fluids",
+          "cells": [
+            {
+              "text": "After the first bolus"
+            },
+            {
+              "text": "Dynamic measures, falling lactate, capillary refill"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Empiric broad cover",
+          "cells": [
+            {
+              "text": "Patient or local risk of MRSA, resistant gram-negatives or fungi"
+            },
+            {
+              "text": "Add cover only when risk factors present"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Prolonged beta-lactam infusion",
+          "cells": [
+            {
+              "text": "After a loading bolus"
+            },
+            {
+              "text": "Extended infusion"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Source control",
+          "cells": [
+            {
+              "text": "Abscess, infected device, necrotic tissue"
+            },
+            {
+              "text": "Drain, debride or remove after initial resuscitation"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Norepinephrine",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Hypotension despite fluids"
+            },
+            {
+              "text": "Target MAP 65; may start peripherally"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "ICU transfer",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Needs intensive care"
+            },
+            {
+              "text": "Within 6 hours"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "De-escalation",
+          "cells": [
+            {
+              "text": "Culture and susceptibility known"
+            },
+            {
+              "text": "Narrow therapy; stop if infection excluded"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "From the 2021 Surviving Sepsis Campaign guideline; the 2026 SCCM/ESICM update keeps a MAP target of 65 mm Hg, upgrades prolonged infusion and de-escalation to recommendations, and downgrades norepinephrine to a suggestion over vasopressin or angiotensin II."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "SEPSIS-dx-mgmt",
+      "title": "Diagnosis and management of sepsis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected infection in an acutely ill adult",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Screen with NEWS, MEWS or SIRS; measure lactate",
+          "cite": "c4"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Shock present, or sepsis probable?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cultures, then antimicrobials within 1 hour",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Rapid look for infection versus other cause",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Concern for infection persists?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Antimicrobials within 3 hours of recognition",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Defer antimicrobials; monitor closely",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Hypoperfusion or hypotension?",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Balanced crystalloid 30 mL/kg in 3 hours; norepinephrine for MAP 65",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Score SOFA; rise of 2 or more confirms sepsis",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Source control; ICU within 6 hours if needed",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "De-escalate on cultures; reassess for mimics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -165,5 +165,472 @@
       "caption": "Overview comparison matrix for haemophilus and moraxella infections."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC STI Treatment Guidelines 2021, Chancroid",
+      "kind": "web",
+      "url": "https://www.cdc.gov/std/treatment-guidelines/chancroid.htm"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 130-7",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "haemophilus_and_moraxella_infections-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Haemophilus and Moraxella infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Gram stain",
+          "cells": [
+            {
+              "text": "Faint pleomorphic gram-negative coccobacilli in CSF or sputum"
+            },
+            {
+              "text": "Easily overlooked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth requirement",
+          "cells": [
+            {
+              "text": "Needs X (hemin) and V (NAD) factors"
+            },
+            {
+              "text": "{{hy:Grows on chocolate agar, not plain blood agar}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive disease",
+          "cells": [
+            {
+              "text": "Culture from blood, CSF, joint, pleural or subdural fluid"
+            },
+            {
+              "text": "Most reliable; gives susceptibilities; PCR also used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hib meningitis age",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Mainly under 2 years",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "Subdural effusion if seizures or obtundation after 2 to 3 days of therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hib epiglottitis age",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "2 to 7 years; now mainly adults where vaccinated",
+              "range": [
+                2,
+                7
+              ]
+            },
+            {
+              "text": "Drooling, dysphagia, airway obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nontypeable H. influenzae beta-lactamase",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 40% of strains",
+              "range": [
+                30,
+                40
+              ]
+            },
+            {
+              "text": "Amoxicillin resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "M. catarrhalis",
+          "cells": [
+            {
+              "text": "Gram-negative diplococcus; hockey puck colonies, pink at 48 h"
+            },
+            {
+              "text": "Over 90% beta-lactamase positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chancroid probable diagnosis",
+          "cells": [
+            {
+              "text": "Painful ulcer, typical nodes, negative syphilis tests 7 to 14 days after onset, negative HSV NAAT"
+            },
+            {
+              "text": "All four criteria needed"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "haemophilus_and_moraxella_infections-ddx",
+      "kind": "ddx",
+      "title": "Genital ulcer look-alikes for chancroid (and respiratory mimics)",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chancroid",
+          "cells": [
+            {
+              "text": "Incubation 1 to 14 days; several soft, excavated, very tender ulcers with ragged undermined edges; tender suppurating unilateral bubo"
+            },
+            {
+              "text": "H. ducreyi culture or PCR"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Primary syphilis",
+          "cells": [
+            {
+              "text": "Incubation 9 to 90 days; usually one firm painless 5 to 15 mm ulcer; firm nontender bilateral nodes"
+            },
+            {
+              "text": "Darkfield or NAAT, syphilis serology"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Genital herpes",
+          "cells": [
+            {
+              "text": "Incubation 2 to 7 days; multiple 1 to 2 mm vesicles then shallow tender ulcers"
+            },
+            {
+              "text": "HSV NAAT"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Lymphogranuloma venereum",
+          "cells": [
+            {
+              "text": "Small, often unnoticed lesion; tender loculated unilateral nodes"
+            },
+            {
+              "text": "Chlamydia NAAT"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Donovanosis",
+          "cells": [
+            {
+              "text": "Red velvety painless ulcer that bleeds; pseudobuboes"
+            },
+            {
+              "text": "Tissue smear for Donovan bodies"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pneumococcal infection",
+          "cells": [
+            {
+              "text": "Clinically identical pneumonia, otitis or meningitis"
+            },
+            {
+              "text": "Culture and Gram stain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilus haemolyticus",
+          "cells": [
+            {
+              "text": "Commensal with identical growth needs"
+            },
+            {
+              "text": "Genotypic markers or sequencing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "haemophilus_and_moraxella_infections-treatment",
+      "kind": "treatment",
+      "title": "Treating Haemophilus and Moraxella infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ceftriaxone or cefotaxime",
+          "cells": [
+            {
+              "text": "Invasive Hib including meningitis"
+            },
+            {
+              "text": "Empirical third-generation cephalosporin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunctive corticosteroid",
+          "cells": [
+            {
+              "text": "Hib meningitis"
+            },
+            {
+              "text": "Reduces neurological and hearing sequelae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway first",
+          "cells": [
+            {
+              "text": "Epiglottitis"
+            },
+            {
+              "text": "{{hy:Secure airway with ENT and anaesthesia before distressing examination}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-amoxiclav or oral cephalosporin",
+          "cells": [
+            {
+              "text": "Otitis media, sinusitis, COPD exacerbation"
+            },
+            {
+              "text": "Beta-lactamase common in both organisms; macrolide alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chancroid regimens",
+          "cells": [
+            {
+              "text": "Confirmed or probable chancroid"
+            },
+            {
+              "text": "Azithromycin 1 g once, ceftriaxone 250 mg IM once, ciprofloxacin 500 mg twice daily 3 days, or erythromycin 500 mg three times daily 7 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chancroid follow-up",
+          "cells": [
+            {
+              "text": "All treated"
+            },
+            {
+              "text": "Re-examine at 3 to 7 days; test for HIV; treat partners from 10 days before onset"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rifampicin prophylaxis",
+          "cells": [
+            {
+              "text": "Eligible close contacts of invasive Hib"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hib conjugate vaccine",
+          "cells": [
+            {
+              "text": "All infants"
+            },
+            {
+              "text": "Primary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology",
+          "cells": [
+            {
+              "text": "After meningitis"
+            },
+            {
+              "text": "About 6% have permanent hearing loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "haemophilus_and_moraxella_infections-dx-mgmt",
+      "title": "Diagnosis and management of Haemophilus and Moraxella infections",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected H. influenzae, Moraxella or H. ducreyi infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Clinical syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Secure airway before examining throat",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and CSF culture on chocolate agar, Gram stain, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Ceftriaxone; steroid if meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Rifampicin for close contacts; audiology; check vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Beta-lactamase-stable oral agent for otitis, sinusitis, COPD",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Syphilis and HSV testing, HIV test",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Azithromycin or ceftriaxone; review at 3 to 7 days; treat partners",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Epiglottitis"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Meningitis or sepsis"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "Mucosal respiratory"
+        },
+        {
+          "from": "n2",
+          "to": "n8",
+          "label": "Genital ulcer"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,327 @@
       "caption": "Overview comparison matrix for grebe chondrodysplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Skeletal dysplasia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chondrodysplasia_grebe-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Acromesomelic shortening with absent or hypoplastic phalanges"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GDF5 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical photography with segmental limb measurements",
+          "cells": [
+            {
+              "text": "Documents distal-predominant shortening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of parents for brachydactyly",
+          "cells": [
+            {
+              "text": "Heterozygous carriers may show brachydactyly, typically type C"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal ultrasound",
+          "cells": [
+            {
+              "text": "In at-risk pregnancies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondrodysplasia_grebe-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acromesomelic dysplasia, Hunter-Thompson type",
+          "cells": [
+            {
+              "text": "Allelic GDF5 disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acromesomelic dysplasia, Maroteaux type",
+          "cells": [
+            {
+              "text": "NPR2 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chondrodysplasia_grebe-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No disease-specific drug therapy; focus on function"
+            },
+            {
+              "text": "Core care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surgery",
+          "cells": [
+            {
+              "text": "Selective reconstructive or corrective surgery for severe limb and digital deformity"
+            },
+            {
+              "text": "Severe deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation and devices",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and assistive devices"
+            },
+            {
+              "text": "Mobility and hand function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostheses and orthoses",
+          "cells": [
+            {
+              "text": "Fit prostheses, orthoses and adaptive aids"
+            },
+            {
+              "text": "Independence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance; brachydactyly in heterozygous carriers"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal diagnosis",
+          "cells": [
+            {
+              "text": "Segregation analysis and targeted antenatal ultrasound or molecular prenatal diagnosis"
+            },
+            {
+              "text": "At-risk pregnancies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team coordination",
+          "cells": [
+            {
+              "text": "Clinical genetics and a skeletal dysplasia multidisciplinary team"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chondrodysplasia_grebe-dx-mgmt",
+      "title": "Diagnosis and management of Grebe chondrodysplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Grebe chondrodysplasia: severe distal limb shortening, normal cognition",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (consanguinity, suggestive family history, hand impairment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: early hand rehabilitation and orthopaedic input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, GDF5 testing, limb measurements and parental examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Acromesomelic pattern with biallelic GDF5 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive, function-focused care; no disease-specific drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Hunter-Thompson, Du Pan and Maroteaux acromesomelic dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and assistive devices",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective reconstructive surgery for severe limb or digital deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Prostheses, orthoses and adaptive aids to support independence",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Autosomal recessive counselling; prenatal diagnosis in at-risk pregnancies",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

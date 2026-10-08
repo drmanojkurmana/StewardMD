@@ -148,5 +148,355 @@
       "caption": "Overview comparison matrix for adenylate kinase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adenylate_kinase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Red-cell adenylate kinase enzyme assay",
+          "cells": [
+            {
+              "text": "Deficient enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, reticulocyte count and blood film",
+          "cells": [
+            {
+              "text": "Chronic haemolysis with non-specific film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen with bilirubin, LDH and haptoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Excludes immune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological assessment where psychomotor features are present",
+          "cells": [
+            {
+              "text": "Psychomotor impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AK1 gene molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the genetic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenylate_kinase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pyruvate kinase deficiency",
+          "cells": [
+            {
+              "text": "Another red-cell enzymopathy with similar haemolysis"
+            },
+            {
+              "text": "Red-cell enzyme assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune haemolytic anaemia",
+          "cells": [
+            {
+              "text": "Coombs-positive"
+            },
+            {
+              "text": "Direct antiglobulin test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary spherocytosis and membrane disorders",
+          "cells": [
+            {
+              "text": "Spherocytes on the film"
+            },
+            {
+              "text": "Blood film"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenylate_kinase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "No specific therapy for the enzyme defect"
+            },
+            {
+              "text": "No corrective treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid supplementation",
+          "cells": [
+            {
+              "text": "Increased erythropoietic demand"
+            },
+            {
+              "text": "Chronic haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transfusion support",
+          "cells": [
+            {
+              "text": "Severe transfusion-dependent disease"
+            },
+            {
+              "text": "Regular transfusion when needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Transfusional iron overload"
+            },
+            {
+              "text": "When indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenectomy in selected severe cases",
+          "cells": [
+            {
+              "text": "Severe or transfusion-dependent disease"
+            },
+            {
+              "text": "After vaccination against encapsulated organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological support",
+          "cells": [
+            {
+              "text": "Psychomotor features"
+            },
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family studies",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance and consanguinity"
+            },
+            {
+              "text": "Family studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adenylate_kinase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Adenylate kinase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic non-spherocytic, Coombs-negative haemolytic anaemia with consanguinity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe neonatal jaundice, aplastic crisis or neurological impairment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exchange transfusion; neurology and haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Red-cell AK enzyme assay, FBC, reticulocytes, blood film, haemolysis screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Red-cell AK activity deficient with DAT negative?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "AK1 gene testing; family studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review PK, GPI, pyrimidine 5'-nucleotidase and membrane disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid for chronic haemolysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Transfusion; iron chelation for overload when indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider splenectomy in severe cases after vaccination",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild compensated anaemia in many; severe cases need ongoing transfusion",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

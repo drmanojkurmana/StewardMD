@@ -150,5 +150,87 @@
       "caption": "Overview comparison matrix for biliary atresia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics, 22e",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biliary_atresia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in biliary atresia",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Fractionated serum bilirubin", "cells": [{"text": "A raised conjugated fraction signals cholestasis and needs urgent evaluation"}], "cite": "c1"},
+        {"parameter": "Liver function tests including GGT and aminotransferases", "cells": [{"text": "Liver function and cholestatic markers"}], "cite": "c1"},
+        {"parameter": "Abdominal ultrasound", "cells": [{"text": "Absent or small gallbladder; triangular cord sign"}], "cite": "c1"},
+        {"parameter": "Hepatobiliary scintigraphy", "cells": [{"text": "Hepatic uptake without excretion into the bowel"}], "cite": "c1"},
+        {"parameter": "Percutaneous liver biopsy", "cells": [{"text": "Tissue assessment of the liver"}], "cite": "c1"},
+        {"parameter": "Intraoperative cholangiogram", "cells": [{"text": "Confirms the diagnosis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biliary_atresia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of neonatal cholestasis",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Choledochal cyst", "cells": [{"text": "Excluded on abdominal ultrasound"}], "cite": "c1"},
+        {"parameter": "Alpha-1-antitrypsin deficiency", "cells": [{"text": "Excluded by specific studies"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biliary_atresia-treatment",
+      "kind": "treatment",
+      "title": "Management options in biliary atresia",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Early Kasai hepatoportoenterostomy", "cells": [{"text": "Performed as soon as possible to restore bile drainage"}, {"text": "Success falls sharply with age; ideally before about 8 weeks"}], "cite": "c1"},
+        {"parameter": "Post-Kasai ursodeoxycholic acid and antibiotics", "cells": [{"text": "Ursodeoxycholic acid to promote bile flow; prophylactic antibiotics against ascending cholangitis"}, {"text": "After the Kasai procedure"}], "cite": "c1"},
+        {"parameter": "Nutrition", "cells": [{"text": "High-energy medium-chain-triglyceride feeds and vitamins A, D, E and K"}, {"text": "Aggressive nutritional support"}], "cite": "c1"},
+        {"parameter": "Cholangitis", "cells": [{"text": "Prompt recognition and antibiotic treatment"}, {"text": "For each episode"}], "cite": "c1"},
+        {"parameter": "Cirrhosis and portal hypertension", "cells": [{"text": "Surveillance and management of varices, ascites and growth"}, {"text": "Evolving biliary cirrhosis"}], "cite": "c1"},
+        {"parameter": "Liver transplantation", "cells": [{"text": "For a failed Kasai procedure or end-stage liver disease"}, {"text": "Transplant pathway"}], "cite": "c1"},
+        {"parameter": "Paediatric hepatology and transplant care", "cells": [{"text": "Multidisciplinary care with family support and counselling"}, {"text": "Multidisciplinary"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biliary_atresia-dx-mgmt",
+      "title": "Diagnosis and management of biliary atresia",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Term infant with prolonged jaundice, pale stools and dark urine", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: raised conjugated bilirubin, bleeding from coagulopathy, or hepatosplenomegaly?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent paediatric hepatology referral; vitamin K", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Fractionated bilirubin; check stool colour; liver function and GGT", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Abdominal ultrasound for gallbladder and triangular cord; hepatobiliary scintigraphy", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Hepatic uptake without bowel excretion on scintigraphy?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Surgical exploration with intraoperative cholangiogram; Kasai before about 8 weeks", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider neonatal hepatitis, Alagille, PFIC or alpha-1 antitrypsin deficiency", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Post-Kasai ursodeoxycholic acid, antibiotics, medium-chain feeds and vitamins", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Early Kasai clears jaundice in some; many still progress to transplantation", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

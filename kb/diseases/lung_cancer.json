@@ -233,5 +233,588 @@
       "caption": "Diagnostic and clinical overview matrix for lung cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Lung Carcinoma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/tumors-of-the-lungs/lung-carcinoma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "lung_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic and staging values in lung cancer",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "LDCT screening eligibility",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age 50 to 80, 20 pack-years or more, smoking now or quit within 15 years",
+              "range": [
+                50,
+                80
+              ]
+            },
+            {
+              "text": "Annual low-dose CT after shared decision-making; 20% relative fall in lung cancer deaths in NLST"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "LDCT false positives",
+          "cells": [
+            {
+              "text": "About 96% of positive NLST screens were false positives"
+            },
+            {
+              "text": "Counsel on false positives and overdiagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptoms with normal chest x-ray",
+          "cells": [
+            {
+              "text": "Chronic cough or haemoptysis in a smoker with COPD aged 40 or more"
+            },
+            {
+              "text": "Investigate further; a normal CXR does not exclude cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue diagnosis",
+          "cells": [
+            {
+              "text": "Core biopsy preferred over FNA"
+            },
+            {
+              "text": "{{hy:Tissue is mandatory; PET alone never confirms cancer}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PET SUV",
+          "cells": [
+            {
+              "text": "Above 2.5 highly suspicious",
+              "op": ">",
+              "value": 2.5
+            },
+            {
+              "text": "False negatives under 8 mm, in diabetes and slow-growing tumours; false positives with infection and TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry",
+          "cells": [
+            {
+              "text": "TTF-1 and napsin-A for adenocarcinoma; p40 and p63 for squamous"
+            },
+            {
+              "text": "NSCLC not otherwise specified is no longer acceptable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing, advanced NSCLC",
+          "cells": [
+            {
+              "text": "NGS for EGFR, ALK, ROS1, BRAF, KRAS, MET, RET, NTRK, HER2 plus PD-L1 tumour proportion score"
+            },
+            {
+              "text": "Selects targeted therapy or immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mediastinal nodes at diagnosis",
+          "cells": [
+            {
+              "text": "One-quarter to one-half of NSCLC"
+            },
+            {
+              "text": "EBUS or mediastinoscopy for staging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "All SCLC; NSCLC stage II to IV or neurologic symptoms"
+            },
+            {
+              "text": "MRI preferred"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "T stage cut-offs",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "T1 3 cm or less; T2 over 3 to 5 cm; T3 over 5 to 7 cm; T4 over 7 cm or invasion of mediastinal structures"
+            },
+            {
+              "text": "TNM 8th edition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCLC stage",
+          "cells": [
+            {
+              "text": "Limited: one hemithorax within a radiation port; extensive: overt metastases or malignant effusion"
+            },
+            {
+              "text": "Extensive stage at presentation in 60 to 70%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight loss",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 10% of body weight",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Poor prognostic sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastasis clues on bloods",
+          "cells": [
+            {
+              "text": "Anaemia, raised ALP, GGT, transaminases or calcium"
+            },
+            {
+              "text": "Prompt staging for spread"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lung_cancer-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic lung cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary metastases from another primary",
+          "cells": [
+            {
+              "text": "Symptoms cannot separate them from a lung primary"
+            },
+            {
+              "text": "{{hy:Biopsy with TTF-1 and napsin-A panel}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mesothelioma",
+          "cells": [
+            {
+              "text": "Pleural-based tumour, may resemble adenocarcinoma"
+            },
+            {
+              "text": "CK5/6, calretinin and WT-1 positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary carcinoid",
+          "cells": [
+            {
+              "text": "Central endobronchial neuroendocrine tumour, may secrete ACTH"
+            },
+            {
+              "text": "Neuroendocrine IHC on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endobronchial metastasis (breast, colon, kidney)",
+          "cells": [
+            {
+              "text": "Haemoptysis with known extrathoracic cancer"
+            },
+            {
+              "text": "Bronchoscopic biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-resolving pneumonia",
+          "cells": [
+            {
+              "text": "Persists after repeated antibiotics without constitutional upset"
+            },
+            {
+              "text": "CT and bronchoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis or granulomatous disease",
+          "cells": [
+            {
+              "text": "Can be PET-avid"
+            },
+            {
+              "text": "Tissue sampling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "lung_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treatment of lung cancer by type and stage",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "All patients, including after diagnosis"
+            },
+            {
+              "text": "Improves survival and reduces treatment side effects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical resection (lobectomy with node sampling)",
+          "cells": [
+            {
+              "text": "{{hy:NSCLC stage I to II}}"
+            },
+            {
+              "text": "Segmentectomy or wedge for some peripheral tumours 2 cm or less"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stereotactic radiation or ablation",
+          "cells": [
+            {
+              "text": "Early NSCLC, high surgical risk"
+            },
+            {
+              "text": "Alternative to surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neoadjuvant or adjuvant therapy",
+          "cells": [
+            {
+              "text": "Early NSCLC; adjuvant after resection of stage II to III, possibly IB over 4 cm"
+            },
+            {
+              "text": "Platinum doublet; EGFR or ALK-directed agents when mutated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Concurrent chemoradiation then immunotherapy",
+          "cells": [
+            {
+              "text": "Unresectable stage III NSCLC"
+            },
+            {
+              "text": "Standard of care"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Targeted therapy",
+          "cells": [
+            {
+              "text": "Stage IV NSCLC with a driver mutation"
+            },
+            {
+              "text": "EGFR: osimertinib; ALK: alectinib or lorlatinib; BRAF: dabrafenib plus trametinib"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chemotherapy plus immunotherapy",
+          "cells": [
+            {
+              "text": "Stage IV NSCLC with no targetable driver"
+            },
+            {
+              "text": "PD-L1 testing predicts response"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platinum plus etoposide with concurrent radiation",
+          "cells": [
+            {
+              "text": "Limited-stage SCLC with good performance status"
+            },
+            {
+              "text": "Prophylactic cranial irradiation in selected cases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platinum-etoposide plus atezolizumab or durvalumab",
+          "cells": [
+            {
+              "text": "Extensive-stage SCLC"
+            },
+            {
+              "text": "Radiation mainly palliative"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oncologic emergencies",
+          "cells": [
+            {
+              "text": "SVC syndrome, tracheal obstruction, cord compression, hypercalcaemia"
+            },
+            {
+              "text": "Need urgent evaluation and therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct SIADH hyponatraemia slowly",
+          "cells": [
+            {
+              "text": "Paraneoplastic SIADH, mainly SCLC"
+            },
+            {
+              "text": "Rapid correction can cause irreversible neurologic injury"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck survival figures: limited SCLC median 25 to 56 months, extensive SCLC 12 to 13 months; NSCLC 5-year survival stage I 65 to 80%. Merck also states stage IV NSCLC 5-year survival as both about 12% and 5 to 62% (depends on driver status); not tabulated."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "lung_cancer-dx-mgmt",
+      "title": "Diagnosis and management of lung cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cough, haemoptysis, weight loss or an abnormal chest image",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest CT with or without PET-CT",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Core biopsy by bronchoscopy, EBUS or percutaneous route",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Small-cell or non-small-cell?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "SCLC limited stage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Concurrent platinum-etoposide chemoradiation; consider PCI",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Platinum-etoposide plus immunotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IHC, NGS and PD-L1; PET-CT, EBUS and brain MRI staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "TNM stage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Resection, or stereotactic radiation if high surgical risk",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chemoradiation then immunotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Targetable driver mutation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Matched targeted therapy, e.g. osimertinib for EGFR",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Chemotherapy plus immunotherapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Small-cell"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "Non-small-cell"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Stage I to II"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Unresectable III"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "Stage IV"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

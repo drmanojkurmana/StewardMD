@@ -160,5 +160,336 @@
       "caption": "Overview comparison matrix for anti-ma2 paraneoplastic encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_ma2_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF anti-Ma2 and anti-Ma1 testing",
+          "cells": [
+            {
+              "text": "Antibody confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound in men",
+          "cells": [
+            {
+              "text": "Testicular tumour; biopsy or orchidectomy if imaging normal but suspicion high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-body FDG-PET and CT",
+          "cells": [
+            {
+              "text": "Extragonadal or non-testicular tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the brain",
+          "cells": [
+            {
+              "text": "Medial temporal lobes, hypothalamus, thalamus and midbrain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Lymphocytic pleocytosis, raised protein and oligoclonal bands"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers alpha-fetoprotein and beta-hCG",
+          "cells": [
+            {
+              "text": "Germ cell tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_ma2_encephalitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-LGI1, anti-NMDA, anti-AMPA or anti-GABA-B limbic encephalitis",
+          "cells": [
+            {
+              "text": "Separated by the anti-Ma2 panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Herpes simplex encephalitis",
+          "cells": [
+            {
+              "text": "Infectious causes must be reasonably excluded before immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_ma2_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tumour search with immunotherapy",
+          "cells": [
+            {
+              "text": "Run in parallel"
+            },
+            {
+              "text": "Ma2 is linked to testicular germ cell tumour in younger men"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orchiectomy",
+          "cells": [
+            {
+              "text": "If a testicular mass is identified"
+            },
+            {
+              "text": "Standard oncologic treatment, then staging and adjuvant care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat malignancy screening",
+          "cells": [
+            {
+              "text": "Periodically for about two years"
+            },
+            {
+              "text": "If no tumour found on initial screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, IVIG or plasma exchange"
+            },
+            {
+              "text": "Start without waiting for antibody results once infection excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-line agents",
+          "cells": [
+            {
+              "text": "Rituximab, azathioprine, mycophenolate mofetil or cyclophosphamide"
+            },
+            {
+              "text": "For non-responders; tocilizumab for rituximab-refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothalamic symptoms",
+          "cells": [
+            {
+              "text": "Wakefulness-promoting agents for sleepiness or narcolepsy-cataplexy"
+            },
+            {
+              "text": "From hypothalamic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bulbar protection",
+          "cells": [
+            {
+              "text": "Monitor gaze palsy, dysarthria and dysphagia; protect the airway"
+            },
+            {
+              "text": "Risk of bulbar compromise"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_ma2_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-Ma2 Paraneoplastic Encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Encephalitis with hypothalamic or brainstem signs, possibly from a tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Brainstem signs threatening bulbar function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent oncology referral for orchiectomy or biopsy if a mass is found",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Anti-Ma2 assay, scrotal ultrasound, FDG-PET and CT, MRI, CSF, markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anti-Ma2 confirmed and a testicular or other tumour found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the tumour, orchiectomy if testicular, alongside immunotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table); biopsy if suspicion stays high",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Corticosteroids, IVIG or plasma exchange without waiting for antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab, azathioprine or cyclophosphamide for non-responders",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Wakefulness-promoting agents for sleepiness or narcolepsy-cataplexy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intracellular-antigen antibodies generally respond less robustly to immunotherapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

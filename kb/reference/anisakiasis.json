@@ -146,5 +146,274 @@
       "caption": "Overview comparison matrix for anisakiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anisakiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper gastrointestinal endoscopy",
+          "cells": [
+            {
+              "text": "Visualises and removes the gastric larva"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Eosinophilia and inflammatory markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anisakis-specific IgE and skin testing",
+          "cells": [
+            {
+              "text": "Suspected allergic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Bowel wall thickening or obstruction in intestinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of resected tissue",
+          "cells": [
+            {
+              "text": "Larva within an eosinophilic granuloma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anisakiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Endoscopic removal of the larva",
+          "cells": [
+            {
+              "text": "Definitive cure of gastric disease"
+            },
+            {
+              "text": "Larva identified and removed endoscopically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for intestinal disease",
+          "cells": [
+            {
+              "text": "Analgesia and fluids"
+            },
+            {
+              "text": "The larva dies and symptoms settle; surgery for obstruction or perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antihistamines and corticosteroids",
+          "cells": [
+            {
+              "text": "Gastro-allergic form"
+            },
+            {
+              "text": "Adrenaline for anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary prevention",
+          "cells": [
+            {
+              "text": "Avoid raw or lightly cured marine fish and squid"
+            },
+            {
+              "text": "Cook thoroughly or freeze adequately"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy referral",
+          "cells": [
+            {
+              "text": "Anisakis-specific IgE testing and long-term dietary avoidance"
+            },
+            {
+              "text": "Where hypersensitivity is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anisakiasis-dx-mgmt",
+      "title": "Diagnosis and management of Anisakiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal symptoms after a recent raw or marinated seafood meal",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Anaphylaxis, perforation or intestinal obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent management of anaphylaxis, perforation or obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy, FBC for eosinophilia, Anisakis IgE, imaging, dietary history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Larva seen at endoscopy or on histology in an eosinophilic granuloma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Endoscopic identification and removal of the gastric larva",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat endoscopy or imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive analgesia and fluids for intestinal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antihistamines and corticosteroids for the gastro-allergic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Allergy referral and dietary avoidance of raw marine fish and squid",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent once the larva is removed or dies; symptoms settle within days",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

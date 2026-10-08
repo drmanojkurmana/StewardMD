@@ -147,5 +147,267 @@
       "caption": "Overview comparison matrix for cohen syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cohen_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Ophthalmological assessment with electroretinography",
+          "cells": [
+            {
+              "text": "Progressive retinal dystrophy and early-onset myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial full blood counts",
+          "cells": [
+            {
+              "text": "Intermittent neutropenia, which a single count may miss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and metabolic monitoring",
+          "cells": [
+            {
+              "text": "Evolving truncal obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological assessment",
+          "cells": [
+            {
+              "text": "Non-progressive intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cohen_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive multidisciplinary care",
+          "cells": [
+            {
+              "text": "No disease-specific therapy; developmental and educational support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological care",
+          "cells": [
+            {
+              "text": "Refractive correction, low-vision aids and electroretinography monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutropenia monitoring",
+          "cells": [
+            {
+              "text": "Serial full blood counts; prompt infection treatment; G-CSF for severe neutropenia or recurrent serious infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Weight and metabolic management",
+          "cells": [
+            {
+              "text": "Dietary and activity management for evolving truncal obesity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "For hypotonia and joint hypermobility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dental and oral care",
+          "cells": [
+            {
+              "text": "Mouth ulcers and characteristic dental features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive VPS13B (COH1) disorder; cascade family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cohen_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cohen syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cohen syndrome: intellectual disability, retinal dystrophy, neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (serious infection, rapid visual loss, metabolic complications)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: infection treatment and ophthalmology review for rapid visual loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "VPS13B sequencing or panel; electroretinography; serial full blood counts",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does VPS13B testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Bardet-Biedl, Prader-Willi and Alstrom syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Serial full blood counts; treat infections; consider G-CSF for severe neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ophthalmological care: refractive correction and low-vision aids",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Weight, dietary and activity management for truncal obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, occupational therapy and dental care",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intellectual disability is non-progressive; vision declines progressively",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

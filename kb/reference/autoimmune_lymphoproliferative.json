@@ -152,5 +152,336 @@
       "caption": "Overview comparison matrix for autoimmune lymphoproliferative syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autoimmune_lymphoproliferative-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Flow cytometry for alpha-beta double-negative T cells",
+          "cells": [
+            {
+              "text": "Quantifies double-negative T cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Autoimmune cytopenias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum vitamin B12, IL-10 and soluble FAS ligand",
+          "cells": [
+            {
+              "text": "Supportive biomarkers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "In vitro lymphocyte apoptosis assays",
+          "cells": [
+            {
+              "text": "Lymphocyte apoptosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of FAS, FASLG and CASP10",
+          "cells": [
+            {
+              "text": "Genetic basis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging and lymph node biopsy",
+          "cells": [
+            {
+              "text": "Excludes lymphoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_lymphoproliferative-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoma and other lymphoproliferative malignancies",
+          "cells": [
+            {
+              "text": "Rapidly enlarging, asymmetric or hard nodes suggest lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency with autoimmune features",
+          "cells": [
+            {
+              "text": "Separated by flow cytometry for double-negative T cells"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_lymphoproliferative-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids and IVIG",
+          "cells": [
+            {
+              "text": "First-line during acute episodes of autoimmune cytopenias"
+            },
+            {
+              "text": "Acute episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sirolimus or mycophenolate mofetil",
+          "cells": [
+            {
+              "text": "Steroid-sparing agents for chronic or refractory disease"
+            },
+            {
+              "text": "Sirolimus is an mTOR inhibitor; both reduce lymphoproliferation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid splenectomy where possible",
+          "cells": [
+            {
+              "text": "Splenectomy avoided"
+            },
+            {
+              "text": "High relapse rates and overwhelming post-splenectomy sepsis risk; vaccinate if unavoidable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma surveillance",
+          "cells": [
+            {
+              "text": "Clinical review and imaging of enlarging or asymmetric nodes"
+            },
+            {
+              "text": "Lifelong surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Full blood count and autoimmune complications"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and counselling",
+          "cells": [
+            {
+              "text": "FAS, FASLG and CASP10 with family counselling"
+            },
+            {
+              "text": "Family implications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stem cell transplant",
+          "cells": [
+            {
+              "text": "Considered in severe disease"
+            },
+            {
+              "text": "Severe disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autoimmune_lymphoproliferative-dx-mgmt",
+      "title": "Diagnosis and management of Autoimmune lymphoproliferative syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Autoimmune cytopenias with lymphadenopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapidly enlarging, hard nodes or systemic B symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent lymph node evaluation for lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Double-negative T-cell flow cytometry, DAT, apoptosis assays, FAS genetics, imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Expanded double-negative T cells confirmed on flow cytometry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Corticosteroids and IVIG during acute episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat lymph node biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sirolimus or mycophenolate for chronic or refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid splenectomy where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong lymphoma surveillance with imaging of enlarging nodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling for FAS, FASLG and CASP10 in the family",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for anterior spinal artery syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anterior_spinal_artery_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent MRI of the cord with diffusion-weighted imaging",
+          "cells": [
+            {
+              "text": "Anterior T2 hyperintensity, sometimes owl-eye, restricted diffusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MR angiography of the aorta",
+          "cells": [
+            {
+              "text": "Dissection, aneurysm or atheromatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebrospinal fluid analysis",
+          "cells": [
+            {
+              "text": "Excludes an inflammatory or infective myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac rhythm assessment",
+          "cells": [
+            {
+              "text": "Embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasculitis and autoimmune screen",
+          "cells": [
+            {
+              "text": "Where an inflammatory arteriopathy is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia evaluation",
+          "cells": [
+            {
+              "text": "Younger patients without an obvious vascular cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anterior_spinal_artery_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transverse myelitis",
+          "cells": [
+            {
+              "text": "CSF analysis helps exclude an inflammatory myelopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "The early flaccid, areflexic phase can be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anterior_spinal_artery_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying vascular cause",
+          "cells": [
+            {
+              "text": "Surgical or endovascular repair of aortic dissection or aneurysm; correct hypotension"
+            },
+            {
+              "text": "Restores cord perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise cord perfusion",
+          "cells": [
+            {
+              "text": "Blood-pressure augmentation; CSF drainage in peri-aortic surgery"
+            },
+            {
+              "text": "Peri-aortic surgery setting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet or anticoagulant therapy",
+          "cells": [
+            {
+              "text": "Directed by mechanism"
+            },
+            {
+              "text": "Atheroembolism, cardioembolic source or thrombophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flaccid-phase supportive care",
+          "cells": [
+            {
+              "text": "Urinary catheterisation, bowel regimen, VTE prophylaxis, pressure-area care"
+            },
+            {
+              "text": "Spinal shock phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spasticity and neuropathic pain",
+          "cells": [
+            {
+              "text": "Antispasticity agents such as baclofen with physiotherapy"
+            },
+            {
+              "text": "Evolving spasticity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and spinal specialists"
+            },
+            {
+              "text": "Maximise functional recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thrombophilia work-up",
+          "cells": [
+            {
+              "text": "Haematology if an inherited prothrombotic disorder is confirmed"
+            },
+            {
+              "text": "Younger patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anterior_spinal_artery_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Anterior spinal artery syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute paraplegia or tetraplegia with a clear sensory level",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Tearing chest or back pain suggesting aortic dissection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency evaluation; treat the underlying vascular cause urgently",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent DWI MRI of cord, aortic CT or MR angiography, CSF, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Anterior T2 hyperintensity with restricted diffusion on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repair aortic dissection or aneurysm; restore cord perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat MRI and CSF tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Raise blood pressure to maintain cord perfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Flaccid-phase care: catheter, bowel regimen, VTE prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Baclofen and physiotherapy for evolving spasticity",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early neurorehabilitation with physiotherapy and occupational therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

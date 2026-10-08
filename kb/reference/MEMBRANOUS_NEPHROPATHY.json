@@ -162,5 +162,415 @@
       "caption": "Overview comparison matrix for membranous nephropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Membranous Nephropathy",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/membranous-nephropathy",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "MEMBRANOUS_NEPHROPATHY-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in membranous nephropathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Nephrotic-range proteinuria",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "3 or more, in 80% of patients",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "GFR normal or reduced"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-PLA2R antibody",
+          "cells": [
+            {
+              "text": "{{hy:Positive in idiopathic disease with IgG4 deposits}}"
+            },
+            {
+              "text": "Negative with IgG1 and IgG2 deposits favours malignancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney biopsy",
+          "cells": [
+            {
+              "text": "Subepithelial deposits with spikes; granular IgG along GBM"
+            },
+            {
+              "text": "Confirms diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Underlying cancer",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "6 to 15",
+              "range": [
+                6,
+                15
+              ]
+            },
+            {
+              "text": "Age-appropriate cancer screening"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary cause screen",
+          "cells": [
+            {
+              "text": "Hepatitis B and C, syphilis, HIV, ANA, drug history (gold, penicillamine, NSAIDs)"
+            },
+            {
+              "text": "Treat the cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High risk of progression",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Persistent proteinuria 8 or more, raised creatinine, interstitial inflammation",
+              "op": ">=",
+              "value": 8
+            },
+            {
+              "text": "Especially men over 50"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Natural history",
+          "cells": [
+            {
+              "text": "One-third remit, one-third stable CKD, one-third kidney failure"
+            },
+            {
+              "text": "Allows initial supportive observation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal vein thrombosis",
+          "cells": [
+            {
+              "text": "More frequent than in other glomerular diseases"
+            },
+            {
+              "text": "Flank pain, haematuria, pulmonary embolism"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "MEMBRANOUS_NEPHROPATHY-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of membranous nephropathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lupus nephritis class V",
+          "cells": [
+            {
+              "text": "{{hy:ANA positive; secondary membranous pattern}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignancy-associated membranous",
+          "cells": [
+            {
+              "text": "PLA2R negative, IgG1 and IgG2 deposits"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Minimal change disease",
+          "cells": [
+            {
+              "text": "Separated by kidney biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal segmental glomerulosclerosis",
+          "cells": [
+            {
+              "text": "Separated by kidney biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic nephropathy",
+          "cells": [
+            {
+              "text": "Diabetes history; kidney biopsy if atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis",
+          "cells": [
+            {
+              "text": "Separated by kidney biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "MEMBRANOUS_NEPHROPATHY-treatment",
+      "kind": "treatment",
+      "title": "Treatment of membranous nephropathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB with diuretics",
+          "cells": [
+            {
+              "text": "All, for oedema, hypertension and proteinuria"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rituximab with corticosteroids",
+          "cells": [
+            {
+              "text": "{{hy:Idiopathic disease at high risk of progression}}"
+            },
+            {
+              "text": "Favoured by most experts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Calcineurin inhibitor or cyclophosphamide",
+          "cells": [
+            {
+              "text": "Alternatives"
+            },
+            {
+              "text": "Choice guided by severity and anti-PLA2R level"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat secondary cause",
+          "cells": [
+            {
+              "text": "Cancer, infection, drug, SLE"
+            },
+            {
+              "text": "Immunosuppression only for idiopathic disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney transplantation",
+          "cells": [
+            {
+              "text": "Kidney failure"
+            },
+            {
+              "text": "Recurrence about 30% at 10 years; graft loss about 10%"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Doses and the albumin threshold for preventive anticoagulation were not stated in the source opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "MEMBRANOUS_NEPHROPATHY-dx-mgmt",
+      "title": "Diagnosis and management of membranous nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with nephrotic syndrome",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Anti-PLA2R, hepatitis B and C, HIV, syphilis, ANA, drug history",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Kidney biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Secondary cause found?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat cancer, infection, SLE or stop drug",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "ACE inhibitor or ARB, diuretics; age-appropriate cancer screen",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "High risk: protein 8 g/day or more, rising creatinine?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Observe; one-third remit spontaneously",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Rituximab with corticosteroids",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Remission?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Calcineurin inhibitor or cyclophosphamide",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Monitor anti-PLA2R and proteinuria",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

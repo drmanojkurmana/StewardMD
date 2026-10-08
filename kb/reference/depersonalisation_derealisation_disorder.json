@@ -149,5 +149,316 @@
       "caption": "Overview comparison matrix for depersonalisation-derealisation disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "New Oxford Textbook of Psychiatry",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "depersonalisation_derealisation_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Structured interview and Cambridge Depersonalisation Scale",
+          "cells": [
+            {
+              "text": "Depersonalisation symptom severity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for anxiety, depression, PTSD and trauma history",
+          "cells": [
+            {
+              "text": "Comorbid conditions that drive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance use history and toxicology",
+          "cells": [
+            {
+              "text": "Cannabis or hallucinogen trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG, where temporal lobe epilepsy is suspected",
+          "cells": [
+            {
+              "text": "Temporal lobe epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging, where focal features or atypical onset are present",
+          "cells": [
+            {
+              "text": "Structural cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "depersonalisation_derealisation_disorder-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychotic disorder",
+          "cells": [
+            {
+              "text": "Reality-testing is intact in depersonalisation but lost in psychosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Substance-induced states (cannabis, hallucinogens, ketamine)",
+          "cells": [
+            {
+              "text": "Precipitants to reduce or avoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal lobe epilepsy or aura",
+          "cells": [
+            {
+              "text": "Requires EEG when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "depersonalisation_derealisation_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Psychoeducation and reassurance",
+          "cells": [
+            {
+              "text": "Benign, non-psychotic experience; reality-testing remains intact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Targets catastrophic appraisal and heightened self-monitoring; grounding techniques"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat comorbid anxiety, depression and PTSD",
+          "cells": [
+            {
+              "text": "SSRIs or SNRIs, as these frequently drive symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Reduce or avoid cannabis and hallucinogens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trauma-focused therapy",
+          "cells": [
+            {
+              "text": "Where trauma underlies the presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Psychiatry or psychology; specialist depersonalisation service for refractory cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "depersonalisation_derealisation_disorder-dx-mgmt",
+      "title": "Diagnosis and management of Depersonalisation-Derealisation Disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected depersonalisation-derealisation disorder: detachment from self or surroundings",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (loss of reality-testing, focal signs or seizures, suicidal depression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent psychiatric review for psychosis or suicidal risk; neurology if focal",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Structured interview and Cambridge Depersonalisation Scale; substance and anxiety screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is reality-testing intact on structured interview?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider psychosis, temporal lobe epilepsy, substance-induced states or migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Psychoeducation: benign, non-psychotic experience with intact reality-testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "CBT for catastrophic appraisal and self-monitoring, with grounding techniques",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "SSRIs or SNRIs for comorbid anxiety, depression or PTSD",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reduce or avoid cannabis and hallucinogens",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to a specialist depersonalisation service for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Often chronic and fluctuating; symptoms improve with psychoeducation and therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

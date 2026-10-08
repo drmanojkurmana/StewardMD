@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for collagenofibrotic glomerulopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "collagenofibrotic_glomerulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal biopsy with electron microscopy",
+          "cells": [
+            {
+              "text": "Lobular appearance; EM needed to avoid confusion with MPGN"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum aminoterminal propeptide of type III procollagen",
+          "cells": [
+            {
+              "text": "Markedly raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congo red staining",
+          "cells": [
+            {
+              "text": "Amyloid excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nail, patellar and skeletal assessment",
+          "cells": [
+            {
+              "text": "Nail-patella syndrome excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenofibrotic_glomerulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Nail-patella syndrome",
+          "cells": [
+            {
+              "text": "Nail, patellar and skeletal features; no extrarenal features in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibrillary glomerulonephritis",
+          "cells": [
+            {
+              "text": "Congo red negative fibrils; immunoglobulin positive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloidosis",
+          "cells": [
+            {
+              "text": "Congo red positive fibrils"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunotactoid glomerulopathy",
+          "cells": [
+            {
+              "text": "Larger microtubular deposits"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenofibrotic_glomerulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Renin-angiotensin blockade to reduce proteinuria and control blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure control",
+          "cells": [
+            {
+              "text": "To slow progression of chronic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic-range proteinuria care",
+          "cells": [
+            {
+              "text": "Dietary sodium restriction, diuretics for oedema, statin for dyslipidaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Proteinuria and renal function to track progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning",
+          "cells": [
+            {
+              "text": "Dialysis or transplantation as kidney function declines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Reported autosomal recessive familial forms; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "collagenofibrotic_glomerulopathy-dx-mgmt",
+      "title": "Diagnosis and management of Collagenofibrotic Glomerulopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected collagenofibrotic glomerulopathy: slowly progressive nephrotic proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (accelerating decline, resistant hypertension, microangiopathy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; check for superimposed thrombotic microangiopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal biopsy with EM, type III collagen stain, procollagen III propeptide, Congo red",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show type III collagen fibrils without amyloid?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider nail-patella syndrome, fibrillary GN, amyloidosis or immunotactoid GN",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "ACE inhibitor or ARB to reduce proteinuria and control blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary sodium restriction, diuretics and statin for nephrotic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial proteinuria and renal function monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Plan dialysis or transplantation as kidney function declines",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Usually slowly progressive; many advance to kidney failure over years",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

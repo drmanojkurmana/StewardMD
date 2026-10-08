@@ -168,5 +168,520 @@
       "caption": "Overview comparison matrix for evaluation of liver function."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ACG guideline on abnormal liver chemistries (Kwo 2017), Newswise summary",
+      "url": "https://www.newswise.com/articles/acg-guideline-on-evaluation-of-abnormal-liver-chemistries-recommends-new-normal-for-serum-alt-levels?channel=",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 307-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "evaluation_of_liver_function-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key liver test values and patterns",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Normal ALT (ACG)",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "Up to 33 in men, up to 25 in women",
+              "op": "<=",
+              "value": 33
+            },
+            {
+              "text": "Higher values merit evaluation even if within lab range"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aminotransferases",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "{{hy:>1000}}",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "Viral, ischaemic or drug or toxin hepatocellular injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aminotransferases, nonspecific",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "Up to about 300",
+              "op": "<=",
+              "value": 300
+            },
+            {
+              "text": "Seen in many disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AST:ALT ratio",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": ">2 suggests, >3 strongly suggests",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Alcohol-related liver disease; AST rarely >300 IU/L"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alkaline phosphatase",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": ">4",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Cholestasis, infiltration, or high bone turnover; <3x nonspecific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct bilirubin fraction",
+          "unit": "% of total",
+          "cells": [
+            {
+              "text": "<15",
+              "op": "<",
+              "value": 15
+            },
+            {
+              "text": "Essentially all unconjugated: haemolysis or Gilbert"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prothrombin time",
+          "unit": "s above control",
+          "cells": [
+            {
+              "text": ">5, not corrected by vitamin K",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Poor prognostic sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albumin in apparent hepatitis",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<3",
+              "op": "<",
+              "value": 3
+            },
+            {
+              "text": "Suggests underlying chronic liver disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GGT in alcohol-related disease",
+          "cells": [
+            {
+              "text": "Not specific; easily inducible"
+            },
+            {
+              "text": "Raised in all forms of fatty liver"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Neutrophils in alcoholic hepatitis",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": ">5500",
+              "op": ">",
+              "value": 5500
+            },
+            {
+              "text": "Predicts severe disease when discriminant function >32"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "evaluation_of_liver_function-ddx",
+      "kind": "ddx",
+      "title": "Patterns of abnormal liver tests",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hepatocellular pattern",
+          "cells": [
+            {
+              "text": "Aminotransferases predominate"
+            },
+            {
+              "text": "Viral serology, autoimmune and metabolic screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholestatic pattern",
+          "cells": [
+            {
+              "text": "Alkaline phosphatase and bilirubin predominate"
+            },
+            {
+              "text": "{{hy:Ultrasound first for duct dilatation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis or Gilbert syndrome",
+          "cells": [
+            {
+              "text": "Isolated unconjugated bilirubin, no bilirubinuria"
+            },
+            {
+              "text": "Bilirubin fractionation; haemolysis markers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dubin-Johnson or Rotor syndrome",
+          "cells": [
+            {
+              "text": "Isolated conjugated bilirubin, other tests normal"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone source of alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Paget disease, growth, late pregnancy"
+            },
+            {
+              "text": "GGT or 5'-nucleotidase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-hepatic low albumin",
+          "cells": [
+            {
+              "text": "Malnutrition, protein-losing enteropathy, nephrotic syndrome"
+            },
+            {
+              "text": "Urine protein and nutritional assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K deficiency or warfarin",
+          "cells": [
+            {
+              "text": "Prolonged PT without synthetic failure"
+            },
+            {
+              "text": "Response to parenteral vitamin K"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "evaluation_of_liver_function-treatment",
+      "kind": "treatment",
+      "title": "Management approach to abnormal liver tests",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeat as a battery",
+          "cells": [
+            {
+              "text": "Any single abnormal result"
+            },
+            {
+              "text": "Define hepatocellular vs cholestatic pattern over days to weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassure, no further workup",
+          "cells": [
+            {
+              "text": "Isolated unconjugated hyperbilirubinaemia without haemolysis"
+            },
+            {
+              "text": "Gilbert syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aetiological workup",
+          "cells": [
+            {
+              "text": "Persistently abnormal tests"
+            },
+            {
+              "text": "HCV antibody, HBsAg, ferritin, ANA, ceruloplasmin if under 40, AMA, ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary imaging before biopsy",
+          "cells": [
+            {
+              "text": "Cholestasis"
+            },
+            {
+              "text": "Ultrasound, then CT, MRCP or ERCP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noninvasive fibrosis assessment",
+          "cells": [
+            {
+              "text": "Chronic liver disease"
+            },
+            {
+              "text": "FIB-4, ELF, FibroTest, elastography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw drugs and alcohol",
+          "cells": [
+            {
+              "text": "Suspected drug, toxin or alcohol injury"
+            },
+            {
+              "text": "Treat underlying disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "cells": [
+            {
+              "text": "Unexplained hepatocellular disease or uncertainty"
+            },
+            {
+              "text": "Transjugular if ascites or prolonged INR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "The ACG normal ALT limits are lower than many laboratory ranges; laboratory groups (CAP) have argued against adopting them because of assay variation."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "evaluation_of_liver_function-dx-mgmt",
+      "title": "Evaluation of abnormal liver tests",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abnormal liver test on routine or symptom-driven testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Repeat battery: bilirubin fractions, AST, ALT, ALP, albumin, INR",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Isolated unconjugated bilirubin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Exclude haemolysis; Gilbert syndrome needs no further workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Predominant pattern cholestatic?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm hepatic ALP with GGT; ultrasound for ducts",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Viral, autoimmune, iron, copper screen; review drugs and alcohol",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Aminotransferases >1000 IU/L or INR prolonged?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Urgent assessment for acute severe injury or liver failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat cause; assess fibrosis noninvasively",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Liver biopsy and hepatology referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

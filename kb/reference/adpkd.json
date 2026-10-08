@@ -153,5 +153,355 @@
       "caption": "Overview comparison matrix for autosomal dominant polycystic kidney disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / KDIGO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adpkd-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal ultrasound with age-adjusted cyst count criteria",
+          "cells": [
+            {
+              "text": "Cyst count against age-adjusted criteria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging and total kidney volume",
+          "cells": [
+            {
+              "text": "Prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure monitoring and renal function",
+          "cells": [
+            {
+              "text": "Hypertension and renal decline"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis",
+          "cells": [
+            {
+              "text": "Haematuria, proteinuria and infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver imaging for hepatic cysts when relevant",
+          "cells": [
+            {
+              "text": "Hepatic cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cerebral vascular imaging in high-risk patients",
+          "cells": [
+            {
+              "text": "Intracranial aneurysm screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adpkd-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Autosomal recessive polycystic kidney disease",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired cystic kidney disease of chronic renal failure",
+          "cells": [
+            {
+              "text": "Occurs in chronic renal failure"
+            },
+            {
+              "text": "Renal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberous sclerosis or von Hippel-Lindau associated cystic disease",
+          "cells": [
+            {
+              "text": "Syndromic cystic disease"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adpkd-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tolvaptan",
+          "cells": [
+            {
+              "text": "Slows cyst growth in rapidly progressive disease"
+            },
+            {
+              "text": "Rapidly progressive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renin-angiotensin blockade with ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Blood pressure control"
+            },
+            {
+              "text": "First-line BP control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Generous fluid intake, dietary sodium restriction and nephrotoxin avoidance",
+          "cells": [
+            {
+              "text": "Supportive measures"
+            },
+            {
+              "text": "Avoid nephrotoxins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lipophilic antibiotics for cyst infection",
+          "cells": [
+            {
+              "text": "Cyst infection, haemorrhage and stones"
+            },
+            {
+              "text": "Penetrate cyst fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function, BP and total kidney volume",
+          "cells": [
+            {
+              "text": "Disease progression"
+            },
+            {
+              "text": "Aneurysm screening in high-risk patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preparation for renal replacement therapy and transplantation",
+          "cells": [
+            {
+              "text": "Approaching kidney failure"
+            },
+            {
+              "text": "Renal replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adpkd-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant polycystic kidney disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bilateral renal cysts, hypertension or flank pain with family kidney disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Sudden severe headache or fever with severe flank pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review: exclude aneurysm rupture or infected cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Renal ultrasound with age-adjusted cyst criteria; BP; renal function; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Age-adjusted cyst criteria met with family history?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Measure total kidney volume; genetic testing if uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review ARPKD, acquired cystic disease, TSC and VHL",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "RAS blockade with ACE inhibitor or ARB for blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tolvaptan for rapidly progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Fluids, sodium restriction, nephrotoxin avoidance; aneurysm screen if high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Progresses over decades; many reach end-stage kidney disease in later adult life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

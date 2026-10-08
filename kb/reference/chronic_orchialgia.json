@@ -153,5 +153,312 @@
       "caption": "Overview comparison matrix for chronic orchialgia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_orchialgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed history and examination",
+          "cells": [
+            {
+              "text": "Localises pain and identifies referred sources"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Excludes mass, varicocele or epididymal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and culture",
+          "cells": [
+            {
+              "text": "Excludes urinary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic spermatic cord block",
+          "cells": [
+            {
+              "text": "Confirms a peripheral pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Where a referred or retroperitoneal cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_orchialgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic epididymitis or post-vasectomy pain syndrome",
+          "cells": [
+            {
+              "text": "Epididymal pain after vasectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Varicocele",
+          "cells": [
+            {
+              "text": "Dilated scrotal veins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referred pain from ureteric calculus or inguinal hernia",
+          "cells": [
+            {
+              "text": "Pain referred to the testis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_orchialgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance, scrotal support and NSAIDs",
+          "cells": [
+            {
+              "text": "Conservative first-line care"
+            },
+            {
+              "text": "Simple analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any specific contributor",
+          "cells": [
+            {
+              "text": "Varicocele, epididymal pathology or infection"
+            },
+            {
+              "text": "Identified cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat referred source",
+          "cells": [
+            {
+              "text": "Ureteric calculi, inguinal hernia, hip pathology or nerve entrapment"
+            },
+            {
+              "text": "Referred pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tricyclic antidepressants or gabapentinoids",
+          "cells": [
+            {
+              "text": "Centrally sensitised component"
+            },
+            {
+              "text": "Neuropathic pain agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgical spermatic cord denervation",
+          "cells": [
+            {
+              "text": "Refractory cases only"
+            },
+            {
+              "text": "Epididymectomy or orchidectomy are last resorts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_orchialgia-dx-mgmt",
+      "title": "Diagnosis and management of Chronic orchialgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic orchialgia: testicular pain persisting three months or more",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hard testicular mass, sudden pain with swelling, systemic features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent urology review for torsion or suspected malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History, scrotal ultrasound, urinalysis and culture for referred sources",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Peripheral pain source confirmed by spermatic cord block?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassurance, scrotal support and NSAIDs as first-line care",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check varicocele, epididymitis, referred calculus and inguinal hernia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tricyclic antidepressants or gabapentinoids for centrally sensitised pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat any identified contributor, including varicocele or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pelvic floor physiotherapy and psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Microsurgical cord denervation for refractory pain; chronic pain referral",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

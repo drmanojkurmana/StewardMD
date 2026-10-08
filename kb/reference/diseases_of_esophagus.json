@@ -190,5 +190,593 @@
       "caption": "Overview comparison matrix for diseases of the esophagus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Gastroesophageal Reflux Disease",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/esophageal-and-swallowing-disorders/gastroesophageal-reflux-disease-gerd",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diseases_of_esophagus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key tests and thresholds in oesophageal disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding or threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Upper endoscopy with biopsy",
+          "cells": [
+            {
+              "text": "{{hy:Single most useful test for oesophageal dysphagia}}"
+            },
+            {
+              "text": "Allows biopsy and dilation; only test that reliably finds Barrett"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumen narrowing",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "<13 mm reliably causes solid dysphagia",
+              "op": "<",
+              "value": 13
+            },
+            {
+              "text": "13-mm barium tablet improves stricture detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory pH monitoring",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "pH <4 for >6% of the day",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Defines GERD; add impedance for non-acid reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Los Angeles grade B, C or D oesophagitis",
+          "cells": [
+            {
+              "text": "Objective proof of GERD"
+            },
+            {
+              "text": "Grade A or normal scope needs pH testing off therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High-resolution manometry",
+          "cells": [
+            {
+              "text": "Achalasia types I, II, III; distal spasm"
+            },
+            {
+              "text": "Also before antireflux surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic oesophagitis biopsy",
+          "unit": "eos/HPF",
+          "cells": [
+            {
+              "text": "Peak >=15 eosinophils per HPF",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "Biopsy separates EoE, infection and reflux"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FLIP panometry",
+          "cells": [
+            {
+              "text": "Alternative to manometry"
+            },
+            {
+              "text": "Good correlation for achalasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barium swallow",
+          "cells": [
+            {
+              "text": "Proximal and cricopharyngeal lesions"
+            },
+            {
+              "text": "Shows function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EUS or CT",
+          "cells": [
+            {
+              "text": "Cancer staging; suspected pseudoachalasia"
+            },
+            {
+              "text": "CT when endoscopy nondiagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barrett progression to cancer",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "0.1 to 0.3% per year",
+              "range": [
+                0.1,
+                0.3
+              ]
+            },
+            {
+              "text": "Highest in obese white men in sixth decade"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diseases_of_esophagus-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of oesophageal symptoms",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Coronary artery disease",
+          "cells": [
+            {
+              "text": "{{hy:Exclude before calling chest pain oesophageal}}"
+            },
+            {
+              "text": "Cardiac evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eosinophilic oesophagitis",
+          "cells": [
+            {
+              "text": "Mimics GERD; food impaction"
+            },
+            {
+              "text": "Biopsy >=15 eos/HPF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudoachalasia",
+          "cells": [
+            {
+              "text": "Tumour at cardia mimics achalasia"
+            },
+            {
+              "text": "CT, EUS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scleroderma oesophagus",
+          "cells": [
+            {
+              "text": "Absent contractility with weak LES"
+            },
+            {
+              "text": "Manometry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic stricture or Schatzki ring",
+          "cells": [
+            {
+              "text": "Progressive solid dysphagia"
+            },
+            {
+              "text": "Endoscopy or barium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oesophageal cancer",
+          "cells": [
+            {
+              "text": "Progressive dysphagia, weight loss"
+            },
+            {
+              "text": "Endoscopy with biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candida oesophagitis",
+          "cells": [
+            {
+              "text": "White plaques; stasis or immunosuppression"
+            },
+            {
+              "text": "Endoscopic biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HSV or CMV oesophagitis",
+          "cells": [
+            {
+              "text": "HSV small ulcers; CMV large serpiginous distal ulcers"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pill oesophagitis",
+          "cells": [
+            {
+              "text": "Single deep ulcer near narrowing, often at carina"
+            },
+            {
+              "text": "Drug history, endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional heartburn",
+          "cells": [
+            {
+              "text": "Normal tests"
+            },
+            {
+              "text": "pH monitoring"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diseases_of_esophagus-treatment",
+      "kind": "treatment",
+      "title": "Treatment of common oesophageal disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle measures",
+          "cells": [
+            {
+              "text": "GERD"
+            },
+            {
+              "text": "No food within 4 h of bed; raise bed head about 15 cm; weight loss, stop smoking"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proton pump inhibitor",
+          "cells": [
+            {
+              "text": "{{hy:GERD first line}}"
+            },
+            {
+              "text": "Omeprazole 20 mg, lansoprazole 30 mg, pantoprazole 40 mg or esomeprazole 40 mg 30 min before a meal; twice daily if partial response; lowest effective long-term dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "H2 blocker",
+          "cells": [
+            {
+              "text": "Mild GERD, nocturnal symptoms"
+            },
+            {
+              "text": "PPIs preferred"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Laparoscopic fundoplication",
+          "cells": [
+            {
+              "text": "Grade C or D oesophagitis, large hiatus hernia, bleeding, stricture, PPI intolerance"
+            },
+            {
+              "text": "Manometry first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopic dilation",
+          "cells": [
+            {
+              "text": "Strictures, webs, Schatzki ring"
+            },
+            {
+              "text": "Often repeated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumatic dilation, Heller myotomy or POEM",
+          "cells": [
+            {
+              "text": "Achalasia"
+            },
+            {
+              "text": "Relief in about 80 to 90%; botulinum toxin if unfit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical steroids with diet elimination",
+          "cells": [
+            {
+              "text": "Eosinophilic oesophagitis"
+            },
+            {
+              "text": "Maintenance needed; relapse on stopping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barrett surveillance",
+          "cells": [
+            {
+              "text": "No dysplasia: every 3 to 5 years"
+            },
+            {
+              "text": "Low-grade dysplasia: consider ablation or yearly scope; high-grade: endoscopic ablation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antimicrobials and drug review",
+          "cells": [
+            {
+              "text": "Infectious or pill oesophagitis"
+            },
+            {
+              "text": "Directed by biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diseases_of_esophagus-dx-mgmt",
+      "title": "Diagnosis and management of oesophageal dysphagia and reflux",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heartburn, dysphagia or oesophageal chest pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Chest pain without dysphagia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Exclude coronary disease first",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Typical reflux without alarm features?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Lifestyle plus empirical PPI",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Responds to PPI?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Upper endoscopy with biopsies",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Structural lesion or mucosal disease found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat finding: dilate stricture, EoE steroids, cancer staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "High-resolution manometry and pH monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Achalasia on manometry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Pneumatic dilation, Heller myotomy or POEM",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "GERD or functional disorder: tailor therapy, consider fundoplication",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Continue lowest effective PPI dose",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n14",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n14",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for cylindroma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / WHO Classification of Skin Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cylindroma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional or incisional biopsy",
+          "cells": [
+            {
+              "text": "Jigsaw pattern and hyaline sheaths"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical mapping of scalp and head-neck",
+          "cells": [
+            {
+              "text": "Multiple lesions counted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family examination for spiradenomas and trichoepitheliomas",
+          "cells": [
+            {
+              "text": "Adnexal tumours in relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CYLD genetic testing",
+          "cells": [
+            {
+              "text": "Brooke-Spiegler syndrome suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging of extensive scalp disease",
+          "cells": [
+            {
+              "text": "Surgical planning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cylindroma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spiradenoma",
+          "cells": [
+            {
+              "text": "Named adnexal look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Named look-alike; histology separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenoid cystic carcinoma",
+          "cells": [
+            {
+              "text": "Histological mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cylindroma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete surgical excision",
+          "cells": [
+            {
+              "text": "Definitive for a solitary sporadic lesion; no systemic therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staged excision with scalp reconstruction",
+          "cells": [
+            {
+              "text": "Multiple or confluent lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CO2 laser or electrosurgical ablation",
+          "cells": [
+            {
+              "text": "Numerous small lesions where wide excision is impractical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No radiotherapy or systemic therapy",
+          "cells": [
+            {
+              "text": "Not indicated in benign cylindroma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-excision for recurrence",
+          "cells": [
+            {
+              "text": "Repeat excision or ablation rather than escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Re-biopsy for rapid change",
+          "cells": [
+            {
+              "text": "Growth, ulceration, bleeding or pain to exclude malignant transformation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "CYLD testing when multiple adnexal tumours or turban presentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cylindroma-dx-mgmt",
+      "title": "Diagnosis and management of Cylindroma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cylindroma: firm dermal nodules on scalp or head and neck",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (rapid growth, ulceration or bleeding, extensive disease, family clustering)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Re-biopsy or re-excision for a changing lesion to exclude malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Excisional biopsy with jigsaw pattern; mapping; family history; CYLD testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does histology show a jigsaw pattern with hyaline sheaths?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider spiradenoma, basal cell carcinoma or adenoid cystic carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Complete excision for solitary sporadic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Staged excision and reconstruction for confluent scalp disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ablation for numerous small lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Re-excision and genetic counselling; surveillance in Brooke-Spiegler syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and slow-growing with excellent prognosis after excision; syndromic patients recur",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

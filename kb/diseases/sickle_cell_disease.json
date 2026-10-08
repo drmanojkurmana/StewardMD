@@ -158,5 +158,619 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 104-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Sickle Cell Disease, 2026",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/anemias-caused-by-hemolysis/sickle-cell-disease",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "GPnotebook, Management of painful crises (NICE CG143 summary)",
+      "url": "https://gpnotebook.com/pages/haematology/management/management-of-painful-crises",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sickle_cell_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Confirming sickle cell disease and assessing a crisis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Haemoglobin electrophoresis or HPLC",
+          "cells": [
+            {
+              "text": "Only HbS with a variable amount of HbF"
+            },
+            {
+              "text": "{{hy:Homozygous sickle cell anaemia; electrophoresis is the key test}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sickle cell anaemia (HbSS) profile",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Hb 70 to 100 g/L; HbS 100%, HbA 0%; HbF 2 to 25%",
+              "range": [
+                70,
+                100
+              ]
+            },
+            {
+              "text": "Vaso-occlusive crises, aseptic necrosis, gallstones, priapism, ankle ulcers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HbSC disease profile",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Hb 100 to 140 g/L; HbS 50%, HbC 50%",
+              "range": [
+                100,
+                140
+              ]
+            },
+            {
+              "text": "Milder; crises are rare"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sickle cell trait",
+          "cells": [
+            {
+              "text": "More HbA than HbS"
+            },
+            {
+              "text": "No clinical abnormality expected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Peripheral smear",
+          "cells": [
+            {
+              "text": "Normocytic cells, nucleated red cells, sickled cells"
+            },
+            {
+              "text": "Microcytosis suggests coexisting thalassaemia"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reticulocyte count (baseline)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">=10% is common",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Reflects chronic haemolysis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Reticulocyte count in a crisis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<1%",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "{{hy:Suggests aplastic crisis, especially with Hb below the usual level}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fall in Hb with enlarging spleen or liver",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "Drop of at least 2 g/dL",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Splenic or hepatic sequestration crisis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Serum bilirubin in painful crisis",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Usually 2 to 4 mg/dL (34 to 68 micromol/L)",
+              "range": [
+                2,
+                4
+              ]
+            },
+            {
+              "text": "Expected with haemolysis; WBC and platelets often rise"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Fever, chest pain and new pulmonary infiltrate",
+          "cells": [
+            {
+              "text": "Sudden onset, hypoxaemia may follow"
+            },
+            {
+              "text": "Acute chest syndrome; get a chest x-ray"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Temperature in an acutely ill patient",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">38",
+              "op": ">",
+              "value": 38
+            },
+            {
+              "text": "Admit for cultures and IV antibiotics"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oxygen saturation on air",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<=95%",
+              "op": "<=",
+              "value": 95
+            },
+            {
+              "text": "Offer oxygen"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Solubility testing is unreliable in the first months of life. Hb ranges are from the owner's tables PDF; reticulocyte, bilirubin and sequestration thresholds are from Merck."
+    },
+    {
+      "id": "sickle_cell_disease-ddx",
+      "kind": "ddx",
+      "title": "Complications and look-alikes to separate from an uncomplicated pain crisis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute chest syndrome",
+          "cells": [
+            {
+              "text": "Fever, chest pain, cough, hypoxia, new infiltrate"
+            },
+            {
+              "text": "{{hy:Chest x-ray with oxygen saturation or ABG}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aplastic crisis (parvovirus)",
+          "cells": [
+            {
+              "text": "Hb below the patient's usual level without a reticulocyte response"
+            },
+            {
+              "text": "Reticulocyte count below 1%"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Acute splenic sequestration",
+          "cells": [
+            {
+              "text": "Mostly children; enlarging spleen, Hb falls at least 2 g/dL, may be shocked"
+            },
+            {
+              "text": "FBC against baseline and spleen size"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Hepatic sequestration",
+          "cells": [
+            {
+              "text": "Right upper quadrant pain with rapid liver enlargement and Hb drop"
+            },
+            {
+              "text": "FBC against baseline and liver size"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Bacterial sepsis (functional asplenia)",
+          "cells": [
+            {
+              "text": "Fever above 38 deg C, acutely ill, WBC rise with left shift"
+            },
+            {
+              "text": "Blood cultures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stroke or TIA",
+          "cells": [
+            {
+              "text": "Acute focal neurological deficit"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sickle_cell_disease-treatment",
+      "kind": "treatment",
+      "title": "Managing a vaso-occlusive crisis and its complications",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia as an emergency",
+          "cells": [
+            {
+              "text": "Every acute painful episode"
+            },
+            {
+              "text": "{{hy:Potent analgesic within 30 minutes of arrival, including triage time}}; aim for control within 1 hour"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Strong opioid bolus",
+          "cells": [
+            {
+              "text": "Severe pain, or moderate pain already treated before arrival"
+            },
+            {
+              "text": "Weak opioid is an option for moderate pain with no prior analgesia; then long-acting analgesia with breakthrough doses"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Regular paracetamol and NSAID",
+          "cells": [
+            {
+              "text": "Alongside the opioid unless contraindicated"
+            },
+            {
+              "text": "NSAIDs reduce opioid need; caution in renal disease"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pethidine (meperidine)",
+          "cells": [
+            {
+              "text": "Avoid"
+            },
+            {
+              "text": "NICE-based advice is not to offer it; Merck advises caution"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oxygen",
+          "cells": [
+            {
+              "text": "SpO2 on air 95% or below"
+            },
+            {
+              "text": "Monitor pain, respiratory rate and sedation every 20 minutes until controlled"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV fluids",
+          "cells": [
+            {
+              "text": "Keep normal intravascular volume"
+            },
+            {
+              "text": "Benefit of vigorous hydration is unclear"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Broad-spectrum antibiotics",
+          "cells": [
+            {
+              "text": "Suspected serious infection or acute chest syndrome"
+            },
+            {
+              "text": "Start immediately after cultures"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Exchange transfusion",
+          "cells": [
+            {
+              "text": "Severe acute events such as acute chest syndrome or stroke"
+            },
+            {
+              "text": "Lowers HbS percentage; transfuse red cells first if Hb is low"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Simple transfusion",
+          "cells": [
+            {
+              "text": "Aplastic crisis; hypoxaemia with PO2 <65 mm Hg"
+            },
+            {
+              "text": "Not helpful in uncomplicated pain crisis; caution in sequestration (hyperviscosity)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Not for uncomplicated painful episodes"
+            },
+            {
+              "text": "Do not use routinely"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Hydroxyurea (long term)",
+          "cells": [
+            {
+              "text": "All children; adults with recurrent crises or complications"
+            },
+            {
+              "text": "Cuts pain crises by about 45%; dose titrated to counts; watch for cytopenias"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Usual maintenance"
+            },
+            {
+              "text": "1 mg orally once daily"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Sources conflict on pethidine: NICE-based guidance (GPnotebook) says do not offer it, Merck says use it with caution. No opioid doses are stated by these sources; use local protocol."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sickle_cell_disease-dx-mgmt",
+      "title": "Diagnosis and management of sickle cell vaso-occlusive crisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known sickle cell disease with acute pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Potent analgesia within 30 min; check BP, SpO2, pulse, RR, temperature",
+          "cite": "c4"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Fever, chest pain, hypoxia or new lung infiltrate?",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Treat as acute chest syndrome: CXR, cultures, antibiotics, oxygen",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Admit; early transfusion, exchange transfusion if severe",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Hb below the patient's usual level?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Reticulocytes below 1%?",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Aplastic crisis: admit, simple transfusion",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Check spleen and liver for sequestration; urgent senior review",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Paracetamol plus NSAID with opioid; oxygen if SpO2 95% or less; IV fluids",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reassess pain, RR and sedation every 20 min",
+          "cite": "c4"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Pain controlled?",
+          "cite": "c4"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Watch for chest syndrome, infection, stroke, priapism; review hydroxyurea",
+          "cite": "c4"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Admit for intractable pain and parenteral opioids",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
   ]
 }

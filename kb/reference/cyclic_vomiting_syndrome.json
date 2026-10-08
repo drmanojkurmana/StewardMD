@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for cyclic vomiting syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cyclic_vomiting_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Basic metabolic panel, glucose and acid-base during an attack",
+          "cells": [
+            {
+              "text": "Hydration and acid-base status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper GI contrast study or cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Malrotation and obstruction excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen (ammonia, lactate, organic acids)",
+          "cells": [
+            {
+              "text": "Metabolic crisis excluded in atypical patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Structural upper-gut disease excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric emptying study",
+          "cells": [
+            {
+              "text": "Motility disorder when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyclic_vomiting_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cannabinoid hyperemesis syndrome",
+          "cells": [
+            {
+              "text": "Compulsive hot bathing; cannabis history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intestinal malrotation with intermittent volvulus",
+          "cells": [
+            {
+              "text": "Bilious vomiting; imaging excludes it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inborn errors of metabolism",
+          "cells": [
+            {
+              "text": "Urea cycle or fatty-acid oxidation defects; fasting-triggered attacks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cyclic_vomiting_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prophylaxis between attacks",
+          "cells": [
+            {
+              "text": "Amitriptyline, propranolol or topiramate; cyproheptadine in younger children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early abortion of attacks",
+          "cells": [
+            {
+              "text": "Ondansetron; triptans considered given migraine overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care during attacks",
+          "cells": [
+            {
+              "text": "IV rehydration, dextrose-containing fluids, electrolyte correction; calm dark room"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Stress, sleep deprivation, excitement and fasting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cannabis cessation",
+          "cells": [
+            {
+              "text": "Where cannabinoid hyperemesis coexists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydration monitoring",
+          "cells": [
+            {
+              "text": "During severe episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Gastroenterology, neurology and psychological support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cyclic_vomiting_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cyclic vomiting syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cyclic vomiting syndrome: stereotyped vomiting episodes, symptom-free gaps",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (bilious vomiting, focal deficit, papilloedema, metabolic crisis features)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent metabolic and imaging review for obstruction or raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Electrolytes and glucose; contrast study or imaging; metabolic screen; endoscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do stereotyped episodes occur with no structural or metabolic cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cannabinoid hyperemesis, malrotation or metabolic disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prophylaxis with amitriptyline, propranolol or topiramate between attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early ondansetron or triptan to abort attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV rehydration and electrolyte correction during episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Trigger avoidance and cannabis cessation where relevant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many improve with maturity; a proportion evolve into migraine",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

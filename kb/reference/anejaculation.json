@@ -150,5 +150,346 @@
       "caption": "Overview comparison matrix for anejaculation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anejaculation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-orgasmic urine analysis",
+          "cells": [
+            {
+              "text": "Distinguishes failure of emission from retrograde ejaculation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed neurological, surgical and drug history",
+          "cells": [
+            {
+              "text": "Identifies neurological, pelvic surgical and medication causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose or HbA1c",
+          "cells": [
+            {
+              "text": "Detects diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum testosterone and gonadotropins",
+          "cells": [
+            {
+              "text": "Assesses the endocrine axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal and transrectal ultrasound",
+          "cells": [
+            {
+              "text": "Where obstruction or structural abnormality is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nocturnal or situational ejaculation assessment",
+          "cells": [
+            {
+              "text": "Gauges a psychogenic component"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "anejaculation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retrograde ejaculation",
+          "cells": [
+            {
+              "text": "Backward flow; sperm present in post-orgasmic urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychogenic inhibition of ejaculation",
+          "cells": [
+            {
+              "text": "Situational pattern, with normal ejaculation in some circumstances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal cord injury or neurological disease",
+          "cells": [
+            {
+              "text": "New neurological symptoms suggesting spinal cord disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anejaculation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reversible causes",
+          "cells": [
+            {
+              "text": "Review and modify sympatholytic medications; optimise glycaemic control"
+            },
+            {
+              "text": "Relevant in diabetic autonomic neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Penile vibratory stimulation",
+          "cells": [
+            {
+              "text": "First-line to induce emission"
+            },
+            {
+              "text": "Neurogenic anejaculation such as spinal cord injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroejaculation",
+          "cells": [
+            {
+              "text": "Under specialist supervision when vibratory stimulation fails"
+            },
+            {
+              "text": "Specialist supervision required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical sperm retrieval",
+          "cells": [
+            {
+              "text": "From epididymis or testis for intracytoplasmic sperm injection"
+            },
+            {
+              "text": "When induced ejaculation is unsuccessful or unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychosexual and behavioural therapy",
+          "cells": [
+            {
+              "text": "For situational or psychogenic anejaculation"
+            },
+            {
+              "text": "Psychogenic cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic dysreflexia precautions",
+          "cells": [
+            {
+              "text": "Blood-pressure monitoring during vibratory or electroejaculation"
+            },
+            {
+              "text": "High-level spinal cord injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Andrology and assisted reproduction referral",
+          "cells": [
+            {
+              "text": "Fertility planning"
+            },
+            {
+              "text": "Avoids delay when natural conception is not feasible"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anejaculation-dx-mgmt",
+      "title": "Diagnosis and management of Anejaculation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Complete absence of antegrade ejaculate, with or without orgasmic sensation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? New neurological symptoms or recent pelvic surgery?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological review for spinal cord disease or demyelination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Post-orgasmic urine, neurological and drug history, glucose, testosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sperm absent from post-orgasmic urine, confirming failure of emission?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Review and modify sympatholytic drugs; optimise glycaemic control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Penile vibratory stimulation first-line for neurogenic anejaculation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Electroejaculation under specialist supervision if vibration fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical sperm retrieval for ICSI if induced ejaculation is unsuccessful",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fertility often achieved with induction or retrieval plus assisted reproduction",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

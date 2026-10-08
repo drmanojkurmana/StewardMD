@@ -208,5 +208,561 @@
       "caption": "Diagnostic and clinical overview matrix for variceal bleeding."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Varices",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/gastrointestinal-bleeding/varices",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "ASGE summary of ESGE variceal bleeding guideline, 2022",
+      "url": "https://www.asge.org/home/resources/publications/journal-scan/issue/top-recommendations-for-the-diagnosis-and-management-of-esophagogastric-variceal-bleeding",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "variceal_bleed-diagnostic",
+      "kind": "diagnostic",
+      "title": "Variceal bleeding: portal pressure, risk and work-up",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "HVPG",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Over 5",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Portal hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HVPG",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "10 or more",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Clinically significant portal hypertension; risk of decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HVPG",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Over 12",
+              "op": ">",
+              "value": 12
+            },
+            {
+              "text": "{{hy:Risk of variceal haemorrhage}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver stiffness",
+          "unit": "kPa",
+          "cells": [
+            {
+              "text": "Under 20 with normal platelets",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "High-risk varices rare; screening endoscopy may be deferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper endoscopy",
+          "cells": [
+            {
+              "text": "Best test; shows red wale signs, cherry-red spots, size"
+            },
+            {
+              "text": "Also excludes non-variceal source, present in up to one-third"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Initial haemoglobin",
+          "cells": [
+            {
+              "text": "May be normal at presentation"
+            },
+            {
+              "text": "Can take up to 72 h to fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline labs",
+          "cells": [
+            {
+              "text": "CBC with platelets, PT, PTT, liver tests; crossmatch at least 6 units"
+            },
+            {
+              "text": "Low platelets often first sign of portal hypertension"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glasgow-Blatchford score",
+          "cells": [
+            {
+              "text": "0 to 1",
+              "range": [
+                0,
+                1
+              ]
+            },
+            {
+              "text": "Very low risk upper GI bleed; outpatient care possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mortality per bleed",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 to 30",
+              "range": [
+                20,
+                30
+              ]
+            },
+            {
+              "text": "Six-week mortality 15 to 25% per Merck"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early TIPS candidates",
+          "cells": [
+            {
+              "text": "Child-Pugh B 8 to 9 with active bleeding, or Child-Pugh C 10 to 13"
+            },
+            {
+              "text": "Advanced disease favours early TIPS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "variceal_bleed-ddx",
+      "kind": "ddx",
+      "title": "Other sources of upper GI bleeding",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Peptic ulcer disease",
+          "cells": [
+            {
+              "text": "Commonest cause, about 50% of upper GI bleeds"
+            },
+            {
+              "text": "Endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mallory-Weiss tear",
+          "cells": [
+            {
+              "text": "Follows vomiting or retching; stops on its own in 80 to 90%"
+            },
+            {
+              "text": "Endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastric varices",
+          "cells": [
+            {
+              "text": "Fundal or cardiofundal location; banding often fails"
+            },
+            {
+              "text": "Endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal hypertensive gastropathy",
+          "cells": [
+            {
+              "text": "Portal hypertension source other than varices"
+            },
+            {
+              "text": "Endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erosive oesophagitis, gastritis, duodenitis",
+          "cells": [
+            {
+              "text": "Often NSAID-related; up to 30% of bleeds"
+            },
+            {
+              "text": "Endoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dieulafoy lesion, vascular ectasia, neoplasm, aortoenteric fistula",
+          "cells": [
+            {
+              "text": "Less common sources"
+            },
+            {
+              "text": "Endoscopy; further imaging as needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Up to one-third of cirrhotic patients with upper GI bleeding have a non-variceal source, so endoscopy is needed in all."
+    },
+    {
+      "id": "variceal_bleed-treatment",
+      "kind": "treatment",
+      "title": "Acute variceal bleeding treatment",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Resuscitation and restrictive transfusion",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Transfuse at Hb under 7 g/dL, target 7 to 9; avoid excess fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ceftriaxone",
+          "cells": [
+            {
+              "text": "{{hy:All cirrhotic patients with GI bleeding}}"
+            },
+            {
+              "text": "1 g daily for up to 7 days; reduces infection, rebleeding and death"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vasoactive drug (terlipressin, octreotide or somatostatin)",
+          "cells": [
+            {
+              "text": "Start at presentation"
+            },
+            {
+              "text": "Continue up to 5 days; improves control and mortality"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Erythromycin",
+          "cells": [
+            {
+              "text": "Before endoscopy if no contraindication"
+            },
+            {
+              "text": "250 mg IV 30 to 120 min before endoscopy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Endoscopic band ligation",
+          "cells": [
+            {
+              "text": "Oesophageal varices"
+            },
+            {
+              "text": "Preferred over sclerotherapy; combine with drug therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cyanoacrylate injection",
+          "cells": [
+            {
+              "text": "Cardiofundal gastric variceal bleeding"
+            },
+            {
+              "text": "TIPS or BRTO are alternatives"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "TIPS",
+          "cells": [
+            {
+              "text": "Bleeding persists or recurs, or early in high-risk Child-Pugh"
+            },
+            {
+              "text": "New or worse encephalopathy in up to 20%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Balloon tamponade or oesophageal stent",
+          "cells": [
+            {
+              "text": "Bridge to TIPS or surgery"
+            },
+            {
+              "text": "Oesophageal balloon to 25 mmHg; intubation often advised"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Only with true coagulopathy such as bleeding at other sites"
+            },
+            {
+              "text": "Routine INR correction not advised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "After the acute bleed"
+            },
+            {
+              "text": "Repeat banding every 1 to 4 weeks until eradicated; non-selective beta-blocker"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Endoscopy timing differs: Harrison advises within 24 h (earlier than 6 to 12 h gives no benefit), ESGE advises within 12 h after resuscitation. Merck allows 1 to 2 units of FFP cautiously, Harrison advises against routine FFP."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "variceal_bleed-dx-mgmt",
+      "title": "Diagnosis and management of variceal bleeding",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Upper GI bleed in known or suspected cirrhosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Airway, IV access, restrictive transfusion to Hb 7 to 9 g/dL",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Start vasoactive drug and ceftriaxone at presentation",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Erythromycin then endoscopy after resuscitation",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Source at endoscopy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Non-variceal source: treat cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Band ligation",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cyanoacrylate injection",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Child-Pugh C 10 to 13, or B with active bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early TIPS",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Bleeding controlled?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Rescue TIPS; balloon tamponade as bridge",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Secondary prevention: repeat banding plus beta-blocker",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Non-variceal"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Oesophageal varices"
+        },
+        {
+          "from": "n5",
+          "to": "n8",
+          "label": "Gastric varices"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

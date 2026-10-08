@@ -171,5 +171,585 @@
       "caption": "Overview comparison matrix for disorders of the pleura."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pleural Effusion",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pleural-effusion",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Pneumothorax",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/mediastinal-and-pleural-disorders/pneumothorax",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_the_pleura-diagnostic",
+      "kind": "diagnostic",
+      "title": "Pleural fluid and pneumothorax criteria",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluid/serum protein",
+          "cells": [
+            {
+              "text": ">0.5",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Light criterion for exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid/serum LDH",
+          "cells": [
+            {
+              "text": ">0.6",
+              "op": ">",
+              "value": 0.6
+            },
+            {
+              "text": "Light criterion for exudate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid LDH",
+          "cells": [
+            {
+              "text": ">2/3 of upper normal serum limit"
+            },
+            {
+              "text": "{{hy:Any one Light criterion means exudate}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum minus fluid albumin gradient",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": ">1.2 (protein gradient >3.1)",
+              "op": ">",
+              "value": 1.2
+            },
+            {
+              "text": "Reclassifies about 25% pseudoexudates as transudates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid NT-proBNP",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": ">1500",
+              "op": ">",
+              "value": 1500
+            },
+            {
+              "text": "Effusion of cardiac origin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural pH",
+          "cells": [
+            {
+              "text": "<7.20",
+              "op": "<",
+              "value": 7.2
+            },
+            {
+              "text": "Complicated parapneumonic effusion; drain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleural glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<60",
+              "op": "<",
+              "value": 60
+            },
+            {
+              "text": "Complicated parapneumonic effusion; also rheumatoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenosine deaminase",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Tuberculous pleuritis (or interferon-gamma >140 pg/mL)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triglyceride",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">110",
+              "op": ">",
+              "value": 110
+            },
+            {
+              "text": "Chylothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid/blood haematocrit",
+          "cells": [
+            {
+              "text": ">0.5",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Haemothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumothorax size",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<10 is small",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Estimated from lung-to-hemithorax width ratio"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_pleura-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of pleural effusion",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "{{hy:Most common cause}}; bilateral transudate"
+            },
+            {
+              "text": "Fluid NT-proBNP, albumin gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cirrhosis (hepatic hydrothorax)",
+          "cells": [
+            {
+              "text": "Transudate with ascites"
+            },
+            {
+              "text": "Albumin gradient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parapneumonic effusion or empyema",
+          "cells": [
+            {
+              "text": "Most common exudate; fever, pneumonia"
+            },
+            {
+              "text": "pH, glucose, Gram stain, culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant effusion",
+          "cells": [
+            {
+              "text": "Second commonest exudate; lung, breast, lymphoma"
+            },
+            {
+              "text": "Cytology, thoracoscopic biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Most often overlooked cause of undiagnosed exudate"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculous pleuritis",
+          "cells": [
+            {
+              "text": "Lymphocytic exudate"
+            },
+            {
+              "text": "ADA over 40 IU/L; pleural biopsy culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid or lupus pleuritis",
+          "cells": [
+            {
+              "text": "Low glucose in rheumatoid disease"
+            },
+            {
+              "text": "Fluid glucose, serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic disease or oesophageal rupture",
+          "cells": [
+            {
+              "text": "Exudate with GI history"
+            },
+            {
+              "text": "Fluid amylase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chylothorax",
+          "cells": [
+            {
+              "text": "Milky fluid"
+            },
+            {
+              "text": "Triglyceride over 110 mg/dL"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_pleura-treatment",
+      "kind": "treatment",
+      "title": "Treatment of pleural disorders",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat cause (diuretics for heart failure or cirrhosis)",
+          "cells": [
+            {
+              "text": "Transudates"
+            },
+            {
+              "text": "Tap if unilateral, febrile, pleuritic or persistent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Therapeutic thoracentesis, about 1 to 1.5 L per session",
+          "cells": [
+            {
+              "text": "Symptomatic large effusion"
+            },
+            {
+              "text": "Stop for chest tightness, pain or cough; ultrasound guidance"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complete drainage by thoracentesis or chest tube plus antibiotics",
+          "cells": [
+            {
+              "text": "{{hy:pH <7.20, glucose <60 mg/dL, positive stain or culture, loculation}}"
+            },
+            {
+              "text": "Add intrapleural alteplase plus dornase alfa if drainage incomplete"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "VATS decortication",
+          "cells": [
+            {
+              "text": "Failed intrapleural therapy"
+            },
+            {
+              "text": "Also for trapped lung"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Indwelling pleural catheter or talc, doxycycline or bleomycin pleurodesis",
+          "cells": [
+            {
+              "text": "Recurrent symptomatic malignant effusion"
+            },
+            {
+              "text": "Equally effective; catheter if lung does not expand"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Observation with repeat film at about 4 h",
+          "cells": [
+            {
+              "text": "Asymptomatic primary spontaneous pneumothorax"
+            },
+            {
+              "text": "Any size if stable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Aspiration via 7 to 9 Fr catheter, 2nd intercostal space",
+          "cells": [
+            {
+              "text": "Symptomatic primary pneumothorax"
+            },
+            {
+              "text": "Chest tube under 14 Fr if lung fails to expand"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "14 or 16 gauge needle, 2nd intercostal space midclavicular line",
+          "cells": [
+            {
+              "text": "Tension pneumothorax"
+            },
+            {
+              "text": "Do not wait for x-ray; then tube thoracostomy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "VATS bleb stapling plus pleurodesis",
+          "cells": [
+            {
+              "text": "Second primary episode, secondary pneumothorax, persistent leak"
+            },
+            {
+              "text": "Recurrence 19 to 29% at 1 year after first primary episode"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Harrison states about half of primary spontaneous pneumothoraces recur; Merck gives 19 to 29% at 1 year. The figures differ in follow-up time. Merck does not state intrapleural alteplase or dornase doses."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_the_pleura-dx-mgmt",
+      "title": "Diagnosis and management of pleural effusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Pleural effusion on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Typical heart failure, bilateral, afebrile?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Treat heart failure; tap if it persists or is atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound-guided thoracentesis: protein, LDH, glucose, pH, cells, culture, cytology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Exudate by Light criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Transudate: treat heart, liver or kidney cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "pH <7.20, glucose <60, pus or positive culture?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Chest tube drainage, antibiotics; fibrinolytic or VATS if loculated",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "ADA, cytology, CT angiography for PE as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Cause found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Treat cause; catheter or pleurodesis if malignant",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Thoracoscopic biopsy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

@@ -153,5 +153,91 @@
       "caption": "Overview comparison matrix for benign prostatic hyperplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith & Tanagho's General Urology / Campbell-Walsh Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_prostatic_hyperplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benign prostatic hyperplasia",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Symptom grouping", "cells": [{"text": "Voiding (hesitancy, weak stream, intermittency, straining) and storage (frequency, urgency, nocturia) symptoms"}], "cite": "c1"},
+        {"parameter": "International Prostate Symptom Score", "cells": [{"text": "Quantifies symptom burden and response to treatment"}], "cite": "c1"},
+        {"parameter": "Digital rectal examination", "cells": [{"text": "Smooth, firm, symmetrically enlarged gland; nodularity, asymmetry or a hard area raises suspicion of malignancy"}], "cite": "c1"},
+        {"parameter": "Urinalysis", "cells": [{"text": "Excludes infection and haematuria"}], "cite": "c1"},
+        {"parameter": "Serum creatinine", "cells": [{"text": "Renal function assessment"}], "cite": "c1"},
+        {"parameter": "PSA", "cells": [{"text": "Mildly elevated from gland volume; a significantly raised or rising level warrants evaluation for cancer"}], "cite": "c1"},
+        {"parameter": "Post-void residual volume by bladder ultrasound", "cells": [{"text": "Residual urine after voiding"}], "cite": "c1"},
+        {"parameter": "Uroflowmetry", "cells": [{"text": "Flow rate and obstructive pattern"}], "cite": "c1"},
+        {"parameter": "Renal and bladder ultrasound", "cells": [{"text": "Upper tracts, bladder wall and residual urine"}], "cite": "c1"},
+        {"parameter": "Pressure-flow urodynamics", "cells": [{"text": "Equivocal or complex cases"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_prostatic_hyperplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign prostatic hyperplasia",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Prostate cancer", "cells": [{"text": "Hard, nodular or asymmetric gland; significantly raised or rising PSA"}], "cite": "c1"},
+        {"parameter": "Urinary tract infection or prostatitis", "cells": [{"text": "Excluded by urinalysis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_prostatic_hyperplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign prostatic hyperplasia",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Watchful waiting", "cells": [{"text": "Lifestyle and fluid advice"}, {"text": "For mild symptoms with low symptom burden"}], "cite": "c1"},
+        {"parameter": "Alpha-blocker", "cells": [{"text": "Relax prostatic smooth muscle"}, {"text": "Rapid relief of the dynamic component of obstruction"}], "cite": "c1"},
+        {"parameter": "5-alpha-reductase inhibitor", "cells": [{"text": "Shrinks larger glands; combination therapy where appropriate"}, {"text": "Acts over months and lowers PSA"}], "cite": "c1"},
+        {"parameter": "Storage symptoms", "cells": [{"text": "Antimuscarinic or beta-3 agonist"}, {"text": "Phosphodiesterase-5 inhibitor where erectile dysfunction coexists"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "IPSS, renal function and post-void residual volume"}, {"text": "Surveillance on treatment"}], "cite": "c1"},
+        {"parameter": "Surgery", "cells": [{"text": "Transurethral resection of the prostate for refractory symptoms or absolute indications"}, {"text": "Absolute indications: refractory retention, recurrent infection, bladder stones, recurrent haematuria, upper tract dilatation"}], "cite": "c1"},
+        {"parameter": "Acute urinary retention", "cells": [{"text": "Catheterisation, then trial without catheter under alpha-blocker cover"}, {"text": "A urological emergency"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_prostatic_hyperplasia-dx-mgmt",
+      "title": "Diagnosis and management of benign prostatic hyperplasia",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Man over 50 with voiding or storage lower urinary tract symptoms", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: retention, hydronephrosis, recurrent infection, haematuria or hard nodular gland?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: catheterise for retention; assess renal function and exclude cancer", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Urinalysis, creatinine, PSA with counselling, and IPSS score", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Uroflowmetry, post-void residual by bladder ultrasound, renal and bladder ultrasound", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Bothersome obstructive symptoms on assessment?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Alpha-blocker; add a 5-alpha-reductase inhibitor for larger glands", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: watchful waiting with lifestyle and fluid advice", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Monitor with IPSS, renal function and residual volume; transurethral resection if refractory", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Medical therapy often stabilises; surgery gives durable relief in refractory cases", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

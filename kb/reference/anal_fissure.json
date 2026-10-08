@@ -146,5 +146,373 @@
       "caption": "Overview comparison matrix for anal fissure."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bailey & Love's Short Practice of Surgery / Sabiston Textbook of Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anal_fissure-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Gentle inspection of the anal verge",
+          "cells": [
+            {
+              "text": "Fissure site and chronic signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination under anaesthesia",
+          "cells": [
+            {
+              "text": "Pain precludes assessment or diagnosis unclear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic evaluation and biopsy",
+          "cells": [
+            {
+              "text": "Atypical, multiple or non-healing fissures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations for IBD or infection",
+          "cells": [
+            {
+              "text": "Atypical features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_fissure-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Thrombosed external haemorrhoid or perianal haematoma",
+          "cells": [
+            {
+              "text": "Painful perianal swelling"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anorectal abscess",
+          "cells": [
+            {
+              "text": "Perianal sepsis"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fistula-in-ano",
+          "cells": [
+            {
+              "text": "Recurrent perianal discharge"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn's disease or ulcerative proctitis",
+          "cells": [
+            {
+              "text": "Atypical or lateral fissures"
+            },
+            {
+              "text": "Endoscopy and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anal carcinoma",
+          "cells": [
+            {
+              "text": "Indurated non-healing ulcer"
+            },
+            {
+              "text": "Biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexually transmitted infection (herpes, syphilis)",
+          "cells": [
+            {
+              "text": "Genital or perianal ulceration"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pruritus ani with excoriation",
+          "cells": [
+            {
+              "text": "Itch without fissure"
+            },
+            {
+              "text": "Examination"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anal_fissure-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary fibre, fluids, stool softeners and warm sitz baths",
+          "cells": [
+            {
+              "text": "Defaecation difficulty"
+            },
+            {
+              "text": "Conservative first step"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical glyceryl trinitrate or diltiazem",
+          "cells": [
+            {
+              "text": "Internal sphincter spasm and ischaemia"
+            },
+            {
+              "text": "Breaks the cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Botulinum toxin injection into the internal sphincter",
+          "cells": [
+            {
+              "text": "Fissures failing topical therapy"
+            },
+            {
+              "text": "Second line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral internal sphincterotomy",
+          "cells": [
+            {
+              "text": "Chronic fissure refractory to medical treatment"
+            },
+            {
+              "text": "Small risk of minor incontinence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation of atypical fissures for IBD or infection",
+          "cells": [
+            {
+              "text": "Lateral, multiple or non-healing fissure"
+            },
+            {
+              "text": "Targeted testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of constipation",
+          "cells": [
+            {
+              "text": "Recurrence prevention"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anal_fissure-dx-mgmt",
+      "title": "Diagnosis and management of Anal fissure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe sharp pain on defaecation with bright red blood on paper",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Lateral, multiple or non-healing fissure, or systemic IBD features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent colorectal review if abscess or sepsis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Inspect anal verge; EUA if pain prevents assessment; endoscopy if atypical",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical posterior midline fissure without systemic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Fibre, fluids, softeners and sitz baths",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review IBD, infection, abscess, fistula and carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical GTN or diltiazem for sphincter spasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Botulinum toxin if topical therapy fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lateral internal sphincterotomy for refractory chronic fissure",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute fissures usually heal; chronic ones respond to topical or surgical therapy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

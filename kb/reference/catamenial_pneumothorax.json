@@ -147,5 +147,286 @@
       "caption": "Overview comparison matrix for catamenial pneumothorax."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Respiratory Medicine and Thoracic Surgery reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "catamenial_pneumothorax-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Menstrual and gynaecological history",
+          "cells": [
+            {
+              "text": "Correlates episodes with the menstrual cycle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the thorax",
+          "cells": [
+            {
+              "text": "Diaphragmatic defects, nodules and cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-assisted thoracoscopy",
+          "cells": [
+            {
+              "text": "Direct inspection of the diaphragm and pleura"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology of resected specimens",
+          "cells": [
+            {
+              "text": "Confirms endometrial tissue"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecological assessment",
+          "cells": [
+            {
+              "text": "Pelvic endometriosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "catamenial_pneumothorax-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute pneumothorax care",
+          "cells": [
+            {
+              "text": "Observation, aspiration or intercostal chest drain"
+            },
+            {
+              "text": "Chosen by size and symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Video-assisted thoracoscopic repair",
+          "cells": [
+            {
+              "text": "Repair diaphragmatic fenestrations; resect endometrial and pleural implants"
+            },
+            {
+              "text": "Surgical treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleurodesis",
+          "cells": [
+            {
+              "text": "Mechanical or chemical pleurodesis"
+            },
+            {
+              "text": "Obliterates pleural space to reduce recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal suppression",
+          "cells": [
+            {
+              "text": "Gonadotrophin-releasing hormone agonists"
+            },
+            {
+              "text": "High recurrence with surgery alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecology co-management",
+          "cells": [
+            {
+              "text": "Manage coexisting pelvic endometriosis"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Recurrence surveillance",
+          "cells": [
+            {
+              "text": "Monitor for recurrence, catamenial haemothorax or haemoptysis"
+            },
+            {
+              "text": "Ongoing follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "catamenial_pneumothorax-dx-mgmt",
+      "title": "Diagnosis and management of Catamenial pneumothorax",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected catamenial pneumothorax: recurrent right-sided pneumothorax around menses",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tension, large or bilateral pneumothorax, massive haemothorax)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency decompression; treat massive catamenial haemothorax",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Menstrual history with CT thorax; thoracoscopy for direct inspection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Episodes correlate with menses and diaphragmatic defects are found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Observation, aspiration or chest drain according to size and symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check primary or secondary pneumothorax and cystic lung disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Video-assisted thoracoscopic repair of diaphragmatic fenestrations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Pleurodesis with gonadotrophin-releasing hormone agonist suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Gynaecology review for coexisting pelvic endometriosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Combined treatment markedly reduces recurrence; surgery alone recurs often",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

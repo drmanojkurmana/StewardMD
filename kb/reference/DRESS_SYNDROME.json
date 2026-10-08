@@ -173,5 +173,325 @@
       "caption": "Late viral reactivation (HHV-6) at 2 to 4 weeks often drives clinical flare-ups despite steroid therapy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Entry text (no source string recorded)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "DRESS_SYNDROME-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete blood count with differential",
+          "cells": [
+            {
+              "text": "Eosinophilia and atypical lymphocytosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Hepatitis, the most common visceral involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine and urinalysis",
+          "cells": [
+            {
+              "text": "Renal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary infiltrates or pneumonitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Supports the diagnosis and helps exclude other severe reactions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HHV-6 and other herpesvirus serology or PCR",
+          "cells": [
+            {
+              "text": "Viral reactivation contributing to the course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac enzymes and echocardiography",
+          "cells": [
+            {
+              "text": "Myocarditis if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function tests at follow-up",
+          "cells": [
+            {
+              "text": "Late autoimmune thyroiditis after recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "DRESS_SYNDROME-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw culprit drug",
+          "cells": [
+            {
+              "text": "Immediate and permanent; avoid cross-reactive aromatic anticonvulsants"
+            },
+            {
+              "text": "Do not rechallenge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Significant visceral involvement; IV methylprednisolone 1 mg/kg/day or oral prednisolone 0.5 to 1 mg/kg/day"
+            },
+            {
+              "text": "Taper extremely slowly over 2 to 3 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and emollients",
+          "cells": [
+            {
+              "text": "Cutaneous disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Fluid and electrolyte correction, temperature control, skin barrier"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV immunoglobulin or ciclosporin",
+          "cells": [
+            {
+              "text": "Severe or corticosteroid-refractory multi-organ disease"
+            },
+            {
+              "text": "Intensive care for fulminant hepatic, cardiac or pulmonary failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial liver, renal, cardiac and pulmonary monitoring",
+          "cells": [
+            {
+              "text": "Relapse and herpesvirus (HHV-6) reactivation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term follow-up",
+          "cells": [
+            {
+              "text": "Delayed autoimmune sequelae such as thyroiditis and type 1 diabetes"
+            },
+            {
+              "text": "Document the drug allergy prominently"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "DRESS_SYNDROME-dx-mgmt",
+      "title": "Diagnosis and management of DRESS syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, morbilliform rash and facial oedema 2 to 8 weeks after a new drug",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Organ involvement: fulminant hepatitis, myocarditis, pneumonitis or nephritis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Intensive care for fulminant hepatic, cardiac or pulmonary failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stop all suspect drugs (allopurinol, carbamazepine, lamotrigine and others)",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CBC shows eosinophilia or atypical lymphocytes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Screen HHV-6, CMV and EBV by PCR; calculate RegiSCAR score",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review SJS/TEN and AGEP; skin biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Systemic corticosteroids: IV methylprednisolone 1 mg/kg/day or oral prednisolone",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Taper steroids slowly over 2 to 3 months to prevent severe relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Add IV immunoglobulin or ciclosporin if corticosteroid-refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mortality about 5 to 10%; screen later for thyroiditis and type 1 diabetes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

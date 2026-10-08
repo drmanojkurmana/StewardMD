@@ -149,5 +149,324 @@
       "caption": "Overview comparison matrix for ataxic hemiparesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ataxic_hemiparesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Diffusion-weighted MRI",
+          "cells": [
+            {
+              "text": "Small pontine or capsular infarct"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of vascular risk factors",
+          "cells": [
+            {
+              "text": "Blood pressure, glucose and lipids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography and carotid imaging",
+          "cells": [
+            {
+              "text": "Excludes large-vessel disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac evaluation",
+          "cells": [
+            {
+              "text": "Embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes non-vascular causes of ataxia and weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat imaging",
+          "cells": [
+            {
+              "text": "Where the initial scan is unrevealing but signs persist"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxic_hemiparesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cerebellar infarction with limb ataxia",
+          "cells": [
+            {
+              "text": "Disproportionate ataxia must not be taken as a primary cerebellar stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem infarct producing crossed sign",
+          "cells": [
+            {
+              "text": "Crossed signs point to a brainstem lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ataxic_hemiparesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute stroke care",
+          "cells": [
+            {
+              "text": "Intravenous thrombolysis within the window if no contraindication"
+            },
+            {
+              "text": "Delivered in the stroke pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiplatelet therapy",
+          "cells": [
+            {
+              "text": "Aspirin; short dual antiplatelet course in eligible minor stroke"
+            },
+            {
+              "text": "Secondary prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-vessel risk control",
+          "cells": [
+            {
+              "text": "Antihypertensives, high-intensity statin and glycaemic control"
+            },
+            {
+              "text": "Aggressive control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy for weakness and incoordination"
+            },
+            {
+              "text": "Combined weakness and incoordination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifestyle and source screening",
+          "cells": [
+            {
+              "text": "Smoking cessation; screen for cardioembolic or large-vessel source"
+            },
+            {
+              "text": "Source exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Recurrent lacunar events and cumulative vascular cognitive impairment"
+            },
+            {
+              "text": "Ongoing surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ataxic_hemiparesis-dx-mgmt",
+      "title": "Diagnosis and management of Ataxic hemiparesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hemiparesis with ataxia from a small pontine or capsular lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Progressive deficit, cortical signs or reduced consciousness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent stroke assessment and thrombolysis if within window",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DWI MRI, vascular risk factors, MR or CT angiography, ECG, metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Small pontine or capsular infarct on DWI MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antiplatelet therapy and small-vessel risk-factor control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intensive statin and blood pressure control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early neurorehabilitation for weakness and incoordination",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for cardioembolic or large-vessel source",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor recurrent lacunar events and vascular cognitive impairment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

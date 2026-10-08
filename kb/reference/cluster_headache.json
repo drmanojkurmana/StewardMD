@@ -146,5 +146,303 @@
       "caption": "Overview comparison matrix for cluster headache."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Bradley's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cluster_headache-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the brain with attention to pituitary and cavernous sinus",
+          "cells": [
+            {
+              "text": "Excludes secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MR or CT angiography",
+          "cells": [
+            {
+              "text": "When dissection or aneurysm is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary hormone screen",
+          "cells": [
+            {
+              "text": "Where imaging suggests a sellar lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG before and during verapamil",
+          "cells": [
+            {
+              "text": "Cardiac conduction effects"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cluster_headache-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Migraine, particularly unilateral migraine",
+          "cells": [
+            {
+              "text": "Patients lie still rather than pace during attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paroxysmal hemicrania",
+          "cells": [
+            {
+              "text": "Indomethacin-responsive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigeminal neuralgia",
+          "cells": [
+            {
+              "text": "Lacks ipsilateral cranial autonomic features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cluster_headache-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High-flow oxygen with subcutaneous or intranasal triptan",
+          "cells": [
+            {
+              "text": "Sumatriptan or zolmitriptan for acute attacks"
+            },
+            {
+              "text": "Fast-acting abortive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verapamil",
+          "cells": [
+            {
+              "text": "First-line preventive; lithium or topiramate as alternatives"
+            },
+            {
+              "text": "Suppresses attacks during a bout"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroid course or greater occipital nerve block",
+          "cells": [
+            {
+              "text": "Transitional rapid control"
+            },
+            {
+              "text": "While preventives take effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galcanezumab",
+          "cells": [
+            {
+              "text": "Anti-CGRP antibody as preventive in episodic disease"
+            },
+            {
+              "text": "Preventive option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of alcohol and vasodilators",
+          "cells": [
+            {
+              "text": "Reliably provoke attacks during an active bout"
+            },
+            {
+              "text": "Trigger avoidance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cluster_headache-dx-mgmt",
+      "title": "Diagnosis and management of Cluster headache",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cluster headache: strictly unilateral orbital pain with autonomic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (first or changed attack pattern, persistent Horner, papilloedema)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurology review for secondary cause or carotid dissection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain with pituitary views and vascular imaging where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Typical attack pattern with secondary causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "High-flow oxygen and sumatriptan or zolmitriptan for acute attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check migraine, paroxysmal hemicrania and trigeminal neuralgia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Verapamil as first-line preventive after baseline ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids or occipital nerve block for transitional control",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid alcohol and vasodilators in an active bout; galcanezumab option",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refractory disease: neurology referral for neuromodulation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

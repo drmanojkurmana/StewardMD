@@ -146,5 +146,324 @@
       "caption": "Overview comparison matrix for acquired von willebrand syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_von_willebrand_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "VWF activity (platelet binding) and antigen, with their ratio",
+          "cells": [
+            {
+              "text": "Loss of VWF function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VWF multimer analysis",
+          "cells": [
+            {
+              "text": "Loss of high-molecular-weight forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII activity",
+          "cells": [
+            {
+              "text": "May be reduced in parallel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum protein electrophoresis and immunofixation",
+          "cells": [
+            {
+              "text": "Paraprotein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and marrow or clonality studies",
+          "cells": [
+            {
+              "text": "Lympho- or myeloproliferative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "High-shear lesion such as aortic stenosis when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_von_willebrand_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Inherited von Willebrand disease",
+          "cells": [
+            {
+              "text": "Acquired and late onset, without family history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired haemophilia A",
+          "cells": [
+            {
+              "text": "Factor VIII autoantibody rather than VWF loss"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_von_willebrand_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Treat the underlying cause",
+          "cells": [
+            {
+              "text": "Valve replacement for severe aortic stenosis (Heyde syndrome), or control of a clonal disorder"
+            },
+            {
+              "text": "Myeloproliferative, lymphoproliferative or plasma-cell disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Desmopressin, VWF or factor VIII concentrates, tranexamic acid",
+          "cells": [
+            {
+              "text": "Acute bleeding"
+            },
+            {
+              "text": "Antifibrinolytics for mucosal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous immunoglobulin",
+          "cells": [
+            {
+              "text": "Antibody-mediated disease with a paraprotein"
+            },
+            {
+              "text": "Where a paraprotein is present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Address gastrointestinal angiodysplasia bleeding",
+          "cells": [
+            {
+              "text": "Angiodysplasia bleeding"
+            },
+            {
+              "text": "May respond to correcting the multimer defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor VWF activity, antigen and factor VIII",
+          "cells": [
+            {
+              "text": "Guides replacement"
+            },
+            {
+              "text": "Serial monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology-led coordination",
+          "cells": [
+            {
+              "text": "Therapy for the associated condition"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_von_willebrand_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Acquired von Willebrand syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Late-onset mucocutaneous bleeding with no personal or family bleeding history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Major GI bleeding, or bleeding with severe aortic stenosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; control bleeding and treat the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "VWF activity and antigen ratio, multimer analysis and factor VIII",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Loss of high-molecular-weight VWF multimers confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Screen for paraprotein, lymphoproliferative or myeloproliferative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review inherited VWD, platelet disorders and acquired haemophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat the cause: valve replacement or control of the clonal disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Desmopressin, VWF or factor VIII concentrate and tranexamic acid for bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "IVIg for antibody-mediated disease; correct the multimer defect",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bleeding often resolves once the underlying disorder is treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

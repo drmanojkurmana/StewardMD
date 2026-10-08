@@ -193,5 +193,545 @@
       "caption": "Overview comparison matrix for inflammatory bowel disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Ulcerative Colitis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/inflammatory-bowel-disease-ibd/ulcerative-colitis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "inflammatory_bowel_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Classifying and grading inflammatory bowel disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "UC extent (Montreal)",
+          "cells": [
+            {
+              "text": "E1 proctitis; E2 left-sided, distal to splenic flexure; E3 extensive"
+            },
+            {
+              "text": "40 to 50% rectum or rectosigmoid only; about 20% pancolitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild UC (S1)",
+          "unit": "stools/day",
+          "cells": [
+            {
+              "text": "4 or fewer stools/day, no systemic illness, normal ESR",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "Outpatient therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate UC (S2)",
+          "unit": "stools/day",
+          "cells": [
+            {
+              "text": "4 or more stools/day, minimal toxicity",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "Outpatient escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:Severe UC (S3)}}",
+          "unit": "stools/day",
+          "cells": [
+            {
+              "text": "6 or more bloody stools/day with pulse 90 or more, temp 37.5 C or more, Hb under 10.5 g/dL or ESR 30 mm/h or more",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Admit for IV therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Megacolon",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Transverse colon over 6 cm in a severe attack",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Perforation risk; steroids mask peritoneal signs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crohn disease (Montreal)",
+          "cells": [
+            {
+              "text": "Location L1 ileal, L2 colonic, L3 ileocolonic, L4 upper; behaviour B1, B2 stricturing, B3 penetrating; p for perianal"
+            },
+            {
+              "text": "Guides therapy and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "UC: crypt distortion, basal plasmacytosis, crypt abscesses; CD: noncaseating granulomas"
+            },
+            {
+              "text": "Granulomas found more often in resection than biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Faecal calprotectin",
+          "cells": [
+            {
+              "text": "Raised with intestinal inflammation"
+            },
+            {
+              "text": "Separates IBD from IBS; less sensitive for isolated ileal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indeterminate colitis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Up to 15% cannot be classified initially",
+              "op": "<=",
+              "value": 15
+            },
+            {
+              "text": "Overlapping features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_bowel_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic inflammatory bowel disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infective colitis (Campylobacter, Salmonella, Shigella, STEC)",
+          "cells": [
+            {
+              "text": "Acute onset; can trigger IBD relapse"
+            },
+            {
+              "text": "Stool culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clostridioides difficile colitis",
+          "cells": [
+            {
+              "text": "Antibiotic or hospital exposure"
+            },
+            {
+              "text": "C. difficile toxin testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amoebiasis",
+          "cells": [
+            {
+              "text": "Must be excluded before steroids"
+            },
+            {
+              "text": "Stool microscopy or antigen, serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Yersinia or intestinal tuberculosis",
+          "cells": [
+            {
+              "text": "Terminal ileal or ileocaecal disease mimicking Crohn"
+            },
+            {
+              "text": "Culture, biopsy for granuloma type and AFB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMV colitis",
+          "cells": [
+            {
+              "text": "Steroid-refractory flare"
+            },
+            {
+              "text": "Biopsy immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ischaemic colitis",
+          "cells": [
+            {
+              "text": "Older patient, watershed segment"
+            },
+            {
+              "text": "Colonoscopy and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microscopic colitis",
+          "cells": [
+            {
+              "text": "Watery diarrhoea, normal-looking mucosa"
+            },
+            {
+              "text": "Random colonic biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAID or checkpoint-inhibitor colitis",
+          "cells": [
+            {
+              "text": "Drug exposure"
+            },
+            {
+              "text": "Drug history and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "No bleeding, normal inflammatory markers"
+            },
+            {
+              "text": "Faecal calprotectin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "inflammatory_bowel_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating inflammatory bowel disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rectal and oral mesalamine (5-ASA)",
+          "cells": [
+            {
+              "text": "Mild UC"
+            },
+            {
+              "text": "Enemas once or twice daily for proctitis; oral plus rectal for left-sided or extensive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biologic with or without immunomodulator",
+          "cells": [
+            {
+              "text": "Moderate UC or moderate to severe Crohn disease"
+            },
+            {
+              "text": "Anti-TNF, vedolizumab, ustekinumab; JAK inhibitors or S1P modulators alternatives"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids",
+          "cells": [
+            {
+              "text": "Induction only"
+            },
+            {
+              "text": "Not for maintenance; responders in severe UC switch to prednisone 40 mg daily then taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "{{hy:IV glucocorticoids, admission}}",
+          "cells": [
+            {
+              "text": "Severe UC"
+            },
+            {
+              "text": "If no response in 3 to 7 days, IV cyclosporine, infliximab or colectomy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fulminant colitis",
+          "cells": [
+            {
+              "text": "Toxic colitis or megacolon"
+            },
+            {
+              "text": "NPO, fluids, stop antidiarrhoeals and narcotics, IV steroids or cyclosporine plus antibiotics; surgery if no improvement in 24 to 48 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Colectomy",
+          "cells": [
+            {
+              "text": "Massive bleeding, perforation, fulminant colitis, cancer, refractory disease"
+            },
+            {
+              "text": "Elective for dysplasia or steroid dependence"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Crohn surgery",
+          "cells": [
+            {
+              "text": "Stricture, fistula, abscess"
+            },
+            {
+              "text": "Resection, stricturoplasty, drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysplasia surveillance",
+          "cells": [
+            {
+              "text": "Colitis over 8 years (not proctitis alone); from diagnosis with PSC"
+            },
+            {
+              "text": "Every 1 to 5 years by risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "All"
+            },
+            {
+              "text": "Nutrition, iron replacement, stop smoking in Crohn disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck states thiopurine or methotrexate monotherapy is not recommended for moderate UC, while the entry text lists thiopurines and methotrexate as maintenance options; current guidance favours biologics. Both kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "inflammatory_bowel_disease-dx-mgmt",
+      "title": "Diagnosis and management of inflammatory bowel disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic bloody diarrhoea, abdominal pain or perianal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stool cultures, C. difficile, parasites; CRP, Hb, albumin, calprotectin",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat infection and reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Colonoscopy with ileal and segmental biopsies; MR or CT enterography",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Severe attack (6 or more bloody stools plus systemic toxicity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Admit, IV steroids, exclude megacolon and CMV",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Response within 3 to 7 days?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Rescue infliximab or cyclosporine, else colectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Switch to oral prednisone and start maintenance",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Mild UC?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Oral and rectal mesalamine",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Biologic or targeted therapy with steroid induction",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

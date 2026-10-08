@@ -148,5 +148,305 @@
       "caption": "Overview comparison matrix for cor triatriatum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Moss and Adams' Heart Disease in Infants, Children and Adolescents",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cor_triatriatum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthoracic and transoesophageal echocardiography",
+          "cells": [
+            {
+              "text": "Dividing membrane seen; orifice gradient measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler across the membrane",
+          "cells": [
+            {
+              "text": "Flow gradient; pulmonary artery pressure estimated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MR angiography",
+          "cells": [
+            {
+              "text": "Pulmonary venous connections and chamber anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Pulmonary venous congestion and cardiac silhouette"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrocardiogram",
+          "cells": [
+            {
+              "text": "Right ventricular hypertrophy or atrial arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cor_triatriatum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital mitral stenosis",
+          "cells": [
+            {
+              "text": "Pitfall: membrane confused with mitral stenosis changes surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supravalvar mitral ring",
+          "cells": [
+            {
+              "text": "Named look-alike that changes surgical planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Total or partial anomalous pulmonary venous return",
+          "cells": [
+            {
+              "text": "Named look-alike with venous connection anomaly"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cor_triatriatum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical resection of the membrane",
+          "cells": [
+            {
+              "text": "Definitive and generally curative when obstruction is significant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative stabilisation",
+          "cells": [
+            {
+              "text": "Diuretics for pulmonary venous congestion; urgent referral for critical obstruction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repair of associated lesions",
+          "cells": [
+            {
+              "text": "Atrial septal defect or anomalous pulmonary venous connection at surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atrial arrhythmia",
+          "cells": [
+            {
+              "text": "Rate or rhythm control and anticoagulation as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative surveillance",
+          "cells": [
+            {
+              "text": "Echocardiography for residual or recurrent obstruction and pressure recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist team",
+          "cells": [
+            {
+              "text": "Congenital cardiology and cardiac surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cor_triatriatum-dx-mgmt",
+      "title": "Diagnosis and management of Cor triatriatum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cor triatriatum: infant with pulmonary venous congestion, membrane",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (pulmonary oedema, low output or shock, rising pulmonary pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiac surgery referral for critical infantile obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography with membrane gradient; Doppler; CT or MR angiography; ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does echocardiography show a membrane dividing the left atrium with a gradient?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider mitral stenosis, supravalvar ring or anomalous pulmonary venous return",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Surgical resection of the obstructing membrane as definitive treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pre-operative diuretics for pulmonary venous congestion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair of associated septal or venous connection lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Postoperative echocardiographic surveillance for recurrent obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resection is generally curative with low mortality when done early",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

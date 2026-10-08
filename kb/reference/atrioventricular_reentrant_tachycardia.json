@@ -149,5 +149,324 @@
       "caption": "Overview comparison matrix for atrioventricular reentrant tachycardia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atrioventricular_reentrant_tachycardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG in sinus rhythm",
+          "cells": [
+            {
+              "text": "Delta wave and short PR interval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "12-lead ECG during tachycardia",
+          "cells": [
+            {
+              "text": "RP relationship and QRS alternans"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Excludes Ebstein anomaly and other structural disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiological study",
+          "cells": [
+            {
+              "text": "Localises the pathway and its antegrade refractory period"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise testing",
+          "cells": [
+            {
+              "text": "Abrupt loss of pre-excitation suggests a low-risk pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory monitoring",
+          "cells": [
+            {
+              "text": "Correlates symptoms with rhythm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular_reentrant_tachycardia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrioventricular nodal reentrant tachycardia",
+          "cells": [
+            {
+              "text": "Separated by EP study showing dual AV nodal physiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal atrial tachycardia",
+          "cells": [
+            {
+              "text": "Separated by the RP relationship on the tachycardia ECG"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular_reentrant_tachycardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vagal manoeuvres and IV adenosine",
+          "cells": [
+            {
+              "text": "Terminate acute orthodromic tachycardia"
+            },
+            {
+              "text": "Blocks the AV nodal limb of the circuit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid AV nodal blockers in pre-excited AF",
+          "cells": [
+            {
+              "text": "Avoid adenosine, verapamil and digoxin"
+            },
+            {
+              "text": "Pre-excited atrial fibrillation or antidromic tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synchronised DC cardioversion",
+          "cells": [
+            {
+              "text": "When haemodynamically unstable"
+            },
+            {
+              "text": "Unstable patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Accessory-pathway catheter ablation",
+          "cells": [
+            {
+              "text": "Durable curative treatment"
+            },
+            {
+              "text": "Curative option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk stratification",
+          "cells": [
+            {
+              "text": "EP study or exercise testing for antegrade conduction"
+            },
+            {
+              "text": "Sudden death risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiarrhythmic drug therapy",
+          "cells": [
+            {
+              "text": "Long-term therapy"
+            },
+            {
+              "text": "Patients who decline or are unsuitable for ablation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atrioventricular_reentrant_tachycardia-dx-mgmt",
+      "title": "Diagnosis and management of atrioventricular reentrant tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal tachycardia with a delta wave and short PR on sinus ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Pre-excited AF with very short RR intervals or syncope?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardioversion if unstable; avoid AV nodal blockers in pre-excited AF",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Sinus ECG for delta wave, tachycardia ECG, echo, EP study, exercise test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathway localised on EP study with antegrade conduction assessed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Accessory-pathway catheter ablation as the curative treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat EP mapping",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vagal manoeuvres and IV adenosine for orthodromic tachycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Risk-stratify antegrade conduction for sudden death risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Long-term antiarrhythmic drugs if ablation is declined",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ablation is curative; follow-up of risk stratification",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

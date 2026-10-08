@@ -150,5 +150,88 @@
       "caption": "Overview comparison matrix for bohring-opitz syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Nature Reviews chromatinopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bohring_opitz_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in Bohring-Opitz syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Exome or genome sequencing", "cells": [{"text": "De novo truncating ASXL1 variant"}], "cite": "c1"},
+        {"parameter": "Abdominal ultrasound surveillance", "cells": [{"text": "Wilms tumour (nephroblastoma) in early childhood"}], "cite": "c1"},
+        {"parameter": "Feeding and swallowing assessment", "cells": [{"text": "Severe reflux and aspiration; need for gastrostomy"}], "cite": "c1"},
+        {"parameter": "Brain MRI", "cells": [{"text": "Structural anomalies"}], "cite": "c1"},
+        {"parameter": "Sleep and respiratory evaluation", "cells": [{"text": "Apnoea and airway compromise"}], "cite": "c1"},
+        {"parameter": "Ophthalmological review", "cells": [{"text": "Ocular manifestations"}], "cite": "c1"},
+        {"parameter": "Growth monitoring", "cells": [{"text": "Failure to thrive"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bohring_opitz_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Bohring-Opitz syndrome",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Bainbridge-Ropers syndrome (ASXL3)", "cells": [{"text": "Clinically overlapping but distinct; ASXL1 sequencing separates them"}], "cite": "c1"},
+        {"parameter": "Somatic ASXL1 variants in myeloid malignancy", "cells": [{"text": "Somatic changes differ from the germline de novo truncating variant that defines this syndrome"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bohring_opitz_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bohring-Opitz syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "Multidisciplinary supportive care"}, {"text": "No disease-specific therapy"}], "cite": "c1"},
+        {"parameter": "Feeding", "cells": [{"text": "Anti-reflux therapy and gastrostomy feeding for safe nutrition"}, {"text": "Severe reflux and aspiration"}], "cite": "c1"},
+        {"parameter": "Sleep and respiratory support", "cells": [{"text": "Evaluation and support for apnoea and airway compromise"}, {"text": "Major cause of early mortality"}], "cite": "c1"},
+        {"parameter": "Wilms tumour surveillance", "cells": [{"text": "Regular abdominal ultrasound through early childhood"}, {"text": "Increased tumour risk"}], "cite": "c1"},
+        {"parameter": "Development", "cells": [{"text": "Developmental therapies and multidisciplinary support"}, {"text": "Severe neurodevelopmental impairment"}], "cite": "c1"},
+        {"parameter": "Ophthalmology", "cells": [{"text": "Ophthalmology review for ocular features"}, {"text": "Ocular manifestations"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling for the de novo ASXL1 variant"}, {"text": "Low but real recurrence risk from germline mosaicism"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bohring_opitz_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Bohring-Opitz syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Trigonocephaly, microcephaly, flexed wrists and fingers, growth restriction and feeding problems", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: apnoea or cyanotic episodes, abdominal mass or haematuria, or recurrent aspiration?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: airway and respiratory support; urgent renal imaging for Wilms tumour", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Feeding and swallow assessment; growth monitoring; brain MRI", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Exome or genome sequencing for a de novo truncating ASXL1 variant", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "De novo ASXL1 truncating variant confirmed?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Gastrostomy and anti-reflux therapy; ultrasound surveillance for Wilms tumour", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider ASXL3 (Bainbridge-Ropers), ASXL2 or other trigonocephaly syndromes", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Developmental support; ophthalmology review; genetic counselling", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "High early mortality from aspiration and apnoea; survivors have severe disability", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

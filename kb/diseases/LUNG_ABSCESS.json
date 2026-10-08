@@ -277,5 +277,602 @@
       "caption": "Diagnostic and clinical overview matrix for lung abscess."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Lung Abscess",
+      "url": "https://www.merckmanuals.com/professional/pulmonary-disorders/lung-abscess/lung-abscess",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 258-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "LUNG_ABSCESS-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing lung abscess",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Cavity size",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Usually a single dominant cavity >2 cm",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Necrosis and cavitation after infection defines an abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "At-risk host",
+          "cells": [
+            {
+              "text": "Aspiration risk (altered consciousness, dysphagia) or immunosuppression"
+            },
+            {
+              "text": "Raises pretest probability"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Consolidation with a single cavity and air-fluid level in a dependent segment"
+            },
+            {
+              "text": "{{hy:Confirms the diagnosis in an at-risk patient}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Location",
+          "cells": [
+            {
+              "text": "Posterior upper lobe or superior lower lobe segments; right more than left"
+            },
+            {
+              "text": "Typical of aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Putrid breath, sputum or empyema",
+          "cells": [
+            {
+              "text": "Foul smell"
+            },
+            {
+              "text": "Essentially diagnostic of anaerobic abscess"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary vs secondary",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 80% primary (aspiration), 20% secondary",
+              "value": 80,
+              "op": "="
+            },
+            {
+              "text": "Secondary: obstruction, systemic illness or immunocompromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest",
+          "cells": [
+            {
+              "text": "Shows cavitation earlier than plain film"
+            },
+            {
+              "text": "Separates abscess from empyema or bulla; finds obstructing mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Negative cultures, atypical course, immunocompromise or cancer risk"
+            },
+            {
+              "text": "Excludes endobronchial cancer, fungi, mycobacteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Multiple cavities",
+          "cells": [
+            {
+              "text": "Several abscesses"
+            },
+            {
+              "text": "Consider echocardiography for endocarditis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Likely pathogens, aspiration-prone host",
+          "cells": [
+            {
+              "text": "Anaerobes plus microaerophilic or anaerobic streptococci, Gemella"
+            },
+            {
+              "text": "Basis for empirical anaerobic cover"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Likely pathogens, immunocompromised host",
+          "cells": [
+            {
+              "text": "M. tuberculosis, Nocardia, Rhodococcus, Legionella, P. aeruginosa, Klebsiella, Aspergillus, Cryptococcus"
+            },
+            {
+              "text": "Early cultures and broader workup"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Likely pathogens, previously healthy host",
+          "cells": [
+            {
+              "text": "S. aureus, S. milleri, K. pneumoniae, group A streptococcus; E. histolytica, Paragonimus, Strongyloides"
+            },
+            {
+              "text": "Non-aspiration causes in healthy patients"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Pathogen rows rephrase the owner's Tables PDF, Table 258-2 (cavitary lung infection); embolic lesions are usually S. aureus, P. aeruginosa or F. necrophorum."
+    },
+    {
+      "id": "LUNG_ABSCESS-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic lung abscess",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Empyema",
+          "cells": [
+            {
+              "text": "Pleural collection that may need urgent drainage"
+            },
+            {
+              "text": "{{hy:CT chest}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bulla with air-fluid level",
+          "cells": [
+            {
+              "text": "Pre-existing thin-walled air space"
+            },
+            {
+              "text": "CT chest"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Apical cavity rather than dependent segment"
+            },
+            {
+              "text": "Induced sputum for TB in endemic areas or HIV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cavitating bronchial carcinoma",
+          "cells": [
+            {
+              "text": "No response to antibiotics, no surrounding consolidation, no fever"
+            },
+            {
+              "text": "Bronchoscopy with biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Septic emboli or embolic disease",
+          "cells": [
+            {
+              "text": "Multiple cavities rather than one"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Non-infectious cavitating vasculitis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary infarction",
+          "cells": [
+            {
+              "text": "Cavitation after embolism"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary sequestration, cysts, sarcoidosis",
+          "cells": [
+            {
+              "text": "Listed non-infectious mimics"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Best-test cells marked needs-source were not stated in the sources opened."
+    },
+    {
+      "id": "LUNG_ABSCESS-treatment",
+      "kind": "treatment",
+      "title": "Treatment of lung abscess",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-lactam with beta-lactamase inhibitor (for example ampicillin-sulbactam)",
+          "cells": [
+            {
+              "text": "{{hy:First line}}"
+            },
+            {
+              "text": "Covers anaerobes and microaerophilic streptococci"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carbapenem (for example imipenem-cilastatin) or ceftriaxone plus metronidazole",
+          "cells": [
+            {
+              "text": "Alternative, especially if gram-negatives suspected"
+            },
+            {
+              "text": "Adjust to culture results plus anaerobic cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Moxifloxacin, or levofloxacin plus metronidazole",
+          "cells": [
+            {
+              "text": "Penicillin allergy"
+            },
+            {
+              "text": "Moxifloxacin also an oral option"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral amoxicillin-clavulanate",
+          "cells": [
+            {
+              "text": "Less ill patients, or step-down after defervescence and stability"
+            },
+            {
+              "text": "IV to oral switch when stable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Linezolid or vancomycin",
+          "cells": [
+            {
+              "text": "MRSA"
+            },
+            {
+              "text": "Add to anaerobic cover as needed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metronidazole alone",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Misses microaerophilic streptococci"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Generally 3 to 6 weeks or longer, until cavity resolves or small stable scar",
+              "range": [
+                3,
+                6
+              ]
+            },
+            {
+              "text": "No optimal duration established"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reassessment",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "No improvement after 7 to 10 days",
+              "range": [
+                7,
+                10
+              ]
+            },
+            {
+              "text": "Look for resistant pathogen, obstruction or non-infectious cause; bronchoscopy, CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous or endobronchial drainage",
+          "cells": [
+            {
+              "text": "Non-responding abscess; any accompanying empyema"
+            },
+            {
+              "text": "Percutaneous for subpleural, bronchoscopic catheter for central"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical resection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10% not responding to antibiotics, or pulmonary gangrene",
+              "op": "=",
+              "value": 10
+            },
+            {
+              "text": "Lobectomy most common"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Sources opened give no drug doses. Chest physiotherapy and postural drainage are not recommended by most authorities (Merck)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "LUNG_ABSCESS-dx-mgmt",
+      "title": "Diagnosis and management of lung abscess",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, cough, putrid sputum in aspiration-prone or immunocompromised patient",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Chest radiograph",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Cavity with air-fluid level?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT chest: confirm cavity, exclude empyema, bulla or mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cancer risk, atypical course or immunocompromised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Bronchoscopy with BAL or biopsy; TB sputum if at risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start beta-lactam/beta-lactamase inhibitor (or alternative)",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Improved by day 7 to 10?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Oral step-down; continue until resolution, often 3 to 6 weeks",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Re-evaluate: resistant pathogen, obstruction, empyema",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Percutaneous or endobronchial drainage; surgery if still failing",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cavity resolved or small stable scar",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Source control achieved",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No or unclear"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

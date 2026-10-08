@@ -160,5 +160,479 @@
       "caption": "Overview comparison matrix for botulism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Botulism",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/anaerobic-bacteria/botulism",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 387-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "botulism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Clinical and laboratory diagnosis of botulism",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic syndrome",
+          "cells": [
+            {
+              "text": "{{hy:Symmetric cranial nerve palsies then descending flaccid paralysis}}"
+            },
+            {
+              "text": "Afebrile, alert, normal sensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysphagia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "86% of 332 US cases"
+            },
+            {
+              "text": "Also fatigue 85%, blurred vision 80%, slurred speech 78%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ptosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "81%"
+            },
+            {
+              "text": "Often the first neurological sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF protein",
+          "cells": [
+            {
+              "text": "Usually normal"
+            },
+            {
+              "text": "Raised protein favours GBS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EMG",
+          "cells": [
+            {
+              "text": "Augmented response to rapid repetitive stimulation"
+            },
+            {
+              "text": "Normal axonal conduction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Excludes basilar stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxin assays",
+          "cells": [
+            {
+              "text": "Serum, stool, gastric fluid, food, wound culture"
+            },
+            {
+              "text": "Through health authorities; mouse bioassay gold standard"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Two or more cases after shared food",
+          "cells": [
+            {
+              "text": "Near-pathognomonic"
+            },
+            {
+              "text": "Public health emergency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound botulism clue",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Trauma or drug injection within 2",
+              "op": "<=",
+              "value": 2
+            },
+            {
+              "text": "Serum toxin or anaerobic wound culture"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "botulism-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of botulism",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Guillain-Barre syndrome (Miller Fisher variant)",
+          "cells": [
+            {
+              "text": "{{hy:Ascending, sensory signs, raised CSF protein}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myasthenia gravis",
+          "cells": [
+            {
+              "text": "Fatigable weakness; antibodies and nerve stimulation tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lambert-Eaton syndrome",
+          "cells": [
+            {
+              "text": "Proximal limb weakness, often with cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick paralysis",
+          "cells": [
+            {
+              "text": "Tick found; resolves on removal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Basilar stroke",
+          "cells": [
+            {
+              "text": "Abnormal brain imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poliomyelitis",
+          "cells": [
+            {
+              "text": "Fever, asymmetric paralysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tetrodotoxin, shellfish, heavy metal, curare or belladonna poisoning",
+          "cells": [
+            {
+              "text": "Toxic exposure history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Myopathies with ptosis (mitochondrial, oculopharyngeal, myotonic, Graves)",
+          "cells": [
+            {
+              "text": "Chronic course; listed with botulism under neuromuscular ptosis"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "botulism-treatment",
+      "kind": "treatment",
+      "title": "Treatment of botulism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Equine heptavalent antitoxin (HBAT)",
+          "cells": [
+            {
+              "text": "{{hy:As soon as clinically diagnosed}}; do not wait for tests"
+            },
+            {
+              "text": "Adult: one 20 or 50 mL vial diluted 1:10, slow infusion; infants under 1 year 10% of adult dose; less useful after 72 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Obtain antitoxin via state health department",
+          "cells": [
+            {
+              "text": "US cases"
+            },
+            {
+              "text": "CDC is the only source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Human botulism immune globulin (BabyBIG)",
+          "cells": [
+            {
+              "text": "Infant botulism types A and B"
+            },
+            {
+              "text": "Via Infant Botulism Treatment and Prevention Program"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICU with serial vital capacity",
+          "cells": [
+            {
+              "text": "All hospitalised cases"
+            },
+            {
+              "text": "Paralysis can hide respiratory distress"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intubation and ventilation",
+          "cells": [
+            {
+              "text": "Respiratory failure or airway collapse"
+            },
+            {
+              "text": "Recovery takes weeks to months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasogastric feeding",
+          "cells": [
+            {
+              "text": "Bulbar weakness"
+            },
+            {
+              "text": "Preferred over IV nutrition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Debridement plus penicillin or metronidazole",
+          "cells": [
+            {
+              "text": "Wound botulism"
+            },
+            {
+              "text": "Parenteral antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Notify public health",
+          "cells": [
+            {
+              "text": "Every foodborne case"
+            },
+            {
+              "text": "May be first case of an outbreak"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Mortality about 5 to 8% with supportive care (Merck); over 95% of non-infant US patients recover (Harrison)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "botulism-dx-mgmt",
+      "title": "Diagnosis and management of botulism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Afebrile alert patient with cranial nerve palsies and descending weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Neurological exam, vital capacity, brain imaging, CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Raised CSF protein, sensory signs or abnormal imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider GBS, stroke or other mimic",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Notify health department; send serum, stool, food for toxin",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Give antitoxin now (BabyBIG if infant)",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Falling vital capacity or airway compromise?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ICU intubation and ventilation",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Wound source?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Debride and give penicillin or metronidazole",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Supportive care until nerve terminals regenerate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

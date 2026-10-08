@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for crigler-najjar syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sherlock's Diseases of the Liver and Biliary System / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crigler_najjar_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fractionated bilirubin",
+          "cells": [
+            {
+              "text": "Predominantly unconjugated hyperbilirubinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis screen with blood film, reticulocytes and haptoglobin",
+          "cells": [
+            {
+              "text": "Haemolysis excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response to enzyme-inducer challenge",
+          "cells": [
+            {
+              "text": "Separates type 2 from type 1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UGT1A1 genetic testing",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bile bilirubin conjugate analysis",
+          "cells": [
+            {
+              "text": "Where specialised testing is available"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crigler_najjar_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Gilbert syndrome",
+          "cells": [
+            {
+              "text": "Pitfall: severe Crigler-Najjar mistaken for benign Gilbert"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dubin-Johnson and Rotor syndromes",
+          "cells": [
+            {
+              "text": "Conjugated hyperbilirubinaemia distinguishes them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced inhibition of bilirubin conjugation",
+          "cells": [
+            {
+              "text": "Medication history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crigler_najjar_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensive phototherapy (type 1)",
+          "cells": [
+            {
+              "text": "Keeps unconjugated bilirubin in a safe range"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phenobarbital (type 2)",
+          "cells": [
+            {
+              "text": "Enzyme induction to upregulate residual UGT1A1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation (type 1)",
+          "cells": [
+            {
+              "text": "Definitive cure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exchange transfusion",
+          "cells": [
+            {
+              "text": "Acute dangerous rises or early encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid precipitants",
+          "cells": [
+            {
+              "text": "Fasting, dehydration, intercurrent illness and bilirubin-displacing drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxicity surveillance",
+          "cells": [
+            {
+              "text": "Serum bilirubin with neurological and brainstem auditory response monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive UGT1A1; family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crigler_najjar_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Crigler-Najjar syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Crigler-Najjar syndrome: unconjugated jaundice from infancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (lethargy, hypotonia, failure to respond to phototherapy, intercurrent illness)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent exchange transfusion for dangerous bilirubin rise or encephalopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fractionated bilirubin; haemolysis screen; enzyme-inducer challenge; UGT1A1",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does enzyme-inducer challenge separate type 1 from type 2?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Gilbert syndrome, haemolysis or conjugated disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensive phototherapy in type 1 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Phenobarbital enzyme induction in type 2 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Liver transplantation as definitive cure for type 1",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid fasting, dehydration and bilirubin-displacing drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Type 2 generally has normal life expectancy; untreated type 1 risks kernicterus",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

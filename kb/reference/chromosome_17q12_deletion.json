@@ -152,5 +152,336 @@
       "caption": "Overview comparison matrix for 17q12 deletion syndrome (rcad)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chromosome_17q12_deletion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "First-line test for the HNF1B-containing deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HNF1B sequencing and dosage analysis",
+          "cells": [
+            {
+              "text": "Where the microarray is normal but the phenotype fits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Structural kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function, electrolytes and HbA1c",
+          "cells": [
+            {
+              "text": "Renal and glycaemic surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic imaging",
+          "cells": [
+            {
+              "text": "Mullerian anomalies in females"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_17q12_deletion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated HNF1B point mutation or intragenic deletion",
+          "cells": [
+            {
+              "text": "Overlapping phenotype with a normal microarray"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant polycystic kidney disease",
+          "cells": [
+            {
+              "text": "Cystic kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mayer-Rokitansky-Kuster-Hauser syndrome",
+          "cells": [
+            {
+              "text": "Mullerian aplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_17q12_deletion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal monitoring",
+          "cells": [
+            {
+              "text": "Monitor renal function and imaging; manage chronic kidney disease through nephrology"
+            },
+            {
+              "text": "Progressive kidney disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes management",
+          "cells": [
+            {
+              "text": "Insulin is often required as sulfonylureas are less effective; endocrinology input"
+            },
+            {
+              "text": "HNF1B-related diabetes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Magnesium replacement",
+          "cells": [
+            {
+              "text": "Monitor and replace magnesium; manage electrolyte disturbance"
+            },
+            {
+              "text": "Hypomagnesaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic enzyme replacement",
+          "cells": [
+            {
+              "text": "Pancreatic enzyme replacement where exocrine insufficiency is present"
+            },
+            {
+              "text": "Pancreatic hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gynaecology",
+          "cells": [
+            {
+              "text": "Assess and manage Mullerian tract anomalies in females"
+            },
+            {
+              "text": "Females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and psychiatric support",
+          "cells": [
+            {
+              "text": "For the minority with a neurodevelopmental or psychiatric phenotype"
+            },
+            {
+              "text": "Around 15 percent of carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental testing and recurrence risk; many deletions are de novo"
+            },
+            {
+              "text": "Recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chromosome_17q12_deletion-dx-mgmt",
+      "title": "Diagnosis and management of 17q12 deletion syndrome (RCAD)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected 17q12 deletion (RCAD): renal cysts or structural kidney disease with diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (declining renal function, new hyperglycaemia, hypomagnesaemia)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: nephrology and endocrinology review for progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray, HNF1B sequencing if normal, renal ultrasound and bloods",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "HNF1B-containing deletion or variant with renal and glycaemic phenotype confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Renal function monitoring through nephrology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check HNF1B point mutation, ADPKD and MRKH syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Insulin often needed for HNF1B-related diabetes; endocrinology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Replace magnesium and manage electrolyte disturbance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pancreatic enzyme replacement where exocrine insufficiency is present",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Counselling; many deletions are de novo; developmental support where needed",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -176,5 +176,593 @@
       "caption": "Overview comparison matrix for diabetes mellitus: management and therapies."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Diabetic Ketoacidosis",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/diabetic-ketoacidosis-dka",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "US Pharmacist, ADA Standards of Care 2025 treatment updates",
+      "url": "https://www.uspharmacist.com/article/diabetestreatment-updates",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetes_mellitus_management_and_therapies-diagnostic",
+      "kind": "diagnostic",
+      "title": "Glycaemic targets and hyperglycaemic crisis criteria",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "HbA1c goal",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<7% (<=6.5% for selected patients)",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "Lenient <7.5 to 8% with cognitive impairment, hypoglycaemia unawareness, short life expectancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CGM time in range 70 to 180 mg/dL",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">70%",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "<4% below 70 mg/dL and <1% below 54 mg/dL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inpatient glucose target",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "About 140 to 180",
+              "range": [
+                140,
+                180
+              ]
+            },
+            {
+              "text": "NICE-SUGAR: tight 81 to 108 mg/dL raised mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DKA: pH",
+          "cells": [
+            {
+              "text": "<7.30",
+              "op": "<",
+              "value": 7.3
+            },
+            {
+              "text": "Severe if <7.0"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "DKA: bicarbonate",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<15 to 18",
+              "op": "<",
+              "value": 18
+            },
+            {
+              "text": "Mild 15 to 18, moderate 10 to 15"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "DKA: anion gap",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": ">10 to 12",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "High anion gap acidosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "DKA: beta-hydroxybutyrate",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": ">3.0",
+              "op": ">",
+              "value": 3.0
+            },
+            {
+              "text": "{{hy:Prefer blood BHB over urine nitroprusside}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DKA: glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">200 to 250",
+              "op": ">",
+              "value": 200
+            },
+            {
+              "text": "Euglycaemic DKA 100 to 250 mg/dL, often on SGLT2 inhibitors"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HHS: glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "About 600 to 1200",
+              "range": [
+                600,
+                1200
+              ]
+            },
+            {
+              "text": "Osmolality >300, bicarbonate >18, pH >7.3, minimal ketones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corrected sodium",
+          "cells": [
+            {
+              "text": "Add about 1.6 mmol/L per 100 mg/dL glucose rise"
+            },
+            {
+              "text": "Normal measured sodium in DKA means a large water deficit"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetes_mellitus_management_and_therapies-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of DKA and HHS",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Starvation ketosis",
+          "cells": [
+            {
+              "text": "Bicarbonate usually preserved"
+            },
+            {
+              "text": "Bicarbonate and glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcoholic ketoacidosis",
+          "cells": [
+            {
+              "text": "Alcohol history; bicarbonate usually >15 meq/L"
+            },
+            {
+              "text": "Glucose, bicarbonate, history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other high anion gap acidosis",
+          "cells": [
+            {
+              "text": "Toxins, lactic acidosis, renal failure"
+            },
+            {
+              "text": "Lactate, osmolar gap, toxicology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute pancreatitis or surgical abdomen",
+          "cells": [
+            {
+              "text": "Abdominal pain mimics DKA; amylase in DKA is often salivary"
+            },
+            {
+              "text": "{{hy:Serum lipase}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Euglycaemic DKA",
+          "cells": [
+            {
+              "text": "Normal or mildly raised glucose on SGLT2 inhibitor"
+            },
+            {
+              "text": "Ketones and bicarbonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke, hypoxaemia or intoxication",
+          "cells": [
+            {
+              "text": "Altered mental state overlapping severe DKA or HHS"
+            },
+            {
+              "text": "Neuroimaging, gases, toxicology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Best-test cells for alcoholic ketoacidosis and toxin screens are standard practice; the entry gives the distinguishing features."
+    },
+    {
+      "id": "diabetes_mellitus_management_and_therapies-treatment",
+      "kind": "treatment",
+      "title": "Treatment of DKA (adults) and long-term glycaemic therapy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or detail"
+      ],
+      "rows": [
+        {
+          "parameter": "0.9% saline",
+          "cells": [
+            {
+              "text": "First step in DKA"
+            },
+            {
+              "text": "1 to 1.5 L in first hour, then 250 to 500 mL/h; switch to 0.45% if sodium normal or high"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Potassium",
+          "cells": [
+            {
+              "text": "K <4.5 mEq/L or once urine flowing"
+            },
+            {
+              "text": "20 to 30 mEq per litre to keep K 4 to 5; withhold if K >5"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hold insulin until potassium replaced",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "K <3.3",
+              "op": "<",
+              "value": 3.3
+            },
+            {
+              "text": "{{hy:Give K 40 mEq/h until K >=3.3, then start insulin}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV regular insulin",
+          "cells": [
+            {
+              "text": "After K >=3.3"
+            },
+            {
+              "text": "Optional 0.1 unit/kg bolus, then 0.1 unit/kg/h; double if glucose falls <50 to 75 mg/dL in first hour"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add dextrose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Glucose <250",
+              "op": "<",
+              "value": 250
+            },
+            {
+              "text": "5 to 10% dextrose; keep glucose 150 to 200; continue insulin until gap closes and ketones clear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sodium bicarbonate",
+          "cells": [
+            {
+              "text": "Only if pH <7 after 1 h",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "50 to 100 mEq over 2 h, then recheck pH and K"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Phosphate",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Only if <0.78",
+              "op": "<",
+              "value": 0.78
+            },
+            {
+              "text": "Potassium phosphate 1 to 2 mmol/kg over 6 to 12 h; watch calcium"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HHS",
+          "cells": [
+            {
+              "text": "Older patient, marked dehydration"
+            },
+            {
+              "text": "Aggressive fluids, insulin, electrolytes, thromboprophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inpatient basal plus prandial and correction insulin",
+          "cells": [
+            {
+              "text": "Hospitalised hyperglycaemia"
+            },
+            {
+              "text": "Sliding scale alone is inadequate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin, then SGLT2 inhibitor or GLP-1 RA",
+          "cells": [
+            {
+              "text": "Type 2 DM; cardiorenal agents for ASCVD, HF, CKD regardless of HbA1c"
+            },
+            {
+              "text": "Combination can start at diagnosis"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Basal-bolus insulin or pump",
+          "cells": [
+            {
+              "text": "Type 1 DM"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "DKA doses are from Merck Manual Professional. Harrison gives the same structure; the 2024 international consensus may differ in detail and was not opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetes_mellitus_management_and_therapies-dx-mgmt",
+      "title": "Diagnosis and management of hyperglycaemic crisis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperglycaemia with vomiting, abdominal pain, drowsiness or Kussmaul breathing",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Glucose, BHB, venous gas, electrolytes, anion gap, osmolality, lipase",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "pH <7.30, bicarbonate <18 and ketones present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Glucose 600 to 1200 mg/dL with osmolality >300?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "HHS: aggressive fluids, insulin, electrolytes, thromboprophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Look for other cause of acidosis or hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "0.9% saline 1 to 1.5 L in first hour",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Potassium <3.3 mEq/L?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Give potassium 40 mEq/h, hold insulin",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Insulin 0.1 unit/kg/h with 20 to 30 mEq K per litre",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Add 5 to 10% dextrose when glucose <250 mg/dL",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Anion gap closed and ketones cleared?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Overlap to subcutaneous insulin; treat precipitant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

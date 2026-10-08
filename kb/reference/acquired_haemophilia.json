@@ -155,5 +155,352 @@
       "caption": "Overview comparison matrix for acquired haemophilia a."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_haemophilia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Mixing study with immediate and incubated samples",
+          "cells": [
+            {
+              "text": "Time-dependent inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor VIII activity with other intrinsic pathway factor assays",
+          "cells": [
+            {
+              "text": "Localises the defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bethesda or Nijmegen-modified Bethesda assay",
+          "cells": [
+            {
+              "text": "Inhibitor titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilute Russell viper venom time",
+          "cells": [
+            {
+              "text": "Excludes lupus anticoagulant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand factor antigen and activity",
+          "cells": [
+            {
+              "text": "Excludes acquired von Willebrand syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy screening and autoimmune serology",
+          "cells": [
+            {
+              "text": "Underlying association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline full blood count, renal and liver function",
+          "cells": [
+            {
+              "text": "Before starting immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_haemophilia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Lupus anticoagulant or antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Prolongs aPTT but predisposes to thrombosis rather than bleeding"
+            },
+            {
+              "text": "Dilute Russell viper venom time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital haemophilia A with an alloantibody inhibitor",
+          "cells": [
+            {
+              "text": "Haemarthroses dominate in congenital disease"
+            },
+            {
+              "text": "Bethesda inhibitor titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired von Willebrand syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Von Willebrand factor antigen and activity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_haemophilia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bypassing agents (recombinant factor VIIa or activated prothrombin complex) or recombinant porcine factor VIII",
+          "cells": [
+            {
+              "text": "Controls acute bleeding"
+            },
+            {
+              "text": "Used for acute bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression with corticosteroids, often with cyclophosphamide or rituximab",
+          "cells": [
+            {
+              "text": "Eradicates the factor VIII autoantibody"
+            },
+            {
+              "text": "Prompt inhibitor eradication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid intramuscular injections, arterial punctures and non-essential procedures",
+          "cells": [
+            {
+              "text": "Provoke bleeding"
+            },
+            {
+              "text": "Avoid invasive procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat any underlying trigger",
+          "cells": [
+            {
+              "text": "Malignancy, autoimmune disease or a causative drug"
+            },
+            {
+              "text": "Investigate and treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor factor VIII activity and Bethesda titre; anti-infective prophylaxis",
+          "cells": [
+            {
+              "text": "Gauges response to treatment"
+            },
+            {
+              "text": "Prophylaxis during immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology follow-up after remission",
+          "cells": [
+            {
+              "text": "Detects relapse"
+            },
+            {
+              "text": "Relapse can occur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_haemophilia-dx-mgmt",
+      "title": "Diagnosis and management of Acquired Haemophilia A",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New spontaneous bleeding in an older adult or postpartum woman, no bleeding history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Expanding haematoma, airway compromise or intracranial bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency bleeding control and airway support; haematology review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Isolated prolonged aPTT: mixing study with immediate and incubated samples",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Time-dependent inhibitor on mixing with low factor VIII confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Bethesda titre, VWF studies, malignancy and autoimmune screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude lupus anticoagulant (dRVVT) and von Willebrand disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Bypassing agents (rFVIIa or activated PCC) to control bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression to eradicate factor VIII autoantibody",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid intramuscular injections and non-essential invasive procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most achieve durable remission with prompt inhibitor eradication; relapse possible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

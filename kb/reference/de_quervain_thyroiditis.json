@@ -142,5 +142,298 @@
       "caption": "Overview comparison matrix for de quervain thyroiditis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "de_quervain_thyroiditis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Thyroid function tests through the phases",
+          "cells": [
+            {
+              "text": "Thyrotoxic, then hypothyroid, then recovery phases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR and CRP",
+          "cells": [
+            {
+              "text": "Typically very high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radioactive iodine uptake",
+          "cells": [
+            {
+              "text": "Low in the thyrotoxic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up thyroid function",
+          "cells": [
+            {
+              "text": "Detects persistent hypothyroidism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "de_quervain_thyroiditis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Suppurative (infective) thyroiditis",
+          "cells": [
+            {
+              "text": "High fever and a fluctuant tender mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graves disease",
+          "cells": [
+            {
+              "text": "Low radioactive iodine uptake in the thyrotoxic phase"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "de_quervain_thyroiditis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pain relief",
+          "cells": [
+            {
+              "text": "NSAIDs; systemic corticosteroids for severe or unremitting pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-blockade",
+          "cells": [
+            {
+              "text": "Controls thyrotoxic symptoms in the initial phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antithyroid drugs and radioiodine",
+          "cells": [
+            {
+              "text": "Thyrotoxicosis is destructive, not hormone overproduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levothyroxine",
+          "cells": [
+            {
+              "text": "If symptomatic in the hypothyroid phase; usually temporary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function monitoring",
+          "cells": [
+            {
+              "text": "Through the triphasic course and at follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Most recover normal thyroid function; recurrence is uncommon"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "de_quervain_thyroiditis-dx-mgmt",
+      "title": "Diagnosis and management of De Quervain thyroiditis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected de Quervain thyroiditis: painful thyroid with very high inflammatory markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suppurative features, severe compression, persistent hypothyroidism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: exclude suppurative thyroiditis and treat severe compression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Thyroid function, ESR and CRP, radioiodine uptake and thyroid ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is radioiodine uptake low with markedly raised ESR or CRP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Graves disease, suppurative thyroiditis or painless thyroiditis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "NSAIDs; systemic corticosteroids for severe or unremitting pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Beta-blockade for thyrotoxic symptoms in the initial phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid antithyroid drugs and radioiodine in this destructive thyrotoxicosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Levothyroxine if symptomatic in the hypothyroid phase, usually temporary",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor thyroid function through the course and at follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Most regain normal thyroid function within months; a minority stay hypothyroid",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

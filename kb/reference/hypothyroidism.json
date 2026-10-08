@@ -155,5 +155,483 @@
       "caption": "Overview comparison matrix for hypothyroidism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypothyroidism",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/thyroid-disorders/hypothyroidism"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypothyroidism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing hypothyroidism",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "TSH",
+          "cells": [
+            {
+              "text": "Raised in primary disease"
+            },
+            {
+              "text": "{{hy:Normal TSH excludes primary but not central hypothyroidism}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overt primary hypothyroidism",
+          "unit": "mIU/L",
+          "cells": [
+            {
+              "text": "TSH usually above 10 mIU/L with low free T4",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Symptomatic end of the spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subclinical hypothyroidism",
+          "cells": [
+            {
+              "text": "Raised TSH with normal free T4"
+            },
+            {
+              "text": "Confirm the raised TSH persists over about 3 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central hypothyroidism",
+          "cells": [
+            {
+              "text": "Low free T4 with low, normal or slightly raised TSH"
+            },
+            {
+              "text": "Needs pituitary assessment; TSH cannot monitor therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T3",
+          "cells": [
+            {
+              "text": "Normal in about 25% of patients"
+            },
+            {
+              "text": "Not indicated for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TPO and thyroglobulin antibodies",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in over 95% of autoimmune hypothyroidism",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Confirms Hashimoto cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated laboratory changes",
+          "cells": [
+            {
+              "text": "High CK, cholesterol, triglycerides; normocytic or macrocytic anaemia"
+            },
+            {
+              "text": "Resolve with replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxoedema coma",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Low consciousness, hypothermia; mortality 20 to 40%",
+              "range": [
+                20,
+                40
+              ]
+            },
+            {
+              "text": "Elderly, triggered by infection, cold, sedatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypothyroidism-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes of hypothyroidism",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Sick euthyroid (nonthyroidal illness)",
+          "cells": [
+            {
+              "text": "Acute illness alters thyroid tests"
+            },
+            {
+              "text": "Repeat tests after recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central hypothyroidism",
+          "cells": [
+            {
+              "text": "Pituitary or hypothalamic disease, other axes low"
+            },
+            {
+              "text": "Free T4 with other pituitary hormones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poor adherence to levothyroxine",
+          "cells": [
+            {
+              "text": "High TSH with normal or high free T4 on treatment"
+            },
+            {
+              "text": "Adherence history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression or dementia",
+          "cells": [
+            {
+              "text": "Fatigue, slowing, poor memory"
+            },
+            {
+              "text": "TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephrotic syndrome",
+          "cells": [
+            {
+              "text": "Oedema with high lipids"
+            },
+            {
+              "text": "Urine protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid lymphoma or nodular goitre",
+          "cells": [
+            {
+              "text": "Growing asymmetric goitre on Hashimoto background"
+            },
+            {
+              "text": "Ultrasound and FNA"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypothyroidism-treatment",
+      "kind": "treatment",
+      "title": "Treating hypothyroidism",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "Levothyroxine, full dose",
+          "unit": "mcg/day",
+          "cells": [
+            {
+              "text": "Healthy young or middle-aged adult"
+            },
+            {
+              "text": "100 mcg daily or 1.7 mcg/kg daily; usual maintenance 75 to 150 mcg",
+              "op": "=",
+              "value": 100
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Levothyroxine, low start",
+          "unit": "mcg/day",
+          "cells": [
+            {
+              "text": "Older adult or heart disease"
+            },
+            {
+              "text": "{{hy:25 mcg daily, raised every 6 weeks}}",
+              "op": "=",
+              "value": 25
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring target",
+          "cells": [
+            {
+              "text": "Primary disease"
+            },
+            {
+              "text": "Lowest dose giving mid-normal TSH; mid-normal free T4 in central disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subclinical, treat",
+          "unit": "mIU/L",
+          "cells": [
+            {
+              "text": "TSH above 10 mIU/L",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Treat even if asymptomatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Subclinical, consider trial",
+          "unit": "mIU/L",
+          "cells": [
+            {
+              "text": "TSH 4.5 to 10 mIU/L",
+              "range": [
+                4.5,
+                10
+              ]
+            },
+            {
+              "text": "If symptoms such as fatigue or depression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Pregnant or planning pregnancy"
+            },
+            {
+              "text": "Dose often needs to rise; monitor TSH"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoid first",
+          "cells": [
+            {
+              "text": "Suspected coexisting adrenal insufficiency"
+            },
+            {
+              "text": "Give steroid before levothyroxine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Myxoedema coma",
+          "cells": [
+            {
+              "text": "Emergency, ICU"
+            },
+            {
+              "text": "IV levothyroxine 300 to 500 mcg load then 75 to 100 mcg daily; IV liothyronine optional; glucocorticoid; avoid external rewarming and hypotonic fluids"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypothyroidism-dx-mgmt",
+      "title": "Diagnosis and management of hypothyroidism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fatigue, cold intolerance, weight gain, goitre or screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Measure TSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Altered consciousness and hypothermia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Myxoedema coma: ICU, IV thyroxine plus steroid",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "TSH raised?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Pituitary disease suspected?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Hypothyroidism unlikely",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Check free T4 and pituitary axes; dose to free T4",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Check free T4 and TPO antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Free T4 low or TSH above 10 mIU/L?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Levothyroxine titrated to mid-normal TSH",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Subclinical: repeat in 3 months; trial if symptomatic",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

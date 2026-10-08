@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for corrosive ingestion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "corrosive_ingestion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Early upper GI endoscopy",
+          "cells": [
+            {
+              "text": "Mucosal injury graded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erect chest and abdominal imaging",
+          "cells": [
+            {
+              "text": "Free air or mediastinal air"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of chest and abdomen",
+          "cells": [
+            {
+              "text": "Transmural injury and perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Tissue necrosis markers"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corrosive_ingestion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Foreign body ingestion",
+          "cells": [
+            {
+              "text": "Named look-alike of oesophageal injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute epiglottitis or airway infection",
+          "cells": [
+            {
+              "text": "Named look-alike with airway symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spontaneous oesophageal perforation",
+          "cells": [
+            {
+              "text": "Named perforation look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corrosive_ingestion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway protection",
+          "cells": [
+            {
+              "text": "Early intubation for stridor or laryngeal oedema; nil by mouth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid emesis and neutralisation",
+          "cells": [
+            {
+              "text": "Neutralising agents, lavage and activated charcoal worsen injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resuscitation and analgesia",
+          "cells": [
+            {
+              "text": "IV fluids and adequate analgesia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early endoscopy",
+          "cells": [
+            {
+              "text": "Once stabilised, to grade depth and guide management and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acid suppression and antibiotics",
+          "cells": [
+            {
+              "text": "PPI; broad-spectrum IV antibiotics only if perforation or mediastinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical referral",
+          "cells": [
+            {
+              "text": "Perforation, mediastinitis or peritonitis; oesophagectomy or gastrectomy as indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strictures and surveillance",
+          "cells": [
+            {
+              "text": "Repeated endoscopic dilatation; long-term surveillance for carcinoma"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "corrosive_ingestion-dx-mgmt",
+      "title": "Diagnosis and management of Corrosive ingestion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected corrosive ingestion: caustic exposure with oral or throat pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (stridor, perforation pain, mediastinitis, shock, rising lactate)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent airway assessment; early intubation for airway involvement",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Early endoscopy; erect imaging for free air; CT; arterial gas and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does endoscopy grade the injury as superficial or deep?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider foreign body, scald injury or pill oesophagitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Airway protection and nil by mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid emesis, neutralising agents and lavage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV fluids and analgesia; PPI for acid suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urgent surgical review for perforation; dilatation for strictures",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Minor injury heals well; deep circumferential injury often causes strictures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

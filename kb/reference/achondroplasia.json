@@ -147,5 +147,307 @@
       "caption": "Overview comparison matrix for achondroplasia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "achondroplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skeletal survey",
+          "cells": [
+            {
+              "text": "Rhizomelic shortening and characteristic pelvic and spinal changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FGFR3 molecular testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Craniocervical MRI and neurological assessment",
+          "cells": [
+            {
+              "text": "Foramen magnum stenosis in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "Central or obstructive sleep apnoea when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial head circumference and growth charting",
+          "cells": [
+            {
+              "text": "Condition-specific growth curves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging",
+          "cells": [
+            {
+              "text": "Symptomatic canal stenosis or kyphosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "achondroplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vosoritide (C-type natriuretic peptide analogue)",
+          "cells": [
+            {
+              "text": "Increases growth velocity in eligible children"
+            },
+            {
+              "text": "Disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early craniocervical MRI with neurological and respiratory assessment",
+          "cells": [
+            {
+              "text": "Detects foramen magnum stenosis"
+            },
+            {
+              "text": "Neurosurgical decompression if cervicomedullary compression develops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography with management of sleep apnoea",
+          "cells": [
+            {
+              "text": "Obstructive and central sleep apnoea"
+            },
+            {
+              "text": "Guided by polysomnography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ENT surveillance for otitis media and hearing loss",
+          "cells": [
+            {
+              "text": "Conductive hearing loss"
+            },
+            {
+              "text": "Monitor speech development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management of kyphosis, genu varum and spinal stenosis",
+          "cells": [
+            {
+              "text": "Thoracolumbar kyphosis and later symptomatic stenosis"
+            },
+            {
+              "text": "Decompressive surgery for stenosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary growth monitoring",
+          "cells": [
+            {
+              "text": "Achondroplasia-specific growth charts"
+            },
+            {
+              "text": "Genetics, orthopaedics, ENT and neurosurgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            },
+            {
+              "text": "Family-planning advice"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "achondroplasia-dx-mgmt",
+      "title": "Diagnosis and management of Achondroplasia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Disproportionate short stature with rhizomelic limb shortening and macrocephaly",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Central apnoea, hypotonia or long-tract signs in infancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent craniocervical MRI and neurosurgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey and FGFR3 molecular testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FGFR3 variant confirmed on molecular testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Craniocervical MRI, polysomnography and achondroplasia growth charts",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review hypochondroplasia, SHOX-related and other dysplasias",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vosoritide to increase growth velocity in eligible children",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Polysomnography-guided treatment of sleep apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "ENT care for otitis media and orthopaedic care for kyphosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Intelligence and lifespan usually normal with surveillance; adult stature reduced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

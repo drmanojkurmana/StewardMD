@@ -157,5 +157,468 @@
       "caption": "Overview comparison matrix for babesiosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Babesiosis",
+      "url": "https://www.cdc.gov/babesiosis/hcp/clinical-care/index.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "babesiosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of babesiosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Giemsa thin smear",
+          "cells": [
+            {
+              "text": "{{hy:Tetrads (Maltese cross)}}, rings, extracellular merozoites, no pigment"
+            },
+            {
+              "text": "Definitive; separates from malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Real-time PCR (18S rRNA)",
+          "unit": "parasites/uL",
+          "cells": [
+            {
+              "text": "Detects 1 to 10",
+              "range": [
+                1,
+                10
+              ]
+            },
+            {
+              "text": "Speciation and low-grade infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IFA serology",
+          "cells": [
+            {
+              "text": "IgM and IgG"
+            },
+            {
+              "text": "Single positive not enough; persists over 1 year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "Low haptoglobin, raised LDH and bilirubin"
+            },
+            {
+              "text": "Dark urine and jaundice suggest severe haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood count",
+          "cells": [
+            {
+              "text": "Anaemia; thrombocytopenia often precedes severe anaemia"
+            },
+            {
+              "text": "WBC variable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasitaemia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">4% predicts severe disease",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Can reach 30 to 40% in immunocompromised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Age of symptomatic patients",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "About 80% are 50 or older",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Asplenic and immunocompromised at highest risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme co-infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About half"
+            },
+            {
+              "text": "Test for Lyme and anaplasmosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic delay",
+          "unit": "days",
+          "cells": [
+            {
+              "text": ">7 after onset",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Predisposes to complicated disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "babesiosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of babesiosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "{{hy:Hemozoin pigment, gametocytes, schizonts}}; travel history"
+            },
+            {
+              "text": "Smear morphology; rapid malaria antigen test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lyme disease",
+          "cells": [
+            {
+              "text": "Same tick; often coexists"
+            },
+            {
+              "text": "Lyme serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaplasmosis",
+          "cells": [
+            {
+              "text": "Same tick; leukopenia, morulae"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Borrelia miyamotoi infection",
+          "cells": [
+            {
+              "text": "Tick-borne relapsing fever"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HELLP syndrome",
+          "cells": [
+            {
+              "text": "Pregnancy with haemolysis, high enzymes, low platelets"
+            },
+            {
+              "text": "Smear for parasites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other haemolytic anaemia or TMA",
+          "cells": [
+            {
+              "text": "Haemolysis with low platelets without parasites"
+            },
+            {
+              "text": "Smear and PCR negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "babesiosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of babesiosis (adults)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and duration"
+      ],
+      "rows": [
+        {
+          "parameter": "Atovaquone plus azithromycin (oral)",
+          "cells": [
+            {
+              "text": "{{hy:Preferred}}, mild to moderate outpatient"
+            },
+            {
+              "text": "Atovaquone 750 mg twice daily with fatty food; azithromycin 500 mg day 1 then 250 mg daily; 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clindamycin plus quinine (oral)",
+          "cells": [
+            {
+              "text": "Alternative"
+            },
+            {
+              "text": "Clindamycin 600 mg three times daily plus quinine 650 mg three times daily; 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atovaquone plus IV azithromycin",
+          "cells": [
+            {
+              "text": "Hospitalised severe illness"
+            },
+            {
+              "text": "Atovaquone 750 mg twice daily; azithromycin 500 mg IV daily; step down to oral to complete 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV clindamycin plus oral quinine",
+          "cells": [
+            {
+              "text": "Severe illness alternative"
+            },
+            {
+              "text": "Clindamycin 600 mg IV four times daily; quinine 650 mg three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Higher-dose azithromycin",
+          "cells": [
+            {
+              "text": "Immunocompromised or more severe"
+            },
+            {
+              "text": "1000 mg then 500 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolonged therapy",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Immunocompromised"
+            },
+            {
+              "text": "At least 6 weeks; until smears negative for 2 consecutive weeks",
+              "op": ">=",
+              "value": 6
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Red cell exchange transfusion",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Parasitaemia >10%",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Or high parasitaemia with severe haemolysis or organ decline"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison reports fatality 0.6% with atovaquone plus azithromycin versus 5 to 9% with older clindamycin plus quinine. Routine follow-up PCR is not advised in immunocompetent patients."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "babesiosis-dx-mgmt",
+      "title": "Diagnosis and management of babesiosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever and fatigue after tick exposure in an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Thin smear, Babesia PCR, CBC, haemolysis markers, Lyme test",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Parasites on smear or PCR positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider Lyme, anaplasmosis, malaria, other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Severe: high parasitaemia, organ failure, asplenia, immunosuppression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral atovaquone plus azithromycin for 7 to 10 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Admit; atovaquone plus IV azithromycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Parasitaemia >10% or severe haemolysis or organ decline?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Red cell exchange transfusion",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Smear monitoring; prolonged course if immunocompromised",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

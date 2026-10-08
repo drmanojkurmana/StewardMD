@@ -160,5 +160,501 @@
       "caption": "Overview comparison matrix for electrical storm and incessant ventricular tachycardia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "EMCrit, Stellate Ganglion Block for electrical storm",
+      "url": "https://emcrit.org/emcrit/stellate-ganglion-block/",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "electrical_storm_and_incessant_ventricular-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and characterising electrical storm",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrical storm",
+          "unit": "episodes per 24 h",
+          "cells": [
+            {
+              "text": "3 or more VT or VF, each needing intervention",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "{{hy:Medical emergency}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incessant VT",
+          "cells": [
+            {
+              "text": "Recurs shortly after any conversion to sinus rhythm"
+            },
+            {
+              "text": "Usually monomorphic; may be too slow for ICD detection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incidence, primary-prevention ICD",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 4"
+            },
+            {
+              "text": "Up to 20% with prior VT or resuscitated arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD interrogation",
+          "cells": [
+            {
+              "text": "Confirms true ventricular arrhythmia"
+            },
+            {
+              "text": "Excludes lead fault or atrial arrhythmia; stored electrograms show triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monomorphic vs polymorphic morphology",
+          "cells": [
+            {
+              "text": "Guides management"
+            },
+            {
+              "text": "Polymorphic suggests ischaemia, long QT, Brugada"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "QT interval and V1 to V2 pattern",
+          "cells": [
+            {
+              "text": "Long QT or Brugada pattern"
+            },
+            {
+              "text": "Specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium and magnesium",
+          "cells": [
+            {
+              "text": "Electrolyte trigger"
+            },
+            {
+              "text": "Replete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI or endomyocardial biopsy",
+          "cells": [
+            {
+              "text": "Scar or inflammatory cardiomyopathy"
+            },
+            {
+              "text": "New storm without prior heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ATP success",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Terminates over 70 of VT episodes",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "Reduces shocks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "electrical_storm_and_incessant_ventricular-ddx",
+      "kind": "ddx",
+      "title": "Causes and substrates of electrical storm",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute ischaemia or ACS",
+          "cells": [
+            {
+              "text": "{{hy:Polymorphic VT or VF}}"
+            },
+            {
+              "text": "ECG, troponin, angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long QT with torsades",
+          "cells": [
+            {
+              "text": "Prolonged QT, drug or congenital"
+            },
+            {
+              "text": "ECG QT measurement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brugada syndrome",
+          "cells": [
+            {
+              "text": "Rsr' with ST elevation in V1 to V2"
+            },
+            {
+              "text": "ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory cardiomyopathy",
+          "cells": [
+            {
+              "text": "Giant cell, sarcoid or viral myocarditis"
+            },
+            {
+              "text": "Cardiac MRI, biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PVC-triggered polymorphic VT or VF",
+          "cells": [
+            {
+              "text": "Purkinje or papillary muscle triggers"
+            },
+            {
+              "text": "Stored electrograms, MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiarrhythmic proarrhythmia",
+          "cells": [
+            {
+              "text": "Amiodarone or flecainide making VT incessant"
+            },
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inappropriate ICD shocks",
+          "cells": [
+            {
+              "text": "Lead malfunction or atrial arrhythmia"
+            },
+            {
+              "text": "ICD interrogation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "electrical_storm_and_incessant_ventricular-treatment",
+      "kind": "treatment",
+      "title": "Management of electrical storm",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct triggers: ischaemia, potassium, magnesium, proarrhythmic drugs",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Revascularise ischaemic substrate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV amiodarone",
+          "cells": [
+            {
+              "text": "{{hy:First-line antiarrhythmic}}"
+            },
+            {
+              "text": "Can cause hypotension and bradycardia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-blockade (propranolol, esmolol or metoprolol)",
+          "cells": [
+            {
+              "text": "With amiodarone to blunt sympathetic drive"
+            },
+            {
+              "text": "Non-selective agents favoured"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sedation; deep sedation and intubation if refractory",
+          "cells": [
+            {
+              "text": "Ongoing storm"
+            },
+            {
+              "text": "Reduces sympathetic drive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ICD reprogramming",
+          "cells": [
+            {
+              "text": "Ineffective or inappropriate shocks"
+            },
+            {
+              "text": "ATP and VF zone above 220 bpm reduce shocks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Left stellate ganglion block (about 10 mL 1 to 2% lidocaine)",
+          "cells": [
+            {
+              "text": "Drug-refractory storm"
+            },
+            {
+              "text": "Meta-analysis: 70% complete resolution; no proven mortality benefit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Catheter ablation",
+          "cells": [
+            {
+              "text": "Refractory storm or triggering PVCs"
+            },
+            {
+              "text": "Can be life-saving"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isoprenaline or quinidine; magnesium",
+          "cells": [
+            {
+              "text": "Brugada storm; torsades"
+            },
+            {
+              "text": "Avoid QT-prolonging drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IABP or ECMO",
+          "cells": [
+            {
+              "text": "Haemodynamically unstable refractory storm"
+            },
+            {
+              "text": "Bridge to ablation or transplant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Open sources consulted did not state IV doses for amiodarone or beta-blockers."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "electrical_storm_and_incessant_ventricular-dx-mgmt",
+      "title": "Management of electrical storm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Three or more VT or VF episodes in 24 h, or multiple ICD shocks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamically unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Defibrillation and ACLS",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Interrogate ICD; 12-lead ECG; potassium, magnesium; ischaemia check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Polymorphic VT or VF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat ischaemia, long QT or Brugada specifically",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "IV amiodarone plus beta-blocker; sedation; reprogram ICD",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Storm controlled?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Deep sedation, stellate ganglion block, catheter ablation",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Mechanical support and specialist centre if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Substrate workup and long-term plan",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

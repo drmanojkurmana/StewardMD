@@ -148,5 +148,310 @@
       "caption": "Overview comparison matrix for cdkl5 deficiency disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ILAE classification / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cdkl5_deficiency_disorder-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted CDKL5 testing, epilepsy gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Establishes the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "May be normal early; later shows multifocal or high-amplitude epileptiform abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Usually normal early; excludes structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological and visual assessment",
+          "cells": [
+            {
+              "text": "Cortical visual impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuropsychological evaluation",
+          "cells": [
+            {
+              "text": "Severely impaired development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cdkl5_deficiency_disorder-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Sodium valproate, vigabatrin or corticosteroids for spasms; ganaxolone or cannabidiol as newer options"
+            },
+            {
+              "text": "Drug-resistant epilepsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ketogenic diet",
+          "cells": [
+            {
+              "text": "Adjunct for refractory seizures"
+            },
+            {
+              "text": "Adjunct therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vagus nerve stimulation or epilepsy surgery",
+          "cells": [
+            {
+              "text": "For selected refractory cases"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental therapies",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and speech and communication therapy"
+            },
+            {
+              "text": "Developmental support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vision support",
+          "cells": [
+            {
+              "text": "Vision support and low-vision aids"
+            },
+            {
+              "text": "Cortical visual impairment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbidity care",
+          "cells": [
+            {
+              "text": "Gastrostomy where needed; manage reflux, scoliosis, sleep and gut problems"
+            },
+            {
+              "text": "Feeding difficulties and comorbidities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure emergency plan",
+          "cells": [
+            {
+              "text": "Rescue medication plan and awareness of sudden unexpected death in epilepsy"
+            },
+            {
+              "text": "Seizure emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked CDKL5 variant and recurrence risk"
+            },
+            {
+              "text": "X-linked"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cdkl5_deficiency_disorder-dx-mgmt",
+      "title": "Diagnosis and management of CDKL5 deficiency disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CDKL5 deficiency disorder: early seizures with severe developmental impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (refractory early seizures, regression, feeding or respiratory risk)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: refractory epileptic spasms and seizure emergency plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CDKL5 testing or epilepsy gene panel; EEG, MRI and visual assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CDKL5 variant confirmed with characteristic seizures and development?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antiseizure medication for drug-resistant epilepsy, including spasms",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Rett syndrome (MECP2), West syndrome and FOXG1 disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ketogenic diet as an adjunct for refractory seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Vagus nerve stimulation or epilepsy surgery in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental, vision and comorbidity support, including gastrostomy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong drug-resistant epilepsy; SUDEP and respiratory risk need supportive care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

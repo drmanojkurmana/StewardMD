@@ -150,5 +150,314 @@
       "caption": "Overview comparison matrix for cri-du-chat syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Smith's Recognizable Patterns of Human Malformation / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cri_du_chat_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Deletion and its size defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype with parental karyotypes",
+          "cells": [
+            {
+              "text": "Underlying translocation detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH of the 5p critical region",
+          "cells": [
+            {
+              "text": "Confirmation where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Congenital heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing assessment",
+          "cells": [
+            {
+              "text": "Infant feeding difficulty"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cri_du_chat_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wolf-Hirschhorn syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike with deletion syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cornelia de Lange syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike with feeding and growth problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prader-Willi syndrome",
+          "cells": [
+            {
+              "text": "Hypotonic neonate look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cri_du_chat_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational and speech and language therapy; augmentative communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and hypotonia",
+          "cells": [
+            {
+              "text": "Dietitian-led support, reflux measures, supplemental tube feeding where growth is impaired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart disease",
+          "cells": [
+            {
+              "text": "Echocardiography and cardiology follow-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and vision",
+          "cells": [
+            {
+              "text": "Regular assessment to support development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic surveillance",
+          "cells": [
+            {
+              "text": "Scoliosis and musculoskeletal problems"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental karyotyping",
+          "cells": [
+            {
+              "text": "Detects balanced translocation; recurrence-risk counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Behavioural and educational support"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cri_du_chat_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cri-du-chat syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cri-du-chat syndrome: cat-like cry, hypotonia, intellectual disability",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (feeding failure with aspiration, unrecognised heart disease, stridor)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent feeding and cardiac assessment; airway review for stridor",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Microarray; karyotype with parents; FISH of 5p; echo; swallowing assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does microarray confirm a 5p deletion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Wolf-Hirschhorn, Cornelia de Lange or other deletion syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Early physiotherapy, occupational and speech and language therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietitian-led feeding support and tube feeding where needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Echocardiography and cardiology follow-up",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Parental karyotyping and recurrence-risk counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe intellectual disability; many gain some self-care and communication skills",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

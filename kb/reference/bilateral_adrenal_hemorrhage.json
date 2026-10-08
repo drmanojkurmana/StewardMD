@@ -148,5 +148,85 @@
       "caption": "Overview comparison matrix for bilateral adrenal haemorrhage."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology and critical care references; adrenal consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bilateral_adrenal_hemorrhage-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in bilateral adrenal haemorrhage",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Paired morning cortisol and ACTH; short synacthen test", "cells": [{"text": "Confirms adrenal insufficiency, where feasible"}], "cite": "c1"},
+        {"parameter": "Serum sodium, potassium, glucose and renal function", "cells": [{"text": "Hyponatraemia, hyperkalaemia and hypoglycaemia as clues to evolving insufficiency"}], "cite": "c1"},
+        {"parameter": "CT or MRI of the adrenals", "cells": [{"text": "Bilateral adrenal enlargement with high-attenuation or evolving blood signal"}], "cite": "c1"},
+        {"parameter": "Coagulation screen, platelet count and antiphospholipid testing", "cells": [{"text": "Thrombotic precipitants, including antiphospholipid syndrome and heparin-induced thrombocytopenia"}], "cite": "c1"},
+        {"parameter": "Blood cultures", "cells": [{"text": "Sepsis as a precipitant, when infection is suspected"}], "cite": "c1"},
+        {"parameter": "Follow-up imaging", "cells": [{"text": "Resolution, and exclusion of an underlying mass"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_adrenal_hemorrhage-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for bilateral adrenal haemorrhage",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Bilateral adrenal metastases or lymphoma", "cells": [{"text": "Haemorrhage shows high-attenuation or evolving blood signal, which distinguishes it from tumour"}], "cite": "c1"},
+        {"parameter": "Sepsis or septic shock without adrenal haemorrhage", "cells": [{"text": "Hypotension should not be attributed to sepsis alone when adrenal insufficiency may coexist"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_adrenal_hemorrhage-treatment",
+      "kind": "treatment",
+      "title": "Management options in bilateral adrenal haemorrhage",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Immediate intravenous hydrocortisone", "cells": [{"text": "Given empirically for suspected acute adrenal crisis"}, {"text": "Before biochemical confirmation"}], "cite": "c1"},
+        {"parameter": "Fluid resuscitation and electrolytes", "cells": [{"text": "Aggressive intravenous fluids; correct hyponatraemia, hyperkalaemia and hypoglycaemia"}, {"text": "Treats hypovolaemia and biochemical derangement"}], "cite": "c1"},
+        {"parameter": "Treat the precipitant", "cells": [{"text": "Antimicrobials for sepsis; manage the coagulopathy; switch from heparin in heparin-induced thrombocytopenia"}, {"text": "Meningococcal sepsis is a classic precipitant"}], "cite": "c1"},
+        {"parameter": "Antiphospholipid syndrome", "cells": [{"text": "Long-term anticoagulation and specialist input where it is the underlying thrombotic cause"}, {"text": "Underlying thrombotic cause"}], "cite": "c1"},
+        {"parameter": "Maintenance replacement", "cells": [{"text": "Oral glucocorticoid plus fludrocortisone as the patient stabilises"}, {"text": "Mineralocorticoid and glucocorticoid replacement"}], "cite": "c1"},
+        {"parameter": "Endocrinology follow-up", "cells": [{"text": "Referral and follow-up imaging to confirm resolution"}, {"text": "Identifies persistent adrenal insufficiency"}], "cite": "c1"},
+        {"parameter": "Patient education", "cells": [{"text": "Sick-day dosing, steroid emergency card and parenteral hydrocortisone for lasting insufficiency"}, {"text": "Applies if insufficiency persists"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bilateral_adrenal_hemorrhage-dx-mgmt",
+      "title": "Diagnosis and management of bilateral adrenal haemorrhage",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Unwell patient with flank or back pain, hypotension and fever; sepsis or anticoagulation", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: shock, hyperkalaemia with hyponatraemia, or ongoing retroperitoneal bleeding?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: intravenous hydrocortisone and fluids now; do not await confirmation", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Morning cortisol with ACTH; electrolytes and glucose; coagulation and antiphospholipid tests", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "CT or MRI of adrenals for bilateral enlargement with blood signal; treat the precipitant", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Bilateral adrenal haemorrhage confirmed on imaging?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Maintenance hydrocortisone and fludrocortisone; anticoagulation management", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider adrenal metastases, lymphoma, phaeochromocytoma or another cause", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Recovery possible; some need lifelong replacement and sick-day cover", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

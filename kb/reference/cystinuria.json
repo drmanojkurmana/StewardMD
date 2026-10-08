@@ -148,5 +148,314 @@
       "caption": "Overview comparison matrix for cystinuria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Textbook of Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystinuria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine microscopy",
+          "cells": [
+            {
+              "text": "Characteristic hexagonal cystine crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyanide-nitroprusside screening",
+          "cells": [
+            {
+              "text": "Cystine detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary cystine and supersaturation",
+          "cells": [
+            {
+              "text": "Quantified excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone composition analysis",
+          "cells": [
+            {
+              "text": "Infrared spectroscopy or X-ray crystallography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT or ultrasound",
+          "cells": [
+            {
+              "text": "Stone burden and hydronephrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystinuria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium oxalate or calcium phosphate stones",
+          "cells": [
+            {
+              "text": "Named look-alike; crystal morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adenine phosphoribosyltransferase deficiency",
+          "cells": [
+            {
+              "text": "2,8-dihydroxyadenine stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Struvite staghorn calculi",
+          "cells": [
+            {
+              "text": "Infection-related look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystinuria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High fluid intake",
+          "cells": [
+            {
+              "text": "Spread across day and night to dilute cystine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium citrate",
+          "cells": [
+            {
+              "text": "Alkalinises urine; cystine more soluble at higher pH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium and protein restriction",
+          "cells": [
+            {
+              "text": "Reduces urinary cystine excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiol chelating agents",
+          "cells": [
+            {
+              "text": "Tiopronin or penicillamine for refractory stones or high excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone removal",
+          "cells": [
+            {
+              "text": "Ureteroscopy or percutaneous nephrolithotomy; resistant to shock-wave"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "24-hour urinary cystine and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystinuria-dx-mgmt",
+      "title": "Diagnosis and management of Cystinuria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cystinuria: recurrent stones with hexagonal crystals on urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (obstructing stone with sepsis, staghorn or bilateral stones, falling GFR)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent decompression for obstructed infected kidney",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine microscopy; nitroprusside test; 24-hour cystine; stone analysis; CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does stone analysis confirm cystine composition?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider calcium oxalate, uric acid or infection-related stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High fluid intake spread over the day and night",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium citrate for urinary alkalinisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tiopronin or penicillamine for refractory stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ureteroscopy or nephrolithotomy for stones; monitor urinary cystine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong and recurrent; adherence is demanding, but stone rates can be reduced",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

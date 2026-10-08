@@ -147,5 +147,379 @@
       "caption": "Overview comparison matrix for alpha-2-antiplasmin deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alpha2_antiplasmin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Alpha-2-antiplasmin activity assay",
+          "cells": [
+            {
+              "text": "Specific deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Euglobulin clot lysis time",
+          "cells": [
+            {
+              "text": "Accelerated fibrinolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Standard coagulation screen (PT, APTT, fibrinogen)",
+          "cells": [
+            {
+              "text": "Characteristically normal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XIII assay",
+          "cells": [
+            {
+              "text": "Excludes delayed-bleeding mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SERPINF2 gene analysis",
+          "cells": [
+            {
+              "text": "Congenital deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Acquired hyperfibrinolysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha2_antiplasmin_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasminogen activator inhibitor-1 deficiency",
+          "cells": [
+            {
+              "text": "Bleeding with hyperfibrinolysis"
+            },
+            {
+              "text": "Specific assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor XIII deficiency",
+          "cells": [
+            {
+              "text": "Delayed bleeding with normal screen"
+            },
+            {
+              "text": "Factor XIII assay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemophilia A or B",
+          "cells": [
+            {
+              "text": "Bleeding with prolonged APTT"
+            },
+            {
+              "text": "Factor assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Von Willebrand disease",
+          "cells": [
+            {
+              "text": "Mucosal bleeding"
+            },
+            {
+              "text": "von Willebrand assays"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired hyperfibrinolysis (liver disease, DIC)",
+          "cells": [
+            {
+              "text": "Acquired state"
+            },
+            {
+              "text": "Liver function tests and clinical context"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alpha2_antiplasmin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Tranexamic acid or aminocaproic acid",
+          "cells": [
+            {
+              "text": "Mainstay to control and prevent bleeding"
+            },
+            {
+              "text": "Antifibrinolytic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antifibrinolytic prophylaxis around surgery, dental work and childbirth",
+          "cells": [
+            {
+              "text": "Prevention"
+            },
+            {
+              "text": "Peri-procedural cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted antifibrinolytic for acute bleeding",
+          "cells": [
+            {
+              "text": "Delayed bleeding"
+            },
+            {
+              "text": "Acute treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Local haemostatic measures",
+          "cells": [
+            {
+              "text": "Mucosal and surgical bleeding"
+            },
+            {
+              "text": "Local care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoidance of unnecessary antiplatelet and anticoagulant drugs",
+          "cells": [
+            {
+              "text": "Bleeding risk"
+            },
+            {
+              "text": "Drug review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical alert and personalised management plan",
+          "cells": [
+            {
+              "text": "Patient safety"
+            },
+            {
+              "text": "Education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening with antiplasmin activity assay",
+          "cells": [
+            {
+              "text": "Autosomal recessive"
+            },
+            {
+              "text": "Family testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alpha2_antiplasmin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Alpha-2-antiplasmin deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Delayed or prolonged bleeding after surgery, dental work or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Intracranial or deep haemorrhage, or umbilical bleeding in a neonate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; start antifibrinolytic",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Antiplasmin activity; euglobulin lysis time; normal screen; FXIII",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low alpha-2-antiplasmin with accelerated fibrinolysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Tranexamic or aminocaproic acid for bleeding and procedures",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review FXIII deficiency, haemophilia, von Willebrand and PAI-1",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifibrinolytic cover before surgery and dental work",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Local haemostasis; avoid unnecessary antiplatelet drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Medical alert card and early-treatment education",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Homozygotes respond well to antifibrinolytics; heterozygotes mild",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -161,5 +161,405 @@
       "caption": "Overview comparison matrix for bartonellosis (incl. cat-scratch disease)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cat-Scratch Disease",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-negative-bacilli/cat-scratch-disease",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cat_scratch_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of Bartonella infections",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Typical CSD",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "85 to 90% of cases",
+              "range": [
+                85,
+                90
+              ]
+            },
+            {
+              "text": "Regional painful node after cat contact, often with inoculation papule"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Papule size",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "0.3 to 1",
+              "range": [
+                0.3,
+                1
+              ]
+            },
+            {
+              "text": "Appears 3 to 10 days after scratch; nodes within 2 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Atypical CSD",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10 to 15%",
+              "range": [
+                10,
+                15
+              ]
+            },
+            {
+              "text": "Parinaud, neuroretinitis, hepatosplenic, encephalitis, FUO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology (IFA or EIA)",
+          "cells": [
+            {
+              "text": "Most used; often IgG alone"
+            },
+            {
+              "text": "{{hy:10 to 20% stay seronegative}}; repeat 6 weeks apart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of node pus or papule",
+          "cells": [
+            {
+              "text": "Highly sensitive and specific"
+            },
+            {
+              "text": "Best in seronegative patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Node histology",
+          "cells": [
+            {
+              "text": "Stellate necrotising granulomas, microabscesses"
+            },
+            {
+              "text": "Nonspecific"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood culture in Bartonella endocarditis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 25%"
+            },
+            {
+              "text": "Incubate up to 6 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG titre in endocarditis",
+          "cells": [
+            {
+              "text": ">=1:800",
+              "op": ">=",
+              "value": 800
+            },
+            {
+              "text": "Cross-reacts with Coxiella and Chlamydia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Warthin-Starry stain",
+          "cells": [
+            {
+              "text": "Clusters of bacilli"
+            },
+            {
+              "text": "Bacillary angiomatosis or peliosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cat_scratch_disease-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of Bartonella infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "{{hy:Persistent nodes, sweats, weight loss with negative serology need biopsy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pyogenic lymphadenitis",
+          "cells": [
+            {
+              "text": "Acute, often with obvious skin source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycobacterial lymphadenitis",
+          "cells": [
+            {
+              "text": "Chronic node; AFB or culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tularaemia, plague, brucellosis",
+          "cells": [
+            {
+              "text": "Animal or vector exposure with node disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxoplasmosis, syphilis, sporotrichosis, histoplasmosis",
+          "cells": [
+            {
+              "text": "Other granulomatous adenopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kaposi sarcoma or pyogenic granuloma",
+          "cells": [
+            {
+              "text": "Versus bacillary angiomatosis skin lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Q fever endocarditis",
+          "cells": [
+            {
+              "text": "Other main cause of culture-negative endocarditis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cat_scratch_disease-treatment",
+      "kind": "treatment",
+      "title": "Treatment of Bartonella infections",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heat and analgesia",
+          "cells": [
+            {
+              "text": "Typical CSD, immunocompetent"
+            },
+            {
+              "text": "Usually resolves without antibiotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Typical CSD, optional"
+            },
+            {
+              "text": "May shorten symptoms and node size"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Needle aspiration",
+          "cells": [
+            {
+              "text": "Fluctuant painful node"
+            },
+            {
+              "text": "{{hy:Not incision and drainage}}, to avoid sinus tracts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azithromycin or doxycycline, prolonged",
+          "cells": [
+            {
+              "text": "Immunocompromised, bacillary angiomatosis or peliosis"
+            },
+            {
+              "text": "Weeks to months; alternatives fluoroquinolone, rifampin, TMP-SMX"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV gentamicin for 2 weeks",
+          "cells": [
+            {
+              "text": "Bartonella endocarditis"
+            },
+            {
+              "text": "Usually with valve assessment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Combination antibiotics",
+          "cells": [
+            {
+              "text": "Neuroretinitis"
+            },
+            {
+              "text": "Agents not specified in source"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "No drug doses were stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cat_scratch_disease-dx-mgmt",
+      "title": "Diagnosis and management of cat-scratch disease and bartonellosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Regional lymphadenopathy, FUO or culture-negative endocarditis with cat or louse exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Bartonella serology; PCR of aspirated pus",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Node biopsy to exclude lymphoma or TB",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Immunocompromised, endocarditis or eye or CNS disease?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Prolonged antibiotics; gentamicin for endocarditis",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Heat, analgesia, optional azithromycin; aspirate fluctuant nodes",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Bartonella found"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

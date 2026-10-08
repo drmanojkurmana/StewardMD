@@ -189,5 +189,570 @@
       "caption": "Overview comparison matrix for heart failure: management."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "ACC, 2022 AHA/ACC/HFSA Heart Failure Guideline: Key Perspectives",
+      "kind": "web",
+      "url": "https://www.acc.org/Latest-in-Cardiology/ten-points-to-remember/2022/03/29/19/53/2022-AHA-ACC-HFSA-Heart-Failure-Guideline-gl-hf"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, NYHA classification (p111) and Table 234-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "heart_failure_management-diagnostic",
+      "kind": "diagnostic",
+      "title": "Classifying heart failure for treatment",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or definition",
+        "Treatment meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "HFrEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF 40% or less",
+              "op": "<=",
+              "value": 40
+            },
+            {
+              "text": "{{hy:Four-pillar GDMT reduces death and admission}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HFmrEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF 41 to 49%",
+              "range": [
+                41,
+                49
+              ]
+            },
+            {
+              "text": "SGLT2 inhibitor reasonable (class 2a)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HFpEF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "LVEF 50% or more",
+              "op": ">=",
+              "value": 50
+            },
+            {
+              "text": "Needs evidence of raised filling pressure; SGLT2 inhibitor 2a"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HF with improved EF",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Prior LVEF 40% or less, now above 40%",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Continue GDMT; 44% relapsed within 6 months of stopping (TRED-HF)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NYHA I",
+          "cells": [
+            {
+              "text": "No limitation of ordinary activity"
+            },
+            {
+              "text": "Symptom class"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NYHA II",
+          "cells": [
+            {
+              "text": "Comfortable at rest; ordinary activity causes symptoms"
+            },
+            {
+              "text": "Symptom class"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NYHA III",
+          "cells": [
+            {
+              "text": "Less than ordinary activity causes symptoms"
+            },
+            {
+              "text": "Symptom class"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "NYHA IV",
+          "cells": [
+            {
+              "text": "Symptoms at rest or with any activity"
+            },
+            {
+              "text": "Symptom class"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "ACC/AHA stages A to D",
+          "cells": [
+            {
+              "text": "At risk, pre-HF, symptomatic, advanced"
+            },
+            {
+              "text": "Prevention in A and B; refer stage D for advanced therapies"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac cachexia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Oedema-free weight loss over 5% in 12 months",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Marker of advanced disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "heart_failure_management-ddx",
+      "kind": "ddx",
+      "title": "Precipitants and mimics to address before escalating therapy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Action"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary or drug non-adherence",
+          "cells": [
+            {
+              "text": "Salt excess or stopped HF drugs"
+            },
+            {
+              "text": "Education, restart therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ischaemia or infarction",
+          "cells": [
+            {
+              "text": "Chest pain, troponin, ECG change"
+            },
+            {
+              "text": "Coronary evaluation"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Arrhythmia",
+          "cells": [
+            {
+              "text": "Tachycardia or bradycardia, especially AF"
+            },
+            {
+              "text": "ECG, rate or rhythm control"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drugs that worsen HF",
+          "cells": [
+            {
+              "text": "Verapamil, diltiazem, NSAIDs, class I antiarrhythmics, sotalol, anti-TNF, beta-blocker start"
+            },
+            {
+              "text": "Stop or substitute"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Infection, anaemia, alcohol, pregnancy",
+          "cells": [
+            {
+              "text": "Systemic triggers of decompensation"
+            },
+            {
+              "text": "Treat trigger"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Worsening hypertension or acute valve failure",
+          "cells": [
+            {
+              "text": "New murmur or BP surge"
+            },
+            {
+              "text": "Echo, BP control"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "COPD or cardiac asthma confusion",
+          "cells": [
+            {
+              "text": "Wheeze from bronchial congestion"
+            },
+            {
+              "text": "Natriuretic peptide, echo"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac amyloidosis",
+          "cells": [
+            {
+              "text": "HFpEF phenotype"
+            },
+            {
+              "text": "Light-chain screen then bone scintigraphy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "heart_failure_management-treatment",
+      "kind": "treatment",
+      "title": "Treating chronic heart failure",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ARNI (or ACE inhibitor or ARB)",
+          "cells": [
+            {
+              "text": "HFrEF"
+            },
+            {
+              "text": "{{hy:ARNI first-line (class 1a)}}; switch from ACEi or ARB if symptomatic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Beta-blocker",
+          "cells": [
+            {
+              "text": "HFrEF"
+            },
+            {
+              "text": "Evidence-based agent up-titrated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mineralocorticoid receptor antagonist",
+          "cells": [
+            {
+              "text": "HFrEF"
+            },
+            {
+              "text": "Watch potassium and renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "HFrEF (1a); HFmrEF and HFpEF (2a)"
+            },
+            {
+              "text": "With or without diabetes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loop diuretic",
+          "cells": [
+            {
+              "text": "Congestion in any EF group"
+            },
+            {
+              "text": "Titrate to volume status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydralazine plus isosorbide dinitrate",
+          "cells": [
+            {
+              "text": "African American patients with HFrEF"
+            },
+            {
+              "text": "High-value therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICD or CRT",
+          "cells": [
+            {
+              "text": "Sudden-death prevention; CRT for wide QRS with LBBB"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HFpEF comorbidity care",
+          "cells": [
+            {
+              "text": "HFpEF"
+            },
+            {
+              "text": "BP control, AF, obesity, sleep apnoea, diabetes, iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spironolactone in HFpEF",
+          "cells": [
+            {
+              "text": "Selected patients at low hyperkalaemia risk"
+            },
+            {
+              "text": "Weak recommendation from TOPCAT Americas subgroup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tafamidis",
+          "cells": [
+            {
+              "text": "Transthyretin cardiac amyloidosis"
+            },
+            {
+              "text": "Class 1a in selected patients"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transplant, MCS or palliative care",
+          "cells": [
+            {
+              "text": "Stage D"
+            },
+            {
+              "text": "Refer to HF specialist"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Exact ICD and CRT eligibility thresholds were not stated in the sources opened; left as needs-source."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "heart_failure_management-dx-mgmt",
+      "title": "Diagnosis and management of heart failure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Confirmed heart failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Find and treat precipitants; loop diuretic for congestion",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Echocardiogram to measure LVEF",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "LVEF?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "ARNI, beta-blocker, MRA, SGLT2 inhibitor; titrate",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Still symptomatic or EF low on optimal GDMT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider ICD or CRT; hydralazine-nitrate if indicated",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Continue GDMT, monitor; keep it if EF improves",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "SGLT2 inhibitor, diuretic, treat comorbidities",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Advanced stage D despite therapy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Refer for transplant, MCS or palliative care",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Follow-up with weights, electrolytes, renal function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "40% or less"
+        },
+        {
+          "from": "n4",
+          "to": "n9",
+          "label": "Above 40%"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

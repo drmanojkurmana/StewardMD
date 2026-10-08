@@ -145,5 +145,305 @@
       "caption": "Overview comparison matrix for cutis tricolor."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / Neurocutaneous Disorders (current reference texts)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cutis_tricolor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed skin mapping of paired hyper- and hypopigmented lesions",
+          "cells": [
+            {
+              "text": "Paired pigmentary pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wood's lamp examination",
+          "cells": [
+            {
+              "text": "Hypopigmented macules accentuated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and developmental assessment",
+          "cells": [
+            {
+              "text": "Systemic features suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal imaging",
+          "cells": [
+            {
+              "text": "Deformity or asymmetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Neurological symptoms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutis_tricolor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Segmental pigmentary mosaicism",
+          "cells": [
+            {
+              "text": "Hypomelanosis of Ito or segmental pigmentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incontinentia pigmenti",
+          "cells": [
+            {
+              "text": "Later-stage look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurofibromatosis type 1",
+          "cells": [
+            {
+              "text": "Named look-alike with café-au-lait macules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cutis_tricolor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Isolated disease is benign and mainly cosmetic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Camouflage or laser",
+          "cells": [
+            {
+              "text": "Pigmentary macules where desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological and developmental assessment",
+          "cells": [
+            {
+              "text": "Syndromic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal and orthopaedic input",
+          "cells": [
+            {
+              "text": "Deformity or asymmetry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Neurological symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology, neurology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cutis_tricolor-dx-mgmt",
+      "title": "Diagnosis and management of Cutis tricolor",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cutis tricolor: paired hyper- and hypopigmented skin lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (developmental regression, seizures, progressive deformity)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurology review for seizures or regression",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin mapping; Wood's lamp; neurological review; skeletal imaging if deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does mapping show paired hyper- and hypopigmented lesions?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider isolated café-au-lait, naevus depigmentosus or NF1",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassurance for isolated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Camouflage or laser treatment where desired",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neurological and developmental assessment for syndromic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Brain MRI and orthopaedic input as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated disease is benign; the syndromic form depends on associated features",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

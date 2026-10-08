@@ -147,5 +147,324 @@
       "caption": "Overview comparison matrix for anterior interosseous syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anterior_interosseous_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Needle EMG of flexor pollicis longus, flexor digitorum profundus to index, pronator quadratus",
+          "cells": [
+            {
+              "text": "Other median muscles spared"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Normal median sensory responses; excludes a more proximal lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tenodesis test and passive wrist movement",
+          "cells": [
+            {
+              "text": "Tendon integrity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution ultrasound or MRI neurography",
+          "cells": [
+            {
+              "text": "Hourglass fascicular constrictions or a compressive lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI of the proximal forearm",
+          "cells": [
+            {
+              "text": "Mass or anomalous muscle, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antecedent viral illness, immunisation or surgery",
+          "cells": [
+            {
+              "text": "Supports neuralgic amyotrophy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anterior_interosseous_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Rupture of flexor pollicis longus or flexor digitorum profundus",
+          "cells": [
+            {
+              "text": "An intact tenodesis effect argues against tendon rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuralgic amyotrophy with selective anterior interosseous involvement",
+          "cells": [
+            {
+              "text": "Acute severe shoulder-girdle or forearm pain precedes weakness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anterior_interosseous_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia and early corticosteroids",
+          "cells": [
+            {
+              "text": "Control acute severe pain"
+            },
+            {
+              "text": "Early corticosteroids considered in neuralgic amyotrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Observation and physiotherapy"
+            },
+            {
+              "text": "Spontaneous recovery over months is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Splinting, range-of-motion exercises, functional pinch retraining"
+            },
+            {
+              "text": "Supports recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Clinical and electrophysiological assessment"
+            },
+            {
+              "text": "Tracks recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical exploration",
+          "cells": [
+            {
+              "text": "Nerve decompression or interfascicular neurolysis"
+            },
+            {
+              "text": "No recovery or a structural compressive cause such as a fibrous band"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tendon transfers",
+          "cells": [
+            {
+              "text": "Persistent disabling loss of pinch"
+            },
+            {
+              "text": "Considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anterior_interosseous_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of anterior interosseous syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute forearm pain, then inability to flex thumb and index distal joints",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe pain preceding weakness, suggesting neuralgic amyotrophy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Check tenodesis effect to exclude flexor tendon rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Needle EMG, nerve conduction, tenodesis test, MRI or ultrasound neurography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "EMG shows selective AIN denervation with normal median sensation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Analgesia, early corticosteroids and hand therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat electrophysiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observation and physiotherapy; spontaneous recovery over months",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy with splinting and functional pinch retraining",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgical exploration if no recovery or a compressive lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Tendon transfers considered for persistent disabling loss of pinch",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

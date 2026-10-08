@@ -186,5 +186,522 @@
       "caption": "Overview comparison matrix for cardiovascular collapse, cardiac arrest, and sudden cardiac death."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, CPR in Adults",
+      "url": "https://www.merckmanuals.com/professional/critical-care-medicine/cardiac-arrest-and-cpr/cardiopulmonary-resuscitation-cpr-in-adults",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cardiovascular_collapse_cardiac_arrest_and-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognition, rhythm and risk in cardiac arrest",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse check",
+          "unit": "s",
+          "cells": [
+            {
+              "text": "No longer than 10",
+              "op": "<=",
+              "value": 10
+            },
+            {
+              "text": "{{hy:Agonal gasps and brief jerks are not signs of life}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shockable rhythm (VF or pulseless VT)",
+          "cells": [
+            {
+              "text": "Best outcome"
+            },
+            {
+              "text": "Defibrillate at once"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "VF as first rhythm in recent series",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 to 25%",
+              "range": [
+                20,
+                25
+              ]
+            },
+            {
+              "text": "PEA and asystole now commoner; poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological recovery without bystander CPR",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 30% by 5 min to ROSC",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Survival is time-dependent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sudden cardiac death share",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 15% of all deaths"
+            },
+            {
+              "text": "Up to two-thirds are first sign of heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LVEF after MI",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Risk rises steeply below 40",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Best-validated risk marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-ROSC 12-lead ECG",
+          "cells": [
+            {
+              "text": "ST elevation"
+            },
+            {
+              "text": "Consider coronary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inherited arrhythmia work-up",
+          "cells": [
+            {
+              "text": "Long QT, Brugada, CPVT, early repolarisation"
+            },
+            {
+              "text": "Young or no structural disease; provocation tests and genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "End-tidal CO2 target after ROSC",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "35 to 40",
+              "range": [
+                35,
+                40
+              ]
+            },
+            {
+              "text": "Ventilation goal"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "cardiovascular_collapse_cardiac_arrest_and-ddx",
+      "kind": "ddx",
+      "title": "Reversible causes and mimics of cardiac arrest",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature or action"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypovolaemia or haemorrhage",
+          "cells": [
+            {
+              "text": "Fluid or blood resuscitation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypoxia or airway obstruction",
+          "cells": [
+            {
+              "text": "Most treatable cause of traumatic arrest"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperkalaemia, hypocalcaemia, hypermagnesaemia",
+          "cells": [
+            {
+              "text": "{{hy:Calcium chloride}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Severe acidosis or tricyclic overdose",
+          "cells": [
+            {
+              "text": "Sodium bicarbonate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tension pneumothorax",
+          "cells": [
+            {
+              "text": "Needle decompression"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cardiac tamponade",
+          "cells": [
+            {
+              "text": "Pericardiocentesis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Massive pulmonary embolism",
+          "cells": [
+            {
+              "text": "Consider in PEA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothermia",
+          "cells": [
+            {
+              "text": "Continue CPR until rewarmed to 34 C"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vasovagal syncope",
+          "cells": [
+            {
+              "text": "Self-limited collapse, not true arrest"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Commotio cordis",
+          "cells": [
+            {
+              "text": "VF after a chest blow, no structural disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiovascular_collapse_cardiac_arrest_and-treatment",
+      "kind": "treatment",
+      "title": "Adult resuscitation and post-arrest care",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or target"
+      ],
+      "rows": [
+        {
+          "parameter": "Chest compressions",
+          "unit": "/min",
+          "cells": [
+            {
+              "text": "All arrests",
+              "range": [
+                100,
+                120
+              ]
+            },
+            {
+              "text": "100 to 120/min, 5 to 6 cm, full recoil; 30:2 without airway"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defibrillation",
+          "cells": [
+            {
+              "text": "{{hy:VF or pulseless VT}}"
+            },
+            {
+              "text": "Biphasic 150 to 200 J (also given as 120 to 200 J); monophasic 360 J; recheck every 2 min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epinephrine",
+          "cells": [
+            {
+              "text": "All arrest rhythms"
+            },
+            {
+              "text": "1 mg IV or IO every 3 to 5 min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amiodarone",
+          "cells": [
+            {
+              "text": "Refractory VF or pulseless VT"
+            },
+            {
+              "text": "300 mg IV push, then 150 mg; infusion 1 mg/min for 6 h then 0.5 mg/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lidocaine",
+          "cells": [
+            {
+              "text": "Alternative antiarrhythmic"
+            },
+            {
+              "text": "1 to 1.5 mg/kg, repeat every 5 to 10 min to 3 mg/kg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Temperature control after ROSC",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Constant 32 to 37.5 for 24 h",
+              "range": [
+                32,
+                37.5
+              ]
+            },
+            {
+              "text": "Avoid fever"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygen after ROSC",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "SpO2 94; PaO2 about 80 to 100 mmHg"
+            },
+            {
+              "text": "Avoid hyperoxia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood pressure after ROSC",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "MAP >65 and systolic >90",
+              "op": ">",
+              "value": 65
+            },
+            {
+              "text": "Glucose 140 to 180 mg/dL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICD",
+          "cells": [
+            {
+              "text": "Survivors without reversible cause; low LVEF after MI"
+            },
+            {
+              "text": "Secondary or primary prevention"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck gives two biphasic first-shock ranges on the same page: 150 to 200 J and 120 to 200 J."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cardiovascular_collapse_cardiac_arrest_and-dx-mgmt",
+      "title": "Management of cardiac arrest",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Unresponsive, not breathing normally, no pulse within 10 s",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Call for help, start CPR, attach defibrillator",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Shockable rhythm (VF or pulseless VT)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Shock, 2 min CPR; epinephrine; amiodarone if refractory",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CPR, epinephrine every 3 to 5 min; treat reversible causes",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "ROSC?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Post-ROSC: ECG, oxygen and BP targets, temperature control",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "ST elevation or likely coronary cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Coronary angiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Find substrate: echo, MRI, genetics; ICD if indicated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n3",
+          "label": "No, reassess"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

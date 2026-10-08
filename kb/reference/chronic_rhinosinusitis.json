@@ -151,5 +151,312 @@
       "caption": "Overview comparison matrix for chronic rhinosinusitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_rhinosinusitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Mucopus, oedema and polyps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT of the paranasal sinuses",
+          "cells": [
+            {
+              "text": "Extent and osteomeatal complex anatomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy testing",
+          "cells": [
+            {
+              "text": "Where an allergic component is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nasal or sinus culture",
+          "cells": [
+            {
+              "text": "Resistant or complicated cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy",
+          "cells": [
+            {
+              "text": "Atypical or unilateral lesions to exclude neoplasia or granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_rhinosinusitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic and non-allergic rhinitis",
+          "cells": [
+            {
+              "text": "Nasal symptoms without sinus inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal sinusitis",
+          "cells": [
+            {
+              "text": "Allergic or invasive fungal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_rhinosinusitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intranasal corticosteroids with saline irrigation",
+          "cells": [
+            {
+              "text": "Mainstay of medical therapy"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short courses of oral corticosteroids",
+          "cells": [
+            {
+              "text": "Severe polyposis or exacerbations"
+            },
+            {
+              "text": "Exacerbation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of underlying drivers",
+          "cells": [
+            {
+              "text": "Allergy and asthma control; aspirin desensitisation in aspirin-exacerbated disease"
+            },
+            {
+              "text": "Underlying driver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologic therapy",
+          "cells": [
+            {
+              "text": "Dupilumab, omalizumab or mepolizumab for severe eosinophilic polypoid disease"
+            },
+            {
+              "text": "Severe eosinophilic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional endoscopic sinus surgery",
+          "cells": [
+            {
+              "text": "Disease refractory to optimised medical therapy"
+            },
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_rhinosinusitis-dx-mgmt",
+      "title": "Diagnosis and management of Chronic rhinosinusitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic rhinosinusitis: symptoms for at least 12 weeks with objective signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (unilateral bloody discharge, orbital or intracranial signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for orbital or intracranial complication",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasal endoscopy and CT of the paranasal sinuses",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Inflammation on endoscopy or CT confirmed and other causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intranasal corticosteroids with saline irrigation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check allergic rhinitis, fungal sinusitis and granulomatosis with polyangiitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short oral corticosteroid courses for severe polyposis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat drivers: allergy, asthma and aspirin-exacerbated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biologics for severe eosinophilic polypoid disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Endoscopic sinus surgery for refractory disease; long-term surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

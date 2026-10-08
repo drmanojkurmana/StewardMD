@@ -148,5 +148,324 @@
       "caption": "Overview comparison matrix for ankrd26-related thrombocytopenia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / Nathan and Oski",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ankrd26_thrombocytopenia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count with peripheral film",
+          "cells": [
+            {
+              "text": "Normal-sized platelets"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted sequencing of the ANKRD26 5' untranslated region",
+          "cells": [
+            {
+              "text": "Targets the ANKRD26 5' untranslated region"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Megakaryocyte morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetic analysis",
+          "cells": [
+            {
+              "text": "Baseline and surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Platelet aggregation and alpha-granule assessment",
+          "cells": [
+            {
+              "text": "Where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum thrombopoietin",
+          "cells": [
+            {
+              "text": "Used when the mechanism is unclear"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankrd26_thrombocytopenia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Misdiagnosis leads to needless steroids, immunoglobulin or splenectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early myelodysplastic syndrome",
+          "cells": [
+            {
+              "text": "Dysmegakaryopoietic marrow can be mistaken for primary MDS"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ankrd26_thrombocytopenia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Recognise the mild phenotype",
+          "cells": [
+            {
+              "text": "Most need no platelet-directed therapy"
+            },
+            {
+              "text": "Avoid unnecessary immunosuppression or splenectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding or surgical cover",
+          "cells": [
+            {
+              "text": "Antifibrinolytics and platelet transfusion"
+            },
+            {
+              "text": "Avoid antiplatelet agents and NSAIDs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological surveillance",
+          "cells": [
+            {
+              "text": "Periodic blood counts, film, marrow and cytogenetics"
+            },
+            {
+              "text": "Risk of myelodysplasia and AML"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic stem cell transplant",
+          "cells": [
+            {
+              "text": "Consider if clonal myeloid disease develops"
+            },
+            {
+              "text": "Clonal myeloid disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist haematology",
+          "cells": [
+            {
+              "text": "Baseline characterisation and ongoing monitoring"
+            },
+            {
+              "text": "Refer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cascade family screening"
+            },
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ankrd26_thrombocytopenia-dx-mgmt",
+      "title": "Diagnosis and management of ANKRD26-related thrombocytopenia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thrombocytopenia with bleeding, often mistaken for immune thrombocytopenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Extra cytopenias, blasts or clonal cytogenetic change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to specialist haematology for clonal or progressive disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film, ANKRD26 5' UTR sequencing, marrow and cytogenetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dysmegakaryopoietic marrow with ANKRD26 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Mild phenotype: no platelet-directed therapy; avoid immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antifibrinolytics and platelet transfusion for significant bleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid antiplatelet agents and NSAIDs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Periodic counts, film, marrow and cytogenetics for myelodysplasia and AML",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild bleeding and stable platelets usually; lifelong myeloid surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -160,5 +160,503 @@
       "caption": "Overview comparison matrix for cardiac transplantation and prolonged assisted circulation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 132-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cardiac_transplantation_and_prolonged_assi-diagnostic",
+      "kind": "diagnostic",
+      "title": "Candidacy thresholds and surveillance in heart transplantation and LVAS",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Peak VO2",
+          "unit": "mL/kg/min",
+          "cells": [
+            {
+              "text": "<14 (<12 on beta blockers) or <50% predicted",
+              "op": "<",
+              "value": 14
+            },
+            {
+              "text": "{{hy:Supports transplant candidacy}} with refractory HF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary vascular resistance",
+          "unit": "Wood units",
+          "cells": [
+            {
+              "text": ">3",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Relative contraindication unless reactive; TPG >15 likewise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "eGFR",
+          "unit": "mL/min/1.73 m2",
+          "cells": [
+            {
+              "text": "<30",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Relative contraindication; consider heart-kidney"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BMI",
+          "unit": "kg/m2",
+          "cells": [
+            {
+              "text": ">35",
+              "op": ">",
+              "value": 35
+            },
+            {
+              "text": "Prompt weight loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tobacco abstinence",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "At least 6",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "Required before listing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Donor ischaemic time",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "About 4",
+              "op": "<=",
+              "value": 4
+            },
+            {
+              "text": "Longer with ex situ perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endomyocardial biopsy",
+          "cells": [
+            {
+              "text": "Lymphocytic infiltrate (ACR) or antibody and complement deposition (AMR)"
+            },
+            {
+              "text": "Plus donor-specific antibodies for AMR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiographic CAV prevalence",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 30% at 5 years, 50% at 10 years",
+              "range": [
+                30,
+                50
+              ]
+            },
+            {
+              "text": "IVUS or OCT more sensitive; ISHLT CAV0 to CAV3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH in LVAS patient",
+          "cells": [
+            {
+              "text": "Rising"
+            },
+            {
+              "text": "Haemolysis; may herald pump thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Driveline infection",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "20 to 50% by 5 years",
+              "range": [
+                20,
+                50
+              ]
+            },
+            {
+              "text": "Predisposes to thrombosis and stroke"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiac_transplantation_and_prolonged_assi-ddx",
+      "kind": "ddx",
+      "title": "Complications after heart transplantation: graft dysfunction and infection timing",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute cellular rejection",
+          "cells": [
+            {
+              "text": "T-cell infiltrate; early, declines after about 6 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibody-mediated rejection",
+          "cells": [
+            {
+              "text": "Donor-specific antibodies with complement fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac allograft vasculopathy",
+          "cells": [
+            {
+              "text": "{{hy:Often silent diffuse coronary disease}}; IVUS or OCT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary graft dysfunction",
+          "cells": [
+            {
+              "text": "Early allograft failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection, early (<1 month)",
+          "cells": [
+            {
+              "text": "Graft, anastomosis and wound bacterial or fungal infection; line candidaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection, middle (1 to 4 months)",
+          "cells": [
+            {
+              "text": "CMV; Toxoplasma highest risk in heart transplant; Listeria; Pneumocystis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection, late (>6 months)",
+          "cells": [
+            {
+              "text": "EBV; CMV after early prophylaxis; Listeria, Cryptococcus, Nocardia, JC virus PML"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Post-transplant lymphoproliferative disorder",
+          "cells": [
+            {
+              "text": "EBV-driven; most frequent malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiac_transplantation_and_prolonged_assi-treatment",
+      "kind": "treatment",
+      "title": "Management after heart transplantation and LVAS",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcineurin inhibitor, antiproliferative and corticosteroid",
+          "cells": [
+            {
+              "text": "Lifelong maintenance immunosuppression"
+            },
+            {
+              "text": "Individualised over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Augmented corticosteroids",
+          "cells": [
+            {
+              "text": "Acute cellular rejection"
+            },
+            {
+              "text": "Add polyclonal antibody if haemodynamic compromise"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange, IVIG, rituximab",
+          "cells": [
+            {
+              "text": "Antibody-mediated rejection"
+            },
+            {
+              "text": "Guided by donor-specific antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isoproterenol or temporary pacing",
+          "cells": [
+            {
+              "text": "{{hy:Allograft bradycardia; atropine does not work}}"
+            },
+            {
+              "text": "Denervated heart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retransplantation",
+          "cells": [
+            {
+              "text": "Advanced CAV"
+            },
+            {
+              "text": "Only definitive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Durable LVAS (e.g., HeartMate 3)",
+          "cells": [
+            {
+              "text": "Bridge or destination therapy"
+            },
+            {
+              "text": "About 60% 5-year survival; Doppler blood pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin K antagonist, INR 2 to 3, without aspirin",
+          "cells": [
+            {
+              "text": "HeartMate 3 anticoagulation"
+            },
+            {
+              "text": "Dropping aspirin reduces bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prophylaxis and skin cancer surveillance",
+          "cells": [
+            {
+              "text": "All recipients"
+            },
+            {
+              "text": "Sunscreen routinely"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Built from Harrison text and Tables PDF only; immunosuppressant doses not stated."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cardiac_transplantation_and_prolonged_assi-dx-mgmt",
+      "title": "Advanced heart failure: transplant or LVAS pathway",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Stage D heart failure despite optimal therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Cardiopulmonary exercise test, right heart catheter, renal and frailty review",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Peak VO2 <14 (or <12 on beta blocker) or inotrope dependent?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Continue guideline therapy; reassess",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Contraindication: fixed high PVR, smoking, severe frailty?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Durable LVAS as bridge or destination",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "List for transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "After transplant: immunosuppression, biopsy surveillance, IVUS for CAV",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Graft dysfunction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Biopsy: steroids for ACR; plasma exchange, IVIG, rituximab for AMR",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Long-term infection and cancer surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "If becomes eligible"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Transplanted"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

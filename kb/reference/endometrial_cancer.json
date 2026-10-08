@@ -151,5 +151,285 @@
       "caption": "Overview comparison matrix for endometrial cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / Novak's Gynecology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endometrial_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Transvaginal ultrasound",
+          "cells": [
+            {
+              "text": "Endometrial thickness and myometrial assessment; a thin stripe does not exclude aggressive non-endometrioid tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial biopsy (pipelle) or hysteroscopy",
+          "cells": [
+            {
+              "text": "Histological diagnosis from directed sampling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology",
+          "cells": [
+            {
+              "text": "Grade, subtype and molecular classification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic MRI",
+          "cells": [
+            {
+              "text": "Depth of myometrial invasion and cervical involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT chest, abdomen and pelvis",
+          "cells": [
+            {
+              "text": "Staging in high-risk histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mismatch repair immunohistochemistry",
+          "cells": [
+            {
+              "text": "Mismatch repair status; testing for Lynch syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endometrial_cancer-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgical mainstay",
+          "cells": [
+            {
+              "text": "Total hysterectomy with bilateral salpingo-oophorectomy; sentinel node assessment or lymphadenectomy guided by risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "Vaginal brachytherapy and/or external beam pelvic radiotherapy for intermediate- and high-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemotherapy",
+          "cells": [
+            {
+              "text": "Platinum-based for high-risk histology, advanced or metastatic disease; increasingly with immune checkpoint inhibitors in mismatch-repair-deficient tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility-sparing progestogen therapy",
+          "cells": [
+            {
+              "text": "Carefully selected women with early low-grade disease who wish to preserve fertility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular classification",
+          "cells": [
+            {
+              "text": "POLE, mismatch repair and p53 status to refine prognosis and guide adjuvant treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lynch syndrome assessment",
+          "cells": [
+            {
+              "text": "Mismatch repair testing; genetic counselling and family screening where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Gynae-oncology team; modifiable risks such as obesity; structured follow-up for recurrence"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endometrial_cancer-dx-mgmt",
+      "title": "Diagnosis and management of Endometrial Cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Postmenopausal or recurrent abnormal bleeding with suspected endometrial cancer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (aggressive histology, nodal or distant spread, pyometra)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate to gynae-oncology MDT for staging and treatment planning",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transvaginal ultrasound, then endometrial biopsy or hysteroscopy with directed sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Histology confirms endometrial carcinoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider polyp, hyperplasia or other causes; repeat the directed workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Total hysterectomy with bilateral salpingo-oophorectomy; lymph node assessment by risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Molecular classification (POLE, mismatch repair, p53) to guide adjuvant therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mismatch repair testing and Lynch syndrome counselling where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Adjuvant brachytherapy or pelvic radiotherapy, or platinum chemo for high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Structured surveillance for recurrence within the gynae-oncology team",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

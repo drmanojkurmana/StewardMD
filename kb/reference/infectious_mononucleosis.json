@@ -168,5 +168,496 @@
       "caption": "Overview comparison matrix for infectious mononucleosis (ebv)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Infectious Mononucleosis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/herpesviruses/infectious-mononucleosis"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 181-2",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infectious_mononucleosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing infectious mononucleosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Atypical lymphocytes",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "More than 10% of white cells",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "Mostly CD8 T cells; peak in weeks 2 to 3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterophile or Monospot positivity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 40% in week 1, 80 to 90% by week 3",
+              "range": [
+                40,
+                90
+              ]
+            },
+            {
+              "text": "{{hy:Repeat in about 7 days if negative early}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterophile titre",
+          "unit": "titre",
+          "cells": [
+            {
+              "text": "40 or more",
+              "op": ">=",
+              "value": 40
+            },
+            {
+              "text": "Diagnostic with compatible illness and atypical lymphocytes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heterophile in children 2 to 5 years",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 50%",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Often absent under 5 years; use EBV-specific serology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acute infection serology",
+          "cells": [
+            {
+              "text": "Heterophile +, VCA IgM +, VCA IgG ++, EA-D +, EBNA negative"
+            },
+            {
+              "text": "VCA IgM lasts only 2 to 3 months"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Convalescence",
+          "cells": [
+            {
+              "text": "Heterophile +/-, VCA IgM negative, VCA IgG +, EA-R +/-, EBNA +"
+            },
+            {
+              "text": "EBNA appears 3 to 6 weeks after onset"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Past infection",
+          "cells": [
+            {
+              "text": "VCA IgG + and EBNA + only"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Liver tests",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Aminotransferases raised in over 90%",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Bilirubin raised in about 40%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenomegaly",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 51%",
+              "op": "=",
+              "value": 51
+            },
+            {
+              "text": "Most prominent in weeks 2 to 3"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Throat or blood culture for EBV",
+          "cells": [
+            {
+              "text": "Not useful"
+            },
+            {
+              "text": "Virus persists lifelong in oropharynx and B cells"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infectious_mononucleosis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic infectious mononucleosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "CMV mononucleosis",
+          "cells": [
+            {
+              "text": "Older age, longer fever, little exudative pharyngitis"
+            },
+            {
+              "text": "CMV IgM serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute HIV infection",
+          "cells": [
+            {
+              "text": "Diffuse rash, oral or genital ulcers, aseptic meningitis"
+            },
+            {
+              "text": "HIV antigen-antibody test or RNA (heterophile can be falsely positive)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Toxoplasmosis",
+          "cells": [
+            {
+              "text": "Less splenomegaly; cat or raw meat exposure"
+            },
+            {
+              "text": "Toxoplasma IgM serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streptococcal pharyngitis",
+          "cells": [
+            {
+              "text": "No splenomegaly, less fatigue"
+            },
+            {
+              "text": "Rapid antigen test or throat culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral hepatitis",
+          "cells": [
+            {
+              "text": "Higher aminotransferases"
+            },
+            {
+              "text": "Hepatitis serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rubella",
+          "cells": [
+            {
+              "text": "Maculopapular rash, no splenomegaly"
+            },
+            {
+              "text": "Rubella IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphoma",
+          "cells": [
+            {
+              "text": "Fixed, nontender nodes"
+            },
+            {
+              "text": "Node biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug reaction (phenytoin, carbamazepine, sulfonamides, minocycline)",
+          "cells": [
+            {
+              "text": "Any age, drug exposure"
+            },
+            {
+              "text": "Drug history and withdrawal"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infectious_mononucleosis-treatment",
+      "kind": "treatment",
+      "title": "Managing infectious mononucleosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "All uncomplicated cases"
+            },
+            {
+              "text": "Rest in acute phase, fluids, paracetamol or NSAID; resume activity when fever and malaise settle"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "{{hy:Avoid contact sports and heavy lifting}}",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "For 1 month after presentation and until splenomegaly resolves"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Avoid ampicillin or amoxicillin",
+          "cells": [
+            {
+              "text": "Coexisting bacterial pharyngitis"
+            },
+            {
+              "text": "Rash in up to 95% given ampicillin in older data"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Impending airway obstruction, severe thrombocytopenia, haemolytic anaemia"
+            },
+            {
+              "text": "Not for uncomplicated disease; may predispose to superinfection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Acyclovir",
+          "cells": [
+            {
+              "text": "Not indicated"
+            },
+            {
+              "text": "Reduces shedding but no clinical benefit in trials"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Splenic rupture",
+          "cells": [
+            {
+              "text": "Abdominal or shoulder-tip pain, shock (under 0.5% of cases)"
+            },
+            {
+              "text": "Emergency surgical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck states rash occurs in up to about 20% in recent data; Harrison 22e notes about 95% develop rash with ampicillin in older series but newer studies suggest similar rash rates with or without penicillin. Both kept."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infectious_mononucleosis-dx-mgmt",
+      "title": "Diagnosis and management of infectious mononucleosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, sore throat, posterior cervical nodes, fatigue",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Blood count with smear and heterophile test",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Heterophile positive with atypical lymphocytes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Child under 5, early illness or atypical case?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "EBV VCA IgM, VCA IgG and EBNA serology",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "VCA IgM positive, EBNA negative?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Test for CMV, HIV, toxoplasma and streptococcus",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Airway threat, severe cytopenia or splenic rupture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Admit; steroids for airway or cytopenia, surgery for rupture",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Supportive care; no contact sports for at least 1 month",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

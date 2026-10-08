@@ -147,5 +147,331 @@
       "caption": "Overview comparison matrix for acanthocephaliasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acanthocephaliasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy",
+          "cells": [
+            {
+              "text": "Characteristic acanthocephalan eggs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Morphological identification of an expelled or extracted worm",
+          "cells": [
+            {
+              "text": "Identifies the worm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy",
+          "cells": [
+            {
+              "text": "Visualises and retrieves attached worms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal imaging",
+          "cells": [
+            {
+              "text": "Perforation or complication when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with eosinophil assessment",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary and exposure history",
+          "cells": [
+            {
+              "text": "Ingestion of insects or arthropods"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acanthocephaliasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Ascariasis or trichuriasis (other intestinal helminths)",
+          "cells": [
+            {
+              "text": "Other intestinal helminth infection"
+            },
+            {
+              "text": "Stool microscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Appendicitis or other acute abdomen",
+          "cells": [
+            {
+              "text": "Arises when perforation occurs"
+            },
+            {
+              "text": "Abdominal imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acanthocephaliasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzimidazole anthelmintic (albendazole or mebendazole)",
+          "cells": [
+            {
+              "text": "Eradicates the worm"
+            },
+            {
+              "text": "Pyrantel pamoate as an alternative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic removal of an attached worm",
+          "cells": [
+            {
+              "text": "Diagnostic and therapeutic"
+            },
+            {
+              "text": "Where accessible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and hydration",
+          "cells": [
+            {
+              "text": "Supportive care for abdominal symptoms"
+            },
+            {
+              "text": "Adequate hydration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery for perforation or peritonitis",
+          "cells": [
+            {
+              "text": "Rare complication"
+            },
+            {
+              "text": "Managed as an acute abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up stool examination",
+          "cells": [
+            {
+              "text": "Confirms clearance"
+            },
+            {
+              "text": "After treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Food hygiene and avoiding raw or undercooked arthropods",
+          "cells": [
+            {
+              "text": "Prevents reinfection"
+            },
+            {
+              "text": "Beetles and cockroaches are the example hosts"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acanthocephaliasis-dx-mgmt",
+      "title": "Diagnosis and management of Acanthocephaliasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ingestion of raw arthropods; abdominal pain or mild GI symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Peritonitis, perforation, GI bleeding or severe persistent pain?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical assessment as an acute abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stool microscopy for acanthocephalan eggs; dietary history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Acanthocephalan eggs or a worm seen on stool or endoscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Endoscopic removal of the attached worm where accessible",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review other helminths such as ascariasis, and inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Benzimidazole anthelmintic: albendazole or mebendazole",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia and hydration for abdominal symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat stool examination to confirm clearance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis excellent; infection is usually mild and readily treated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

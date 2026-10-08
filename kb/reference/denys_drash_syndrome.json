@@ -150,5 +150,325 @@
       "caption": "Overview comparison matrix for denys-drash syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Oxford Handbook of Nephrology and Hypertension",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "denys_drash_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and quantification of proteinuria",
+          "cells": [
+            {
+              "text": "Rapidly progressive nephrotic syndrome in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy, where indicated",
+          "cells": [
+            {
+              "text": "Diffuse mesangial sclerosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and molecular WT1 gene analysis",
+          "cells": [
+            {
+              "text": "Pathogenic WT1 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine and imaging evaluation of gonadal and genital development",
+          "cells": [
+            {
+              "text": "Disorder of sex development and gonadal malignancy risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound surveillance",
+          "cells": [
+            {
+              "text": "Renal mass suggesting Wilms tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "denys_drash_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Frasier syndrome",
+          "cells": [
+            {
+              "text": "Different renal lesion and tumour profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "WAGR syndrome",
+          "cells": [
+            {
+              "text": "WT1 deletion with aniridia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other genetic steroid-resistant nephrotic syndromes",
+          "cells": [
+            {
+              "text": "Nephrotic syndrome without a WT1 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "denys_drash_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care for diffuse mesangial sclerosis",
+          "cells": [
+            {
+              "text": "Albumin, diuretics, renin-angiotensin blockade, thromboprophylaxis and infection prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for Wilms tumour",
+          "cells": [
+            {
+              "text": "Close renal ultrasound; consider risk-reducing bilateral nephrectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat Wilms tumour",
+          "cells": [
+            {
+              "text": "Surgery and chemotherapy under paediatric oncology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement and transplant",
+          "cells": [
+            {
+              "text": "For early end-stage disease; the nephropathy does not recur in the allograft"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadectomy",
+          "cells": [
+            {
+              "text": "Dysgenetic gonads, to remove malignancy risk; endocrine and psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Paediatric nephrology, oncology, urology, endocrinology and clinical genetics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Confirmatory WT1 analysis for the family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "denys_drash_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Denys-Drash syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Denys-Drash: infantile nephrotic syndrome with sex development disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (renal mass, rapid progression, gonadal malignancy signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent multidisciplinary review for renal mass or gonadal malignancy risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype and WT1 gene analysis; renal biopsy if indicated; gonadal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a pathogenic WT1 variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Frasier, WAGR or other genetic steroid-resistant nephrotic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Supportive care for diffuse mesangial sclerosis: albumin, diuretics, RAS blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Renal ultrasound surveillance for Wilms tumour; consider bilateral nephrectomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gonadectomy of dysgenetic gonads to remove malignancy risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal replacement therapy and transplant for early end-stage disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling and confirmatory WT1 testing for the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Poor renal prognosis with early end-stage disease; outcome depends on timely detection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

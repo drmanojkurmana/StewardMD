@@ -234,5 +234,594 @@
       "caption": "Diagnostic and clinical overview matrix for sle / autoimmune flare."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 331-4",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 283-3",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c4",
+      "label": "Merck Manual Professional, Systemic Lupus Erythematosus",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/autoimmune-rheumatic-disorders/systemic-lupus-erythematosus-sle",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sle_flare-diagnostic",
+      "kind": "diagnostic",
+      "title": "Confirming SLE and grading a flare",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "ANA (EULAR/ACR 2019 entry criterion)",
+          "cells": [
+            {
+              "text": "Titre at least 1:80"
+            },
+            {
+              "text": "Required before scoring; positive in about 95% of SLE"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "EULAR/ACR 2019 weighted score",
+          "unit": "points",
+          "cells": [
+            {
+              "text": ">=10 with at least one clinical criterion",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Classifies as SLE; built for research, not diagnosis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "ANA rim pattern (anti-dsDNA)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Present in about 50% of SLE",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Highly specific for SLE"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Speckled pattern, anti-Sm",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 30% of SLE",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Most specific SLE antibody"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diffuse pattern, antihistone",
+          "cells": [
+            {
+              "text": "Antihistone antibodies"
+            },
+            {
+              "text": "Suggests drug-induced lupus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-dsDNA and C3/C4 trend",
+          "cells": [
+            {
+              "text": "Rising anti-dsDNA with falling C3/C4"
+            },
+            {
+              "text": "{{hy:Warns of active or impending nephritis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRP",
+          "cells": [
+            {
+              "text": "Often normal in a flare"
+            },
+            {
+              "text": "High CRP suggests infection or serositis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Urine protein",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": ">500 mg/day, haematuria or red cell casts",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "Indication for renal biopsy"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Lupus nephritis class on biopsy",
+          "cells": [
+            {
+              "text": "Classes I to VI, mesangial to sclerotic"
+            },
+            {
+              "text": "Class III or IV (proliferative) needs aggressive therapy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SLEDAI, low disease activity",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "0 to 4",
+              "range": [
+                0,
+                4
+              ]
+            },
+            {
+              "text": "Treatment target with prednisone 5 mg/day or less"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild flare (EULAR tier)",
+          "cells": [
+            {
+              "text": "Rash 9% BSA or less, platelets 50 to 100, SLEDAI 6 or less"
+            },
+            {
+              "text": "Constitutional symptoms, mild arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate flare (EULAR tier)",
+          "cells": [
+            {
+              "text": "Rash 9 to 18% BSA, platelets 20 to 50, SLEDAI 7 to 12"
+            },
+            {
+              "text": "RA-like arthritis, serositis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe flare (EULAR tier)",
+          "cells": [
+            {
+              "text": "Platelets <20, rash >18% BSA, SLEDAI >12"
+            },
+            {
+              "text": "{{hy:Organ-threatening: nephritis, cerebritis, myelitis, pneumonitis, mesenteric vasculitis}}"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Platelet values are x10^9/L. Anti-dsDNA prevalence differs: the tables PDF gives about 50% of SLE, Harrison gives about 40 to 70%. Merck notes anti-dsDNA and complement may not track non-renal flares."
+    },
+    {
+      "id": "sle_flare-ddx",
+      "kind": "ddx",
+      "title": "Conditions to separate from an SLE flare",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infection (pneumonia, sepsis, endocarditis)",
+          "cells": [
+            {
+              "text": "{{hy:Can mimic flare cytopenias, fever and pneumonitis; exclude before escalating}}"
+            },
+            {
+              "text": "Cultures and imaging; high CRP favours infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced lupus",
+          "cells": [
+            {
+              "text": "Hydralazine, procainamide, isoniazid, anti-TNF; rarely renal or CNS"
+            },
+            {
+              "text": "Antihistone positive, anti-dsDNA usually absent; resolves off drug"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Glucocorticoid-induced psychosis",
+          "cells": [
+            {
+              "text": "Psychosis after steroid escalation"
+            },
+            {
+              "text": "Neither shows marked CSF or imaging change; clinical judgement"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Avascular necrosis",
+          "cells": [
+            {
+              "text": "Pain out of proportion in one hip, shoulder or knee after steroids"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis or rhupus",
+          "cells": [
+            {
+              "text": "Erosive arthritis; lupus arthritis is non-erosive"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immune thrombocytopenia",
+          "cells": [
+            {
+              "text": "Isolated low platelets without SLE features"
+            },
+            {
+              "text": "Anti-dsDNA or anti-Sm positivity favours SLE"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Rosacea",
+          "cells": [
+            {
+              "text": "Involves nasolabial folds, papules and pustules"
+            },
+            {
+              "text": "Lupus malar rash spares nasolabial folds"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sle_flare-treatment",
+      "kind": "treatment",
+      "title": "Treating an SLE flare by severity",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "All patients, background therapy"
+            },
+            {
+              "text": "5 mg/kg actual body weight daily, maximum 400 mg/day; yearly eye screening"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "NSAIDs",
+          "cells": [
+            {
+              "text": "Mild arthralgia"
+            },
+            {
+              "text": "As needed; avoid chronic use"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Steroid-sparing agents",
+          "cells": [
+            {
+              "text": "Mild to moderate disease needing steroids"
+            },
+            {
+              "text": "Methotrexate 15 to 20 mg weekly, azathioprine 2 mg/kg daily, or mycophenolate 1 to 1.5 g twice daily"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Belimumab",
+          "cells": [
+            {
+              "text": "Active disease despite standard therapy; nephritis add-on"
+            },
+            {
+              "text": "10 mg/kg IV every 2 weeks for 3 doses then monthly, or 200 mg SC weekly"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "IV methylprednisolone pulse",
+          "cells": [
+            {
+              "text": "Severe, organ-threatening flare"
+            },
+            {
+              "text": "{{hy:1 g over 1 hour on 3 consecutive days}}; exclude infection first"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral prednisone",
+          "cells": [
+            {
+              "text": "Severe disease after or instead of pulse"
+            },
+            {
+              "text": "0.5 to 1 mg/kg daily (usually 40 to 60 mg), taper over about 6 months to 7.5 mg or less"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Cyclophosphamide",
+          "cells": [
+            {
+              "text": "Class III or IV nephritis, organ- or life-threatening disease"
+            },
+            {
+              "text": "Euro-Lupus 500 mg IV every 2 weeks for 6 doses; NIH 0.75 to 1 g/m2 monthly for 6 months"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Mycophenolate mofetil induction",
+          "cells": [
+            {
+              "text": "Lupus nephritis"
+            },
+            {
+              "text": "Up to 3 g/day in 2 doses; may add voclosporin 23.7 mg twice daily"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Anifrolumab",
+          "cells": [
+            {
+              "text": "Active non-renal disease"
+            },
+            {
+              "text": "300 mg IV every 4 weeks; not studied in severe renal or neuropsychiatric disease"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Rituximab",
+          "cells": [
+            {
+              "text": "Refractory disease"
+            },
+            {
+              "text": "1 g on days 1 and 15"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Severe thrombocytopenia or haemolysis",
+          "cells": [
+            {
+              "text": "Haematological flare"
+            },
+            {
+              "text": "Prednisone 1 mg/kg daily (max 80 mg) plus azathioprine or mycophenolate; IVIG 400 mg/kg daily for 5 days or 1 g/kg daily for 2 days"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Response typically takes 4 to 12 weeks. Glucocorticoid damage accrues even at 5 mg/day prednisone equivalent, so taper is a goal."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sle_flare-dx-mgmt",
+      "title": "Diagnosis and management of an SLE flare",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known or suspected SLE with new symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CBC, creatinine, urinalysis and UPCR, anti-dsDNA, C3/C4, CRP",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Infection possible (fever, high CRP, new infiltrate)?",
+          "cite": "c4"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cultures and imaging; treat infection before escalating immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organ-threatening disease (renal, CNS, lung, gut, platelets under 20)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Proteinuria over 500 mg/day or active sediment?",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Renal biopsy; class III or IV gets induction therapy",
+          "cite": "c4"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "IV methylprednisolone 1 g daily for 3 days",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Induction: cyclophosphamide or mycophenolate, then taper steroids",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Mild or moderate flare: optimise hydroxychloroquine, short steroid",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Add methotrexate, azathioprine, mycophenolate or belimumab if needed",
+          "cite": "c4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,87 @@
       "caption": "Overview comparison matrix for inborn errors of bile acid synthesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bile_acid_synthesis_defect-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in inborn errors of bile acid synthesis",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Urinary bile acid analysis by mass spectrometry", "cells": [{"text": "Abnormal bile acid intermediates; the key diagnostic test"}], "cite": "c1"},
+        {"parameter": "Serum total bile acids", "cells": [{"text": "Characteristically low despite cholestasis"}], "cite": "c1"},
+        {"parameter": "Serum gamma-glutamyl transferase", "cells": [{"text": "Often normal or low"}], "cite": "c1"},
+        {"parameter": "Liver function tests and coagulation", "cells": [{"text": "Reflects fat-soluble vitamin status"}], "cite": "c1"},
+        {"parameter": "Molecular genetic testing (HSD3B7, AKR1D1, CYP7B1)", "cells": [{"text": "Confirms the genetic defect"}], "cite": "c1"},
+        {"parameter": "Liver biopsy", "cells": [{"text": "Characterises the hepatopathy, in selected cases"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bile_acid_synthesis_defect-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of cholestasis",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Progressive familial intrahepatic cholestasis", "cells": [{"text": "Also low-GGT cholestasis; urinary bile acid analysis separates the transporter defects from synthesis defects"}], "cite": "c1"},
+        {"parameter": "Cerebrotendinous xanthomatosis", "cells": [{"text": "A distinct bile acid synthesis defect, identified by specialist analysis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bile_acid_synthesis_defect-treatment",
+      "kind": "treatment",
+      "title": "Management options in inborn errors of bile acid synthesis",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Primary bile-acid replacement", "cells": [{"text": "Oral cholic acid, sometimes with chenodeoxycholic acid"}, {"text": "Restores bile flow and suppresses toxic intermediates"}], "cite": "c1"},
+        {"parameter": "Fat-soluble vitamins", "cells": [{"text": "Supplement vitamins A, D, E and K"}, {"text": "Corrects malabsorption"}], "cite": "c1"},
+        {"parameter": "Nutritional support", "cells": [{"text": "Support for steatorrhoea and failure to thrive"}, {"text": "Nutrition is part of care"}], "cite": "c1"},
+        {"parameter": "Monitoring", "cells": [{"text": "Liver biochemistry, coagulation and urinary bile-acid intermediates"}, {"text": "Used to titrate replacement"}], "cite": "c1"},
+        {"parameter": "Liver transplantation", "cells": [{"text": "For late presentation with cirrhosis or failure unresponsive to replacement"}, {"text": "Late presentation"}], "cite": "c1"},
+        {"parameter": "Hepatology and metabolic care", "cells": [{"text": "Early treatment to prevent irreversible liver injury"}, {"text": "Multidisciplinary"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Counselling and family testing for HSD3B7, AKR1D1 and CYP7B1"}, {"text": "Autosomal recessive inheritance"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bile_acid_synthesis_defect-dx-mgmt",
+      "title": "Diagnosis and management of inborn errors of bile acid synthesis",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Neonatal or infant cholestasis with conjugated jaundice, failure to thrive or hepatomegaly", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: coagulopathy from vitamin K deficiency, advancing liver failure or bleeding?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: vitamin K and fat-soluble vitamins; urgent hepatology review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Liver function, GGT (often normal or low) and total bile acids (characteristically low)", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Urinary bile acid analysis by mass spectrometry for abnormal intermediates", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Abnormal bile acid intermediates identified?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Primary bile-acid replacement with cholic acid, plus vitamins A, D, E and K", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider PFIC, cerebrotendinous xanthomatosis or biliary atresia", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Gene testing (HSD3B7, AKR1D1, CYP7B1); monitor biochemistry and titrate replacement", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Early treatment can normalise liver tests and avoid transplantation", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

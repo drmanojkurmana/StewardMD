@@ -145,5 +145,334 @@
       "caption": "Overview comparison matrix for adrenal myelolipoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard endocrinology and radiology reference texts and adrenal incidentaloma consensus guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenal_myelolipoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Macroscopic fat with low Hounsfield attenuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI with chemical-shift and fat-suppression sequences",
+          "cells": [
+            {
+              "text": "Bulk fat content"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline biochemical screen of an incidentaloma",
+          "cells": [
+            {
+              "text": "Confirms the lesion is non-functioning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval size assessment on follow-up imaging",
+          "cells": [
+            {
+              "text": "Growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for retroperitoneal haemorrhage if acute pain",
+          "cells": [
+            {
+              "text": "Acute presentation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_myelolipoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Lipid-rich adrenal adenoma",
+          "cells": [
+            {
+              "text": "Lipid-rich without bulk macroscopic fat"
+            },
+            {
+              "text": "Non-contrast CT for macroscopic fat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal or retroperitoneal liposarcoma",
+          "cells": [
+            {
+              "text": "Rapid growth or heterogeneous soft-tissue components"
+            },
+            {
+              "text": "Interval growth imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal haemorrhage of another cause",
+          "cells": [
+            {
+              "text": "Acute pain with fall in haemoglobin"
+            },
+            {
+              "text": "Evaluation for retroperitoneal haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_myelolipoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative surveillance of small, asymptomatic, imaging-confirmed lesions",
+          "cells": [
+            {
+              "text": "Benign lesion without symptoms"
+            },
+            {
+              "text": "Rather than surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation with macroscopic fat on CT or fat-suppressed MRI",
+          "cells": [
+            {
+              "text": "Diagnosis"
+            },
+            {
+              "text": "Imaging confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline incidentaloma biochemical screen",
+          "cells": [
+            {
+              "text": "Confirms non-functioning lesion"
+            },
+            {
+              "text": "Screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval size monitoring",
+          "cells": [
+            {
+              "text": "Growth on follow-up"
+            },
+            {
+              "text": "Imaging surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenalectomy for large, symptomatic or haemorrhage-complicated lesions",
+          "cells": [
+            {
+              "text": "Size-related complications"
+            },
+            {
+              "text": "Surgical referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent resuscitation for spontaneous retroperitoneal haemorrhage",
+          "cells": [
+            {
+              "text": "Acute haemorrhage"
+            },
+            {
+              "text": "Fluid and stabilisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenal_myelolipoma-dx-mgmt",
+      "title": "Diagnosis and management of Adrenal myelolipoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental adrenal mass, often asymptomatic",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute flank pain with falling haemoglobin, or rapid growth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent resuscitation for retroperitoneal haemorrhage; surgical review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Unenhanced CT for macroscopic fat; fat-suppressed MRI if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Bulk macroscopic fat confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Baseline incidentaloma screen; conservative surveillance if small",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Characterise further; review liposarcoma and lipid-rich adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interval size monitoring on imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adrenalectomy for large, symptomatic or haemorrhage-complicated lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Advise avoidance of flank trauma; prompt review of new flank pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; excellent prognosis and surgery generally curative",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

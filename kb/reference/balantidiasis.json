@@ -147,5 +147,315 @@
       "caption": "Overview comparison matrix for balantidiasis (balantidium coli)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "balantidiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Fresh stool wet-mount microscopy",
+          "cells": [
+            {
+              "text": "Large motile ciliated trophozoites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool concentration methods",
+          "cells": [
+            {
+              "text": "Cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool examination",
+          "cells": [
+            {
+              "text": "Shedding is intermittent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sigmoidoscopy or colonoscopy with biopsy",
+          "cells": [
+            {
+              "text": "Ulcer edges in invasive disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and markers of inflammation and dehydration",
+          "cells": [
+            {
+              "text": "Dehydration and inflammation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balantidiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Amoebic colitis",
+          "cells": [
+            {
+              "text": "Balantidium is a large motile ciliated trophozoite; this is the key difference"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Campylobacter or non-typhoidal Salmonella colitis",
+          "cells": [
+            {
+              "text": "Stool microscopy identifies the ciliate"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "balantidiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiparasitic therapy",
+          "cells": [
+            {
+              "text": "Tetracycline such as doxycycline first-line; metronidazole or iodoquinol as alternatives"
+            },
+            {
+              "text": "Doxycycline first-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehydration and electrolyte correction",
+          "cells": [
+            {
+              "text": "In dysenteric illness"
+            },
+            {
+              "text": "Dysentery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical management of complications",
+          "cells": [
+            {
+              "text": "Perforation and peritonitis in invasive colitis"
+            },
+            {
+              "text": "Invasive colitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Predisposing factors",
+          "cells": [
+            {
+              "text": "Treat malnutrition; assess and manage immunosuppression"
+            },
+            {
+              "text": "Predisposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sanitation and contact reduction",
+          "cells": [
+            {
+              "text": "Reduce contact with pig faeces; screen or treat close contacts"
+            },
+            {
+              "text": "Exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clearance check",
+          "cells": [
+            {
+              "text": "Follow-up stool examination"
+            },
+            {
+              "text": "Intermittent shedding"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "balantidiasis-dx-mgmt",
+      "title": "Diagnosis and management of Balantidiasis (Balantidium coli)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dysentery or colitis after pig contact or in a malnourished patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe bloody dysentery with dehydration or perforation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Rehydration and electrolyte correction; surgical review for perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fresh stool wet mount, concentration, repeated stool, endoscopy with biopsy, FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Large motile ciliated trophozoites on repeated stool examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Doxycycline as first-line antiparasitic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat stool examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Metronidazole or iodoquinol as alternatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat malnutrition and assess immune status",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sanitation and screening of close contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Follow-up stool examination to confirm clearance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -168,5 +168,505 @@
       "caption": "Overview comparison matrix for pancreatic cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Pancreatic Cancer",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/tumors-of-the-gastrointestinal-tract/pancreatic-cancer"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pancreatic_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging pancreatic cancer",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Painless obstructive jaundice",
+          "cells": [
+            {
+              "text": "Head of pancreas tumor; Courvoisier sign"
+            },
+            {
+              "text": "Visible once bilirubin is about 2 mg/dL or more"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreas-protocol CT (arterial and portal venous phases)",
+          "cells": [
+            {
+              "text": "Mass and its relation to SMA, celiac axis, SMV and portal vein"
+            },
+            {
+              "text": "{{hy:Key test for staging and resectability}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or MRCP",
+          "cells": [
+            {
+              "text": "Alternative to CT"
+            },
+            {
+              "text": "Choice depends on local expertise"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "EUS with core biopsy",
+          "cells": [
+            {
+              "text": "Tissue diagnosis and local staging"
+            },
+            {
+              "text": "Core (Tru-Cut) preferred over FNA for molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CA19-9",
+          "cells": [
+            {
+              "text": "Monitoring marker, not for screening"
+            },
+            {
+              "text": "Draw after bilirubin normalizes; undetectable in 8 to 15% (Lewis non-secretors), CA125 may help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver tests, amylase, lipase",
+          "cells": [
+            {
+              "text": "Raised ALP and bilirubin suggest duct obstruction or liver metastases"
+            },
+            {
+              "text": "Amylase and lipase usually normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "PET and staging laparoscopy",
+          "cells": [
+            {
+              "text": "Occult metastases"
+            },
+            {
+              "text": "Used selectively"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Next-generation sequencing, germline testing",
+          "cells": [
+            {
+              "text": "KRAS, BRCA, MSI, NTRK, NRG1, BRAF"
+            },
+            {
+              "text": "Guides targeted therapy and family counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Resectability at diagnosis",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10 to 20% resectable",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "Resectable, borderline or locally advanced, metastatic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_cancer-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic pancreatic adenocarcinoma",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Calcification, long history, mass-forming inflammation; itself a risk factor"
+            },
+            {
+              "text": "EUS-guided biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatic neuroendocrine tumor",
+          "cells": [
+            {
+              "text": "Hypervascular mass, slower course, possible hormone syndrome"
+            },
+            {
+              "text": "Biopsy with neuroendocrine stains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IPMN",
+          "cells": [
+            {
+              "text": "Cystic lesion communicating with the duct"
+            },
+            {
+              "text": "MRCP or EUS; Fukuoka criteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mucinous cystic neoplasm or cystadenocarcinoma",
+          "cells": [
+            {
+              "text": "Cystic tumor; better prognosis"
+            },
+            {
+              "text": "EUS with cyst fluid analysis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pseudocyst",
+          "cells": [
+            {
+              "text": "History of pancreatitis"
+            },
+            {
+              "text": "Imaging and cyst fluid"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Metastasis to pancreas",
+          "cells": [
+            {
+              "text": "Renal, breast, lung, melanoma or lymphoma primary"
+            },
+            {
+              "text": "Biopsy with immunohistochemistry"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distal cholangiocarcinoma or ampullary tumor",
+          "cells": [
+            {
+              "text": "Also causes painless jaundice"
+            },
+            {
+              "text": "ERCP or EUS with biopsy"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "pancreatic_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treating pancreatic cancer",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pancreaticoduodenectomy (Whipple) or distal pancreatectomy",
+          "cells": [
+            {
+              "text": "Resectable disease"
+            },
+            {
+              "text": "Followed by adjuvant chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FOLFIRINOX",
+          "cells": [
+            {
+              "text": "Adjuvant, neoadjuvant or metastatic, good performance status"
+            },
+            {
+              "text": "Fluorouracil, leucovorin, irinotecan, oxaliplatin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gemcitabine plus nab-paclitaxel",
+          "cells": [
+            {
+              "text": "Alternative combination in the same settings"
+            },
+            {
+              "text": "Similar outcomes to FOLFIRINOX in a perioperative trial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neoadjuvant chemotherapy or chemoradiation",
+          "cells": [
+            {
+              "text": "Borderline resectable"
+            },
+            {
+              "text": "Survival benefit over upfront surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Olaparib maintenance; targeted or immunotherapy",
+          "cells": [
+            {
+              "text": "BRCA mutation; BRAF, NTRK, NRG1 or MMR-deficient tumors"
+            },
+            {
+              "text": "Needs molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary and duodenal stenting or surgical bypass",
+          "cells": [
+            {
+              "text": "Obstructive jaundice or gastric outlet block"
+            },
+            {
+              "text": "Bypass if expected survival over about 6 to 7 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Opioids and celiac plexus block",
+          "cells": [
+            {
+              "text": "Tumor pain"
+            },
+            {
+              "text": "Long-acting opioids for chronic pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholestyramine",
+          "cells": [
+            {
+              "text": "Pruritus"
+            },
+            {
+              "text": "4 g orally once to four times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pancrelipase with acid suppression",
+          "cells": [
+            {
+              "text": "Exocrine insufficiency"
+            },
+            {
+              "text": "Dose by symptoms and dietary fat"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Trousseau syndrome or venous thrombosis"
+            },
+            {
+              "text": "Common in metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pancreatic_cancer-dx-mgmt",
+      "title": "Diagnosis and management of pancreatic cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painless jaundice, back pain, weight loss or new diabetes",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Pancreas-protocol CT (or MRI)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "EUS core biopsy; CA19-9 after bilirubin falls; sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Distant metastases?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Systemic chemotherapy, targeted therapy if actionable, palliative care",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Resectable without major vessel involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Whipple or distal pancreatectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Adjuvant FOLFIRINOX or gemcitabine-based chemotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Biliary stent if jaundiced, then neoadjuvant therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Becomes resectable on restaging?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue chemotherapy; stents, analgesia, enzymes",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

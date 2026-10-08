@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for common variable immunodeficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "common_variable_immunodeficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum IgG, IgA and IgM with IgG subclasses",
+          "cells": [
+            {
+              "text": "Hypogammaglobulinaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibody titres before and after vaccination",
+          "cells": [
+            {
+              "text": "Poor specific antibody response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of secondary causes (SPEP, HIV, drug review, urinary protein)",
+          "cells": [
+            {
+              "text": "Secondary causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging including CT",
+          "cells": [
+            {
+              "text": "Bronchiectasis and lung disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "common_variable_immunodeficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Secondary hypogammaglobulinaemia from drugs (e.g. rituximab, anticonvulsants)",
+          "cells": [
+            {
+              "text": "Drug exposure; excluded by drug review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic lymphocytic leukaemia, lymphoma or myeloma",
+          "cells": [
+            {
+              "text": "Causes immunoglobulin deficiency; excluded by SPEP"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV infection and protein-losing states",
+          "cells": [
+            {
+              "text": "Excluded by HIV testing and urinary protein assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "common_variable_immunodeficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Intravenous or subcutaneous, titrated to trough level and infection frequency; the mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antibiotic treatment",
+          "cells": [
+            {
+              "text": "Low threshold; prophylactic antibiotics for frequent sinopulmonary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway clearance and physiotherapy",
+          "cells": [
+            {
+              "text": "Early antibiotics for exacerbations to preserve lung function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for autoimmune disease",
+          "cells": [
+            {
+              "text": "Corticosteroids, rituximab or other immunosuppression for cytopenias and granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vaccination",
+          "cells": [
+            {
+              "text": "Inactivated vaccines; avoid live vaccines; antibody responses may be poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured surveillance",
+          "cells": [
+            {
+              "text": "Lung imaging, blood counts, vigilance for lymphoma and chronic lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing",
+          "cells": [
+            {
+              "text": "When a monogenic cause or transplant candidacy is considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "common_variable_immunodeficiency-dx-mgmt",
+      "title": "Diagnosis and management of Common variable immunodeficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CVID: recurrent sinopulmonary infection with low immunoglobulins",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (sepsis, lymphoma features, progressive lung decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat severe infection or sepsis; assess for lymphoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum IgG, IgA, IgM and subclasses; vaccine antibody titres; lymphocyte phenotyping",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are secondary causes excluded and antibody response poor?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat other causes, such as drug-induced or malignant hypogammaglobulinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunoglobulin replacement titrated to trough level and infections",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt antibiotics; prophylaxis for frequent sinopulmonary infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway clearance and physiotherapy to limit bronchiectasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Inactivated vaccines only; structured lung and lymphoma surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Life expectancy has improved substantially with regular replacement and infection control",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

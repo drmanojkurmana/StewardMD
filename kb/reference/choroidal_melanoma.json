@@ -148,5 +148,327 @@
       "caption": "Overview comparison matrix for choroidal melanoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choroidal_melanoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "B-scan and A-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Dimensions and internal reflectivity; low reflectivity and acoustic hollowing support the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundoscopy and fundus photography",
+          "cells": [
+            {
+              "text": "Documents the lesion and its risk features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Subretinal fluid and dome shape"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic staging with liver imaging and liver function tests",
+          "cells": [
+            {
+              "text": "Detects metastasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fine-needle aspiration biopsy",
+          "cells": [
+            {
+              "text": "Cytogenetic and gene-expression prognostication in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroidal_melanoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Choroidal naevus",
+          "cells": [
+            {
+              "text": "Thickness below about 2 mm; no subretinal fluid or orange pigment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choroidal metastasis",
+          "cells": [
+            {
+              "text": "Distant primary tumour"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choroidal_melanoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Eye-preserving radiotherapy",
+          "cells": [
+            {
+              "text": "Plaque brachytherapy or proton-beam therapy"
+            },
+            {
+              "text": "Mainstay of local control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "Reserved for large tumours, extensive invasion or a blind painful eye"
+            },
+            {
+              "text": "Advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjunct therapy",
+          "cells": [
+            {
+              "text": "Transpupillary thermotherapy or local resection in selected cases"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prognostic testing",
+          "cells": [
+            {
+              "text": "Cytogenetic and gene-expression testing for monosomy 3 and chromosome 8q gain"
+            },
+            {
+              "text": "Metastatic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic staging and surveillance",
+          "cells": [
+            {
+              "text": "Liver imaging and lifelong surveillance for liver metastasis"
+            },
+            {
+              "text": "Liver is the dominant metastatic site"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic disease",
+          "cells": [
+            {
+              "text": "Medical oncology referral, including tebentafusp in HLA-A*02:01-positive patients"
+            },
+            {
+              "text": "Metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular oncology team",
+          "cells": [
+            {
+              "text": "Manage radiation retinopathy, neovascular glaucoma and visual rehabilitation"
+            },
+            {
+              "text": "Radiation complications"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choroidal_melanoma-dx-mgmt",
+      "title": "Diagnosis and management of Choroidal melanoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choroidal melanoma: pigmented dome-shaped choroidal mass with serous detachment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (liver abnormality, optic nerve extension, rapid growth)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent oncology referral for suspected metastatic risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Ultrasound, fundus imaging, OCT and liver staging tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Thick pigmented choroidal mass with malignant features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Plaque brachytherapy or proton-beam therapy for eye-preserving control",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check choroidal naevus, choroidal metastasis and haemangioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prognostic cytogenetic testing for monosomy 3 on selected biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Enucleation for large tumours, extensive invasion or blind painful eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liver imaging and lifelong surveillance for liver metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Tebentafusp or liver-directed therapy for metastatic disease in suitable patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

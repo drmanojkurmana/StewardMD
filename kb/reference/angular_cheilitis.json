@@ -143,5 +143,286 @@
       "caption": "Overview comparison matrix for angular cheilitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oral medicine and dermatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "angular_cheilitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical diagnosis",
+          "cells": [
+            {
+              "text": "Characteristic commissural involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of dentition, dentures and vertical facial height",
+          "cells": [
+            {
+              "text": "Mechanical cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiological swab",
+          "cells": [
+            {
+              "text": "Guides targeting where infection is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for nutritional deficiencies and diabetes",
+          "cells": [
+            {
+              "text": "Where disease is recurrent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consideration of underlying immunosuppression or systemic disease",
+          "cells": [
+            {
+              "text": "Underlying systemic cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "angular_cheilitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical antifungal",
+          "cells": [
+            {
+              "text": "Such as miconazole"
+            },
+            {
+              "text": "Topical antibacterial such as fusidic acid if Staphylococcus aureus is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Barrier ointment or paste",
+          "cells": [
+            {
+              "text": "Protect the macerated angles from saliva"
+            },
+            {
+              "text": "Continued saliva contact"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct the mechanical cause",
+          "cells": [
+            {
+              "text": "Adjust ill-fitting dentures, reinforce denture hygiene, restore vertical facial height"
+            },
+            {
+              "text": "Lost vertical facial height"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Replace nutritional deficiencies",
+          "cells": [
+            {
+              "text": "Iron, B-group vitamins or zinc"
+            },
+            {
+              "text": "Screen for deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimise contributory systemic factors",
+          "cells": [
+            {
+              "text": "Diabetes control, xerostomia, immunosuppression"
+            },
+            {
+              "text": "Systemic contributors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refer for recurrent or refractory disease",
+          "cells": [
+            {
+              "text": "Oral medicine or dermatology"
+            },
+            {
+              "text": "Address the underlying cause to prevent relapse"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "angular_cheilitis-dx-mgmt",
+      "title": "Diagnosis and management of Angular cheilitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Characteristic commissural involvement at the angles of the mouth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Recurrent disease, or spread beyond the commissures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer to oral medicine or dermatology for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical diagnosis; dentures and vertical height; commissural swab if infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Staphylococcus aureus implicated on commissural swab?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Add topical antibacterial such as fusidic acid to antifungal",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the swab",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical antifungal such as miconazole and a barrier ointment",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct the mechanical cause: dentures, hygiene, vertical height",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and replace iron, B-group vitamin or zinc deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Responds once contributory factors are corrected; recurs if untreated",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

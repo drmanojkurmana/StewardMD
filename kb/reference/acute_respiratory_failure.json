@@ -149,5 +149,346 @@
       "caption": "Overview comparison matrix for acute respiratory failure."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATLS / Harrison's Principles of Internal Medicine (critical care)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_respiratory_failure-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Classifies type 1 or type 2 failure and acid-base status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Consolidation, oedema, effusion or pneumothorax"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous pulse oximetry and capnography",
+          "cells": [
+            {
+              "text": "Ongoing oxygenation and carbon dioxide monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside lung and cardiac ultrasound",
+          "cells": [
+            {
+              "text": "Differentiates causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT pulmonary angiography",
+          "cells": [
+            {
+              "text": "Embolism when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_respiratory_failure-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiogenic pulmonary oedema",
+          "cells": [
+            {
+              "text": "Cardiac cause; treated with non-invasive ventilation and diuretics"
+            },
+            {
+              "text": "Bedside cardiac ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "Embolic cause of hypoxaemia"
+            },
+            {
+              "text": "CT pulmonary angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular weakness or central respiratory depression",
+          "cells": [
+            {
+              "text": "Inadequate ventilation with hypercapnia"
+            },
+            {
+              "text": "Arterial blood gas for hypercapnia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_respiratory_failure-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Secure the airway and support oxygenation and ventilation",
+          "cells": [
+            {
+              "text": "Immediate priority"
+            },
+            {
+              "text": "In parallel with seeking the cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Controlled oxygen therapy to a target saturation",
+          "cells": [
+            {
+              "text": "Oxygenation"
+            },
+            {
+              "text": "Caution in chronic carbon dioxide retainers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-invasive ventilation",
+          "cells": [
+            {
+              "text": "Hypercapnic COPD exacerbation or cardiogenic oedema"
+            },
+            {
+              "text": "Selected causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Invasive mechanical ventilation",
+          "cells": [
+            {
+              "text": "Obtunded or deteriorating patient"
+            },
+            {
+              "text": "Without delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the precipitant: antibiotics, diuretics or bronchodilators",
+          "cells": [
+            {
+              "text": "Underlying cause"
+            },
+            {
+              "text": "Cause-specific treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring with ABG, pulse oximetry and capnography",
+          "cells": [
+            {
+              "text": "Ongoing assessment"
+            },
+            {
+              "text": "Continuous monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation to intensive care",
+          "cells": [
+            {
+              "text": "Organ support and refractory hypoxaemia"
+            },
+            {
+              "text": "Critical care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_respiratory_failure-dx-mgmt",
+      "title": "Diagnosis and management of Acute respiratory failure",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Breathlessness with rising respiratory rate, accessory muscle use or confusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Exhaustion, falling respiratory rate or inability to protect the airway?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Secure the airway and ventilate; call critical care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ABG to classify type 1 or type 2 failure; chest radiograph; oximetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Hypercapnic failure with COPD or cardiogenic oedema?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Non-invasive ventilation with controlled oxygen targets",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review pneumonia, ARDS, PE and neuromuscular causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Invasive ventilation without delay if obtunded or deteriorating",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Treat the precipitant: antibiotics, diuretics or bronchodilators",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor with ABG, pulse oximetry and capnography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Recovery in many with prompt support; ARDS and multi-organ failure do worse",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

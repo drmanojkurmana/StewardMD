@@ -150,5 +150,327 @@
       "caption": "Overview comparison matrix for 16p11.2 microdeletion syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chromosome_16p11_deletion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "Detects and sizes the copy-number change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or MLPA",
+          "cells": [
+            {
+              "text": "Confirms the deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental studies",
+          "cells": [
+            {
+              "text": "Inheritance and recurrence-risk counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial growth and body-mass-index monitoring",
+          "cells": [
+            {
+              "text": "Obesity tendency and macrocephaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, speech-language and autism assessment",
+          "cells": [
+            {
+              "text": "Neurodevelopmental features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_16p11_deletion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Prader-Willi syndrome",
+          "cells": [
+            {
+              "text": "Weight gain in a carrier"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MC4R-related obesity",
+          "cells": [
+            {
+              "text": "Monogenic cause of obesity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_16p11_deletion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early developmental intervention",
+          "cells": [
+            {
+              "text": "Speech-and-language therapy, behavioural support for autism and individualised education"
+            },
+            {
+              "text": "Developmental features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epilepsy",
+          "cells": [
+            {
+              "text": "Antiseizure medication where seizures occur"
+            },
+            {
+              "text": "Seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and obesity",
+          "cells": [
+            {
+              "text": "Monitor growth and BMI; dietary and activity measures"
+            },
+            {
+              "text": "Obesity tendency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Motor and speech therapy",
+          "cells": [
+            {
+              "text": "Occupational therapy, physiotherapy and articulation therapy"
+            },
+            {
+              "text": "Motor coordination and articulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autism and cognitive assessment",
+          "cells": [
+            {
+              "text": "Formal autism and cognitive assessment to direct support"
+            },
+            {
+              "text": "Support planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental testing and recurrence risk; variable expressivity"
+            },
+            {
+              "text": "Inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Team coordination",
+          "cells": [
+            {
+              "text": "Developmental paediatrics multidisciplinary team"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chromosome_16p11_deletion-dx-mgmt",
+      "title": "Diagnosis and management of 16p11.2 microdeletion syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected 16p11.2 deletion: autism, developmental delay and obesity tendency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (new seizures, rapid weight gain with complications, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review of seizures or obesity complications",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray, parental studies, growth and BMI monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "BP4-BP5 deletion confirmed with developmental or autism features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Early speech-language therapy and behavioural support for autism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Prader-Willi syndrome, MC4R obesity and fragile X",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication where seizures occur",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dietary and activity measures to prevent obesity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational therapy, physiotherapy and articulation therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Counselling on variable expressivity and incomplete penetrance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

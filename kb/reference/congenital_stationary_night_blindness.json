@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for congenital stationary night blindness."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Ryan's Retina / Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_stationary_night_blindness-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full-field ERG",
+          "cells": [
+            {
+              "text": "Electronegative waveform; complete versus incomplete forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ON/OFF and S-cone ERG protocols",
+          "cells": [
+            {
+              "text": "Subtyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dark adaptometry",
+          "cells": [
+            {
+              "text": "Rod threshold defect quantified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular testing (NYX, CACNA1F, GRM6, TRPM1)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus examination and imaging",
+          "cells": [
+            {
+              "text": "Otherwise normal retina"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_stationary_night_blindness-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Retinitis pigmentosa and other progressive rod-cone dystrophies",
+          "cells": [
+            {
+              "text": "Progression of field or fundus change points away from stationary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitamin A deficiency retinopathy",
+          "cells": [
+            {
+              "text": "Systemic features or malabsorption suggest acquired deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune retinopathy",
+          "cells": [
+            {
+              "text": "Sudden later-onset night blindness suggests acquired cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_stationary_night_blindness-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Refractive correction",
+          "cells": [
+            {
+              "text": "Spectacles or contact lenses, particularly for myopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision support",
+          "cells": [
+            {
+              "text": "Counselling on night vision; driving and low-light safety advice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nystagmus and amblyopia",
+          "cells": [
+            {
+              "text": "Managed where indicated, including amblyopia treatment in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance",
+          "cells": [
+            {
+              "text": "Non-progressive; avoid unnecessary treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "Electroretinography and genetic testing to distinguish from progressive degeneration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked, autosomal recessive or dominant pattern identified"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_stationary_night_blindness-dx-mgmt",
+      "title": "Diagnosis and management of Congenital stationary night blindness",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital stationary night blindness: lifelong poor night vision",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (documented progression, malabsorption, late-onset night blindness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Reconsider a degenerative or acquired diagnosis; check vitamin A status",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-field ERG with ON/OFF protocols; dark adaptometry; gene testing; fundus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ERG show an electronegative waveform with a stable phenotype?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider progressive rod-cone dystrophy or acquired retinopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Refractive correction, particularly for myopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-vision support and advice on driving and low-light activity",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Nystagmus management and amblyopia treatment in children",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassure: non-progressive; genetic counselling for inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "By definition stationary; night vision and acuity remain stable throughout life",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

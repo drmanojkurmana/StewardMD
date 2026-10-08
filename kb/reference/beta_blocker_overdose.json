@@ -143,5 +143,74 @@
       "caption": "Overview comparison matrix for beta-blocker overdose."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard toxicology references (Goldfrank's Toxicologic Emergencies; Tintinalli's Emergency Medicine)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "beta_blocker_overdose-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in beta-blocker overdose",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Continuous cardiac monitoring and serial ECGs", "cells": [{"text": "Bradycardia or heart block; QRS widening with membrane-stabilising agents"}], "cite": "c1"},
+        {"parameter": "Blood glucose", "cells": [{"text": "May be low, especially in children; contrasts with high glucose in calcium-channel-blocker poisoning"}], "cite": "c1"},
+        {"parameter": "Agent, formulation and co-ingestants", "cells": [{"text": "Identifies the specific agent and any modified-release preparation"}], "cite": "c1"},
+        {"parameter": "Blood gas and lactate", "cells": [{"text": "Gauges perfusion"}], "cite": "c1"},
+        {"parameter": "Echocardiography in refractory shock", "cells": [{"text": "Guides mechanical or pharmacological support"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "beta_blocker_overdose-treatment",
+      "kind": "treatment",
+      "title": "Management options in beta-blocker overdose",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Fluids and atropine", "cells": [{"text": "Intravenous fluids and atropine for symptomatic bradycardia and hypotension"}, {"text": "Initial measures"}], "cite": "c1"},
+        {"parameter": "Glucagon", "cells": [{"text": "Bypasses beta-receptor blockade"}, {"text": "Improves chronotropy and inotropy"}], "cite": "c1"},
+        {"parameter": "High-dose insulin euglycaemic therapy", "cells": [{"text": "With glucose; vasopressors for refractory cardiogenic shock"}, {"text": "Escalation step"}], "cite": "c1"},
+        {"parameter": "Sodium bicarbonate", "cells": [{"text": "For sodium-channel blockade and QRS widening from lipophilic agents such as propranolol; manage seizures"}, {"text": "Lipophilic agents cause seizures and coma"}], "cite": "c1"},
+        {"parameter": "Hypoglycaemia correction", "cells": [{"text": "Correct hypoglycaemia with continuous cardiac monitoring and serial ECGs"}, {"text": "Especially in children"}], "cite": "c1"},
+        {"parameter": "Lipid emulsion and mechanical support", "cells": [{"text": "Intravenous lipid emulsion and mechanical circulatory support"}, {"text": "For shock unresponsive to pharmacological measures"}], "cite": "c1"},
+        {"parameter": "Decontamination and follow-up", "cells": [{"text": "Activated charcoal for recent ingestion; whole-bowel irrigation for modified-release preparations"}, {"text": "Psychiatric follow-up after intentional overdose"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "beta_blocker_overdose-dx-mgmt",
+      "title": "Diagnosis and management of beta-blocker overdose",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Bradycardia and hypotension after beta-blocker ingestion", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: profound bradycardia, heart block, wide QRS, seizures or refractory hypotension?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: glucagon and high-dose insulin euglycaemic therapy; vasopressors", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Continuous ECG; check glucose, electrolytes, blood gas and lactate", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Fluids and atropine for symptomatic bradycardia; identify agent and co-ingestants", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Haemodynamics respond to fluids and atropine?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Correct hypoglycaemia, monitor ECG; activated charcoal if ingestion is recent", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "No: glucagon, insulin euglycaemic therapy, vasopressors; consider lipid emulsion", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Many recover with supportive care; modified-release agents can deteriorate late", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

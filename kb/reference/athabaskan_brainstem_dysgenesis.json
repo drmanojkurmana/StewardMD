@@ -149,5 +149,336 @@
       "caption": "Overview comparison matrix for athabaskan brainstem dysgenesis (hoxa1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "athabaskan_brainstem_dysgenesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Molecular testing of HOXA1",
+          "cells": [
+            {
+              "text": "Including the recurrent founder variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep and ventilation studies",
+          "cells": [
+            {
+              "text": "Respiratory control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological testing and inner ear imaging",
+          "cells": [
+            {
+              "text": "Hearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-ophthalmological evaluation",
+          "cells": [
+            {
+              "text": "Gaze and ocular motility"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and vascular imaging",
+          "cells": [
+            {
+              "text": "Cardiac and carotid anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and swallowing assessment",
+          "cells": [
+            {
+              "text": "Development and swallowing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "athabaskan_brainstem_dysgenesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Bosley-Salih-Alorainy syndrome",
+          "cells": [
+            {
+              "text": "A related HOXA1-spectrum disorder; separated by HOXA1 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Horizontal gaze palsy with progressive scoliosis",
+          "cells": [
+            {
+              "text": "The gaze abnormality should not be interpreted in isolation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "athabaskan_brainstem_dysgenesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Non-invasive ventilation up to tracheostomy and assisted ventilation"
+            },
+            {
+              "text": "Guided by sleep and ventilation studies; central hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac and vascular management",
+          "cells": [
+            {
+              "text": "Cardiology and vascular management of anomalies"
+            },
+            {
+              "text": "Informed by echo and vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological rehabilitation",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation"
+            },
+            {
+              "text": "Sensorineural deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and swallowing support",
+          "cells": [
+            {
+              "text": "Aspiration precautions; gastrostomy where bulbar dysfunction requires it"
+            },
+            {
+              "text": "Bulbar dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neuro-ophthalmological support",
+          "cells": [
+            {
+              "text": "Support for gaze limitation and developmental delay"
+            },
+            {
+              "text": "Developmental delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive HOXA1 disorder; founder-variant testing and family screening"
+            },
+            {
+              "text": "Recessive recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation plan",
+          "cells": [
+            {
+              "text": "Monitoring for life-threatening apnoea and hypoventilation"
+            },
+            {
+              "text": "Infancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "athabaskan_brainstem_dysgenesis-dx-mgmt",
+      "title": "Diagnosis and management of Athabaskan brainstem dysgenesis (HOXA1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Gaze limitation and central hypoventilation in an infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Apnoea needing urgent respiratory support or aspiration risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support for central apnoea",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HOXA1 testing, sleep and ventilation studies, hearing, neuro-ophthalmology, echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "HOXA1 variant confirmed with central hypoventilation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Respiratory support escalated from non-invasive ventilation as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat HOXA1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Hearing aids or cochlear implantation for sensorineural deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiology and vascular management of anomalies",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Feeding support with aspiration precautions and gastrostomy if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary follow-up and family genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

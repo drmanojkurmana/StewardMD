@@ -276,5 +276,564 @@
       "caption": "Diagnostic and clinical overview matrix for pyrexia of unknown origin."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "David and Quinlan, Fever of Unknown Origin in Adults, Am Fam Physician 2022",
+      "url": "https://www.aafp.org/pubs/afp/issues/2022/0200/p137.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "PUO-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining and working up pyrexia of unknown origin",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Temperature",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">=38.3 deg C (101 deg F) on at least two or several occasions",
+              "op": ">=",
+              "value": 38.3
+            },
+            {
+              "text": "Fever criterion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "At least 3 weeks (Harrison); no minimum in the current consensus (AFP)",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Sources differ"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Host",
+          "cells": [
+            {
+              "text": "Not immunocompromised"
+            },
+            {
+              "text": "Nosocomial, neutropenic and HIV-associated FUO need separate approaches"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammation of unknown origin",
+          "cells": [
+            {
+              "text": "Raised CRP or ESR with normal temperature"
+            },
+            {
+              "text": "Same causes and workup as FUO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obligatory tests",
+          "cells": [
+            {
+              "text": "ESR, CRP, CBC with differential, electrolytes, creatinine, LFTs, LDH, CK, ferritin, ANA, RF, protein electrophoresis, urinalysis"
+            },
+            {
+              "text": "Baseline panel before calling it FUO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cultures and imaging",
+          "cells": [
+            {
+              "text": "Three blood cultures, urine culture, chest x-ray, abdominal ultrasound, TST or IGRA"
+            },
+            {
+              "text": "{{hy:More than 3 blood cultures add nothing without clues}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potentially diagnostic clues",
+          "cells": [
+            {
+              "text": "Eyes, nodes, temporal arteries, liver, spleen, scars, skin, mucosa; drugs, travel, animals"
+            },
+            {
+              "text": "Drive all further testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FDG-PET/CT",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 50% total diagnostic yield",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Next step when clue-guided tests fail; scan before steroids, while inflamed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Temporal artery biopsy",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Age >=55 years",
+              "op": ">=",
+              "value": 55
+            },
+            {
+              "text": "GCA up to 17% of elderly FUO"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Yield 14% to 27%",
+              "range": [
+                14,
+                27
+              ]
+            },
+            {
+              "text": "Highest yield for suspected miliary TB"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bone marrow biopsy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Specific diagnosis in 23.7% in one series",
+              "op": "=",
+              "value": 23.7
+            },
+            {
+              "text": "When haematological disease is suspected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug fever",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Fever persisting >72 h after stopping the drug",
+              "op": ">",
+              "value": 72
+            },
+            {
+              "text": "Makes that drug an unlikely cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Duration conflict: Harrison requires illness of at least 3 weeks; the 2022 AFP review states the current consensus has no minimum duration. Temporal artery biopsy age: Harrison >=55, AFP >55."
+    },
+    {
+      "id": "PUO-ddx",
+      "kind": "ddx",
+      "title": "Main cause groups and key causes of PUO",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key clue",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infection (20% to 40%)",
+          "cells": [
+            {
+              "text": "Commoner in lower-income countries"
+            },
+            {
+              "text": "Clue-guided cultures and imaging"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Extrapulmonary or miliary TB",
+          "cells": [
+            {
+              "text": "Up to half of infective FUO outside the West"
+            },
+            {
+              "text": "{{hy:Liver, marrow or node biopsy with AFB culture and PCR}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective endocarditis, including culture-negative",
+          "cells": [
+            {
+              "text": "Prior antibiotics, fastidious organisms, Q fever, Bartonella"
+            },
+            {
+              "text": "Echocardiography when suspected; prolonged cultures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal, pelvic or spinal abscess",
+          "cells": [
+            {
+              "text": "Localising pain or prior surgery"
+            },
+            {
+              "text": "Ultrasound or CT; MRI for spine"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignancy (20% to 30%)",
+          "cells": [
+            {
+              "text": "Lymphoma and others; steroids may mask"
+            },
+            {
+              "text": "CT and PET/CT-guided biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-infectious inflammatory disease (10% to 30%)",
+          "cells": [
+            {
+              "text": "Still disease, GCA, SLE, sarcoidosis"
+            },
+            {
+              "text": "Temporal artery biopsy; serology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drug fever or DRESS",
+          "cells": [
+            {
+              "text": "Any drug, eosinophilia, nodes"
+            },
+            {
+              "text": "Stop drug; fever settles within 72 h"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factitious or fraudulent fever",
+          "cells": [
+            {
+              "text": "Access to medical equipment; pulse-temperature dissociation"
+            },
+            {
+              "text": "Supervised multi-site temperature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endemic infections after travel",
+          "cells": [
+            {
+              "text": "Malaria, visceral leishmaniasis, histoplasmosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Category percentages from AFP 2022; miscellaneous causes 10% to 20%. Best-test cell marked needs-source was not stated in the sources opened."
+    },
+    {
+      "id": "PUO-treatment",
+      "kind": "treatment",
+      "title": "Management of pyrexia of unknown origin",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Watchful waiting with repeated clue search",
+          "cells": [
+            {
+              "text": "{{hy:Stable patient without a diagnosis}}"
+            },
+            {
+              "text": "Up to 75% resolve spontaneously"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop antibiotics and glucocorticoids during workup",
+          "cells": [
+            {
+              "text": "Patient already on them"
+            },
+            {
+              "text": "They mask disease and spoil cultures and node biopsies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop suspected drug",
+          "cells": [
+            {
+              "text": "Possible drug fever"
+            },
+            {
+              "text": "Fever beyond 72 h after stopping argues against it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Empirical antimicrobials",
+          "cells": [
+            {
+              "text": "Only neutropenic, immunocompromised or critically ill patients"
+            },
+            {
+              "text": "Not shown effective in FUO; may delay diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Empirical glucocorticoids",
+          "cells": [
+            {
+              "text": "Avoid until infection and lymphoma are excluded"
+            },
+            {
+              "text": "Can let infection or lymphoma progress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted therapy",
+          "cells": [
+            {
+              "text": "Once a cause is found"
+            },
+            {
+              "text": "Treat the specific disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "PUO-dx-mgmt",
+      "title": "Diagnosis and management of pyrexia of unknown origin",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever >=38.3 deg C on several occasions, no diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Immunocompromised, neutropenic, HIV or nosocomial?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Use the specific pathway for that host; empirical therapy as indicated",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stop antibiotics, steroids and suspect drugs where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Repeat history and exam; obligatory test panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Potentially diagnostic clues present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Clue-directed tests and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "FDG-PET/CT while inflamed; temporal artery biopsy if >=55",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Diagnosis made?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Treat the specific cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Patient deteriorating?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Consider liver or marrow biopsy and empirical trial",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Watchful waiting; most resolve spontaneously",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n9",
+          "label": "Reassess"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,274 @@
       "caption": "Overview comparison matrix for carotid sinus hypersensitivity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / Low's Clinical Autonomic Disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carotid_sinus_hypersensitivity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Carotid sinus massage response, cardioinhibitory component",
+          "cells": [
+            {
+              "text": "Asystole or marked bradycardia; conventionally a pause of at least 3 seconds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid sinus massage response, vasodepressor component",
+          "cells": [
+            {
+              "text": "Fall in systolic pressure; conventionally at least 50 mmHg"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mixed response pattern",
+          "cells": [
+            {
+              "text": "Common; massage done supine and upright, with ECG and blood-pressure monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head-up tilt-table testing",
+          "cells": [
+            {
+              "text": "Assesses coexisting reflex syncope or orthostatic hypotension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Excludes structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carotid_sinus_hypersensitivity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Trigger avoidance",
+          "cells": [
+            {
+              "text": "Avoid tight collars, rapid head turning and neck extension"
+            },
+            {
+              "text": "Common provoking triggers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Review and withdraw bradycardic and hypotensive medicines"
+            },
+            {
+              "text": "Contributory drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac pacing",
+          "cells": [
+            {
+              "text": "Permanent dual-chamber pacing for the cardioinhibitory form with recurrent syncope"
+            },
+            {
+              "text": "Considered for a dominant cardioinhibitory type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasodepressor measures",
+          "cells": [
+            {
+              "text": "Increased salt and fluid, compression garments, midodrine or fludrocortisone"
+            },
+            {
+              "text": "Vasodepressor component is harder to treat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Falls prevention",
+          "cells": [
+            {
+              "text": "Falls-prevention strategies and physiotherapy in frail older people"
+            },
+            {
+              "text": "Frail older people"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carotid_sinus_hypersensitivity-dx-mgmt",
+      "title": "Diagnosis and management of Carotid sinus hypersensitivity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected carotid sinus hypersensitivity: syncope or unexplained fall",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (exertional syncope, carotid bruit or recent stroke or TIA)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: cardiac cause, or massage contraindicated by bruit or recent TIA",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Carotid sinus massage supine and upright, with ECG and blood-pressure monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pause of 3 seconds or more, or systolic fall of 50 mmHg or more, matching symptoms?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Avoid triggers: tight collars, rapid head turning, neck extension",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassess with tilt-table testing and echocardiography; correlate with symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw bradycardic or hypotensive medicines",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Dual-chamber pacing for cardioinhibitory form with recurrent syncope",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Salt, fluids, compression garments, midodrine or fludrocortisone for vasodepressor type",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fewer syncopal events with avoidance and pacing; vasodepressor type responds less well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

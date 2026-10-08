@@ -142,5 +142,86 @@
       "caption": "Overview comparison matrix for biotin deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nutrition and dermatology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biotin_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in biotin deficiency",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical pattern", "cells": [{"text": "Periorificial scaly erythematous dermatitis with hair loss, plus neurological features"}], "cite": "c1"},
+        {"parameter": "Diet, parenteral nutrition and medication history", "cells": [{"text": "Raw egg white, biotin-free parenteral nutrition, or some anticonvulsants"}], "cite": "c1"},
+        {"parameter": "Biotinidase activity and newborn screening", "cells": [{"text": "Inherited biotinidase deficiency"}], "cite": "c1"},
+        {"parameter": "Urinary organic acids", "cells": [{"text": "Where an inherited disorder is suspected"}], "cite": "c1"},
+        {"parameter": "Response to biotin supplementation", "cells": [{"text": "Rapid improvement in rash, hair regrowth and neurological symptoms"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biotin_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike causes of dermatitis with alopecia",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Zinc deficiency dermatitis", "cells": [{"text": "A look-alike mimic; response to biotin replacement separates them"}], "cite": "c1"},
+        {"parameter": "Inherited organic acidaemias", "cells": [{"text": "Separated by urinary organic acid analysis"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biotin_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options in biotin deficiency",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Oral biotin", "cells": [{"text": "Oral biotin supplementation as the mainstay"}, {"text": "Reverses dermatitis, alopecia and neurological features"}], "cite": "c1"},
+        {"parameter": "Remove the precipitating cause", "cells": [{"text": "Stop raw egg white; add biotin to parenteral nutrition; review anticonvulsants"}, {"text": "Acquired causes"}], "cite": "c1"},
+        {"parameter": "Skin care", "cells": [{"text": "Supportive skin care for the periorificial dermatitis"}, {"text": "While replacement takes effect"}], "cite": "c1"},
+        {"parameter": "Response monitoring", "cells": [{"text": "Rash, hair regrowth and neurological symptoms"}, {"text": "Rapid improvement expected"}], "cite": "c1"},
+        {"parameter": "Inherited biotinidase deficiency", "cells": [{"text": "Confirm biotinidase activity and commit to lifelong biotin replacement"}, {"text": "Suspected inherited disease"}], "cite": "c1"},
+        {"parameter": "Metabolic referral", "cells": [{"text": "Newborn-screening follow-up and family screening for inherited cases"}, {"text": "Refer inherited cases"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biotin_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of biotin deficiency",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Periorificial scaly dermatitis with hair loss, plus lethargy or hypotonia", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: seizures, metabolic acidosis in an infant, regression or coma?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent metabolic review; biotinidase activity; give biotin", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Take diet history (raw egg white), parenteral feeding and anticonvulsant use", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Biotinidase activity and newborn screen result; urinary organic acids if inherited", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Acquired cause found (raw egg, parenteral feeding or anticonvulsant)?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Remove the cause and give oral biotin", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Inherited biotinidase deficiency suspected: lifelong biotin and metabolic referral", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Monitor rash, hair and neurological response to biotin", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Responds rapidly and often completely, especially when inherited disease is treated early", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

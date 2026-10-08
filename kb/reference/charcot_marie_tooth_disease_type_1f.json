@@ -150,5 +150,336 @@
       "caption": "Overview comparison matrix for charcot-marie-tooth disease type 1f."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1f-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Defines a demyelinating, axonal or intermediate pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NEFL gene panel or exome sequencing",
+          "cells": [
+            {
+              "text": "Identifies a pathogenic NEFL variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMP22 dosage testing",
+          "cells": [
+            {
+              "text": "Excludes the common CMT1A duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family segregation analysis",
+          "cells": [
+            {
+              "text": "Considers dominant, recessive and de novo inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and functional assessment",
+          "cells": [
+            {
+              "text": "Early-onset paediatric cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1f-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT2E",
+          "cells": [
+            {
+              "text": "Axonal counterpart caused by the same NEFL gene"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMT1A",
+          "cells": [
+            {
+              "text": "PMP22 duplication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic inflammatory demyelinating polyradiculoneuropathy",
+          "cells": [
+            {
+              "text": "Treatable acquired mimic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1f-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy"
+            },
+            {
+              "text": "No disease-modifying treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and footwear",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, podiatry, footwear and walking aids"
+            },
+            {
+              "text": "Foot drop and pes cavus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric rehabilitation",
+          "cells": [
+            {
+              "text": "Intensive rehabilitation and developmental support"
+            },
+            {
+              "text": "Severe early-onset childhood presentations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot surgery and pain control",
+          "cells": [
+            {
+              "text": "Orthopaedic foot surgery; neuropathic pain treatment; avoid vincristine"
+            },
+            {
+              "text": "Disabling deformity and neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression and scoliosis",
+          "cells": [
+            {
+              "text": "Monitor progression and screen for scoliosis"
+            },
+            {
+              "text": "Early-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Dominant, recessive and de novo inheritance; assess relatives"
+            },
+            {
+              "text": "Inheritance variability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neuromuscular, orthopaedic and rehabilitation care"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1f-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth Disease Type 1F",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 1F (NEFL): demyelinating-range CMT with distal weakness and pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (relapsing course, conduction block, respiratory or bulbar signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for inflammatory neuropathy or severe early-onset disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, NEFL panel or exome, PMP22 dosage, pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic NEFL variant confirmed with PMP22 duplication excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; no disease-modifying treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CMT2E, CMT1A, dominant intermediate CMT and CIDP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, podiatry and footwear for foot drop and pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive paediatric rehabilitation for severe early-onset disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Orthopaedic foot surgery for fixed disabling deformity; avoid vincristine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor progression and scoliosis; genetic counselling for inheritance pattern",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

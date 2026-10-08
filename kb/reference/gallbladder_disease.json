@@ -187,5 +187,532 @@
       "caption": "Overview comparison matrix for gallbladder & biliary tract disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Cholecystitis",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/acute-cholecystitis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gallbladder_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in gallbladder and biliary disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Ultrasound for gallstones",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Accuracy >95",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "Detects stones as small as 1.5 mm by acoustic shadow"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biliary pain duration",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "30 min to 5 h; >5 h suggests cholecystitis",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Steady, not colicky"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute cholecystitis on ultrasound",
+          "cells": [
+            {
+              "text": "Stones with wall thickening, pericholecystic fluid, sonographic Murphy sign"
+            },
+            {
+              "text": "{{hy:Ultrasound first-line}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholescintigraphy",
+          "cells": [
+            {
+              "text": "Non-filling gallbladder means cystic duct obstruction"
+            },
+            {
+              "text": "Best test for acalculous cholecystitis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipase in cholecystitis",
+          "unit": "x normal",
+          "cells": [
+            {
+              "text": ">3 suggests duct obstruction",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Bilirubin up to 4 mg/dL common"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bilirubin in cholecystitis",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">5 suggests CBD stone",
+              "op": ">",
+              "value": 5
+            },
+            {
+              "text": "Jaundice unusual early in cholecystitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin in obstruction",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "20 or more suggests malignancy",
+              "op": ">=",
+              "value": 20
+            },
+            {
+              "text": "Courvoisier gallbladder also points to tumour"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Charcot triad",
+          "cells": [
+            {
+              "text": "Pain, jaundice, fever with rigors"
+            },
+            {
+              "text": "Acute cholangitis; confusion and shock mean suppurative disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP",
+          "cells": [
+            {
+              "text": "First choice for choledocholithiasis and PSC (beaded ducts)"
+            },
+            {
+              "text": "ERCP when intervention needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AMA in PBC",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in about 95"
+            },
+            {
+              "text": "If negative, sp100 or gp210 and biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gallbladder_disease-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of biliary-type pain and cholestasis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acalculous cholecystitis",
+          "cells": [
+            {
+              "text": "Critically ill, fasting, TPN, burns"
+            },
+            {
+              "text": "Cholescintigraphy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biliary dyskinesia",
+          "cells": [
+            {
+              "text": "Gallbladder ejection fraction <40% reproducing pain"
+            },
+            {
+              "text": "CCK cholescintigraphy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant biliary obstruction",
+          "cells": [
+            {
+              "text": "Painless jaundice, palpable gallbladder"
+            },
+            {
+              "text": "CT, EUS"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4 cholangitis",
+          "cells": [
+            {
+              "text": "Mimics PSC; steroid-responsive"
+            },
+            {
+              "text": "Serum IgG4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter of Oddi dysfunction",
+          "cells": [
+            {
+              "text": "Biliary pain after cholecystectomy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional dyspepsia",
+          "cells": [
+            {
+              "text": "Bloating and belching after fatty food, not specific"
+            },
+            {
+              "text": "Normal ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasitic or AIDS cholangiopathy",
+          "cells": [
+            {
+              "text": "Clonorchis, Fasciola, Ascaris; HIV"
+            },
+            {
+              "text": "Stool or bile examination, cholangiography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gallbladder_disease-treatment",
+      "kind": "treatment",
+      "title": "Treatment of gallstone disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Asymptomatic gallstones"
+            },
+            {
+              "text": "Prophylactic cholecystectomy not warranted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic cholecystectomy",
+          "cells": [
+            {
+              "text": "{{hy:Symptomatic gallstones and complications}}"
+            },
+            {
+              "text": "Death <0.1%; bile duct injury 0.2 to 0.6%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholecystectomy in acute cholecystitis",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Within 7 days of admission and 10 days of onset",
+              "op": "<=",
+              "value": 7
+            },
+            {
+              "text": "Early (24 to 48 h) favoured in older, diabetic, gangrene or empyema"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV antibiotics",
+          "cells": [
+            {
+              "text": "Acute cholecystitis or cholangitis"
+            },
+            {
+              "text": "Ampicillin-sulbactam or piperacillin-tazobactam"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Percutaneous cholecystostomy",
+          "cells": [
+            {
+              "text": "Very high surgical risk"
+            },
+            {
+              "text": "Interval cholecystectomy at 6 weeks or later if fit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ERCP with sphincterotomy",
+          "cells": [
+            {
+              "text": "CBD stones; bacterial cholangitis"
+            },
+            {
+              "text": "Urgent drainage in suppurative cholangitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "cells": [
+            {
+              "text": "Selected unfit patients, small cholesterol stones"
+            },
+            {
+              "text": "Stones >10 mm rarely dissolve; 30 to 50% recur"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gallbladder_disease-dx-mgmt",
+      "title": "Diagnosis and management of gallstone disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Right upper quadrant or epigastric pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Ultrasound, LFTs, lipase, CBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Gallstones present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider dyskinesia, acalculous disease, other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fever, jaundice and pain (cholangitis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "IV antibiotics and urgent ERCP drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Signs of acute cholecystitis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Fit for surgery?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics and cholecystectomy within 7 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Percutaneous cholecystostomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Raised bilirubin or dilated duct?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "MRCP, then ERCP if stone",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Elective laparoscopic cholecystectomy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,336 @@
       "caption": "Overview comparison matrix for central serous chorioretinopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_serous_chorioretinopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Optical coherence tomography",
+          "cells": [
+            {
+              "text": "Confirms and quantifies subretinal fluid; mainstay for diagnosis and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Focal leak at the retinal pigment epithelium, with a smokestack or inkblot pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Choroidal hyperpermeability and dilated choroidal vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence",
+          "cells": [
+            {
+              "text": "Maps chronic retinal pigment epithelial changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amsler grid testing",
+          "cells": [
+            {
+              "text": "Documents and monitors the central scotoma and metamorphopsia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_serous_chorioretinopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wet age-related macular degeneration",
+          "cells": [
+            {
+              "text": "Choroidal neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Choroidal tumour",
+          "cells": [
+            {
+              "text": "Exudative retinal detachment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory or infective posterior uveitis",
+          "cells": [
+            {
+              "text": "Exudative detachment with inflammation or infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_serous_chorioretinopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop corticosteroid exposure",
+          "cells": [
+            {
+              "text": "Discontinue or taper systemic, inhaled, topical or intra-articular steroids"
+            },
+            {
+              "text": "Key modifiable trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Observe acute cases; address stress and modify lifestyle"
+            },
+            {
+              "text": "Most resolve spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photodynamic therapy",
+          "cells": [
+            {
+              "text": "Reduced-fluence or reduced-dose PDT guided by indocyanine green angiography"
+            },
+            {
+              "text": "Persistent or chronic subretinal fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal laser",
+          "cells": [
+            {
+              "text": "Photocoagulation to an extrafoveal leak"
+            },
+            {
+              "text": "Leak localised on fluorescein angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralocorticoid receptor antagonist",
+          "cells": [
+            {
+              "text": "Trial of spironolactone or eplerenone"
+            },
+            {
+              "text": "Chronic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial OCT and Amsler grid; screen for and treat endogenous hypercortisolism"
+            },
+            {
+              "text": "Hypercortisolism when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Medical retina specialist; anti-VEGF if choroidal neovascularisation develops"
+            },
+            {
+              "text": "Secondary neovascularisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_serous_chorioretinopathy-dx-mgmt",
+      "title": "Diagnosis and management of Central serous chorioretinopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central serous chorioretinopathy: unilateral blurring with a central scotoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (no resolution in months, haemorrhage, atypical bilateral detachment)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude secondary neovascularisation and inflammatory or neoplastic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "OCT for subretinal fluid; fluorescein and ICG angiography; steroid history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Subretinal fluid with focal leak confirmed; steroid exposure reviewed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop or taper any corticosteroid exposure, the key modifiable trigger",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check wet macular degeneration, polypoidal vasculopathy and uveitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Observe acute cases, most of which resolve spontaneously",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Photodynamic therapy for persistent or chronic subretinal fluid",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Focal laser to an extrafoveal leak; spironolactone or eplerenone if chronic",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Acute disease usually resolves; chronic disease can cause permanent atrophy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

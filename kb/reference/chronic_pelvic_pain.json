@@ -149,5 +149,342 @@
       "caption": "Overview comparison matrix for chronic pelvic pain."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braddom's Physical Medicine & Rehabilitation / pain medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_pelvic_pain-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pelvic and musculoskeletal examination",
+          "cells": [
+            {
+              "text": "Pelvic floor tone and trigger points"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and targeted urological evaluation",
+          "cells": [
+            {
+              "text": "Bladder pain syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound and MRI where indicated",
+          "cells": [
+            {
+              "text": "Gynaecological and structural causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy in selected cases",
+          "cells": [
+            {
+              "text": "Endometriosis or adhesions suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of mood, sleep and central sensitisation",
+          "cells": [
+            {
+              "text": "Coexisting contributors"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_pelvic_pain-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Endometriosis or adenomyosis",
+          "cells": [
+            {
+              "text": "Gynaecological cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interstitial cystitis or bladder pain syndrome",
+          "cells": [
+            {
+              "text": "Bladder pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome or inflammatory bowel disease",
+          "cells": [
+            {
+              "text": "Bowel symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pudendal neuralgia",
+          "cells": [
+            {
+              "text": "Nerve entrapment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic floor myofascial dysfunction",
+          "cells": [
+            {
+              "text": "Hypertonic pelvic floor with trigger points"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_pelvic_pain-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pelvic floor physical therapy",
+          "cells": [
+            {
+              "text": "Targets hypertonicity and myofascial trigger points"
+            },
+            {
+              "text": "Cornerstone of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat identified contributors",
+          "cells": [
+            {
+              "text": "Endometriosis, bladder pain syndrome, IBS and pudendal neuralgia"
+            },
+            {
+              "text": "Directed treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antidepressants and anticonvulsants",
+          "cells": [
+            {
+              "text": "Centrally sensitised component"
+            },
+            {
+              "text": "Neuropathic agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological therapy",
+          "cells": [
+            {
+              "text": "Central sensitisation, mood and impact of prior trauma"
+            },
+            {
+              "text": "Psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pudendal nerve block or trigger-point injection",
+          "cells": [
+            {
+              "text": "Selected patients"
+            },
+            {
+              "text": "Interventional measures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy",
+          "cells": [
+            {
+              "text": "Where endometriosis or adhesions are suspected"
+            },
+            {
+              "text": "Surgical diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_pelvic_pain-dx-mgmt",
+      "title": "Diagnosis and management of Chronic pelvic pain",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic pelvic pain: non-cyclical pelvic pain lasting several months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abnormal bleeding, pelvic mass, weight loss, peritonism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for malignancy or a surgical emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pelvic examination, urinalysis, ultrasound and mood assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pelvic floor hypertonicity or trigger points confirmed on examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the contributor and start pelvic floor physical therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check endometriosis, bladder pain syndrome, IBS and pudendal neuralgia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat identified contributors such as endometriosis or bladder pain syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antidepressants or anticonvulsants for the centrally sensitised component",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Psychological therapy for central sensitisation, mood and prior trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Nerve blocks, trigger-point injection or laparoscopy in selected patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

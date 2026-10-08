@@ -149,5 +149,84 @@
       "caption": "Overview comparison matrix for benign myoclonus of infancy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Swaiman's Pediatric Neurology / ILAE nonepileptic paroxysmal disorders",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_myoclonus_of_infancy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benign myoclonus of infancy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Video-EEG", "cells": [{"text": "Normal ictal and interictal record, with no hypsarrhythmia"}], "cite": "c1"},
+        {"parameter": "Home video of typical events", "cells": [{"text": "Brief clusters of jerks, spasms, shudders or head nodding"}], "cite": "c1"},
+        {"parameter": "Serial developmental assessment", "cells": [{"text": "Normal progress, with no regression"}], "cite": "c1"},
+        {"parameter": "Neurological examination", "cells": [{"text": "Normal tone and milestones"}], "cite": "c1"},
+        {"parameter": "MRI brain", "cells": [{"text": "Only if the examination is abnormal or the diagnosis is uncertain"}], "cite": "c1"},
+        {"parameter": "Metabolic screen", "cells": [{"text": "Reserved for atypical or regressive presentations"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_myoclonus_of_infancy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign myoclonus of infancy",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "West syndrome (infantile spasms)", "cells": [{"text": "Hypsarrhythmia on EEG; this benign condition has a normal EEG and normal development"}], "cite": "c1"},
+        {"parameter": "Epileptic encephalopathy", "cells": [{"text": "Developmental stagnation or regression argues against this benign disorder"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_myoclonus_of_infancy-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign myoclonus of infancy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "No specific treatment", "cells": [{"text": "Explain the benign non-epileptic nature and spontaneous resolution"}, {"text": "Resolves before about 2 years of age"}], "cite": "c1"},
+        {"parameter": "Parental reassurance", "cells": [{"text": "Educate to distinguish the events from epileptic spasms"}, {"text": "Avoids unnecessary intervention"}], "cite": "c1"},
+        {"parameter": "Withhold antiepileptic drugs", "cells": [{"text": "Do not start antiepileptic medication"}, {"text": "Ineffective for this phenomenon; avoids unnecessary antiepileptic or hormonal treatment"}], "cite": "c1"},
+        {"parameter": "Video-EEG confirmation", "cells": [{"text": "Capture a typical event with a normal record"}, {"text": "Before committing to observation alone"}], "cite": "c1"},
+        {"parameter": "Developmental surveillance", "cells": [{"text": "Serial developmental surveillance"}, {"text": "Confirms continued normal progress"}], "cite": "c1"},
+        {"parameter": "Re-evaluation", "cells": [{"text": "Repeat EEG and neuroimaging if regression, abnormal examination or atypical features emerge"}, {"text": "Prompt re-evaluation"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_myoclonus_of_infancy-dx-mgmt",
+      "title": "Diagnosis and management of benign myoclonus of infancy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Brief myoclonic-like jerks, spasms or head nodding in an infant aged 3-9 months, awake", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: developmental regression, hypsarrhythmia or abnormal neurological examination?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: exclude West syndrome urgently with repeat EEG and neuroimaging", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Video-EEG capturing a typical event; review home video of events", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Normal ictal and interictal EEG with no hypsarrhythmia?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Observe; no antiepileptic or hormonal treatment; reassure parents", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: manage as epileptic spasms (West syndrome) urgently", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Serial developmental surveillance; re-evaluate if regression appears", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Resolves spontaneously before about 2 years with normal development", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

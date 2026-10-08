@@ -148,5 +148,324 @@
       "caption": "Overview comparison matrix for atrioventricular nodal reentrant tachycardia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atrioventricular_nodal_reentrant_tachycardia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "12-lead ECG during tachycardia and in sinus rhythm",
+          "cells": [
+            {
+              "text": "Pseudo-r' or pseudo-S waves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory or event monitoring",
+          "cells": [
+            {
+              "text": "Onset and offset if episodes are infrequent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vagal manoeuvre or adenosine with continuous ECG",
+          "cells": [
+            {
+              "text": "Response to the manoeuvre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transthoracic echocardiography",
+          "cells": [
+            {
+              "text": "Excludes structural heart disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrophysiological study",
+          "cells": [
+            {
+              "text": "Dual AV nodal physiology and a jump in the AH interval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid function and full blood count",
+          "cells": [
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular_nodal_reentrant_tachycardia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Atrioventricular reentrant tachycardia with a concealed accessory pathway",
+          "cells": [
+            {
+              "text": "Dual AV nodal physiology on EP study points to AVNRT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Focal atrial tachycardia",
+          "cells": [
+            {
+              "text": "Dual AV nodal physiology and AH jump are features of AVNRT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular_nodal_reentrant_tachycardia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Vagal manoeuvres",
+          "cells": [
+            {
+              "text": "Terminate the acute episode; escalate to IV adenosine"
+            },
+            {
+              "text": "Transient AV node block"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV verapamil or beta-blocker",
+          "cells": [
+            {
+              "text": "When adenosine fails; synchronised cardioversion if haemodynamically compromised"
+            },
+            {
+              "text": "Alternative acute treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic prophylaxis",
+          "cells": [
+            {
+              "text": "Beta-blockers or non-dihydropyridine calcium channel blockers"
+            },
+            {
+              "text": "Troublesome episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slow-pathway catheter ablation",
+          "cells": [
+            {
+              "text": "Durable curative treatment for troublesome or recurrent AVNRT"
+            },
+            {
+              "text": "Recurrent AVNRT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Self-administered vagal manoeuvres",
+          "cells": [
+            {
+              "text": "Teach patients; reassure about the benign nature"
+            },
+            {
+              "text": "Patient education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Precipitant screening",
+          "cells": [
+            {
+              "text": "Thyroid dysfunction and anaemia"
+            },
+            {
+              "text": "Precipitants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atrioventricular_nodal_reentrant_tachycardia-dx-mgmt",
+      "title": "Diagnosis and management of atrioventricular nodal reentrant tachycardia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Paroxysmal regular narrow-complex tachycardia with abrupt onset",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Hypotension, chest pain, syncope or very rapid rates?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Vagal manoeuvres then IV adenosine; cardioversion if unstable",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG for pseudo-r' waves, monitoring, EP study, echo, thyroid and FBC",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dual AV nodal physiology with AH jump on EP study?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Slow-pathway catheter ablation for recurrent or troublesome episodes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat ECG during tachycardia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Teach self-administered vagal manoeuvres",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Beta-blocker or non-dihydropyridine calcium channel blocker prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen and treat precipitants such as thyroid dysfunction and anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Reassure patients; the arrhythmia is benign",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

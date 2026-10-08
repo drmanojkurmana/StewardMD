@@ -150,5 +150,305 @@
       "caption": "Overview comparison matrix for collagenous sprue."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Gastroenterology and gastrointestinal pathology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "collagenous_sprue-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Duodenal and jejunal biopsies with Masson trichrome and Congo red",
+          "cells": [
+            {
+              "text": "Thickened collagen band; amyloid excluded by negative Congo red"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and HLA-DQ2/DQ8 typing",
+          "cells": [
+            {
+              "text": "Coeliac disease status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "T-cell receptor clonality and intraepithelial lymphocyte immunophenotyping",
+          "cells": [
+            {
+              "text": "Refractory coeliac disease or lymphoma assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging, capsule endoscopy or enteroscopy",
+          "cells": [
+            {
+              "text": "Extent of disease; lymphoma excluded"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenous_sprue-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Refractory coeliac disease, types I and II",
+          "cells": [
+            {
+              "text": "Persists despite gluten-free diet; separated by clonality and immunophenotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Olmesartan and other drug-induced sprue-like enteropathy",
+          "cells": [
+            {
+              "text": "Drug history; may be reversible on withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal amyloidosis",
+          "cells": [
+            {
+              "text": "Collagen band distinguished by negative Congo red staining"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "collagenous_sprue-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict gluten-free diet",
+          "cells": [
+            {
+              "text": "Given the strong association with coeliac disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Withdraw culprit drugs",
+          "cells": [
+            {
+              "text": "Olmesartan and other angiotensin-receptor blockers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Budesonide or prednisolone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Azathioprine for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Correct iron, folate, B12, fat-soluble vitamins, calcium and magnesium; parenteral nutrition if malabsorption is severe"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Clonality studies and cross-sectional imaging for refractory coeliac disease and enteropathy-associated T-cell lymphoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Gastroenterology and dietetics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "collagenous_sprue-dx-mgmt",
+      "title": "Diagnosis and management of Collagenous sprue",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected collagenous sprue: chronic watery diarrhoea, weight loss, malabsorption",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (lymphoma features, refractory to diet and steroids, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: exclude enteropathy-associated T-cell lymphoma; parenteral nutrition if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Duodenal biopsies with Masson trichrome and Congo red; coeliac serology; clonality",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show a collagen band with negative Congo red?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider refractory coeliac disease, drug-induced sprue or amyloidosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Strict gluten-free diet given the coeliac association",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Withdraw culprit drugs, especially olmesartan",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids, with azathioprine for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Correct nutritional deficiencies; parenteral nutrition if malabsorption is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis has improved; many respond to diet with steroids or immunosuppression",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

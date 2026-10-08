@@ -142,5 +142,296 @@
       "caption": "Overview comparison matrix for congenital hereditary endothelial dystrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / corneal dystrophy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Examination of corneal clarity, thickness and diameter",
+          "cells": [
+            {
+              "text": "Corneal oedema and clouding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intraocular pressure measurement",
+          "cells": [
+            {
+              "text": "Congenital glaucoma excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing (SLC4A11)",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for nystagmus and visual development",
+          "cells": [
+            {
+              "text": "Visual development"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary congenital glaucoma",
+          "cells": [
+            {
+              "text": "Raised intraocular pressure and corneal enlargement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucopolysaccharidoses and metabolic corneal clouding",
+          "cells": [
+            {
+              "text": "Systemic features suggest metabolic disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sclerocornea or anterior segment dysgenesis",
+          "cells": [
+            {
+              "text": "Named corneal look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corneal transplantation",
+          "cells": [
+            {
+              "text": "For visually significant corneal oedema; endothelial keratoplasty (DSAEK or DMEK)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical hypertonic saline",
+          "cells": [
+            {
+              "text": "Reduces stromal oedema in milder cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment",
+          "cells": [
+            {
+              "text": "Aggressive treatment and refractive correction; early deprivation risks amblyopia and nystagmus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glaucoma exclusion",
+          "cells": [
+            {
+              "text": "Monitor for primary congenital glaucoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive SLC4A11; relatives tested"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric corneal referral",
+          "cells": [
+            {
+              "text": "Graft surgery and post-transplant follow-up; higher paediatric graft risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_hereditary_endothelial_dystrophy-dx-mgmt",
+      "title": "Diagnosis and management of Congenital hereditary endothelial dystrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital endothelial dystrophy: bilateral corneal clouding at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised pressure, systemic metabolic features, progressive clouding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude congenital glaucoma urgently; check for systemic metabolic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Corneal clarity, thickness and diameter; intraocular pressure; SLC4A11 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does SLC4A11 testing confirm the endothelial dystrophy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital glaucoma, birth trauma or metabolic clouding",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corneal transplantation (DSAEK or DMEK) for visually significant oedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical hypertonic saline in milder cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive amblyopia treatment and refractive correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling; referral to a paediatric corneal specialist",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Vision depends on corneal clarity and amblyopia management; paediatric grafts carry risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -207,5 +207,547 @@
       "caption": "Diagnostic and clinical overview matrix for transient ischaemic attack."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Transient Ischemic Attack",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/stroke/transient-ischemic-attack-tia",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "AFP, DAPT for High-Risk TIA and Minor Stroke (BMJ Rapid Recommendation), 2019",
+      "url": "https://www.aafp.org/pubs/afp/issues/2019/0915/p378.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "tia-diagnostic",
+      "kind": "diagnostic",
+      "title": "TIA: definition and ABCD2 risk score",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Points or interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Definition",
+          "cells": [
+            {
+              "text": "Sudden focal deficit, fully resolved, no infarct on diffusion MRI"
+            },
+            {
+              "text": "{{hy:Infarct on imaging makes it a stroke, however brief}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Typical duration",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "Usually under 60, most under 5",
+              "op": "<",
+              "value": 60
+            },
+            {
+              "text": "Deficit lasting 1 to 24 hours often has infarction"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Age",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "60 or more",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood pressure at assessment",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Systolic over 140 or diastolic over 90"
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical features",
+          "cells": [
+            {
+              "text": "Unilateral weakness 2; speech disturbance without weakness 1"
+            },
+            {
+              "text": "Other symptoms 0"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duration",
+          "unit": "min",
+          "cells": [
+            {
+              "text": "60 or more: 2; 10 to 59: 1; under 10: 0"
+            },
+            {
+              "text": "Longer events carry higher risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCD2 total, 3-month stroke risk",
+          "cells": [
+            {
+              "text": "0 to 1: about 0%; 2 to 3: 3%; 4: 8%; 5: 12%; 6: 17%; 7: 22%"
+            },
+            {
+              "text": "Risk climbs with score"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABCD2 total, 2-day stroke risk",
+          "cells": [
+            {
+              "text": "0 to 3: about 1%; 4 to 5: about 4%; 6 to 7: about 8%"
+            },
+            {
+              "text": "Score above 4 means high risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Brain imaging",
+          "cells": [
+            {
+              "text": "Diffusion MRI is most accurate; CT may miss infarct for over 24 hours"
+            },
+            {
+              "text": "Normal imaging does not exclude TIA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vascular and cardiac work-up",
+          "cells": [
+            {
+              "text": "CTA or MRA of neck and intracranial vessels; ECG, telemetry, echo with bubble study"
+            },
+            {
+              "text": "Same evaluation as completed stroke"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison quotes ABCD2 risk at 3 months while Merck quotes risk at 2 days; both are shown. Merck lists BP as systolic 140 or more, Harrison as over 140."
+    },
+    {
+      "id": "tia-ddx",
+      "kind": "ddx",
+      "title": "TIA mimics",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Focal seizure or Todd paralysis",
+          "cells": [
+            {
+              "text": "{{hy:Positive symptoms that march over seconds}}"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Migraine aura, including acephalgic",
+          "cells": [
+            {
+              "text": "Slower march over minutes; scintillations, headache, nausea; can start after 65"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Focal deficit with low glucose"
+            },
+            {
+              "text": "Bedside glucose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intracranial tumour",
+          "cells": [
+            {
+              "text": "Acute presentation through bleed, seizure or hydrocephalus"
+            },
+            {
+              "text": "Brain imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic encephalopathy",
+          "cells": [
+            {
+              "text": "Fluctuating mental state without focal signs"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke recrudescence",
+          "cells": [
+            {
+              "text": "Old deficit reappears with fever or sepsis, clears with treatment"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral facial palsy or loss of consciousness alone",
+          "cells": [
+            {
+              "text": "Not features of TIA"
+            },
+            {
+              "text": "Clinical examination"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "tia-treatment",
+      "kind": "treatment",
+      "title": "TIA treatment and secondary prevention",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent evaluation",
+          "cells": [
+            {
+              "text": "All suspected TIA"
+            },
+            {
+              "text": "Stroke risk highest in first 24 to 48 hours; usually admitted for telemetry"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aspirin plus clopidogrel",
+          "cells": [
+            {
+              "text": "{{hy:Non-cardioembolic TIA with ABCD2 4 or more, or minor stroke NIHSS 3 or less}}"
+            },
+            {
+              "text": "Start once imaging excludes bleed: aspirin 75 to 81 mg daily plus clopidogrel 300 mg load then 75 mg daily for 10 to 21 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Single antiplatelet",
+          "cells": [
+            {
+              "text": "After the dual course, or lower-risk TIA"
+            },
+            {
+              "text": "Dual therapy beyond 21 days adds bleeding without benefit"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Statin",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Same secondary prevention as ischaemic stroke"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Cardiac embolic source"
+            },
+            {
+              "text": "Instead of antiplatelet therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Carotid endarterectomy or stenting",
+          "cells": [
+            {
+              "text": "Ipsilateral carotid stenosis over 70%"
+            },
+            {
+              "text": "Best in those without residual deficit"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Risk factor control",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Blood pressure, diabetes, lipids, smoking, alcohol, weight"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Dual therapy is not for major stroke because of intracranial bleeding risk."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "tia-dx-mgmt",
+      "title": "Diagnosis and management of TIA",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden focal neurological deficit that has fully resolved",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Check glucose; consider seizure, migraine and other mimics",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Urgent brain imaging, ideally diffusion MRI",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Haemorrhage on imaging?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Manage as intracranial haemorrhage; no antiplatelet",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Vascular imaging, ECG, telemetry, echo; calculate ABCD2",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Cardioembolic source such as AF?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulate",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "ABCD2 4 or more?",
+          "cite": "c3"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Aspirin plus clopidogrel for 10 to 21 days, then single agent",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Single antiplatelet agent",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Ipsilateral carotid stenosis over 70%?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "Refer for endarterectomy or stenting",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Statin and risk factor control",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

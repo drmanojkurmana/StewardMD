@@ -147,5 +147,324 @@
       "caption": "Overview comparison matrix for autosomal dominant lateral temporal epilepsy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "LGI1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Germline LGI1 diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Typically normal; excludes structural temporal lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography focused on the lateral temporal region",
+          "cells": [
+            {
+              "text": "Lateral temporal focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Detailed family history of auditory or aphasic auras",
+          "cells": [
+            {
+              "text": "Auditory or aphasic auras"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune antibody testing including anti-LGI1",
+          "cells": [
+            {
+              "text": "Where acquired encephalitis is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment",
+          "cells": [
+            {
+              "text": "Excludes a primary auditory cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Mesial temporal lobe epilepsy with hippocampal sclerosis",
+          "cells": [
+            {
+              "text": "Mesial rather than lateral temporal focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-LGI1 autoimmune limbic encephalitis",
+          "cells": [
+            {
+              "text": "Subacute cognitive decline, confusion or hyponatraemia point to it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Sodium-channel agents such as carbamazepine or lamotrigine, or levetiracetam"
+            },
+            {
+              "text": "Focal seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monotherapy at the lowest effective dose",
+          "cells": [
+            {
+              "text": "Seizures are infrequent and usually easily controlled"
+            },
+            {
+              "text": "Lowest effective dose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizure-safety and trigger advice",
+          "cells": [
+            {
+              "text": "Counsel avoidance of the identified auditory trigger"
+            },
+            {
+              "text": "Sound-triggered reflex seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude acquired encephalitis",
+          "cells": [
+            {
+              "text": "Anti-LGI1 limbic encephalitis needs immunotherapy"
+            },
+            {
+              "text": "Distinguish from germline LGI1"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant with incomplete penetrance; evaluation of relatives"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurology follow-up",
+          "cells": [
+            {
+              "text": "Reassess if seizures become drug-resistant or cognition deteriorates"
+            },
+            {
+              "text": "Reassessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autosomal_dominant_lateral_temporal_epilepsy-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant lateral temporal epilepsy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Brief focal seizures with auditory or aphasic auras and a family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Subacute cognitive decline, confusion or hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Test for acquired anti-LGI1 encephalitis; start immunotherapy if present",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LGI1 testing, MRI, lateral temporal EEG, audiology, antibody testing if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Germline LGI1 variant confirmed with no acquired encephalitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Antiseizure monotherapy with carbamazepine, lamotrigine or levetiracetam",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and treat any acquired encephalitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Trigger avoidance for sound-triggered seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Genetic counselling and evaluation of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassess if seizures become drug-resistant",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Neurology follow-up with genetic counselling",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

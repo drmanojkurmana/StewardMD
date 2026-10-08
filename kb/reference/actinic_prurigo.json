@@ -148,5 +148,355 @@
       "caption": "Overview comparison matrix for actinic prurigo."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "actinic_prurigo-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "History of childhood onset, perennial course and cheilitis",
+          "cells": [
+            {
+              "text": "Characteristic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phototesting",
+          "cells": [
+            {
+              "text": "Reduced threshold to UVA and provocation of lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-DRB1*0407 typing",
+          "cells": [
+            {
+              "text": "Association supports the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin or lip biopsy",
+          "cells": [
+            {
+              "text": "Follicular lymphoid hyperplasia on lip in some cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antinuclear antibody testing",
+          "cells": [
+            {
+              "text": "Excludes lupus erythematosus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Porphyrin studies",
+          "cells": [
+            {
+              "text": "Excludes a cutaneous porphyria"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "actinic_prurigo-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Polymorphic light eruption",
+          "cells": [
+            {
+              "text": "Often extends onto covered sites and persists through winter"
+            },
+            {
+              "text": "Phototesting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous lupus erythematosus",
+          "cells": [
+            {
+              "text": "Excluded by antinuclear antibody testing"
+            },
+            {
+              "text": "Antinuclear antibody testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Erythropoietic protoporphyria",
+          "cells": [
+            {
+              "text": "Excluded by porphyrin studies"
+            },
+            {
+              "text": "Porphyrin studies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "actinic_prurigo-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Strict photoprotection with high-SPF UVA-covering sunscreen",
+          "cells": [
+            {
+              "text": "Core treatment"
+            },
+            {
+              "text": "Protective clothing and sun avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and calcineurin inhibitors",
+          "cells": [
+            {
+              "text": "Cutaneous lesions and actinic cheilitis"
+            },
+            {
+              "text": "Topical therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thalidomide",
+          "cells": [
+            {
+              "text": "Severe or refractory disease"
+            },
+            {
+              "text": "Recognised effective systemic agent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic hardening phototherapy (narrowband UVB)",
+          "cells": [
+            {
+              "text": "Desensitisation before the sunny season"
+            },
+            {
+              "text": "Before the sunny season"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emollients and antihistamines",
+          "cells": [
+            {
+              "text": "Symptomatic relief of pruritus"
+            },
+            {
+              "text": "Symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for thalidomide neuropathy and teratogenicity",
+          "cells": [
+            {
+              "text": "Safety of systemic therapy"
+            },
+            {
+              "text": "Contraceptive precautions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dermatology or photodermatology referral",
+          "cells": [
+            {
+              "text": "Phototesting and systemic therapy"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "actinic_prurigo-dx-mgmt",
+      "title": "Diagnosis and management of Actinic prurigo",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent itchy photodermatosis from childhood with lower-lip cheilitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Disabling itch, infected excoriations or photosensitive rash with autoantibodies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent dermatology review; exclude lupus and infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "History, phototesting and HLA-DRB1*0407 typing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lupus and porphyria excluded by ANA and porphyrin studies?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Diagnose actinic prurigo; strict UVA-covering photoprotection",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review polymorphic light eruption, CAD, cutaneous lupus and EPP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids or calcineurin inhibitors for lesions and cheilitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prophylactic narrowband UVB hardening before the sunny season",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Thalidomide for severe or refractory disease, with neuropathy monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Chronic but often improves through adolescence and adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

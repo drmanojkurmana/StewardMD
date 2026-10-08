@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for cowden syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Emery and Rimoin's Principles and Practice of Medical Genetics / relevant specialty textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cowden_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Germline PTEN testing with deletion and duplication analysis",
+          "cells": [
+            {
+              "text": "Causative variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound and clinical thyroid assessment",
+          "cells": [
+            {
+              "text": "From a young age"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and renal imaging",
+          "cells": [
+            {
+              "text": "Polyps and renal cancer screened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Lhermitte-Duclos disease when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cowden_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Peutz-Jeghers syndrome and juvenile polyposis",
+          "cells": [
+            {
+              "text": "Gastrointestinal hamartomas; PTEN testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bannayan-Riley-Ruvalcaba syndrome",
+          "cells": [
+            {
+              "text": "Allelic PTEN condition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Birt-Hogg-Dube syndrome",
+          "cells": [
+            {
+              "text": "Cutaneous papules"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cowden_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Intensified cancer surveillance",
+          "cells": [
+            {
+              "text": "Across affected organs; no specific drug therapy for PTEN loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breast surveillance",
+          "cells": [
+            {
+              "text": "Clinical examination and MRI; consider risk-reducing mastectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid surveillance",
+          "cells": [
+            {
+              "text": "Ultrasound from a young age; thyroidectomy for malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrial surveillance",
+          "cells": [
+            {
+              "text": "Evaluate abnormal bleeding; consider risk-reducing hysterectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucocutaneous and neurological care",
+          "cells": [
+            {
+              "text": "Excision or topical treatment; brain MRI for Lhermitte-Duclos"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "mTOR inhibition",
+          "cells": [
+            {
+              "text": "Sirolimus for troublesome overgrowth under specialist or trial settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "PTEN testing and cascade screening of relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cowden_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cowden syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cowden syndrome: macrocephaly with mucocutaneous hamartomas",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (breast lump, thyroid nodule suspicious, abnormal bleeding, headache)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent breast, thyroid or endometrial evaluation for suspicious findings",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Germline PTEN testing; thyroid ultrasound; colonoscopy; renal imaging; brain MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does germline PTEN testing confirm a pathogenic variant?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Peutz-Jeghers, juvenile polyposis or BRRS",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intensified lifelong surveillance across affected organs",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Breast MRI surveillance; consider risk-reducing surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thyroid ultrasound from childhood; endometrial surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Colonoscopy and renal imaging; genetic counselling and cascade testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early detection improves outcome; cumulative lifetime cancer risk remains substantial",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for congenital central hypoventilation syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "ATS statement on congenital central hypoventilation syndrome and paediatric respiratory texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_central_hypoventilation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "PHOX2B genetic testing with polyalanine repeat sizing",
+          "cells": [
+            {
+              "text": "Causative variant identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polysomnography",
+          "cells": [
+            {
+              "text": "Sleep-related hypoventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas analysis",
+          "cells": [
+            {
+              "text": "Hypercapnia disproportionate to any lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for Hirschsprung disease",
+          "cells": [
+            {
+              "text": "When bowel symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance imaging and catecholamine studies",
+          "cells": [
+            {
+              "text": "Neural-crest tumours screened"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_central_hypoventilation-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary neuromuscular disease causing hypoventilation",
+          "cells": [
+            {
+              "text": "Respiratory weakness rather than central failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structural brainstem lesion or injury",
+          "cells": [
+            {
+              "text": "Structural cause assessed by neuroimaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic or mitochondrial disorders affecting respiratory control",
+          "cells": [
+            {
+              "text": "Named cause of respiratory control failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_central_hypoventilation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong assisted ventilation",
+          "cells": [
+            {
+              "text": "Tailored to age and severity: tracheostomy ventilation in infancy or non-invasive ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous monitoring during sleep and illness",
+          "cells": [
+            {
+              "text": "Prevents hypoxic neurological injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalate support in infection",
+          "cells": [
+            {
+              "text": "Ventilatory support increased during respiratory infection or stress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hirschsprung disease",
+          "cells": [
+            {
+              "text": "Screen and manage surgically; manage autonomic dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neural-crest tumour surveillance",
+          "cells": [
+            {
+              "text": "Imaging and catecholamine studies, for example neuroblastoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Respiratory, ENT, gastroenterology, cardiology and sleep services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "PHOX2B testing for the child and family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_central_hypoventilation-dx-mgmt",
+      "title": "Diagnosis and management of Congenital central hypoventilation syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital central hypoventilation: apnoea or cyanosis in a neonate",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (cyanosis, apnoea, bradyarrhythmia, neural-crest mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent respiratory support and cardiac assessment for bradyarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "PHOX2B testing with repeat sizing; polysomnography; blood gases; Hirschsprung check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does PHOX2B testing confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider neuromuscular, brainstem or metabolic causes of hypoventilation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong assisted ventilation tailored to age and severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continuous oxygenation and ventilation monitoring during sleep and illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen for Hirschsprung disease and neural-crest tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and PHOX2B testing for the family",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With reliable ventilatory support survival into adulthood is expected",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

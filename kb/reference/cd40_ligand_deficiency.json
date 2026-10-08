@@ -155,5 +155,348 @@
       "caption": "Overview comparison matrix for cd40 ligand deficiency (x-linked hyper-igm syndrome)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cd40_ligand_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum immunoglobulin profile",
+          "cells": [
+            {
+              "text": "Low IgG and IgA with normal or raised IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for CD40 ligand on activated CD4 T cells",
+          "cells": [
+            {
+              "text": "Reduced or absent expression on functional stimulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD40LG gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the mutation and enables carrier testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Associated neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool testing for Cryptosporidium, liver tests and biliary imaging",
+          "cells": [
+            {
+              "text": "Cholangitis, where suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cd40_ligand_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CD40 deficiency",
+          "cells": [
+            {
+              "text": "Autosomal recessive hyper-IgM with an identical functional phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AICDA deficiency",
+          "cells": [
+            {
+              "text": "Intrinsic B-cell class-switch defect with no opportunistic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NEMO (IKBKG) deficiency",
+          "cells": [
+            {
+              "text": "Hyper-IgM with ectodermal dysplasia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cd40_ligand_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Regular immunoglobulin replacement therapy"
+            },
+            {
+              "text": "Corrects the absent class-switched antibody"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumocystis prophylaxis",
+          "cells": [
+            {
+              "text": "Co-trimoxazole from diagnosis"
+            },
+            {
+              "text": "Pneumocystis pneumonia is common in infancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptosporidium avoidance",
+          "cells": [
+            {
+              "text": "Boiled or filtered water and prompt treatment"
+            },
+            {
+              "text": "Drives sclerosing cholangitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutropenia treatment",
+          "cells": [
+            {
+              "text": "Granulocyte colony-stimulating factor"
+            },
+            {
+              "text": "Symptomatic neutropenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early infection treatment",
+          "cells": [
+            {
+              "text": "Aggressive early treatment of infections; avoid live vaccines"
+            },
+            {
+              "text": "Infection risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematopoietic stem cell transplantation",
+          "cells": [
+            {
+              "text": "Allogeneic transplantation"
+            },
+            {
+              "text": "Potentially curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver surveillance",
+          "cells": [
+            {
+              "text": "Liver function testing and biliary imaging"
+            },
+            {
+              "text": "Sclerosing cholangitis and malignancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Carrier testing and screening of at-risk male relatives"
+            },
+            {
+              "text": "X-linked disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cd40_ligand_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of CD40 ligand deficiency (X-linked hyper-IgM syndrome)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CD40 ligand deficiency: infant or young boy with Pneumocystis pneumonia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (opportunistic infection, Cryptosporidium with liver disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: treat opportunistic infection; start prophylaxis and assess the liver",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Immunoglobulin profile, CD40 ligand flow cytometry and CD40LG sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low switched immunoglobulins with reduced CD40 ligand expression confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Regular immunoglobulin replacement therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CD40 deficiency, AICDA deficiency and NEMO deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pneumocystis prophylaxis with co-trimoxazole from diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid Cryptosporidium with boiled or filtered water; treat promptly",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Granulocyte colony-stimulating factor for symptomatic neutropenia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Transplant can be curative; best before significant organ damage",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

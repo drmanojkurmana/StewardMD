@@ -146,5 +146,312 @@
       "caption": "Overview comparison matrix for clubfoot."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "clubfoot-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination of rigidity and severity",
+          "cells": [
+            {
+              "text": "Structural versus postural foot"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full musculoskeletal and neurological examination",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hip examination and imaging",
+          "cells": [
+            {
+              "text": "Developmental dysplasia of the hip"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal ultrasound with postnatal confirmation",
+          "cells": [
+            {
+              "text": "Detection of the deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging or specialist assessment",
+          "cells": [
+            {
+              "text": "Where a neuromuscular cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clubfoot-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Postural talipes",
+          "cells": [
+            {
+              "text": "Corrects fully with gentle manipulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital vertical talus",
+          "cells": [
+            {
+              "text": "Alternative diagnosis when the foot does not respond to casting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuromuscular clubfoot",
+          "cells": [
+            {
+              "text": "Associated spina bifida or arthrogryposis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clubfoot-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ponseti serial manipulation and casting",
+          "cells": [
+            {
+              "text": "Progressively corrects cavus, adductus, varus and equinus"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Percutaneous Achilles tenotomy",
+          "cells": [
+            {
+              "text": "Residual hindfoot equinus at the end of casting"
+            },
+            {
+              "text": "End of casting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot-abduction boots-and-bar orthosis",
+          "cells": [
+            {
+              "text": "Prevents relapse; parental education on brace compliance"
+            },
+            {
+              "text": "Poor compliance causes recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of associated DDH and neuromuscular disorders",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            },
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tibialis anterior transfer or posteromedial soft-tissue release",
+          "cells": [
+            {
+              "text": "Relapsed, resistant or syndromic feet"
+            },
+            {
+              "text": "Surgery for resistant feet"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "clubfoot-dx-mgmt",
+      "title": "Diagnosis and management of Clubfoot",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected clubfoot: equinus, varus, cavus and adductus present at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (spinal dysraphism, early relapse, neglected rigid deformity)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for spinal dysraphism or neuromuscular cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical rigidity assessment, neurological examination and hip assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Rigid structural deformity rather than a postural foot?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Ponseti serial manipulation and casting as mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check postural talipes, vertical talus and neuromuscular clubfoot",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Percutaneous Achilles tenotomy at the end of casting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Boots-and-bar orthosis with parental education to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Manage developmental dysplasia of the hip and neuromuscular disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surgery for relapsed or resistant feet; follow-up through skeletal growth",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

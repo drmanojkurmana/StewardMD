@@ -152,5 +152,305 @@
       "caption": "Overview comparison matrix for congenital syphilis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell / BASHH-CDC STI guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_syphilis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Maternal treponemal and non-treponemal serology",
+          "cells": [
+            {
+              "text": "Maternal infection and treatment history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative non-treponemal titre in the infant",
+          "cells": [
+            {
+              "text": "Compared with the maternal titre"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dark-field or molecular detection of Treponema pallidum",
+          "cells": [
+            {
+              "text": "Organism detected in lesions or discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF examination",
+          "cells": [
+            {
+              "text": "Cell count, protein and treponemal testing for neurosyphilis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-bone radiographs",
+          "cells": [
+            {
+              "text": "Periostitis, osteochondritis and metaphyseal change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_syphilis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Other TORCH infections such as cytomegalovirus and toxoplasmosis",
+          "cells": [
+            {
+              "text": "Other congenital infections; syphilis serology separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal sepsis or other bacterial infection",
+          "cells": [
+            {
+              "text": "Acute bacterial illness rather than congenital infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury or metabolic bone disease",
+          "cells": [
+            {
+              "text": "Mimics of bony changes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_syphilis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral benzylpenicillin",
+          "cells": [
+            {
+              "text": "Definitive antimicrobial therapy for the infant; course guided by CSF findings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antenatal screening and maternal treatment",
+          "cells": [
+            {
+              "text": "Benzathine penicillin treatment to prevent fetal infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Jaundice, anaemia and painful pseudoparalysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serological follow-up",
+          "cells": [
+            {
+              "text": "Serial non-treponemal titres; re-treat if titres fail to fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late-stigmata surveillance",
+          "cells": [
+            {
+              "text": "Ophthalmological, audiological and dental review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Public health",
+          "cells": [
+            {
+              "text": "Notify, trace and treat maternal contacts; screen for other sexually transmitted infections"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_syphilis-dx-mgmt",
+      "title": "Diagnosis and management of Congenital syphilis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital syphilis: infant of a mother with syphilis or unclear treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (hydrops, neurosyphilis on CSF, pseudoparalysis, late stigmata)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation and parenteral penicillin; CSF examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Maternal serology; infant titre; organism detection; CSF; long-bone radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do infant titres, organism detection or CSF confirm congenital syphilis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider other TORCH infections, sepsis or metabolic bone disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Parenteral benzylpenicillin as definitive therapy, guided by CSF",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Supportive care for jaundice, anaemia and pseudoparalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serial non-treponemal titres to confirm response",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmological and audiological surveillance; notify and treat contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With timely maternal screening and treatment fetal infection is usually prevented",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

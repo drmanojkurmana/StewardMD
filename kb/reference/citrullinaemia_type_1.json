@@ -155,5 +155,312 @@
       "caption": "Overview comparison matrix for citrullinaemia type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Metabolic medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "citrullinaemia_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ammonia",
+          "cells": [
+            {
+              "text": "Urgent, correctly sampled and transported on ice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma amino acid profile",
+          "cells": [
+            {
+              "text": "Markedly raised citrulline with low argininosuccinate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine orotic acid and organic acids",
+          "cells": [
+            {
+              "text": "Orotic acid typically raised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas, glucose and lactate",
+          "cells": [
+            {
+              "text": "Metabolic status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ASS1 genetic testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrullinaemia_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ornithine transcarbamylase deficiency or argininosuccinic aciduria",
+          "cells": [
+            {
+              "text": "Other urea cycle disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Citrin deficiency (citrullinaemia type 2)",
+          "cells": [
+            {
+              "text": "Raised citrulline with SLC25A13 variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transient hyperammonaemia of the newborn",
+          "cells": [
+            {
+              "text": "Neonatal hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "citrullinaemia_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop protein intake and reverse catabolism",
+          "cells": [
+            {
+              "text": "High-energy glucose and intravenous lipid"
+            },
+            {
+              "text": "Acute emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium benzoate, sodium phenylbutyrate and intravenous arginine",
+          "cells": [
+            {
+              "text": "Nitrogen-scavenging agents"
+            },
+            {
+              "text": "Acute hyperammonaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemodialysis or haemofiltration",
+          "cells": [
+            {
+              "text": "Severe or refractory hyperammonaemia"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protein-restricted diet with arginine and oral scavengers",
+          "cells": [
+            {
+              "text": "Long-term management"
+            },
+            {
+              "text": "Sick-day regimen during intercurrent illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver transplantation",
+          "cells": [
+            {
+              "text": "Severely affected patients or recurrent crises"
+            },
+            {
+              "text": "Recurrent crises"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "citrullinaemia_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Citrullinaemia type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected citrullinaemia type 1: neonatal lethargy, poor feeding or hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (raised ammonia with encephalopathy, seizures, raised ICP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency treatment for hyperammonaemia with protein stopped",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent ammonia, amino acid profile, urine orotic acid and ASS1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Markedly raised citrulline with low argininosuccinate confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop protein intake; high-energy glucose and intravenous lipid",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check other urea cycle disorders and citrin deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Sodium benzoate, sodium phenylbutyrate and intravenous arginine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Haemodialysis or haemofiltration for refractory hyperammonaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protein-restricted diet with arginine and oral nitrogen scavengers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Liver transplantation and family ASS1 counselling with newborn screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

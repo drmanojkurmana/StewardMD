@@ -151,5 +151,298 @@
       "caption": "Overview comparison matrix for cement dermatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cement_dermatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Occupational history",
+          "cells": [
+            {
+              "text": "Links symptoms to cement and concrete work"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing to potassium dichromate and cobalt chloride",
+          "cells": [
+            {
+              "text": "Confirms the allergic component"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing to rubber accelerators and other construction allergens",
+          "cells": [
+            {
+              "text": "Other construction allergens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical assessment for alkaline burns",
+          "cells": [
+            {
+              "text": "Kneeling or boot-contact areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin swab",
+          "cells": [
+            {
+              "text": "If secondary bacterial infection is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cement_dermatitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromate-reduced cement",
+          "cells": [
+            {
+              "text": "Cement treated with ferrous sulfate to reduce hexavalent to trivalent chromium"
+            },
+            {
+              "text": "Lowers allergenic load"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protective measures",
+          "cells": [
+            {
+              "text": "Impermeable gloves, protective clothing and barrier creams"
+            },
+            {
+              "text": "Prevent contact with wet cement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and emollients",
+          "cells": [
+            {
+              "text": "Settle acute eczema and restore the skin barrier"
+            },
+            {
+              "text": "Acute eczema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burn care",
+          "cells": [
+            {
+              "text": "Prompt copious irrigation and wound care of alkaline burns"
+            },
+            {
+              "text": "Classically over knees and lower legs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "For secondary bacterial infection where present"
+            },
+            {
+              "text": "Where present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "To potassium dichromate and cobalt"
+            },
+            {
+              "text": "Confirms allergy and guides avoidance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational health review",
+          "cells": [
+            {
+              "text": "Workplace modification; change of trade for persistent allergic disease"
+            },
+            {
+              "text": "Sensitisation may persist despite avoidance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cement_dermatitis-dx-mgmt",
+      "title": "Diagnosis and management of cement dermatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cement dermatitis: hand eczema or burns in a concrete worker",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (deep alkaline burn, full-thickness loss, severe infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: surgical assessment for full-thickness alkaline burns",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Occupational history and patch testing to dichromate and cobalt",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Chromate or cobalt allergy confirmed by patch testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Chromate-reduced cement and impermeable gloves and clothing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check rubber glove allergy, irritant dermatitis and pompholyx",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical corticosteroids and emollients for acute eczema",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Irrigate and dress alkaline burns; antibiotics if infected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational health review; change of trade if allergy persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Irritant dermatitis often improves; chromate allergy is often chronic",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

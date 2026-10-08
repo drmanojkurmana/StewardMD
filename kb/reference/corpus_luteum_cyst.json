@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for corpus luteum cyst."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard gynaecology reference textbook",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "corpus_luteum_cyst-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pregnancy test and serial beta-hCG",
+          "cells": [
+            {
+              "text": "Ectopic pregnancy excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transvaginal ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Peripheral vascular rim"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Intracystic or intraperitoneal bleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic free fluid assessment",
+          "cells": [
+            {
+              "text": "Rupture with free fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up ultrasound",
+          "cells": [
+            {
+              "text": "Resolution confirmed when uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corpus_luteum_cyst-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Ectopic pregnancy",
+          "cells": [
+            {
+              "text": "Pitfall: haemorrhagic corpus luteum confused with ectopic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ovarian torsion",
+          "cells": [
+            {
+              "text": "Named look-alike with acute pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endometrioma",
+          "cells": [
+            {
+              "text": "Named look-alike cyst"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "corpus_luteum_cyst-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant management",
+          "cells": [
+            {
+              "text": "Simple analgesia; most functional cysts resolve over one or two cycles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up ultrasound",
+          "cells": [
+            {
+              "text": "Confirms resolution when diagnosis uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early pregnancy",
+          "cells": [
+            {
+              "text": "Recognise as normal supporting structure while excluding ectopic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Combined hormonal contraception",
+          "cells": [
+            {
+              "text": "Suppresses ovulation and reduces recurrent functional cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Suspected rupture",
+          "cells": [
+            {
+              "text": "IV fluids, haemodynamic monitoring and urgent gynaecology review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopy",
+          "cells": [
+            {
+              "text": "Cystectomy or haemostatic control for instability or ongoing haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulant review",
+          "cells": [
+            {
+              "text": "Intraperitoneal bleeding more severe in these women"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "corpus_luteum_cyst-dx-mgmt",
+      "title": "Diagnosis and management of Corpus luteum cyst",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected corpus luteum cyst: pelvic pain with a functional ovarian cyst",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (haemodynamic instability, positive pregnancy test, torsion, anticoagulation)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gynaecology review; resuscitate for haemoperitoneum",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pregnancy test; beta-hCG; transvaginal Doppler ultrasound; FBC; free fluid check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ultrasound show a cyst with a peripheral vascular rim, ectopic excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider ectopic pregnancy, torsion, appendicitis or endometrioma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Expectant management with simple analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Combined hormonal contraception to reduce recurrent functional cysts",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "IV fluids and urgent gynaecology review for suspected rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laparoscopy for instability or ongoing haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign; usually resolves within one or two cycles; most recover well after rupture",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

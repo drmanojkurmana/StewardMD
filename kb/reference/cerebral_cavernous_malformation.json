@@ -153,5 +153,298 @@
       "caption": "Overview comparison matrix for cerebral cavernous malformation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurovascular genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebral_cavernous_malformation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Susceptibility-weighted or gradient-echo MRI",
+          "cells": [
+            {
+              "text": "Most sensitive; popcorn or mulberry lesion with haemosiderin rim"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Whole-neuraxis MRI including spinal cord",
+          "cells": [
+            {
+              "text": "Indicated where familial disease is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of KRIT1, CCM2 and PDCD10",
+          "cells": [
+            {
+              "text": "Identifies familial disease; cascade testing of relatives"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electroencephalography",
+          "cells": [
+            {
+              "text": "Where seizures require characterisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial MRI surveillance",
+          "cells": [
+            {
+              "text": "Monitors lesion number and change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_cavernous_malformation-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Serial MRI surveillance for asymptomatic or incidental lesions"
+            },
+            {
+              "text": "Incidental lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Control seizures, the commonest presentation"
+            },
+            {
+              "text": "Commonest presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microsurgical resection",
+          "cells": [
+            {
+              "text": "For accessible symptomatic lesions with recurrent haemorrhage or drug-resistant epilepsy"
+            },
+            {
+              "text": "Accessible lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "For selected surgically inaccessible lesions"
+            },
+            {
+              "text": "Evidence is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antithrombotic caution",
+          "cells": [
+            {
+              "text": "Cautious approach to antithrombotic therapy"
+            },
+            {
+              "text": "Haemorrhage risk, especially brainstem and deep lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing and screening",
+          "cells": [
+            {
+              "text": "Cascade screening of relatives with whole-neuraxis imaging"
+            },
+            {
+              "text": "Familial KRIT1, CCM2 or PDCD10"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Refer to neurosurgery or neurology; counsel on rebleed risk"
+            },
+            {
+              "text": "Higher rebleed risk after symptomatic haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebral_cavernous_malformation-dx-mgmt",
+      "title": "Diagnosis and management of Cerebral Cavernous Malformation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cerebral cavernous malformation: seizures or haemorrhage with a popcorn lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (headache with deficit, brainstem signs, raised pressure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: neurosurgical review for symptomatic haemorrhage or brainstem lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Susceptibility-weighted MRI; whole-neuraxis MRI; genetic testing if multiple lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Multiple lesions or familial pattern on susceptibility MRI confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Serial MRI surveillance for asymptomatic or incidental lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check arteriovenous malformation, capillary telangiectasia and metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication for seizures, the commonest presentation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Microsurgical resection of accessible symptomatic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Stereotactic radiosurgery for selected inaccessible lesions; cautious antithrombotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Many stay asymptomatic; symptomatic bleeding of deep lesions carries deficit risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

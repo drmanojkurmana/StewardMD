@@ -145,5 +145,73 @@
       "caption": "Overview comparison matrix for biemond syndrome ii."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biemond_syndrome_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic investigations in Biemond syndrome II",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Ophthalmological assessment", "cells": [{"text": "Iris coloboma; retinal evaluation"}], "cite": "c1"},
+        {"parameter": "Radiographs of hands and feet", "cells": [{"text": "Postaxial polydactyly"}], "cite": "c1"},
+        {"parameter": "Endocrine assessment", "cells": [{"text": "Gonadal function and pubertal development"}], "cite": "c1"},
+        {"parameter": "Renal ultrasound and function testing", "cells": [{"text": "Renal involvement, common in the ciliopathy overlap"}], "cite": "c1"},
+        {"parameter": "Developmental assessment and ciliopathy gene panel", "cells": [{"text": "Intellectual disability; gene panel where available"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "biemond_syndrome_2-treatment",
+      "kind": "treatment",
+      "title": "Management options in Biemond syndrome II",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Supportive care", "cells": [{"text": "Management modelled on Bardet-Biedl-type ciliopathies"}, {"text": "No disease-specific therapy"}], "cite": "c1"},
+        {"parameter": "Weight management", "cells": [{"text": "Dietary and lifestyle intervention for central obesity"}, {"text": "Addresses metabolic complications"}], "cite": "c1"},
+        {"parameter": "Ophthalmology care", "cells": [{"text": "Refractive correction and visual support for iris coloboma"}, {"text": "Iris coloboma"}], "cite": "c1"},
+        {"parameter": "Endocrine management", "cells": [{"text": "Hormone replacement to support pubertal development as needed"}, {"text": "For hypogenitalism and hypogonadism"}], "cite": "c1"},
+        {"parameter": "Renal surveillance", "cells": [{"text": "Ultrasound and function testing; treat any impairment"}, {"text": "Ciliopathy overlap"}], "cite": "c1"},
+        {"parameter": "Development and surgery", "cells": [{"text": "Developmental and educational support; surgery for postaxial polydactyly where indicated"}, {"text": "Management of hydrocephalus if present"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary care and counselling", "cells": [{"text": "Genetic counselling for presumed autosomal recessive inheritance"}, {"text": "Multidisciplinary care"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biemond_syndrome_2-dx-mgmt",
+      "title": "Diagnosis and management of Biemond syndrome II",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Iris coloboma with obesity, postaxial polydactyly, hypogenitalism or intellectual disability", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive visual impairment, renal impairment or endocrine deficiency?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: retinal, renal and endocrine specialist review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Ophthalmology for coloboma; hand and foot radiographs; developmental assessment", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Renal ultrasound and function; endocrine assessment of gonadal function and puberty", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Iris coloboma present without retinal pigmentary dystrophy?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Ciliopathy gene panel where available; weight and endocrine management", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Bardet-Biedl syndrome or another obesity-polydactyly ciliopathy", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Outlook depends on renal and neurological involvement; supportive care with surveillance", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

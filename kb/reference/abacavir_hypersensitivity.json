@@ -149,5 +149,312 @@
       "caption": "Overview comparison matrix for abacavir hypersensitivity (hla-b*57:01)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "abacavir_hypersensitivity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "HLA-B*57:01 genotyping",
+          "cells": [
+            {
+              "text": "Carriage of the allele strongly associated with the reaction; ideally before starting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and eosinophil count",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and renal function tests",
+          "cells": [
+            {
+              "text": "Organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication timeline",
+          "cells": [
+            {
+              "text": "Correlates symptoms with abacavir dosing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Patch testing",
+          "cells": [
+            {
+              "text": "Specialist evaluation of uncertain historical reactions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abacavir_hypersensitivity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Intercurrent viral or opportunistic infection",
+          "cells": [
+            {
+              "text": "Arises in an HIV-positive patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other drug hypersensitivity (co-administered antiretrovirals or antimicrobials)",
+          "cells": [
+            {
+              "text": "Another drug is the culprit"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DRESS syndrome from another agent",
+          "cells": [
+            {
+              "text": "Caused by a different agent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "abacavir_hypersensitivity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Discontinue abacavir immediately and permanently",
+          "cells": [
+            {
+              "text": "Definitive treatment at first suspicion"
+            },
+            {
+              "text": "Never rechallenge after a genuine reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care for the systemic reaction",
+          "cells": [
+            {
+              "text": "Fluids, antipyretics and symptomatic measures"
+            },
+            {
+              "text": "Monitor organ function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative antiretroviral agent",
+          "cells": [
+            {
+              "text": "Maintains effective HIV suppression"
+            },
+            {
+              "text": "In liaison with HIV specialist services"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HLA-B*57:01 screening before prescribing",
+          "cells": [
+            {
+              "text": "Prevents recurrence"
+            },
+            {
+              "text": "Avoid abacavir in allele-positive individuals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Document as drug allergy and warn the patient",
+          "cells": [
+            {
+              "text": "Lifelong avoidance"
+            },
+            {
+              "text": "Includes fixed-dose combinations containing abacavir"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "abacavir_hypersensitivity-dx-mgmt",
+      "title": "Diagnosis and management of Abacavir hypersensitivity (HLA-B*57:01)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, rash, GI upset and malaise within six weeks of starting abacavir",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotension, cardiovascular collapse or respiratory distress?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency management of collapse; never rechallenge with abacavir",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "HLA-B*57:01 genotyping, FBC with eosinophils, liver and renal tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "HLA-B*57:01 carried and symptoms follow abacavir dosing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stop abacavir permanently; supportive care and monitor organ function",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review infection, IRIS and other drug reactions; patch testing if unclear",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Substitute an alternative antiretroviral with HIV specialist input",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Screen HLA-B*57:01 before any future abacavir prescribing",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Document the drug allergy and warn about combination products",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Full resolution with prompt withdrawal; lifelong avoidance is mandatory",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

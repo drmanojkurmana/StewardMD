@@ -193,5 +193,502 @@
       "caption": "Diagnostic and clinical overview matrix for opioid overdose."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Opioid Toxicity and Withdrawal",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/special-subjects/recreational-drugs-and-intoxicants/opioid-toxicity-and-withdrawal"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "opioid_od-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising opioid overdose",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Breathing",
+          "cells": [
+            {
+              "text": "Slow, shallow respiration progressing to apnoea"
+            },
+            {
+              "text": "{{hy:Hypoxia, not the drug itself, is what kills}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pupils",
+          "cells": [
+            {
+              "text": "Miosis; mydriasis once cerebral anoxia sets in"
+            },
+            {
+              "text": "Dilated pupils do not exclude opioids in a deteriorating patient"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Consciousness",
+          "cells": [
+            {
+              "text": "Stupor or coma"
+            },
+            {
+              "text": "Vital signs change only at grade 3 to 4 CNS depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other signs",
+          "cells": [
+            {
+              "text": "Bradycardia, hypotension, hypothermia, urinary retention"
+            },
+            {
+              "text": "Depressed physiological state"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Response to naloxone",
+          "cells": [
+            {
+              "text": "Reversal of mental state and vital signs within minutes of IV naloxone"
+            },
+            {
+              "text": "Virtually diagnostic of opioid poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seizures",
+          "cells": [
+            {
+              "text": "Uncommon"
+            },
+            {
+              "text": "Think of meperidine, high-dose tramadol, polydrug use or neonate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine drug screen",
+          "cells": [
+            {
+              "text": "Screening only; false positives with fluoroquinolones; misses agents such as kratom"
+            },
+            {
+              "text": "Negative screen does not exclude opioids; never delay treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "QT prolongation, for example with methadone"
+            },
+            {
+              "text": "Risk of sudden death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Noncardiogenic pulmonary oedema within minutes to a few hours"
+            },
+            {
+              "text": "Look for aspiration pneumonia too"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "opioid_od-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic opioid overdose",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Benzodiazepine or other sedative-hypnotic",
+          "cells": [
+            {
+              "text": "Depressed state that does not reverse with naloxone; common co-ingestant"
+            },
+            {
+              "text": "Poor naloxone response; history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholinergic poisoning",
+          "cells": [
+            {
+              "text": "Miosis with salivation, lacrimation, bronchorrhoea, fasciculations"
+            },
+            {
+              "text": "Plasma or red cell cholinesterase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Coma reversed by dextrose"
+            },
+            {
+              "text": "{{hy:Capillary glucose}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sympatholytic poisoning",
+          "cells": [
+            {
+              "text": "Clonidine, beta-blocker, calcium channel blocker or digoxin; bradycardia and hypotension"
+            },
+            {
+              "text": "History and ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alcohol or sedative withdrawal overlap",
+          "cells": [
+            {
+              "text": "May coexist and be more dangerous than opioid withdrawal"
+            },
+            {
+              "text": "History and timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Buprenorphine exposure",
+          "cells": [
+            {
+              "text": "Primary overdose nearly impossible as a partial agonist"
+            },
+            {
+              "text": "Poor naloxone response should prompt search for co-ingested sedative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "opioid_od-treatment",
+      "kind": "treatment",
+      "title": "Reversing opioid overdose",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Airway and ventilation",
+          "cells": [
+            {
+              "text": "Bag-mask, then intubation if naloxone unavailable or ineffective"
+            },
+            {
+              "text": "First priority"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Naloxone, breathing patient",
+          "cells": [
+            {
+              "text": "{{hy:0.4 to 2 mg IV in 0.4 mg steps every 2 to 3 min}}"
+            },
+            {
+              "text": "Children under 20 kg: 0.1 mg/kg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Naloxone, apnoeic patient",
+          "cells": [
+            {
+              "text": "2 mg IV if it can be given without delay"
+            },
+            {
+              "text": "Repeat if no response within 2 min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Other routes",
+          "cells": [
+            {
+              "text": "IM, SC or intranasal naloxone when no IV access"
+            },
+            {
+              "text": "Also effective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Low-dose titration",
+          "cells": [
+            {
+              "text": "0.1 mg doses in long-term users when reversal is not urgent"
+            },
+            {
+              "text": "Limits precipitated withdrawal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fentanyl analogues",
+          "cells": [
+            {
+              "text": "May need higher naloxone doses"
+            },
+            {
+              "text": "Xylazine adulteration deepens respiratory depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Naloxone infusion",
+          "cells": [
+            {
+              "text": "About two-thirds of the effective bolus dose per hour"
+            },
+            {
+              "text": "For recurrent respiratory depression; ICU monitoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary oedema",
+          "cells": [
+            {
+              "text": "Oxygen, often BiPAP or intubation"
+            },
+            {
+              "text": "Develops within minutes to hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Observation",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "2 to 3 h after naloxone (half-life about 1 h)",
+              "range": [
+                2,
+                3
+              ]
+            },
+            {
+              "text": "Admit after long-acting opioids such as methadone"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "opioid_od-dx-mgmt",
+      "title": "Diagnosis and management of opioid overdose",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Reduced consciousness with slow breathing or miosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Open airway, bag-mask ventilate, check glucose",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Apnoeic?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Naloxone 2 mg IV without delay",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Naloxone 0.4 mg IV every 2 to 3 min up to 2 mg",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Breathing and consciousness restored?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Suspected fentanyl or sedative co-ingestion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Higher naloxone doses; ventilate; treat co-ingestant",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Intubate and ventilate; seek other cause of coma",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Long-acting opioid such as methadone?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Admit; naloxone infusion if depression recurs",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Observe 2 to 3 h after last naloxone, then discharge plan",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Responds"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No response"
+        }
+      ]
+    }
+  ]
 }

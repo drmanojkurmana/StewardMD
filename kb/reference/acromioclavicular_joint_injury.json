@@ -144,5 +144,289 @@
       "caption": "Overview comparison matrix for acromioclavicular joint injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Review of Orthopaedics / Brukner and Khan's Clinical Sports Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acromioclavicular_joint_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Bilateral AP radiographs with coracoclavicular distance",
+          "cells": [
+            {
+              "text": "Comparison of coracoclavicular distance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axillary lateral view and Zanca view",
+          "cells": [
+            {
+              "text": "Posterior displacement; AC joint and coracoclavicular distance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Associated rotator cuff or labral injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical grading with cross-body adduction test",
+          "cells": [
+            {
+              "text": "Tenderness and step; positive cross-body adduction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acromioclavicular_joint_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sling immobilisation, analgesia and early mobilisation",
+          "cells": [
+            {
+              "text": "Non-operative care for Rockwood types I to III"
+            },
+            {
+              "text": "Early mobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ice and NSAIDs",
+          "cells": [
+            {
+              "text": "Acute pain control"
+            },
+            {
+              "text": "Simple analgesics also used"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy-led graduated rehabilitation",
+          "cells": [
+            {
+              "text": "Scapular control, range of motion and girdle strength"
+            },
+            {
+              "text": "Graduated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical stabilisation with coracoclavicular ligament reconstruction",
+          "cells": [
+            {
+              "text": "Rockwood types IV to VI and selected high-demand type III"
+            },
+            {
+              "text": "Selected high-demand type III"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graduated return to sport",
+          "cells": [
+            {
+              "text": "Once pain-free with restored strength"
+            },
+            {
+              "text": "Heavy activity after recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance; corticosteroid injection; later distal clavicle excision",
+          "cells": [
+            {
+              "text": "Persistent AC pain or post-traumatic arthritis"
+            },
+            {
+              "text": "Corticosteroid first, then excision"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic or sports-medicine referral",
+          "cells": [
+            {
+              "text": "High-grade or refractory injuries"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acromioclavicular_joint_injury-dx-mgmt",
+      "title": "Diagnosis and management of Acromioclavicular joint injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fall onto the point of the shoulder, arm adducted; AC joint tenderness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Skin threatened or posterior displacement with neurovascular compromise?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent orthopaedic and vascular or neurological assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Bilateral AP radiographs, axillary lateral and Zanca views",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Complete AC separation with a visible step (type III or worse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider surgical stabilisation for types IV to VI or high-demand type III",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Types I or II: sling, analgesia and early mobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ice and NSAIDs for acute pain control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Physiotherapy-led rehabilitation for scapular control and strength",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Graduated return to sport once pain-free with restored strength",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Low-grade injuries recover well; some develop persistent AC pain or arthritis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

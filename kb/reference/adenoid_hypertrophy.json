@@ -149,5 +149,334 @@
       "caption": "Overview comparison matrix for adenoid hypertrophy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Dhingra, Diseases of Ear, Nose and Throat",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adenoid_hypertrophy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nasal endoscopy",
+          "cells": [
+            {
+              "text": "Visualises and grades the adenoid pad"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lateral soft tissue radiograph of the nasopharynx",
+          "cells": [
+            {
+              "text": "Adenoid size"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tympanometry and audiometry",
+          "cells": [
+            {
+              "text": "Middle ear effusion and conductive loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep assessment or polysomnography",
+          "cells": [
+            {
+              "text": "Obstructive sleep apnoea when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allergy assessment",
+          "cells": [
+            {
+              "text": "Allergic component when likely"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenoid_hypertrophy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic rhinitis",
+          "cells": [
+            {
+              "text": "Allergic component"
+            },
+            {
+              "text": "Allergy assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Juvenile nasopharyngeal angiofibroma",
+          "cells": [
+            {
+              "text": "Adolescent males with epistaxis and a mass"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adenoid_hypertrophy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Adenoidectomy",
+          "cells": [
+            {
+              "text": "Significant nasal obstruction, sleep apnoea or recurrent otitis media"
+            },
+            {
+              "text": "Prompt and lasting relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intranasal corticosteroid, saline irrigation and antihistamine",
+          "cells": [
+            {
+              "text": "Allergic component"
+            },
+            {
+              "text": "May reduce obstruction and defer surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics for bacterial rhinosinusitis or recurrent infection",
+          "cells": [
+            {
+              "text": "Associated infection"
+            },
+            {
+              "text": "Appropriate antibiotics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ventilation tubes",
+          "cells": [
+            {
+              "text": "Persistent middle ear effusion with conductive loss"
+            },
+            {
+              "text": "Often at the time of adenoidectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Watchful waiting",
+          "cells": [
+            {
+              "text": "Milder cases"
+            },
+            {
+              "text": "Adenoid tissue regresses toward puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring with tympanometry, audiometry, sleep and growth",
+          "cells": [
+            {
+              "text": "Significant obstruction"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep assessment and ENT referral when OSA is suspected",
+          "cells": [
+            {
+              "text": "Suspected obstructive sleep apnoea"
+            },
+            {
+              "text": "Polysomnography"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adenoid_hypertrophy-dx-mgmt",
+      "title": "Diagnosis and management of Adenoid hypertrophy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Nasal obstruction, mouth breathing and snoring in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Witnessed apnoeas, strictly unilateral obstruction or epistaxis with a mass?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ENT and sleep referral; exclude mass or angiofibroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nasal endoscopy, nasopharyngeal radiograph, tympanometry and audiometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Adenoid obstruction with significant sleep or ear disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Refer for adenoidectomy; ventilation tubes if effusion persists",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Watchful waiting; allergy treatment with steroid spray and saline",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intranasal corticosteroid, saline irrigation and antihistamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Antibiotics for bacterial rhinosinusitis or recurrent infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor hearing, sleep and growth; polysomnography if OSA suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Adenoid tissue often regresses with age; surgery gives lasting relief",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

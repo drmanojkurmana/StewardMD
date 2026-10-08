@@ -147,5 +147,327 @@
       "caption": "Overview comparison matrix for bacterial keratitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bacterial_keratitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination with fluorescein staining",
+          "cells": [
+            {
+              "text": "Infiltrate and epithelial defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corneal scraping for Gram stain and culture",
+          "cells": [
+            {
+              "text": "Organism and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contact lens and lens case cultures",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Measurement of infiltrate size and corneal thinning",
+          "cells": [
+            {
+              "text": "Infiltrate size and thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confocal microscopy or specialised staining",
+          "cells": [
+            {
+              "text": "Acanthamoeba or fungal infection suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacterial_keratitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Herpes simplex (dendritic) keratitis",
+          "cells": [
+            {
+              "text": "Steroids can worsen undiagnosed herpetic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal keratitis",
+          "cells": [
+            {
+              "text": "Identified by specialised microscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacterial_keratitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corneal scrape then intensive antibiotics",
+          "cells": [
+            {
+              "text": "Gram stain and culture, then intensive topical broad-spectrum antibiotics"
+            },
+            {
+              "text": "Start after scraping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frequent dosing",
+          "cells": [
+            {
+              "text": "Drops very frequently, including overnight in significant ulcers"
+            },
+            {
+              "text": "Tapered to response and sensitivities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stop contact lens wear",
+          "cells": [
+            {
+              "text": "Lens and case sent for culture"
+            },
+            {
+              "text": "Contact lens use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and cycloplegia",
+          "cells": [
+            {
+              "text": "Cycloplegic drop for pain and ciliary spasm; withhold steroids until infection is controlled"
+            },
+            {
+              "text": "Pain and spasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitor for thinning and perforation",
+          "cells": [
+            {
+              "text": "Infiltrate size, epithelial healing, descemetocele formation"
+            },
+            {
+              "text": "Complications"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue adhesive or keratoplasty",
+          "cells": [
+            {
+              "text": "Corneal glue or emergency keratoplasty"
+            },
+            {
+              "text": "Impending or actual perforation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Tailored therapy when Acanthamoeba or fungal keratitis is suspected"
+            },
+            {
+              "text": "Unresponsive lens-related disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bacterial_keratitis-dx-mgmt",
+      "title": "Diagnosis and management of Bacterial keratitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful red eye with a corneal ulcer, often in a contact lens wearer",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Central or large ulcer, rapid progression or perforation risk?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Corneal scrape, then intensive topical antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Fluorescein slit lamp, corneal scraping culture, lens cultures, infiltrate measurement",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Organism identified, or Acanthamoeba and fungus excluded on microscopy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intensive topical broad-spectrum antibiotics with frequent dosing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and refer for specialist microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Stop contact lens wear; send lens for culture",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cycloplegic drops; withhold steroids until infection is controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor thinning and perforation; glue or keratoplasty if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Specialist referral for Acanthamoeba or fungal keratitis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

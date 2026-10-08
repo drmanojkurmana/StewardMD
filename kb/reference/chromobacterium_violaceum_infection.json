@@ -147,5 +147,327 @@
       "caption": "Overview comparison matrix for chromobacterium violaceum infection."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chromobacterium_violaceum_infection-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Blood cultures and culture of pus or tissue",
+          "cells": [
+            {
+              "text": "Violet-pigmented colonies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain of aspirate",
+          "cells": [
+            {
+              "text": "Gram-negative bacilli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging (ultrasound or CT)",
+          "cells": [
+            {
+              "text": "Hepatic, splenic and pulmonary abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dihydrorhodamine or nitroblue tetrazolium testing",
+          "cells": [
+            {
+              "text": "Screens for chronic granulomatous disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial susceptibility testing",
+          "cells": [
+            {
+              "text": "Variable resistance; directs therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromobacterium_violaceum_infection-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Melioidosis (Burkholderia pseudomallei)",
+          "cells": [
+            {
+              "text": "Visceral abscesses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Staphylococcal septicaemia",
+          "cells": [
+            {
+              "text": "Metastatic abscesses"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromobacterium_violaceum_infection-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Targeted prolonged antibiotics",
+          "cells": [
+            {
+              "text": "Fluoroquinolone, carbapenem, aminoglycoside or trimethoprim-sulfamethoxazole; avoid beta-lactams to which it is resistant"
+            },
+            {
+              "text": "Often combination therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drainage",
+          "cells": [
+            {
+              "text": "Surgical or percutaneous drainage of hepatic, splenic and pulmonary abscesses"
+            },
+            {
+              "text": "Alongside antimicrobials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Susceptibility-guided therapy",
+          "cells": [
+            {
+              "text": "Antimicrobial susceptibility testing"
+            },
+            {
+              "text": "Variable resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended oral eradication",
+          "cells": [
+            {
+              "text": "Extended course with an oral eradication phase"
+            },
+            {
+              "text": "Prevents relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis care",
+          "cells": [
+            {
+              "text": "Resuscitation and critical care support"
+            },
+            {
+              "text": "Fulminant, disseminated disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology referral",
+          "cells": [
+            {
+              "text": "Investigate for chronic granulomatous disease and neutrophil defects"
+            },
+            {
+              "text": "Severe or recurrent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging monitoring",
+          "cells": [
+            {
+              "text": "Cross-sectional imaging for abscesses and relapse"
+            },
+            {
+              "text": "Relapse surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chromobacterium_violaceum_infection-dx-mgmt",
+      "title": "Diagnosis and management of Chromobacterium violaceum infection",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Chromobacterium violaceum infection: skin sepsis or visceral abscesses",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid sepsis, multiple visceral abscesses, recurrent infection)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: critical care for fulminant sepsis; urgent surgical drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood and pus cultures for violet colonies; Gram stain; cross-sectional imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gram-negative bacilli with visceral abscesses confirmed by culture or imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Targeted antibiotic such as a fluoroquinolone or carbapenem, avoiding beta-lactams",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check melioidosis, staphylococcal septicaemia and Klebsiella liver abscess",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Drain hepatic, splenic and pulmonary abscesses with antibiotic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Susceptibility testing to guide directed therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Extended course with an oral eradication phase to prevent relapse",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Test for chronic granulomatous disease in severe or recurrent cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

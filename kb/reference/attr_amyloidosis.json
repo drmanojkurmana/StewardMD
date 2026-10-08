@@ -150,5 +150,336 @@
       "caption": "Overview comparison matrix for attr amyloidosis (transthyretin amyloidosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "attr_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography with longitudinal strain",
+          "cells": [
+            {
+              "text": "Apical sparing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone scintigraphy with DPD, PYP or HMDP",
+          "cells": [
+            {
+              "text": "Graded by the Perugini scale"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum free light chains with serum and urine immunofixation",
+          "cells": [
+            {
+              "text": "Excludes AL amyloidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TTR gene sequencing",
+          "cells": [
+            {
+              "text": "Variant from wild-type disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tissue biopsy with Congo red staining",
+          "cells": [
+            {
+              "text": "Amyloid typing by mass spectrometry or immunohistochemistry when required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac biomarkers and nerve conduction studies",
+          "cells": [
+            {
+              "text": "Assessed according to phenotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "attr_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "AL (immunoglobulin light-chain) amyloidosis",
+          "cells": [
+            {
+              "text": "Excluded by free light chains and immunofixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertensive heart disease and hypertrophic cardiomyopathy",
+          "cells": [
+            {
+              "text": "Increased wall thickness attributed to hypertension misses ATTR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "attr_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Disease-modifying therapy",
+          "cells": [
+            {
+              "text": "Tafamidis (transthyretin tetramer stabiliser) or gene-silencing therapy"
+            },
+            {
+              "text": "Start early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive cardiac care",
+          "cells": [
+            {
+              "text": "Cautious diuresis; avoid or use with care agents poorly tolerated"
+            },
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia management",
+          "cells": [
+            {
+              "text": "Anticoagulation for atrial fibrillation; pacing for conduction disease"
+            },
+            {
+              "text": "Amyloid-associated arrhythmias"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathy symptom care",
+          "cells": [
+            {
+              "text": "Neuropathic pain agents; measures for orthostatic and gastrointestinal autonomic symptoms"
+            },
+            {
+              "text": "Sensorimotor and autonomic neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progression monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography, cardiac biomarkers and functional assessment"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplantation",
+          "cells": [
+            {
+              "text": "Heart or combined organ transplant in selected advanced disease"
+            },
+            {
+              "text": "Advanced disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Genetic testing and family screening in hereditary variant disease"
+            },
+            {
+              "text": "Hereditary variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "attr_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of ATTR Amyloidosis (Transthyretin Amyloidosis)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heart failure with preserved ejection fraction and increased wall thickness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Hypotension or intolerance of standard heart failure drugs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cautious diuresis and review of drug tolerance",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echo strain, cardiac MRI, bone scintigraphy, free light chains, TTR sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Scintigraphy positive with AL excluded on light chains?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start tafamidis or gene-silencing therapy early",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy or typing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anticoagulation for AF and pacing for conduction disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Neuropathic pain and autonomic symptom treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial echo, biomarkers and functional monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Heart transplantation considered in selected advanced disease; family screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

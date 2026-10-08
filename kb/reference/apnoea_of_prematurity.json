@@ -142,5 +142,324 @@
       "caption": "Overview comparison matrix for apnoea of prematurity."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neonatology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apnoea_of_prematurity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardiorespiratory monitoring",
+          "cells": [
+            {
+              "text": "Characterises the events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis screen",
+          "cells": [
+            {
+              "text": "Where infection is possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, glucose and electrolytes",
+          "cells": [
+            {
+              "text": "Anaemia, hypoglycaemia or electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for seizures",
+          "cells": [
+            {
+              "text": "Where events are atypical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Where a central cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apnoea_of_prematurity-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Sepsis or meningitis",
+          "cells": [
+            {
+              "text": "New or abruptly worsening apnoea suggests sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoglycaemia or electrolyte disturbance",
+          "cells": [
+            {
+              "text": "Reversible causes that are easily overlooked"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal seizures",
+          "cells": [
+            {
+              "text": "Confused with apnoea when events are atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apnoea_of_prematurity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Caffeine citrate",
+          "cells": [
+            {
+              "text": "Methylxanthine respiratory stimulant; mainstay pharmacological treatment"
+            },
+            {
+              "text": "Reduces apnoea and the need for ventilation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory support",
+          "cells": [
+            {
+              "text": "Nasal CPAP or non-invasive ventilation with supplemental oxygen"
+            },
+            {
+              "text": "Tactile stimulation for events"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat secondary causes",
+          "cells": [
+            {
+              "text": "Sepsis with antibiotics; anaemia; hypoglycaemia"
+            },
+            {
+              "text": "Apnoea of prematurity is a diagnosis of exclusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring and thermoneutral care",
+          "cells": [
+            {
+              "text": "Continuous cardiorespiratory monitoring; thermoneutral environment; positioning"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mechanical ventilation",
+          "cells": [
+            {
+              "text": "Severe, frequent or refractory events"
+            },
+            {
+              "text": "Escalation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Discharge planning",
+          "cells": [
+            {
+              "text": "Home monitoring only for persistent events"
+            },
+            {
+              "text": "Resolution expected around term-corrected age"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apnoea_of_prematurity-dx-mgmt",
+      "title": "Diagnosis and management of Apnoea of prematurity",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent pauses in breathing in a preterm infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? New or abruptly worsening apnoea suggesting sepsis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent sepsis screen and antibiotics if infection is possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cardiorespiratory monitoring, sepsis screen, FBC, glucose and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Secondary cause excluded: sepsis, anaemia, hypoglycaemia, seizures?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Caffeine citrate as the mainstay pharmacological treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and treat any cause found",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nasal CPAP or non-invasive ventilation with oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Tactile stimulation for events; thermoneutral positioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Escalate to mechanical ventilation for severe or refractory events",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Resolution with maturation around term-corrected age",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

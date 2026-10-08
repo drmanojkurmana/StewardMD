@@ -143,5 +143,85 @@
       "caption": "Overview comparison matrix for benign paroxysmal torticollis of infancy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff Neurology in Clinical Practice / paediatric neurology literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "benign_paroxysmal_torticollis_of_infancy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in benign paroxysmal torticollis of infancy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Clinical history", "cells": [{"text": "Recurrent self-limiting episodes with a normal interval examination"}], "cite": "c1"},
+        {"parameter": "MRI of brain and craniocervical junction", "cells": [{"text": "Used if features are atypical or the examination is abnormal"}], "cite": "c1"},
+        {"parameter": "Assessment for gastro-oesophageal reflux", "cells": [{"text": "Where posturing suggests Sandifer syndrome"}], "cite": "c1"},
+        {"parameter": "Family history of migraine", "cells": [{"text": "Related episodic syndromes"}], "cite": "c1"},
+        {"parameter": "Genetic evaluation", "cells": [{"text": "Where an episodic channelopathy is suspected; CACNA1A association"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_paroxysmal_torticollis_of_infancy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for benign paroxysmal torticollis of infancy",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Posterior fossa or craniocervical junction tumour", "cells": [{"text": "Abnormal examination between episodes, or signs of raised intracranial pressure"}], "cite": "c1"},
+        {"parameter": "Sandifer syndrome (reflux)", "cells": [{"text": "Dystonic posturing with gastro-oesophageal reflux; assess for reflux"}], "cite": "c1"},
+        {"parameter": "Idiopathic torsional dystonia", "cells": [{"text": "Persistent rather than paroxysmal torticollis argues against this condition"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "benign_paroxysmal_torticollis_of_infancy-treatment",
+      "kind": "treatment",
+      "title": "Management options in benign paroxysmal torticollis of infancy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Reassurance", "cells": [{"text": "Explain it is a benign self-limiting episodic syndrome; most need no specific drug therapy"}, {"text": "Resolves in early childhood"}], "cite": "c1"},
+        {"parameter": "Supportive care during episodes", "cells": [{"text": "Comfort measures and hydration during head tilt, pallor, irritability and vomiting"}, {"text": "Episode-focused care"}], "cite": "c1"},
+        {"parameter": "Avoid unnecessary escalation", "cells": [{"text": "Avoid unnecessary antiepileptic or antiemetic escalation"}, {"text": "Migraine-related and self-terminating"}], "cite": "c1"},
+        {"parameter": "Reflux screening", "cells": [{"text": "Screen for and treat gastro-oesophageal reflux where posturing suggests Sandifer syndrome"}, {"text": "Sandifer syndrome is a mimic"}], "cite": "c1"},
+        {"parameter": "Interval neurological review", "cells": [{"text": "Confirm normal development between episodes"}, {"text": "Performed between episodes"}], "cite": "c1"},
+        {"parameter": "Genetic counselling", "cells": [{"text": "Genetic evaluation and counselling if a CACNA1A channelopathy is suspected"}, {"text": "Links to episodic ataxia and hemiplegic migraine"}], "cite": "c1"},
+        {"parameter": "Imaging", "cells": [{"text": "Brain and craniocervical MRI if features are atypical or interictal examination is abnormal"}, {"text": "Escalate if abnormal"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "benign_paroxysmal_torticollis_of_infancy-dx-mgmt",
+      "title": "Diagnosis and management of benign paroxysmal torticollis of infancy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Recurrent sustained head tilt to one side, lasting hours to days, in a well infant", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: abnormal examination between episodes, persistent torticollis, or raised pressure signs?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: MRI of brain and craniocervical junction to exclude a posterior fossa lesion", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Check for reflux if posturing suggests Sandifer syndrome; take family history of migraine", "cite": "c1"},
+        {"id": "n5", "type": "decision", "text": "Recurrent self-limiting episodes with a normal interval examination?", "cite": "c1"},
+        {"id": "n6", "type": "action", "text": "Supportive care during episodes; avoid antiepileptic or antiemetic escalation", "cite": "c1"},
+        {"id": "n7", "type": "outcome", "text": "No: atypical course; specialist neurology review and imaging", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "Interval neurological review; genetic evaluation if CACNA1A channelopathy is suspected", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Resolves spontaneously by about 2 to 5 years; some later develop migraine", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Yes"},
+        {"from": "n5", "to": "n7", "label": "No"},
+        {"from": "n6", "to": "n8", "label": "Next"},
+        {"from": "n8", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }

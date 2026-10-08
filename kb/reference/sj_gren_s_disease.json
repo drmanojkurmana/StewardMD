@@ -180,5 +180,519 @@
       "caption": "Overview comparison matrix for sjögren’s disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Sjogren Syndrome",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/autoimmune-rheumatic-disorders/sj%C3%B6gren-syndrome"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sj_gren_s_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "2016 ACR/EULAR classification of Sjogren's disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Points"
+      ],
+      "rows": [
+        {
+          "parameter": "Entry symptom",
+          "cells": [
+            {
+              "text": "Dry eyes or dry mouth daily for 3 months or more"
+            },
+            {
+              "text": "Required to apply criteria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Labial gland biopsy focus score",
+          "cells": [
+            {
+              "text": "Focus score 1 or more per 4 mm2",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "3 points",
+              "op": "=",
+              "value": 3
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-SSA (Ro) antibody",
+          "cells": [
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "3 points",
+              "op": "=",
+              "value": 3
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ocular staining score",
+          "cells": [
+            {
+              "text": "5 or more (van Bijsterveld 4 or more) in one eye",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "1 point",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Schirmer test",
+          "unit": "mm/5 min",
+          "cells": [
+            {
+              "text": "5 mm or less in 5 min in one eye",
+              "op": "<=",
+              "value": 5
+            },
+            {
+              "text": "1 point",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Unstimulated whole saliva flow",
+          "unit": "mL/min",
+          "cells": [
+            {
+              "text": "0.1 mL/min or less",
+              "op": "<=",
+              "value": 0.1
+            },
+            {
+              "text": "1 point",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Total score",
+          "cells": [
+            {
+              "text": "4 or more classifies as Sjogren",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "{{hy:Biopsy or anti-Ro alone gives 3 points}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Exclusions",
+          "cells": [
+            {
+              "text": "Head and neck radiation, active HCV, advanced HIV, sarcoidosis, amyloidosis, GVHD, IgG4-RD"
+            },
+            {
+              "text": "Exclude before classifying"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive labs",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Rheumatoid factor in over 70%",
+              "op": ">",
+              "value": 70
+            },
+            {
+              "text": "ANA, anti-La, raised ESR, low C4"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "sj_gren_s_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Sjogren's disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced or age-related dryness",
+          "cells": [
+            {
+              "text": "Most common cause of sicca symptoms"
+            },
+            {
+              "text": "Medication history; negative anti-Ro, normal biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HIV diffuse infiltrative lymphocytosis",
+          "cells": [
+            {
+              "text": "Young men, CD8 gland infiltrates, no anti-Ro/La"
+            },
+            {
+              "text": "HIV serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hepatitis C",
+          "cells": [
+            {
+              "text": "Sicca with parotid swelling and cryoglobulins"
+            },
+            {
+              "text": "HCV RNA by PCR"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sarcoidosis",
+          "cells": [
+            {
+              "text": "Granulomatous gland infiltrate, no Ro/La antibodies"
+            },
+            {
+              "text": "Biopsy with non-caseating granulomas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgG4-related disease",
+          "cells": [
+            {
+              "text": "Submandibular swelling, past pancreatitis"
+            },
+            {
+              "text": "Serum IgG4, IgG4 plasma cells on biopsy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MALT lymphoma",
+          "cells": [
+            {
+              "text": "Persistent parotid enlargement, low C4, monoclonal band"
+            },
+            {
+              "text": "Gland or node biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Head and neck radiation, GVHD, amyloidosis",
+          "cells": [
+            {
+              "text": "Clear history or systemic features"
+            },
+            {
+              "text": "History, tissue biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "sj_gren_s_disease-treatment",
+      "kind": "treatment",
+      "title": "Managing Sjogren's disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Preservative-free artificial tears, night ointment",
+          "cells": [
+            {
+              "text": "All with dry eyes"
+            },
+            {
+              "text": "Hypromellose or methylcellulose drops"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Topical ciclosporin",
+          "cells": [
+            {
+              "text": "Persistent dry eye"
+            },
+            {
+              "text": "Under ophthalmology care"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pilocarpine",
+          "cells": [
+            {
+              "text": "Dry mouth with residual gland function"
+            },
+            {
+              "text": "5 mg orally three times daily; avoid in bronchospasm or angle-closure glaucoma"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cevimeline",
+          "cells": [
+            {
+              "text": "Alternative secretagogue"
+            },
+            {
+              "text": "30 mg orally three times daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dental care and fluoride",
+          "cells": [
+            {
+              "text": "All with xerostomia"
+            },
+            {
+              "text": "Prevents caries; treat oral candida"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hydroxychloroquine",
+          "cells": [
+            {
+              "text": "Arthralgia, fatigue"
+            },
+            {
+              "text": "5 mg/kg once daily; trial data limited"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methotrexate",
+          "cells": [
+            {
+              "text": "Definite arthritis or myositis"
+            },
+            {
+              "text": "15 to 20 mg once weekly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone or rituximab",
+          "cells": [
+            {
+              "text": "Cryoglobulinaemic vasculitis, neuropathy, severe lung disease"
+            },
+            {
+              "text": "Prednisone 1 mg/kg once daily for severe disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lymphoma surveillance",
+          "cells": [
+            {
+              "text": "Lifelong"
+            },
+            {
+              "text": "{{hy:About 16-fold higher non-Hodgkin lymphoma risk}}"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sj_gren_s_disease-dx-mgmt",
+      "title": "Diagnosis and management of Sjogren's disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dry eyes or mouth for 3 months or more, or salivary gland swelling",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Review drugs, prior radiation; test HCV, HIV",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Exclusion condition present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat the alternative cause of sicca",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Anti-Ro, Schirmer, ocular staining, saliva flow, labial biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "ACR/EULAR score 4 or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Not classified; symptomatic care and review",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Tears, ciclosporin, secretagogue, dental fluoride",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Systemic disease (vasculitis, neuropathy, lung, kidney)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Hydroxychloroquine for joints; monitor",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prednisone or rituximab; immunosuppressant",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Watch for lymphoma: parotid mass, low C4, monoclonal band",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

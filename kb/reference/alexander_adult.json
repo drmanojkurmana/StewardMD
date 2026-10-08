@@ -149,5 +149,331 @@
       "caption": "Overview comparison matrix for adult-onset alexander disease (gfap)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Bradley Neurology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alexander_adult-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain and cervical spine MRI",
+          "cells": [
+            {
+              "text": "Medullary and upper cord atrophy (tadpole appearance) and brainstem signal change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GFAP sequencing, including de novo and mosaic variants",
+          "cells": [
+            {
+              "text": "Causative GFAP variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Swallow assessment, including videofluoroscopy",
+          "cells": [
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing where dysautonomia is prominent",
+          "cells": [
+            {
+              "text": "Autonomic involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sleep study where sleep-disordered breathing is suspected",
+          "cells": [
+            {
+              "text": "Sleep-disordered breathing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF and inflammatory workup",
+          "cells": [
+            {
+              "text": "Excludes alternative brainstem disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alexander_adult-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Multiple sclerosis and other inflammatory brainstem disease",
+          "cells": [
+            {
+              "text": "Inflammatory brainstem disease"
+            },
+            {
+              "text": "CSF and inflammatory workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brainstem or foramen magnum tumour or structural lesion",
+          "cells": [
+            {
+              "text": "Structural brainstem lesion"
+            },
+            {
+              "text": "Brain MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alexander_adult-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Swallow assessment, dietary texture modification and gastrostomy when aspiration risk is high",
+          "cells": [
+            {
+              "text": "Dysphagia and aspiration"
+            },
+            {
+              "text": "Gastrostomy where risk is high"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment of palatal myoclonus, spasticity and cerebellar symptoms",
+          "cells": [
+            {
+              "text": "Bulbar, cerebellar and spastic features"
+            },
+            {
+              "text": "Antispasticity agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of autonomic disturbance and sleep-disordered breathing with non-invasive ventilation",
+          "cells": [
+            {
+              "text": "Orthostatic intolerance, bladder dysfunction and sleep apnoea"
+            },
+            {
+              "text": "Ventilation where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, occupational therapy and speech and language therapy",
+          "cells": [
+            {
+              "text": "Function and communication"
+            },
+            {
+              "text": "Maintain function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance for respiratory compromise and aspiration with palliative input",
+          "cells": [
+            {
+              "text": "Main prognostic determinants"
+            },
+            {
+              "text": "Palliative input as disease advances"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Mostly de novo with small mosaic recurrence risk"
+            },
+            {
+              "text": "Parental mosaicism"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alexander_adult-dx-mgmt",
+      "title": "Diagnosis and management of Adult-onset Alexander disease (GFAP)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Adult with bulbar dysfunction, palatal myoclonus and ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe dysphagia with aspiration, or sleep-disordered breathing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent swallow assessment; airway and respiratory support",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI brain and cervical cord; GFAP sequencing; swallow assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Medullary and upper cord atrophy (tadpole pattern) on MRI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Confirm GFAP variant; gastrostomy if aspiration risk is high",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review MSA, MS, brainstem tumour and progressive bulbar palsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Texture modification and dietary swallow support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Symptomatic treatment of palatal myoclonus, spasticity and cerebellar signs",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "NIV for sleep-disordered breathing; autonomic symptom management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; aspiration and respiratory compromise drive prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

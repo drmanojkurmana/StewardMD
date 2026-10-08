@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for entomophthoromycosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Manson's Tropical Diseases / Mandell, Douglas and Bennett's Principles and Practice of Infectious Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "entomophthoromycosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsy histology",
+          "cells": [
+            {
+              "text": "Broad, sparsely septate hyphae with the Splendore-Hoeppli phenomenon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture",
+          "cells": [
+            {
+              "text": "Identifies Conidiobolus or Basidiobolus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia is common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT or MRI",
+          "cells": [
+            {
+              "text": "Extent of facial or abdominal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy and biopsy",
+          "cells": [
+            {
+              "text": "Suspected gastrointestinal involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of immune status",
+          "cells": [
+            {
+              "text": "Distinguishes it from mucormycosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "entomophthoromycosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Angioinvasive mucormycosis",
+          "cells": [
+            {
+              "text": "Occurs in immunocompromised hosts; entomophthoromycosis is typically indolent in immunocompetent hosts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal malignancy or inflammatory bowel disease (gastrointestinal form)",
+          "cells": [
+            {
+              "text": "Gastrointestinal basidiobolomycosis mimics these and is often diagnosed only after surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "entomophthoromycosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged systemic antifungal therapy",
+          "cells": [
+            {
+              "text": "Oral itraconazole or another azole, continued for months until induration resolves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium iodide",
+          "cells": [
+            {
+              "text": "Adjunct or alternative, particularly in subcutaneous basidiobolomycosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical debridement or resection",
+          "cells": [
+            {
+              "text": "Obstructing gastrointestinal masses, and reconstruction of rhinofacial disease, with antifungal cover"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia and serial imaging for regression of masses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reconstructive surgery",
+          "cells": [
+            {
+              "text": "Residual rhinofacial disfigurement once infection is controlled"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Distinguish from angioinvasive mucormycosis",
+          "cells": [
+            {
+              "text": "Urgency and management differ substantially"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Infectious diseases, surgery and gastroenterology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "entomophthoromycosis-dx-mgmt",
+      "title": "Diagnosis and management of Entomophthoromycosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Firm, painless subcutaneous swelling of face, limb or abdomen",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (airway or orbit threat, obstruction, angioinvasive features, relapse)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Exclude angioinvasive mucormycosis, whose urgency and management differ",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy for histology and culture; CT or MRI to define the extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Broad, sparsely septate hyphae with Splendore-Hoeppli material on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-biopsy for adequate tissue; consider mucormycosis or another mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prolonged systemic azole, most often oral itraconazole, for months",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium iodide as adjunct or alternative",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surgical debridement or resection of obstructing masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor peripheral eosinophilia and serial imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Reconstructive surgery once infection is controlled",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Limb disease often responds; rhinofacial disease can leave disfigurement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

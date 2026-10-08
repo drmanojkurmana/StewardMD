@@ -148,5 +148,298 @@
       "caption": "Overview comparison matrix for acute angle-closure glaucoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_angle_closure_glaucoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Applanation or non-contact tonometry",
+          "cells": [
+            {
+              "text": "Quantifies raised intraocular pressure, often above 40 mmHg"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Corneal oedema, chamber depth and pupil reaction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonioscopy of both eyes",
+          "cells": [
+            {
+              "text": "Occludable or closed angle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optic disc assessment once the media clear",
+          "cells": [
+            {
+              "text": "Glaucomatous cupping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anterior segment OCT or ultrasound biomicroscopy",
+          "cells": [
+            {
+              "text": "Angle configuration"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_angle_closure_glaucoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Topical beta-blocker, alpha-agonist and prostaglandin analogue, with systemic acetazolamide",
+          "cells": [
+            {
+              "text": "Immediate intraocular pressure lowering"
+            },
+            {
+              "text": "Intravenous mannitol if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical pilocarpine",
+          "cells": [
+            {
+              "text": "Constricts the pupil to break the pupillary block"
+            },
+            {
+              "text": "Once pressure begins to fall"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids",
+          "cells": [
+            {
+              "text": "Reduces intraocular inflammation"
+            },
+            {
+              "text": "Adjunct therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and antiemetics",
+          "cells": [
+            {
+              "text": "Pain and vomiting of the attack"
+            },
+            {
+              "text": "Symptom control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laser peripheral iridotomy",
+          "cells": [
+            {
+              "text": "Definitive treatment once the cornea clears"
+            },
+            {
+              "text": "Lens extraction as an alternative definitive option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prophylactic laser peripheral iridotomy of the fellow eye",
+          "cells": [
+            {
+              "text": "Anatomically at-risk fellow eye"
+            },
+            {
+              "text": "Prevents a contralateral attack"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent ophthalmology referral with pressure and disc monitoring",
+          "cells": [
+            {
+              "text": "Ongoing monitoring"
+            },
+            {
+              "text": "Sight-threatening emergency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_angle_closure_glaucoma-dx-mgmt",
+      "title": "Diagnosis and management of Acute angle-closure glaucoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden severe eye pain, blurring and haloes in a hypermetropic eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Stony-hard eye with fixed mid-dilated pupil and corneal haze?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology referral; sight-threatening emergency",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Tonometry, slit-lamp examination and gonioscopy of both eyes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Occludable angle with raised intraocular pressure confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Topical beta-blocker, alpha-agonist, prostaglandin and acetazolamide",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review acute anterior uveitis, conjunctivitis, scleritis and migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Topical pilocarpine once pressure falls, to break pupillary block",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Topical steroids for inflammation; analgesia and antiemetics",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Laser peripheral iridotomy once the cornea clears",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prompt pressure reduction and iridotomy preserve vision; treat fellow eye",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

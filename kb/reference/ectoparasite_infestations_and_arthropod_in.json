@@ -191,5 +191,526 @@
       "caption": "Overview comparison matrix for ectoparasite infestations and arthropod injuries."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Care of Scabies",
+      "url": "https://www.cdc.gov/scabies/hcp/clinical-care/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Clinical Care of Head Lice",
+      "url": "https://www.cdc.gov/lice/hcp/clinical-care/index.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ectoparasite_infestations_and_arthropod_in-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic clues in ectoparasite infestations and bites",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin scraping of unroofed burrow",
+          "cells": [
+            {
+              "text": "Mites, eggs or faecal pellets"
+            },
+            {
+              "text": "Confirms scabies; dermatoscopy or adhesive tape lift also help"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Burrows in ordinary scabies",
+          "cells": [
+            {
+              "text": "Usually 10 to 15 or fewer",
+              "op": "<=",
+              "value": 15
+            },
+            {
+              "text": "Itch worse at night and after hot showers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "First infestation latency",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Up to about 6 before itch",
+              "op": "<=",
+              "value": 6
+            },
+            {
+              "text": "Reinfestation itches promptly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crusted scabies",
+          "cells": [
+            {
+              "text": "Thousands of mites, few burrows, little itch"
+            },
+            {
+              "text": "{{hy:Highly contagious}}; seen with steroids, HIV, neurological disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Live louse on hair or clothing seams",
+          "cells": [
+            {
+              "text": "Active pediculosis"
+            },
+            {
+              "text": "Nits alone do not prove active infestation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Boil-like nodule with central pore",
+          "cells": [
+            {
+              "text": "Furuncular myiasis"
+            },
+            {
+              "text": "Bubbles from pore when submerged"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tick attachment",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "Removal within 24 usually prevents Lyme, babesiosis, anaplasmosis",
+              "op": "<",
+              "value": 24
+            },
+            {
+              "text": "Viruses may transmit faster"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ascending flaccid paralysis with normal CSF",
+          "cells": [
+            {
+              "text": "Tick paralysis"
+            },
+            {
+              "text": "Search scalp for attached tick"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hymenoptera anaphylaxis",
+          "cells": [
+            {
+              "text": "Usually begins within 10 minutes"
+            },
+            {
+              "text": "Skin tests and venom RAST guide immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectoparasite_infestations_and_arthropod_in-ddx",
+      "kind": "ddx",
+      "title": "Look-alikes of infestations and bites",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Psoriasis",
+          "cells": [
+            {
+              "text": "Mimicked by crusted scabies"
+            },
+            {
+              "text": "Scraping for mites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eczema or contact dermatitis",
+          "cells": [
+            {
+              "text": "No burrows"
+            },
+            {
+              "text": "Scraping negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRSA or bacterial skin infection",
+          "cells": [
+            {
+              "text": "{{hy:Most 'spider bites' are not spider bites}}"
+            },
+            {
+              "text": "Culture of lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delusional infestation",
+          "cells": [
+            {
+              "text": "Self-induced excoriations, no parasite found"
+            },
+            {
+              "text": "Specimen review; psychiatric assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Guillain-Barre syndrome",
+          "cells": [
+            {
+              "text": "Mimicked by tick paralysis"
+            },
+            {
+              "text": "Tick search; CSF normal in tick paralysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute surgical abdomen",
+          "cells": [
+            {
+              "text": "Widow spider rigidity without tenderness"
+            },
+            {
+              "text": "History of bite, non-tender abdomen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Mimicked by large local sting reaction"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous small-vessel vasculitis",
+          "cells": [
+            {
+              "text": "Purpuric papules like chigger bites"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ectoparasite_infestations_and_arthropod_in-treatment",
+      "kind": "treatment",
+      "title": "Treatment of scabies and lice",
+      "rowHeader": "Option",
+      "columns": [
+        "Dose and use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Permethrin 5% cream",
+          "cells": [
+            {
+              "text": "{{hy:Neck down, wash off after 8 to 14 h}}; repeat about 1 week later if needed"
+            },
+            {
+              "text": "Approved from 2 months of age; treat close contacts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral ivermectin for scabies",
+          "cells": [
+            {
+              "text": "200 mcg/kg with food, two doses 7 to 14 days apart"
+            },
+            {
+              "text": "Not for under 15 kg or pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Crusted scabies",
+          "cells": [
+            {
+              "text": "Ivermectin 200 mcg/kg on 3, 5 or 7 dose schedule (days 1, 2, 8 and onward) plus permethrin 5% and keratolytic"
+            },
+            {
+              "text": "Barrier isolation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Permethrin 1% lotion (head lice)",
+          "cells": [
+            {
+              "text": "Retreat on day 9"
+            },
+            {
+              "text": "From 2 months of age; does not kill nits"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Pyrethrins with piperonyl butoxide",
+          "cells": [
+            {
+              "text": "Retreat at 9 to 10 days"
+            },
+            {
+              "text": "Age 2 or more; avoid in chrysanthemum or ragweed allergy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Ivermectin 0.5% lotion or spinosad 0.9%",
+          "cells": [
+            {
+              "text": "Single application; repeat spinosad only if live lice at day 7"
+            },
+            {
+              "text": "From 6 months of age"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Malathion 0.5% or benzyl alcohol 5%",
+          "cells": [
+            {
+              "text": "Retreat at 7 to 9 days (malathion) or 7 days (benzyl alcohol)"
+            },
+            {
+              "text": "Malathion age 6 or more and flammable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral ivermectin for lice",
+          "cells": [
+            {
+              "text": "200 or 400 mcg/kg single dose, repeat at 9 to 10 days"
+            },
+            {
+              "text": "Not for under 15 kg or pregnancy"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tick removal by traction with fine forceps",
+          "cells": [
+            {
+              "text": "Grasp at mouthparts"
+            },
+            {
+              "text": "Avoid heat or occlusive agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline and supportive care",
+          "cells": [
+            {
+              "text": "Anaphylaxis or systemic envenomation"
+            },
+            {
+              "text": "Refer for venom immunotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Repeated permethrin can cause irritant dermatitis. Do not use the same lice product more than 2 to 3 times."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ectoparasite_infestations_and_arthropod_in-dx-mgmt",
+      "title": "Diagnosis and management of suspected scabies or lice",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Itchy rash or suspected infestation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Burrows or mites on scraping?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Crusted, thousands of mites, immunosuppressed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Permethrin 5% or oral ivermectin; treat contacts",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Multi-dose ivermectin plus permethrin and keratolytic; isolate",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Live louse found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pediculicide with retreatment as labelled; launder clothing for body lice",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "No parasite after repeated search?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Consider dermatitis, bacterial infection or delusional infestation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Antihistamine and steroid for post-treatment itch; review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n2",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

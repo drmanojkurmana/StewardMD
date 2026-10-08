@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for congenital hypogonadotropic hypogonadism (normosmic)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Endocrine Society clinical guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_hypogonadotropic_hypogonadism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal LH, FSH and sex steroids",
+          "cells": [
+            {
+              "text": "Low gonadotropins with low sex hormones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Formal olfactory testing",
+          "cells": [
+            {
+              "text": "Normal sense of smell (normosmic form)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin, thyroid and pituitary hormone assessment",
+          "cells": [
+            {
+              "text": "Broader hypopituitarism excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Structural lesion excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of GnRH-axis genes (GNRHR, KISS1R, TACR3)",
+          "cells": [
+            {
+              "text": "Causative gene"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hypogonadotropic_hypogonadism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kallmann syndrome",
+          "cells": [
+            {
+              "text": "Hypogonadotropic hypogonadism with anosmia; olfactory testing separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional delay of growth and puberty",
+          "cells": [
+            {
+              "text": "Resolves spontaneously; pitfall to confuse with this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Suppresses the gonadotropic axis; prolactin measured"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hypogonadotropic_hypogonadism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Sex-steroid replacement",
+          "cells": [
+            {
+              "text": "Testosterone in males; oestrogen then combined oestrogen and progestogen in females"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility",
+          "cells": [
+            {
+              "text": "Gonadotropin therapy (FSH and hCG) or pulsatile GnRH when fertility is desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryptorchidism",
+          "cells": [
+            {
+              "text": "Orchidopexy; consider gonadotropin therapy for testicular development"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone protection",
+          "cells": [
+            {
+              "text": "Sex-steroid replacement, calcium and vitamin D; bone density monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassessment off treatment",
+          "cells": [
+            {
+              "text": "A minority undergo spontaneous reversal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "GNRHR, KISS1R, TAC3 and TACR3; reproductive endocrinology referral"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_hypogonadotropic_hypogonadism-dx-mgmt",
+      "title": "Diagnosis and management of Congenital hypogonadotropic hypogonadism (normosmic)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected normosmic congenital hypogonadotropic hypogonadism: absent puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (visual field defect, micropenis or cryptorchidism, syndrome)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent pituitary MRI for a sellar mass; neonatal genital evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "LH, FSH and sex steroids; olfactory testing; pituitary MRI; GnRH-axis gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are gonadotropins and sex steroids low with a normal sense of smell?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider Kallmann syndrome, constitutional delay or hyperprolactinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Sex-steroid replacement to induce and maintain secondary sexual characteristics",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gonadotropin therapy or pulsatile GnRH for fertility",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orchidopexy for cryptorchidism; bone density and calcium monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Reassess off treatment; genetic counselling and reproductive endocrinology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With replacement, secondary sexual characteristics and bone health are maintained",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

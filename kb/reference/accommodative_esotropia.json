@@ -154,5 +154,352 @@
       "caption": "Overview comparison matrix for accommodative esotropia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "American Academy of Ophthalmology, Basic and Clinical Science Course (Pediatric Ophthalmology and Strabismus)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "accommodative_esotropia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Cornerstone of diagnosis; hypermetropia needing full correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deviation measured for distance and near",
+          "cells": [
+            {
+              "text": "Derives the AC/A ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alignment with and without full hypermetropic correction",
+          "cells": [
+            {
+              "text": "Response to full correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monocular visual acuities",
+          "cells": [
+            {
+              "text": "Amblyopia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereoacuity and binocular function testing",
+          "cells": [
+            {
+              "text": "Binocular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Excludes an organic or sensory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular motility testing",
+          "cells": [
+            {
+              "text": "Excludes an incomitant paretic or restrictive cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accommodative_esotropia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Infantile (congenital) esotropia",
+          "cells": [
+            {
+              "text": "Earlier onset, large angle and minimal hypermetropia"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sixth nerve palsy or other abduction deficit",
+          "cells": [
+            {
+              "text": "Limited abduction"
+            },
+            {
+              "text": "Ocular motility testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute acquired comitant esotropia",
+          "cells": [
+            {
+              "text": "Acute diplopia"
+            },
+            {
+              "text": "Neuro-imaging when indicated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accommodative_esotropia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Full hypermetropic correction (glasses)",
+          "cells": [
+            {
+              "text": "First-line; may fully control the deviation"
+            },
+            {
+              "text": "Based on cycloplegic refraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia treatment with occlusion or penalisation",
+          "cells": [
+            {
+              "text": "Detects and treats amblyopia"
+            },
+            {
+              "text": "Refractive correction plus occlusion or penalisation of the better eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bifocals or antimuscarinic therapy",
+          "cells": [
+            {
+              "text": "Reduces accommodative convergence in high AC/A type"
+            },
+            {
+              "text": "Near deviation exceeds distance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular review with repeat cycloplegic refraction",
+          "cells": [
+            {
+              "text": "Refraction changes with growth"
+            },
+            {
+              "text": "Adjust spectacles as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Strabismus surgery",
+          "cells": [
+            {
+              "text": "Residual non-accommodative deviation"
+            },
+            {
+              "text": "Partially accommodative cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of binocular function and stereoacuity",
+          "cells": [
+            {
+              "text": "Preserves fusion"
+            },
+            {
+              "text": "Orthoptic follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "accommodative_esotropia-dx-mgmt",
+      "title": "Diagnosis and management of accommodative esotropia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Convergent squint in a hypermetropic child, about 2 to 3 years old",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Limited abduction, incomitance or neurological signs present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuro-imaging; exclude sixth nerve palsy or raised pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full cycloplegic refraction; measure distance and near deviation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Deviation controlled by full hypermetropic correction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prescribe full glasses correction as first-line treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Check AC/A ratio; consider high AC/A or partially accommodative type",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat amblyopia with occlusion or penalisation of the better eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bifocals or antimuscarinic therapy for high AC/A with near deviation greater",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Repeat cycloplegic refraction as spectacles change with growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis with good binocular potential; some lose hypermetropia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

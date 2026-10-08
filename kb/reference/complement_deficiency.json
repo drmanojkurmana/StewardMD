@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for complement deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Middleton's Allergy",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complement_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CH50 and AH50 functional screens",
+          "cells": [
+            {
+              "text": "Classical and alternative pathway function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C3, C4 and C1q levels",
+          "cells": [
+            {
+              "text": "Inherited deficiency distinguished from consumption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology (ANA, dsDNA)",
+          "cells": [
+            {
+              "text": "Immune-complex disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microbiologic confirmation and serogrouping",
+          "cells": [
+            {
+              "text": "Neisserial or other invasive infection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Asplenia or hyposplenism with encapsulated-organism infection",
+          "cells": [
+            {
+              "text": "Named with complement deficiency as a risk for encapsulated infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired complement consumption from autoimmune disease",
+          "cells": [
+            {
+              "text": "Low levels from active disease rather than inherited deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Thorough immunisation",
+          "cells": [
+            {
+              "text": "Encapsulated organisms, with full meningococcal programme"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antibiotics",
+          "cells": [
+            {
+              "text": "Treat infections promptly; consider prophylaxis for recurrent neisserial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Written plan for families",
+          "cells": [
+            {
+              "text": "Low threshold for urgent assessment; empirical treatment for suspected meningococcal sepsis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression for SLE",
+          "cells": [
+            {
+              "text": "Standard immunosuppression for lupus and immune-complex disease with early-component deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Localise the defect",
+          "cells": [
+            {
+              "text": "Functional screens and component assays guide risk and management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Relatives screened once an inherited deficiency is confirmed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complement_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Complement deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected complement deficiency: recurrent or invasive neisserial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (meningococcal or invasive infection, sepsis, severe lupus)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency antibiotics for suspected meningococcal sepsis or meningitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CH50 and AH50; component assays; C3, C4, C1q; ANA and dsDNA; microbiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do functional screens confirm an inherited component deficiency?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Check for acquired consumption from active autoimmune disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Thorough immunisation, including full meningococcal programme",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt antibiotics; prophylaxis in recurrent neisserial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immunosuppression for lupus-like immune-complex disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Genetic counselling and screening of relatives",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With vaccination and prompt treatment most patients do well",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

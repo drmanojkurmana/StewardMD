@@ -153,5 +153,327 @@
       "caption": "Overview comparison matrix for atypical fibroxanthoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology / WHO Classification of Skin Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atypical_fibroxanthoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Excisional or deep incisional biopsy",
+          "cells": [
+            {
+              "text": "Full-thickness sampling of the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad immunohistochemistry panel: cytokeratins, S100/SOX10, desmin",
+          "cells": [
+            {
+              "text": "Excludes mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CD10",
+          "cells": [
+            {
+              "text": "Supportive marker, interpreted with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of depth, necrosis and lymphovascular invasion",
+          "cells": [
+            {
+              "text": "Distinguishes from pleomorphic dermal sarcoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Deep or recurrent disease suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_fibroxanthoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Spindle-cell squamous cell carcinoma",
+          "cells": [
+            {
+              "text": "Excluded by a broad immunohistochemistry panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pleomorphic dermal sarcoma",
+          "cells": [
+            {
+              "text": "Deep invasion, necrosis or lymphovascular invasion indicate it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atypical_fibroxanthoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Complete excision",
+          "cells": [
+            {
+              "text": "Surgical removal of localised AFX confined to the dermis without adverse features"
+            },
+            {
+              "text": "Primary treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mohs micrographic surgery or wide local excision",
+          "cells": [
+            {
+              "text": "Both are used; retrospective data favour Mohs for margin control"
+            },
+            {
+              "text": "Tissue conservation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No adjuvant therapy",
+          "cells": [
+            {
+              "text": "Radiotherapy or systemic therapy not established after complete excision"
+            },
+            {
+              "text": "No established role"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reclassification",
+          "cells": [
+            {
+              "text": "Deep invasion, necrosis or lymphovascular or perineural invasion: treat as pleomorphic dermal sarcoma"
+            },
+            {
+              "text": "Reclassify the lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced disease",
+          "cells": [
+            {
+              "text": "Radiation or chemotherapy may be considered for unresectable, recurrent or metastatic disease"
+            },
+            {
+              "text": "No clear guidelines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sarcoma team referral",
+          "cells": [
+            {
+              "text": "Individualised decisions for unresectable, recurrent or metastatic cases"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance in transplant and immunosuppressed patients",
+          "cells": [
+            {
+              "text": "Higher recurrence and metastasis reported"
+            },
+            {
+              "text": "Increased surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atypical_fibroxanthoma-dx-mgmt",
+      "title": "Diagnosis and management of Atypical fibroxanthoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Dermal tumour in a field of ultraviolet-damaged skin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Deep invasion, necrosis or lymphovascular invasion?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer for sarcoma review if deep invasion or necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Full-thickness biopsy, immunohistochemistry panel, depth and necrosis assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Immunohistochemistry excludes carcinoma, melanoma and sarcoma mimics?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Complete excision with Mohs or wide local excision",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and re-biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reclassify as pleomorphic dermal sarcoma if adverse features",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "No established adjuvant radiotherapy or systemic therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Increased surveillance in transplant and immunosuppressed patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Follow-up for local recurrence; photoprotection for field cancers",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

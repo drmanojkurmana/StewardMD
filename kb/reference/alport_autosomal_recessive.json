@@ -149,5 +149,379 @@
       "caption": "Overview comparison matrix for autosomal recessive alport syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard nephrology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "alport_autosomal_recessive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urinalysis and urine protein quantification",
+          "cells": [
+            {
+              "text": "Haematuria and proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatinine and eGFR",
+          "cells": [
+            {
+              "text": "Progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry",
+          "cells": [
+            {
+              "text": "Sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Lenticonus and retinal flecks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy with electron microscopy",
+          "cells": [
+            {
+              "text": "Basement membrane lamellation and thinning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COL4A3 and COL4A4 genetic testing with family segregation",
+          "cells": [
+            {
+              "text": "Biallelic variants"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alport_autosomal_recessive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked Alport syndrome (COL4A5)",
+          "cells": [
+            {
+              "text": "Inheritance pattern differs"
+            },
+            {
+              "text": "COL4A5 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thin basement membrane nephropathy",
+          "cells": [
+            {
+              "text": "Heterozygous carriers"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA nephropathy",
+          "cells": [
+            {
+              "text": "Haematuria with IgA deposition"
+            },
+            {
+              "text": "Kidney biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant Alport syndrome",
+          "cells": [
+            {
+              "text": "Heterozygous variants"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-infectious glomerulonephritis",
+          "cells": [
+            {
+              "text": "Acute nephritic presentation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "alport_autosomal_recessive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Early ACE inhibitor",
+          "cells": [
+            {
+              "text": "Reduces proteinuria and slows progression"
+            },
+            {
+              "text": "Early start"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Angiotensin receptor blocker or other antiproteinuric therapy",
+          "cells": [
+            {
+              "text": "Persistent proteinuria"
+            },
+            {
+              "text": "Add-on"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular blood pressure, proteinuria and eGFR monitoring",
+          "cells": [
+            {
+              "text": "Tracks decline"
+            },
+            {
+              "text": "Titrate therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Management of anaemia, mineral-bone disorder and acidosis",
+          "cells": [
+            {
+              "text": "CKD complications"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological surveillance and hearing amplification; ophthalmology review",
+          "cells": [
+            {
+              "text": "Hearing loss and lenticonus"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy planning with transplantation",
+          "cells": [
+            {
+              "text": "Advanced CKD"
+            },
+            {
+              "text": "Timely planning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and screening of relatives",
+          "cells": [
+            {
+              "text": "Autosomal recessive inheritance"
+            },
+            {
+              "text": "Relatives"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "alport_autosomal_recessive-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal recessive Alport syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria with progressive proteinuria, hearing loss or lenticonus",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly rising creatinine, nephrotic proteinuria or accelerated decline?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; optimise blood pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urinalysis; eGFR; audiometry; eye review; COL4A3 and COL4A4 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Biallelic COL4A3 or COL4A4 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start early ACE inhibitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review X-linked Alport, thin membrane disease and IgA nephropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Add angiotensin receptor blocker for persistent proteinuria",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor blood pressure, proteinuria and eGFR",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing and eye surveillance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Kidney failure often in adolescence or early adulthood; transplant usually succeeds",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

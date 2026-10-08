@@ -179,5 +179,555 @@
       "caption": "Overview comparison matrix for disorders of the neurohypophysis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Central Diabetes Insipidus",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/pituitary-disorders/central-diabetes-insipidus",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Hyponatremia",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/electrolyte-disorders/hyponatremia",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Tables PDF, Drugs causing SIADH",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_the_neurohypophysis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic values in polyuria and SIAD",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "24-h urine volume",
+          "unit": "mL/kg/day",
+          "cells": [
+            {
+              "text": ">40 to 50, or >3 L/day",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "Defines polyuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum sodium at presentation",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "<135",
+              "op": "<",
+              "value": 135
+            },
+            {
+              "text": "Points to primary polydipsia; high sodium suggests AVP deficiency or resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline copeptin",
+          "unit": "pmol/L",
+          "cells": [
+            {
+              "text": ">21.4 without water deprivation",
+              "op": ">",
+              "value": 21.4
+            },
+            {
+              "text": "{{hy:AVP resistance (nephrogenic)}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypertonic saline-stimulated copeptin",
+          "unit": "pmol/L",
+          "cells": [
+            {
+              "text": ">4.9 at sodium 150 or above",
+              "op": ">",
+              "value": 4.9
+            },
+            {
+              "text": "Primary polydipsia rather than AVP deficiency; about 96.5% accurate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Water deprivation test accuracy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 70% overall, 41% in primary polydipsia"
+            },
+            {
+              "text": "Older indirect test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI posterior pituitary bright spot",
+          "cells": [
+            {
+              "text": "Often absent in AVP deficiency"
+            },
+            {
+              "text": "Absence alone is not diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SIAD urine sodium",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "Usually >30",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Below 30 suggests low effective arterial volume instead"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "SIAD urine osmolality",
+          "cells": [
+            {
+              "text": "Inappropriately concentrated for low serum osmolality"
+            },
+            {
+              "text": "Euvolemic; normal renal, adrenal and thyroid function required"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drugs causing SIADH",
+          "cells": [
+            {
+              "text": "Desmopressin, chlorpropamide, high-dose oxytocin, vincristine, carbamazepine, nicotine, phenothiazines, cyclophosphamide"
+            },
+            {
+              "text": "Also tricyclics, MAOIs and SSRIs"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Copeptin is used in the polyuria differential only; it has no diagnostic value in SIAD."
+    },
+    {
+      "id": "disorders_of_the_neurohypophysis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of polyuria and hyponatraemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "AVP deficiency (central DI)",
+          "cells": [
+            {
+              "text": "High-normal sodium; low stimulated copeptin"
+            },
+            {
+              "text": "Hypertonic saline copeptin, then desmopressin response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AVP resistance (nephrogenic DI)",
+          "cells": [
+            {
+              "text": "Lithium, hypercalcaemia, hypokalaemia, AVPR2 or AQP2 mutations"
+            },
+            {
+              "text": "{{hy:Baseline copeptin >21.4 pmol/L}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary polydipsia",
+          "cells": [
+            {
+              "text": "Low-normal sodium; drinks into hyponatraemia"
+            },
+            {
+              "text": "Stimulated copeptin >4.9 pmol/L"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gestational AVP deficiency",
+          "cells": [
+            {
+              "text": "Placental vasopressinase; remits after delivery"
+            },
+            {
+              "text": "Responds to desmopressin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osmotic diuresis",
+          "cells": [
+            {
+              "text": "Uncontrolled hyperglycaemia with glucosuria"
+            },
+            {
+              "text": "Blood and urine glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudo or translocational hyponatraemia",
+          "cells": [
+            {
+              "text": "Hyperlipidaemia, hyperproteinaemia, hyperglycaemia, mannitol"
+            },
+            {
+              "text": "Measured serum osmolality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypovolaemic or hypervolaemic hyponatraemia",
+          "cells": [
+            {
+              "text": "Heart failure, cirrhosis, GI loss, diuretics"
+            },
+            {
+              "text": "Urine sodium below 30 mmol/L"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Euvolaemic hyponatraemia mimicking SIAD"
+            },
+            {
+              "text": "Cortisol testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_neurohypophysis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of AVP deficiency, AVP resistance and SIAD",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Desmopressin intranasal (10 mcg per 0.1 mL spray), oral or SC",
+          "cells": [
+            {
+              "text": "{{hy:AVP deficiency, mainstay}}"
+            },
+            {
+              "text": "SC about one tenth of nasal dose; lowest night dose that stops nocturia; watch for hyponatraemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thiazide (chlorothiazide 15 to 25 mg/kg) with salt restriction",
+          "cells": [
+            {
+              "text": "AVP resistance or adjunct"
+            },
+            {
+              "text": "Cuts urine volume by 25 to 50%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prostaglandin inhibitor such as indomethacin",
+          "cells": [
+            {
+              "text": "AVP resistance adjunct"
+            },
+            {
+              "text": "Reduces urine volume by 10 to 25%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop offending drug",
+          "cells": [
+            {
+              "text": "Lithium-induced AVP resistance or drug-induced SIAD"
+            },
+            {
+              "text": "Treat the underlying cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid restriction",
+          "cells": [
+            {
+              "text": "Chronic SIAD, first step"
+            },
+            {
+              "text": "Severe restriction often needed and often insufficient alone"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral salt tablets or oral urea",
+          "cells": [
+            {
+              "text": "Mild to moderate chronic SIAD"
+            },
+            {
+              "text": "Salt limited by hypertension or heart failure"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "3% saline 100 mL IV over 15 minutes, repeat once",
+          "cells": [
+            {
+              "text": "Acute hyponatraemia with neurological symptoms"
+            },
+            {
+              "text": "Correct no more than 8 mEq/L in first 24 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tolvaptan or conivaptan",
+          "cells": [
+            {
+              "text": "Refractory SIAD"
+            },
+            {
+              "text": "Tolvaptan limited to 30 days for liver risk; avoid conivaptan if eGFR below 30"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Demeclocycline 300 to 600 mg every 12 h",
+          "cells": [
+            {
+              "text": "Uncorrectable cause and restriction not tolerated"
+            },
+            {
+              "text": "Risk of acute kidney injury"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_the_neurohypophysis-dx-mgmt",
+      "title": "Diagnosis and management of polyuria and SIAD",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Polyuria-polydipsia or hyponatraemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotonic hyponatraemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Check volume, urine sodium and osmolality; exclude adrenal and thyroid",
+          "cite": "c3"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Euvolaemic with urine sodium over 30 mEq/L?",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat hypo or hypervolaemic cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "SIAD: stop drugs, fluid restriction; 3% saline if neurological symptoms",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm urine volume over 3 L/day; exclude hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Baseline copeptin over 21.4 pmol/L?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "AVP resistance: stop lithium, thiazide, low salt, NSAID",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Saline-stimulated copeptin over 4.9 pmol/L?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Primary polydipsia: reduce intake",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "AVP deficiency: pituitary MRI; desmopressin",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Monitor sodium; correct slowly",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

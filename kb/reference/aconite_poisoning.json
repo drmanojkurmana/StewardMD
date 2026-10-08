@@ -153,5 +153,352 @@
       "caption": "Overview comparison matrix for aconite poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Toxicology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aconite_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous ECG monitoring and serial 12-lead ECGs",
+          "cells": [
+            {
+              "text": "Ventricular and bidirectional tachycardia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum potassium and magnesium",
+          "cells": [
+            {
+              "text": "Arrhythmogenic electrolyte disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and acid-base status",
+          "cells": [
+            {
+              "text": "Status in shocked or arrhythmic patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aconitine alkaloid assay in blood or urine",
+          "cells": [
+            {
+              "text": "Detects aconitine where a specialist laboratory is available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digoxin level",
+          "cells": [
+            {
+              "text": "Excludes glycoside toxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Myocardial injury when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identification of the plant or herbal preparation",
+          "cells": [
+            {
+              "text": "Source of the ingestion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aconite_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Digoxin or cardiac glycoside toxicity (including oleander)",
+          "cells": [
+            {
+              "text": "Cardiac glycoside toxicity"
+            },
+            {
+              "text": "Digoxin level"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte disturbance provoking arrhythmia (hypokalaemia, hypomagnesaemia)",
+          "cells": [
+            {
+              "text": "Electrolyte-driven arrhythmia"
+            },
+            {
+              "text": "Serum potassium and magnesium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aconite_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous cardiac monitoring and supportive resuscitation",
+          "cells": [
+            {
+              "text": "No specific antidote exists"
+            },
+            {
+              "text": "Monitoring takes priority"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amiodarone, lidocaine or flecainide; electrical cardioversion",
+          "cells": [
+            {
+              "text": "Characteristic ventricular tachyarrhythmias"
+            },
+            {
+              "text": "Cardioversion for unstable rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct potassium and magnesium; fluids and vasopressors; atropine",
+          "cells": [
+            {
+              "text": "Electrolytes, hypotension and bradyarrhythmia"
+            },
+            {
+              "text": "Atropine for bradyarrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal decontamination with activated charcoal",
+          "cells": [
+            {
+              "text": "Early presentation after a significant ingestion"
+            },
+            {
+              "text": "Early presentation only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venoarterial ECMO or cardiopulmonary bypass",
+          "cells": [
+            {
+              "text": "Refractory arrhythmia or shock, as a bridge"
+            },
+            {
+              "text": "Bridge to recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive respiratory care, including ventilation",
+          "cells": [
+            {
+              "text": "Respiratory muscle weakness"
+            },
+            {
+              "text": "Mechanical ventilation if needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identify the source and involve toxicology services",
+          "cells": [
+            {
+              "text": "Herbal or traditional preparations, or foraged Aconitum"
+            },
+            {
+              "text": "Poisons and toxicology services"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aconite_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Aconite poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Perioral then generalised paraesthesia, numbness and GI upset after Aconitum exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ventricular or bidirectional tachycardia on monitor, or shock?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency resuscitation; antiarrhythmic therapy and electrical cardioversion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous ECG, serial 12-lead ECGs, potassium, magnesium and renal function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Digoxin toxicity excluded by level?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Aconitine assay if available; identify the plant or preparation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review glycoside toxicity and electrolyte-driven arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Amiodarone, lidocaine or flecainide for ventricular tachyarrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct potassium and magnesium; fluids, vasopressors and atropine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Early activated charcoal; ECMO or bypass if arrhythmia is refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild cases resolve; refractory ventricular arrhythmia carries high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

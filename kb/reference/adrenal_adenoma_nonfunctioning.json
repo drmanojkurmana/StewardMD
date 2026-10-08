@@ -152,5 +152,355 @@
       "caption": "Overview comparison matrix for non-functioning adrenal adenoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / ESE-ENSAT Clinical Practice Guideline on the Management of Adrenal Incidentalomas",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adrenal_adenoma_nonfunctioning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Unenhanced CT attenuation, with contrast washout when indeterminate",
+          "cells": [
+            {
+              "text": "Lipid-rich benign appearance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chemical-shift MRI",
+          "cells": [
+            {
+              "text": "Intracytoplasmic lipid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight low-dose dexamethasone suppression test",
+          "cells": [
+            {
+              "text": "Autonomous cortisol secretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary metanephrines",
+          "cells": [
+            {
+              "text": "Excludes phaeochromocytoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aldosterone-to-renin ratio",
+          "cells": [
+            {
+              "text": "In hypertension or hypokalaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging",
+          "cells": [
+            {
+              "text": "Indeterminate lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_adenoma_nonfunctioning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hormonally active cortisol- or aldosterone-secreting adenoma",
+          "cells": [
+            {
+              "text": "Secretes cortisol or aldosterone"
+            },
+            {
+              "text": "Dexamethasone suppression test and aldosterone-renin ratio"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phaeochromocytoma",
+          "cells": [
+            {
+              "text": "Catecholamine secretion"
+            },
+            {
+              "text": "Plasma or urinary metanephrines"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenocortical carcinoma",
+          "cells": [
+            {
+              "text": "Large size, irregular margins or high unenhanced attenuation"
+            },
+            {
+              "text": "Unenhanced CT"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adrenal_adenoma_nonfunctioning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and avoidance of intervention",
+          "cells": [
+            {
+              "text": "Confirmed non-functioning adenoma with benign imaging"
+            },
+            {
+              "text": "Benign imaging features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Overnight dexamethasone suppression test",
+          "cells": [
+            {
+              "text": "Autonomous cortisol secretion"
+            },
+            {
+              "text": "Overnight low-dose test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma or urinary metanephrines",
+          "cells": [
+            {
+              "text": "Phaeochromocytoma"
+            },
+            {
+              "text": "Biochemical screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aldosterone-to-renin ratio",
+          "cells": [
+            {
+              "text": "Hypertension or hypokalaemia"
+            },
+            {
+              "text": "Added where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Characterisation with CT or chemical-shift MRI",
+          "cells": [
+            {
+              "text": "Indeterminate lesions"
+            },
+            {
+              "text": "Contrast washout or chemical shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interval imaging and biochemical review",
+          "cells": [
+            {
+              "text": "Growth or new hormone secretion"
+            },
+            {
+              "text": "Indeterminate lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenalectomy",
+          "cells": [
+            {
+              "text": "Hormonally active or suspicious for malignancy"
+            },
+            {
+              "text": "If features develop"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adrenal_adenoma_nonfunctioning-dx-mgmt",
+      "title": "Diagnosis and management of Non-functioning adrenal adenoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Incidental adrenal mass on imaging with no clinical hormone excess",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Large size, irregular margins or high unenhanced attenuation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent referral for suspected adrenocortical carcinoma or metastasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Unenhanced CT attenuation; washout or chemical-shift MRI if indeterminate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lipid-rich benign lesion on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Overnight dexamethasone test, metanephrines, aldosterone-renin ratio if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Interval imaging and review for growth or malignancy features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassure and avoid intervention for a confirmed non-functioning adenoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add aldosterone-to-renin ratio in hypertension or hypokalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Interval imaging and biochemical review for indeterminate lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Excellent prognosis for benign, imaging-stable, non-functioning adenoma",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

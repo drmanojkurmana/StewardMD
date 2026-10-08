@@ -153,5 +153,336 @@
       "caption": "Overview comparison matrix for charge syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charge_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "CHD7 sequencing and deletion or duplication analysis",
+          "cells": [
+            {
+              "text": "Confirms the molecular diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-resolution temporal-bone CT or MRI",
+          "cells": [
+            {
+              "text": "Semicircular-canal aplasia and cochlear anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiological assessment with brainstem-evoked responses",
+          "cells": [
+            {
+              "text": "Sensorineural or mixed deafness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated ophthalmological examination",
+          "cells": [
+            {
+              "text": "Coloboma and microphthalmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Conotruncal and aortic-arch lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charge_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "22q11.2 deletion (DiGeorge or velocardiofacial) syndrome",
+          "cells": [
+            {
+              "text": "Conotruncal defects and thymic hypoplasia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kallmann syndrome",
+          "cells": [
+            {
+              "text": "Anosmia with hypogonadotrophic hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Branchio-oto-renal syndrome",
+          "cells": [
+            {
+              "text": "Ear malformation and deafness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charge_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal airway",
+          "cells": [
+            {
+              "text": "Surgical correction of choanal atresia; tracheostomy if obstruction is severe or recurrent"
+            },
+            {
+              "text": "Bilateral choanal atresia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Feeding and aspiration",
+          "cells": [
+            {
+              "text": "Speech and language therapy, thickened feeds, nasogastric or gastrostomy feeding"
+            },
+            {
+              "text": "Cranial nerve IX and X dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surgery",
+          "cells": [
+            {
+              "text": "Repair of conotruncal and aortic-arch defects"
+            },
+            {
+              "text": "Guided by paediatric cardiology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hearing and eye care",
+          "cells": [
+            {
+              "text": "Hearing aids or cochlear implantation; tinted lenses for photophobia"
+            },
+            {
+              "text": "Deafness and coloboma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine replacement",
+          "cells": [
+            {
+              "text": "Hormone replacement for hypogonadotropic hypogonadism and growth hormone deficiency"
+            },
+            {
+              "text": "Where confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vestibular and developmental physiotherapy",
+          "cells": [
+            {
+              "text": "Support for balance delay from semicircular-canal aplasia"
+            },
+            {
+              "text": "Profound balance delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Most cases are de novo CHD7 variants; parental testing"
+            },
+            {
+              "text": "Refines recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charge_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of CHARGE syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CHARGE syndrome: coloboma, choanal atresia and ear malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (choanal atresia distress, aspiration, cyanotic heart disease)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: secure neonatal airway; urgent cardiology and ENT review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CHD7 sequencing, temporal-bone imaging, audiology, eye and heart assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "CHD7 variant with coloboma, choanal atresia and ear features confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Correct choanal atresia surgically; tracheostomy if obstruction is severe",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check 22q11.2 deletion, Kabuki syndrome and Kallmann syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Speech and language therapy with thickened feeds or gastrostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Repair conotruncal and aortic-arch cardiac defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hearing rehabilitation, tinted lenses and vestibular physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most cases are de novo; parental testing refines recurrence risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

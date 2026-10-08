@@ -145,5 +145,76 @@
       "caption": "Overview comparison matrix for boerhaave syndrome (spontaneous oesophageal rupture)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "boerhaave_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Boerhaave syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Mackler triad: vomiting, chest pain and subcutaneous emphysema", "cells": [{"text": "Clinical clues; the full triad is present in only a minority"}], "cite": "c1"},
+        {"parameter": "Water-soluble contrast oesophagogram", "cells": [{"text": "Demonstrates the leak"}], "cite": "c1"},
+        {"parameter": "CT of chest and abdomen", "cells": [{"text": "Mediastinal air, fluid and pleural effusion"}], "cite": "c1"},
+        {"parameter": "Chest radiograph", "cells": [{"text": "Pneumomediastinum, effusion and hydropneumothorax"}], "cite": "c1"},
+        {"parameter": "Pleural fluid analysis", "cells": [{"text": "Food debris, low pH or raised amylase"}], "cite": "c1"},
+        {"parameter": "Blood tests and lactate", "cells": [{"text": "Sepsis and physiological status"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "boerhaave_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Boerhaave syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Resuscitation and antimicrobials", "cells": [{"text": "Nil by mouth, intravenous fluids, broad-spectrum antibiotics with antifungal cover, and a proton pump inhibitor"}, {"text": "Immediate resuscitation"}], "cite": "c1"},
+        {"parameter": "Surgical repair", "cells": [{"text": "Urgent surgical primary repair of the transmural rupture"}, {"text": "Definitive treatment"}], "cite": "c1"},
+        {"parameter": "Endoscopic options", "cells": [{"text": "Endoscopic stenting or clipping in selected contained or late-presenting cases"}, {"text": "Selected cases only"}], "cite": "c1"},
+        {"parameter": "Drainage", "cells": [{"text": "Drainage of mediastinal and pleural contamination, including chest-drain placement"}, {"text": "Contamination control"}], "cite": "c1"},
+        {"parameter": "Nutritional support", "cells": [{"text": "Feeding jejunostomy or parenteral nutrition while the oesophagus heals"}, {"text": "Nutrition during healing"}], "cite": "c1"},
+        {"parameter": "Critical care", "cells": [{"text": "Aggressive management of mediastinitis and sepsis"}, {"text": "Critical-care support"}], "cite": "c1"},
+        {"parameter": "Emergency referral", "cells": [{"text": "Emergency upper gastrointestinal or thoracic surgical referral"}, {"text": "Survival falls sharply with delay"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "boerhaave_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Boerhaave syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Sudden severe chest or upper abdominal pain after forceful vomiting or retching", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: sepsis, enlarging effusion or tension hydropneumothorax, or shock?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: resuscitation, broad-spectrum antibiotics and emergency surgical review", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Chest radiograph and CT for mediastinal air and effusion", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Water-soluble contrast oesophagogram; pleural fluid analysis; lactate", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Full-thickness leak demonstrated?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Urgent surgical repair with drainage; nil by mouth and broad-spectrum antibiotics", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider Mallory-Weiss tear, myocardial infarction, aortic dissection or other cause", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Nutritional support while the oesophagus heals; critical care for sepsis", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Survival falls sharply with delay; early treatment gives reasonable survival", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

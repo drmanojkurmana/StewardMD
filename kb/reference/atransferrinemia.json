@@ -148,5 +148,295 @@
       "caption": "Overview comparison matrix for congenital atransferrinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atransferrinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum transferrin and transferrin saturation",
+          "cells": [
+            {
+              "text": "Very low or absent transferrin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum iron, total iron-binding capacity and ferritin",
+          "cells": [
+            {
+              "text": "High ferritin with tissue loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Microcytic hypochromic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "TF molecular genetic testing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver and cardiac iron assessment by MRI-based quantification",
+          "cells": [
+            {
+              "text": "Organ iron loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow evaluation",
+          "cells": [
+            {
+              "text": "Where the anaemia is otherwise unexplained"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atransferrinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Apotransferrin or fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Delivers transferrin to erythroid precursors"
+            },
+            {
+              "text": "Corrects the microcytic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron chelation therapy",
+          "cells": [
+            {
+              "text": "Treats tissue iron overload"
+            },
+            {
+              "text": "Strictly avoid iron supplementation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "FBC, ferritin, MRI-based cardiac and hepatic iron quantification, organ function"
+            },
+            {
+              "text": "Organ iron loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ complication management",
+          "cells": [
+            {
+              "text": "Heart, liver and endocrine iron deposition"
+            },
+            {
+              "text": "Parenchymal damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention and growth support",
+          "cells": [
+            {
+              "text": "Prevent and treat recurrent infections; support growth"
+            },
+            {
+              "text": "Childhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care and genetic counselling",
+          "cells": [
+            {
+              "text": "Haematology, cardiology, hepatology and endocrinology; family screening"
+            },
+            {
+              "text": "Genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atransferrinemia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital atransferrinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Microcytic anaemia with high ferritin and very low transferrin",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Cardiac dysfunction, arrhythmia or progressive liver fibrosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Cardiology review for myocardial iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Transferrin, saturation, iron studies, FBC, TF gene testing, MRI iron quantification",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "TF variant confirms atransferrinaemia with tissue iron loading?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Transferrin by apotransferrin or fresh frozen plasma",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat TF testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Iron chelation for tissue iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid iron supplementation, which worsens overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor heart and liver iron by MRI and organ function",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care and family genetic screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

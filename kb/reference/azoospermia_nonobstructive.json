@@ -152,5 +152,336 @@
       "caption": "Overview comparison matrix for non-obstructive azoospermia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "azoospermia_nonobstructive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Repeat centrifuged semen analysis",
+          "cells": [
+            {
+              "text": "Absence of sperm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum FSH, LH and testosterone",
+          "cells": [
+            {
+              "text": "Raised FSH supports spermatogenic failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Klinefelter syndrome and other chromosomal abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Y-chromosome microdeletion analysis",
+          "cells": [
+            {
+              "text": "Cause and retrieval prospects"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scrotal ultrasound",
+          "cells": [
+            {
+              "text": "Testicular volume and associated pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin and pituitary assessment",
+          "cells": [
+            {
+              "text": "Where a central cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "azoospermia_nonobstructive-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Obstructive azoospermia with preserved spermatogenesis",
+          "cells": [
+            {
+              "text": "Separated by integrating testicular size with FSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Klinefelter syndrome and other chromosomal disorders",
+          "cells": [
+            {
+              "text": "Detected on karyotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "azoospermia_nonobstructive-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct contributory factors",
+          "cells": [
+            {
+              "text": "Withdraw gonadotoxic agents; treat endocrine abnormality; gonadotrophin therapy where indicated"
+            },
+            {
+              "text": "Contributory factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Microdissection testicular sperm extraction",
+          "cells": [
+            {
+              "text": "Recovers focal sperm for intracytoplasmic sperm injection"
+            },
+            {
+              "text": "Principal route to biological fatherhood"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing before retrieval",
+          "cells": [
+            {
+              "text": "Karyotype for Klinefelter syndrome; Y-chromosome microdeletion analysis"
+            },
+            {
+              "text": "Before retrieval"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal optimisation",
+          "cells": [
+            {
+              "text": "Aromatase inhibitors, selective oestrogen-receptor modulators or hCG"
+            },
+            {
+              "text": "Consider"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryopreservation",
+          "cells": [
+            {
+              "text": "Sperm recovered at surgery is frozen"
+            },
+            {
+              "text": "Maximises assisted-reproduction attempts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Counselling on alternatives",
+          "cells": [
+            {
+              "text": "Donor insemination and adoption, with psychological support"
+            },
+            {
+              "text": "If retrieval fails"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Andrology and reproductive medicine"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "azoospermia_nonobstructive-dx-mgmt",
+      "title": "Diagnosis and management of Non-obstructive azoospermia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Azoospermia on repeated centrifuged semen analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Testicular mass or features of Klinefelter syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation of any testicular mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat semen analysis, FSH, LH, testosterone, karyotype, Y microdeletion, scrotal US",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised FSH with small testes and no sperm on repeated analysis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Microdissection testicular sperm extraction for ICSI",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat hormone and genetic tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Genetic testing and counselling before retrieval",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cryopreserve any sperm recovered",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Offer donor insemination or adoption if retrieval fails",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Andrology and reproductive medicine multidisciplinary follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

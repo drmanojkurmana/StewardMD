@@ -153,5 +153,355 @@
       "caption": "Overview comparison matrix for acute graft-versus-host disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard haematopoietic cell transplantation and transplant immunology reference texts",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_graft_versus_host_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Histological confirmation of cutaneous involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopy with mucosal biopsy",
+          "cells": [
+            {
+              "text": "Gut disease in stomach, duodenum or rectosigmoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver function tests",
+          "cells": [
+            {
+              "text": "Cholestatic pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool studies and viral testing",
+          "cells": [
+            {
+              "text": "Excludes infective enterocolitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood viral PCR for CMV, EBV and adenovirus",
+          "cells": [
+            {
+              "text": "Viral reactivation in an immunosuppressed state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of donor engraftment and chimerism",
+          "cells": [
+            {
+              "text": "Donor engraftment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_graft_versus_host_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug eruption from conditioning agents or antimicrobials",
+          "cells": [
+            {
+              "text": "Drug exposure"
+            },
+            {
+              "text": "Skin biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infective enterocolitis (Clostridioides difficile or CMV colitis)",
+          "cells": [
+            {
+              "text": "Infective cause of diarrhoea"
+            },
+            {
+              "text": "Stool studies and viral testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinusoidal obstruction syndrome",
+          "cells": [
+            {
+              "text": "Alternative cause of cholestasis and hyperbilirubinaemia"
+            },
+            {
+              "text": "Clinical and imaging assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_graft_versus_host_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Mainstay for grade II or higher disease"
+            },
+            {
+              "text": "First-line"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciclosporin or tacrolimus",
+          "cells": [
+            {
+              "text": "Calcineurin-inhibitor prophylaxis"
+            },
+            {
+              "text": "Continued or optimised"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ruxolitinib or extracorporeal photopheresis",
+          "cells": [
+            {
+              "text": "Steroid-refractory disease"
+            },
+            {
+              "text": "Refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and budesonide",
+          "cells": [
+            {
+              "text": "Skin disease and gut involvement"
+            },
+            {
+              "text": "Budesonide for gut"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care: skin protection, fluids, nutrition",
+          "cells": [
+            {
+              "text": "Diarrhoea and skin care"
+            },
+            {
+              "text": "Fluid and electrolyte replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antimicrobial and antifungal prophylaxis; CMV surveillance",
+          "cells": [
+            {
+              "text": "Intensified immunosuppression"
+            },
+            {
+              "text": "Viral reactivation surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist haematopoietic stem cell transplant team",
+          "cells": [
+            {
+              "text": "Management setting"
+            },
+            {
+              "text": "Specialist care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_graft_versus_host_disease-dx-mgmt",
+      "title": "Diagnosis and management of Acute graft-versus-host disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Rash, diarrhoea or cholestasis weeks to months after allogeneic transplant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Rapidly confluent or blistering rash, severe diarrhoea or rising bilirubin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent HSCT team review; treat infection and assess severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy, endoscopy with mucosal biopsy, LFTs, stool and viral PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infection excluded and organ biopsy confirms GVHD?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Start systemic corticosteroids for grade II or higher disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review drug eruption, enterocolitis, SOS and engraftment syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Optimise calcineurin-inhibitor prophylaxis with ciclosporin or tacrolimus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Ruxolitinib or photopheresis for steroid-refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Topical steroids for skin; budesonide for gut; fluids and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lower grades respond to steroids; high-grade or refractory disease is high risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

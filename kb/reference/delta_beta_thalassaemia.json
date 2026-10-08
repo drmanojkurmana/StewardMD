@@ -151,5 +151,325 @@
       "caption": "Overview comparison matrix for delta-beta thalassaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Haematology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delta_beta_thalassaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Microcytosis and hypochromia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemoglobin electrophoresis or HPLC",
+          "cells": [
+            {
+              "text": "Quantifies HbF, HbA2 and HbA; normal or low HbA2 discriminates from beta trait"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kleihauer test or flow cytometry",
+          "cells": [
+            {
+              "text": "Cellular distribution of HbF; separates it from hereditary persistence of fetal haemoglobin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies and ferritin",
+          "cells": [
+            {
+              "text": "Coexisting iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DNA analysis of the beta-globin cluster",
+          "cells": [
+            {
+              "text": "Deletions and Hb Lepore"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_beta_thalassaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Beta-thalassaemia trait",
+          "cells": [
+            {
+              "text": "Raised HbA2; delta-beta shows normal or low HbA2"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hereditary persistence of fetal haemoglobin",
+          "cells": [
+            {
+              "text": "Checked by HbF cellular distribution and red-cell indices"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron deficiency anaemia",
+          "cells": [
+            {
+              "text": "Coexisting iron deficiency alters the HbA2 and HbF picture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hb Lepore syndromes",
+          "cells": [
+            {
+              "text": "Identified on beta-globin cluster DNA analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delta_beta_thalassaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Mild heterozygous form",
+          "cells": [
+            {
+              "text": "No specific treatment beyond recognition and reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folic acid",
+          "cells": [
+            {
+              "text": "Supports increased erythropoiesis in the intermedia phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Selective transfusion",
+          "cells": [
+            {
+              "text": "For symptomatic anaemia, growth failure or physiological stress; avoid unnecessary transfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron overload monitoring",
+          "cells": [
+            {
+              "text": "Chelation and hepatic iron surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid inappropriate iron",
+          "cells": [
+            {
+              "text": "Treat only genuine coexisting iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Partner testing and preconception or prenatal counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delta_beta_thalassaemia-dx-mgmt",
+      "title": "Diagnosis and management of Delta-beta thalassaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected delta-beta thalassaemia: microcytosis with normal or low HbA2",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (transfusion dependence, growth failure, progressive splenomegaly)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review for a severe genotype and worsening cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FBC and film; HPLC for HbF and HbA2; Kleihauer test; beta-globin DNA analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are HbA2 normal or low with a deletion in the beta-globin cluster?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider beta trait, hereditary persistence of fetal haemoglobin or iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Recognise and reassure the mild heterozygous form; no specific treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Folic acid for the homozygous intermedia phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Selective transfusion for symptomatic anaemia, growth failure or stress",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor and chelate iron overload; avoid unnecessary iron",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Genetic counselling with partner testing and prenatal options",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Heterozygotes mildly affected; homozygotes follow intermedia course; iron overload key",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -160,5 +160,343 @@
       "caption": "Overview comparison matrix for acute megakaryoblastic leukaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_megakaryoblastic_leukaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Trephine biopsy with reticulin staining",
+          "cells": [
+            {
+              "text": "Dry tap is common; diagnostic sample"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flow cytometry for CD41, CD42b and CD61",
+          "cells": [
+            {
+              "text": "Megakaryocytic lineage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry for platelet glycoproteins and von Willebrand factor on trephine",
+          "cells": [
+            {
+              "text": "Megakaryocytic immunophenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytogenetics and FISH (CBFA2T3-GLIS2, RBM15-MKL1)",
+          "cells": [
+            {
+              "text": "Fusion subgroups"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GATA1 mutation analysis",
+          "cells": [
+            {
+              "text": "Children with Down syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with film and coagulation screen",
+          "cells": [
+            {
+              "text": "Severe pancytopenia and coagulation status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_megakaryoblastic_leukaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Transient abnormal myelopoiesis of Down syndrome",
+          "cells": [
+            {
+              "text": "Neonatal and self-resolving"
+            },
+            {
+              "text": "GATA1 mutation analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute panmyelosis with myelofibrosis",
+          "cells": [
+            {
+              "text": "Fibrotic marrow"
+            },
+            {
+              "text": "Trephine biopsy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_megakaryoblastic_leukaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reduced-intensity chemotherapy for Down-syndrome paediatric AMKL",
+          "cells": [
+            {
+              "text": "Curative intent"
+            },
+            {
+              "text": "GATA1-mutated blasts are chemosensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensive paediatric AML-type chemotherapy for non-Down paediatric AMKL",
+          "cells": [
+            {
+              "text": "Curative intent"
+            },
+            {
+              "text": "Often RBM15-MKL1 or CBFA2T3-GLIS2 fusions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Allogeneic haematopoietic stem cell transplant",
+          "cells": [
+            {
+              "text": "High-risk non-Down paediatric disease and most adult cases"
+            },
+            {
+              "text": "Consolidation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytarabine with an anthracycline-based induction",
+          "cells": [
+            {
+              "text": "First-line induction across subtypes"
+            },
+            {
+              "text": "AML-type induction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult AMKL treatment where feasible",
+          "cells": [
+            {
+              "text": "Curative intent where possible"
+            },
+            {
+              "text": "Outcomes generally poor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care: transfusion, antimicrobial prophylaxis, tumour lysis prophylaxis",
+          "cells": [
+            {
+              "text": "Neutropenia and high blast burden"
+            },
+            {
+              "text": "At treatment start"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial trephine biopsy with reticulin staining",
+          "cells": [
+            {
+              "text": "Monitors marrow response"
+            },
+            {
+              "text": "Dry taps and fibrosis are common"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_megakaryoblastic_leukaemia-dx-mgmt",
+      "title": "Diagnosis and management of Acute megakaryoblastic leukaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Platelet-rich blasts with a dry tap or fibrotic marrow in an AML-like patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Severe pancytopenia with bleeding or life-threatening infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent haematology review; supportive transfusion and infection care",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Trephine with reticulin; CD41, CD42b and CD61 flow cytometry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Megakaryocytic lineage confirmed on immunophenotype and trephine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cytogenetics, FISH and GATA1 analysis; assess for Down syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review AML subtypes, transient myelopoiesis, ALL and myelofibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Down-syndrome AMKL: reduced-intensity chemotherapy with curative intent",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Non-Down paediatric AMKL: intensive AML-type chemotherapy; transplant if high risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cytarabine with anthracycline induction; allogeneic transplant consolidation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Down-syndrome disease is chemosensitive; adult and high-risk cases are poorer",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

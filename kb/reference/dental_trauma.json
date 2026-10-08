@@ -147,5 +147,316 @@
       "caption": "Overview comparison matrix for dental trauma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard oral medicine & OMFS references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "dental_trauma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulp sensibility testing at baseline and on follow-up",
+          "cells": [
+            {
+              "text": "Pulp vitality over time; an initially vital tooth can lose it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periapical and occlusal radiographs, with jaw imaging if fracture suspected",
+          "cells": [
+            {
+              "text": "Further imaging for suspected jaw fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of tooth mobility, displacement and percussion",
+          "cells": [
+            {
+              "text": "Mobility and displacement of injured teeth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Documentation of injury time and storage medium",
+          "cells": [
+            {
+              "text": "Time out of the mouth and storage medium for avulsed teeth"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dental_trauma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Alveolar or jaw fracture",
+          "cells": [
+            {
+              "text": "Missed when attention focuses on the obvious dental injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-accidental injury",
+          "cells": [
+            {
+              "text": "Inconsistent history or injury pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-existing caries or fracture",
+          "cells": [
+            {
+              "text": "Unrelated to the acute event"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "dental_trauma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avulsed permanent tooth",
+          "cells": [
+            {
+              "text": "Time-critical: reimplant promptly or store in milk or saliva, then reimplant and splint flexibly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reposition and splint",
+          "cells": [
+            {
+              "text": "Luxated or displaced teeth; reduce and stabilise alveolar fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Restore and manage the pulp",
+          "cells": [
+            {
+              "text": "Adhesive composite for fractured crowns; pulp capping or pulpotomy to preserve vitality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avulsed primary teeth",
+          "cells": [
+            {
+              "text": "Do not reimplant; risk to the developing permanent successor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endodontic treatment",
+          "cells": [
+            {
+              "text": "For teeth with pulp necrosis; monitor for root resorption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Tetanus prophylaxis, analgesia and antibiotics where wounds are contaminated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up and rehabilitation",
+          "cells": [
+            {
+              "text": "Serial pulp sensibility testing and radiographs; prosthetic or orthodontic rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "dental_trauma-dx-mgmt",
+      "title": "Diagnosis and management of Dental trauma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dental trauma: injury to teeth and their supporting structures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (airway compromise, jaw fracture, inconsistent history)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency management of airway, haemorrhage and head or facial injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Clinical exam, pulp sensibility, periapical and occlusal radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is a permanent tooth avulsed, luxated or fractured?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider alveolar or jaw fracture, pre-existing caries or non-accidental injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avulsed permanent tooth: reimplant promptly or store in milk or saliva",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reposition and splint luxated teeth; stabilise alveolar fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restore fractured crowns; pulp capping or pulpotomy to preserve vitality",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Do not reimplant avulsed primary teeth; risk to the successor",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Tetanus, analgesia and antibiotics for contaminated wounds",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Outcome depends on injury type, maturity and speed of care; long dry time worsens it",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

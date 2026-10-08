@@ -157,5 +157,427 @@
       "caption": "Overview comparison matrix for insulinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Insulinoma",
+      "url": "https://www.merckmanuals.com/professional/oncology/gastrointestinal-and-pancreatic-neuroendocrine-tumors-nets/insulinoma",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "INSULINOMA-diagnostic",
+      "kind": "diagnostic",
+      "title": "Biochemical diagnosis of insulinoma",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Whipple triad",
+          "cells": [
+            {
+              "text": "Fasting symptoms, low glucose at the time, relief with carbohydrate"
+            },
+            {
+              "text": "Establishes true hypoglycaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supervised fast",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "48 to 72; 98% develop symptoms within 48"
+            },
+            {
+              "text": "70% to 80% within 24 hours"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucose to trigger insulin sample",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Below 55 with symptoms, or below 40 without",
+              "op": "<",
+              "value": 55
+            },
+            {
+              "text": "Draw insulin, C-peptide, proinsulin together"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin",
+          "unit": "mcU/mL",
+          "cells": [
+            {
+              "text": "Above 6",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "{{hy:Inappropriately high insulin during hypoglycaemia}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Insulin to glucose ratio",
+          "cells": [
+            {
+              "text": "Above 0.3 (mcU/mL per mg/dL)",
+              "op": ">",
+              "value": 0.3
+            },
+            {
+              "text": "Insulin-mediated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "C-peptide",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": "0.6 or more",
+              "op": ">=",
+              "value": 0.6
+            },
+            {
+              "text": "Low in exogenous insulin use"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proinsulin",
+          "unit": "pmol/L",
+          "cells": [
+            {
+              "text": "5 or more",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Endogenous source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity above 90",
+              "op": ">",
+              "value": 90
+            },
+            {
+              "text": "Preferred localisation; CT not useful"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignancy and MEN1",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10 malignant; about 10 in MEN1"
+            },
+            {
+              "text": "MEN1 tumours present in the 20s and are often multiple"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "INSULINOMA-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of hyperinsulinaemic hypoglycaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Surreptitious insulin use",
+          "cells": [
+            {
+              "text": "{{hy:High insulin but low C-peptide and proinsulin}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sulfonylurea ingestion",
+          "cells": [
+            {
+              "text": "Positive sulfonylurea or meglitinide screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-insulinoma pancreatogenous hypoglycaemia or post-bariatric",
+          "cells": [
+            {
+              "text": "Postprandial rather than fasting episodes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Insulin autoimmune hypoglycaemia",
+          "cells": [
+            {
+              "text": "Insulin antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric or neurologic disorder",
+          "cells": [
+            {
+              "text": "Episodic confusion or behaviour change without documented hypoglycaemia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "INSULINOMA-treatment",
+      "kind": "treatment",
+      "title": "Treatment of insulinoma",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Enucleation",
+          "cells": [
+            {
+              "text": "{{hy:Small superficial single tumour}}"
+            },
+            {
+              "text": "Overall surgical cure about 90%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Distal subtotal pancreatectomy",
+          "cells": [
+            {
+              "text": "Large or deep body or tail lesions, or multiple tumours"
+            },
+            {
+              "text": "MEN1 often multiple"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pancreatoduodenectomy",
+          "cells": [
+            {
+              "text": "Resectable malignant tumour in the head"
+            },
+            {
+              "text": "Whipple procedure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diazoxide",
+          "cells": [
+            {
+              "text": "Unresectable or awaiting surgery"
+            },
+            {
+              "text": "Give with a natriuretic diuretic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Octreotide or lanreotide",
+          "cells": [
+            {
+              "text": "Diazoxide-refractory hypoglycaemia"
+            },
+            {
+              "text": "Variable effect"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Streptozotocin with 5-fluorouracil",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "Response about 60%, up to 2 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Everolimus, sunitinib, temozolomide regimens",
+          "cells": [
+            {
+              "text": "Metastatic disease"
+            },
+            {
+              "text": "No doses in source"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "INSULINOMA-dx-mgmt",
+      "title": "Diagnosis and management of insulinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fasting neuroglycopenic episodes in a well-appearing adult",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Supervised 48 to 72 hour fast",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Glucose below 55 mg/dL with symptoms?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Insulinoma essentially excluded",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Insulin above 6, C-peptide 0.6 or more, proinsulin 5 or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Low C-peptide: consider surreptitious insulin",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude sulfonylurea; localise with endoscopic ultrasound",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Resectable?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Enucleation or pancreatectomy; cure about 90%",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Diazoxide, somatostatin analogue, systemic therapy",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

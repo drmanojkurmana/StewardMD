@@ -144,5 +144,327 @@
       "caption": "Overview comparison matrix for barodontalgia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Diving and aviation medicine / dental references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "barodontalgia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dental examination and imaging",
+          "cells": [
+            {
+              "text": "Underlying dental pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History correlating pain with ascent or descent",
+          "cells": [
+            {
+              "text": "Pressure-linked pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of recent dental treatment",
+          "cells": [
+            {
+              "text": "Recent work as precipitant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of sinus barotrauma",
+          "cells": [
+            {
+              "text": "Sinus barotrauma as a referred-pain source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vitality testing of the implicated tooth",
+          "cells": [
+            {
+              "text": "Pulp status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "barodontalgia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Maxillary sinus barotrauma",
+          "cells": [
+            {
+              "text": "Referred pain to upper teeth; excluded on assessment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulpitis or periapical disease unrelated to pressure",
+          "cells": [
+            {
+              "text": "Pain not linked to ascent or descent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "barodontalgia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Definitive dental treatment",
+          "cells": [
+            {
+              "text": "Restoration of caries or replacement of defective restorations"
+            },
+            {
+              "text": "Underlying pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Root canal treatment",
+          "cells": [
+            {
+              "text": "For pulpitis and periapical disease; extraction of non-restorable teeth"
+            },
+            {
+              "text": "Pulpal or periapical disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Symptomatic relief pending definitive dental care"
+            },
+            {
+              "text": "Symptomatic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Defer diving or flying",
+          "cells": [
+            {
+              "text": "Appropriate interval after dental procedures until healing is complete"
+            },
+            {
+              "text": "After dental procedures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat sinus barotrauma",
+          "cells": [
+            {
+              "text": "Exclude and treat sinus barotrauma as a source of referred pain"
+            },
+            {
+              "text": "Referred pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preventive dental review",
+          "cells": [
+            {
+              "text": "Regular review to maintain barometric fitness"
+            },
+            {
+              "text": "Prevention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fitness assessment",
+          "cells": [
+            {
+              "text": "Dental or diving and aviation medicine fitness-to-dive or fitness-to-fly review"
+            },
+            {
+              "text": "Before diving or flying"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "barodontalgia-dx-mgmt",
+      "title": "Diagnosis and management of Barodontalgia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Tooth pain provoked by pressure change in a diver or air traveller",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe pain with incapacitation risk, fracture or infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent review for severe pain risking incapacitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dental examination and imaging, pain-pressure history, recent dental work, sinus check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dental pathology confirmed with pain linked to pressure change?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Definitive dental treatment and deferral of diving or flying",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and exclude sinus barotrauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Root canal treatment or extraction as indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Analgesia until definitive dental care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat sinus barotrauma if it is the source",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Fitness-to-dive or fitness-to-fly assessment",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for carvajal syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "carvajal_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Electrocardiography and Holter monitoring",
+          "cells": [
+            {
+              "text": "Detects arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and cardiac MRI",
+          "cells": [
+            {
+              "text": "Characterise the cardiomyopathy and fibrofatty change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Molecular genetic testing of DSP",
+          "cells": [
+            {
+              "text": "Confirms DSP (desmoplakin) variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hair microscopy",
+          "cells": [
+            {
+              "text": "Woolly hair-shaft abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy of keratoderma",
+          "cells": [
+            {
+              "text": "May show epidermolytic change"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carvajal_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Naxos disease",
+          "cells": [
+            {
+              "text": "Right-dominant arrhythmogenic cardiomyopathy (JUP, plakoglobin)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other arrhythmogenic cardiomyopathies",
+          "cells": [
+            {
+              "text": "Without cutaneous features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ectodermal dysplasia-skin fragility syndrome",
+          "cells": [
+            {
+              "text": "PKP1 variant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "carvajal_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Heart-failure therapy",
+          "cells": [
+            {
+              "text": "ACE inhibitors or angiotensin receptor blockers, beta-blockers, mineralocorticoid antagonists, diuretics"
+            },
+            {
+              "text": "For the dilated cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Implantable cardioverter-defibrillator",
+          "cells": [
+            {
+              "text": "Implant for those at high risk of ventricular arrhythmia"
+            },
+            {
+              "text": "Life-threatening ventricular arrhythmia and sudden cardiac death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exercise restriction",
+          "cells": [
+            {
+              "text": "Avoid competitive and high-intensity exercise"
+            },
+            {
+              "text": "Reduces arrhythmic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Keratoderma care",
+          "cells": [
+            {
+              "text": "Emollients and keratolytic agents"
+            },
+            {
+              "text": "Topical treatment of the palmoplantar keratoderma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance",
+          "cells": [
+            {
+              "text": "ECG, Holter monitoring and imaging"
+            },
+            {
+              "text": "Cardiomyopathy progresses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac transplantation",
+          "cells": [
+            {
+              "text": "Consider transplantation"
+            },
+            {
+              "text": "End-stage heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Cardiac screening of relatives"
+            },
+            {
+              "text": "Autosomal recessive DSP disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "carvajal_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Carvajal syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Carvajal syndrome: woolly hair, palmoplantar keratoderma, cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (palpitations, syncope, heart failure or family sudden death)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: ventricular arrhythmia or heart failure needs urgent cardiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG, Holter monitoring, echocardiography, cardiac MRI and DSP testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Arrhythmogenic left-dominant cardiomyopathy with DSP variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Heart-failure therapy with ACE inhibitors or ARBs, beta-blockers, diuretics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Naxos disease and PKP1 syndrome by their stated features",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Implantable cardioverter-defibrillator for high-risk patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Restrict competitive and high-intensity exercise",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Emollients and keratolytics for the palmoplantar keratoderma",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong cardiac surveillance; transplantation considered in end-stage failure",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -159,5 +159,412 @@
       "caption": "Overview comparison matrix for iga nephropathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Immunoglobulin A Nephropathy",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/immunoglobulin-a-nephropathy",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "IGA_NEPHROPATHY-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key findings in IgA nephropathy",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Visible haematuria timing",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "1 to 2 after a febrile mucosal illness",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "{{hy:Synpharyngitic; earlier than post-infectious GN}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Proteinuria",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Usually below 1",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "Nephrotic syndrome in about 10%"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine sediment",
+          "cells": [
+            {
+              "text": "Dysmorphic red cells, occasional red cell casts"
+            },
+            {
+              "text": "Glomerular bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Complement and serum IgA",
+          "cells": [
+            {
+              "text": "Complement normal; IgA may be raised"
+            },
+            {
+              "text": "Serum IgA not diagnostic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney biopsy",
+          "cells": [
+            {
+              "text": "Granular mesangial IgA and C3, mesangial expansion"
+            },
+            {
+              "text": "Needed in moderate or severe disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "RPGN at presentation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 5",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "Crescentic disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Progression risk markers",
+          "cells": [
+            {
+              "text": "Proteinuria above 1 g/day, raised creatinine, hypertension, fibrosis, crescents"
+            },
+            {
+              "text": "Kidney failure in 5% to 60% at 10 years"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "IGA_NEPHROPATHY-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of IgA nephropathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Post-infectious glomerulonephritis",
+          "cells": [
+            {
+              "text": "{{hy:Haematuria starts weeks, not days, after infection; low complement}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IgA vasculitis (Henoch-Schonlein)",
+          "cells": [
+            {
+              "text": "Same biopsy; purpura, arthralgia, abdominal pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary mesangial IgA",
+          "cells": [
+            {
+              "text": "Cirrhosis, IBD, coeliac disease, psoriasis, HIV, lung cancer"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thin basement membrane disease",
+          "cells": [
+            {
+              "text": "Isolated haematuria without proteinuria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Alport syndrome",
+          "cells": [
+            {
+              "text": "Hereditary nephritis with deafness"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "IGA_NEPHROPATHY-treatment",
+      "kind": "treatment",
+      "title": "Treatment of IgA nephropathy",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "{{hy:Hypertension, creatinine above 1.2 mg/dL, or protein above 300 mg/day}}"
+            },
+            {
+              "text": "Target urine protein below 500 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "Persistent proteinuria on ACE inhibitor or ARB"
+            },
+            {
+              "text": "Slowed progression in DAPA-CKD subgroup"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sparsentan",
+          "cells": [
+            {
+              "text": "UPCR 1.5 or more despite ACE inhibitor or ARB"
+            },
+            {
+              "text": "Stop ACE inhibitor or ARB first"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Proteinuria 1 g/day or more and eGFR 20 to 120 after 3 months supportive care"
+            },
+            {
+              "text": "At least 6 months; infection risk rises with dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV steroids with cyclophosphamide",
+          "cells": [
+            {
+              "text": "Crescentic or severe proliferative disease"
+            },
+            {
+              "text": "Then oral prednisone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney transplantation",
+          "cells": [
+            {
+              "text": "Kidney failure"
+            },
+            {
+              "text": "Recurs in about 30% of grafts"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tonsillectomy, diets, immune globulin",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "Unproven"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Avoid immunosuppression in advanced fibrotic disease."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "IGA_NEPHROPATHY-dx-mgmt",
+      "title": "Diagnosis and management of IgA nephropathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria 1 to 2 days after a respiratory infection",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urinalysis, urine protein, creatinine, complement",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Proteinuria, raised creatinine or hypertension?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Monitor isolated haematuria",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Kidney biopsy",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Crescentic or rapidly progressive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "IV steroids, cyclophosphamide, then oral prednisone",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ACE inhibitor or ARB plus SGLT2 inhibitor for 3 months",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Proteinuria still 1 g/day or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Corticosteroids for 6 months or sparsentan",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Continue supportive care; monitor protein and creatinine",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

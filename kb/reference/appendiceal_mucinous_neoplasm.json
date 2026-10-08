@@ -159,5 +159,327 @@
       "caption": "Overview comparison matrix for appendiceal mucinous neoplasm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Digestive System Tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "appendiceal_mucinous_neoplasm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Peritoneal and mucinous disease burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy",
+          "cells": [
+            {
+              "text": "Excludes a synchronous colorectal primary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tumour markers CEA, CA19-9 and CA125",
+          "cells": [
+            {
+              "text": "Baseline and monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathological grading with mucin cellularity",
+          "cells": [
+            {
+              "text": "Grade and subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "KRAS and GNAS molecular testing",
+          "cells": [
+            {
+              "text": "Where the diagnosis is uncertain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic laparoscopy",
+          "cells": [
+            {
+              "text": "Peritoneal assessment in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "appendiceal_mucinous_neoplasm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute appendicitis with appendiceal distension",
+          "cells": [
+            {
+              "text": "A suspected mucocele must not be ruptured or aspirated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "appendiceal_mucinous_neoplasm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Appendicectomy",
+          "cells": [
+            {
+              "text": "Intact, non-ruptured, en bloc removal with negative margins"
+            },
+            {
+              "text": "Disease confined to the appendix"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specimen-directed escalation",
+          "cells": [
+            {
+              "text": "Perforation, extra-appendiceal mucin, involved margin or higher grade"
+            },
+            {
+              "text": "High-risk features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytoreductive surgery with perioperative chemotherapy",
+          "cells": [
+            {
+              "text": "Complete cytoreduction at specialist centres"
+            },
+            {
+              "text": "Established peritoneal metastases (pseudomyxoma peritonei)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic chemotherapy",
+          "cells": [
+            {
+              "text": "Unresectable or diffusely disseminated disease"
+            },
+            {
+              "text": "Not suited to cytoreduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat cytoreduction",
+          "cells": [
+            {
+              "text": "Recurrence after prior surgery, at a specialist centre"
+            },
+            {
+              "text": "Salvage option"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Palliative procedures",
+          "cells": [
+            {
+              "text": "Bowel bypass or debulking"
+            },
+            {
+              "text": "Relieves obstruction when curative surgery is not possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Late peritoneal recurrence, individualised to histologic subtype"
+            },
+            {
+              "text": "Surveillance intensity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "appendiceal_mucinous_neoplasm-dx-mgmt",
+      "title": "Diagnosis and management of appendiceal mucinous neoplasm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Mucocele or mucinous appendiceal mass, possibly with abdominal distension",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Appendiceal rupture or free intraperitoneal mucin on imaging?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist review of free mucin; avoid rupture or aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CT, MRI, colonoscopy, CEA, CA19-9, CA125, histology grading, KRAS and GNAS",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Confined disease with grade and subtype confirmed on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intact en bloc appendicectomy with negative margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and extend staging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cytoreductive surgery with perioperative chemotherapy at specialist centres",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic chemotherapy for unresectable or disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Palliative bowel bypass or debulking when cure is not possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance for late peritoneal recurrence, individualised to subtype",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

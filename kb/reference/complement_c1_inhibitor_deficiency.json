@@ -154,5 +154,305 @@
       "caption": "Overview comparison matrix for complement c1 inhibitor deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Middleton's Allergy: Principles and Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complement_c1_inhibitor_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum C4 level",
+          "cells": [
+            {
+              "text": "Low during and between attacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1 inhibitor antigenic and functional assays",
+          "cells": [
+            {
+              "text": "Protein concentration and activity measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C1q level",
+          "cells": [
+            {
+              "text": "Distinguishes acquired from hereditary forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for lymphoproliferative or autoimmune disorder",
+          "cells": [
+            {
+              "text": "Suspected in acquired disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_c1_inhibitor_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Histaminergic (allergic) angioedema and urticaria",
+          "cells": [
+            {
+              "text": "Adrenaline, antihistamines and steroids are wrongly given for bradykinin-mediated angioedema"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACE-inhibitor-induced angioedema",
+          "cells": [
+            {
+              "text": "Caused by ACE inhibitors, a trigger to avoid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acquired C1 inhibitor deficiency with lymphoproliferative disease",
+          "cells": [
+            {
+              "text": "C1q level distinguishes acquired from hereditary forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_c1_inhibitor_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Bradykinin-targeted acute treatment",
+          "cells": [
+            {
+              "text": "Plasma-derived or recombinant C1-inhibitor concentrate, or a B2-receptor antagonist"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secure the airway early",
+          "cells": [
+            {
+              "text": "Laryngeal attacks carry risk of fatal asphyxiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-term prophylaxis",
+          "cells": [
+            {
+              "text": "C1-inhibitor concentrate before dental work, surgery or trauma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term prophylaxis",
+          "cells": [
+            {
+              "text": "Where attacks are frequent or severe; C1-inhibitor replacement, kallikrein inhibitor or oral agents"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid triggers",
+          "cells": [
+            {
+              "text": "ACE inhibitors and oestrogen-containing preparations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "On-demand plan",
+          "cells": [
+            {
+              "text": "On-demand supply and a written emergency plan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complement_c1_inhibitor_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Complement C1 inhibitor deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected C1 inhibitor deficiency: recurrent angioedema, often with abdominal attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (laryngeal oedema, rapid facial swelling, severe abdominal attack)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: secure the airway; C1-inhibitor concentrate or bradykinin-targeted agent",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum C4; C1-inhibitor antigenic and functional assays; C1q level",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is C1-inhibitor deficiency confirmed by low levels or function?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider histaminergic angioedema, ACE-inhibitor angioedema or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Bradykinin-targeted acute treatment with C1-inhibitor concentrate",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short-term prophylaxis before dental work, surgery or trauma",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Long-term prophylaxis for frequent or severe attacks",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid ACE inhibitors and oestrogen; on-demand supply and emergency plan",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With modern therapy most achieve good control and normal life expectancy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

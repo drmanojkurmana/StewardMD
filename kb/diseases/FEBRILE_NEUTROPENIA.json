@@ -243,5 +243,503 @@
       "caption": "Diagnostic and clinical overview matrix for febrile neutropenia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Freifeld et al, IDSA Febrile Neutropenia Guideline, Clin Infect Dis 2011",
+      "url": "https://academic.oup.com/cid/article/52/4/e56/382256",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Neutropenia",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/leukopenias/neutropenia",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "FEBRILE_NEUTROPENIA-diagnostic",
+      "kind": "diagnostic",
+      "title": "Defining febrile neutropenia and stratifying risk",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Fever, single reading",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">=38.3 oral",
+              "op": ">=",
+              "value": 38.3
+            },
+            {
+              "text": "Meets fever definition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever, sustained",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": ">=38.0 over 1 h",
+              "op": ">=",
+              "value": 38.0
+            },
+            {
+              "text": "Meets fever definition"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neutropenia",
+          "unit": "cells/mm3",
+          "cells": [
+            {
+              "text": "ANC <500, or expected to fall below 500 within 48 h",
+              "op": "<",
+              "value": 500
+            },
+            {
+              "text": "{{hy:Fever plus this ANC is an emergency}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Profound neutropenia",
+          "unit": "cells/mm3",
+          "cells": [
+            {
+              "text": "ANC <100",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Confirm by manual smear"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Muted inflammation",
+          "unit": "cells/uL",
+          "cells": [
+            {
+              "text": "ANC <200",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "Signs of focal infection may be absent"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "MASCC score, low risk",
+          "cells": [
+            {
+              "text": ">=21",
+              "op": ">=",
+              "value": 21
+            },
+            {
+              "text": "Candidate for oral or outpatient therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "High risk",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "ANC <=100 expected >7 days, comorbidity, or MASCC <21",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Admit for IV therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood cultures",
+          "unit": "mL per set",
+          "cells": [
+            {
+              "text": ">=2 sets, about 20 mL each; one from each lumen plus one peripheral",
+              "op": "=",
+              "value": 20
+            },
+            {
+              "text": "Without a line, 2 separate venipunctures"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mucosal ulcers",
+          "cells": [
+            {
+              "text": "Swab for herpes virus and Candida"
+            },
+            {
+              "text": "Common sites: skin, lung, sinus, perirectal, line sites"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "FEBRILE_NEUTROPENIA-ddx",
+      "kind": "ddx",
+      "title": "Sources and mimics to consider in neutropenic fever",
+      "rowHeader": "Condition",
+      "columns": [
+        "Clue",
+        "Implication"
+      ],
+      "rows": [
+        {
+          "parameter": "Catheter-related infection",
+          "cells": [
+            {
+              "text": "Line site inflammation; coagulase-negative staphylococci or S. aureus"
+            },
+            {
+              "text": "Indication to add vancomycin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Radiographically documented infiltrate"
+            },
+            {
+              "text": "Indication to add gram-positive cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Skin or soft tissue infection",
+          "cells": [
+            {
+              "text": "Cellulitis, furunculosis, paronychia"
+            },
+            {
+              "text": "Indication to add vancomycin"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Invasive fungal infection",
+          "cells": [
+            {
+              "text": "Persistent fever on antibiotics, prolonged neutropenia, steroids"
+            },
+            {
+              "text": "Consider empiric antifungal"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Herpes or Candida mucositis",
+          "cells": [
+            {
+              "text": "Mucosal ulcers, stomatitis"
+            },
+            {
+              "text": "Culture ulcers"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Colitis or perirectal infection",
+          "cells": [
+            {
+              "text": "Abdominal or perirectal signs"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drug fever",
+          "cells": [
+            {
+              "text": "Patient otherwise well; may have rash and lymphadenopathy"
+            },
+            {
+              "text": "Review drug list"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "FEBRILE_NEUTROPENIA-treatment",
+      "kind": "treatment",
+      "title": "Empiric management of febrile neutropenia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "IV antipseudomonal beta-lactam monotherapy",
+          "cells": [
+            {
+              "text": "{{hy:High risk: cefepime, meropenem, imipenem-cilastatin or piperacillin-tazobactam}}"
+            },
+            {
+              "text": "Ceftazidime no longer reliable as monotherapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral ciprofloxacin plus amoxicillin-clavulanate",
+          "cells": [
+            {
+              "text": "Low risk (MASCC >=21)"
+            },
+            {
+              "text": "Avoid if on fluoroquinolone prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Add vancomycin",
+          "cells": [
+            {
+              "text": "Instability, pneumonia, gram-positive bacteraemia, line or skin infection, MRSA or VRE colonisation"
+            },
+            {
+              "text": "Stop after 2 to 3 days if no gram-positive infection"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Empiric antifungal",
+          "cells": [
+            {
+              "text": "High risk with fever persisting after 4 to 7 days of antibiotics"
+            },
+            {
+              "text": "Neutropenia expected >7 days; preemptive approach acceptable if stable"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "Documented or unexplained fever"
+            },
+            {
+              "text": "Continue at least until ANC >=500 cells/mm3"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "G-CSF prophylaxis",
+          "cells": [
+            {
+              "text": "Predicted febrile neutropenia risk >=30%"
+            },
+            {
+              "text": "Filgrastim 5 mcg/kg SC daily or pegfilgrastim 6 mg SC once per cycle"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "Antifungal timing differs: IDSA 2011 says after 4 to 7 days of antibiotics, Merck says after 3 to 4 days. Doses of empiric beta-lactams were not stated in the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "FEBRILE_NEUTROPENIA-dx-mgmt",
+      "title": "Diagnosis and management of febrile neutropenia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever >=38.3 deg C once or >=38.0 deg C for 1 h after chemotherapy",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "ANC <500 or expected to fall below 500 in 48 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Evaluate as fever without neutropenia",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": ">=2 blood culture sets, line lumens plus peripheral; focused exam",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "High risk: MASCC <21, ANC <=100 for >7 days or comorbidity?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oral ciprofloxacin plus amoxicillin-clavulanate",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Admit; IV cefepime, carbapenem or piperacillin-tazobactam",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Instability, pneumonia, line or skin infection, MRSA colonisation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Add vancomycin; stop at 2 to 3 days if no gram-positive",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Fever persists after 4 to 7 days, neutropenia >7 days?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Add empiric or preemptive antifungal",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Continue until ANC >=500 and source treated",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

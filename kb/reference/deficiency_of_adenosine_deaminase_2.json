@@ -152,5 +152,316 @@
       "caption": "Overview comparison matrix for deficiency of adenosine deaminase 2 (dada2)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Stiehm's Immune Deficiencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "deficiency_of_adenosine_deaminase_2-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma ADA2 enzyme activity assay",
+          "cells": [
+            {
+              "text": "Reduced enzyme activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic testing of ADA2 (CECR1)",
+          "cells": [
+            {
+              "text": "Biallelic loss-of-function ADA2 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging with vascular imaging",
+          "cells": [
+            {
+              "text": "Lacunar infarcts and haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Quantitative immunoglobulins and lymphocyte subsets",
+          "cells": [
+            {
+              "text": "Immunodeficiency phenotype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and bone marrow evaluation",
+          "cells": [
+            {
+              "text": "Cytopenias or bone marrow failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deficiency_of_adenosine_deaminase_2-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic polyarteritis nodosa",
+          "cells": [
+            {
+              "text": "Diagnosed in error in a young patient who has not had ADA2 testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency",
+          "cells": [
+            {
+              "text": "Overlapping immunodeficiency phenotype; ADA2 testing separates them"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "deficiency_of_adenosine_deaminase_2-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Anti-TNF biologic therapy",
+          "cells": [
+            {
+              "text": "Mainstay to prevent recurrent strokes and suppress the vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No antiplatelet or anticoagulant for stroke",
+          "cells": [
+            {
+              "text": "Haemorrhage risk; control disease with TNF blockade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids for flares",
+          "cells": [
+            {
+              "text": "Control acute inflammatory flares while biologic therapy is established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunoglobulin and infections",
+          "cells": [
+            {
+              "text": "Replacement and prompt treatment of infections for immunodeficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematology input",
+          "cells": [
+            {
+              "text": "Treat cytopenias and marrow failure; transplantation can be curative for severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain and vascular monitoring",
+          "cells": [
+            {
+              "text": "MRI with vascular imaging, full blood count and acute-phase reactants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family testing and early diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "deficiency_of_adenosine_deaminase_2-dx-mgmt",
+      "title": "Diagnosis and management of Deficiency of adenosine deaminase 2 (DADA2)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected DADA2: young patient with stroke, vasculitis or cytopenias",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute stroke, intracranial haemorrhage, progressive cytopenias)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neurological care; no antiplatelet or anticoagulant for stroke prevention",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma ADA2 activity, CECR1 gene testing, brain MRI with vascular imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is ADA2 activity reduced or are biallelic CECR1 variants present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider polyarteritis nodosa, antiphospholipid syndrome or monogenic vasculopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Establish anti-TNF therapy as the mainstay to prevent strokes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Avoid antiplatelet or anticoagulant therapy; control disease with TNF blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Corticosteroids for flares; immunoglobulin for immunodeficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Haematology input; transplantation can be curative for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Monitor with brain MRI, vascular imaging, blood counts and acute-phase reactants",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Untreated carries high recurrent stroke burden; TNF blockade reduces recurrence",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -1,183 +1,668 @@
 {
- "id": "iron_deficiency_anemia",
- "name": "Iron Deficiency Anemia",
- "system": "Haematology",
- "class": "non_infective",
- "chapter": 102,
- "page": 762,
- "aliases": [
-  "IDA"
- ],
- "referenceOnly": true,
- "review": {
-  "status": "ai_drafted"
- },
- "harrison": {
-  "pages": "Harrison 22e p.764",
-  "clinicalPearls": [
-   "Classic blood picture is a microcytic, hypochromic anemia (MCV <80 fL in established disease), but microcytosis can be ABSENT in early iron deficiency or masked by liver disease or concomitant folate/B12 deficiency (Harrison 22e p.765, p.450).",
-   "Low serum ferritin is the mainstay of absolute iron deficiency, reflecting depleted stores; ferritin <30 µg/L has high sensitivity and specificity (92% and 98%) and can be used as a single diagnostic test (Harrison 22e p.765).",
-   "Transferrin saturation (serum iron/TIBC) measures iron available for erythropoiesis; erythropoiesis becomes iron-restricted at values <15-20% (Harrison 22e p.765).",
-   "Anemia develops only in the LATE stage because the erythron is relatively spared compared with heart and skeletal muscle, which become iron-depleted earlier; slow progression plus compensation means anemia is often undetected, especially in the young, until hemoglobin falls below ~8 g/dL (Harrison 22e p.765).",
-   "Clinical clues include pica (compulsive ingestion of nonnutritive substances such as ice, soil, or clay), nail fragility and koilonychia, hair loss, cheilosis, atrophic glossitis, and dysphagia from esophageal webs (Plummer-Vinson syndrome) (Harrison 22e p.765; Koilonychia association noted p.~).",
-   "Even symptomatic isolated iron deficiency WITHOUT anemia matters: suboptimal myocyte, cardiomyocyte, and neuron function can cause fatigue, irritability, poor concentration, restless legs syndrome, and reduced exercise capacity (Harrison 22e p.765).",
-   "Severe iron-deficiency anemia may be accompanied by thrombocytosis, due to prevalent megakaryocyte commitment of the common erythroid-platelet progenitor when iron is insufficient (Harrison 22e p.766).",
-   "Serum hepcidin is low/undetectable in absolute iron deficiency (maximizing dietary iron absorption) but elevated in inflammation and in IRIDA (TMPRSS6 mutations) (Harrison 22e p.766).",
-   "Inadequate therapeutic response (no reticulocytosis after 1 week, or <1 g/dL hemoglobin rise after 2 weeks of iron therapy) should prompt a search for the cause: noncompliance, ongoing blood loss, or malabsorption (Harrison 22e p.766)."
+  "id": "iron_deficiency_anemia",
+  "name": "Iron Deficiency Anemia",
+  "system": "Haematology",
+  "class": "non_infective",
+  "chapter": 102,
+  "page": 762,
+  "aliases": [
+    "IDA"
   ],
-  "pathophysiology": "Iron supply becomes inadequate for needs through excessive demand, insufficient intake, defective absorption, or blood loss; multiple causes frequently co-occur, especially in the elderly and in multimorbidity (Harrison 22e p.764). In ISOLATED iron deficiency, stores are depleted while hemoglobin is still normal; when iron remains sufficient for erythropoiesis, red cells are normochromic/normocytic with decreased ferritin (<15-30 µg/L). As transferrin saturation falls <15-20%, iron supply to erythropoiesis is insufficient and cells become hypochromic and microcytic, the classic feature of iron-deficiency anemia (Harrison 22e p.764). Iron deficiency is ABSOLUTE when stores are exhausted and FUNCTIONAL when erythropoiesis is iron-restricted but stores are adequate or even increased. Low hepcidin in iron deficiency maximizes dietary absorption; TMPRSS6 mutations cause hereditary iron-refractory IDA (IRIDA) with reduced absorption and oral-iron refractoriness. In inflammation, high hepcidin sequesters iron into stores, producing functional iron deficiency with low serum iron and transferrin saturation despite elevated ferritin; absolute and functional deficiency often coexist (IBD, CKD, aging). Beyond anemia, heart, muscle, and brain are affected; immune response may be blunted as lymphocytes require iron during the metabolic burst (Harrison 22e p.764).",
-  "additionalDifferentials": [
-   "Anemia of inflammation (anemia of chronic disease) - the second most common anemia worldwide, due to functional iron deficiency; a diagnosis of exclusion usually occurring with an inflammatory disorder such as cancer or infection (Harrison 22e p.765, p.450).",
-   "Thalassemia trait - microcytosis with normal-to-high ferritin and serum iron; red cells are more homogeneous in volume with a low/normal RDW (Harrison 22e p.450, p.767).",
-   "Mixed forms (combined absolute and functional iron deficiency) (Harrison 22e p.767).",
-   "Other nutritional anemias - vitamin B12 and folate deficiency (megaloblastic, macrocytic); may coexist with and mask iron deficiency in malabsorption (Harrison 22e p.765).",
-   "Sideroblastic anemia (rare) as a cause of microcytic hypochromic red cells (Harrison 22e p.~)."
-  ],
-  "infectionMimics": [],
-  "nonInfectiousMimics": [
-   "Anemia of inflammation / chronic disease (functional iron deficiency from high hepcidin: low serum iron and transferrin saturation with NORMAL-to-HIGH ferritin) (Harrison 22e p.764, p.767).",
-   "Thalassemia trait (microcytic but with normal-to-high ferritin and iron, and a low/normal RDW) (Harrison 22e p.450, p.767)."
-  ],
-  "additionalInvestigations": [
-   "Serum ferritin (mainstay; <30 µg/L diagnostic, sensitivity 92% / specificity 98%); note ferritin is an acute-phase reactant and may rise severalfold in inflammation (Harrison 22e p.765, p.450).",
-   "Transferrin saturation (serum iron/TIBC); iron-restricted erythropoiesis at <15-20% (Harrison 22e p.765).",
-   "Serum iron (reduced, but diurnal fluctuation prevents use as a single test) (Harrison 22e p.765).",
-   "MCV and RDW from the CBC (MCV <80 fL when established; RDW often elevated reflecting anisocytosis) (Harrison 22e p.765).",
-   "Soluble transferrin receptor (sTfR) - increased in iron deficiency; sTfR/log ferritin ratio >2 favors iron deficiency (Harrison 22e p.766, p.767).",
-   "Reticulocyte hemoglobin content (CHr, reduced) and percentage of hypochromic red cells (%HYPO, increased >6%), reflecting iron availability days to months before testing (Harrison 22e p.766, p.767).",
-   "Serum hepcidin (low/undetectable in absolute deficiency; not routinely measured, reference values not standardized) (Harrison 22e p.766, p.767).",
-   "Absence of stainable iron in bone marrow remains the gold standard, although it is rarely needed and unacceptably invasive (Harrison 22e p.765).",
-   "Endoscopy and/or radiographic imaging to identify the cause - essential in males and postmenopausal females to rule out malignancy or other severe bleeding sources (Harrison 22e p.765, p.~)."
-  ],
-  "redFlags": [
-   "Unexplained iron-deficiency anemia in any adult (with the possible exception of a premenopausal, multiparous woman) MANDATES thorough endoscopic and/or radiographic visualization of the entire large bowel - right (ascending) colon cancer causes insidious blood loss and often presents as IDA (Harrison 22e p.~, colorectal cancer chapter).",
-   "Imaging and endoscopy to trace the cause are essential in males and postmenopausal females to rule out malignancy or other severe causes of bleeding (Harrison 22e p.765).",
-   "Hemoglobin falling below ~8 g/dL or otherwise severe anemia (Harrison 22e p.765).",
-   "Myelophthisic blood smear (nucleated red cells, teardrop cells, immature white cells) suggesting marrow infiltration mandates marrow examination - a competing cause of anemia to recognize (Harrison 22e p.450)."
-  ],
-  "prognosis": "Iron deficiency and IDA are highly treatable with iron replacement. Oral iron usually requires at least ~3 months of therapy to restore hemoglobin and replenish stores and prevent early recurrence; inadequate response (no reticulocytosis at 1 week or <1 g/dL hemoglobin rise at 2 weeks) should prompt a search for noncompliance, ongoing blood loss, or malabsorption. Prognosis ultimately depends on the underlying cause (e.g., occult GI malignancy) rather than the anemia itself (Harrison 22e p.766).",
-  "pitfalls": [
-   "Classic microcytosis/hypochromia can be ABSENT in early iron deficiency, in elderly patients, or when masked by concomitant folate/B12 deficiency or liver disease - do not exclude IDA on a normal MCV alone (Harrison 22e p.765, p.450).",
-   "Ferritin is an acute-phase reactant; normal or high ferritin during inflammation can mask coexisting iron deficiency (Harrison 22e p.450).",
-   "Serum iron alone is unreliable as a single test due to diurnal variation (Harrison 22e p.765).",
-   "Treating IDA without investigating the cause can miss occult GI malignancy; isolated symptomatic iron deficiency without anemia should not be underestimated (Harrison 22e p.764, p.765).",
-   "Biomarkers other than ferritin and transferrin saturation are limited by poor standardization and accessibility (Harrison 22e p.766)."
-  ],
-  "severityClassification": "Harrison describes a continuum rather than a formal grading scale: (1) isolated/absolute iron deficiency with depleted stores (ferritin <15-30 µg/L) but NORMAL hemoglobin and normochromic-normocytic cells; (2) iron-restricted erythropoiesis once transferrin saturation falls <15-20%, with hypochromic microcytic cells; (3) overt iron-deficiency anemia. Severe anemia is generally taken as hemoglobin <=8 g/dL (the threshold at which anemia commonly becomes detectable and at which rapid IV correction is considered) (Harrison 22e p.764-766).",
-  "references": [
-   "Harrison 22e p.764",
-   "Harrison 22e p.765",
-   "Harrison 22e p.766",
-   "Harrison 22e p.767",
-   "Harrison 22e p.450",
-   "Camaschella C: Iron deficiency. Blood 133:30, 2019"
-  ],
-  "crossLinks": [
-   "colorectal_cancer"
-  ],
-  "management": [
-   "Replace iron with oral iron salts such as ferrous sulphate, fumarate or gluconate as first-line, continuing for months after the haemoglobin normalises to replenish stores and prevent early recurrence",
-   "Use intravenous iron such as ferric carboxymaltose or iron sucrose when oral iron is not tolerated, is ineffective, absorption is impaired, or in functional iron deficiency",
-   "Identify and treat the underlying cause, investigating for gastrointestinal blood loss, menstrual loss, malabsorption including coeliac disease, and dietary inadequacy",
-   "Reserve red cell transfusion for severe symptomatic anaemia or haemodynamic compromise",
-   "Monitor the response with reticulocytosis and haemoglobin rise, and reassess adherence, absorption and ongoing loss if the response is inadequate",
-   "Optimise dietary iron intake and counsel on taking oral iron with vitamin C and away from tea and calcium to improve absorption",
-   "Refer at-risk adults for endoscopic evaluation to exclude a gastrointestinal malignancy"
-  ]
- },
- "algorithms": [
-  {
-   "id": "iron_deficiency_anemia-pathway",
-   "title": "Iron Deficiency Anemia: Clinical Decision & Diagnostic Pathway",
-   "steps": [
-    {
-     "step": "Clinical Presentation & High Suspicion",
-     "action": "Classic blood picture is a microcytic, hypochromic anemia (MCV <80 fL in established disease), but microcytosis can be ABSENT in early iron deficiency or masked by liver disease or concomitant folate/B12 deficiency (Harrison 22e p.765,",
-     "critical": true
-    },
-    {
-     "step": "Triage & Emergency Warning Signs",
-     "branch": "Critical Findings",
-     "action": "Emergency red flag evaluation: Unexplained iron-deficiency anemia in any adult (with the possible exception of a premenopausal, multiparous woman) MANDATES thorough endoscopic and/or radiographic visualization of the entire large bowel -",
-     "critical": true
-    },
-    {
-     "step": "Diagnostic Workup & Biomarkers",
-     "action": "Targeted workup: Serum ferritin (mainstay; <30 µg/L diagnostic, sensitivity 92% / specificity 98%); note ferritin is an acute-phase reactant and may rise severalfold in inflammation (Harrison 22e p.765, p.450)., Transferrin saturation"
-    },
-    {
-     "step": "Targeted Clinical Management",
-     "branch": "Treatment Pathway",
-     "action": "Targeted management: Replace iron with oral iron salts such as ferrous sulphate, fumarate or gluconate as first-line, continuing for months after the haemoglobin normalises to replenish stores and prevent early recurrence"
-    },
-    {
-     "step": "Monitoring & Critical Pitfalls",
-     "action": "Clinical pitfall alert: Classic microcytosis/hypochromia can be ABSENT in early iron deficiency, in elderly patients, or when masked by concomitant folate/B12 deficiency or liver disease - do not exclude IDA on a normal MCV alone (Harrison"
-    }
-   ],
-   "caption": "Clinical pathway for the evaluation and management of iron deficiency anemia."
-  }
- ],
- "tables": [
-  {
-   "id": "iron_deficiency_anemia-matrix",
-   "title": "Iron Deficiency Anemia: Clinical Features & Management Matrix",
-   "headers": [
-    "Clinical Domain",
-    "Protocol Recommendation",
-    "Operational Goal"
-   ],
-   "rows": [
-    [
-     "Diagnostic Hallmark",
-     "Classic blood picture is a microcytic, hypochromic anemia (MCV <80 fL in established disease), but microcytosis can be ABSENT in",
-     "Cardinal clinical findings"
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.764",
+    "clinicalPearls": [
+      "Classic blood picture is a microcytic, hypochromic anemia (MCV <80 fL in established disease), but microcytosis can be ABSENT in early iron deficiency or masked by liver disease or concomitant folate/B12 deficiency (Harrison 22e p.765, p.450).",
+      "Low serum ferritin is the mainstay of absolute iron deficiency, reflecting depleted stores; ferritin <30 µg/L has high sensitivity and specificity (92% and 98%) and can be used as a single diagnostic test (Harrison 22e p.765).",
+      "Transferrin saturation (serum iron/TIBC) measures iron available for erythropoiesis; erythropoiesis becomes iron-restricted at values <15-20% (Harrison 22e p.765).",
+      "Anemia develops only in the LATE stage because the erythron is relatively spared compared with heart and skeletal muscle, which become iron-depleted earlier; slow progression plus compensation means anemia is often undetected, especially in the young, until hemoglobin falls below ~8 g/dL (Harrison 22e p.765).",
+      "Clinical clues include pica (compulsive ingestion of nonnutritive substances such as ice, soil, or clay), nail fragility and koilonychia, hair loss, cheilosis, atrophic glossitis, and dysphagia from esophageal webs (Plummer-Vinson syndrome) (Harrison 22e p.765; Koilonychia association noted p.~).",
+      "Even symptomatic isolated iron deficiency WITHOUT anemia matters: suboptimal myocyte, cardiomyocyte, and neuron function can cause fatigue, irritability, poor concentration, restless legs syndrome, and reduced exercise capacity (Harrison 22e p.765).",
+      "Severe iron-deficiency anemia may be accompanied by thrombocytosis, due to prevalent megakaryocyte commitment of the common erythroid-platelet progenitor when iron is insufficient (Harrison 22e p.766).",
+      "Serum hepcidin is low/undetectable in absolute iron deficiency (maximizing dietary iron absorption) but elevated in inflammation and in IRIDA (TMPRSS6 mutations) (Harrison 22e p.766).",
+      "Inadequate therapeutic response (no reticulocytosis after 1 week, or <1 g/dL hemoglobin rise after 2 weeks of iron therapy) should prompt a search for the cause: noncompliance, ongoing blood loss, or malabsorption (Harrison 22e p.766)."
     ],
-    [
-     "Key Investigations",
-     "Serum ferritin (mainstay; <30 µg/L diagnostic, sensitivity 92% / specificity 98%); note ferritin is an acute-phase reactant and",
-     "Confirmatory diagnostic workup"
+    "pathophysiology": "Iron supply becomes inadequate for needs through excessive demand, insufficient intake, defective absorption, or blood loss; multiple causes frequently co-occur, especially in the elderly and in multimorbidity (Harrison 22e p.764). In ISOLATED iron deficiency, stores are depleted while hemoglobin is still normal; when iron remains sufficient for erythropoiesis, red cells are normochromic/normocytic with decreased ferritin (<15-30 µg/L). As transferrin saturation falls <15-20%, iron supply to erythropoiesis is insufficient and cells become hypochromic and microcytic, the classic feature of iron-deficiency anemia (Harrison 22e p.764). Iron deficiency is ABSOLUTE when stores are exhausted and FUNCTIONAL when erythropoiesis is iron-restricted but stores are adequate or even increased. Low hepcidin in iron deficiency maximizes dietary absorption; TMPRSS6 mutations cause hereditary iron-refractory IDA (IRIDA) with reduced absorption and oral-iron refractoriness. In inflammation, high hepcidin sequesters iron into stores, producing functional iron deficiency with low serum iron and transferrin saturation despite elevated ferritin; absolute and functional deficiency often coexist (IBD, CKD, aging). Beyond anemia, heart, muscle, and brain are affected; immune response may be blunted as lymphocytes require iron during the metabolic burst (Harrison 22e p.764).",
+    "additionalDifferentials": [
+      "Anemia of inflammation (anemia of chronic disease) - the second most common anemia worldwide, due to functional iron deficiency; a diagnosis of exclusion usually occurring with an inflammatory disorder such as cancer or infection (Harrison 22e p.765, p.450).",
+      "Thalassemia trait - microcytosis with normal-to-high ferritin and serum iron; red cells are more homogeneous in volume with a low/normal RDW (Harrison 22e p.450, p.767).",
+      "Mixed forms (combined absolute and functional iron deficiency) (Harrison 22e p.767).",
+      "Other nutritional anemias - vitamin B12 and folate deficiency (megaloblastic, macrocytic); may coexist with and mask iron deficiency in malabsorption (Harrison 22e p.765).",
+      "Sideroblastic anemia (rare) as a cause of microcytic hypochromic red cells (Harrison 22e p.~)."
     ],
-    [
-     "Primary Differentials",
-     "Anemia of inflammation (anemia of chronic disease) - the second most common anemia worldwide, due to functional iron deficiency;",
-     "Rule out key mimics"
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Anemia of inflammation / chronic disease (functional iron deficiency from high hepcidin: low serum iron and transferrin saturation with NORMAL-to-HIGH ferritin) (Harrison 22e p.764, p.767).",
+      "Thalassemia trait (microcytic but with normal-to-high ferritin and iron, and a low/normal RDW) (Harrison 22e p.450, p.767)."
     ],
-    [
-     "Management Strategy",
-     "Replace iron with oral iron salts such as ferrous sulphate, fumarate or gluconate as first-line, continuing for months after the",
-     "Core treatment modality"
+    "additionalInvestigations": [
+      "Serum ferritin (mainstay; <30 µg/L diagnostic, sensitivity 92% / specificity 98%); note ferritin is an acute-phase reactant and may rise severalfold in inflammation (Harrison 22e p.765, p.450).",
+      "Transferrin saturation (serum iron/TIBC); iron-restricted erythropoiesis at <15-20% (Harrison 22e p.765).",
+      "Serum iron (reduced, but diurnal fluctuation prevents use as a single test) (Harrison 22e p.765).",
+      "MCV and RDW from the CBC (MCV <80 fL when established; RDW often elevated reflecting anisocytosis) (Harrison 22e p.765).",
+      "Soluble transferrin receptor (sTfR) - increased in iron deficiency; sTfR/log ferritin ratio >2 favors iron deficiency (Harrison 22e p.766, p.767).",
+      "Reticulocyte hemoglobin content (CHr, reduced) and percentage of hypochromic red cells (%HYPO, increased >6%), reflecting iron availability days to months before testing (Harrison 22e p.766, p.767).",
+      "Serum hepcidin (low/undetectable in absolute deficiency; not routinely measured, reference values not standardized) (Harrison 22e p.766, p.767).",
+      "Absence of stainable iron in bone marrow remains the gold standard, although it is rarely needed and unacceptably invasive (Harrison 22e p.765).",
+      "Endoscopy and/or radiographic imaging to identify the cause - essential in males and postmenopausal females to rule out malignancy or other severe bleeding sources (Harrison 22e p.765, p.~)."
     ],
-    [
-     "Clinical Pitfall",
-     "Classic microcytosis/hypochromia can be ABSENT in early iron deficiency, in elderly patients, or when masked by concomitant",
-     "Prevent diagnostic or management error"
+    "redFlags": [
+      "Unexplained iron-deficiency anemia in any adult (with the possible exception of a premenopausal, multiparous woman) MANDATES thorough endoscopic and/or radiographic visualization of the entire large bowel - right (ascending) colon cancer causes insidious blood loss and often presents as IDA (Harrison 22e p.~, colorectal cancer chapter).",
+      "Imaging and endoscopy to trace the cause are essential in males and postmenopausal females to rule out malignancy or other severe causes of bleeding (Harrison 22e p.765).",
+      "Hemoglobin falling below ~8 g/dL or otherwise severe anemia (Harrison 22e p.765).",
+      "Myelophthisic blood smear (nucleated red cells, teardrop cells, immature white cells) suggesting marrow infiltration mandates marrow examination - a competing cause of anemia to recognize (Harrison 22e p.450)."
+    ],
+    "prognosis": "Iron deficiency and IDA are highly treatable with iron replacement. Oral iron usually requires at least ~3 months of therapy to restore hemoglobin and replenish stores and prevent early recurrence; inadequate response (no reticulocytosis at 1 week or <1 g/dL hemoglobin rise at 2 weeks) should prompt a search for noncompliance, ongoing blood loss, or malabsorption. Prognosis ultimately depends on the underlying cause (e.g., occult GI malignancy) rather than the anemia itself (Harrison 22e p.766).",
+    "pitfalls": [
+      "Classic microcytosis/hypochromia can be ABSENT in early iron deficiency, in elderly patients, or when masked by concomitant folate/B12 deficiency or liver disease - do not exclude IDA on a normal MCV alone (Harrison 22e p.765, p.450).",
+      "Ferritin is an acute-phase reactant; normal or high ferritin during inflammation can mask coexisting iron deficiency (Harrison 22e p.450).",
+      "Serum iron alone is unreliable as a single test due to diurnal variation (Harrison 22e p.765).",
+      "Treating IDA without investigating the cause can miss occult GI malignancy; isolated symptomatic iron deficiency without anemia should not be underestimated (Harrison 22e p.764, p.765).",
+      "Biomarkers other than ferritin and transferrin saturation are limited by poor standardization and accessibility (Harrison 22e p.766)."
+    ],
+    "severityClassification": "Harrison describes a continuum rather than a formal grading scale: (1) isolated/absolute iron deficiency with depleted stores (ferritin <15-30 µg/L) but NORMAL hemoglobin and normochromic-normocytic cells; (2) iron-restricted erythropoiesis once transferrin saturation falls <15-20%, with hypochromic microcytic cells; (3) overt iron-deficiency anemia. Severe anemia is generally taken as hemoglobin <=8 g/dL (the threshold at which anemia commonly becomes detectable and at which rapid IV correction is considered) (Harrison 22e p.764-766).",
+    "references": [
+      "Harrison 22e p.764",
+      "Harrison 22e p.765",
+      "Harrison 22e p.766",
+      "Harrison 22e p.767",
+      "Harrison 22e p.450",
+      "Camaschella C: Iron deficiency. Blood 133:30, 2019"
+    ],
+    "crossLinks": [
+      "colorectal_cancer"
+    ],
+    "management": [
+      "Replace iron with oral iron salts such as ferrous sulphate, fumarate or gluconate as first-line, continuing for months after the haemoglobin normalises to replenish stores and prevent early recurrence",
+      "Use intravenous iron such as ferric carboxymaltose or iron sucrose when oral iron is not tolerated, is ineffective, absorption is impaired, or in functional iron deficiency",
+      "Identify and treat the underlying cause, investigating for gastrointestinal blood loss, menstrual loss, malabsorption including coeliac disease, and dietary inadequacy",
+      "Reserve red cell transfusion for severe symptomatic anaemia or haemodynamic compromise",
+      "Monitor the response with reticulocytosis and haemoglobin rise, and reassess adherence, absorption and ongoing loss if the response is inadequate",
+      "Optimise dietary iron intake and counsel on taking oral iron with vitamin C and away from tea and calcium to improve absorption",
+      "Refer at-risk adults for endoscopic evaluation to exclude a gastrointestinal malignancy"
     ]
-   ],
-   "caption": "Overview comparison matrix for iron deficiency anemia."
-  }
- ],
- "diagrams": [
-  {
-   "id": "iron-deficiency-anemia-real-image",
-   "title": "Iron Deficiency Anemia: Peripheral Blood Film (Microcytic Hypochromic Anemia)",
-   "type": "diagram",
-   "src": "/assets/kb-real-images/iron-deficiency-smear.jpg?v=kbri3",
-   "caption": "Real Giemsa-stained peripheral blood film showing marked microcytosis, exaggerated central pallor, and pencil cells.",
-   "annotations": [
+  },
+  "algorithms": [
     {
-     "label": "Microcytosis & Hypochromia",
-     "description": "Diminutive red cells with thin rims of hemoglobin and enlarged central pallor (>1/3)."
-    },
-    {
-     "label": "Poikilocytosis & Pencil Cells",
-     "description": "Elongated elliptical 'pencil' erythrocytes characteristic of severe iron deficiency."
-    },
-    {
-     "label": "Anisocytosis",
-     "description": "Elevated red cell distribution width (RDW) reflecting disparate cell sizing."
+      "id": "iron_deficiency_anemia-pathway",
+      "title": "Iron Deficiency Anemia: Clinical Decision & Diagnostic Pathway",
+      "steps": [
+        {
+          "step": "Clinical Presentation & High Suspicion",
+          "action": "Classic blood picture is a microcytic, hypochromic anemia (MCV <80 fL in established disease), but microcytosis can be ABSENT in early iron deficiency or masked by liver disease or concomitant folate/B12 deficiency (Harrison 22e p.765,",
+          "critical": true
+        },
+        {
+          "step": "Triage & Emergency Warning Signs",
+          "branch": "Critical Findings",
+          "action": "Emergency red flag evaluation: Unexplained iron-deficiency anemia in any adult (with the possible exception of a premenopausal, multiparous woman) MANDATES thorough endoscopic and/or radiographic visualization of the entire large bowel -",
+          "critical": true
+        },
+        {
+          "step": "Diagnostic Workup & Biomarkers",
+          "action": "Targeted workup: Serum ferritin (mainstay; <30 µg/L diagnostic, sensitivity 92% / specificity 98%); note ferritin is an acute-phase reactant and may rise severalfold in inflammation (Harrison 22e p.765, p.450)., Transferrin saturation"
+        },
+        {
+          "step": "Targeted Clinical Management",
+          "branch": "Treatment Pathway",
+          "action": "Targeted management: Replace iron with oral iron salts such as ferrous sulphate, fumarate or gluconate as first-line, continuing for months after the haemoglobin normalises to replenish stores and prevent early recurrence"
+        },
+        {
+          "step": "Monitoring & Critical Pitfalls",
+          "action": "Clinical pitfall alert: Classic microcytosis/hypochromia can be ABSENT in early iron deficiency, in elderly patients, or when masked by concomitant folate/B12 deficiency or liver disease - do not exclude IDA on a normal MCV alone (Harrison"
+        }
+      ],
+      "caption": "Clinical pathway for the evaluation and management of iron deficiency anemia."
     }
-   ]
-  }
- ]
+  ],
+  "tables": [
+    {
+      "id": "iron_deficiency_anemia-matrix",
+      "title": "Iron Deficiency Anemia: Clinical Features & Management Matrix",
+      "headers": [
+        "Clinical Domain",
+        "Protocol Recommendation",
+        "Operational Goal"
+      ],
+      "rows": [
+        [
+          "Diagnostic Hallmark",
+          "Classic blood picture is a microcytic, hypochromic anemia (MCV <80 fL in established disease), but microcytosis can be ABSENT in",
+          "Cardinal clinical findings"
+        ],
+        [
+          "Key Investigations",
+          "Serum ferritin (mainstay; <30 µg/L diagnostic, sensitivity 92% / specificity 98%); note ferritin is an acute-phase reactant and",
+          "Confirmatory diagnostic workup"
+        ],
+        [
+          "Primary Differentials",
+          "Anemia of inflammation (anemia of chronic disease) - the second most common anemia worldwide, due to functional iron deficiency;",
+          "Rule out key mimics"
+        ],
+        [
+          "Management Strategy",
+          "Replace iron with oral iron salts such as ferrous sulphate, fumarate or gluconate as first-line, continuing for months after the",
+          "Core treatment modality"
+        ],
+        [
+          "Clinical Pitfall",
+          "Classic microcytosis/hypochromia can be ABSENT in early iron deficiency, in elderly patients, or when masked by concomitant",
+          "Prevent diagnostic or management error"
+        ]
+      ],
+      "caption": "Overview comparison matrix for iron deficiency anemia."
+    }
+  ],
+  "diagrams": [
+    {
+      "id": "iron-deficiency-anemia-real-image",
+      "title": "Iron Deficiency Anemia: Peripheral Blood Film (Microcytic Hypochromic Anemia)",
+      "type": "diagram",
+      "src": "/assets/kb-real-images/iron-deficiency-smear.jpg?v=kbri3",
+      "caption": "Real Giemsa-stained peripheral blood film showing marked microcytosis, exaggerated central pallor, and pencil cells.",
+      "annotations": [
+        {
+          "label": "Microcytosis & Hypochromia",
+          "description": "Diminutive red cells with thin rims of hemoglobin and enlarged central pallor (>1/3)."
+        },
+        {
+          "label": "Poikilocytosis & Pencil Cells",
+          "description": "Elongated elliptical 'pencil' erythrocytes characteristic of severe iron deficiency."
+        },
+        {
+          "label": "Anisocytosis",
+          "description": "Elevated red cell distribution width (RDW) reflecting disparate cell sizing."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Iron Deficiency Anemia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/anemias-caused-by-deficient-erythropoiesis/iron-deficiency-anemia"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 103-4",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "iron_deficiency_anemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Laboratory diagnosis of iron deficiency",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum ferritin",
+          "unit": "ug/L",
+          "cells": [
+            {
+              "text": "Below 30 ug/L",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "{{hy:Single best test; sensitivity 92%, specificity 98%}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ferritin with inflammation",
+          "unit": "ug/L",
+          "cells": [
+            {
+              "text": "Up to 100 ug/L still compatible",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "Ferritin is an acute-phase reactant"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transferrin saturation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Below 15 to 20%",
+              "range": [
+                15,
+                20
+              ]
+            },
+            {
+              "text": "Iron-restricted erythropoiesis begins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum iron",
+          "unit": "mcg/dL",
+          "cells": [
+            {
+              "text": "Below 50 mcg/dL in stage 2",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Diurnal variation; not a stand-alone test"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MCV",
+          "unit": "fL",
+          "cells": [
+            {
+              "text": "Below 80 fL when established",
+              "op": "<",
+              "value": 80
+            },
+            {
+              "text": "Can be normal early or with coexisting B12 or folate deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Soluble transferrin receptor",
+          "unit": "mg/L",
+          "cells": [
+            {
+              "text": "Above 8.5 mg/L",
+              "op": ">",
+              "value": 8.5
+            },
+            {
+              "text": "sTfR/log ferritin ratio above 2 favours iron deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypochromic red cells",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Above 6%",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Reticulocyte haemoglobin content falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow iron stain",
+          "cells": [
+            {
+              "text": "Absent stainable iron"
+            },
+            {
+              "text": "Gold standard but rarely needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Ferritin cutoff: Harrison 22e and Merck use below 30 ug/L; the older printed Table 103-4 uses below 15 ug/L. The current lower-specificity cutoff of 30 is preferred."
+    },
+    {
+      "id": "iron_deficiency_anemia-ddx",
+      "kind": "ddx",
+      "title": "Microcytic anaemias that mimic iron deficiency",
+      "rowHeader": "Condition",
+      "columns": [
+        "Iron studies",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Iron deficiency",
+          "cells": [
+            {
+              "text": "SI below 30, TIBC above 360, saturation below 10%, ferritin below 15 ug/L"
+            },
+            {
+              "text": "Ferritin"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Anaemia of inflammation",
+          "cells": [
+            {
+              "text": "SI below 50, TIBC below 300, saturation 10 to 20%, ferritin 30 to 200 ug/L"
+            },
+            {
+              "text": "Ferritin with sTfR/log ferritin ratio"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Thalassaemia trait",
+          "cells": [
+            {
+              "text": "SI normal to high, TIBC normal, saturation 30 to 80%, ferritin 50 to 300 ug/L"
+            },
+            {
+              "text": "{{hy:Haemoglobin electrophoresis; low or normal RDW}}"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Sideroblastic anaemia",
+          "cells": [
+            {
+              "text": "SI normal to high, saturation 30 to 80%, ferritin 50 to 300 ug/L"
+            },
+            {
+              "text": "Marrow with ringed sideroblasts"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mixed absolute and functional deficiency",
+          "cells": [
+            {
+              "text": "Ferritin up to 100 ug/L with inflammation"
+            },
+            {
+              "text": "sTfR or reticulocyte haemoglobin"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Values from Table 103-4 (SI and TIBC in ug/dL)."
+    },
+    {
+      "id": "iron_deficiency_anemia-treatment",
+      "kind": "treatment",
+      "title": "Treatment of iron deficiency anaemia",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Find the cause",
+          "cells": [
+            {
+              "text": "{{hy:Every man and postmenopausal woman: endoscopy or colon imaging}}"
+            },
+            {
+              "text": "Right colon cancer often presents as iron deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral iron",
+          "cells": [
+            {
+              "text": "65 mg elemental iron (325 mg ferrous sulfate) every other day, 30 minutes before meals"
+            },
+            {
+              "text": "Larger or more frequent doses are poorly absorbed and cause constipation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vitamin C with oral iron",
+          "cells": [
+            {
+              "text": "Ascorbic acid 500 mg or orange juice with the dose"
+            },
+            {
+              "text": "Avoid tea, calcium and antacids near the dose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Duration",
+          "cells": [
+            {
+              "text": "At least 6 months after haemoglobin normalises"
+            },
+            {
+              "text": "Refills stores"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Check response",
+          "cells": [
+            {
+              "text": "Reticulocytes at about 1 week; about 1 g/dL rise by day 14"
+            },
+            {
+              "text": "Poor response: nonadherence, ongoing loss or malabsorption"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV iron",
+          "cells": [
+            {
+              "text": "Oral intolerance or failure, ongoing large loss, need for rapid repletion"
+            },
+            {
+              "text": "Initial cumulative dose of 1000 mg is usually enough; Harrison names ferric carboxymaltose, iron sucrose"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Red cell transfusion",
+          "cells": [
+            {
+              "text": "Severe symptomatic anaemia or haemodynamic compromise"
+            },
+            {
+              "text": "Not routine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "iron_deficiency_anemia-dx-mgmt",
+      "title": "Diagnosis and management of iron deficiency anaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anaemia or symptoms of iron deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CBC with MCV and RDW, serum ferritin, transferrin saturation",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Ferritin below 30 ug/L?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Inflammation with ferritin under 100 and low saturation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider thalassaemia, sideroblastic anaemia or inflammation",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Iron deficiency confirmed: look for the cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Man or postmenopausal woman?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Upper and lower GI endoscopy, coeliac testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Assess menstrual loss and diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Oral iron every other day with vitamin C",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "About 1 g/dL rise by 2 weeks?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Check adherence, loss, malabsorption; consider IV iron",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue 6 months after Hb normal to refill stores",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

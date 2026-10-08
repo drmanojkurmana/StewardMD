@@ -231,5 +231,601 @@
       "caption": "Diagnostic and clinical overview matrix for acute pancreatitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Acute Pancreatitis",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/gastrointestinal-disorders/pancreatitis/acute-pancreatitis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pancreatitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading acute pancreatitis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Diagnosis",
+          "unit": "criteria",
+          "cells": [
+            {
+              "text": "2 of 3: typical pain, lipase or amylase over 3 times upper limit, typical imaging",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "{{hy:Enzyme level does not track severity}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum lipase",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Over 3 times upper limit",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Preferred enzyme; stays raised 7 to 14 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ALT",
+          "unit": "x ULN",
+          "cells": [
+            {
+              "text": "Over 3 times upper limit",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Points to gallstone cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Triglycerides",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "1000 mg/dL or more",
+              "op": ">=",
+              "value": 1000
+            },
+            {
+              "text": "Hypertriglyceridaemic cause; amylase may be falsely normal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haematocrit",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Above 44%",
+              "op": ">",
+              "value": 44
+            },
+            {
+              "text": "Haemoconcentration predicts severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BUN",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Admission above 20 mg/dL, or rising at 48 h",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "Persistent rise despite fluids predicts death"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SIRS",
+          "unit": "criteria",
+          "cells": [
+            {
+              "text": "2 or more of: temperature above 38.3 or below 36 deg C, HR above 90, RR above 20 or PaCO2 below 32, WBC above 12,000 or below 4,000",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "If SIRS resolves by 24 h, organ failure or necrosis is unlikely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BISAP",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "3 or more: BUN over 25 mg/dL, impaired mental state, SIRS, age over 60, pleural effusion",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "Scored in first 24 h; Ranson needs 48 h"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ failure",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "Modified Marshall score 2 or more in any system",
+              "op": ">=",
+              "value": 2
+            },
+            {
+              "text": "Persisting over 48 h defines severe disease"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Revised Atlanta severity",
+          "cells": [
+            {
+              "text": "Mild: no organ failure; moderately severe: transient organ failure under 48 h or complications; severe: persistent organ failure"
+            },
+            {
+              "text": "Grade clinically in first 2 weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Ultrasound first for gallstones; contrast CT at 3 to 5 days if not improving"
+            },
+            {
+              "text": "Early CT only if diagnosis uncertain"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "SIRS temperature cutoff: Harrison 22e uses above 38 deg C, Merck above 38.3 deg C. Amylase normalises in 3 to 7 days (Harrison) or 3 to 5 days (Merck)."
+    },
+    {
+      "id": "pancreatitis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute pancreatitis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Perforated peptic ulcer",
+          "cells": [
+            {
+              "text": "Sudden severe pain with peritonism"
+            },
+            {
+              "text": "Free air on erect chest x-ray or CT"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mesenteric ischaemia",
+          "cells": [
+            {
+              "text": "Pain out of proportion to signs; vascular risk"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Biliary colic or cholecystitis",
+          "cells": [
+            {
+              "text": "Right upper quadrant pain; lipase not over 3 times upper limit"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Strangulating bowel obstruction",
+          "cells": [
+            {
+              "text": "Vomiting, distension, no flatus"
+            },
+            {
+              "text": "CT abdomen"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inferior myocardial infarction",
+          "cells": [
+            {
+              "text": "Epigastric pain with ECG change"
+            },
+            {
+              "text": "{{hy:ECG and troponin}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Aortic aneurysm or dissection",
+          "cells": [
+            {
+              "text": "Back pain, pulse deficit, hypotension"
+            },
+            {
+              "text": "CT angiography"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diabetic ketoacidosis",
+          "cells": [
+            {
+              "text": "Amylase spuriously raised in acidaemia (pH 7.32 or below) without pancreatitis"
+            },
+            {
+              "text": "Lipase and CT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other causes of high lipase",
+          "cells": [
+            {
+              "text": "Renal failure, sepsis, cirrhosis, post-ERCP, head injury"
+            },
+            {
+              "text": "Need typical pain or imaging too"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pancreatitis-treatment",
+      "kind": "treatment",
+      "title": "Managing acute pancreatitis",
+      "rowHeader": "Option",
+      "columns": [
+        "Regimen",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Fluids",
+          "unit": "mL/kg/h",
+          "cells": [
+            {
+              "text": "{{hy:Lactated Ringer 1.5 mL/kg/h; 10 mL/kg bolus if hypovolaemic}}",
+              "op": "=",
+              "value": 1.5
+            },
+            {
+              "text": "Reassess often in first 6 h, then over 24 to 48 h using haematocrit, BUN, urine output"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Analgesia",
+          "cells": [
+            {
+              "text": "Parenteral opioid in adequate dose: hydromorphone, morphine or fentanyl"
+            },
+            {
+              "text": "Add antiemetic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Mild disease: low-fat soft oral diet as soon as tolerated"
+            },
+            {
+              "text": "Severe: early enteral (nasogastric) feeding; TPN only if enteral fails"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Not for prophylaxis, whatever the severity"
+            },
+            {
+              "text": "Only for extrapancreatic infection or infected necrosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infected necrosis",
+          "cells": [
+            {
+              "text": "Carbapenem, fluoroquinolone or metronidazole"
+            },
+            {
+              "text": "Suspect if deterioration after 7 to 10 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Drainage or necrosectomy",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Delay over 4 weeks if stable, minimally invasive first",
+              "op": ">",
+              "value": 4
+            },
+            {
+              "text": "Allows walled-off necrosis to form"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ERCP",
+          "cells": [
+            {
+              "text": "Gallstone pancreatitis with cholangitis or rising bilirubin"
+            },
+            {
+              "text": "Not needed when the stone passes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cholecystectomy",
+          "cells": [
+            {
+              "text": "Mild gallstone pancreatitis"
+            },
+            {
+              "text": "Before discharge"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pseudocyst drainage",
+          "cells": [
+            {
+              "text": "Rapidly enlarging, infected, bleeding or about to rupture"
+            },
+            {
+              "text": "Percutaneous, surgical or EUS-guided"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pancreatitis-dx-mgmt",
+      "title": "Diagnosis and management of acute pancreatitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute epigastric pain radiating to back",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Lipase, LFTs, triglycerides, calcium, haematocrit, BUN",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "At least 2 of 3 diagnostic criteria?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider mimics: ulcer, ischaemia, MI, aneurysm",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Lactated Ringer 1.5 mL/kg/h, opioid analgesia",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Ultrasound for gallstones; score SIRS and BISAP",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Organ failure persisting over 48 h?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Severe: ICU, nasogastric enteral feeding",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Mild: early oral low-fat diet",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Gallstones with cholangitis?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Early ERCP",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Not improving at 3 to 5 days?",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "Contrast CT for necrosis; antibiotics only if infected",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Cholecystectomy before discharge if biliary",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

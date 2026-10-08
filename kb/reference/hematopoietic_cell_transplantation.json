@@ -169,5 +169,536 @@
       "caption": "Overview comparison matrix for hematopoietic cell transplantation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 132-3",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hematopoietic_cell_transplantation-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key values in hematopoietic cell transplantation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Chance a full sibling is HLA-matched",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "1 in 4",
+              "op": "=",
+              "value": 25
+            },
+            {
+              "text": "Probability of a matched sibling is 1 minus 0.75 to the power of the number of siblings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Matched unrelated donor found",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 60% of patients",
+              "op": "=",
+              "value": 60
+            },
+            {
+              "text": "Lower in minorities and mixed ancestry; search takes 3 to 4 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autologous CD34+ dose",
+          "unit": "x10^6/kg",
+          "cells": [
+            {
+              "text": "More than 2.5 x 10^6 cells/kg",
+              "op": ">",
+              "value": 2.5
+            },
+            {
+              "text": "Reliable engraftment; plerixafor for the 5 to 10% who mobilise poorly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutrophil recovery after marrow graft",
+          "unit": "day",
+          "cells": [
+            {
+              "text": "About 500/uL by day 22",
+              "op": "=",
+              "value": 22
+            },
+            {
+              "text": "About 100/uL by day 16; peripheral blood about 1 week faster, cord blood about 1 week slower"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute GVHD liver stage",
+          "unit": "umol/L",
+          "cells": [
+            {
+              "text": "Bilirubin 34 to 51 umol/L (2 to 3 mg/dL) up to above 257 umol/L (15 mg/dL)",
+              "range": [
+                34,
+                257
+              ]
+            },
+            {
+              "text": "Skin by rash area, gut by diarrhoea volume 500 to 1000 mL/day up to ileus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute GVHD grade I",
+          "cells": [
+            {
+              "text": "Skin stage 1 to 2 only"
+            },
+            {
+              "text": "{{hy:Clinically minor, no survival effect, no treatment needed}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinusoidal obstruction syndrome",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Tender hepatomegaly, jaundice, fluid gain, peak about day 16; mortality about 30%",
+              "op": "=",
+              "value": 30
+            },
+            {
+              "text": "Can progress to hepatorenal failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant-associated TMA",
+          "cells": [
+            {
+              "text": "Schistocytes, high LDH, thrombocytopenia, acute kidney injury about 1 month after transplant"
+            },
+            {
+              "text": "Separate from other microangiopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chimerism",
+          "cells": [
+            {
+              "text": "Sex-chromosome FISH or short tandem repeat analysis"
+            },
+            {
+              "text": "Host lymphocytes persisting means immunologic rejection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adaptive immune recovery",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "1 to 2 years",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "Innate immunity recovers within weeks"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hematopoietic_cell_transplantation-ddx",
+      "kind": "ddx",
+      "title": "Infections and look-alikes after stem cell transplant by time",
+      "rowHeader": "Condition",
+      "columns": [
+        "Early (under 1 month)",
+        "Middle (1 to 4 months)",
+        "Late (over 6 months)"
+      ],
+      "rows": [
+        {
+          "parameter": "Disseminated infection",
+          "cells": [
+            {
+              "text": "Aerobic gram-negative and gram-positive bacteria"
+            },
+            {
+              "text": "Nocardia, Candida, Aspergillus, EBV"
+            },
+            {
+              "text": "Encapsulated bacteria (pneumococcus, H. influenzae, meningococcus)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Skin and mucosa",
+          "cells": [
+            {
+              "text": "HSV"
+            },
+            {
+              "text": "HHV-6"
+            },
+            {
+              "text": "VZV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lungs",
+          "cells": [
+            {
+              "text": "Bacteria, Candida, Aspergillus, other moulds, HSV"
+            },
+            {
+              "text": "CMV, respiratory viruses, Pneumocystis, Toxoplasma"
+            },
+            {
+              "text": "Pneumocystis, pneumococcus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gut",
+          "cells": [
+            {
+              "text": "C. difficile"
+            },
+            {
+              "text": "CMV, adenovirus"
+            },
+            {
+              "text": "EBV, CMV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Kidney and brain",
+          "cells": [
+            {
+              "text": "Brain: HHV-6"
+            },
+            {
+              "text": "BK virus, adenovirus; brain HHV-6, Toxoplasma"
+            },
+            {
+              "text": "Toxoplasma, JC virus (rare)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-infectious mimics",
+          "cells": [
+            {
+              "text": "Conditioning toxicity and diffuse alveolar haemorrhage mimic pneumonia"
+            },
+            {
+              "text": "Acute GVHD rash, diarrhoea, liver tests mimic infection or drug reaction; biopsy"
+            },
+            {
+              "text": "Organising pneumonia, bronchiolitis obliterans with chronic GVHD"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hematopoietic_cell_transplantation-treatment",
+      "kind": "treatment",
+      "title": "Transplant steps and complication management",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Graft choice",
+          "cells": [
+            {
+              "text": "Syngeneic, allogeneic or autologous"
+            },
+            {
+              "text": "Autologous has no GVHD but no graft-versus-tumour effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conditioning",
+          "cells": [
+            {
+              "text": "Myeloablative when disease is measurable and patient fit"
+            },
+            {
+              "text": "Reduced intensity for older or comorbid patients: more relapse, less transplant mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GVHD prophylaxis",
+          "cells": [
+            {
+              "text": "All allogeneic grafts"
+            },
+            {
+              "text": "Calcineurin inhibitor (ciclosporin or tacrolimus) with methotrexate, or post-transplant cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute GVHD grade II to IV",
+          "cells": [
+            {
+              "text": "Confirm by biopsy"
+            },
+            {
+              "text": "Needs aggressive immunosuppression; grade I needs none"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Neutropenia and immune recovery period"
+            },
+            {
+              "text": "{{hy:Empiric broad-spectrum antibiotics for fever once neutrophils fall below 500/uL}}; CMV PCR-guided pre-emptive therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Revaccination",
+          "cells": [
+            {
+              "text": "All recipients"
+            },
+            {
+              "text": "Live vaccines (MMR) avoided until 2 years after transplant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse after allogeneic graft",
+          "cells": [
+            {
+              "text": "Post-transplant relapse"
+            },
+            {
+              "text": "Donor lymphocyte infusion can induce remission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graft failure",
+          "cells": [
+            {
+              "text": "No marrow recovery or loss after engraftment"
+            },
+            {
+              "text": "Re-infusion futile unless preceded by second immunosuppressive conditioning"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Steroid dose for acute GVHD and second-line agents are not stated in the opened sources; needs a transplant guideline source."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hematopoietic_cell_transplantation-dx-mgmt",
+      "title": "Diagnosis and management of hematopoietic cell transplantation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Candidate with malignant or non-malignant marrow disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Graft-versus-tumour effect or marrow replacement needed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Autologous: mobilise, collect over 2.5 x 10^6 CD34+ cells/kg",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Allogeneic: HLA type patient, siblings, then registry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Fit with measurable disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Myeloablative conditioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reduced-intensity conditioning",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Infuse graft; GVHD and infection prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Rash, diarrhoea or jaundice in first 3 months?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Biopsy and grade acute GVHD; exclude SOS, infection, drugs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Grade I: observe; grade II to IV: aggressive immunosuppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Monitor chimerism, CMV PCR, relapse; revaccinate",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Dose escalation only"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Need donor graft"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

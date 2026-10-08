@@ -151,5 +151,323 @@
       "caption": "Overview comparison matrix for degos disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "degos_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Wedge-shaped ischaemic dermal necrosis over a thrombosed vessel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid antibody and lupus anticoagulant testing",
+          "cells": [
+            {
+              "text": "Excludes antiphospholipid syndrome as a mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANA and connective-tissue serology",
+          "cells": [
+            {
+              "text": "Excludes lupus and other connective-tissue mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Central nervous system involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological review",
+          "cells": [
+            {
+              "text": "Retinal and conjunctival lesions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "degos_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "Confused with Degos disease; separated by antiphospholipid testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic lupus erythematosus",
+          "cells": [
+            {
+              "text": "Lupus vasculopathy; separated by ANA and connective-tissue serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous small-vessel vasculitis",
+          "cells": [
+            {
+              "text": "Degos is a vasculopathy, not a true inflammatory vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphomatoid papulosis",
+          "cells": [
+            {
+              "text": "Early non-specific papules, which are easily dismissed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "degos_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspirin and dipyridamole",
+          "cells": [
+            {
+              "text": "First-line for the benign cutaneous-only variant to limit thrombo-occlusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Eculizumab (C5 inhibitor)",
+          "cells": [
+            {
+              "text": "For systemic disease, targeting C5b-9-mediated endothelial injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treprostinil",
+          "cells": [
+            {
+              "text": "Prostacyclin analogue to improve microvascular perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin care and analgesia",
+          "cells": [
+            {
+              "text": "For the atrophic cutaneous lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic surveillance",
+          "cells": [
+            {
+              "text": "Endoscopy or imaging and brain MRI to detect bowel and CNS involvement early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency management",
+          "cells": [
+            {
+              "text": "Surgery for bowel infarction or perforation; neurological care for cerebral ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Dermatology, gastroenterology, neurology and rheumatology; specialist centre if systemic"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "degos_disease-dx-mgmt",
+      "title": "Diagnosis and management of degos disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Degos disease: porcelain-white atrophic skin lesions with thrombotic features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (abdominal pain, neurological symptoms or peritonism)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent surgical review for bowel infarction or perforation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skin biopsy for wedge-shaped ischaemic necrosis; antiphospholipid and ANA testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show thrombosed vessel necrosis with mimics excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider antiphospholipid syndrome, lupus vasculopathy or cholesterol embolisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aspirin and dipyridamole for the cutaneous-only variant",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Eculizumab and treprostinil for systemic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Surveillance with endoscopy or imaging and brain MRI for systemic spread",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Skin care and analgesia for atrophic lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Cutaneous-only form may persist for years; systemic form carries a poor prognosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

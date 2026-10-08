@@ -163,5 +163,549 @@
       "caption": "Overview comparison matrix for parkinson's disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Parkinson Disease",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/neurologic-disorders/movement-and-cerebellar-disorders/parkinson-disease"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 372-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "parkinsons_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Parkinson disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Cardinal motor features",
+          "cells": [
+            {
+              "text": "Bradykinesia, rest tremor, rigidity, gait disturbance with postural instability"
+            },
+            {
+              "text": "Bradykinesia plus rigidity or tremor defines parkinsonism"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Other motor features",
+          "cells": [
+            {
+              "text": "Micrographia, masked face, reduced blink, soft voice, dysphagia, freezing"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Nonmotor features",
+          "cells": [
+            {
+              "text": "Anosmia, mood and sleep disturbance, autonomic and sensory symptoms, cognitive impairment"
+            },
+            {
+              "text": "Can precede motor signs"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Supportive triad",
+          "cells": [
+            {
+              "text": "Rest tremor, asymmetric onset, good levodopa response"
+            },
+            {
+              "text": "{{hy:With UK Brain Bank criteria, over 90% are confirmed at autopsy}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Two of three cardinal features alone",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 24% postmortem error rate",
+              "op": "=",
+              "value": 24
+            },
+            {
+              "text": "Too loose for diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa trial",
+          "unit": "mg/day",
+          "cells": [
+            {
+              "text": "No or modest response at 1200 mg/day or more",
+              "op": ">=",
+              "value": 1200
+            },
+            {
+              "text": "Suggests another parkinsonism"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dopamine transporter SPECT or PET",
+          "cells": [
+            {
+              "text": "Reduced asymmetric posterior putamen uptake"
+            },
+            {
+              "text": "Separates PD from essential tremor or drug-induced parkinsonism, not from atypical parkinsonism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI",
+          "cells": [
+            {
+              "text": "Hummingbird sign (PSP), hot cross bun sign (MSA), vascular lesions"
+            },
+            {
+              "text": "Looks for mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Onset before 40 years",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Under 40 years",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Consider genetic PD, Wilson disease, dopa-responsive dystonia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parkinsons_disease-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Parkinson disease",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Drug-induced parkinsonism",
+          "cells": [
+            {
+              "text": "Neuroleptics, metoclopramide, flunarizine, cinnarizine, tetrabenazine, amiodarone, lithium; often symmetric"
+            },
+            {
+              "text": "Drug history; normal DAT scan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Essential tremor",
+          "cells": [
+            {
+              "text": "Symmetric 6 to 10 Hz postural and kinetic tremor"
+            },
+            {
+              "text": "Normal DAT scan"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multiple system atrophy",
+          "cells": [
+            {
+              "text": "Early orthostatic hypotension or cerebellar signs"
+            },
+            {
+              "text": "MRI hot cross bun sign; poor levodopa response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Progressive supranuclear palsy",
+          "cells": [
+            {
+              "text": "Early falls, vertical gaze palsy, slow saccades"
+            },
+            {
+              "text": "MRI midbrain atrophy (hummingbird)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticobasal syndrome",
+          "cells": [
+            {
+              "text": "Asymmetric apraxia, cortical sensory loss, poor levodopa response"
+            },
+            {
+              "text": "Clinical; FDG imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dementia with Lewy bodies",
+          "cells": [
+            {
+              "text": "Dementia and hallucinations before or with early motor signs"
+            },
+            {
+              "text": "Clinical timing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vascular parkinsonism",
+          "cells": [
+            {
+              "text": "Lower-body gait-predominant, stepwise"
+            },
+            {
+              "text": "MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Normal-pressure hydrocephalus",
+          "cells": [
+            {
+              "text": "Gait apraxia, incontinence, dementia"
+            },
+            {
+              "text": "MRI ventriculomegaly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wilson disease",
+          "cells": [
+            {
+              "text": "Onset under 40, liver disease"
+            },
+            {
+              "text": "Serum ceruloplasmin, slit-lamp exam"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "parkinsons_disease-treatment",
+      "kind": "treatment",
+      "title": "Treating Parkinson disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Carbidopa-levodopa",
+          "cells": [
+            {
+              "text": "Mainstay at any stage once symptoms affect function"
+            },
+            {
+              "text": "Raise every 4 to 7 days; most need levodopa 400 to 1200 mg/day divided every 2 to 5 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dopamine agonist (pramipexole, ropinirole)",
+          "cells": [
+            {
+              "text": "Younger patients or adjunct"
+            },
+            {
+              "text": "{{hy:Impulse control disorders in nearly 40%}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "MAO-B inhibitor (rasagiline, selegiline)",
+          "cells": [
+            {
+              "text": "Mild early disease or adjunct for wearing-off"
+            },
+            {
+              "text": "Rasagiline 1 mg orally once daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "COMT inhibitor (entacapone, tolcapone)",
+          "cells": [
+            {
+              "text": "Wearing-off with levodopa"
+            },
+            {
+              "text": "Tolcapone needs liver test monitoring"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Amantadine",
+          "cells": [
+            {
+              "text": "Peak-dose levodopa dyskinesia"
+            },
+            {
+              "text": "Best option for dyskinesia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Apomorphine",
+          "cells": [
+            {
+              "text": "Rescue for off periods"
+            },
+            {
+              "text": "2 mg test dose with orthostatic BP checks; works in 5 to 10 min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Deep brain stimulation (STN or GPi)",
+          "cells": [
+            {
+              "text": "Disabling fluctuations or dyskinesia"
+            },
+            {
+              "text": "Disease 5 to 15 years, age under 70, no major cognitive or mood disorder"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Quetiapine, pimavanserin or clozapine",
+          "cells": [
+            {
+              "text": "PD psychosis"
+            },
+            {
+              "text": "Clozapine needs CBC monitoring (agranulocytosis about 1%); avoid other antipsychotics"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Rehabilitation and nonmotor care",
+          "cells": [
+            {
+              "text": "All stages"
+            },
+            {
+              "text": "Physiotherapy, speech therapy, laxatives, orthostatic hypotension measures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck groups risperidone and olanzapine with antipsychotics to avoid; both are atypical agents that still worsen parkinsonism."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "parkinsons_disease-dx-mgmt",
+      "title": "Diagnosis and management of Parkinson disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bradykinesia with rest tremor or rigidity",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neuroleptic, metoclopramide or other culprit drug?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Stop the drug; drug-induced parkinsonism",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Red flags: early falls, gaze palsy, dysautonomia, early dementia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Consider atypical parkinsonism; MRI and specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Onset under 40 years?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Exclude Wilson disease; consider genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Start carbidopa-levodopa (or agonist or MAO-B inhibitor if mild)",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Good sustained levodopa response?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Reconsider diagnosis",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "Wearing-off or dyskinesia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Fractionate levodopa; COMT or MAO-B, amantadine; DBS if refractory",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue therapy, rehabilitation, nonmotor care",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

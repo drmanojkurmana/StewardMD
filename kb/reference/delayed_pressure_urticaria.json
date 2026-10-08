@@ -146,5 +146,287 @@
       "caption": "Overview comparison matrix for delayed pressure urticaria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delayed_pressure_urticaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pressure-challenge testing with a weighted stimulus",
+          "cells": [
+            {
+              "text": "Reproduces swelling after a delay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "History of swelling after standing, sitting or carrying",
+          "cells": [
+            {
+              "text": "Swelling appears after a delay under sustained pressure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for coexisting chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Signals more troublesome, treatment-resistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inflammatory markers",
+          "cells": [
+            {
+              "text": "May be raised during active disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delayed_pressure_urticaria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic spontaneous urticaria with angioedema",
+          "cells": [
+            {
+              "text": "Commonly coexists and needs its own treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis or localised inflammatory swelling",
+          "cells": [
+            {
+              "text": "Deep swelling mistaken for cellulitis gets wrongly treated with antibiotics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delayed_pressure_urticaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pressure reduction",
+          "cells": [
+            {
+              "text": "Cushioning, padded and broad straps, well-fitting footwear; avoid tight belts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Second-generation H1-antihistamines",
+          "cells": [
+            {
+              "text": "First-line, uptitrated as needed; response often incomplete"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Omalizumab",
+          "cells": [
+            {
+              "text": "For antihistamine-resistant disease; often responds well"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuncts",
+          "cells": [
+            {
+              "text": "Montelukast or dapsone; short oral steroid courses for severe flares only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat coexisting chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Commonly accompanies it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Dermatology or allergy services for refractory or disabling disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delayed_pressure_urticaria-dx-mgmt",
+      "title": "Diagnosis and management of Delayed pressure urticaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected delayed pressure urticaria: swelling after a delay under sustained pressure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tongue, lip or airway swelling, systemic symptoms, severe disability)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent angioedema and airway assessment for tongue, lip or airway swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Weighted pressure-challenge testing with delayed review; pressure trigger history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does the pressure challenge reproduce delayed swelling?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider chronic spontaneous urticaria, cellulitis or other angioedema",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Pressure reduction: cushioning, padded straps, avoid tight belts",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Second-generation H1-antihistamines, uptitrated as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Omalizumab for antihistamine-resistant disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat coexisting chronic spontaneous urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often persistent for years and disabling; antihistamine response may be limited",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

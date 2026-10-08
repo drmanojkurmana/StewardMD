@@ -166,5 +166,610 @@
       "caption": "Overview comparison matrix for diabetes mellitus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Tables PDF, Table 344-2",
+      "kind": "user-supplied"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Diabetes Mellitus",
+      "url": "https://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/diabetes-mellitus-dm",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "US Pharmacist, ADA Standards of Care 2025 treatment updates",
+      "url": "https://www.uspharmacist.com/article/diabetestreatment-updates",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diabetes_mellitus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic criteria for diabetes and prediabetes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Random plasma glucose with symptoms",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=200 mg/dL (11.1 mmol/L)",
+              "op": ">=",
+              "value": 200
+            },
+            {
+              "text": "Symptoms: polyuria, polydipsia, weight loss"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fasting plasma glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=126 mg/dL (7.0 mmol/L)",
+              "op": ">=",
+              "value": 126
+            },
+            {
+              "text": "Fasting means no calories for at least 8 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HbA1c",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:>=6.5% (48 mmol/mol)}}",
+              "op": ">=",
+              "value": 6.5
+            },
+            {
+              "text": "Tables PDF prints >6.5%; Harrison uses >=6.5%. Misleading with haemoglobinopathies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "2-h plasma glucose on 75-g OGTT",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">=200 mg/dL (11.1 mmol/L)",
+              "op": ">=",
+              "value": 200
+            },
+            {
+              "text": "OGTT used mainly in pregnancy and CF-related diabetes"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Confirmation",
+          "cells": [
+            {
+              "text": "Repeat on a different day"
+            },
+            {
+              "text": "Not needed if unequivocal hyperglycaemia or acute decompensation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prediabetes: HbA1c",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "5.7 to 6.4%",
+              "range": [
+                5.7,
+                6.4
+              ]
+            },
+            {
+              "text": "Raises risk of type 2 DM and CVD"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prediabetes: impaired fasting glucose (ADA)",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "100 to 125 mg/dL",
+              "range": [
+                100,
+                125
+              ]
+            },
+            {
+              "text": "WHO cut-off is >110 mg/dL (6.1 mmol/L)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prediabetes: impaired glucose tolerance",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "2-h glucose 140 to 199 mg/dL",
+              "range": [
+                140,
+                199
+              ]
+            },
+            {
+              "text": "On 75-g OGTT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Islet autoantibodies (GAD, IA-2, ZnT8, insulin)",
+          "cells": [
+            {
+              "text": "Present in >85% at type 1 onset"
+            },
+            {
+              "text": "Stage 1 type 1 DM: 2 or more autoantibodies with normoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-peptide",
+          "cells": [
+            {
+              "text": "Marker of endogenous insulin secretion"
+            },
+            {
+              "text": "Helps classify type and separate endogenous from exogenous insulin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison and the Tables PDF agree on glucose cut-offs; the Tables PDF prints the HbA1c threshold as >6.5% while Harrison states >=6.5%."
+    },
+    {
+      "id": "diabetes_mellitus-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis and classification of hyperglycaemia",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Type 1 DM (including adult onset)",
+          "cells": [
+            {
+              "text": "Autoimmune beta-cell loss; 25 to 50% present with DKA; about 40% start after age 30"
+            },
+            {
+              "text": "Islet autoantibodies; low C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Type 2 DM",
+          "cells": [
+            {
+              "text": "{{hy:Insulin resistance with failing secretion}}; most obese; may be silent for years"
+            },
+            {
+              "text": "Autoantibody negative; preserved C-peptide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Latent autoimmune diabetes of adults",
+          "cells": [
+            {
+              "text": "5 to 10% of phenotypic type 2 carry GAD or ICA"
+            },
+            {
+              "text": "GAD antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MODY (monogenic)",
+          "cells": [
+            {
+              "text": "Autosomal dominant, onset usually before 25 y; HNF-1alpha type responds to sulfonylureas"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pancreatogenic (type 3c) DM",
+          "cells": [
+            {
+              "text": "Pancreatitis, pancreatectomy, cystic fibrosis, haemochromatosis"
+            },
+            {
+              "text": "Pancreatic imaging, iron studies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrinopathy-related hyperglycaemia",
+          "cells": [
+            {
+              "text": "Acromegaly, Cushing syndrome, glucagonoma, phaeochromocytoma, hyperthyroidism"
+            },
+            {
+              "text": "Hormone testing for the suspected disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced hyperglycaemia",
+          "cells": [
+            {
+              "text": "Glucocorticoids, calcineurin inhibitors, thiazides, atypical antipsychotics, checkpoint inhibitors"
+            },
+            {
+              "text": "Medication history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stress hyperglycaemia",
+          "cells": [
+            {
+              "text": "Transient in surgery, infection or critical illness"
+            },
+            {
+              "text": "HbA1c; reassess after recovery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gestational DM",
+          "cells": [
+            {
+              "text": "Arises in 2nd or 3rd trimester; 1st-trimester diabetes is pre-existing"
+            },
+            {
+              "text": "OGTT in pregnancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diabetes_mellitus-treatment",
+      "kind": "treatment",
+      "title": "Management of diabetes mellitus",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifestyle: diet, weight loss, physical activity",
+          "cells": [
+            {
+              "text": "All type 2 patients from diagnosis"
+            },
+            {
+              "text": "Plus structured self-management education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metformin",
+          "cells": [
+            {
+              "text": "Usual first-line drug in type 2 DM"
+            },
+            {
+              "text": "Hold around iodinated contrast; can lower vitamin B12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SGLT2 inhibitor",
+          "cells": [
+            {
+              "text": "{{hy:ASCVD, heart failure or CKD, regardless of HbA1c}}"
+            },
+            {
+              "text": "Prevents HF admission; glycaemic effect smaller when eGFR <45; risk of euglycaemic DKA"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "GLP-1 receptor agonist",
+          "cells": [
+            {
+              "text": "ASCVD or high risk; CKD; HFpEF with obesity"
+            },
+            {
+              "text": "Preferred for glycaemia when eGFR <30 because of low hypoglycaemia risk"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Early combination therapy",
+          "cells": [
+            {
+              "text": "Can start at diagnosis"
+            },
+            {
+              "text": "To reach individual goals sooner"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Basal-bolus insulin or pump",
+          "cells": [
+            {
+              "text": "All type 1 DM; type 2 with uncontrolled hyperglycaemia or decompensation"
+            },
+            {
+              "text": "Automated insulin delivery suggested for type 1 on multiple daily injections; sliding scale alone is ineffective"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Glycaemic targets",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Most non-pregnant adults"
+            },
+            {
+              "text": "HbA1c <7%; CGM time 70 to 180 mg/dL >70%, below 70 mg/dL <4%",
+              "op": "<",
+              "value": 7
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cardiovascular risk reduction",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "BP control, statin, smoking cessation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication screening",
+          "cells": [
+            {
+              "text": "Annually"
+            },
+            {
+              "text": "Dilated retinal exam, UACR with eGFR, monofilament foot exam"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Drug choice is individualised by cardiorenal disease, weight, hypoglycaemia risk, cost and preference (ADA 2025). No doses are listed because the opened sources gave none."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diabetes_mellitus-dx-mgmt",
+      "title": "Diagnosis and management of diabetes mellitus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Symptoms of hyperglycaemia or screening result",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Measure HbA1c, fasting glucose, or 75-g OGTT",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Diagnostic threshold met and confirmed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "HbA1c 5.7 to 6.4% or IFG or IGT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Prediabetes: lifestyle change and periodic retesting",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Normal glycaemia: routine screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "DKA, autoantibodies or low C-peptide suggesting type 1?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Basal-bolus insulin or pump with glucose monitoring",
+          "cite": "c3"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lifestyle change plus metformin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "ASCVD, heart failure or CKD present?",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Add SGLT2 inhibitor or GLP-1 RA regardless of HbA1c",
+          "cite": "c4"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "HbA1c above individual target?",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "action",
+          "text": "Intensify: combination therapy, then insulin",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Continue therapy with annual complication screening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n14",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        },
+        {
+          "from": "n13",
+          "to": "n14",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

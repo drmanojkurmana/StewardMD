@@ -154,5 +154,345 @@
       "caption": "Overview comparison matrix for apeced syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "apeced_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "AIRE gene sequencing",
+          "cells": [
+            {
+              "text": "Confirmatory diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-interferon-omega and anti-interferon-alpha autoantibodies",
+          "cells": [
+            {
+              "text": "Interferon autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium, phosphate and parathyroid hormone",
+          "cells": [
+            {
+              "text": "Hypoparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short synacthen test with ACTH and renin and aldosterone",
+          "cells": [
+            {
+              "text": "Adrenal axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Organ-specific autoantibodies",
+          "cells": [
+            {
+              "text": "21-hydroxylase, glutamic acid decarboxylase, intrinsic factor, hepatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fasting glucose, thyroid function and gonadal hormone profile",
+          "cells": [
+            {
+              "text": "Further endocrine axes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fungal culture of mucocutaneous lesions",
+          "cells": [
+            {
+              "text": "Candidiasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apeced_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Isolated autoimmune Addison disease",
+          "cells": [
+            {
+              "text": "Diagnosing it in isolation misses the wider syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated idiopathic hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Diagnosing it in isolation misses the wider syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "apeced_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong glucocorticoid and mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "Autoimmune adrenal insufficiency; stress-dose escalation during illness"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypoparathyroidism treatment",
+          "cells": [
+            {
+              "text": "Activated vitamin D analogues (alfacalcidol or calcitriol) with calcium"
+            },
+            {
+              "text": "Monitor for hypercalciuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azole antifungals",
+          "cells": [
+            {
+              "text": "Suppress chronic mucocutaneous candidiasis; rotate agents"
+            },
+            {
+              "text": "Review for azole resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Further endocrine replacement",
+          "cells": [
+            {
+              "text": "Levothyroxine, insulin, sex-steroid replacement"
+            },
+            {
+              "text": "As further axes fail"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multisystem surveillance",
+          "cells": [
+            {
+              "text": "Endocrine, hepatic and haematological screening"
+            },
+            {
+              "text": "Lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis education",
+          "cells": [
+            {
+              "text": "Emergency parenteral hydrocortisone kit; oral mucosa surveillance"
+            },
+            {
+              "text": "Family education"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "AIRE testing for siblings and family"
+            },
+            {
+              "text": "Autosomal recessive inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "apeced_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of APECED syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Candidiasis with adrenal or parathyroid failure, possibly multiple endocrine loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Adrenal crisis with hypotension or symptomatic hypocalcaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency adrenal crisis treatment and calcium correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "AIRE sequencing, interferon autoantibodies, calcium and PTH, synacthen test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AIRE gene sequencing confirms the syndrome?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong glucocorticoid and mineralocorticoid replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat AIRE and endocrine tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Activated vitamin D analogues with calcium for hypoparathyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Azole antifungals for chronic mucocutaneous candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Lifelong multisystem surveillance and emergency hydrocortisone kit",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and AIRE testing for siblings",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

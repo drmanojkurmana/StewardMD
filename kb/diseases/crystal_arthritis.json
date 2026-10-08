@@ -214,5 +214,499 @@
       "caption": "Diagnostic and clinical overview matrix for crystal arthritis (gout / pseudogout)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Gout",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/crystal-induced-arthritides/gout",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "crystal_arthritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Synovial fluid and laboratory findings in crystal arthritis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Gout (MSU)",
+        "Pseudogout (CPP)"
+      ],
+      "rows": [
+        {
+          "parameter": "Crystal shape",
+          "cells": [
+            {
+              "text": "Needle-shaped"
+            },
+            {
+              "text": "Rhomboid or rod-shaped"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Birefringence",
+          "cells": [
+            {
+              "text": "{{hy:Strongly negative}}"
+            },
+            {
+              "text": "Weakly positive or none"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Synovial WBC in a flare",
+          "unit": "/uL",
+          "cells": [
+            {
+              "text": "5000 to 75,000",
+              "range": [
+                5000,
+                75000
+              ]
+            },
+            {
+              "text": "About 24,000 (several thousand to 100,000)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Commonest joint",
+          "cells": [
+            {
+              "text": "First MTP in 70% to 90% of first flares"
+            },
+            {
+              "text": "Knee, then wrist; podagra rare"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">6.8 almost always, but normal in at least 30% during a flare",
+              "op": ">",
+              "value": 6.8
+            },
+            {
+              "text": "Not useful"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Imaging",
+          "cells": [
+            {
+              "text": "Punched-out erosions, tophi; ultrasound double-contour; dual-energy CT"
+            },
+            {
+              "text": "Chondrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain and culture",
+          "cells": [
+            {
+              "text": "Always"
+            },
+            {
+              "text": "Always; infection can coexist with crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Attack length",
+          "unit": "weeks",
+          "cells": [
+            {
+              "text": "Settles in 1 to 2 weeks untreated"
+            },
+            {
+              "text": "Can last weeks to months"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Merck quotes a gout flare synovial WBC range of 2,000 to 100,000/uL with over 80% neutrophils; Harrison gives 5,000 to 75,000/uL."
+    },
+    {
+      "id": "crystal_arthritis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic acute crystal arthritis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Septic arthritis",
+          "cells": [
+            {
+              "text": "Fever, single hot joint; can coexist with crystals"
+            },
+            {
+              "text": "{{hy:Synovial Gram stain and culture}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cellulitis",
+          "cells": [
+            {
+              "text": "Gout flare can look like cellulitis"
+            },
+            {
+              "text": "Joint aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Apatite (basic calcium phosphate) disease",
+          "cells": [
+            {
+              "text": "Destructive shoulder in elderly, low cell count"
+            },
+            {
+              "text": "Alizarin red staining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium oxalate arthropathy",
+          "cells": [
+            {
+              "text": "Often in renal failure"
+            },
+            {
+              "text": "Bipyramidal crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rheumatoid arthritis",
+          "cells": [
+            {
+              "text": "Chronic symmetric CPP synovitis can resemble it"
+            },
+            {
+              "text": "Serology, crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoarthritis",
+          "cells": [
+            {
+              "text": "CPPD pseudo-OA in atypical joints"
+            },
+            {
+              "text": "X-ray chondrocalcinosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psoriatic arthritis or palindromic rheumatism",
+          "cells": [
+            {
+              "text": "Skin disease or migrating attacks"
+            },
+            {
+              "text": "No crystals"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "crystal_arthritis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of acute gout and urate lowering",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Colchicine",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "{{hy:Acute flare, best within 12 to 24 h}}"
+            },
+            {
+              "text": "1.2 mg, then 0.6 mg 1 h later; then 0.6 to 1.2 mg daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "NSAID at full anti-inflammatory dose",
+          "cells": [
+            {
+              "text": "Acute flare without renal or GI contraindication"
+            },
+            {
+              "text": "Continue a few days after resolution"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone",
+          "cells": [
+            {
+              "text": "Flare when NSAID or colchicine unsuitable"
+            },
+            {
+              "text": "About 0.5 mg/kg daily with taper"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intra-articular glucocorticoid",
+          "cells": [
+            {
+              "text": "One or two joints"
+            },
+            {
+              "text": "Not if septic arthritis possible"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anakinra",
+          "cells": [
+            {
+              "text": "Other options contraindicated or failed"
+            },
+            {
+              "text": "100 mg SC daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urate-lowering therapy",
+          "cells": [
+            {
+              "text": "Tophi, erosions, >=2 flares a year, stones, or urate >9 mg/dL"
+            },
+            {
+              "text": "Start with colchicine or NSAID prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allopurinol",
+          "cells": [
+            {
+              "text": "First-line ULT"
+            },
+            {
+              "text": "Start 50 to 100 mg daily (50 mg if CrCl <60), titrate to maximum 800 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Febuxostat",
+          "cells": [
+            {
+              "text": "Allopurinol not tolerated"
+            },
+            {
+              "text": "20 to 40 mg daily, up to 80 to 120 mg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum urate target",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<6 mg/dL",
+              "op": "<",
+              "value": 6
+            },
+            {
+              "text": "Lower if tophi"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prophylactic colchicine",
+          "cells": [
+            {
+              "text": "First months of ULT"
+            },
+            {
+              "text": "0.6 mg once or twice daily, maximum 1.2 mg/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HLA-B*5801 test",
+          "cells": [
+            {
+              "text": "Southeast Asian and African American patients before allopurinol"
+            },
+            {
+              "text": "Reduces severe skin reactions"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Pseudogout flares are treated with the same anti-inflammatory options in practice, but the sources opened give doses for gout only."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "crystal_arthritis-dx-mgmt",
+      "title": "Diagnosis and management of acute crystal arthritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Acute hot swollen joint",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Aspirate: cell count, Gram stain, culture, polarised microscopy",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Organisms on Gram stain or culture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Treat as septic arthritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Crystal type?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Gout: colchicine, NSAID or prednisone",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Pseudogout: anti-inflammatory therapy; check Ca, Mg, iron if under 50",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "ULT indication present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Allopurinol to urate <6 mg/dL with colchicine cover",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Lifestyle advice; review comorbidities",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Needle, negative"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Rhomboid, positive"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

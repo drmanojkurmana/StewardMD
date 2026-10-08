@@ -334,5 +334,717 @@
         }
       ]
     }
+  ],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Features of Malaria",
+      "url": "https://www.cdc.gov/malaria/hcp/clinical-features/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "CDC, Malaria Treatment Tables, 2026",
+      "url": "https://www.cdc.gov/malaria/hcp/clinical-guidance/appendix-a-treatment-tables.html",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "CDC, Treatment of Severe Malaria",
+      "url": "https://cdc.gov/malaria/hcp/clinical-guidance/treatment-of-severe-malaria-1.html",
+      "kind": "web"
+    },
+    {
+      "id": "c5",
+      "label": "Tables PDF, Table 210-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "MALARIA-diagnostic",
+      "kind": "diagnostic",
+      "title": "Confirming malaria and recognising severe disease",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Thick and thin blood films",
+          "cells": [
+            {
+              "text": "Thick film concentrates parasites about 40 to 100 times; read 100 to 200 fields before calling negative",
+              "range": [
+                100,
+                200
+              ]
+            },
+            {
+              "text": "{{hy:Malaria is never a clinical diagnosis; confirm with smear or RDT}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapid diagnostic test",
+          "cells": [
+            {
+              "text": "PfHRP2, parasite LDH or aldolase antigen"
+            },
+            {
+              "text": "Does not quantify parasitaemia; HRP2 deletions give false negatives; may stay positive for weeks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incubation period",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Usually 7 to 30 days",
+              "range": [
+                7,
+                30
+              ]
+            },
+            {
+              "text": "Vivax and ovale can relapse months later"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelet count",
+          "cells": [
+            {
+              "text": "Mild thrombocytopenia usual"
+            },
+            {
+              "text": "A normal count should question the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parasitaemia",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">=5% (CDC); >5% non-immune or >10% any patient (Harrison)",
+              "op": ">=",
+              "value": 5
+            },
+            {
+              "text": "Severe malaria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haemoglobin",
+          "unit": "g/dL",
+          "cells": [
+            {
+              "text": "<7 g/dL (CDC); Hb <50 g/L or Hct <15% with >10,000 parasites/uL (Harrison)",
+              "op": "<",
+              "value": 7
+            },
+            {
+              "text": "Severe anaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Consciousness",
+          "cells": [
+            {
+              "text": "GCS <11, or Blantyre <3 in young children; coma >30 min after a seizure",
+              "op": "<",
+              "value": 11
+            },
+            {
+              "text": "Cerebral malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acidosis",
+          "cells": [
+            {
+              "text": "pH <7.25, base deficit >8 mEq/L, bicarbonate <15 mmol/L or lactate >=5 mmol/L",
+              "op": "<",
+              "value": 7.25
+            },
+            {
+              "text": "Lactate and bicarbonate are the best prognostic tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Creatinine",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">3 mg/dL (>265 umol/L) in adults",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Renal failure; lower values define severe disease in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "<40 mg/dL (<2.2 mmol/L)",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bilirubin",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": ">3 mg/dL with parasitaemia >100,000/uL or other organ dysfunction",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Jaundice counts only with another sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shock",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": "Systolic BP <80 mmHg in adults with poor perfusion; <70 mmHg in children 1 to 5 years",
+              "op": "<",
+              "value": 80
+            },
+            {
+              "text": "Circulatory collapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory",
+          "cells": [
+            {
+              "text": "Pulmonary oedema or ARDS; SpO2 <92% on air with RR >30/min",
+              "op": "<",
+              "value": 92
+            },
+            {
+              "text": "Severe malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other severe features",
+          "cells": [
+            {
+              "text": ">2 seizures in 24 h, bleeding or DIC, haemoglobinuria, prostration"
+            },
+            {
+              "text": "Any one defines severe malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Species clues on film",
+          "cells": [
+            {
+              "text": "Falciparum: rings only, banana gametocytes; vivax and ovale: enlarged cells, Schuffner dots; malariae: band forms"
+            },
+            {
+              "text": "Vivax and ovale relapse; falciparum and malariae do not"
+            }
+          ],
+          "cite": "c5"
+        },
+        {
+          "parameter": "Erythrocytic cycle",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "48 h falciparum and vivax, 50 h ovale, 72 h malariae",
+              "range": [
+                48,
+                72
+              ]
+            },
+            {
+              "text": "Basis of tertian or quartan fever"
+            }
+          ],
+          "cite": "c5"
+        }
+      ],
+      "footnote": "Conflict: CDC defines severe malaria by parasitaemia >=5% and Hb <7 g/dL; Harrison (WHO-based) uses >5% in non-immune or >10% in any patient, and Hb <50 g/L with parasite density >10,000/uL. Both kept."
+    },
+    {
+      "id": "MALARIA-ddx",
+      "kind": "ddx",
+      "title": "Febrile illnesses that mimic malaria",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dengue",
+          "cells": [
+            {
+              "text": "Myalgia usually more severe than in malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Leptospirosis",
+          "cells": [
+            {
+              "text": "Muscle tenderness and petechial haemorrhages, which malaria lacks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhus and rickettsial illness",
+          "cells": [
+            {
+              "text": "Tender muscles, unlike malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral haemorrhagic fevers",
+          "cells": [
+            {
+              "text": "Petechial haemorrhages, very rare in malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial meningitis",
+          "cells": [
+            {
+              "text": "Neck stiffness and photophobia, absent in malaria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sepsis or bacteraemia",
+          "cells": [
+            {
+              "text": "May coexist; parasitaemia can be incidental in high-transmission areas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute viral illness",
+          "cells": [
+            {
+              "text": "Early malaria is non-specific; only a smear or RDT separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetic ketoacidosis",
+          "cells": [
+            {
+              "text": "Acidotic breathing overlaps with severe malaria acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematological malignancy",
+          "cells": [
+            {
+              "text": "Hyperreactive malarial splenomegaly with pancytopenia can be mistaken for it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "A positive smear or RDT is the separating test for malaria in every row; sources gave no other row-specific test."
+    },
+    {
+      "id": "MALARIA-treatment",
+      "kind": "treatment",
+      "title": "Adult treatment of malaria (CDC regimens)",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Adult dose as stated"
+      ],
+      "rows": [
+        {
+          "parameter": "IV artesunate",
+          "cells": [
+            {
+              "text": "{{hy:Severe malaria, any species, start as soon as possible}}"
+            },
+            {
+              "text": "2.4 mg/kg at 0, 12 and 24 h; if parasitaemia >1% continue once daily, up to 7 days total"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Oral bridge while awaiting artesunate",
+          "cells": [
+            {
+              "text": "Severe malaria when IV artesunate is not in stock"
+            },
+            {
+              "text": "Artemether-lumefantrine preferred; atovaquone-proguanil, quinine or mefloquine"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Oral follow-on after artesunate",
+          "cells": [
+            {
+              "text": "Parasitaemia <=1% and tolerating oral drugs"
+            },
+            {
+              "text": "Full course of artemether-lumefantrine or atovaquone-proguanil, 8 to 24 h after last IV dose"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Artemether-lumefantrine",
+          "cells": [
+            {
+              "text": "Uncomplicated falciparum or unknown species, first choice"
+            },
+            {
+              "text": "4 tablets (20/120 mg) per dose; dose at 0 and 8 h, then twice daily days 2 to 5 (10 doses)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Atovaquone-proguanil",
+          "cells": [
+            {
+              "text": "Uncomplicated falciparum, vivax, ovale, malariae or knowlesi"
+            },
+            {
+              "text": "4 adult tablets (250/100 mg) once daily for 3 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Quinine sulfate plus doxycycline",
+          "cells": [
+            {
+              "text": "Alternative for uncomplicated malaria"
+            },
+            {
+              "text": "Quinine 542 mg base three times daily plus doxycycline 100 mg twice daily, both 7 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Mefloquine",
+          "cells": [
+            {
+              "text": "Only when no other option can be used"
+            },
+            {
+              "text": "684 mg base, then 456 mg base 6 to 12 h later"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Chloroquine phosphate",
+          "cells": [
+            {
+              "text": "Vivax or ovale from chloroquine-sensitive areas; confirmed malariae or knowlesi"
+            },
+            {
+              "text": "600 mg base, then 300 mg base at 6, 24 and 48 h"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Artemether-lumefantrine, 3-day course",
+          "cells": [
+            {
+              "text": "Uncomplicated vivax, ovale, malariae or knowlesi"
+            },
+            {
+              "text": "4 tablets per dose; 0 and 8 h, then twice daily days 2 and 3"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Primaquine",
+          "cells": [
+            {
+              "text": "Anti-relapse for vivax or ovale after normal quantitative G6PD test; not in pregnancy"
+            },
+            {
+              "text": "30 mg base daily for 14 days (total 6 mg/kg if >=70 kg)"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Tafenoquine",
+          "cells": [
+            {
+              "text": "Anti-relapse, normal G6PD, only with chloroquine or hydroxychloroquine acute therapy; not in pregnancy"
+            },
+            {
+              "text": "300 mg single dose"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Monitoring after artesunate",
+          "cells": [
+            {
+              "text": "All severe cases"
+            },
+            {
+              "text": "Daily smears until negative; check for haemolysis weekly for up to 4 weeks"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Exchange transfusion",
+          "cells": [
+            {
+              "text": "Not recommended"
+            },
+            {
+              "text": "No proven benefit"
+            }
+          ],
+          "cite": "c4"
+        }
+      ],
+      "footnote": "Doses are US CDC adult regimens (2026 update extends artemether-lumefantrine to 5 days for falciparum). India's national programme regimens were not reviewed here and may differ. Do not use the drug taken for chemoprophylaxis."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "MALARIA-dx-mgmt",
+      "title": "Diagnosis and management of malaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever in a person in or from a malaria-endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Thick and thin blood films, or RDT if microscopy unavailable",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Parasites seen or RDT positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat films; look for other causes of fever",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Any severe criterion (parasitaemia >=5%, coma, shock, AKI, acidosis)?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "IV artesunate 2.4 mg/kg at 0, 12, 24 h; ICU-level supportive care",
+          "cite": "c4"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Parasitaemia <=1% and taking oral drugs?",
+          "cite": "c4"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Continue IV artesunate daily, up to 7 days",
+          "cite": "c4"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Full oral follow-on course; weekly haemolysis checks for 4 weeks",
+          "cite": "c4"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Falciparum or species unknown?",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Artemether-lumefantrine 5-day course or atovaquone-proguanil",
+          "cite": "c3"
+        },
+        {
+          "id": "n12",
+          "type": "action",
+          "text": "Vivax or ovale: acute course plus primaquine or tafenoquine if G6PD normal",
+          "cite": "c3"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Cure; daily smears until negative",
+          "cite": "c4"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Malaria excluded after repeated negative films",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n14",
+          "label": "Still negative"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "After 3rd dose"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "When criteria met"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No, vivax or ovale"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Next"
+        }
+      ]
+    }
   ]
 }

@@ -148,5 +148,298 @@
       "caption": "Overview comparison matrix for central retinal artery occlusion."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_retinal_artery_occlusion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundoscopy",
+          "cells": [
+            {
+              "text": "Retinal pallor and a cherry-red spot at the fovea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relative afferent pupillary defect assessment",
+          "cells": [
+            {
+              "text": "Present in the affected eye"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ESR, CRP and platelets",
+          "cells": [
+            {
+              "text": "Screen for giant cell arteritis; temporal artery biopsy if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carotid Doppler ultrasound",
+          "cells": [
+            {
+              "text": "Identifies an embolic source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and echocardiography",
+          "cells": [
+            {
+              "text": "Cardiac source evaluation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_retinal_artery_occlusion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stroke-of-eye pathway",
+          "cells": [
+            {
+              "text": "Emergency referral with the acute pathway and workup used for cerebral ischaemia"
+            },
+            {
+              "text": "Time-critical emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ocular massage and pressure lowering",
+          "cells": [
+            {
+              "text": "Ocular massage; anterior chamber paracentesis and pressure-lowering drugs"
+            },
+            {
+              "text": "Reperfusion attempts; benefit limited once the window has passed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant cell arteritis treatment",
+          "cells": [
+            {
+              "text": "High-dose corticosteroids when suspected in older patients"
+            },
+            {
+              "text": "Do not wait for biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary prevention",
+          "cells": [
+            {
+              "text": "Antiplatelet therapy; control of hypertension, diabetes and hyperlipidaemia"
+            },
+            {
+              "text": "Prevents subsequent cerebral stroke"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Embolic source treatment",
+          "cells": [
+            {
+              "text": "Carotid endarterectomy or anticoagulation for atrial fibrillation"
+            },
+            {
+              "text": "Directed by carotid and cardiac evaluation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke or TIA service referral",
+          "cells": [
+            {
+              "text": "Neuroimaging through the stroke or TIA service"
+            },
+            {
+              "text": "Referral"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-vision and fellow-eye care",
+          "cells": [
+            {
+              "text": "Low-vision support, monitoring and protection of the fellow eye"
+            },
+            {
+              "text": "Fellow eye"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_retinal_artery_occlusion-dx-mgmt",
+      "title": "Diagnosis and management of Central retinal artery occlusion",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central retinal artery occlusion: sudden painless loss of vision in one eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (suspected giant cell arteritis or ophthalmic artery involvement)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent systemic steroids for suspected arteritis; stroke pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundoscopy for cherry-red spot; ESR, CRP and platelets; carotid Doppler",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Cherry-red spot with pale retina and afferent defect confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Stroke-of-eye pathway with emergency referral and cerebral ischaemia workup",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check central retinal vein occlusion and optic neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ocular massage and measures to lower intraocular pressure within the window",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "High-dose corticosteroids if giant cell arteritis is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiplatelet therapy and control of hypertension, diabetes and lipids",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Visual outcome often poor; priority is preventing stroke and protecting fellow eye",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

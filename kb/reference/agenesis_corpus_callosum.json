@@ -150,5 +150,355 @@
       "caption": "Overview comparison matrix for agenesis of the corpus callosum."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Volpe's Neurology of the Newborn / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "agenesis_corpus_callosum-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Agenesis and associated malformations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prenatal ultrasound and fetal MRI when suspected",
+          "cells": [
+            {
+              "text": "Antenatal diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chromosomal microarray and exome sequencing where indicated",
+          "cells": [
+            {
+              "text": "Chromosomal or genetic cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screening for disorders with callosal agenesis",
+          "cells": [
+            {
+              "text": "Organic acidaemias and similar"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological examination",
+          "cells": [
+            {
+              "text": "Aicardi syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental assessment and EEG if seizures occur",
+          "cells": [
+            {
+              "text": "Development and seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agenesis_corpus_callosum-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Interhemispheric cyst with callosal dysgenesis",
+          "cells": [
+            {
+              "text": "Interhemispheric cyst"
+            },
+            {
+              "text": "Brain MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aicardi syndrome",
+          "cells": [
+            {
+              "text": "Infantile spasms, especially in girls"
+            },
+            {
+              "text": "Ophthalmological examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Secondary callosal thinning from destructive or hypoxic-ischaemic injury",
+          "cells": [
+            {
+              "text": "Destructive or hypoxic injury"
+            },
+            {
+              "text": "Brain MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "agenesis_corpus_callosum-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Determination and management of the underlying cause and associated malformations",
+          "cells": [
+            {
+              "text": "Prognosis and treatment depend on the cause"
+            },
+            {
+              "text": "Cause-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiseizure medication tailored to seizure type, including infantile spasms",
+          "cells": [
+            {
+              "text": "Seizures"
+            },
+            {
+              "text": "Type-specific therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early physiotherapy, occupational and speech therapy",
+          "cells": [
+            {
+              "text": "Developmental delay"
+            },
+            {
+              "text": "Early intervention"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for associated anomalies, including Aicardi syndrome",
+          "cells": [
+            {
+              "text": "Associated anomalies"
+            },
+            {
+              "text": "Imaging, eye and metabolic review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Educational and psychological support",
+          "cells": [
+            {
+              "text": "Cognitive, social and interhemispheric transfer difficulties"
+            },
+            {
+              "text": "Educational input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling with microarray and exome sequencing",
+          "cells": [
+            {
+              "text": "Recurrence risk"
+            },
+            {
+              "text": "Defines recurrence risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Neurology, genetics and allied health"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "agenesis_corpus_callosum-dx-mgmt",
+      "title": "Diagnosis and management of Agenesis of the corpus callosum",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Callosal agenesis on imaging, sometimes after prenatal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Seizures or infantile spasms, or regression and multiple malformations?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent paediatric neurology review; treat seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Brain MRI; chromosomal microarray; exome; metabolic screening; eye review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Isolated callosal agenesis with no associated syndrome or metabolic disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Developmental follow-up; counselling on recurrence risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review holoprosencephaly, Aicardi, septo-optic dysplasia and metabolic causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antiseizure medication tailored to seizure type",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Early physiotherapy, occupational and speech therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Screen for associated anomalies including Aicardi syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Isolated agenesis may be near-normal; syndromic forms depend on the cause",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

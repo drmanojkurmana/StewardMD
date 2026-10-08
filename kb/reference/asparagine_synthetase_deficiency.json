@@ -148,5 +148,315 @@
       "caption": "Overview comparison matrix for asparagine synthetase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID (Online Metabolic and Molecular Bases of Inherited Disease)",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "asparagine_synthetase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Plasma and CSF amino acids",
+          "cells": [
+            {
+              "text": "Low or low-normal asparagine and related changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI",
+          "cells": [
+            {
+              "text": "Microcephaly, simplified gyration and atrophy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG",
+          "cells": [
+            {
+              "text": "Characterises the epileptic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ASNS gene sequencing",
+          "cells": [
+            {
+              "text": "The definitive test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metabolic screen",
+          "cells": [
+            {
+              "text": "Excludes other treatable encephalopathies"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asparagine_synthetase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Serine biosynthesis defects (PHGDH and related)",
+          "cells": [
+            {
+              "text": "Separated by ASNS gene analysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other genetic causes of congenital microcephaly with epileptic encephalopathy",
+          "cells": [
+            {
+              "text": "Separated by ASNS gene analysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asparagine_synthetase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiepileptic therapy",
+          "cells": [
+            {
+              "text": "Combination anticonvulsants for intractable seizures"
+            },
+            {
+              "text": "Epileptic encephalopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurological supportive care",
+          "cells": [
+            {
+              "text": "Antispasticity agents and management of irritability"
+            },
+            {
+              "text": "Spasticity and exaggerated startle"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition and airway protection",
+          "cells": [
+            {
+              "text": "Safe feeding; gastrostomy where dysphagia or aspiration risk"
+            },
+            {
+              "text": "Aspiration risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asparagine supplementation",
+          "cells": [
+            {
+              "text": "Dietary asparagine, considered"
+            },
+            {
+              "text": "Uncertain benefit; limited blood-brain-barrier uptake"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, respiratory and palliative input",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            },
+            {
+              "text": "Severe impairment and high early mortality"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening; prenatal or preimplantation testing offered"
+            },
+            {
+              "text": "Autosomal recessive"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "asparagine_synthetase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Asparagine synthetase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive microcephaly with refractory neonatal or infantile seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe startle, spasticity or encephalopathy from birth?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antiepileptic control of intractable seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Plasma and CSF amino acids, MRI, EEG, ASNS sequencing, metabolic screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ASNS gene variants confirm the diagnosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Combination antiseizure therapy for intractable seizures",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antispasticity agents and irritability management",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Gastrostomy if dysphagia or aspiration risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider asparagine supplementation; benefit uncertain",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe impairment and high early mortality; developmental and palliative input",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -152,5 +152,286 @@
       "caption": "Overview comparison matrix for anti-dppx encephalitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuro-immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anti_dppx_encephalitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum and CSF DPPX IgG assay",
+          "cells": [
+            {
+              "text": "Antibody confirmation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigations for B-cell lymphoproliferative disease",
+          "cells": [
+            {
+              "text": "Lymphoma screen with cross-sectional imaging and haematology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and EMG",
+          "cells": [
+            {
+              "text": "Hyperexcitability and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal evaluation",
+          "cells": [
+            {
+              "text": "Chronic diarrhoea; structural or infective causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autonomic function testing",
+          "cells": [
+            {
+              "text": "Where dysautonomia is prominent"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anti_dppx_encephalitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "First-line immunotherapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, intravenous immunoglobulin or plasma exchange"
+            },
+            {
+              "text": "Escalate to rituximab or cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screen for B-cell lymphoproliferative disorder",
+          "cells": [
+            {
+              "text": "Treat any associated lymphoma"
+            },
+            {
+              "text": "Lymphoma association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperexcitability control",
+          "cells": [
+            {
+              "text": "Benzodiazepines for myoclonus and startle"
+            },
+            {
+              "text": "Symptomatic suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Manage prominent diarrhoea and weight loss; correct deficits"
+            },
+            {
+              "text": "Resultant deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dysautonomia and encephalomyelitis",
+          "cells": [
+            {
+              "text": "Monitor and manage"
+            },
+            {
+              "text": "Progressive encephalomyelitis with rigidity and myoclonus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maintenance and relapse surveillance",
+          "cells": [
+            {
+              "text": "Immunotherapy with multidisciplinary follow-up"
+            },
+            {
+              "text": "High-risk relapse pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anti_dppx_encephalitis-dx-mgmt",
+      "title": "Diagnosis and management of Anti-DPPX encephalitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Chronic diarrhoea and weight loss before neurological decline",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe unexplained diarrhoea with weight loss, or PERM-like course?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent lymphoma screen; benzodiazepines for hyperexcitability",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "DPPX IgG assay, lymphoma work-up, MRI, EEG and EMG, GI evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "DPPX IgG confirmed in serum or CSF?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "First-line immunotherapy: steroids, IVIG or plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat antibody testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for and treat B-cell lymphoproliferative disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Benzodiazepines for myoclonus and startle",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nutritional support and management of dysautonomia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Escalate to rituximab or cyclophosphamide; relapse surveillance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

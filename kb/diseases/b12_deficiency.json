@@ -139,5 +139,506 @@
       "caption": "Diagnostic and clinical overview matrix for vitamin b12 deficiency (incl. subacute combined degeneration)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison 22e, Megaloblastic Anaemias (entry text)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Vitamin B12 Deficiency",
+      "url": "https://www.merckmanuals.com/professional/nutritional-disorders/vitamin-deficiency-dependency-and-toxicity/vitamin-b12-deficiency",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table e37-1 and Table 105-1",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "b12_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing vitamin B12 deficiency",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum B12",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "<200 (<145 pmol/L)",
+              "op": "<",
+              "value": 200
+            },
+            {
+              "text": "{{hy:Deficiency}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Serum B12, low-normal",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "200 to 350",
+              "range": [
+                200,
+                350
+              ]
+            },
+            {
+              "text": "Check MMA and homocysteine if suspicion persists"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Methylmalonic acid",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "B12 deficiency; normal in folate deficiency; also rises in renal failure"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Homocysteine",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Either B12 or folate deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Holotranscobalamin II",
+          "unit": "pg/mL",
+          "cells": [
+            {
+              "text": "<40",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "Indicates deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood count and film",
+          "cells": [
+            {
+              "text": "Macrocytosis, hypersegmented neutrophils"
+            },
+            {
+              "text": "Megaloblastic picture; can precede anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LDH and bilirubin",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Ineffective erythropoiesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intrinsic factor antibodies",
+          "cells": [
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "Pernicious anaemia; sensitivity can be poor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neurological signs",
+          "cells": [
+            {
+              "text": "Loss of position and vibration sense, weakness, ataxia, extensor plantars"
+            },
+            {
+              "text": "Can occur without anaemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Schilling test, urinary excretion",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "<5% means poor absorption",
+              "op": "<",
+              "value": 5
+            },
+            {
+              "text": ">=9% normal; rarely used now"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Schilling pattern: pernicious anaemia",
+          "cells": [
+            {
+              "text": "Low; corrects with intrinsic factor"
+            },
+            {
+              "text": "Not with pancreatic enzymes or antibiotics"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Schilling pattern: chronic pancreatitis",
+          "cells": [
+            {
+              "text": "Low; corrects with pancreatic enzymes"
+            },
+            {
+              "text": "Separates causes of malabsorption"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Schilling pattern: bacterial overgrowth",
+          "cells": [
+            {
+              "text": "Low; corrects after 5 days of antibiotics"
+            },
+            {
+              "text": "Separates causes of malabsorption"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Schilling pattern: ileal disease",
+          "cells": [
+            {
+              "text": "Low; no correction with any step"
+            },
+            {
+              "text": "Separates causes of malabsorption"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "b12_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic B12 deficiency",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Folate deficiency",
+          "cells": [
+            {
+              "text": "{{hy:Normal MMA}}; folate alone may mask B12 deficiency"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antifolate drugs such as methotrexate",
+          "cells": [
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Drugs affecting DNA synthesis (for example zidovudine)",
+          "cells": [
+            {
+              "text": "Drug history"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Myelodysplasia or AML",
+          "cells": [
+            {
+              "text": "Refractory megaloblastic change with normal vitamins"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Dementia",
+          "cells": [
+            {
+              "text": "Cognitive change in older adults without B12 markers"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nitrous oxide exposure",
+          "cells": [
+            {
+              "text": "Repeated use impairs B12 utilisation"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "b12_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Treatment of vitamin B12 deficiency",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Parenteral vitamin B12",
+          "cells": [
+            {
+              "text": "{{hy:Severe deficiency or neurological involvement}}"
+            },
+            {
+              "text": "1 mg IM 1 to 4 times weekly until counts correct, then 1 mg IM monthly"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral vitamin B12",
+          "cells": [
+            {
+              "text": "No severe deficiency or neurological signs"
+            },
+            {
+              "text": "1000 to 2000 mcg once daily; absorbed even without intrinsic factor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Do not give folate alone",
+          "cells": [
+            {
+              "text": "Any suspected B12 deficiency"
+            },
+            {
+              "text": "Anaemia improves while nerve damage progresses"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Treat the cause",
+          "cells": [
+            {
+              "text": "Pernicious anaemia, gastric surgery, ileal disease, metformin, diet"
+            },
+            {
+              "text": "Lifelong therapy unless cause corrected"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitor response",
+          "cells": [
+            {
+              "text": "After starting treatment"
+            },
+            {
+              "text": "Reticulocytes rise within about 1 week; counts correct by 6 weeks"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Screen for autoimmune disease",
+          "cells": [
+            {
+              "text": "Pernicious anaemia"
+            },
+            {
+              "text": "Associated autoimmune conditions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Neurological recovery is slow and deficits of months to years may be permanent, so do not wait for a haematological response before treating."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "b12_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of vitamin B12 deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Macrocytic anaemia, neuropathy, ataxia or cognitive change",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "FBC, film, reticulocytes, serum B12 and folate",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "B12 <200 pg/mL?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "B12 200 to 350 with ongoing suspicion?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Check MMA and homocysteine",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "MMA raised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Look for folate deficiency, drugs, MDS",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intrinsic factor antibodies; find cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Neurological signs or severe deficiency?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "IM B12 1 mg 1 to 4 times weekly, then monthly",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Oral B12 1000 to 2000 mcg daily",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

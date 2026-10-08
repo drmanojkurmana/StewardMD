@@ -153,5 +153,336 @@
       "caption": "Overview comparison matrix for autosomal recessive agammaglobulinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autosomal_recessive_agammaglobulinaemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum immunoglobulin quantification (IgG, IgA, IgM)",
+          "cells": [
+            {
+              "text": "Immunoglobulin levels, age-matched"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphocyte immunophenotyping",
+          "cells": [
+            {
+              "text": "Absent CD19 and CD20 B cells with preserved T and NK cells"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific antibody titres and isohaemagglutinins",
+          "cells": [
+            {
+              "text": "Antibody responses"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BTK protein expression and BTK gene testing",
+          "cells": [
+            {
+              "text": "Excludes X-linked disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted or panel gene sequencing (IGHM, IGLL1, CD79A, CD79B, BLNK, PIK3R1)",
+          "cells": [
+            {
+              "text": "Autosomal recessive genes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow examination",
+          "cells": [
+            {
+              "text": "Arrest at the pro-B to pre-B transition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_recessive_agammaglobulinaemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked agammaglobulinaemia (Bruton, BTK deficiency)",
+          "cells": [
+            {
+              "text": "Excluded by BTK protein and gene testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Common variable immunodeficiency with very low B cells",
+          "cells": [
+            {
+              "text": "B-cell count assessed by lymphocyte immunophenotyping"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_recessive_agammaglobulinaemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong immunoglobulin replacement",
+          "cells": [
+            {
+              "text": "Intravenous or subcutaneous, maintaining protective trough IgG"
+            },
+            {
+              "text": "Mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antibiotics",
+          "cells": [
+            {
+              "text": "Treat bacterial infection promptly; prophylaxis in selected patients"
+            },
+            {
+              "text": "Bacterial infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid live attenuated vaccines",
+          "cells": [
+            {
+              "text": "Unsafe and ineffective; immunise close contacts"
+            },
+            {
+              "text": "Vaccination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sinopulmonary care",
+          "cells": [
+            {
+              "text": "Airway clearance, physiotherapy and early treatment of exacerbations"
+            },
+            {
+              "text": "Bronchiectasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Enterovirus vigilance",
+          "cells": [
+            {
+              "text": "Chronic enteroviral infection"
+            },
+            {
+              "text": "Serious complication of antibody deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunology follow-up",
+          "cells": [
+            {
+              "text": "Trough levels, growth and end-organ function"
+            },
+            {
+              "text": "Regular review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; affects both sexes"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autosomal_recessive_agammaglobulinaemia-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal Recessive Agammaglobulinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Recurrent or invasive bacterial infection after infancy with absent B cells",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Overwhelming bacterial infection or chronic enteroviral meningoencephalitis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent antibiotics; enteroviral screen if neurological features",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Immunoglobulins, lymphocyte phenotyping, BTK testing, gene panel, marrow",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Absent B cells with normal BTK and a recessive gene variant found?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lifelong immunoglobulin replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotic prophylaxis in selected patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid live vaccines; immunise close contacts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Airway clearance and physiotherapy for sinopulmonary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance for enteroviral infection and regular trough IgG review",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

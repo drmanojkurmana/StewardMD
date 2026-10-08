@@ -148,5 +148,327 @@
       "caption": "Overview comparison matrix for charcot-marie-tooth disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley's Neurology in Clinical Practice / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Separates demyelinating from axonal forms by velocity and amplitude"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PMP22 dosage analysis and gene panel",
+          "cells": [
+            {
+              "text": "Targeted genetic testing, often starting with PMP22 dosage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family history and examination of relatives",
+          "cells": [
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot and gait assessment",
+          "cells": [
+            {
+              "text": "Planning of orthoses and surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of acquired neuropathy",
+          "cells": [
+            {
+              "text": "When the picture is atypical"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Chronic inflammatory demyelinating polyneuropathy",
+          "cells": [
+            {
+              "text": "Rapid or asymmetric progression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Friedreich ataxia and other neurodegenerative disorders",
+          "cells": [
+            {
+              "text": "Prominent sensory ataxia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Physiotherapy and occupational therapy",
+          "cells": [
+            {
+              "text": "Maintain strength, flexibility and function"
+            },
+            {
+              "text": "No disease-modifying drug"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and footwear",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, appropriate footwear and walking aids"
+            },
+            {
+              "text": "Foot drop"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot deformity care",
+          "cells": [
+            {
+              "text": "Podiatry and orthopaedic surgery such as tendon transfer, osteotomy or arthrodesis"
+            },
+            {
+              "text": "Pes cavus and hammer toes when disabling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control",
+          "cells": [
+            {
+              "text": "Treat neuropathic pain, muscle cramps and fatigue"
+            },
+            {
+              "text": "Symptomatic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid neurotoxic drugs",
+          "cells": [
+            {
+              "text": "Avoid drugs such as vincristine"
+            },
+            {
+              "text": "Can worsen neuropathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication surveillance",
+          "cells": [
+            {
+              "text": "Monitor scoliosis, hip dysplasia and respiratory or vocal cord involvement"
+            },
+            {
+              "text": "Subtype-dependent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Guided by subtype and inheritance pattern; family assessment"
+            },
+            {
+              "text": "Family assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Charcot-Marie-Tooth: childhood-onset distal weakness, pes cavus, foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid or asymmetric decline, sensory ataxia, respiratory signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: review for CIDP or an alternative neurodegenerative diagnosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, PMP22 dosage, gene panel and family history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Demyelinating or axonal pattern with a hereditary variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; no disease-modifying drug exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CIDP, acquired axonal neuropathy and Friedreich ataxia",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses and footwear for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Podiatry and orthopaedic foot surgery for disabling deformity",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Avoid neurotoxic drugs such as vincristine; treat pain and cramps",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slowly progressive; outcome depends on subtype and disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

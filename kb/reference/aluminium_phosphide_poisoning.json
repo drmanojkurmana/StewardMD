@@ -149,5 +149,382 @@
       "caption": "Overview comparison matrix for aluminium phosphide poisoning."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / WHO & national toxicology guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aluminium_phosphide_poisoning-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Continuous ECG and cardiac monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and myocarditis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas with anion gap and lactate",
+          "cells": [
+            {
+              "text": "High anion-gap acidosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes including magnesium, renal and liver function",
+          "cells": [
+            {
+              "text": "Multi-organ involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Silver nitrate paper test on breath or gastric aspirate where available",
+          "cells": [
+            {
+              "text": "Phosphine detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aluminium_phosphide_poisoning-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Cyanide or hydrogen sulfide poisoning",
+          "cells": [
+            {
+              "text": "Other cellular asphyxiants"
+            },
+            {
+              "text": "Toxicology history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiogenic shock from other causes",
+          "cells": [
+            {
+              "text": "Shock with cardiac dysfunction"
+            },
+            {
+              "text": "Echocardiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic shock",
+          "cells": [
+            {
+              "text": "Shock with infection source"
+            },
+            {
+              "text": "Cultures and clinical review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other lethal pesticide ingestion",
+          "cells": [
+            {
+              "text": "Pesticide exposure"
+            },
+            {
+              "text": "Toxicology history"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fulminant myocarditis",
+          "cells": [
+            {
+              "text": "Myocardial inflammation"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aluminium_phosphide_poisoning-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Aggressive supportive resuscitation in critical care",
+          "cells": [
+            {
+              "text": "No specific antidote"
+            },
+            {
+              "text": "Airway, oxygenation and haemodynamics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV fluids, vasopressors or inotropes; VA-ECMO in selected cases",
+          "cells": [
+            {
+              "text": "Refractory shock"
+            },
+            {
+              "text": "Selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium bicarbonate and electrolyte correction including magnesium",
+          "cells": [
+            {
+              "text": "Severe metabolic acidosis"
+            },
+            {
+              "text": "Correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious gastrointestinal decontamination",
+          "cells": [
+            {
+              "text": "Ingested tablet"
+            },
+            {
+              "text": "Staff protected from phosphine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous ECG and echocardiography with arrhythmia treatment",
+          "cells": [
+            {
+              "text": "Arrhythmia and ventricular dysfunction"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy and organ support",
+          "cells": [
+            {
+              "text": "Failing organs"
+            },
+            {
+              "text": "As required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Protection of rescuers and early toxicology involvement",
+          "cells": [
+            {
+              "text": "Off-gassing risk"
+            },
+            {
+              "text": "Safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychiatric assessment after recovery",
+          "cells": [
+            {
+              "text": "Deliberate self-harm context"
+            },
+            {
+              "text": "After recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aluminium_phosphide_poisoning-dx-mgmt",
+      "title": "Diagnosis and management of Aluminium phosphide poisoning",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ingestion or exposure to aluminium phosphide with breath or gastric odour",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Refractory hypotension, shock or severe acidosis with rising lactate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent critical care and toxicology; ventilate area if exposed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "ECG; echocardiography; blood gas with anion gap and lactate",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Shock and high anion gap with phosphine exposure confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive resuscitation; no specific antidote",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review cyanide, cardiogenic and septic shock, and other pesticides",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Vasopressors or inotropes; consider VA-ECMO in selected cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sodium bicarbonate and magnesium correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Protect staff from off-gassing; psychiatric review after recovery",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Very high mortality, especially with fresh tablets and established shock",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

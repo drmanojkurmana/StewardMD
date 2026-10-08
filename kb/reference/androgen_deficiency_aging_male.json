@@ -155,5 +155,308 @@
       "caption": "Overview comparison matrix for androgen deficiency in the ageing male (late-onset hypogonadism)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Campbell-Walsh-Wein Urology / WHO laboratory manual for semen analysis",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "androgen_deficiency_aging_male-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Early-morning fasting total testosterone",
+          "cells": [
+            {
+              "text": "Repeated on a second occasion to confirm a low result"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex-hormone-binding globulin with calculated free or bioavailable testosterone",
+          "cells": [
+            {
+              "text": "Used when binding protein is abnormal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Luteinising hormone and follicle-stimulating hormone",
+          "cells": [
+            {
+              "text": "Distinguish primary from secondary hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum prolactin",
+          "cells": [
+            {
+              "text": "Pituitary imaging if a central cause or markedly low gonadotropins are found"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Iron studies and ferritin",
+          "cells": [
+            {
+              "text": "Screen for haemochromatosis in suspected primary failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline haematocrit and prostate-specific antigen",
+          "cells": [
+            {
+              "text": "Taken before any replacement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "androgen_deficiency_aging_male-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reversible contributors first",
+          "cells": [
+            {
+              "text": "Weight reduction, glycaemic control in type 2 diabetes, treat metabolic syndrome"
+            },
+            {
+              "text": "Can restore endogenous testosterone before any replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone replacement",
+          "cells": [
+            {
+              "text": "Transdermal gel or intramuscular ester"
+            },
+            {
+              "text": "Men with persistent characteristic symptoms and confirmed low early-morning testosterone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Phosphodiesterase-5 inhibitors",
+          "cells": [
+            {
+              "text": "Treat associated erectile dysfunction"
+            },
+            {
+              "text": "Used alongside hormonal correction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadotropin therapy",
+          "cells": [
+            {
+              "text": "Preserve fertility rather than give exogenous testosterone"
+            },
+            {
+              "text": "Men still seeking fatherhood, since replacement suppresses spermatogenesis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haematocrit monitoring",
+          "cells": [
+            {
+              "text": "Dose reduction or venesection for therapy-induced erythrocytosis"
+            },
+            {
+              "text": "Haematocrit monitored during therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prostate surveillance",
+          "cells": [
+            {
+              "text": "Baseline and periodic prostate-specific antigen with prostate examination"
+            },
+            {
+              "text": "Detects unmasked prostate disease during replacement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid testosterone",
+          "cells": [
+            {
+              "text": "Untreated prostate or breast cancer, decompensated heart failure"
+            },
+            {
+              "text": "Assess bone density given fracture risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "androgen_deficiency_aging_male-dx-mgmt",
+      "title": "Diagnosis and management of Androgen deficiency in the ageing male (late-onset hypogonadism)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent characteristic symptoms with unequivocally low serum testosterone",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Pituitary mass, breast mass or rising PSA suggested?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent evaluation for pituitary mass, breast or prostate disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Repeat fasting early-morning testosterone, LH, FSH, SHBG, prolactin",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low testosterone confirmed on a second early-morning sample?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Correct reversible causes: weight, glycaemia, metabolic syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat the targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Testosterone gel or ester for confirmed symptomatic men",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Phosphodiesterase-5 inhibitor for associated erectile dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor haematocrit and PSA; assess bone density",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptomatic men with confirmed deficiency usually improve on replacement",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

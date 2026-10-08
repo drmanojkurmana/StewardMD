@@ -147,5 +147,298 @@
       "caption": "Overview comparison matrix for cerebral aneurysm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Youmans & Winn Neurological Surgery / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cerebral_aneurysm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-contrast CT head",
+          "cells": [
+            {
+              "text": "Highly sensitive for subarachnoid blood when done early"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lumbar puncture for xanthochromia",
+          "cells": [
+            {
+              "text": "Used when CT is negative but suspicion persists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT angiography or digital subtraction angiography",
+          "cells": [
+            {
+              "text": "Defines aneurysm location and morphology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or MR angiography",
+          "cells": [
+            {
+              "text": "Detection and follow-up of unruptured aneurysms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium monitoring and transcranial Doppler",
+          "cells": [
+            {
+              "text": "Hyponatraemia and vasospasm after haemorrhage"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cerebral_aneurysm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Secure the aneurysm",
+          "cells": [
+            {
+              "text": "Endovascular coiling or surgical clipping"
+            },
+            {
+              "text": "Prevents rebleeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nimodipine",
+          "cells": [
+            {
+              "text": "Reduces delayed cerebral ischaemia from vasospasm while maintaining euvolaemia"
+            },
+            {
+              "text": "Vasospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurocritical care",
+          "cells": [
+            {
+              "text": "Blood pressure control before securing, analgesia, external ventricular drain for hydrocephalus"
+            },
+            {
+              "text": "Acute care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sodium and vasospasm monitoring",
+          "cells": [
+            {
+              "text": "Monitor sodium; transcranial Doppler for vasospasm"
+            },
+            {
+              "text": "Hyponatraemia and vasospasm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Unruptured aneurysm strategy",
+          "cells": [
+            {
+              "text": "Risk-stratify for surveillance or preventive treatment; control blood pressure and smoking"
+            },
+            {
+              "text": "Rupture risk against treatment risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relatives and associated conditions",
+          "cells": [
+            {
+              "text": "Screen relatives; consider polycystic kidney disease and connective tissue disorders"
+            },
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist referral",
+          "cells": [
+            {
+              "text": "Neurosurgical and neuro-interventional team; rehabilitation for survivors"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cerebral_aneurysm-dx-mgmt",
+      "title": "Diagnosis and management of Cerebral aneurysm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected aneurysmal subarachnoid haemorrhage: sudden thunderclap headache",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (reduced consciousness, focal deficit, painful third nerve palsy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency imaging and neurosurgical or neuro-interventional referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Non-contrast CT head; lumbar puncture for xanthochromia if CT is negative",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Subarachnoid blood on CT or xanthochromia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Secure the ruptured aneurysm by coiling or clipping to prevent rebleeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check reversible cerebral vasoconstriction, perimesencephalic haemorrhage, migraine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Give nimodipine and maintain euvolaemia against vasospasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor sodium and use transcranial Doppler for vasospasm",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Drain hydrocephalus; control blood pressure and risk factors",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early securing improves survivor outcomes; rupture carries high mortality",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

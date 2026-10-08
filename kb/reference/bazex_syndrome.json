@@ -147,5 +147,87 @@
       "caption": "Overview comparison matrix for bazex syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bazex_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic findings in Bazex syndrome",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "ENT examination with nasendoscopy and laryngoscopy", "cells": [{"text": "Upper aerodigestive squamous carcinoma, the associated primary"}], "cite": "c1"},
+        {"parameter": "CT or MRI of head and neck, chest and mediastinum", "cells": [{"text": "Cervical or mediastinal lymphadenopathy, which is commonly metastatic"}], "cite": "c1"},
+        {"parameter": "Panendoscopy including oesophagoscopy and bronchoscopy", "cells": [{"text": "Upper aerodigestive primary, as indicated"}], "cite": "c1"},
+        {"parameter": "Biopsy of cervical lymphadenopathy", "cells": [{"text": "Metastatic squamous carcinoma"}], "cite": "c1"},
+        {"parameter": "Skin biopsy", "cells": [{"text": "Non-specific hyperkeratosis, parakeratosis and dyskeratosis"}], "cite": "c1"},
+        {"parameter": "PET-CT", "cells": [{"text": "Occult primary when initial imaging is negative"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bazex_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for Bazex syndrome",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "Psoriasis, especially acral or palmoplantar disease", "cells": [{"text": "The acral psoriasiform eruption here is almost invariably paraneoplastic"}], "cite": "c1"},
+        {"parameter": "Bazex-Dupre-Christol syndrome", "cells": [{"text": "Inherited genodermatosis with follicular atrophoderma and early basal cell carcinomas"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bazex_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options in Bazex syndrome",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Treat the underlying carcinoma", "cells": [{"text": "Definitive treatment of the malignancy, usually upper aerodigestive squamous cell carcinoma"}, {"text": "The eruption clears once the tumour is controlled"}], "cite": "c1"},
+        {"parameter": "Tumour staging and oncological care", "cells": [{"text": "Prompt staging, with surgery, radiotherapy or chemotherapy as the primary dictates"}, {"text": "Choice follows the primary carcinoma"}], "cite": "c1"},
+        {"parameter": "Symptomatic skin care", "cells": [{"text": "Emollients and keratolytics"}, {"text": "Dermatosis is typically resistant to topical therapy alone"}], "cite": "c1"},
+        {"parameter": "Oral retinoids", "cells": [{"text": "Consider for troublesome palmoplantar keratoderma"}, {"text": "Limited benefit without tumour control"}], "cite": "c1"},
+        {"parameter": "Skin monitoring", "cells": [{"text": "Monitor the skin as a marker of disease activity"}, {"text": "Recurrence signals tumour relapse and should prompt restaging"}], "cite": "c1"},
+        {"parameter": "Multidisciplinary team", "cells": [{"text": "ENT and head-and-neck surgery, oncology and dermatology"}, {"text": "Multidisciplinary management"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bazex_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Bazex syndrome",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Violaceous psoriasiform acral eruption: ears, nose, digits, nails, adherent scale", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: man over 40 who smokes or drinks, with nodes, dysphagia or haemoptysis?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: urgent search for an upper aerodigestive squamous carcinoma", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Continue: review skin biopsy and differentials such as psoriasis and tinea", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "ENT with nasendoscopy and laryngoscopy; CT or MRI of head, neck, chest and mediastinum", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Squamous carcinoma or metastatic nodes found on biopsy?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Treat the underlying squamous carcinoma; the skin clears once the tumour is controlled", "cite": "c1"},
+        {"id": "n8", "type": "action", "text": "PET-CT and panendoscopy to locate an occult primary", "cite": "c1"},
+        {"id": "n9", "type": "action", "text": "Skin care with emollients and keratolytics; consider oral retinoids for keratoderma", "cite": "c1"},
+        {"id": "n10", "type": "outcome", "text": "Recurrence of the eruption signals tumour relapse and needs restaging", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n8", "to": "n7", "label": "Next"},
+        {"from": "n7", "to": "n9", "label": "Next"},
+        {"from": "n9", "to": "n10", "label": "Next"}
+      ]
+    }
+  ]
 }

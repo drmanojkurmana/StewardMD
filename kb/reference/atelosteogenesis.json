@@ -150,5 +150,315 @@
       "caption": "Overview comparison matrix for atelosteogenesis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Skeletal dysplasia references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "atelosteogenesis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Antenatal and postnatal skeletal survey",
+          "cells": [
+            {
+              "text": "Skeletal features on radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FLNB molecular genetic testing",
+          "cells": [
+            {
+              "text": "Types I and III"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SLC26A2 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chondro-osseous histology",
+          "cells": [
+            {
+              "text": "Giant-cell chondrocytes in type I"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cartilage sulfation studies or fibroblast sulfate uptake",
+          "cells": [
+            {
+              "text": "The recessive form"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atelosteogenesis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Boomerang dysplasia",
+          "cells": [
+            {
+              "text": "Allelic with atelosteogenesis type I (FLNB)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diastrophic dysplasia",
+          "cells": [
+            {
+              "text": "Caused by SLC26A2 variants; separated by SLC26A2 testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "atelosteogenesis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prenatal counselling and palliative pathway",
+          "cells": [
+            {
+              "text": "Comfort care offered for perinatally lethal types I and II"
+            },
+            {
+              "text": "Types I and II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal respiratory support",
+          "cells": [
+            {
+              "text": "Pulmonary hypoplasia and airway compromise; ICU decisions guided by prognosis"
+            },
+            {
+              "text": "Prognosis-guided decisions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway and cervical-spine care",
+          "cells": [
+            {
+              "text": "Cleft palate and cervical-spine instability"
+            },
+            {
+              "text": "SLC26A2-related type II"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthopaedic management",
+          "cells": [
+            {
+              "text": "Joint dislocations, clubfeet and spinal deformity"
+            },
+            {
+              "text": "Milder type III survivors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary follow-up",
+          "cells": [
+            {
+              "text": "Clinical genetics, orthopaedics, respiratory medicine and spinal surgery"
+            },
+            {
+              "text": "Surviving children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Low recurrence for de novo dominant FLNB types I and III; recessive inheritance for the SLC26A2 form"
+            },
+            {
+              "text": "Inheritance differs by type"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "atelosteogenesis-dx-mgmt",
+      "title": "Diagnosis and management of Atelosteogenesis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe micromelia with joint dislocations and a small thorax on antenatal scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Neonatal respiratory insufficiency from a small narrow thorax?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Neonatal respiratory support and airway assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Skeletal survey, FLNB and SLC26A2 testing, histology, sulfation studies",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FLNB variant (types I or III) or SLC26A2 variant (type II) identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prognosis-guided neonatal support and palliative pathway for types I and II",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat genetic testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Airway assessment for cleft palate and cervical-spine instability",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic care for dislocations and clubfeet in type III survivors",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Multidisciplinary follow-up for surviving children",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling tailored to the inheritance pattern of each type",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

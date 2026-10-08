@@ -146,5 +146,296 @@
       "caption": "Overview comparison matrix for colles' fracture."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "colles_fracture-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Posteroanterior and lateral wrist radiographs",
+          "cells": [
+            {
+              "text": "Dorsal tilt, radial length, inclination and articular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT for complex intra-articular or comminuted patterns",
+          "cells": [
+            {
+              "text": "Complex pattern, to plan fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical median nerve assessment",
+          "cells": [
+            {
+              "text": "Median nerve function before and after reduction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Osteoporosis assessment in older patients",
+          "cells": [
+            {
+              "text": "Secondary fracture prevention needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colles_fracture-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Smith's fracture and Barton's fracture",
+          "cells": [
+            {
+              "text": "Volar displacement (Smith) or intra-articular shear (Barton)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute carpal tunnel syndrome",
+          "cells": [
+            {
+              "text": "Progressive median nerve symptoms need urgent decompression or reduction"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "colles_fracture-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Closed reduction and cast immobilisation",
+          "cells": [
+            {
+              "text": "Displaced fractures, restoring radial length and volar tilt; casting alone for undisplaced"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical fixation",
+          "cells": [
+            {
+              "text": "Volar locking plate or K-wires for unstable, comminuted or intra-articular fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and elevation",
+          "cells": [
+            {
+              "text": "Controls pain and swelling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Median nerve assessment and decompression",
+          "cells": [
+            {
+              "text": "Assess before and after reduction; decompress promptly for acute carpal tunnel syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial radiographs",
+          "cells": [
+            {
+              "text": "Confirm and maintain alignment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy and physiotherapy",
+          "cells": [
+            {
+              "text": "Restore wrist mobility and grip strength"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-health assessment",
+          "cells": [
+            {
+              "text": "Osteoporosis treatment such as bisphosphonates and falls prevention in older patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "colles_fracture-dx-mgmt",
+      "title": "Diagnosis and management of Colles' fracture",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Colles' fracture: distal radius, dorsal displacement after a fall on the hand",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (progressive median nerve symptoms, open fracture, vascular compromise)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: decompress for acute carpal tunnel or reduce; manage any open fracture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Wrist radiographs for dorsal tilt and radial length; CT if intra-articular",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is the reduction acceptable, with dorsal tilt and radial length restored?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Re-reduce or fix surgically with volar plate or K-wires if unstable",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Closed reduction and cast immobilisation for displaced fractures",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Analgesia and limb elevation for pain and swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy and physiotherapy for wrist mobility and grip",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone-health assessment and osteoporosis treatment in older patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most stable fractures recover well; malunion can leave weakness and reduced function",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

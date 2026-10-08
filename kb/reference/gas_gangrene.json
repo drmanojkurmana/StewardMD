@@ -155,5 +155,466 @@
       "caption": "Overview comparison matrix for gas gangrene (clostridial myonecrosis)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Clostridial Soft-Tissue Infections",
+      "url": "https://merckmanuals.com/en-pr/professional/infectious-diseases/anaerobic-bacteria/clostridial-soft-tissue-infections",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "gas_gangrene-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of gas gangrene",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Pain out of proportion to signs",
+          "cells": [
+            {
+              "text": "{{hy:Excruciating pain with toxic appearance}}"
+            },
+            {
+              "text": "Earliest clue; impending doom"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incubation (traumatic)",
+          "unit": "hours",
+          "cells": [
+            {
+              "text": "As short as 6 h, usually under 4 days",
+              "op": ">=",
+              "value": 6
+            },
+            {
+              "text": "After contaminated deep wound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound",
+          "cells": [
+            {
+              "text": "Foul serosanguineous discharge, gas, bronze to maroon bullae"
+            },
+            {
+              "text": "Brawny oedema and crepitus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gram stain of tissue",
+          "cells": [
+            {
+              "text": "Large gram-positive or gram-variable rods, few or no inflammatory cells"
+            },
+            {
+              "text": "Usually definitive in traumatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain x-ray, CT or MRI",
+          "cells": [
+            {
+              "text": "Gas in soft tissue; extent of necrosis"
+            },
+            {
+              "text": "Must not delay surgical exploration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical exploration and histology",
+          "cells": [
+            {
+              "text": "Necrotic muscle, leukocytes in adjacent vessels"
+            },
+            {
+              "text": "Separates myonecrosis from fasciitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaerobic blood cultures",
+          "cells": [
+            {
+              "text": "Spontaneous gangrene: bacteraemia precedes skin signs by hours"
+            },
+            {
+              "text": "C. septicum suggests colonic lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clostridial wound contamination",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "30 to 80 of open traumatic wounds",
+              "range": [
+                30,
+                80
+              ]
+            },
+            {
+              "text": "Culture alone does not make the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "gas_gangrene-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of gas gangrene",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Necrotising fasciitis",
+          "cells": [
+            {
+              "text": "Fascial rather than muscle necrosis"
+            },
+            {
+              "text": "Muscle biopsy at surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Streptococcal or staphylococcal infection",
+          "cells": [
+            {
+              "text": "Many neutrophils with cocci in chains or clusters"
+            },
+            {
+              "text": "Gram stain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Synergistic necrotising or crepitant cellulitis",
+          "cells": [
+            {
+              "text": "Mixed aerobic and anaerobic flora"
+            },
+            {
+              "text": "Gram stain shows mixed organisms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fournier gangrene",
+          "cells": [
+            {
+              "text": "Perineal and genital involvement"
+            },
+            {
+              "text": "Clinical site and surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clostridial cellulitis",
+          "cells": [
+            {
+              "text": "Gas in subcutaneous tissue, muscle spared"
+            },
+            {
+              "text": "Surgical exploration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Non-clostridial gas-forming infection",
+          "cells": [
+            {
+              "text": "Gram-negative bacilli or Bacteroides"
+            },
+            {
+              "text": "Gram stain and culture"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "gas_gangrene-treatment",
+      "kind": "treatment",
+      "title": "Treatment of gas gangrene",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency surgical debridement",
+          "cells": [
+            {
+              "text": "{{hy:All cases, immediately}}"
+            },
+            {
+              "text": "Resect to viable tissue; amputation if needed; re-explore"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IV penicillin G plus clindamycin",
+          "cells": [
+            {
+              "text": "Start immediately"
+            },
+            {
+              "text": "Clindamycin suppresses toxin; clindamycin alone inadequate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Piperacillin-tazobactam or carbapenem with clindamycin",
+          "cells": [
+            {
+              "text": "Gram-negatives seen or suspected"
+            },
+            {
+              "text": "Broad-spectrum cover"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Clindamycin plus metronidazole",
+          "cells": [
+            {
+              "text": "Severe penicillin allergy"
+            },
+            {
+              "text": "Add vancomycin if S. aureus"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intensive care resuscitation",
+          "cells": [
+            {
+              "text": "Shock, haemolysis, organ failure"
+            },
+            {
+              "text": "Fluids and organ support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Adjunct after surgery and antibiotics"
+            },
+            {
+              "text": "Controversial; never delay surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed wound closure",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Traumatic wounds, compound fractures"
+            },
+            {
+              "text": "Close after 5 to 6 days when free of infection",
+              "range": [
+                5,
+                6
+              ]
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GI workup",
+          "cells": [
+            {
+              "text": "Survivors of C. septicum infection"
+            },
+            {
+              "text": "Look for colonic malignancy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Mortality: Merck gives 40% or more with treatment; Harrison gives over 50% once bacteraemic and 67 to 100% for spontaneous disease in adults. Doses not stated in the opened sources."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "gas_gangrene-dx-mgmt",
+      "title": "Diagnosis and management of gas gangrene",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe wound pain out of proportion, toxicity, crepitus or bullae",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Resuscitate; blood cultures; start penicillin plus clindamycin",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Urgent surgical exploration with Gram stain and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Necrotic muscle with clostridia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Treat as necrotising fasciitis or other soft tissue infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Radical debridement or amputation; ICU support",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Necrosis still spreading?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Repeat debridement; consider hyperbaric oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Spontaneous disease without wound?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Investigate GI tract for malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Delayed closure after 5 to 6 days",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

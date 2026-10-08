@@ -147,5 +147,321 @@
       "caption": "Overview comparison matrix for 6-pyruvoyl-tetrahydropterin synthase deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's Online Metabolic and Molecular Bases of Inherited Disease (OMMBID) / Nelson Textbook of Paediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine and blood pterin profile",
+          "cells": [
+            {
+              "text": "Raised neopterin with low biopterin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dihydropteridine reductase activity assay",
+          "cells": [
+            {
+              "text": "Normal, excluding the recycling defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood phenylalanine with BH4 loading test",
+          "cells": [
+            {
+              "text": "Phenylalanine lowering after loading"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PTS gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF neurotransmitter metabolites",
+          "cells": [
+            {
+              "text": "Low homovanillic and 5-hydroxyindoleacetic acid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and neurological assessment, EEG if seizures",
+          "cells": [
+            {
+              "text": "Neurological and developmental status"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Classic phenylketonuria",
+          "cells": [
+            {
+              "text": "Dietary phenylalanine restriction alone prevents neurological deterioration"
+            },
+            {
+              "text": "Pterin profile excludes a BH4 defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dihydropteridine reductase deficiency",
+          "cells": [
+            {
+              "text": "BH4 recycling defect"
+            },
+            {
+              "text": "DHPR activity assay"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose"
+      ],
+      "rows": [
+        {
+          "parameter": "Tetrahydrobiopterin supplementation with sapropterin",
+          "cells": [
+            {
+              "text": "Mainstay to correct hyperphenylalaninaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Levodopa with a dopa-decarboxylase inhibitor and a serotonin precursor",
+          "cells": [
+            {
+              "text": "Restores dopamine and serotonin"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Folinic acid",
+          "cells": [
+            {
+              "text": "Adjunct supporting central folate metabolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptomatic treatment of dystonia and seizures",
+          "cells": [
+            {
+              "text": "Movement disorder and seizures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of phenylalanine, CSF neurotransmitters and development",
+          "cells": [
+            {
+              "text": "Tracks treatment response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong specialist metabolic and neurology follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; PTS testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "6_pyruvoyl_tetrahydropterin_synthase_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of 6-pyruvoyl-tetrahydropterin synthase deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hyperphenylalaninaemia on newborn screen with dystonia or oculogyric crises",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Neurological deterioration despite phenylalanine control?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate for BH4 defect work-up; diet alone is not enough",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urine and blood pterins, DHPR activity and BH4 loading test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised neopterin, low biopterin and normal DHPR confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Sequence PTS and start sapropterin (BH4 cofactor) replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials: classic PKU, DHPR and GTP cyclohydrolase I",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Levodopa with a dopa-decarboxylase inhibitor and serotonin precursor",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Folinic acid adjunct; treat dystonia and seizures symptomatically",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor phenylalanine, CSF neurotransmitters and development",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early combined treatment gives good outcome; delay causes lasting disability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

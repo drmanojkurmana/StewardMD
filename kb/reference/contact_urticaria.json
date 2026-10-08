@@ -147,5 +147,296 @@
       "caption": "Overview comparison matrix for contact urticaria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Hunter's Diseases of Occupations / WHO",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "contact_urticaria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Occupational and exposure history with symptom timing",
+          "cells": [
+            {
+              "text": "Causative contact identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin prick testing with resuscitation available",
+          "cells": [
+            {
+              "text": "Sensitisation confirmed, e.g. to latex"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specific IgE testing",
+          "cells": [
+            {
+              "text": "Where available"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for asthma or rhinitis",
+          "cells": [
+            {
+              "text": "Coexisting disease, especially with latex"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "contact_urticaria-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Allergic contact dermatitis (delayed type)",
+          "cells": [
+            {
+              "text": "Pitfall: immediate urticaria confused with delayed dermatitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritant contact dermatitis",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic spontaneous urticaria",
+          "cells": [
+            {
+              "text": "Named look-alike; no contact trigger"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "contact_urticaria-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Avoid the causative substance",
+          "cells": [
+            {
+              "text": "Latex-free environment where natural rubber latex is implicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oral antihistamines",
+          "cells": [
+            {
+              "text": "Symptomatic relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenaline auto-injector",
+          "cells": [
+            {
+              "text": "Emergency action plan for those at risk of systemic reaction or anaphylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Occupational measures",
+          "cells": [
+            {
+              "text": "Substituting latex gloves; workplace changes for food handlers and healthcare workers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting asthma and rhinitis",
+          "cells": [
+            {
+              "text": "Assessed and managed, particularly with latex sensitisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmation and counselling",
+          "cells": [
+            {
+              "text": "Skin-prick or IgE testing with resuscitation; ongoing risk of sensitisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "contact_urticaria-dx-mgmt",
+      "title": "Diagnosis and management of Contact urticaria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected contact urticaria: immediate weals after contact with a substance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (angioedema, wheeze, anaphylaxis, prior severe reaction)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency treatment of anaphylaxis with adrenaline",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Exposure history; skin prick or IgE testing with resuscitation available",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does skin-prick or IgE testing confirm sensitisation to the contact agent?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider allergic contact dermatitis or chronic spontaneous urticaria",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Avoid the causative substance, such as latex",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oral antihistamines for symptomatic relief",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Adrenaline auto-injector and action plan for at-risk individuals",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Occupational measures and asthma or rhinitis management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms resolve with avoidance; sensitised individuals remain at risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

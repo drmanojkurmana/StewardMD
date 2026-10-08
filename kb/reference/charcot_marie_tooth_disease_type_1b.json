@@ -148,5 +148,336 @@
       "caption": "Overview comparison matrix for charcot-marie-tooth disease type 1b."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1b-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies",
+          "cells": [
+            {
+              "text": "Markedly slow in early-onset disease; near-normal or axonal in late-onset disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MPZ gene sequencing",
+          "cells": [
+            {
+              "text": "Confirms an MPZ variant; usually pursued when the PMP22 duplication is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology review",
+          "cells": [
+            {
+              "text": "Pupillary abnormalities, where suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiology",
+          "cells": [
+            {
+              "text": "If hearing symptoms are present"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve biopsy",
+          "cells": [
+            {
+              "text": "Atypical cases; onion bulbs or uncompacted myelin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1b-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "CMT1A",
+          "cells": [
+            {
+              "text": "PMP22 duplication; the commonest demyelinating CMT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CMT2 subtypes",
+          "cells": [
+            {
+              "text": "Late-onset CMT1B can appear axonal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dejerine-Sottas disease",
+          "cells": [
+            {
+              "text": "Severe infantile-onset end of the spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_type_1b-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive management",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy tailored to disease severity"
+            },
+            {
+              "text": "No disease-modifying therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and footwear",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, podiatry, footwear and walking aids"
+            },
+            {
+              "text": "Foot drop, pes cavus and hammer toes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation or foot surgery",
+          "cells": [
+            {
+              "text": "Intensive paediatric rehabilitation in severe early-onset disease; foot surgery for disabling deformity"
+            },
+            {
+              "text": "Chosen by disease course"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Symptom control and drug caution",
+          "cells": [
+            {
+              "text": "Treat neuropathic pain; avoid vincristine"
+            },
+            {
+              "text": "Neurotoxicity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pupil and hearing screening",
+          "cells": [
+            {
+              "text": "Ophthalmology and audiology assessment"
+            },
+            {
+              "text": "Tonic pupils and sensorineural hearing loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance; genotype-phenotype correlation guides prognosis"
+            },
+            {
+              "text": "Relatives assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neuromuscular, orthopaedic, audiology and rehabilitation care"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_type_1b-dx-mgmt",
+      "title": "Diagnosis and management of Charcot-Marie-Tooth disease type 1B",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected CMT type 1B (MPZ): infantile hypotonia or late-onset neuropathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (infantile hypotonia, inflammatory features, pupil or hearing signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for treatable acquired neuropathy or severe early phenotype",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies and MPZ sequencing after PMP22 testing is negative",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pathogenic MPZ variant with a compatible conduction pattern confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy tailored to disease severity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check CMT1A, late-onset axonal-appearing CMT2, X-linked CMT and CIDP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, podiatry and footwear for foot drop and pes cavus",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intensive rehabilitation in severe early onset; foot surgery if disabling",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ophthalmology and audiology for pupil and hearing features",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genotype-phenotype correlation guides prognosis; assess relatives",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

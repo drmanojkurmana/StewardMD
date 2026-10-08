@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for eosinophilic gastroenteritis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sleisenger and Fordtran's Gastrointestinal and Liver Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "eosinophilic_gastroenteritis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Full blood count and blood film",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia, common but not universal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Upper and lower endoscopy with multiple biopsies",
+          "cells": [
+            {
+              "text": "Biopsies from normal and abnormal mucosa; appearances range from normal to ulceration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stool microscopy and serology",
+          "cells": [
+            {
+              "text": "Exclusion of parasitic infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac serology and total IgE",
+          "cells": [
+            {
+              "text": "Coeliac disease; atopic background"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging",
+          "cells": [
+            {
+              "text": "Bowel-wall thickening and ascites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diagnostic paracentesis",
+          "cells": [
+            {
+              "text": "Eosinophil count in suspected serosal disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_gastroenteritis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Parasitic infection (strongyloidiasis, anisakiasis)",
+          "cells": [
+            {
+              "text": "Causes tissue eosinophilia; must be excluded before treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coeliac disease and other malabsorptive enteropathies",
+          "cells": [
+            {
+              "text": "Malabsorption; coeliac serology is part of the workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced eosinophilic mucosal injury",
+          "cells": [
+            {
+              "text": "Drug reaction is excluded before committing to treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic_gastroenteritis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Dietary elimination therapy",
+          "cells": [
+            {
+              "text": "Empirical multi-food or allergy-directed; amino-acid based in refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Systemic prednisolone or targeted budesonide, the mainstay to induce remission; brisk response in serosal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude parasites, drug reaction and connective-tissue disease",
+          "cells": [
+            {
+              "text": "Before committing to treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support",
+          "cells": [
+            {
+              "text": "Correction of malabsorption, iron deficiency and protein loss"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunomodulators or anti-IL-5 biologics",
+          "cells": [
+            {
+              "text": "Relapsing or steroid-dependent disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstruction and ascites management",
+          "cells": [
+            {
+              "text": "Obstructive muscular disease; drainage of symptomatic eosinophilic ascites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Symptoms and mucosal histology with gastroenterology follow-up"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "eosinophilic_gastroenteritis-dx-mgmt",
+      "title": "Diagnosis and management of Eosinophilic gastroenteritis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Abdominal pain, diarrhoea or vomiting with suspected eosinophilic gastroenteritis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag (obstruction, rapidly accumulating ascites, bleeding or mass)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Manage obstruction or drain ascites; evaluate for malignancy or hypereosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endoscopy with multiple biopsies; stool and serology for parasites; imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Dense eosinophilic infiltration on biopsy after secondary causes excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Repeat sampling from several sites; consider coeliac or inflammatory bowel disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids, prednisolone or budesonide, as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Dietary elimination therapy, allergy-directed where possible",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Correct malabsorption, iron deficiency and protein loss",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anti-IL-5 or steroid-sparing agents for relapsing disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relapsing-remitting; most respond well to diet and corticosteroids",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

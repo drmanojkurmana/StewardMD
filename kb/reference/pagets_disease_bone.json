@@ -150,5 +150,478 @@
       "caption": "Overview comparison matrix for paget's disease of bone."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Paget Disease of Bone",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/musculoskeletal-and-connective-tissue-disorders/paget-disease-of-bone/paget-disease-of-bone"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Table 354-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "pagets_disease_bone-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing Paget disease of bone",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum total alkaline phosphatase",
+          "cells": [
+            {
+              "text": "Raised, with normal GGT and 5'-nucleotidase"
+            },
+            {
+              "text": "{{hy:Test of choice for diagnosis and monitoring}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-specific ALP",
+          "cells": [
+            {
+              "text": "Raised when total ALP is normal in single-site disease"
+            },
+            {
+              "text": "Confirms bone source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum calcium and phosphate",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Hypercalcemia points to another cause such as hyperparathyroidism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other bone turnover markers",
+          "cells": [
+            {
+              "text": "P1NP for formation; N- and C-telopeptide for resorption"
+            },
+            {
+              "text": "Osteocalcin is not recommended"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Bone expansion, cortical thickening, coarse trabeculae, lytic and sclerotic areas, bowing"
+            },
+            {
+              "text": "Required to confirm the diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Skull and spine films",
+          "cells": [
+            {
+              "text": "Osteoporosis circumscripta, cotton wool skull, picture frame or ivory vertebra"
+            },
+            {
+              "text": "Typical patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tc-99m bone scan",
+          "cells": [
+            {
+              "text": "Shows all active sites"
+            },
+            {
+              "text": "More sensitive, less specific than radiographs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disease activity marker",
+          "unit": "x upper limit",
+          "cells": [
+            {
+              "text": "ALP about 4 times normal with 15 to 35% of skeleton involved",
+              "op": ">=",
+              "value": 4
+            },
+            {
+              "text": "High activity; risk of high-output cardiac state"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI, CT or biopsy",
+          "cells": [
+            {
+              "text": "New pain or mass at a pagetic site"
+            },
+            {
+              "text": "Excludes sarcoma, giant cell tumor or metastasis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pagets_disease_bone-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic Paget disease of bone",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Osteoarthritis",
+          "cells": [
+            {
+              "text": "Joint pain near pagetic bone"
+            },
+            {
+              "text": "Joint radiographs; pain not from pagetic site"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Osteosarcoma in pagetic bone",
+          "cells": [
+            {
+              "text": "New or worse pain in a long-standing lesion; under 0.5% of patients"
+            },
+            {
+              "text": "MRI then biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Giant cell tumor",
+          "cells": [
+            {
+              "text": "Osteoclast-rich lesion next to pagetic bone"
+            },
+            {
+              "text": "MRI and biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone metastases",
+          "cells": [
+            {
+              "text": "Known or occult primary; sclerotic or lytic lesions"
+            },
+            {
+              "text": "Biopsy if uncertain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary hyperparathyroidism",
+          "cells": [
+            {
+              "text": "Hypercalcemia in an ambulatory patient"
+            },
+            {
+              "text": "Serum calcium with PTH"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liver-source ALP rise",
+          "cells": [
+            {
+              "text": "Raised GGT and 5'-nucleotidase"
+            },
+            {
+              "text": "Bone-specific ALP, liver tests"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Familial hyperphosphatasia syndromes",
+          "cells": [
+            {
+              "text": "Earlier onset, more severe, familial"
+            },
+            {
+              "text": "Genetic testing (TNFRSF11A or TNFRSF11B)"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "pagets_disease_bone-treatment",
+      "kind": "treatment",
+      "title": "Treating Paget disease of bone",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Indications to treat",
+          "cells": [
+            {
+              "text": "Pagetic pain, risk of complications at skull, spine or weight-bearing bone, before surgery at a pagetic site, or bone ALP over 2 times normal"
+            },
+            {
+              "text": "Localized asymptomatic disease may not need treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Zoledronic acid IV",
+          "cells": [
+            {
+              "text": "First line"
+            },
+            {
+              "text": "{{hy:Check and replete calcium and vitamin D first}}; aim 25(OH)D over 25 ng/mL to avoid hypocalcemia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral risedronate or alendronate; IV pamidronate",
+          "cells": [
+            {
+              "text": "Second line"
+            },
+            {
+              "text": "Not recommended with CrCl under 35 mL/min"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Salmon calcitonin",
+          "cells": [
+            {
+              "text": "Bisphosphonate intolerant or resistant"
+            },
+            {
+              "text": "Alternative only"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Analgesics and NSAIDs",
+          "cells": [
+            {
+              "text": "Pain, secondary osteoarthritis"
+            },
+            {
+              "text": "Orthotics for gait; avoid bed rest"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Orthopedic surgery",
+          "cells": [
+            {
+              "text": "Fracture, deformity, joint replacement, nerve compression"
+            },
+            {
+              "text": "Pre-treat to reduce bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "After therapy"
+            },
+            {
+              "text": "Total or bone ALP or P1NP; markers normalize in over 90% treated"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "pagets_disease_bone-dx-mgmt",
+      "title": "Diagnosis and management of Paget disease of bone",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Raised ALP, bone pain, deformity or incidental x-ray finding",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Check GGT, calcium, phosphate, bone-specific ALP",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Radiographs of symptomatic sites, then bone scan for extent",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Typical pagetic changes on radiographs?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Look for other causes; biopsy if metastasis suspected",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Symptoms, high-risk site, planned surgery or bone ALP over 2x normal?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Observe; recheck ALP periodically",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replete calcium and vitamin D",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Zoledronic acid IV (oral bisphosphonate if needed)",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "New pain or mass at a pagetic site?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "MRI and biopsy for sarcoma or giant cell tumor",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Monitor ALP or P1NP; retreat when markers rise",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

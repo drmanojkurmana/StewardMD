@@ -146,5 +146,305 @@
       "caption": "Overview comparison matrix for congenital hypothyroidism."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_hypothyroidism-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Newborn screening TSH and/or T4 on heel-prick blood",
+          "cells": [
+            {
+              "text": "Abnormal screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Confirmatory serum free T4 and TSH",
+          "cells": [
+            {
+              "text": "Hypothyroidism confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thyroid ultrasound and/or radionuclide scan",
+          "cells": [
+            {
+              "text": "Aetiology defined"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maternal thyroid history and antibody status",
+          "cells": [
+            {
+              "text": "Where relevant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hypothyroidism-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Transient neonatal hypothyroidism (maternal antithyroid drugs, iodine exposure)",
+          "cells": [
+            {
+              "text": "Maternal drug or iodine exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Central (secondary or tertiary) hypothyroidism",
+          "cells": [
+            {
+              "text": "Low thyroid hormone with inappropriately normal or low TSH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional causes of poor feeding and lethargy",
+          "cells": [
+            {
+              "text": "Lethargy and poor feeding without thyroid cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_hypothyroidism-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Levothyroxine replacement",
+          "cells": [
+            {
+              "text": "Start as early as possible after a positive newborn screen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Administration",
+          "cells": [
+            {
+              "text": "Crushed levothyroxine in water or breast milk, separated from soya feeds, iron and calcium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dose titration",
+          "cells": [
+            {
+              "text": "TSH and free T4 monitored; dose adjusted to growth"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental and hearing surveillance",
+          "cells": [
+            {
+              "text": "Early detection of deficits"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aetiology and trial off treatment",
+          "cells": [
+            {
+              "text": "Ultrasound and radionuclide imaging decide whether therapy is lifelong"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrinology follow-up",
+          "cells": [
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental education",
+          "cells": [
+            {
+              "text": "Adherence and the harm of interrupted therapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_hypothyroidism-dx-mgmt",
+      "title": "Diagnosis and management of Congenital hypothyroidism",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital hypothyroidism: abnormal newborn screen with raised TSH",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (marked lethargy, poor feeding, prolonged jaundice)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent confirmation and start of levothyroxine; do not delay",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Confirm with free T4 and TSH; thyroid ultrasound and radionuclide scan",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are free T4 and TSH confirmed abnormal on repeat testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider transient maternal causes or central hypothyroidism",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start levothyroxine as early as possible after a positive screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Crushed levothyroxine, separated from soya, iron and calcium",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Monitor TSH and free T4; titrate to growth",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Developmental and hearing surveillance; imaging to define aetiology",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With early screening and adequate dosing neurodevelopment is typically normal",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

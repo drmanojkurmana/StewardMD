@@ -152,5 +152,364 @@
       "caption": "Overview comparison matrix for autosomal dominant tubulointerstitial kidney disease, ren-related."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Nephrology genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adtkd_ren-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Detailed family history and pedigree",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "REN sequencing within an ADTKD gene panel",
+          "cells": [
+            {
+              "text": "REN variant"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum urate and potassium with plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Typically low renin activity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Anaemia disproportionate to renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Normal or small kidneys without numerous cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bland urinalysis with quantification of proteinuria",
+          "cells": [
+            {
+              "text": "Non-specific bland urine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy only if the diagnosis remains unclear",
+          "cells": [
+            {
+              "text": "Non-specific tubulointerstitial fibrosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adtkd_ren-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "ADTKD-UMOD",
+          "cells": [
+            {
+              "text": "Hyperuricaemia and gout without childhood anaemia or hypotension"
+            },
+            {
+              "text": "UMOD sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADTKD-HNF1B",
+          "cells": [
+            {
+              "text": "Renal cysts, hypomagnesaemia, diabetes and genital anomalies"
+            },
+            {
+              "text": "HNF1B sequencing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alport syndrome and thin basement membrane disease",
+          "cells": [
+            {
+              "text": "Haematuria"
+            },
+            {
+              "text": "Urinalysis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adtkd_ren-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive chronic kidney disease care",
+          "cells": [
+            {
+              "text": "No cure"
+            },
+            {
+              "text": "Blood pressure and complication management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adequate salt and fluid intake; avoidance of volume depletion",
+          "cells": [
+            {
+              "text": "Acute kidney injury prevention"
+            },
+            {
+              "text": "Underactive renin-angiotensin axis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cautious renin-angiotensin blockers, diuretics and NSAIDs",
+          "cells": [
+            {
+              "text": "Tendency to hypotension, hyperkalaemia and salt wasting"
+            },
+            {
+              "text": "Used with caution"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urate-lowering therapy; fludrocortisone or erythropoiesis-stimulating agents for anaemia",
+          "cells": [
+            {
+              "text": "Hyperuricaemia, gout and anaemia"
+            },
+            {
+              "text": "Anaemia treatment as needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring of renal function, potassium, urate and haemoglobin",
+          "cells": [
+            {
+              "text": "Disease progression"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement therapy and transplantation",
+          "cells": [
+            {
+              "text": "Kidney failure in mid-to-late adulthood"
+            },
+            {
+              "text": "Good transplant outcomes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adtkd_ren-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant tubulointerstitial kidney disease, REN-related",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Childhood anaemia, gout and CKD in a family with dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Acute kidney injury after volume depletion or hyperkalaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent nephrology review; correct volume and potassium",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urate, potassium, renin, aldosterone; FBC; renal ultrasound; urinalysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low renin with kidneys normal or small and no cysts?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "REN sequencing within ADTKD gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review UMOD, HNF1B, MUC1 subtypes and Alport syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Salt and fluid intake to avoid volume depletion",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cautious RAS blockers, diuretics and NSAIDs given hypotension and hyperkalaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Urate-lowering therapy; fludrocortisone or ESA for anaemia if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Slow progression; kidney failure often in mid-to-late adulthood",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

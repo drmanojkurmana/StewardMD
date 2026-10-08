@@ -146,5 +146,286 @@
       "caption": "Overview comparison matrix for aspiration pneumonitis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aspiration_pneumonitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse oximetry and arterial blood gas",
+          "cells": [
+            {
+              "text": "Quantifies hypoxaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest radiograph or CT",
+          "cells": [
+            {
+              "text": "Infiltrates, often in dependent lung zones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bronchoscopy",
+          "cells": [
+            {
+              "text": "Clears particulate material when obstruction is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum or bronchoalveolar lavage culture",
+          "cells": [
+            {
+              "text": "Secondary infection, if suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial observation",
+          "cells": [
+            {
+              "text": "Progression to acute respiratory distress syndrome"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aspiration_pneumonitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Positioning and airway management",
+          "cells": [
+            {
+              "text": "Head-down or lateral positioning, suction, tracheal intubation with suction"
+            },
+            {
+              "text": "Limits further aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oxygen and lung-protective ventilation",
+          "cells": [
+            {
+              "text": "For hypoxaemia and respiratory failure"
+            },
+            {
+              "text": "Respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Flexible bronchoscopy",
+          "cells": [
+            {
+              "text": "Removes aspirated particulate material when large-airway obstruction is suspected"
+            },
+            {
+              "text": "Not routine lavage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid routine antibiotics and steroids",
+          "cells": [
+            {
+              "text": "In pure chemical pneumonitis"
+            },
+            {
+              "text": "Antibiotics reserved for established secondary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Oximetry, blood gases and imaging for progression to ARDS"
+            },
+            {
+              "text": "Escalate to critical care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Perioperative prevention",
+          "cells": [
+            {
+              "text": "Appropriate fasting, rapid-sequence induction and aspiration precautions"
+            },
+            {
+              "text": "High-risk patients"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aspiration_pneumonitis-dx-mgmt",
+      "title": "Diagnosis and management of Aspiration pneumonitis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Witnessed aspiration with rapid desaturation and airway soiling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Progressive hypoxaemia or rising oxygen requirement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Immediate airway management, suction and oxygen",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Oximetry, arterial blood gas, chest imaging, bronchoscopy if obstruction suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Infiltrates in dependent lung zones with hypoxaemia confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lung-protective ventilation and critical care escalation if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Flexible bronchoscopy for large-airway obstruction, not routine lavage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid routine antibiotics and steroids in pure chemical pneumonitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Watch for progression to ARDS with serial oximetry and gases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Perioperative prevention with rapid-sequence induction in high-risk patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

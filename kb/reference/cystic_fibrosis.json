@@ -151,5 +151,525 @@
       "caption": "Overview comparison matrix for cystic fibrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cystic Fibrosis",
+      "url": "https://www.merckmanuals.com/professional/pediatrics/cystic-fibrosis-cf/cystic-fibrosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystic_fibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of cystic fibrosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Sweat chloride, abnormal",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "{{hy:60 or more}}",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Consistent with CF; confirm with second test or 2 CFTR variants"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sweat chloride, intermediate",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "30 to 59",
+              "range": [
+                30,
+                59
+              ]
+            },
+            {
+              "text": "CF possible; genetic testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sweat chloride, normal",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "30 or less",
+              "op": "<=",
+              "value": 30
+            },
+            {
+              "text": "CF unlikely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Two disease-causing CFTR variants",
+          "cells": [
+            {
+              "text": "One on each allele"
+            },
+            {
+              "text": "Confirms diagnosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Newborn screen: immunoreactive trypsinogen",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Triggers sweat testing (ideally at 2 to 4 weeks)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Faecal elastase-1",
+          "cells": [
+            {
+              "text": "Low"
+            },
+            {
+              "text": "Exocrine pancreatic insufficiency (about 80%)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "F508del share of US defective alleles",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 85%"
+            },
+            {
+              "text": "Class II processing defect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CF-related diabetes in adults",
+          "unit": "%",
+          "cells": [
+            {
+              "text": ">30%",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Annual diabetes testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sputum culture",
+          "cells": [
+            {
+              "text": "S. aureus, H. influenzae, P. aeruginosa"
+            },
+            {
+              "text": "B. cepacia complex, mucoid Pseudomonas, NTM signal poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_fibrosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of cystic fibrosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Non-CF bronchiectasis",
+          "cells": [
+            {
+              "text": "May relate to CFTR carrier state"
+            },
+            {
+              "text": "{{hy:Sweat chloride and CFTR genotyping}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic rhinosinusitis alone",
+          "cells": [
+            {
+              "text": "Relative CFTR deficiency without multisystem disease"
+            },
+            {
+              "text": "Sweat chloride"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated congenital bilateral absence of vas deferens",
+          "cells": [
+            {
+              "text": "Forme fruste of CFTR mutation"
+            },
+            {
+              "text": "CFTR genotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic recurrent pancreatitis",
+          "cells": [
+            {
+              "text": "CFTR variant in at least one allele"
+            },
+            {
+              "text": "CFTR genotyping"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CRMS or CFSPID",
+          "cells": [
+            {
+              "text": "Positive screen with intermediate or normal sweat chloride"
+            },
+            {
+              "text": "Repeat sweat test and genotype follow-up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Allergic bronchopulmonary aspergillosis in CF",
+          "cells": [
+            {
+              "text": "About 5%; failure to respond to inpatient antibiotics"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystic_fibrosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of cystic fibrosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Elexacaftor-tezacaftor-ivacaftor",
+          "cells": [
+            {
+              "text": "{{hy:Age 2 or older with at least one F508del or certain rare variants}}"
+            },
+            {
+              "text": "Benefits over 90%; improves FEV1, fewer exacerbations; monitor liver tests and CYP3A interactions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ivacaftor",
+          "cells": [
+            {
+              "text": "Age 1 month or older with a potentiator-responsive variant"
+            },
+            {
+              "text": "Modulators do not work for class I nonsense or frameshift mutations"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dornase alfa or 7% hypertonic saline, plus airway clearance",
+          "cells": [
+            {
+              "text": "Long-term daily inhalation"
+            },
+            {
+              "text": "Mobilises viscous secretions"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Inhaled tobramycin or aztreonam, alternate months, with oral azithromycin 3 times weekly",
+          "cells": [
+            {
+              "text": "Chronic Pseudomonas"
+            },
+            {
+              "text": "Suppressive therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oral culture-guided antibiotics",
+          "cells": [
+            {
+              "text": "Mild exacerbation"
+            },
+            {
+              "text": "Inhaled agent about 4 weeks or oral fluoroquinolone 2 to 3 weeks for Pseudomonas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IV tobramycin or amikacin plus antipseudomonal beta-lactam",
+          "cells": [
+            {
+              "text": "Moderate to severe exacerbation"
+            },
+            {
+              "text": "About 2 weeks; add vancomycin or linezolid for MRSA"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pancreatic enzymes with all meals; fat-soluble vitamins",
+          "cells": [
+            {
+              "text": "Pancreatic insufficiency"
+            },
+            {
+              "text": "Avoid high doses (fibrosing colonopathy); calories 30 to 50% above usual"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lung transplant referral",
+          "unit": "% predicted",
+          "cells": [
+            {
+              "text": "FEV1 <30%",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Median adult survival after transplant about 9.5 years"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystic_fibrosis-dx-mgmt",
+      "title": "Diagnosis and management of cystic fibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Positive newborn screen, family history or suggestive symptoms",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Sweat chloride after pilocarpine iontophoresis",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Sweat chloride 60 mmol/L or more?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Intermediate 30 to 59?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "CFTR genotyping",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Two CF-causing variants?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "CF unlikely, or CRMS with follow-up",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Confirm with repeat sweat test or genotype",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Specialist CF centre: modulator if eligible, airway clearance, enzymes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Pulmonary exacerbation?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Culture-guided oral or IV antibiotics",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "FEV1 below 30% predicted?",
+          "cite": "c1"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Lung transplant referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Surveillance: cultures, spirometry, annual diabetes test",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

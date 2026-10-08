@@ -147,5 +147,314 @@
       "caption": "Overview comparison matrix for cystine nephrolithiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Comprehensive Clinical Nephrology / Campbell-Walsh-Wein Urology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystine_nephrolithiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urine microscopy",
+          "cells": [
+            {
+              "text": "Hexagonal cystine crystals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyanide-nitroprusside screening test",
+          "cells": [
+            {
+              "text": "Cystine detected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "24-hour urinary cystine",
+          "cells": [
+            {
+              "text": "Quantified excretion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone analysis",
+          "cells": [
+            {
+              "text": "Cystine composition confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-contrast CT",
+          "cells": [
+            {
+              "text": "Stone burden, since plain films underestimate it"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystine_nephrolithiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Calcium oxalate stones",
+          "cells": [
+            {
+              "text": "Named look-alike on plain film"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uric acid stones",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Idiopathic recurrent stone disease",
+          "cells": [
+            {
+              "text": "Crystal morphology identifies cystine"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystine_nephrolithiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "High fluid intake",
+          "cells": [
+            {
+              "text": "Dilutes urine cystine below saturation day and night"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium citrate",
+          "cells": [
+            {
+              "text": "Alkalinises urine; cystine more soluble at higher pH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dietary sodium and protein",
+          "cells": [
+            {
+              "text": "Restrict sodium; moderate animal protein"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thiol agents",
+          "cells": [
+            {
+              "text": "Tiopronin or penicillamine for high excretors or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stone removal",
+          "cells": [
+            {
+              "text": "Ureteroscopic laser or percutaneous nephrolithotomy; resistant to shock-wave"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Urinary cystine, urine pH and imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystine_nephrolithiasis-dx-mgmt",
+      "title": "Diagnosis and management of Cystine nephrolithiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cystine nephrolithiasis: recurrent stones in a young patient",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (obstruction with fever, staghorn or bilateral stones, falling renal function)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent decompression for infected obstructed kidney",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Hexagonal crystals; cyanide-nitroprusside test; 24-hour urine; stone analysis; CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does stone analysis or crystal morphology confirm cystine?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider calcium oxalate, uric acid or struvite stones",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "High fluid intake day and night to dilute urinary cystine",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Potassium citrate to alkalinise the urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thiol agents such as tiopronin for refractory disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ureteroscopy or nephrolithotomy for stones; monitor with urinary cystine",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong and recurrent; rigorous hydration and thiol therapy greatly reduce stones",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

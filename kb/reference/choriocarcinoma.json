@@ -148,5 +148,327 @@
       "caption": "Overview comparison matrix for choriocarcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Obstetrics / RCOG and FIGO gestational trophoblastic disease guidance",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "choriocarcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serial quantitative serum beta-hCG",
+          "cells": [
+            {
+              "text": "Sensitive marker for diagnosis, response and relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic ultrasound with Doppler",
+          "cells": [
+            {
+              "text": "Uterine mass and vascularity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest imaging",
+          "cells": [
+            {
+              "text": "Pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of brain, liver and abdomen",
+          "cells": [
+            {
+              "text": "Staging in high-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count, renal and liver function",
+          "cells": [
+            {
+              "text": "Baseline before chemotherapy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choriocarcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Persistent or invasive hydatidiform mole",
+          "cells": [
+            {
+              "text": "Persistent trophoblastic disease after a molar pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Non-gestational germ cell tumour producing hCG",
+          "cells": [
+            {
+              "text": "Non-gestational origin"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "choriocarcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Specialist centre referral",
+          "cells": [
+            {
+              "text": "Refer to a gestational trophoblastic disease centre; a validated prognostic score sets intensity"
+            },
+            {
+              "text": "Risk-stratified treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-risk disease",
+          "cells": [
+            {
+              "text": "Single-agent methotrexate with folinic acid rescue, or actinomycin D"
+            },
+            {
+              "text": "Low-risk disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-risk or metastatic disease",
+          "cells": [
+            {
+              "text": "Multi-agent chemotherapy such as EMA-CO"
+            },
+            {
+              "text": "High-risk or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Response monitoring",
+          "cells": [
+            {
+              "text": "Serial quantitative beta-hCG to guide duration and detect relapse"
+            },
+            {
+              "text": "Response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Radiotherapy or surgery for chemoresistant or bleeding deposits, including cerebral metastases"
+            },
+            {
+              "text": "Chemoresistant disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Contraception",
+          "cells": [
+            {
+              "text": "Reliable contraception; avoid pregnancy until beta-hCG has been normal for the recommended interval"
+            },
+            {
+              "text": "During treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Post-treatment surveillance",
+          "cells": [
+            {
+              "text": "Prolonged beta-hCG surveillance to confirm remission and detect recurrence"
+            },
+            {
+              "text": "Recurrence detection"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "choriocarcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Choriocarcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected choriocarcinoma: bleeding after pregnancy with markedly raised beta-hCG",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (haemoptysis, neurological signs, intraperitoneal bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent specialist chemotherapy referral; manage haemorrhage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serial beta-hCG, pelvic ultrasound with Doppler, chest and staging imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Raised beta-hCG with trophoblastic tumour confirmed and staged?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Refer to a specialist trophoblastic centre; prognostic score sets intensity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check invasive mole and non-gestational germ cell tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Single-agent methotrexate with folinic acid or actinomycin D for low-risk disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Multi-agent chemotherapy such as EMA-CO for high-risk or metastatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Radiotherapy or surgery for chemoresistant or bleeding deposits",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prolonged beta-hCG surveillance to confirm remission; contraception meanwhile",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

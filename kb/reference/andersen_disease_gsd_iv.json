@@ -147,5 +147,358 @@
       "caption": "Overview comparison matrix for andersen disease (gsd iv, branching enzyme)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Scriver's OMMBID / GeneReviews",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "andersen_disease_gsd_iv-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Glycogen branching enzyme activity assay",
+          "cells": [
+            {
+              "text": "Enzyme deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GBE1 molecular genetic testing",
+          "cells": [
+            {
+              "text": "Biallelic GBE1 variants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver biopsy with PAS-positive polyglucosan inclusions",
+          "cells": [
+            {
+              "text": "Abnormal glycogen and fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and creatine kinase",
+          "cells": [
+            {
+              "text": "Cardiac or muscle involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI, nerve conduction studies and urodynamics",
+          "cells": [
+            {
+              "text": "Adult polyglucosan body disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "andersen_disease_gsd_iv-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Neonatal haemochromatosis, tyrosinaemia or biliary atresia",
+          "cells": [
+            {
+              "text": "Infantile cirrhosis"
+            },
+            {
+              "text": "Metabolic and biliary workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other hepatic glycogen storage diseases",
+          "cells": [
+            {
+              "text": "Hepatomegaly with glycogen storage"
+            },
+            {
+              "text": "Enzyme testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital muscular dystrophies or congenital myopathies",
+          "cells": [
+            {
+              "text": "Neuromuscular perinatal form"
+            },
+            {
+              "text": "Muscle biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lafora disease",
+          "cells": [
+            {
+              "text": "Polyglucosan disorder"
+            },
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adult-onset motor neurone disease or multiple sclerosis",
+          "cells": [
+            {
+              "text": "Adult polyglucosan body disease mimic"
+            },
+            {
+              "text": "Neurological workup"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mitochondrial hepatopathy",
+          "cells": [
+            {
+              "text": "Hepatopathy with mitochondrial disease"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "andersen_disease_gsd_iv-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Liver transplantation for progressive hepatic form",
+          "cells": [
+            {
+              "text": "Cirrhosis and portal hypertension"
+            },
+            {
+              "text": "Definitive treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutritional support and management of portal hypertension",
+          "cells": [
+            {
+              "text": "Progressive liver failure"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac surveillance and management of cardiomyopathy",
+          "cells": [
+            {
+              "text": "Neuromuscular and congenital forms"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Physiotherapy, neurogenic bladder management and mobility aids",
+          "cells": [
+            {
+              "text": "Neuromuscular and adult phenotypes"
+            },
+            {
+              "text": "Supportive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family screening",
+          "cells": [
+            {
+              "text": "Autosomal recessive GBE1 defect"
+            },
+            {
+              "text": "Family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "andersen_disease_gsd_iv-dx-mgmt",
+      "title": "Diagnosis and management of Andersen disease (GSD IV, branching enzyme)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Infant with failure to thrive, hepatosplenomegaly and liver disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ascites, variceal bleeding, cardiomyopathy or severe perinatal hypotonia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent hepatology review; treat bleeding and ascites",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "GBE1 activity and sequencing; liver biopsy for polyglucosan; echo",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Low branching enzyme with GBE1 variants confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Refer for liver transplantation in progressive hepatic form",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review infantile cirrhosis, other GSDs and congenital myopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Nutrition and portal hypertension care",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cardiac surveillance for cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy and mobility aids for neuromuscular forms",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Hepatic form often fatal early without transplant; hypoglycaemia not dominant",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

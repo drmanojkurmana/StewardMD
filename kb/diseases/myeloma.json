@@ -227,5 +227,602 @@
       "caption": "Diagnostic and clinical overview matrix for multiple myeloma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Multiple Myeloma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/plasma-cell-disorders/multiple-myeloma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "myeloma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing active multiple myeloma (IMWG)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Clonal marrow plasma cells",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "10% or more, or biopsy-proven plasmacytoma",
+              "op": ">=",
+              "value": 10
+            },
+            {
+              "text": "Required, plus at least one myeloma-defining event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypercalcaemia (C)",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Above 2.75 mmol/L or more than 0.25 mmol/L above upper limit",
+              "op": ">",
+              "value": 2.75
+            },
+            {
+              "text": "CRAB end-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal insufficiency (R)",
+          "unit": "mL/min",
+          "cells": [
+            {
+              "text": "Creatinine clearance below 40 mL/min or creatinine above 177 umol/L (2 mg/dL)",
+              "op": "<",
+              "value": 40
+            },
+            {
+              "text": "CRAB end-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anaemia (A)",
+          "unit": "g/L",
+          "cells": [
+            {
+              "text": "Hb below 100 g/L or more than 20 g/L below lower limit",
+              "op": "<",
+              "value": 100
+            },
+            {
+              "text": "CRAB end-organ damage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone lesions (B)",
+          "unit": "lesions",
+          "cells": [
+            {
+              "text": "1 or more lytic lesion on radiograph, CT or PET-CT",
+              "op": ">=",
+              "value": 1
+            },
+            {
+              "text": "{{hy:Lesions are purely lytic, so bone scan and alkaline phosphatase can be normal}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Marrow plasma cells (SLiM)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "60% or more",
+              "op": ">=",
+              "value": 60
+            },
+            {
+              "text": "Myeloma-defining biomarker without CRAB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Involved to uninvolved free light chain ratio (SLiM)",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "100 or more",
+              "op": ">=",
+              "value": 100
+            },
+            {
+              "text": "Myeloma-defining biomarker without CRAB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI focal lesions (SLiM)",
+          "unit": "lesions",
+          "cells": [
+            {
+              "text": "More than 1 lesion of 5 mm or more",
+              "op": ">",
+              "value": 1
+            },
+            {
+              "text": "Myeloma-defining biomarker without CRAB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bence Jones proteinuria",
+          "unit": "mg/24 h",
+          "cells": [
+            {
+              "text": "Over 200 mg/24 h when no serum M protein",
+              "op": ">",
+              "value": 200
+            },
+            {
+              "text": "Urine dipstick misses light chains; use 24 h urine and serum free light chains"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "R-ISS stage I",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "Beta-2 microglobulin below 3.5 mcg/mL and albumin 3.5 g/dL or more, normal LDH, standard-risk FISH",
+              "op": "<",
+              "value": 3.5
+            },
+            {
+              "text": "Best prognosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "R-ISS stage III",
+          "unit": "mcg/mL",
+          "cells": [
+            {
+              "text": "Beta-2 microglobulin 5.5 mcg/mL or more with high-risk FISH or high LDH",
+              "op": ">=",
+              "value": 5.5
+            },
+            {
+              "text": "High-risk: t(4;14), t(14;16), t(14;20), del17p, 1q gain"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Free light chain biomarker: Harrison 22e (IMWG) uses an involved to uninvolved ratio of 100 or more; Merck lists serum free light chains above 100 mg/L as an active-disease risk factor. Both kept."
+    },
+    {
+      "id": "myeloma-ddx",
+      "kind": "ddx",
+      "title": "Plasma cell disorders and M-protein look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "MGUS",
+          "cells": [
+            {
+              "text": "M protein below 30 g/L, marrow plasma cells below 10%, no myeloma-defining event",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "Marrow biopsy and CRAB screen; progresses about 1% per year"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smouldering myeloma",
+          "cells": [
+            {
+              "text": "M protein 30 g/L or more, or urine 500 mg/24 h or more, and/or marrow plasma cells 10 to 60%, no defining event"
+            },
+            {
+              "text": "{{hy:PET-CT separates smouldering from active disease}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Solitary plasmacytoma",
+          "cells": [
+            {
+              "text": "Single bone or extramedullary lesion, often younger; M protein in under 30%"
+            },
+            {
+              "text": "Whole-body PET-CT and marrow biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Waldenstrom macroglobulinaemia",
+          "cells": [
+            {
+              "text": "IgM monoclonal protein"
+            },
+            {
+              "text": "Immunofixation showing IgM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AL amyloidosis",
+          "cells": [
+            {
+              "text": "Light-chain organ deposition"
+            },
+            {
+              "text": "Fat pad aspirate for amyloid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "POEMS syndrome",
+          "cells": [
+            {
+              "text": "Polyneuropathy, organomegaly, endocrinopathy, skin change; sclerotic bone lesions"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reactive or secondary M protein",
+          "cells": [
+            {
+              "text": "CLL, lymphoma, cirrhosis, sarcoidosis, rheumatoid arthritis and others"
+            },
+            {
+              "text": "Absence of clonal plasmacytosis with myeloma-defining event"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Metastatic cancer to bone",
+          "cells": [
+            {
+              "text": "Osteolytic lesions from another primary"
+            },
+            {
+              "text": "Myeloma diagnosis requires no evidence of metastatic cancer"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "myeloma-treatment",
+      "kind": "treatment",
+      "title": "Treating multiple myeloma and its complications",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "No organ damage and no active-disease risk factor"
+            },
+            {
+              "text": "Treat when symptoms or complications develop"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Induction triplet",
+          "cells": [
+            {
+              "text": "{{hy:Bortezomib plus lenalidomide plus a corticosteroid gives the best survival}}"
+            },
+            {
+              "text": "Daratumumab or isatuximab may be added to bortezomib and dexamethasone"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Autologous stem cell transplant",
+          "cells": [
+            {
+              "text": "Adequate cardiac, hepatic, pulmonary and renal function"
+            },
+            {
+              "text": "Prolongs progression-free, not overall, survival"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Maintenance",
+          "cells": [
+            {
+              "text": "After response"
+            },
+            {
+              "text": "Lenalidomide, thalidomide, ixazomib or corticosteroids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hypercalcaemia",
+          "cells": [
+            {
+              "text": "Hydration and saluresis, then IV bisphosphonate (zoledronic acid preferred)"
+            },
+            {
+              "text": "Denosumab in severe renal failure; avoid calcium and vitamin D"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Renal protection",
+          "cells": [
+            {
+              "text": "Urine output above 2000 mL/day with heavy Bence Jones proteinuria",
+              "op": ">",
+              "value": 2000
+            },
+            {
+              "text": "Avoid dehydration, contrast and NSAIDs; plasma exchange in some"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bone disease",
+          "cells": [
+            {
+              "text": "Monthly IV pamidronate or zoledronic acid; denosumab alternative"
+            },
+            {
+              "text": "Risk of jaw osteonecrosis; palliative radiotherapy 18 to 24 Gy for pain"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anaemia",
+          "cells": [
+            {
+              "text": "Erythropoietin if chemotherapy alone fails; transfuse for symptoms"
+            },
+            {
+              "text": "Check iron, ferritin and B12"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "Antiviral prophylaxis with proteasome inhibitors or antibodies; pneumococcal and influenza vaccines"
+            },
+            {
+              "text": "No live vaccines; IVIG only for recurrent infections with low immunoglobulins"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperviscosity",
+          "cells": [
+            {
+              "text": "Symptomatic hyperviscosity"
+            },
+            {
+              "text": "Plasma exchange"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "myeloma-dx-mgmt",
+      "title": "Diagnosis and management of multiple myeloma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Bone pain, anaemia, high calcium, renal failure or high protein gap",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "SPEP with immunofixation, serum free light chains, 24 h urine",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Monoclonal protein or abnormal light chain ratio?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Myeloma unlikely; look for other cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Marrow aspirate and biopsy, whole-body low-dose CT or PET-CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Clonal plasma cells 10% or more or plasmacytoma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "MGUS or reactive M protein: monitor",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "CRAB feature or SLiM biomarker present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Smouldering myeloma: observe, treat when active",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Active myeloma: stage with R-ISS and FISH",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Treat hypercalcaemia, protect kidneys, start bisphosphonate",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Fit for autologous transplant?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Triplet induction, autologous transplant, then maintenance",
+          "cite": "c2"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Triplet or anti-CD38 regimen, then maintenance",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "Yes"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

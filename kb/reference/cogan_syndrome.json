@@ -149,5 +149,305 @@
       "caption": "Overview comparison matrix for cogan syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Firestein & Kelley's Textbook of Rheumatology / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cogan_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Interstitial keratitis, scleritis or uveitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Audiometry and vestibular testing",
+          "cells": [
+            {
+              "text": "Audiovestibular involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology to exclude syphilis",
+          "cells": [
+            {
+              "text": "Syphilis and other infective causes excluded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography and vascular imaging",
+          "cells": [
+            {
+              "text": "Aortitis or aortic valve disease, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cogan_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Syphilitic interstitial keratitis",
+          "cells": [
+            {
+              "text": "Excluded by serology before immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Meniere disease",
+          "cells": [
+            {
+              "text": "Ocular inflammation is the link missed when Meniere is assumed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cogan_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "First-line for audiovestibular involvement and systemic vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Topical corticosteroids and cycloplegics",
+          "cells": [
+            {
+              "text": "For interstitial keratitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt high-dose corticosteroids",
+          "cells": [
+            {
+              "text": "For sudden sensorineural hearing loss, to try to preserve hearing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude infection first",
+          "cells": [
+            {
+              "text": "Particularly syphilis, before committing to immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Steroid-sparing immunosuppression",
+          "cells": [
+            {
+              "text": "Methotrexate, azathioprine, ciclosporin, mycophenolate or cyclophosphamide"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biologic therapy",
+          "cells": [
+            {
+              "text": "TNF inhibitors, tocilizumab or rituximab for refractory disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical and implant options",
+          "cells": [
+            {
+              "text": "Cochlear implantation for progressive bilateral deafness; cardiothoracic surgery for aortitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial monitoring",
+          "cells": [
+            {
+              "text": "Audiometry, vestibular testing, inflammatory markers, echocardiography or vascular imaging"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cogan_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Cogan syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Cogan syndrome: interstitial keratitis with hearing loss or vertigo",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid hearing loss, aortitis, new aortic regurgitation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: high-dose corticosteroids to preserve hearing; rapid specialist review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp, audiometry, vestibular tests, syphilis serology, echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Is syphilis or another infection excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the infection first; do not start immunosuppression yet",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Systemic corticosteroids for audiovestibular and vasculitic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Steroid-sparing immunosuppression such as methotrexate or azathioprine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Cochlear implantation for progressive bilateral deafness",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial audiometry, inflammatory markers and echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Ocular inflammation settles; hearing loss is often permanent and may progress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

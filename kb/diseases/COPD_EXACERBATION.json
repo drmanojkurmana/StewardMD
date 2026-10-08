@@ -295,5 +295,518 @@
       "caption": "Diagnostic and clinical overview matrix for acute copd exacerbation."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "US Pharmacist, Overview of the Diagnosis and Treatment of COPD Exacerbations, 2024",
+      "url": "https://www.uspharmacist.com/article/overview-of-the-diagnosis-and-treatment-of-copd-exacerbations",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "COPD_EXACERBATION-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and grading a COPD exacerbation",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Symptom worsening",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "More dyspnoea, cough or change in sputum, evolving over under 14 days",
+              "op": "<",
+              "value": 14
+            },
+            {
+              "text": "Clinical diagnosis; no single confirming test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spirometry during exacerbation",
+          "cells": [
+            {
+              "text": "Not helpful"
+            },
+            {
+              "text": "Unlike asthma, lung function does not aid diagnosis or management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial PCO2",
+          "unit": "mmHg",
+          "cells": [
+            {
+              "text": ">45",
+              "op": ">",
+              "value": 45
+            },
+            {
+              "text": "Hypercarbia; get ABG in advanced COPD, prior hypercarbia, drowsiness or distress"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial pH with hypercarbia",
+          "cells": [
+            {
+              "text": "<=7.35",
+              "op": "<=",
+              "value": 7.35
+            },
+            {
+              "text": "{{hy:Respiratory acidosis; indication for noninvasive ventilation}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest x-ray or CT",
+          "cells": [
+            {
+              "text": "Severe COPD, moderate to severe distress or focal signs"
+            },
+            {
+              "text": "About 25% abnormal in moderate to severe exacerbations; pneumonia most common"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C-reactive protein",
+          "cells": [
+            {
+              "text": "Part of expert-consensus (Rome) severity staging with dyspnoea, vital signs and ABG"
+            },
+            {
+              "text": "Mainly useful in the emergency department"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Procalcitonin",
+          "cells": [
+            {
+              "text": "Not currently recommended to guide antibiotics"
+            },
+            {
+              "text": "One trial used a cut-off below 0.1 ng/mL"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood eosinophils",
+          "cells": [
+            {
+              "text": "May predict steroid response"
+            },
+            {
+              "text": "No cut-off given in the source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Signs of severe distress",
+          "cells": [
+            {
+              "text": "Cannot speak full sentences, accessory muscle use, cyanosis, confusion, paradoxical abdominal motion"
+            },
+            {
+              "text": "Suggests need for hospital care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment-based grade",
+          "cells": [
+            {
+              "text": "Mild: short-acting bronchodilator only; moderate: steroid with or without antibiotic; severe: hospital or ED"
+            },
+            {
+              "text": "Older grading; the Rome proposal grades by measured variables instead"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Numeric Rome proposal thresholds (dyspnoea score, respiratory rate, heart rate, saturation, CRP) were not available in the sources opened."
+    },
+    {
+      "id": "COPD_EXACERBATION-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic a COPD exacerbation",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pneumonia",
+          "cells": [
+            {
+              "text": "Most frequent abnormal finding on chest imaging in this setting"
+            },
+            {
+              "text": "Chest radiograph"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pulmonary embolism",
+          "cells": [
+            {
+              "text": "{{hy:Incidence rises during exacerbations; consider actively}}"
+            },
+            {
+              "text": "D-dimer"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heart failure",
+          "cells": [
+            {
+              "text": "Common alternative or contributing finding on imaging"
+            },
+            {
+              "text": "Pro-BNP"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pneumothorax",
+          "cells": [
+            {
+              "text": "Asymmetric chest examination"
+            },
+            {
+              "text": "Chest imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Large airway obstruction",
+          "cells": [
+            {
+              "text": "Asymmetric chest examination"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "D-dimer and pro-BNP are named as helpful tests in the US Pharmacist review; confirmatory imaging for PE is not detailed there."
+    },
+    {
+      "id": "COPD_EXACERBATION-treatment",
+      "kind": "treatment",
+      "title": "Management of a COPD exacerbation",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Short-acting beta2 agonist",
+          "cells": [
+            {
+              "text": "All exacerbations"
+            },
+            {
+              "text": "Mainstay; a short-acting antimuscarinic may be added"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prednisone 40 mg daily or equivalent",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "Moderate or severe exacerbation; GOLD course 5 days",
+              "op": "=",
+              "value": 5
+            },
+            {
+              "text": "{{hy:5 days as good as 14 (REDUCE)}}; oral equals IV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotic (amoxicillin-clavulanate, macrolide, tetracycline or fluoroquinolone)",
+          "cells": [
+            {
+              "text": "All three of more dyspnoea, more sputum and purulence; or two including purulence; or ventilated"
+            },
+            {
+              "text": "No single first choice"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotic duration",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "<=5",
+              "op": "<=",
+              "value": 5
+            },
+            {
+              "text": "7 to 10 days gave no benefit and more adverse effects"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Controlled oxygen",
+          "unit": "% SpO2",
+          "cells": [
+            {
+              "text": "Target 88 to 92",
+              "range": [
+                88,
+                92
+              ]
+            },
+            {
+              "text": "Do not withhold for fear of CO2 retention; monitor blood gases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Noninvasive ventilation",
+          "cells": [
+            {
+              "text": "Respiratory acidosis, persistent hypoxia or severe dyspnoea"
+            },
+            {
+              "text": "Preferred first; lowers mortality and intubation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Invasive ventilation",
+          "cells": [
+            {
+              "text": "NIV failure or intolerance, low consciousness, agitation, aspiration, haemodynamic instability, severe arrhythmia"
+            },
+            {
+              "text": "Hospital mortality 17% to 49% with ventilatory support"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Continue maintenance inhalers",
+          "cells": [
+            {
+              "text": "During exacerbation"
+            },
+            {
+              "text": "May duplicate short-acting therapy with little added benefit"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Steroid duration differs by source: GOLD 5 days, ERS/ATS up to 14 days. Ventilation mortality figure is from Harrison 22e."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "COPD_EXACERBATION-dx-mgmt",
+      "title": "Diagnosis and management of COPD exacerbation",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Known COPD with worse dyspnoea, cough or sputum over under 14 days",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Exclude pneumonia, PE, heart failure, pneumothorax",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Severe distress, new hypoxaemia, severe COPD or major comorbidity?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Outpatient: short-acting bronchodilator",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Hospital: ABG, chest x-ray, oxygen to SpO2 88 to 92%",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prednisone 40 mg daily for 5 days if moderate or severe",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Purulent sputum plus more dyspnoea or volume, or ventilated?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antibiotic for 5 days or less",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "PCO2 >45 mmHg with pH <=7.35?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Noninvasive ventilation",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "decision",
+          "text": "NIV failing or contraindicated?",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Intubate and ventilate in ICU",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Continue ward care; plan prevention of future exacerbations",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Yes"
+        },
+        {
+          "from": "n11",
+          "to": "n13",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

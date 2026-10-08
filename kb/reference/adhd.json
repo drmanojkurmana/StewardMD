@@ -151,5 +151,334 @@
       "caption": "Overview comparison matrix for attention-deficit/hyperactivity disorder."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adhd-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Standardised rating scales from multiple informants across settings",
+          "cells": [
+            {
+              "text": "Symptoms across settings"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, educational and collateral history",
+          "cells": [
+            {
+              "text": "Onset before age 12"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Baseline cardiovascular assessment before stimulant initiation",
+          "cells": [
+            {
+              "text": "Cardiac status before stimulants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for learning, mood, anxiety and sleep disorders",
+          "cells": [
+            {
+              "text": "Comorbid disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth, blood pressure and heart rate monitoring during treatment",
+          "cells": [
+            {
+              "text": "Effects of treatment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adhd-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Bipolar disorder",
+          "cells": [
+            {
+              "text": "Mood instability and mania"
+            },
+            {
+              "text": "Mood screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstructive sleep apnoea and other sleep disorders",
+          "cells": [
+            {
+              "text": "Sleep disruption"
+            },
+            {
+              "text": "Sleep assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adhd-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Behavioural and educational interventions",
+          "cells": [
+            {
+              "text": "Foundation of management"
+            },
+            {
+              "text": "Parent training, classroom accommodations, psychoeducation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylphenidate or amfetamine-based stimulants",
+          "cells": [
+            {
+              "text": "First-line drug treatment"
+            },
+            {
+              "text": "Stimulant pharmacotherapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atomoxetine or guanfacine",
+          "cells": [
+            {
+              "text": "Non-stimulant option"
+            },
+            {
+              "text": "Where stimulants are unsuitable or poorly tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiovascular assessment before stimulants; growth, heart rate and BP monitoring",
+          "cells": [
+            {
+              "text": "Safety during treatment"
+            },
+            {
+              "text": "Baseline and ongoing checks"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening and treatment of comorbid mood, anxiety, sleep and learning disorders",
+          "cells": [
+            {
+              "text": "Comorbidity"
+            },
+            {
+              "text": "Treat comorbid disorders"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care across education, psychology and specialist services",
+          "cells": [
+            {
+              "text": "Multidisciplinary care"
+            },
+            {
+              "text": "Coordination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Regular review; titrate or switch agents",
+          "cells": [
+            {
+              "text": "Inadequate control or adverse effects"
+            },
+            {
+              "text": "Review response"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adhd-dx-mgmt",
+      "title": "Diagnosis and management of Attention-deficit/hyperactivity disorder",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent inattention or hyperactivity-impulsivity from childhood across settings",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Cardiac symptoms, family sudden death, emerging psychosis or mania?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Specialist review before stimulant; cardiology or psychiatry input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Rating scales from multiple informants; developmental and collateral history",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Symptoms before age 12 and across more than one setting?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Baseline cardiovascular check; screen for comorbid disorders",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review anxiety, mood, sleep disorders, thyroid and autism",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Behavioural parent training and classroom accommodations",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stimulant (methylphenidate or amfetamine-based) as first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Atomoxetine or guanfacine if stimulants unsuitable; monitor growth and BP",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Symptoms often ease with age; treatment and support improve outcomes",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

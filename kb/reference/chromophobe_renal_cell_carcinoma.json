@@ -152,5 +152,327 @@
       "caption": "Overview comparison matrix for chromophobe renal cell carcinoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Uro-oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chromophobe_renal_cell_carcinoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced CT or MRI",
+          "cells": [
+            {
+              "text": "Characterises the renal mass and stages disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal mass biopsy",
+          "cells": [
+            {
+              "text": "Where the diagnosis will change management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunohistochemistry including CK7",
+          "cells": [
+            {
+              "text": "Separates chromophobe from oncocytoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family and personal history assessment",
+          "cells": [
+            {
+              "text": "Birt-Hogg-Dube features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal function and staging tests",
+          "cells": [
+            {
+              "text": "Larger or symptomatic tumours"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromophobe_renal_cell_carcinoma-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal oncocytoma",
+          "cells": [
+            {
+              "text": "Benign lesion that is hard to separate from chromophobe carcinoma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Birt-Hogg-Dube associated hybrid oncocytic tumour",
+          "cells": [
+            {
+              "text": "Birt-Hogg-Dube association"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromophobe_renal_cell_carcinoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Surgery by stage and size",
+          "cells": [
+            {
+              "text": "Individualised surgery by an experienced urologist"
+            },
+            {
+              "text": "Localised disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nephron-sparing surgery",
+          "cells": [
+            {
+              "text": "Partial nephrectomy favoured for small to medium tumours where feasible"
+            },
+            {
+              "text": "Preserves renal function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radical nephrectomy",
+          "cells": [
+            {
+              "text": "For larger, complex or locally advanced tumours"
+            },
+            {
+              "text": "Routine adrenalectomy is not performed unless invaded"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thermal ablation",
+          "cells": [
+            {
+              "text": "Kidney-sparing option for small masses, especially with high operative risk"
+            },
+            {
+              "text": "Higher local failure rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "Imaging follow-up for small, indolent-appearing masses"
+            },
+            {
+              "text": "Older or comorbid patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant therapy",
+          "cells": [
+            {
+              "text": "Not established outside trials"
+            },
+            {
+              "text": "No chromophobe-specific trial evidence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced disease",
+          "cells": [
+            {
+              "text": "Early medical oncology referral; mTOR inhibitor everolimus; trial enrolment"
+            },
+            {
+              "text": "Advanced or metastatic disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chromophobe_renal_cell_carcinoma-dx-mgmt",
+      "title": "Diagnosis and management of Chromophobe renal cell carcinoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chromophobe renal cell carcinoma: solid, well-circumscribed renal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (rapid growth, advanced disease, sarcomatoid features)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urology and medical oncology referral for advanced or sarcomatoid disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast CT or MRI, biopsy where it changes management, CK7 staining",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Chromophobe histology separated from oncocytoma on immunohistochemistry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nephron-sparing surgery for small to medium tumours where feasible",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check renal oncocytoma, clear cell and papillary renal carcinoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radical nephrectomy for larger or complex tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Thermal ablation or active surveillance for small indolent masses",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Medical oncology and trial enrolment for advanced disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Birt-Hogg-Dube genetic counselling for multiple or bilateral tumours",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

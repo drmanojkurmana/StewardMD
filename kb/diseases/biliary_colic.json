@@ -223,5 +223,440 @@
       "caption": "Diagnostic and clinical overview matrix for biliary colic / cholelithiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Cholelithiasis",
+      "url": "https://www.merckmanuals.com/professional/hepatic-and-biliary-disorders/gallbladder-and-bile-duct-disorders/cholelithiasis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "biliary_colic-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising biliary colic and its complications",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Pain pattern",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Steady RUQ or epigastric pain, rising over 15 min to 1 h"
+            },
+            {
+              "text": "Not truly colicky"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pain duration",
+          "unit": "h",
+          "cells": [
+            {
+              "text": "Under 6 h, occasionally up to 12 h",
+              "op": "<",
+              "value": 6
+            },
+            {
+              "text": "Harrison: about 30 min to 5 h"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pain >5 to 12 h, vomiting or fever",
+          "cells": [
+            {
+              "text": "Prolonged attack"
+            },
+            {
+              "text": "{{hy:Suspect cholecystitis or pancreatitis}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fever or chills",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "Complication, not simple colic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Abdominal ultrasound",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity and specificity 95%",
+              "op": ">=",
+              "value": 95
+            },
+            {
+              "text": "Test of choice; also shows sludge"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Raised bilirubin or alkaline phosphatase in an attack",
+          "cells": [
+            {
+              "text": "Abnormal LFTs"
+            },
+            {
+              "text": "Suggests common bile duct stone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endoscopic ultrasound",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Finds stones under 3 mm"
+            },
+            {
+              "text": "When other imaging equivocal"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HIDA scan",
+          "cells": [
+            {
+              "text": "Non-filling gallbladder"
+            },
+            {
+              "text": "Cystic duct obstruction, supports cholecystitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRCP or ERCP",
+          "cells": [
+            {
+              "text": "Suspected duct stone"
+            },
+            {
+              "text": "ERCP is gold standard and therapeutic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain x-ray",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Only 10% to 15% of stones calcified"
+            },
+            {
+              "text": "Low yield"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Pain duration cut-offs differ: Harrison suspects cholecystitis beyond about 5 h, Merck beyond 12 h."
+    },
+    {
+      "id": "biliary_colic-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic biliary colic",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute cholecystitis",
+          "cells": [
+            {
+              "text": "{{hy:Pain beyond 5 h, fever, Murphy sign}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholangitis",
+          "cells": [
+            {
+              "text": "Charcot triad: pain, jaundice, spiking fever"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gallstone pancreatitis",
+          "cells": [
+            {
+              "text": "Severe pain lasting days; raised lipase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peptic ulcer disease or functional dyspepsia",
+          "cells": [
+            {
+              "text": "Intermittent over weeks, may ease with food"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Irritable bowel syndrome",
+          "cells": [
+            {
+              "text": "Linked to stress and bowel habit, not fatty meals"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sphincter of Oddi dysfunction or acalculous cholecystopathy",
+          "cells": [
+            {
+              "text": "Biliary-type pain without stones"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Right renal colic, lower lobe pneumonia, mesenteric ischaemia",
+          "cells": [
+            {
+              "text": "Non-biliary RUQ or flank pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac pain",
+          "cells": [
+            {
+              "text": "Gallbladder pain can refer to the precordium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "biliary_colic-treatment",
+      "kind": "treatment",
+      "title": "Management of biliary colic and gallstones",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia (NSAID such as diclofenac, or opioid)",
+          "cells": [
+            {
+              "text": "Acute attack"
+            },
+            {
+              "text": "Doses not stated in sources opened"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laparoscopic cholecystectomy",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:Symptomatic gallstones}}"
+            },
+            {
+              "text": "Conversion to open 4% to 8%; symptoms recur in 20% to 40% per year without surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Expectant management",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Asymptomatic stones"
+            },
+            {
+              "text": "Symptoms develop in about 1% to 4% per year"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prophylactic cholecystectomy",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Stones >3 cm or porcelain gallbladder"
+            },
+            {
+              "text": "Carcinoma risk; porcelain indication debated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ursodeoxycholic acid",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Small radiolucent stones <0.5 cm in a working gallbladder",
+              "op": "<",
+              "value": 0.5
+            },
+            {
+              "text": "Declines or unfit for surgery; 50% recur in 5 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent assessment and admission",
+          "cells": [
+            {
+              "text": "Fever, jaundice, pain beyond 5 h"
+            },
+            {
+              "text": "Treat as cholecystitis, cholangitis or pancreatitis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "biliary_colic-dx-mgmt",
+      "title": "Diagnosis and management of biliary colic",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Steady RUQ or epigastric pain, often after meals or at night",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Analgesia; RUQ ultrasound; LFTs",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Fever, jaundice or pain >5 h?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Jaundice or raised bilirubin and ALP?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Duct stone or cholangitis: MRCP or ERCP",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Acute cholecystitis or pancreatitis pathway",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Gallstones on ultrasound?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Elective laparoscopic cholecystectomy",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Consider EUS, dyspepsia, IBS, other causes",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

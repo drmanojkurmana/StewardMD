@@ -146,5 +146,312 @@
       "caption": "Overview comparison matrix for chylopericardium."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chylopericardium-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardiocentesis with fluid analysis",
+          "cells": [
+            {
+              "text": "Milky appearance, triglyceride level and chylomicrons"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Effusion size and tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac CT or MRI",
+          "cells": [
+            {
+              "text": "Characterises the effusion and any mediastinal cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymphangiography or lymphoscintigraphy",
+          "cells": [
+            {
+              "text": "Localises the abnormal lymphatic communication"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Investigation for malignancy or lymphatic disorder",
+          "cells": [
+            {
+              "text": "Secondary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylopericardium-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Purulent (bacterial) pericardial effusion",
+          "cells": [
+            {
+              "text": "Infected effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cholesterol (gold-paint) pericardial effusion",
+          "cells": [
+            {
+              "text": "Cholesterol-rich effusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant pericardial effusion",
+          "cells": [
+            {
+              "text": "Neoplastic effusion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chylopericardium-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Pericardial drainage",
+          "cells": [
+            {
+              "text": "Pericardiocentesis for large or symptomatic effusion; emergency for tamponade"
+            },
+            {
+              "text": "Tamponade"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-fat diet with medium-chain triglycerides",
+          "cells": [
+            {
+              "text": "Or bowel rest with parenteral nutrition to reduce chyle flow"
+            },
+            {
+              "text": "First-line measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Octreotide",
+          "cells": [
+            {
+              "text": "Somatostatin analogue to lower lymphatic flow"
+            },
+            {
+              "text": "Persistent leakage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Thoracic-duct embolisation or ligation",
+          "cells": [
+            {
+              "text": "With pericardial window or pericardiectomy for refractory disease"
+            },
+            {
+              "text": "Refractory or recurrent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treatment of underlying cause",
+          "cells": [
+            {
+              "text": "Malignancy or lymphatic disorder in secondary disease"
+            },
+            {
+              "text": "Secondary disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chylopericardium-dx-mgmt",
+      "title": "Diagnosis and management of Chylopericardium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chylopericardium: enlarging pericardial effusion, milky on aspiration",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (tamponade, rapid reaccumulation, mediastinal malignancy)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: emergency pericardial drainage for tamponade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pericardiocentesis for triglycerides, echocardiography and cardiac CT or MRI",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Milky fluid with high triglycerides and chylomicrons confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Pericardial drainage and low-fat, medium-chain triglyceride diet",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check purulent, cholesterol and malignant pericardial effusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Octreotide to reduce lymphatic flow in persistent leakage",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Lymphangiography with thoracic-duct embolisation or ligation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat underlying malignancy or lymphatic disorder in secondary disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Monitor nutrition and immunity; echocardiography for reaccumulation",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -173,5 +173,307 @@
       "caption": "Direct oral anticoagulants (DOACs) are contraindicated in high-risk triple-positive APS due to increased arterial stroke risk."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison 22e p.2837",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "antiphospholipid_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Lupus anticoagulant testing as a three-step procedure",
+          "cells": [
+            {
+              "text": "Screens with aPTT and dilute Russell viper venom time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticardiolipin and anti-beta2GPI IgG and IgM",
+          "cells": [
+            {
+              "text": "Standardised ELISA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphosphatidylserine or prothrombin antibodies",
+          "cells": [
+            {
+              "text": "When APS features are present without classical antiphospholipid antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeat antiphospholipid antibody testing",
+          "cells": [
+            {
+              "text": "Confirms persistence, 12 weeks apart"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "2023 ACR/EULAR classification criteria",
+          "cells": [
+            {
+              "text": "At least 3 points from clinical domains and at least 3 points from laboratory domains"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal biopsy",
+          "cells": [
+            {
+              "text": "Suspected aPL-nephropathy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "antiphospholipid_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Long-term anticoagulation for thrombotic disease",
+          "cells": [
+            {
+              "text": "Vitamin K antagonist such as warfarin"
+            },
+            {
+              "text": "Generally avoid direct oral anticoagulants in arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial events",
+          "cells": [
+            {
+              "text": "Vitamin K antagonist, with or without an antiplatelet agent"
+            },
+            {
+              "text": "Arterial disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Obstetric APS",
+          "cells": [
+            {
+              "text": "Low-dose aspirin with prophylactic low-molecular-weight heparin"
+            },
+            {
+              "text": "Through pregnancy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary thromboprophylaxis",
+          "cells": [
+            {
+              "text": "Low-dose aspirin"
+            },
+            {
+              "text": "Hydroxychloroquine if coexisting lupus; high-risk antibody carriers"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Catastrophic APS",
+          "cells": [
+            {
+              "text": "Combined therapeutic anticoagulation, high-dose corticosteroids and plasma exchange"
+            },
+            {
+              "text": "Treated urgently"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Modifiable risk",
+          "cells": [
+            {
+              "text": "Avoid oestrogen-containing contraception; control cardiovascular risk"
+            },
+            {
+              "text": "Thromboprophylaxis around high-risk periods"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Anticoagulation intensity and platelet count"
+            },
+            {
+              "text": "Multidisciplinary rheumatology, haematology and obstetrics"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "antiphospholipid_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Antiphospholipid Syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thrombosis or obstetric events with persistent antiphospholipid antibodies",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Rapid thrombosis involving three or more organs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent combined anticoagulation, steroids and plasma exchange for CAPS",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Three-step lupus anticoagulant testing, aCL, anti-beta2GPI, repeat at 12 weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Antibodies persist on repeat testing, with 2023 criteria met?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Vitamin K antagonist anticoagulation for thrombotic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat aPL testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Low-dose aspirin with LMWH in obstetric APS",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Avoid oestrogen-containing contraception; control cardiovascular risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Monitor anticoagulation intensity and platelet count",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care with rheumatology, haematology and obstetrics",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

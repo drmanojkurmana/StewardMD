@@ -146,5 +146,343 @@
       "caption": "Overview comparison matrix for delayed puberty."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / standard sleep & reproductive medicine references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delayed_puberty-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Basal LH, FSH and sex steroids",
+          "cells": [
+            {
+              "text": "Separates central from primary gonadal causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone age radiograph",
+          "cells": [
+            {
+              "text": "Skeletal maturation and pubertal potential"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Chromosomal disorder, when suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolactin and thyroid function",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia or untreated hypothyroidism as causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary and hypothalamic imaging",
+          "cells": [
+            {
+              "text": "Central structural cause, when considered"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delayed_puberty-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kallmann syndrome",
+          "cells": [
+            {
+              "text": "Anosmia with absent puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Turner syndrome",
+          "cells": [
+            {
+              "text": "Short stature with characteristic features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constitutional delay of growth and puberty",
+          "cells": [
+            {
+              "text": "Normal variant; progresses spontaneously to normal puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypopituitarism or pituitary tumour",
+          "cells": [
+            {
+              "text": "Headache or visual disturbance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Functional hypogonadotrophic hypogonadism",
+          "cells": [
+            {
+              "text": "Chronic illness, undernutrition, excessive exercise or eating disorder"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delayed_puberty-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and watchful waiting",
+          "cells": [
+            {
+              "text": "Constitutional delay; monitor pubertal progression and growth velocity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Short-course sex-steroid priming",
+          "cells": [
+            {
+              "text": "Where delay causes psychosocial distress; testosterone in boys, oestrogen in girls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term sex-hormone replacement",
+          "cells": [
+            {
+              "text": "Permanent hypogonadism; titrated to mimic normal puberty"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat underlying causes",
+          "cells": [
+            {
+              "text": "Optimise nutrition, manage chronic illness, address exercise or eating disorders, treat pituitary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility-directed therapy",
+          "cells": [
+            {
+              "text": "Pulsatile GnRH or gonadotrophins when fertility is desired"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Monitor growth and bone age; bone-protective measures for low bone density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary input",
+          "cells": [
+            {
+              "text": "Paediatric endocrinology and psychology; karyotype and genetic counselling"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delayed_puberty-dx-mgmt",
+      "title": "Diagnosis and management of Delayed puberty",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected delayed puberty: absent or delayed pubertal development",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (anosmia, headache or visual change, chronic illness, short stature)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent endocrine and neurology review for a pituitary or hypothalamic tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Basal LH, FSH and sex steroids; bone age; prolactin and thyroid function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do hormone levels localise a central or primary cause?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constitutional delay or functional causes; repeat the assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reassure and monitor if constitutional delay; spontaneous progression expected",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Short-course low-dose sex-steroid priming where delay causes distress",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Long-term sex-hormone replacement for permanent hypogonadism",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat reversible causes: nutrition, chronic illness, hyperprolactinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Karyotype and genetic counselling for Turner, Klinefelter or Kallmann",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Constitutional delay reaches normal adult height and fertility; pathological causes vary",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

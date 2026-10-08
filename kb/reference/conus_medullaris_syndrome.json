@@ -149,5 +149,314 @@
       "caption": "Overview comparison matrix for conus medullaris syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Bradley and Daroff's Neurology in Clinical Practice",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "conus_medullaris_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Urgent lumbosacral MRI with contrast",
+          "cells": [
+            {
+              "text": "Compressive or intrinsic lesion identified"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bladder ultrasound or catheterisation",
+          "cells": [
+            {
+              "text": "Post-void residual volume measured"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Digital rectal examination",
+          "cells": [
+            {
+              "text": "Anal tone and voluntary contraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urodynamic studies",
+          "cells": [
+            {
+              "text": "Pattern of bladder dysfunction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CSF analysis",
+          "cells": [
+            {
+              "text": "Inflammatory or neoplastic process when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conus_medullaris_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cauda equina syndrome",
+          "cells": [
+            {
+              "text": "Pitfall: confused with conus compression; delays imaging"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Conus tumour such as ependymoma or metastasis",
+          "cells": [
+            {
+              "text": "Mass lesion; oncological work-up"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tethered cord syndrome",
+          "cells": [
+            {
+              "text": "Named look-alike"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conus_medullaris_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency surgical decompression",
+          "cells": [
+            {
+              "text": "Best chance of preserving sphincter and neurological function for compressive lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lesion-specific therapy",
+          "cells": [
+            {
+              "text": "Corticosteroids, radiotherapy or chemotherapy for neoplastic or inflammatory cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurogenic bladder",
+          "cells": [
+            {
+              "text": "Intermittent catheterisation for retention and overflow; urodynamic-guided care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bowel regimen",
+          "cells": [
+            {
+              "text": "Stimulant laxatives, suppositories and planned evacuation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sexual dysfunction",
+          "cells": [
+            {
+              "text": "Phosphodiesterase-5 inhibitors and specialist input"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neurorehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy; monitor pressure injury and urinary infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neurosurgery, urology, continence and rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "conus_medullaris_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Conus medullaris syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected conus medullaris syndrome: early bladder and bowel disturbance, saddle deficit",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute retention with saddle anaesthesia, lost anal tone)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Surgical emergency: urgent decompression for compressive lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent lumbosacral MRI with contrast; residual volume; rectal tone; urodynamics",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does MRI show a conus lesion rather than cauda equina compression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cauda equina syndrome, transverse myelitis or AV malformation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Emergency surgical decompression of a compressive lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Lesion-specific therapy for neoplastic or inflammatory cause",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Intermittent catheterisation and urodynamic-guided bladder care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Structured bowel regimen; early neurorehabilitation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Bladder, bowel and sexual function often recover incompletely once deficits set in",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -147,5 +147,305 @@
       "caption": "Overview comparison matrix for cystoisosporiasis (cystoisospora belli)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell/Manson's Tropical Diseases",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cystoisosporiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Stool microscopy with modified acid-fast staining",
+          "cells": [
+            {
+              "text": "Oocysts seen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "UV autofluorescence microscopy",
+          "cells": [
+            {
+              "text": "Oocysts on faecal smear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Repeated stool sampling",
+          "cells": [
+            {
+              "text": "Intermittent oocyst shedding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count",
+          "cells": [
+            {
+              "text": "Peripheral eosinophilia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Small-bowel biopsy",
+          "cells": [
+            {
+              "text": "When stool examination repeatedly negative"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystoisosporiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Cryptosporidiosis",
+          "cells": [
+            {
+              "text": "Named protozoal look-alike; acid-fast staining"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyclosporiasis",
+          "cells": [
+            {
+              "text": "Named protozoal look-alike"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV enteropathy",
+          "cells": [
+            {
+              "text": "Named look-alike with immunosuppression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cystoisosporiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Cotrimoxazole",
+          "cells": [
+            {
+              "text": "Antimicrobial of choice; clears infection and diarrhoea"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ciprofloxacin or pyrimethamine with folinic acid",
+          "cells": [
+            {
+              "text": "Alternatives in sulphonamide intolerance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged courses and secondary prophylaxis",
+          "cells": [
+            {
+              "text": "Immunocompromised hosts where relapse is frequent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Immune reconstitution in HIV"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Rehydration, electrolyte correction and nutrition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hygiene and testing",
+          "cells": [
+            {
+              "text": "Food and water hygiene; HIV and CD4 testing in prolonged disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cystoisosporiasis-dx-mgmt",
+      "title": "Diagnosis and management of Cystoisosporiasis (Cystoisospora belli)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cystoisosporiasis: prolonged watery diarrhoea with eosinophilia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (dehydrating diarrhoea, progressive weight loss, disseminated disease)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent rehydration and HIV assessment for severe or disseminated disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Acid-fast or UV stool microscopy; repeated samples; FBC; HIV and CD4",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Are Cystoisospora oocysts seen on acid-fast staining?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider cryptosporidiosis, cyclosporiasis or microsporidiosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Cotrimoxazole as the antimicrobial of choice",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ciprofloxacin or pyrimethamine with folinic acid if sulphonamide intolerant",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Prolonged courses and prophylaxis in immunocompromised hosts",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antiretroviral therapy in HIV; rehydration and nutrition",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Immunocompetent usually recover fully; immunocompromised may be chronically ill",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

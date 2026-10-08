@@ -147,5 +147,323 @@
       "caption": "Overview comparison matrix for postoperative delirium."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "delirium_postoperative-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Confusion Assessment Method or other validated delirium screen",
+          "cells": [
+            {
+              "text": "Delirium detected and distinguished from dementia and depression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for infection, hypoxia, metabolic and electrolyte disturbance",
+          "cells": [
+            {
+              "text": "Precipitants of postoperative delirium"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review",
+          "cells": [
+            {
+              "text": "Deliriogenic and sedative drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for urinary retention, constipation and pain",
+          "cells": [
+            {
+              "text": "Common precipitants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging or EEG",
+          "cells": [
+            {
+              "text": "Only if a focal cause or seizures are suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delirium_postoperative-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Dementia or pre-existing cognitive impairment",
+          "cells": [
+            {
+              "text": "Mislabelling delirium as dementia; screening separates them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Depression or acute psychiatric illness",
+          "cells": [
+            {
+              "text": "Separated from delirium by systematic screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Residual anaesthetic or sedative effect",
+          "cells": [
+            {
+              "text": "Sedative drugs worsen confusion; minimise them"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stroke or other acute neurological event",
+          "cells": [
+            {
+              "text": "Sudden confusion with focal neurological signs"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "delirium_postoperative-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multicomponent prevention",
+          "cells": [
+            {
+              "text": "Reorientation, early mobilisation, sleep hygiene, sensory aids, hydration and pain control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat precipitants",
+          "cells": [
+            {
+              "text": "Pain, infection, hypoxia, metabolic and electrolyte disturbance, urinary retention, constipation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimise sedatives and anticholinergics",
+          "cells": [
+            {
+              "text": "Opioid-sparing multimodal analgesia; remove unnecessary lines and catheters"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Low-dose antipsychotics",
+          "cells": [
+            {
+              "text": "Reserved for severe agitation with a safety risk; not routine"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systematic screening",
+          "cells": [
+            {
+              "text": "Validated tool such as the Confusion Assessment Method"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Safety and family involvement",
+          "cells": [
+            {
+              "text": "Hydration, nutrition and carer involvement; avoid restraint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Geriatric input",
+          "cells": [
+            {
+              "text": "High-risk patients; follow-up for cognitive and functional recovery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "delirium_postoperative-dx-mgmt",
+      "title": "Diagnosis and management of Postoperative delirium",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected postoperative delirium: acute confusion after surgery or anaesthesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (focal signs, hypoxia or sepsis, withdrawal, dangerous agitation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent: treat hypoxia, sepsis or withdrawal; assess for stroke",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CAM screening; infection, oxygen, metabolic and electrolyte tests; medication review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does screening confirm delirium with a precipitant identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dementia, depression, non-convulsive seizures or residual sedation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Prevent with reorientation, early mobilisation, sleep, sensory aids and hydration",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat precipitants: pain, infection, hypoxia, electrolytes, urinary retention",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Minimise sedatives and anticholinergics; use opioid-sparing analgesia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Antipsychotics only for severe agitation with a safety risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Often reversible; longer stay, decline and higher mortality in hypoactive cases",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

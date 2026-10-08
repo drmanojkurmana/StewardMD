@@ -147,5 +147,324 @@
       "caption": "Overview comparison matrix for chronic pain management."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Miller's Anesthesia / standard perioperative references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_pain_management-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Biopsychosocial assessment",
+          "cells": [
+            {
+              "text": "Function, mood and sleep"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Validated pain and disability questionnaires",
+          "cells": [
+            {
+              "text": "Track outcomes over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted imaging or nerve conduction studies",
+          "cells": [
+            {
+              "text": "Only when a specific treatable cause is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for depression, anxiety and substance use",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication review including opioid risk assessment",
+          "cells": [
+            {
+              "text": "Opioid safety"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_pain_management-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Malignancy or other progressive structural disease",
+          "cells": [
+            {
+              "text": "New or changing pain with progressive features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuropathic pain from a specific nerve lesion",
+          "cells": [
+            {
+              "text": "Pain in a nerve territory"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fibromyalgia and other nociplastic pain",
+          "cells": [
+            {
+              "text": "Pain without a clear tissue lesion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_pain_management-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Multidisciplinary pain service",
+          "cells": [
+            {
+              "text": "Biopsychosocial care centred on function and goals"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graded exercise and activity pacing",
+          "cells": [
+            {
+              "text": "Physical rehabilitation as the foundation"
+            },
+            {
+              "text": "Foundation of treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cognitive behavioural therapy",
+          "cells": [
+            {
+              "text": "Psychological therapies and acceptance-based approaches"
+            },
+            {
+              "text": "Psychological support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antidepressants and anticonvulsants",
+          "cells": [
+            {
+              "text": "For neuropathic pain rather than conventional analgesics"
+            },
+            {
+              "text": "Neuropathic pain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Risk-assessed opioid use",
+          "cells": [
+            {
+              "text": "Avoid dose escalation given worse outcomes"
+            },
+            {
+              "text": "Opioid review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nerve blocks, radiofrequency or neuromodulation",
+          "cells": [
+            {
+              "text": "Selected patients within a broader plan"
+            },
+            {
+              "text": "Interventional options"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_pain_management-dx-mgmt",
+      "title": "Diagnosis and management of Chronic pain management",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic pain: pain persisting beyond normal healing, usually over 3 months",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (malignancy, infection, fracture, cord or cauda equina signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for cord or cauda equina compression or infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsychosocial assessment, outcome questionnaires and mood screening",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Specific treatable cause identified on targeted investigation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat the identified cause and start graded exercise and activity pacing",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check malignancy, nerve lesion, fibromyalgia and medication problems",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Antidepressants or anticonvulsants for neuropathic pain",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Psychological therapy such as cognitive behavioural therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Cautious, risk-assessed opioid use with no dose escalation",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Nerve blocks, radiofrequency or neuromodulation for selected patients",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

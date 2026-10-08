@@ -165,5 +165,444 @@
       "caption": "Overview comparison matrix for infectious complications of bites."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "NHS Grampian primary care antimicrobial guidance, Human and animal bites (based on NICE NG184)",
+      "kind": "web",
+      "url": "https://www.rightdecisions.scot.nhs.uk/nhs-grampian-orkney-shetland/primary-care-guidance/skin-infections/humananimal-bites/"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "infectious_complications_of_bites-diagnostic",
+      "kind": "diagnostic",
+      "title": "Assessing infection risk and organisms after a bite",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Dog bites",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "15 to 20% become infected",
+              "range": [
+                15,
+                20
+              ]
+            },
+            {
+              "text": "Infection appears 8 to 24 h after injury; dogs cause about 80% of animal bites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "{{hy:Cat bites and scratches}}",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "More than half become infected",
+              "op": ">",
+              "value": 50
+            },
+            {
+              "text": "Deep punctures seed joints and bone; Pasteurella can spread within hours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Human bites overall",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 10 to 15% become infected",
+              "range": [
+                10,
+                15
+              ]
+            },
+            {
+              "text": "Higher rate than other animal bites"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Superficial human bite",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 2% infection risk",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Low risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Deep human bite or clenched-fist injury",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Over 25% infection risk",
+              "op": ">",
+              "value": 25
+            },
+            {
+              "text": "Inoculates joint, tendon and bone; Eikenella corrodens"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capnocytophaga canimorsus sepsis",
+          "cells": [
+            {
+              "text": "Dog bite in asplenic, cirrhotic or immunosuppressed host"
+            },
+            {
+              "text": "Blood culture may take up to 14 days; organisms seen in neutrophils on smear"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound cultures",
+          "cells": [
+            {
+              "text": "Gram stain and aerobic culture of all infected wounds"
+            },
+            {
+              "text": "Add anaerobic culture for abscess, dead tissue or foul discharge"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiograph",
+          "cells": [
+            {
+              "text": "Penetrating wound"
+            },
+            {
+              "text": "Look for fracture or retained tooth fragment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infectious_complications_of_bites-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic or complicate bite-wound infection",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Snake envenomation tissue necrosis",
+          "cells": [
+            {
+              "text": "Local venom damage mimics infection"
+            },
+            {
+              "text": "History of venomous snake and coagulation tests"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rat-bite fever",
+          "cells": [
+            {
+              "text": "Fever, migratory arthralgia, palm and sole rash after the wound has healed"
+            },
+            {
+              "text": "Blood culture for Streptobacillus moniliformis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rocky Mountain spotted fever, leptospirosis, secondary syphilis, Lyme disease",
+          "cells": [
+            {
+              "text": "Fever and rash look-alikes of rat-bite fever"
+            },
+            {
+              "text": "Exposure history and specific serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cat-scratch disease",
+          "cells": [
+            {
+              "text": "Late regional lymphadenopathy after cat bite or scratch"
+            },
+            {
+              "text": "Bartonella henselae serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seal finger",
+          "cells": [
+            {
+              "text": "Chronic suppurative finger infection after seal or walrus bite"
+            },
+            {
+              "text": "Exposure history (Mycoplasma species)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Uninfected traumatic or crush injury",
+          "cells": [
+            {
+              "text": "Pain and swelling without progressive erythema or pus"
+            },
+            {
+              "text": "Clinical course"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "infectious_complications_of_bites-treatment",
+      "kind": "treatment",
+      "title": "Managing bite wounds",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Regimen or action as stated by source"
+      ],
+      "rows": [
+        {
+          "parameter": "{{hy:Wound care}}",
+          "cells": [
+            {
+              "text": "Every bite"
+            },
+            {
+              "text": "Copious irrigation and debridement; avoid primary closure of cat punctures, limb wounds over 12 h or face wounds over 24 h old"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-amoxiclav",
+          "cells": [
+            {
+              "text": "First line prophylaxis or treatment, adults"
+            },
+            {
+              "text": "625 mg three times daily; 3 days prophylaxis, 5 days treatment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Doxycycline plus metronidazole",
+          "cells": [
+            {
+              "text": "Penicillin allergy, adults"
+            },
+            {
+              "text": "Doxycycline 100 mg twice daily plus metronidazole 400 mg three times daily; 3 days prophylaxis, 5 days treatment; doxycycline unsuitable under 12 years"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Specialist microbiology advice",
+          "cells": [
+            {
+              "text": "Wild or exotic animal bites, unfamiliar farm animals"
+            },
+            {
+              "text": "Seek before prescribing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tetanus and rabies",
+          "cells": [
+            {
+              "text": "All bites"
+            },
+            {
+              "text": "Tetanus prophylaxis; assess rabies risk and give post-exposure prophylaxis; notify public health"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand surgery referral",
+          "cells": [
+            {
+              "text": "Hand bites, clenched-fist injury"
+            },
+            {
+              "text": "Assess tendon, nerve and joint involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Admission and IV therapy",
+          "cells": [
+            {
+              "text": "Sepsis or immunocompromised host"
+            },
+            {
+              "text": "Blood cultures and parenteral therapy covering Capnocytophaga and Pasteurella"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Prophylaxis criteria follow NICE NG184 as referenced by the NHS Grampian page; NG184 itself could not be opened. Old World monkey bites need assessment for B virus."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "infectious_complications_of_bites-dx-mgmt",
+      "title": "Diagnosis and management of infectious complications of bites",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Animal or human bite",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Irrigate, debride, X-ray deep wounds; tetanus and rabies review",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Signs of infection (pain, pus, cellulitis, fever)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Gram stain and culture; aerobic plus anaerobic if foul",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Sepsis, asplenia, cirrhosis or deep hand infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Admit, blood cultures, IV therapy, hand surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Oral co-amoxiclav for 5 days",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "High-risk wound (cat, hand, joint, deep, immunosuppressed)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Co-amoxiclav prophylaxis for 3 days; leave open",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Wound care only; safety-net advice",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

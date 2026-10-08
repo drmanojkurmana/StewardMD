@@ -148,5 +148,343 @@
       "caption": "Overview comparison matrix for al (light-chain) amyloidosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Hematology / WHO classification of haematolymphoid tumours",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "al_amyloidosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum free light chain assay with serum and urine immunofixation",
+          "cells": [
+            {
+              "text": "Monoclonal light chain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congo red staining for apple-green birefringence",
+          "cells": [
+            {
+              "text": "Amyloid deposition"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amyloid typing by mass spectrometry or immunohistochemistry",
+          "cells": [
+            {
+              "text": "Light-chain type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac biomarkers and echocardiography or cardiac MRI",
+          "cells": [
+            {
+              "text": "Cardiac involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate and trephine",
+          "cells": [
+            {
+              "text": "Plasma cell clone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment of renal, hepatic and neurological involvement",
+          "cells": [
+            {
+              "text": "Organ involvement"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "al_amyloidosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Transthyretin (ATTR) amyloidosis",
+          "cells": [
+            {
+              "text": "Hereditary or wild-type; no monoclonal protein"
+            },
+            {
+              "text": "Serum free light chains and immunofixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AA amyloidosis from chronic inflammation",
+          "cells": [
+            {
+              "text": "Chronic inflammatory disease"
+            },
+            {
+              "text": "Amyloid typing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "al_amyloidosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Daratumumab with bortezomib, cyclophosphamide and dexamethasone",
+          "cells": [
+            {
+              "text": "Suppresses the amyloidogenic light chain"
+            },
+            {
+              "text": "Plasma-cell-directed therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autologous stem cell transplantation",
+          "cells": [
+            {
+              "text": "Carefully selected patients with limited cardiac involvement"
+            },
+            {
+              "text": "Selected patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Loop diuretics for congestion; avoid calcium channel blockers and digoxin",
+          "cells": [
+            {
+              "text": "Restrictive cardiomyopathy"
+            },
+            {
+              "text": "Poorly tolerated agents avoided"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics, salt restriction and anti-proteinuric therapy",
+          "cells": [
+            {
+              "text": "Nephrotic syndrome"
+            },
+            {
+              "text": "Renal management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial free light chains with natriuretic peptides and troponin",
+          "cells": [
+            {
+              "text": "Haematological and cardiac response"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation and arrhythmia surveillance",
+          "cells": [
+            {
+              "text": "Thromboembolic risk of cardiac amyloidosis"
+            },
+            {
+              "text": "Conduction monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist amyloidosis centre care",
+          "cells": [
+            {
+              "text": "Haematology, cardiology and nephrology"
+            },
+            {
+              "text": "Coordinated care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "al_amyloidosis-dx-mgmt",
+      "title": "Diagnosis and management of AL (light-chain) amyloidosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heart failure, nephrotic proteinuria, periorbital purpura or macroglossia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Syncope, arrhythmia, rapid renal decline or bleeding?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent cardiology and nephrology review; specialist amyloid centre",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Serum free light chains; immunofixation; cardiac biomarkers and imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Monoclonal light chain confirmed with Congo red and typing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Daratumumab with bortezomib, cyclophosphamide and dexamethasone",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review ATTR, AA amyloidosis and myeloma without amyloid",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Autologous stem cell transplant for selected limited-cardiac patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Loop diuretics for congestion; avoid calcium channel blockers and digoxin",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Anticoagulation for cardiac thromboembolic risk; arrhythmia monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Prognosis set by cardiac involvement; early diagnosis gives better response",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

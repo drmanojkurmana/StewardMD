@@ -155,5 +155,298 @@
       "caption": "Overview comparison matrix for central neurocytoma."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours of the CNS",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "central_neurocytoma-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Contrast-enhanced brain MRI",
+          "cells": [
+            {
+              "text": "Characterises the intraventricular mass and hydrocephalus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with synaptophysin staining",
+          "cells": [
+            {
+              "text": "Uniform round cells; strong synaptophysin positivity confirms neuronal differentiation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IDH, 1p/19q and ATRX testing",
+          "cells": [
+            {
+              "text": "Absent IDH mutation and 1p/19q codeletion with retained ATRX distinguish it from oligodendroglioma"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ki-67/MIB-1 proliferation index",
+          "cells": [
+            {
+              "text": "Identifies atypical, higher-risk tumours"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relationship to septum pellucidum and foramen of Monro",
+          "cells": [
+            {
+              "text": "Attachment near these structures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "central_neurocytoma-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Relief of obstructive hydrocephalus",
+          "cells": [
+            {
+              "text": "External ventricular drain, endoscopic third ventriculostomy or shunt"
+            },
+            {
+              "text": "Urgent, before or at definitive surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Maximal safe surgical resection",
+          "cells": [
+            {
+              "text": "Primary and usually definitive treatment for resectable tumours"
+            },
+            {
+              "text": "Gross total resection is often curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiotherapy",
+          "cells": [
+            {
+              "text": "For incompletely resected, recurrent or atypical tumours"
+            },
+            {
+              "text": "Elevated proliferation index or atypical histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Stereotactic radiosurgery",
+          "cells": [
+            {
+              "text": "Option for small residual or recurrent disease"
+            },
+            {
+              "text": "Where repeat open resection carries high risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic drug therapy",
+          "cells": [
+            {
+              "text": "No established role; management relies on local therapy"
+            },
+            {
+              "text": "Not established"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance MRI",
+          "cells": [
+            {
+              "text": "Serial contrast-enhanced brain MRI for recurrence"
+            },
+            {
+              "text": "Intervals individualised to resection and histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuro-oncology review",
+          "cells": [
+            {
+              "text": "Individualise repeat resection or radiotherapy at recurrence"
+            },
+            {
+              "text": "Multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "central_neurocytoma-dx-mgmt",
+      "title": "Diagnosis and management of Central neurocytoma",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected central neurocytoma: intraventricular mass with raised pressure symptoms",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (acute obstructive hydrocephalus, haemorrhage, falling consciousness)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent neurosurgery; drain or ventriculostomy for CSF obstruction",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Contrast MRI, synaptophysin staining, IDH, 1p/19q and ATRX testing, Ki-67",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Synaptophysin positive, with IDH and 1p/19q pattern excluding oligodendroglioma?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Maximal safe surgical resection, often definitive for resectable tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check oligodendroglioma, ependymoma and subependymoma by molecular markers",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Adjuvant radiotherapy for incomplete, atypical or recurrent tumour",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Stereotactic radiosurgery for small residual or recurrent disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Serial contrast MRI surveillance, individualised to resection extent",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally favourable; atypical tumours with high Ki-67 recur more often",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

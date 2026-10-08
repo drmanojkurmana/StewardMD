@@ -162,5 +162,562 @@
       "caption": "Overview comparison matrix for skin cancer."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Melanoma",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/dermatologic-disorders/cancers-of-the-skin/melanoma"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "skin_cancer-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising and staging skin cancer (melanoma focus)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "ABCDE: asymmetry, border, colour",
+          "cells": [
+            {
+              "text": "Asymmetric, irregular border, varied or darker colour"
+            },
+            {
+              "text": "Suspicious pigmented lesion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ABCDE: diameter",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Over 6 mm",
+              "op": ">",
+              "value": 6
+            },
+            {
+              "text": "Suspicious feature"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ABCDE: evolution",
+          "cells": [
+            {
+              "text": "Changing mole, or new mole after age 30"
+            },
+            {
+              "text": "{{hy:Change is the most important sign}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ugly duckling sign",
+          "cells": [
+            {
+              "text": "Nevus unlike the patient's other nevi"
+            },
+            {
+              "text": "Biopsy candidate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Excisional biopsy",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "1 to 3 mm margins, full dermal depth"
+            },
+            {
+              "text": "Preferred; incisional biopsy acceptable when excision impractical"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breslow thickness, thin",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Under 0.8 mm",
+              "op": "<",
+              "value": 0.8
+            },
+            {
+              "text": "Thinnest band; ulceration moves it up"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Breslow thickness 1.0 to 2.0 mm",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Over 1.0 to 2.0 mm",
+              "range": [
+                1.0,
+                2.0
+              ]
+            },
+            {
+              "text": "Intermediate band; ulceration worsens category"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Breslow thickness over 4.0 mm",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Over 4.0 mm",
+              "op": ">",
+              "value": 4.0
+            },
+            {
+              "text": "Thickest band, worst prognosis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sentinel node biopsy",
+          "unit": "mm",
+          "cells": [
+            {
+              "text": "Recommended for Breslow 1.0 mm or more without palpable nodes",
+              "op": ">=",
+              "value": 1.0
+            },
+            {
+              "text": "Consider for 0.8 to 1.0 mm, or under 0.8 mm with ulceration"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staging tests",
+          "cells": [
+            {
+              "text": "CBC, LDH, liver tests, CT or PET"
+            },
+            {
+              "text": "LDH is part of AJCC stage IV"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Thickness bands follow the Merck summary of AJCC staging; nodal status and distant metastases change the stage group, so check the AJCC table before staging a patient."
+    },
+    {
+      "id": "skin_cancer-ddx",
+      "kind": "ddx",
+      "title": "Lesions that mimic skin cancer",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Benign or dysplastic nevus",
+          "cells": [
+            {
+              "text": "Stable, symmetric, uniform colour"
+            },
+            {
+              "text": "Dermoscopy, excisional biopsy if changing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Seborrhoeic keratosis",
+          "cells": [
+            {
+              "text": "Stuck-on, waxy surface"
+            },
+            {
+              "text": "Dermoscopy; biopsy if doubt"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pigmented basal cell carcinoma",
+          "cells": [
+            {
+              "text": "Pearly rolled border with pigment; mimics melanoma"
+            },
+            {
+              "text": "Histology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wart or callus",
+          "cells": [
+            {
+              "text": "Can hide a squamous cell carcinoma"
+            },
+            {
+              "text": "Biopsy a persistent or atypical lesion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nummular eczema or psoriasis",
+          "cells": [
+            {
+              "text": "Mimics superficial BCC"
+            },
+            {
+              "text": "Biopsy of a non-responding patch"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Subungual or acral haematoma",
+          "cells": [
+            {
+              "text": "Trauma history, grows out with nail"
+            },
+            {
+              "text": "Dermoscopy and follow-up; biopsy if persists"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pyogenic granuloma or venous lake",
+          "cells": [
+            {
+              "text": "Vascular, bleeds; mimics amelanotic melanoma"
+            },
+            {
+              "text": "Excision with histology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Merkel cell carcinoma",
+          "cells": [
+            {
+              "text": "Rapidly expanding red nodule, older or immunosuppressed (AEIOU)"
+            },
+            {
+              "text": "Histology with immunostains"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "skin_cancer-treatment",
+      "kind": "treatment",
+      "title": "Treating skin cancer",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Wide local excision",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "All primary melanoma"
+            },
+            {
+              "text": "1 cm lateral margin is adequate under 0.8 mm",
+              "op": "=",
+              "value": 1
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sentinel node biopsy, then node dissection if positive",
+          "cells": [
+            {
+              "text": "Melanoma 1.0 mm or more, or high-risk thin lesions"
+            },
+            {
+              "text": "Dissection when nodes clinically involved or SLNB positive"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Neoadjuvant or adjuvant PD-1 inhibitor",
+          "cells": [
+            {
+              "text": "Selected high-risk resectable melanoma"
+            },
+            {
+              "text": "Improves event-free survival"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nivolumab plus ipilimumab",
+          "cells": [
+            {
+              "text": "Metastatic melanoma, first line regardless of BRAF"
+            },
+            {
+              "text": "{{hy:Usually preferred immunotherapy}}; nivolumab plus relatlimab is gentler"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "BRAF plus MEK inhibitor",
+          "cells": [
+            {
+              "text": "BRAF V600 mutant, symptomatic or rapidly progressive"
+            },
+            {
+              "text": "Dabrafenib-trametinib, encorafenib-binimetinib, vemurafenib-cobimetinib"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Radiotherapy",
+          "cells": [
+            {
+              "text": "Unresectable margins, local recurrence, brain metastases"
+            },
+            {
+              "text": "Palliation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Excision or Mohs surgery",
+          "cells": [
+            {
+              "text": "BCC and SCC; Mohs for high-risk sites"
+            },
+            {
+              "text": "Complete removal is curative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Imiquimod or topical 5-FU, radiotherapy",
+          "cells": [
+            {
+              "text": "Selected superficial BCC or SCC in situ"
+            },
+            {
+              "text": "When surgery unsuitable"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Photoprotection and surveillance",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Self-examination, dermoscopy in high-risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "skin_cancer-dx-mgmt",
+      "title": "Diagnosis and management of skin cancer",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "New or changing skin lesion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Apply ABCDE and ugly duckling; dermoscopy",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Suspicious for malignancy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Reassure, photograph, review",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Excisional biopsy with 1 to 3 mm margins",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Melanoma on histology?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "BCC or SCC: excision or Mohs; topical or radiotherapy if superficial",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Report Breslow thickness, ulceration, mitoses",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Distant metastases on staging?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Immunotherapy; BRAF plus MEK if V600 and rapid progression",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Wide local excision; SLNB if 1.0 mm or more or high-risk thin",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "decision",
+          "text": "Sentinel node positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n13",
+          "type": "outcome",
+          "text": "Surveillance and photoprotection",
+          "cite": "c1"
+        },
+        {
+          "id": "n14",
+          "type": "outcome",
+          "text": "Node management and adjuvant PD-1 inhibitor",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n12",
+          "to": "n13",
+          "label": "No"
+        },
+        {
+          "from": "n12",
+          "to": "n14",
+          "label": "Yes"
+        }
+      ]
+    }
+  ]
 }

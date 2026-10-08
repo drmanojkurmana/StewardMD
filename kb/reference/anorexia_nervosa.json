@@ -150,5 +150,298 @@
       "caption": "Overview comparison matrix for anorexia nervosa."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kaplan & Sadock's Synopsis of Psychiatry; DSM-5-TR",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anorexia_nervosa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight, height, BMI and growth trajectory",
+          "cells": [
+            {
+              "text": "Growth in young people"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes including potassium, phosphate and magnesium",
+          "cells": [
+            {
+              "text": "Hypokalaemia and hypophosphataemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Bradycardia and QT prolongation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density assessment",
+          "cells": [
+            {
+              "text": "In prolonged illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Refeeding risk assessment",
+          "cells": [
+            {
+              "text": "Before and during nutritional rehabilitation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anorexia_nervosa-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Nutritional rehabilitation",
+          "cells": [
+            {
+              "text": "Structured weight restoration; advance feeding cautiously"
+            },
+            {
+              "text": "The cornerstone of care; avoids refeeding syndrome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolyte and thiamine replacement",
+          "cells": [
+            {
+              "text": "Monitor and replace phosphate, potassium and magnesium; give thiamine"
+            },
+            {
+              "text": "Before and during refeeding"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological therapy",
+          "cells": [
+            {
+              "text": "Family-based treatment for adolescents; specialist therapy for adults"
+            },
+            {
+              "text": "Eating-disorder-focused therapy for adults"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medical stabilisation",
+          "cells": [
+            {
+              "text": "Bradycardia, hypotension, hypothermia, hypokalaemia"
+            },
+            {
+              "text": "Severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone health",
+          "cells": [
+            {
+              "text": "Calcium and vitamin D"
+            },
+            {
+              "text": "Attention to osteopenia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Comorbid depression and anxiety",
+          "cells": [
+            {
+              "text": "Treat and monitor suicide risk"
+            },
+            {
+              "text": "No drug is a primary treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Inpatient or compulsory treatment"
+            },
+            {
+              "text": "When the illness is life-threatening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anorexia_nervosa-dx-mgmt",
+      "title": "Diagnosis and management of Anorexia nervosa",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Restrictive eating with low body mass index and possible growth faltering",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Severe bradycardia, hypotension, hypothermia or hypokalaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Medical stabilisation; monitor cardiac instability and electrolytes",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "BMI and growth, electrolytes, ECG for bradycardia and QT, bone density",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Refeeding risk assessed before nutritional rehabilitation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Structured nutritional rehabilitation with weight restoration",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat electrolytes and ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Replace phosphate, potassium and magnesium; give thiamine",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Family-based treatment for adolescents; specialist therapy for adults",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat comorbid depression and anxiety; monitor suicide risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Multidisciplinary care; inpatient or compulsory treatment if life-threatening",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

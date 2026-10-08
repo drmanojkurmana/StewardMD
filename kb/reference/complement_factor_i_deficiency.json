@@ -150,5 +150,296 @@
       "caption": "Overview comparison matrix for complement factor i deficiency."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Clinical immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "complement_factor_i_deficiency-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Complement screen",
+          "cells": [
+            {
+              "text": "Low C3 with normal C4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor I antigenic level and functional activity",
+          "cells": [
+            {
+              "text": "Factor I deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Factor H and factor B levels",
+          "cells": [
+            {
+              "text": "Often secondarily reduced; help distinguish the pattern"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AP50 and CH50 functional assays",
+          "cells": [
+            {
+              "text": "Alternative and total pathway function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_factor_i_deficiency-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Factor H deficiency",
+          "cells": [
+            {
+              "text": "Factor I measured directly; factor H levels often secondarily reduced in this disorder"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Primary C3 deficiency",
+          "cells": [
+            {
+              "text": "Low C3 with normal C4 is the alternative-pathway pattern named here"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gain-of-function C3 or factor B variants",
+          "cells": [
+            {
+              "text": "Complement consumption from overactivation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "complement_factor_i_deficiency-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immunisation",
+          "cells": [
+            {
+              "text": "Meningococcal, pneumococcal and Haemophilus influenzae type b vaccines; mainstay"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prompt antibiotics",
+          "cells": [
+            {
+              "text": "For pyogenic and neisserial infection; consider long-term prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Emergency plan",
+          "cells": [
+            {
+              "text": "Low threshold for urgent assessment and empirical antibiotics in febrile illness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C5 inhibitor for atypical HUS",
+          "cells": [
+            {
+              "text": "Terminal complement C5 inhibitor with renal replacement as required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement-directed renal therapy",
+          "cells": [
+            {
+              "text": "C3 glomerulopathy and renal involvement; nephrology support"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive; family screening"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "complement_factor_i_deficiency-dx-mgmt",
+      "title": "Diagnosis and management of Complement factor I deficiency",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected complement factor I deficiency: low C3 with normal C4",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (invasive meningococcal or pneumococcal disease, AKI with haemolysis)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency treatment of invasive meningococcal or pneumococcal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Complement screen; factor I level and function; factor H and B; CFI sequencing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does direct factor I measurement confirm the defect?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider factor H deficiency or other alternative pathway defects",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Immunise against encapsulated organisms as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Prompt antibiotics for pyogenic and neisserial infection",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "C5 inhibitor and renal replacement for associated atypical HUS",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Complement-directed therapy for C3 glomerulopathy; genetic counselling",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With immunisation and prompt treatment of infection the outlook is generally good",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

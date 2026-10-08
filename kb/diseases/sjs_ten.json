@@ -210,5 +210,613 @@
       "caption": "Diagnostic and clinical overview matrix for stevens-johnson syndrome / ten."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "DermNet, Stevens-Johnson syndrome/toxic epidermal necrolysis",
+      "url": "https://dermnetnz.org/topics/stevens-johnson-syndrome-toxic-epidermal-necrolysis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "sjs_ten-diagnostic",
+      "kind": "diagnostic",
+      "title": "Classifying SJS/TEN and scoring severity (SCORTEN)",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Epidermal detachment, SJS",
+          "unit": "% BSA",
+          "cells": [
+            {
+              "text": "<10%",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Stevens-Johnson syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidermal detachment, overlap",
+          "unit": "% BSA",
+          "cells": [
+            {
+              "text": "10 to 30%",
+              "range": [
+                10,
+                30
+              ]
+            },
+            {
+              "text": "SJS/TEN overlap"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Epidermal detachment, TEN",
+          "unit": "% BSA",
+          "cells": [
+            {
+              "text": ">30%",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "{{hy:Toxic epidermal necrolysis; class can change over the first days}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prodrome",
+          "unit": "deg C",
+          "cells": [
+            {
+              "text": "Fever >39 deg C with sore throat and conjunctivitis",
+              "op": ">",
+              "value": 39
+            },
+            {
+              "text": "Precedes painful dusky atypical target lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug latency",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "About 5 to 28 days after starting the drug",
+              "range": [
+                5,
+                28
+              ]
+            },
+            {
+              "text": "Antiepileptics may take up to about 2 months"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucosa and Nikolsky sign",
+          "cells": [
+            {
+              "text": "Mucosal involvement, Nikolsky positive"
+            },
+            {
+              "text": "Characteristic of SJS/TEN"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skin biopsy",
+          "cells": [
+            {
+              "text": "Full-thickness epidermal necrosis, little inflammation, negative direct immunofluorescence"
+            },
+            {
+              "text": "{{hy:Confirms diagnosis; frozen section is fastest}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN: age",
+          "unit": "years",
+          "cells": [
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN: malignancy",
+          "cells": [
+            {
+              "text": "Present"
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN: heart rate",
+          "unit": "beats/min",
+          "cells": [
+            {
+              "text": ">120",
+              "op": ">",
+              "value": 120
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN: detachment on admission",
+          "unit": "% BSA",
+          "cells": [
+            {
+              "text": ">10%",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN: serum urea",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": ">10",
+              "op": ">",
+              "value": 10
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN: serum glucose",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": ">14",
+              "op": ">",
+              "value": 14
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN: serum bicarbonate",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "<20",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "SCORTEN total and predicted mortality",
+          "unit": "points",
+          "cells": [
+            {
+              "text": "0 to 1: >3.2%; 2: >12.1%; 3: >35.3%; 4: >58.3%; 5 or more: >90%"
+            },
+            {
+              "text": "Score on admission"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Blood counts",
+          "cells": [
+            {
+              "text": "Anaemia nearly always; lymphopenia in about 90%"
+            },
+            {
+              "text": "Neutropenia is a poor prognostic sign; no eosinophilia"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Latency differs slightly: Harrison gives 5 to 28 days; DermNet gives within the first week for antibiotics, up to about 2 months for anticonvulsants. Both kept."
+    },
+    {
+      "id": "sjs_ten-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic SJS/TEN",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Acute generalized exanthematous pustulosis (AGEP)",
+          "cells": [
+            {
+              "text": "Superficial erosions; prominent mucosal involvement absent"
+            },
+            {
+              "text": "Biopsy: subcorneal neutrophilic pustules, not full-thickness necrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "DRESS",
+          "cells": [
+            {
+              "text": "Eosinophilia and systemic organ involvement; may overlap with TEN"
+            },
+            {
+              "text": "Blood count (eosinophilia, atypical lymphocytes absent in SJS/TEN)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Staphylococcal scalded skin syndrome",
+          "cells": [
+            {
+              "text": "Blistering rash that a biopsy separates from SJS/TEN"
+            },
+            {
+              "text": "{{hy:Skin biopsy}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Erythema multiforme major",
+          "cells": [
+            {
+              "text": "Target lesions with mucosal involvement, often infection-triggered"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Bullous SLE or paraneoplastic pemphigus",
+          "cells": [
+            {
+              "text": "Autoimmune blistering disease"
+            },
+            {
+              "text": "Biopsy with direct immunofluorescence (negative in SJS/TEN)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reactive infectious mucocutaneous eruption (RIME)",
+          "cells": [
+            {
+              "text": "Mucositis after infection such as mycoplasma"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        }
+      ]
+    },
+    {
+      "id": "sjs_ten-treatment",
+      "kind": "treatment",
+      "title": "Management of SJS/TEN",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Stop the culprit drug",
+          "cells": [
+            {
+              "text": "Immediately in every case"
+            },
+            {
+              "text": "{{hy:Better outcome if stopped by the day blisters appear}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ICU or burns unit admission",
+          "cells": [
+            {
+              "text": "Urgently, especially with large detachment"
+            },
+            {
+              "text": "Warm room 30 to 32 deg C, strong analgesia, sterile handling, reverse isolation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluids and nutrition",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "IV crystalloid and nasogastric feeding, adjusted daily"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Wound care",
+          "cells": [
+            {
+              "text": "Daily skin review and swabs"
+            },
+            {
+              "text": "Silver nitrate or chlorhexidine; avoid silver sulfadiazine (a sulfonamide) and adhesive tape"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Eye, genital and airway care",
+          "cells": [
+            {
+              "text": "Mucosal involvement"
+            },
+            {
+              "text": "Daily ophthalmology review; intubate if airway involved"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Only for proven infection"
+            },
+            {
+              "text": "Prophylactic antibiotics are not recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ciclosporin",
+          "cells": [
+            {
+              "text": "Systemic option early in the illness"
+            },
+            {
+              "text": "3 to 5 mg/kg/day; avoid in renal impairment"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "IVIG",
+          "cells": [
+            {
+              "text": "Alternative systemic option"
+            },
+            {
+              "text": "2 to 3 g/kg over 2 to 3 days"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anti-TNF (etanercept, infliximab)",
+          "cells": [
+            {
+              "text": "Alternative systemic option"
+            },
+            {
+              "text": "Dose not stated by source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Controversial; only early if used"
+            },
+            {
+              "text": "Prednisone 1 to 2 mg/kg/day for 3 to 5 days in some centres; benefit unproven"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Thalidomide",
+          "cells": [
+            {
+              "text": "Never"
+            },
+            {
+              "text": "Increased mortality"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Evidence for systemic agents is limited; DermNet reports about 60% lower mortality with ciclosporin versus SCORTEN-matched untreated patients."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "sjs_ten-dx-mgmt",
+      "title": "Diagnosis and management of Stevens-Johnson syndrome / TEN",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever, sore eyes or throat, then painful dusky rash with blisters",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Mucosal erosions, Nikolsky positive, new drug in recent weeks?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Consider AGEP, DRESS, erythema multiforme; biopsy if unsure",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Stop all suspected drugs now",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Skin biopsy (frozen section) to confirm full-thickness necrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Measure detached BSA and SCORTEN on admission",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urgent ICU or burns unit: warm room, fluids, feeding, wound and eye care",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Progressing early in the illness?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Consider ciclosporin, IVIG or anti-TNF with specialist input",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Supportive care; treat infection only when proven; follow eyes long term",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "No"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

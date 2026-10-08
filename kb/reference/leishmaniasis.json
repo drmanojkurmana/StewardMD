@@ -172,5 +172,501 @@
       "caption": "Overview comparison matrix for leishmaniasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Leishmaniasis: Clinical Care",
+      "kind": "web",
+      "url": "https://www.cdc.gov/leishmaniasis/hcp/clinical-care/index.html"
+    },
+    {
+      "id": "c3",
+      "label": "WHO Fact sheet, Leishmaniasis",
+      "kind": "web",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/leishmaniasis"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "leishmaniasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of leishmaniasis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical picture of VL",
+          "cells": [
+            {
+              "text": "Prolonged fever, massive splenomegaly, wasting, pancytopenia in an endemic area"
+            },
+            {
+              "text": "Hypergammaglobulinaemia supports long-standing disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Splenic aspirate smear",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity over 95%",
+              "op": ">",
+              "value": 95
+            },
+            {
+              "text": "{{hy:Gold standard; invasive with bleeding risk}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone marrow aspirate smear",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity 60 to 85%",
+              "range": [
+                60,
+                85
+              ]
+            },
+            {
+              "text": "Safer than splenic aspirate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lymph node aspirate",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 50%",
+              "op": "=",
+              "value": 50
+            },
+            {
+              "text": "Lymphadenopathy rare in India"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "rK39 rapid test",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Sensitivity about 98%, specificity about 90%",
+              "op": "=",
+              "value": 98
+            },
+            {
+              "text": "Lower in East Africa; stays positive for years, so no use for relapse"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR or LAMP",
+          "cells": [
+            {
+              "text": "Nucleic acid detection with species identification"
+            },
+            {
+              "text": "Useful in HIV coinfection where serology fails in up to 50%"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous lesion",
+          "cells": [
+            {
+              "text": "Painless ulcer with raised edge weeks after sandfly bite"
+            },
+            {
+              "text": "Slit smear, aspirate or biopsy with PCR; serology of limited value"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PKDL",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Rash in 5 to 10% after VL in South Asia",
+              "range": [
+                5,
+                10
+              ]
+            },
+            {
+              "text": "Appears 6 months to over a year after cure"
+            }
+          ],
+          "cite": "c3"
+        }
+      ],
+      "footnote": "PKDL frequency: WHO gives 5 to 10% on the Indian subcontinent; Harrison 22e gives 2 to 50% across South Asia and East Africa."
+    },
+    {
+      "id": "leishmaniasis-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic leishmaniasis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Malaria",
+          "cells": [
+            {
+              "text": "Paroxysmal fever, splenomegaly in endemic area"
+            },
+            {
+              "text": "Blood smear or malaria RDT"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Typhoid fever",
+          "cells": [
+            {
+              "text": "Fever with relative bradycardia, GI symptoms"
+            },
+            {
+              "text": "Blood culture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tuberculosis",
+          "cells": [
+            {
+              "text": "Fever, weight loss, lymphadenopathy"
+            },
+            {
+              "text": "Sputum or tissue testing for TB"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brucellosis",
+          "cells": [
+            {
+              "text": "Animal or dairy exposure, arthralgia"
+            },
+            {
+              "text": "Blood culture and serology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chronic myeloid leukaemia",
+          "cells": [
+            {
+              "text": "Massive splenomegaly with high white count"
+            },
+            {
+              "text": "Blood film and BCR-ABL"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Portal hypertension",
+          "cells": [
+            {
+              "text": "Splenomegaly with varices, no fever"
+            },
+            {
+              "text": "Ultrasound with Doppler"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tropical splenomegaly syndrome",
+          "cells": [
+            {
+              "text": "Very high IgM, malaria exposure"
+            },
+            {
+              "text": "Malaria antibodies, response to antimalarials"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous TB, leprosy, fungal ulcer, cancer (for CL)",
+          "cells": [
+            {
+              "text": "Chronic skin ulcer or nodule"
+            },
+            {
+              "text": "Biopsy with culture and PCR"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "leishmaniasis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of leishmaniasis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Liposomal amphotericin B, immunocompetent VL",
+          "cells": [
+            {
+              "text": "{{hy:First line for visceral disease}}"
+            },
+            {
+              "text": "3 mg/kg IV on days 1 to 5, 14 and 21 (total 21 mg/kg)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Liposomal amphotericin B, immunosuppressed VL",
+          "cells": [
+            {
+              "text": "HIV or other immunosuppression"
+            },
+            {
+              "text": "4 mg/kg IV on days 1 to 5, 10, 17, 24, 31 and 38 (total 40 mg/kg); add ART and consider secondary prophylaxis"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pentavalent antimonial",
+          "cells": [
+            {
+              "text": "VL outside South Asia, or CL"
+            },
+            {
+              "text": "20 mg SbV/kg daily IV or IM for 28 days (VL) or 10 to 20 days (CL); resistance in parts of South Asia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Miltefosine",
+          "cells": [
+            {
+              "text": "L. donovani VL; New World CL in patients 12 years or older and 30 kg or more"
+            },
+            {
+              "text": "CL: 50 mg twice daily (30 to 44 kg) or three times daily (45 kg or more) for 28 days; avoid in pregnancy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Local therapy for simple CL",
+          "cells": [
+            {
+              "text": "Few small lesions without mucosal risk"
+            },
+            {
+              "text": "Cryotherapy, thermotherapy, topical paromomycin or intralesional SbV"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Severe anaemia, bleeding, malnutrition, secondary infection"
+            },
+            {
+              "text": "Transfusion, nutrition, treat infections"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "After VL treatment"
+            },
+            {
+              "text": "Watch for relapse and PKDL; serology cannot confirm cure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Regimens per CDC; India uses programme-specific regimens (for example single-dose liposomal amphotericin B) that should be checked against the current national guideline."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "leishmaniasis-dx-mgmt",
+      "title": "Diagnosis and management of leishmaniasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Fever over 2 weeks with splenomegaly in or from an endemic area",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "CBC, malaria test, rK39 rapid test",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "rK39 positive with compatible illness?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "HIV positive or atypical picture?",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Marrow or splenic aspirate, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Amastigotes or PCR positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Look for other causes: malaria, TB, typhoid, CML",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Immunosuppressed?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Liposomal amphotericin B, total 40 mg/kg, plus ART",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Liposomal amphotericin B, total 21 mg/kg",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Follow for relapse and PKDL",
+          "cite": "c3"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,322 @@
       "caption": "Overview comparison matrix for anterior cruciate ligament injury."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Apley & Solomon's System of Orthopaedics and Fractures",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acl_injury-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI of the knee",
+          "cells": [
+            {
+              "text": "Confirms the tear; shows meniscal, chondral and ligament injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lachman, anterior drawer and pivot-shift tests",
+          "cells": [
+            {
+              "text": "Anterior tibial translation and rotational instability; Lachman most sensitive"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Excludes fracture; Segond fracture as an indirect sign"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspiration of a tense haemarthrosis",
+          "cells": [
+            {
+              "text": "Symptom relief and diagnostic information"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for multiligament injury",
+          "cells": [
+            {
+              "text": "When knee dislocation is suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acl_injury-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Meniscal tear",
+          "cells": [
+            {
+              "text": "A locked knee suggests a displaced bucket-handle tear"
+            },
+            {
+              "text": "MRI of the knee"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Knee dislocation with multiligament injury",
+          "cells": [
+            {
+              "text": "Multiligament injury with neurovascular risk"
+            },
+            {
+              "text": "Urgent vascular and neurological assessment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acl_injury-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Rest, ice, compression, elevation and analgesia",
+          "cells": [
+            {
+              "text": "Initial management"
+            },
+            {
+              "text": "Aspirate a tense haemarthrosis for symptom relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Early structured physiotherapy",
+          "cells": [
+            {
+              "text": "Restores range of motion and strength"
+            },
+            {
+              "text": "Quadriceps, hamstrings and neuromuscular control"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arthroscopic reconstruction with tendon graft",
+          "cells": [
+            {
+              "text": "Young, active or pivoting-sport patients; symptomatic giving way"
+            },
+            {
+              "text": "Surgical option for instability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation-led non-operative management",
+          "cells": [
+            {
+              "text": "Lower-demand patients"
+            },
+            {
+              "text": "Bracing and activity modification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat associated meniscal, chondral and collateral injuries",
+          "cells": [
+            {
+              "text": "Injuries found with the ACL tear"
+            },
+            {
+              "text": "Addressed at the same time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Criteria-based return to sport",
+          "cells": [
+            {
+              "text": "After reconstruction"
+            },
+            {
+              "text": "With neuromuscular prevention training"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acl_injury-dx-mgmt",
+      "title": "Diagnosis and management of Anterior cruciate ligament injury",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Non-contact pivoting injury with a pop and rapid knee swelling",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Knee dislocation, neurovascular compromise or locked knee?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent vascular and neurological assessment; orthopaedic review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Knee MRI, Lachman, anterior drawer, pivot-shift and radiographs",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "ACL rupture confirmed on MRI and stability testing?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Rest, ice, compression; aspirate tense haemarthrosis if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review meniscal, collateral, PCL, patellar and osteochondral injury",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Early structured physiotherapy for motion, strength and control",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Arthroscopic reconstruction with tendon graft for active patients",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat associated meniscal and chondral injuries at the same time",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Criteria-based return to sport after reconstruction, with prevention training",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

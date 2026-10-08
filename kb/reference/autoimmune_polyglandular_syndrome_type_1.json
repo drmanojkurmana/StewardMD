@@ -144,5 +144,315 @@
       "caption": "Overview comparison matrix for autoimmune polyglandular syndrome type 1."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Endocrinology and immunology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autoimmune_polyglandular_syndrome_type_1-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Assessment of endocrine components: calcium, adrenal, gonadal, thyroid, glucose",
+          "cells": [
+            {
+              "text": "Endocrine components"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "AIRE genetic testing",
+          "cells": [
+            {
+              "text": "Genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibody profiling, including anti-interferon-omega",
+          "cells": [
+            {
+              "text": "Anti-interferon-omega autoantibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Evaluation for chronic mucocutaneous candidiasis",
+          "cells": [
+            {
+              "text": "Candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periodic surveillance for evolving components",
+          "cells": [
+            {
+              "text": "Surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_polyglandular_syndrome_type_1-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Autoimmune polyglandular syndrome type 2",
+          "cells": [
+            {
+              "text": "Separated by AIRE genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated autoimmune Addison disease or hypoparathyroidism",
+          "cells": [
+            {
+              "text": "Missed when a single component is diagnosed in isolation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autoimmune_polyglandular_syndrome_type_1-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Hormone replacement per failed gland",
+          "cells": [
+            {
+              "text": "Glucocorticoid and mineralocorticoid; calcium with active vitamin D analogues"
+            },
+            {
+              "text": "Each failed gland"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Azole antifungals",
+          "cells": [
+            {
+              "text": "Chronic candidiasis; monitor for resistance and oral carcinoma"
+            },
+            {
+              "text": "Candidiasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Immunosuppression",
+          "cells": [
+            {
+              "text": "Autoimmune hepatitis and other non-endocrine features"
+            },
+            {
+              "text": "Non-endocrine features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal crisis prevention",
+          "cells": [
+            {
+              "text": "Sick-day glucocorticoid rules; emergency parenteral hydrocortisone; glucocorticoid before levothyroxine"
+            },
+            {
+              "text": "Adrenal crisis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lifelong surveillance",
+          "cells": [
+            {
+              "text": "Cumulative endocrine and non-endocrine components"
+            },
+            {
+              "text": "Components accrue over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal recessive AIRE mutations; family testing"
+            },
+            {
+              "text": "Family"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autoimmune_polyglandular_syndrome_type_1-dx-mgmt",
+      "title": "Diagnosis and management of Autoimmune polyglandular syndrome type 1",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Candidiasis with an endocrine component such as adrenal or parathyroid failure",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Adrenal crisis or severe hypocalcaemia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency hydrocortisone and calcium correction as needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Endocrine components, AIRE testing, interferon-omega antibodies, candidiasis evaluation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "AIRE variant confirmed with an endocrine component present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Gland-specific hormone replacement",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat AIRE testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Azole antifungals for candidiasis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sick-day rules and emergency hydrocortisone",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Immunosuppression for autoimmune hepatitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Lifelong surveillance as components accrue",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

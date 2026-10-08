@@ -150,5 +150,327 @@
       "caption": "Overview comparison matrix for 15q13.3 microdeletion syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "GeneReviews / Smith's Recognizable Patterns of Human Malformation",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chromosome_15q13_deletion-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Chromosomal microarray",
+          "cells": [
+            {
+              "text": "First-line test to detect and size the deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FISH or MLPA",
+          "cells": [
+            {
+              "text": "Confirms the deletion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Parental studies",
+          "cells": [
+            {
+              "text": "Inheritance and recurrence-risk counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "EEG and neurological assessment",
+          "cells": [
+            {
+              "text": "Where seizures are present or suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental, cognitive and autism evaluation",
+          "cells": [
+            {
+              "text": "Associated neurodevelopmental features"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_15q13_deletion-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Idiopathic generalised epilepsy",
+          "cells": [
+            {
+              "text": "Without an identifiable copy-number change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Other recurrent copy-number syndromes (e.g. 16p13.11, 3q29)",
+          "cells": [
+            {
+              "text": "Associated with epilepsy or schizophrenia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chromosome_15q13_deletion-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Antiseizure medication",
+          "cells": [
+            {
+              "text": "Broad-spectrum agents such as valproate, levetiracetam or lamotrigine for generalised epilepsy"
+            },
+            {
+              "text": "Tailored to seizure type"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Developmental support",
+          "cells": [
+            {
+              "text": "Individualised learning support, speech-and-language and occupational therapy"
+            },
+            {
+              "text": "Developmental delay and intellectual disability"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Behavioural support",
+          "cells": [
+            {
+              "text": "Support for autism; psychiatric assessment and pharmacotherapy for emergent psychosis"
+            },
+            {
+              "text": "Autism and psychosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Neurodevelopmental and EEG surveillance; psychiatric monitoring into adolescence"
+            },
+            {
+              "text": "Schizophrenia risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordination",
+          "cells": [
+            {
+              "text": "Clinical genetics, paediatric neurology, psychiatry and educational services"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Parental testing; incomplete penetrance and variable expressivity"
+            },
+            {
+              "text": "Inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Specialist epilepsy referral",
+          "cells": [
+            {
+              "text": "Refer drug-resistant seizures to specialist epilepsy services"
+            },
+            {
+              "text": "Drug-resistant seizures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chromosome_15q13_deletion-dx-mgmt",
+      "title": "Diagnosis and management of 15q13.3 microdeletion syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected 15q13.3 microdeletion: epilepsy with developmental delay or behavioural change",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (poorly controlled seizures, emerging psychosis, regression)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: specialist epilepsy and psychiatric review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chromosomal microarray with parental studies and EEG",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "BP4-BP5 deletion confirmed on microarray with clinical fit?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Broad-spectrum antiseizure medication such as valproate or levetiracetam",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check idiopathic generalised epilepsy and other copy-number syndromes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Developmental, speech and occupational therapy with educational support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Behavioural support for autism; psychiatric assessment for psychosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surveillance into adolescence given schizophrenia risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Counselling on incomplete penetrance and variable expressivity",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

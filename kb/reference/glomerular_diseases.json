@@ -182,5 +182,579 @@
       "caption": "Overview comparison matrix for glomerular diseases (spectrum)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Overview of Nephrotic Syndrome",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/genitourinary-disorders/glomerular-disorders/overview-of-nephrotic-syndrome"
+    },
+    {
+      "id": "c3",
+      "label": "Tables PDF, Tables 283-3, 283-4, 283-5",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "glomerular_diseases-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising glomerular syndromes",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Meaning"
+      ],
+      "rows": [
+        {
+          "parameter": "Nephrotic proteinuria",
+          "unit": "g/24 h",
+          "cells": [
+            {
+              "text": "3 g/24 h or more, or spot protein/creatinine ratio 3 or more",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "With low albumin, oedema, high lipids, lipiduria"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Nephritic proteinuria",
+          "unit": "g/24 h",
+          "cells": [
+            {
+              "text": "Usually 1 to 2 g/24 h",
+              "range": [
+                1,
+                2
+              ]
+            },
+            {
+              "text": "With RBC casts, dysmorphic RBCs, hypertension, falling GFR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urine sediment",
+          "unit": "RBC/hpf",
+          "cells": [
+            {
+              "text": "3 to 5 RBCs in spun first-morning urine is suspicious",
+              "range": [
+                3,
+                5
+              ]
+            },
+            {
+              "text": "{{hy:RBC casts or dysmorphic RBCs point to glomerulonephritis}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Albuminuria",
+          "unit": "mg/g",
+          "cells": [
+            {
+              "text": "UACR over 30 mg/g abnormal; frank proteinuria over 300 mg/24 h",
+              "op": ">",
+              "value": 30
+            },
+            {
+              "text": "Microalbuminuria 30 to 300 mg/24 h"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rapidly progressive GN",
+          "cells": [
+            {
+              "text": "Creatinine rising over days"
+            },
+            {
+              "text": "Crescentic GN on biopsy; emergency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-PLA2R antibody",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in 70 to 80% of primary membranous",
+              "range": [
+                70,
+                80
+              ]
+            },
+            {
+              "text": "Biopsy may be skipped if positive with normal creatinine and no secondary cause"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complement",
+          "cells": [
+            {
+              "text": "Low C3, normal C4"
+            },
+            {
+              "text": "Poststreptococcal GN or C3 glomerulopathy; low C3 and C4 in active lupus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biopsy descriptors",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Focal under 50% of glomeruli, diffuse over 50%",
+              "op": "<",
+              "value": 50
+            },
+            {
+              "text": "Segmental vs global; crescents = extracapillary"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lupus nephritis class",
+          "cells": [
+            {
+              "text": "ISN/RPS I to VI"
+            },
+            {
+              "text": "III and IV proliferative carry worst prognosis; V membranous"
+            }
+          ],
+          "cite": "c3"
+        }
+      ]
+    },
+    {
+      "id": "glomerular_diseases-ddx",
+      "kind": "ddx",
+      "title": "Key glomerular lesions and how to separate them",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Minimal change disease",
+          "cells": [
+            {
+              "text": "70 to 90% of childhood, 10 to 15% of adult nephrotic syndrome; selective proteinuria"
+            },
+            {
+              "text": "Biopsy: normal light microscopy, foot-process effacement on EM"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FSGS",
+          "cells": [
+            {
+              "text": "Commonest primary GN to ESKD in US; may be secondary (HIV, heroin, reflux, obesity) or familial (NPHS1, NPHS2)"
+            },
+            {
+              "text": "Deep biopsy sampling corticomedullary glomeruli"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Membranous nephropathy",
+          "cells": [
+            {
+              "text": "About 25% of adult nephrotic syndrome; highest thrombosis risk"
+            },
+            {
+              "text": "Anti-PLA2R or anti-THSD7A; screen for cancer, lupus, drugs"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "IgA nephropathy",
+          "cells": [
+            {
+              "text": "Gross haematuria during or just after a respiratory infection"
+            },
+            {
+              "text": "Biopsy mesangial IgA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Poststreptococcal GN",
+          "cells": [
+            {
+              "text": "Nephritis 1 to 3 weeks after throat or 2 to 6 weeks after skin infection"
+            },
+            {
+              "text": "Low C3, streptozyme or ASO; biopsy rarely needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-GBM disease",
+          "cells": [
+            {
+              "text": "Pulmonary haemorrhage with RPGN"
+            },
+            {
+              "text": "Anti-GBM (alpha3 NC1); linear IgG on biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ANCA vasculitis",
+          "cells": [
+            {
+              "text": "Pauci-immune crescentic GN"
+            },
+            {
+              "text": "Anti-PR3 (GPA) or anti-MPO (MPA, EGPA)"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MPGN pattern",
+          "cells": [
+            {
+              "text": "Tram-tracking; immune-complex, complement or monoclonal cause (hepatitis C, cryoglobulins, C3 nephritic factor)"
+            },
+            {
+              "text": "Immunofluorescence, hepatitis serology, paraprotein screen"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Non-glomerular haematuria",
+          "cells": [
+            {
+              "text": "Stones, tumour, BPH, papillary necrosis"
+            },
+            {
+              "text": "No casts or dysmorphic RBCs; imaging and cystoscopy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "glomerular_diseases-treatment",
+      "kind": "treatment",
+      "title": "Treating glomerular disease",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "ACE inhibitor or ARB",
+          "cells": [
+            {
+              "text": "Proteinuria, hypertension"
+            },
+            {
+              "text": "{{hy:Cornerstone non-immune therapy}}; watch potassium in CKD"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sodium restriction",
+          "unit": "g/day",
+          "cells": [
+            {
+              "text": "Under 2 g sodium per day for oedema",
+              "op": "<",
+              "value": 2
+            },
+            {
+              "text": "About 100 mmol/day"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Loop diuretics",
+          "cells": [
+            {
+              "text": "Oedema not controlled by salt restriction"
+            },
+            {
+              "text": "IV albumin then loop diuretic in severe cases"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Statin",
+          "cells": [
+            {
+              "text": "Nephrotic dyslipidaemia"
+            },
+            {
+              "text": "Protein restriction not recommended"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Thromboembolism; consider in high-risk nephrotic states"
+            },
+            {
+              "text": "Membranous carries highest risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "Children with presumed minimal change disease; MCD in adults"
+            },
+            {
+              "text": "Biopsy children who fail a steroid trial"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lesion-directed immunosuppression",
+          "cells": [
+            {
+              "text": "Biopsy-proven immune GN (lupus, membranous, primary FSGS)"
+            },
+            {
+              "text": "Cyclophosphamide, rituximab, calcineurin inhibitor or mycophenolate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma exchange plus immunosuppression",
+          "cells": [
+            {
+              "text": "Anti-GBM disease, severe ANCA GN, lung haemorrhage"
+            },
+            {
+              "text": "Urgent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "No immunosuppression",
+          "cells": [
+            {
+              "text": "Poststreptococcal GN, secondary or genetic FSGS"
+            },
+            {
+              "text": "Treat the trigger"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pneumococcal vaccination",
+          "cells": [
+            {
+              "text": "All nephrotic patients"
+            },
+            {
+              "text": "Unless contraindicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dialysis or transplant",
+          "cells": [
+            {
+              "text": "Progression to kidney failure"
+            },
+            {
+              "text": "Plan early with nephrology"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "glomerular_diseases-dx-mgmt",
+      "title": "Diagnosis and management of glomerular diseases",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Haematuria, proteinuria, oedema, hypertension or rising creatinine",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Urine microscopy, UACR or UPCR, creatinine, renal ultrasound",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Creatinine rising over days or lung haemorrhage?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urgent anti-GBM, ANCA, ANA, complement; urgent biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Steroids, cyclophosphamide or rituximab, plasma exchange",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Proteinuria 3 g/24 h or more with low albumin?",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Child with typical nephrotic picture?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Presume minimal change; corticosteroids, biopsy if no response",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Serology (PLA2R, hepatitis, HIV, ANA, paraprotein) and biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Nephritic serology: C3, C4, ASO, ANA, ANCA, then biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "ACE inhibitor or ARB, salt restriction, diuretics, statin",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Lesion-specific immunosuppression; monitor proteinuria and GFR",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

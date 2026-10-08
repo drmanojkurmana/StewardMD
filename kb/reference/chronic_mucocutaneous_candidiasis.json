@@ -152,5 +152,336 @@
       "caption": "Overview comparison matrix for chronic mucocutaneous candidiasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Stiehm's Immunologic Disorders / IUIS classification of inborn errors of immunity",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "chronic_mucocutaneous_candidiasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Enumeration of circulating Th17 (IL-17-producing) cells",
+          "cells": [
+            {
+              "text": "Defect in the IL-17 pathway"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "STAT1 phosphorylation assay and STAT1 gene sequencing",
+          "cells": [
+            {
+              "text": "Gain-of-function STAT1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoantibodies against IL-17 cytokines and AIRE testing",
+          "cells": [
+            {
+              "text": "Suspected APECED or IL-17 autoimmunity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum immunoglobulins and endocrine autoantibody and hormone screen",
+          "cells": [
+            {
+              "text": "Autoimmune endocrinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gene panel covering IL17RA, IL17F, ACT1, CARD9 and RORgammaT",
+          "cells": [
+            {
+              "text": "Identifies the underlying genotype"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mucocutaneous_candidiasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "STAT1 gain-of-function disease",
+          "cells": [
+            {
+              "text": "Targetable with a JAK inhibitor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "APECED (AIRE deficiency)",
+          "cells": [
+            {
+              "text": "Candidiasis with autoimmune endocrinopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CARD9 deficiency",
+          "cells": [
+            {
+              "text": "Invasive fungal disease, including central nervous system"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "chronic_mucocutaneous_candidiasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Azole suppression",
+          "cells": [
+            {
+              "text": "Suppressive or intermittent oral fluconazole as mainstay"
+            },
+            {
+              "text": "Mucocutaneous Candida"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Alternative antifungals",
+          "cells": [
+            {
+              "text": "Other azoles or echinocandins guided by sensitivities"
+            },
+            {
+              "text": "Azole resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "JAK inhibition",
+          "cells": [
+            {
+              "text": "Ruxolitinib for STAT1 gain-of-function disease"
+            },
+            {
+              "text": "Restores Th17 balance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic antifungals",
+          "cells": [
+            {
+              "text": "Aggressive therapy for deep-seated or central nervous system invasion"
+            },
+            {
+              "text": "CARD9 deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Associated features",
+          "cells": [
+            {
+              "text": "Hormone replacement for autoimmune endocrinopathy in APECED"
+            },
+            {
+              "text": "Genotype-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surveillance",
+          "cells": [
+            {
+              "text": "Monitor for squamous cell carcinoma in inflamed mucosa and azole resistance"
+            },
+            {
+              "text": "Chronic inflammation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Transplant and counselling",
+          "cells": [
+            {
+              "text": "Stem cell transplant considered in severe monogenic forms; genetic counselling"
+            },
+            {
+              "text": "Severe forms"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "chronic_mucocutaneous_candidiasis-dx-mgmt",
+      "title": "Diagnosis and management of Chronic mucocutaneous candidiasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected chronic mucocutaneous candidiasis: recurrent skin, nail and mucosal Candida",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (CNS signs, adrenal crisis, invasive fungal infection, oral lesion)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent review for invasive or central nervous system fungal disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Th17 enumeration, STAT1 testing, autoantibody screen and gene panel",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Defective IL-17 axis or STAT1 gain-of-function variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Suppressive oral fluconazole as the mainstay",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check STAT1 gain-of-function disease, APECED and CARD9 deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ruxolitinib for STAT1 gain-of-function disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Aggressive systemic antifungals for deep or central nervous system invasion",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Hormone replacement for autoimmune endocrinopathy in APECED",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Surveillance for squamous carcinoma and emerging azole resistance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

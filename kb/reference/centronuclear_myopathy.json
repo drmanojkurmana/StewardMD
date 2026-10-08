@@ -151,5 +151,310 @@
       "caption": "Overview comparison matrix for centronuclear/myotubular myopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neuromuscular Disorders reference texts / OMIM",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "centronuclear_myopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Muscle biopsy",
+          "cells": [
+            {
+              "text": "Centrally placed nuclei and perinuclear oxidative staining patterns"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MTM1, DNM2 and BIN1 genetic testing",
+          "cells": [
+            {
+              "text": "Identifies the X-linked, dominant or recessive form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum creatine kinase",
+          "cells": [
+            {
+              "text": "Usually normal or mildly elevated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory function assessment",
+          "cells": [
+            {
+              "text": "Critical in neonates with the X-linked form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmological assessment",
+          "cells": [
+            {
+              "text": "Ptosis and ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "centronuclear_myopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "No curative therapy; supportive care"
+            },
+            {
+              "text": "No curative therapy exists"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neonatal ventilation",
+          "cells": [
+            {
+              "text": "Mechanical ventilation for respiratory failure in the severe X-linked form"
+            },
+            {
+              "text": "Neonatal respiratory failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Gastrostomy feeding where bulbar weakness impairs feeding"
+            },
+            {
+              "text": "Bulbar weakness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Respiratory surveillance",
+          "cells": [
+            {
+              "text": "Airway clearance, non-invasive ventilation and prompt treatment of chest infections"
+            },
+            {
+              "text": "Proactive surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rehabilitation",
+          "cells": [
+            {
+              "text": "Physiotherapy, occupational therapy and orthoses; manage contractures and scoliosis"
+            },
+            {
+              "text": "Function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology",
+          "cells": [
+            {
+              "text": "Ptosis props or surgery"
+            },
+            {
+              "text": "Ptosis and ophthalmoplegia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bleeding surveillance",
+          "cells": [
+            {
+              "text": "Monitor hepatic peliosis, haemorrhage and coagulopathy in MTM1 disease"
+            },
+            {
+              "text": "MTM1 disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family and carrier testing for X-linked, dominant and recessive forms"
+            },
+            {
+              "text": "Inheritance pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "centronuclear_myopathy-dx-mgmt",
+      "title": "Diagnosis and management of Centronuclear/myotubular myopathy",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected centronuclear myopathy: hypotonic infant or male with ptosis and weakness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (neonatal respiratory failure, recurrent aspiration, bleeding)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: immediate ventilatory support and airway protection",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Muscle biopsy, MTM1, DNM2 and BIN1 testing, creatine kinase, respiratory function",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Central nuclei on biopsy with a pathogenic MTM1, DNM2 or BIN1 variant confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Supportive care; no curative therapy exists",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check nemaline, central core and congenital myotonic dystrophy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Gastrostomy feeding where bulbar weakness impairs feeding",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Airway clearance, non-invasive ventilation and early chest-infection treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Physiotherapy, orthoses, contracture and scoliosis management",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Severe X-linked form has high early mortality; dominant and recessive forms are milder",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

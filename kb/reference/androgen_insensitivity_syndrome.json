@@ -148,5 +148,328 @@
       "caption": "Overview comparison matrix for androgen insensitivity syndrome (ar)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology / Nelson Textbook of Pediatrics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "androgen_insensitivity_syndrome-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Confirms a 46,XY complement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone, luteinising hormone and anti-Mullerian hormone",
+          "cells": [
+            {
+              "text": "Testosterone typically in or above the normal male range but cannot act"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic imaging",
+          "cells": [
+            {
+              "text": "Demonstrates absent uterus and locates the gonads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen receptor gene testing",
+          "cells": [
+            {
+              "text": "Molecular confirmation of the diagnosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone to dihydrotestosterone ratio",
+          "cells": [
+            {
+              "text": "Helps distinguish 5-alpha-reductase deficiency"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "androgen_insensitivity_syndrome-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "5-alpha-reductase type 2 deficiency",
+          "cells": [
+            {
+              "text": "Testosterone to dihydrotestosterone ratio helps distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Disorders of testosterone biosynthesis",
+          "cells": [
+            {
+              "text": "Receptor testing separates it from partial androgen insensitivity"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "androgen_insensitivity_syndrome-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Oestrogen replacement",
+          "cells": [
+            {
+              "text": "Establish and maintain feminisation"
+            },
+            {
+              "text": "Timed to the individual's needs and gonadal status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonadal retention or gonadectomy",
+          "cells": [
+            {
+              "text": "Individualised decision"
+            },
+            {
+              "text": "Weighs germ-cell tumour risk against endogenous hormone production"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graduated vaginal dilation",
+          "cells": [
+            {
+              "text": "First-line for vaginal hypoplasia in the complete phenotype"
+            },
+            {
+              "text": "Reconstructive surgery only if required"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genital surgery in partial insensitivity",
+          "cells": [
+            {
+              "text": "Phenotype- and identity-led approach"
+            },
+            {
+              "text": "Avoid irreversible intervention without consent where possible"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-health monitoring",
+          "cells": [
+            {
+              "text": "Densitometry with calcium and vitamin D supplementation"
+            },
+            {
+              "text": "Particularly after gonadectomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Endocrinology, gynaecology, clinical psychology, specialist nursing"
+            },
+            {
+              "text": "Psychological support is part of care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Clinical genetics referral",
+          "cells": [
+            {
+              "text": "Counselling and cascade testing of maternal-line relatives"
+            },
+            {
+              "text": "For the androgen receptor mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "androgen_insensitivity_syndrome-dx-mgmt",
+      "title": "Diagnosis and management of Androgen insensitivity syndrome (AR)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "46,XY individual with female phenotype, amenorrhoea or inguinal mass",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Inguinal or labial mass, or ambiguous genitalia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent specialist assessment of the mass or ambiguous genitalia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, testosterone, LH, AMH, pelvic imaging, AR gene testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Karyotype 46,XY with androgen receptor mutation confirmed?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Oestrogen replacement to establish and maintain feminisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Decide gonadal retention or gonadectomy, weighing tumour risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Graduated vaginal dilation first-line for vaginal hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Bone-health monitoring with densitometry, calcium and vitamin D",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good outcome with multidisciplinary care; fertility not possible",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

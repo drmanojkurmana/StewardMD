@@ -198,5 +198,511 @@
       "caption": "Diagnostic and clinical overview matrix for ruptured abdominal aortic aneurysm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Abdominal Aortic Aneurysms",
+      "url": "https://www.merckmanuals.com/professional/cardiovascular-disorders/diseases-of-the-aorta-and-its-branches/abdominal-aortic-aneurysms-aaa",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aaa-diagnostic",
+      "kind": "diagnostic",
+      "title": "Recognising rupture and grading aneurysm risk",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Definition",
+          "cells": [
+            {
+              "text": "Dilation at least 50% above the adjacent normal aorta"
+            },
+            {
+              "text": "True aneurysm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rupture triad",
+          "cells": [
+            {
+              "text": "Abdominal or back pain, hypotension, tachycardia, with or without pulsatile mass"
+            },
+            {
+              "text": "{{hy:Surgical emergency}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pain radiating to flank, sacrum or genitalia",
+          "cells": [
+            {
+              "text": "Older patient with acute pain"
+            },
+            {
+              "text": "Always consider rupturing AAA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bedside ultrasound",
+          "cells": [
+            {
+              "text": "Unstable patient with presumed rupture"
+            },
+            {
+              "text": "Fastest test; bowel gas can limit it"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "CT or MR angiography",
+          "cells": [
+            {
+              "text": "Stable patient"
+            },
+            {
+              "text": "Defines size and anatomy for repair planning"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Plain abdominal x-ray",
+          "cells": [
+            {
+              "text": "About 25% of aneurysms are not calcified"
+            },
+            {
+              "text": "Cannot exclude AAA"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pre-operative bloods",
+          "cells": [
+            {
+              "text": "CBC, electrolytes, urea, creatinine, PT, PTT, type and cross-match"
+            },
+            {
+              "text": "Send at once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter <4 cm",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Rupture risk 0%"
+            },
+            {
+              "text": "Annual rupture risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter 4 to 4.9 cm",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Rupture risk 0.5% to 5%",
+              "range": [
+                0.5,
+                5
+              ]
+            },
+            {
+              "text": "Annual rupture risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter 5 to 5.9 cm",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Rupture risk 3% to 15%",
+              "range": [
+                3,
+                15
+              ]
+            },
+            {
+              "text": "Annual rupture risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter 6 to 6.9 cm",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Rupture risk 10% to 20%",
+              "range": [
+                10,
+                20
+              ]
+            },
+            {
+              "text": "Annual rupture risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter 7 to 7.9 cm",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Rupture risk 20% to 40%",
+              "range": [
+                20,
+                40
+              ]
+            },
+            {
+              "text": "Annual rupture risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Diameter >8 cm",
+          "unit": "%/year",
+          "cells": [
+            {
+              "text": "Rupture risk 30% to 50%",
+              "range": [
+                30,
+                50
+              ]
+            },
+            {
+              "text": "Annual rupture risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Growth",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": ">0.5 cm in 6 months",
+              "op": ">",
+              "value": 0.5
+            },
+            {
+              "text": "Repair at any size"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Harrison gives 5-year rupture risk of about 1% to 2% below 5 cm and 20% to 40% above 5 cm; Merck gives the annual risks shown."
+    },
+    {
+      "id": "aaa-ddx",
+      "kind": "ddx",
+      "title": "Conditions that mimic ruptured AAA",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Renal or ureteric colic",
+          "cells": [
+            {
+              "text": "{{hy:Flank pain to groin; AAA rupture is often misread as this}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute mesenteric ischaemia",
+          "cells": [
+            {
+              "text": "Pain out of proportion to examination"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aortic dissection or thoracoabdominal aneurysm",
+          "cells": [
+            {
+              "text": "Chest or back pain; disease contiguous above the diaphragm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rectus sheath haematoma",
+          "cells": [
+            {
+              "text": "Abdominal wall mass, often on anticoagulants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mycotic aneurysm",
+          "cells": [
+            {
+              "text": "Fever, saccular aneurysm, positive blood cultures"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aaa-treatment",
+      "kind": "treatment",
+      "title": "Management of ruptured and intact AAA",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Emergency open repair or endovascular stent graft",
+          "cells": [
+            {
+              "text": "{{hy:Rupture, or acute pain with hypotension}}"
+            },
+            {
+              "text": "No clear mortality difference between the two"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Permissive hypotension",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "Do not raise MAP above 70 to 80 mm Hg",
+              "range": [
+                70,
+                80
+              ]
+            },
+            {
+              "text": "Higher pressure may increase bleeding"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fluids and blood transfusion",
+          "cells": [
+            {
+              "text": "Haemorrhagic shock"
+            },
+            {
+              "text": "Cross-match early; call vascular surgery at once"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urgent repair",
+          "cells": [
+            {
+              "text": "Symptomatic or rapidly expanding aneurysm of any size"
+            },
+            {
+              "text": "New pain often precedes rupture"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Elective repair",
+          "unit": "cm",
+          "cells": [
+            {
+              "text": "Asymptomatic, >5.5 cm in men or >5 cm in women"
+            },
+            {
+              "text": "Harrison uses >=5.5 cm in men and >=5.0 cm in women"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Ultrasound or CT surveillance",
+          "cells": [
+            {
+              "text": "Aneurysm <5 cm"
+            },
+            {
+              "text": "Every 6 to 12 months"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "All patients"
+            },
+            {
+              "text": "Most potent modifiable risk factor"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening ultrasound",
+          "cells": [
+            {
+              "text": "Men over 65 who have ever smoked"
+            },
+            {
+              "text": "Reduces mortality; small absolute benefit in low-risk men"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Untreated rupture mortality approaches 100%; about 50% of those reaching hospital still die."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aaa-dx-mgmt",
+      "title": "Diagnosis and management of suspected ruptured AAA",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Older patient with abdominal or back pain, possible pulsatile mass",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Hypotension or shock?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Bedside ultrasound; cross-match; call vascular surgery",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "decision",
+          "text": "Aneurysm seen?",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Emergency open or endovascular repair; permissive hypotension",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "CT angiography",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Rupture or symptomatic aneurysm?",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Urgent repair",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Look for other causes: renal colic, ischaemia, dissection",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n4",
+          "to": "n6",
+          "label": "Unclear"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

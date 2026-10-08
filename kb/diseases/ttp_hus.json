@@ -230,5 +230,598 @@
       "caption": "Diagnostic and clinical overview matrix for thrombotic microangiopathy (ttp/hus)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Thrombotic Thrombocytopenic Purpura",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/thrombocytopenia-and-platelet-dysfunction/thrombotic-thrombocytopenic-purpura-ttp",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "MDCalc, PLASMIC Score for TTP",
+      "url": "https://www.mdcalc.com/calc/10200/plasmic-score-ttp",
+      "kind": "web"
+    },
+    {
+      "id": "c4",
+      "label": "Merck Manual Professional, Hemolytic-Uremic Syndrome",
+      "url": "https://www.merckmanuals.com/professional/hematology-and-oncology/thrombocytopenia-and-platelet-dysfunction/hemolytic-uremic-syndrome-hus",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "ttp_hus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Thrombotic microangiopathy: core labs and PLASMIC score",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Peripheral smear",
+          "cells": [
+            {
+              "text": "Schistocytes with thrombocytopenia"
+            },
+            {
+              "text": "Hallmark of microangiopathic haemolytic anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Haemolysis markers",
+          "cells": [
+            {
+              "text": "High LDH and unconjugated bilirubin, low haptoglobin, reticulocytosis"
+            },
+            {
+              "text": "Confirms haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Direct antiglobulin test",
+          "cells": [
+            {
+              "text": "Negative"
+            },
+            {
+              "text": "Separates from autoimmune haemolysis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PT and aPTT",
+          "cells": [
+            {
+              "text": "Normal"
+            },
+            {
+              "text": "Abnormal values point to DIC"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADAMTS13 activity",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Under 10",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "{{hy:Diagnostic of TTP; send activity and inhibitor in every suspected case}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ADAMTS13 in HUS",
+          "cells": [
+            {
+              "text": "Usually normal"
+            },
+            {
+              "text": "Normal level does not exclude other TMA"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "PLASMIC: platelets",
+          "unit": "x10^9/L",
+          "cells": [
+            {
+              "text": "Under 30",
+              "op": "<",
+              "value": 30
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PLASMIC: haemolysis",
+          "cells": [
+            {
+              "text": "Reticulocytes over 2.5%, undetectable haptoglobin, or indirect bilirubin over 2.0 mg/dL"
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PLASMIC: no active cancer in past year",
+          "cells": [
+            {
+              "text": "No cancer treatment"
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PLASMIC: no organ or stem-cell transplant",
+          "cells": [
+            {
+              "text": "No transplant"
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PLASMIC: MCV",
+          "unit": "fL",
+          "cells": [
+            {
+              "text": "Under 90",
+              "op": "<",
+              "value": 90
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PLASMIC: INR",
+          "cells": [
+            {
+              "text": "Under 1.5",
+              "op": "<",
+              "value": 1.5
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PLASMIC: creatinine",
+          "unit": "mg/dL",
+          "cells": [
+            {
+              "text": "Under 2.0",
+              "op": "<",
+              "value": 2.0
+            },
+            {
+              "text": "1 point"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "PLASMIC total",
+          "cells": [
+            {
+              "text": "6 or more high; 5 intermediate; 4 or less low"
+            },
+            {
+              "text": "High: start plasma exchange now; low: consider other diagnoses"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Stool Shiga toxin or E. coli O157:H7",
+          "cells": [
+            {
+              "text": "Positive"
+            },
+            {
+              "text": "STEC-HUS; organism may have cleared by presentation"
+            }
+          ],
+          "cite": "c4"
+        }
+      ]
+    },
+    {
+      "id": "ttp_hus-ddx",
+      "kind": "ddx",
+      "title": "Separating causes of thrombotic microangiopathy",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Immune TTP",
+          "cells": [
+            {
+              "text": "Neurological features more common; women, pregnancy, HIV"
+            },
+            {
+              "text": "ADAMTS13 under 10% with inhibitor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Congenital TTP (Upshaw-Schulman)",
+          "cells": [
+            {
+              "text": "Childhood or first-pregnancy onset, family history"
+            },
+            {
+              "text": "Low ADAMTS13 without antibody; genetic testing"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "STEC-HUS",
+          "cells": [
+            {
+              "text": "Bloody diarrhoea prodrome, often in a child; renal failure dominant"
+            },
+            {
+              "text": "Stool Shiga toxin EIA or O157:H7 culture"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Complement-mediated (atypical) HUS",
+          "cells": [
+            {
+              "text": "No infective prodrome or recurrent disease"
+            },
+            {
+              "text": "Complement levels and gene testing, anti-factor H antibody"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "DIC",
+          "cells": [
+            {
+              "text": "Consumptive coagulopathy"
+            },
+            {
+              "text": "{{hy:Prolonged PT and aPTT}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug-induced TMA",
+          "cells": [
+            {
+              "text": "Quinine, cyclosporine, tacrolimus, chemotherapy"
+            },
+            {
+              "text": "Normal ADAMTS13; improves on stopping drug"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Malignant hypertension, preeclampsia, sepsis",
+          "cells": [
+            {
+              "text": "Alternative causes when ADAMTS13 is 10% or more"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Heparin-induced thrombocytopenia",
+          "cells": [
+            {
+              "text": "Heparin exposure with thrombosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "ttp_hus-treatment",
+      "kind": "treatment",
+      "title": "Treatment of TTP and HUS",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Therapeutic plasma exchange",
+          "cells": [
+            {
+              "text": "{{hy:Suspected immune TTP; start urgently}}"
+            },
+            {
+              "text": "Daily until platelets and LDH normalise; plasma infusion if exchange is delayed"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Glucocorticoids and rituximab",
+          "cells": [
+            {
+              "text": "Adults with immune TTP"
+            },
+            {
+              "text": "Often given with exchange; rituximab also for relapse"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Caplacizumab",
+          "cells": [
+            {
+              "text": "Immune TTP"
+            },
+            {
+              "text": "Anti-VWF nanobody; faster platelet recovery but more bleeding; ISTH supports use"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Platelet transfusion",
+          "cells": [
+            {
+              "text": "Only life-threatening bleeding"
+            },
+            {
+              "text": "May worsen microvascular thrombosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care and dialysis",
+          "cells": [
+            {
+              "text": "STEC-HUS"
+            },
+            {
+              "text": "No antibiotics; over half need dialysis"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Eculizumab, ravulizumab or pegcetacoplan",
+          "cells": [
+            {
+              "text": "Complement-mediated aHUS"
+            },
+            {
+              "text": "Give meningococcal vaccine first"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Fresh frozen plasma",
+          "cells": [
+            {
+              "text": "Congenital TTP when recombinant ADAMTS13 unavailable"
+            },
+            {
+              "text": "Exchange, steroids and rituximab not used"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stop offending drug",
+          "cells": [
+            {
+              "text": "Drug-induced TMA"
+            },
+            {
+              "text": "No response to exchange or immunosuppression"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Sources conflict on plasma exchange in HUS: Harrison notes aHUS is often started on exchange until ADAMTS13 returns (without proven benefit), while Merck states exchange is not used in HUS. Doses for steroids, rituximab and caplacizumab were not given by the sources opened."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "ttp_hus-dx-mgmt",
+      "title": "Diagnosis and management of TTP and HUS",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Thrombocytopenia with anaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Smear, LDH, haptoglobin, DAT, PT/aPTT, creatinine",
+          "cite": "c4"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Schistocytes with DAT negative and normal PT/aPTT?",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Consider DIC or other causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Send ADAMTS13 activity and inhibitor; score PLASMIC",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "PLASMIC 6 or more?",
+          "cite": "c3"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Start plasma exchange now with steroids; haematology input",
+          "cite": "c3"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "ADAMTS13 under 10%?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "TTP: continue exchange; add rituximab, caplacizumab",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Shiga toxin or bloody diarrhoea prodrome?",
+          "cite": "c4"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "STEC-HUS: supportive care, dialysis as needed",
+          "cite": "c4"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Possible aHUS: complement tests; eculizumab after vaccine",
+          "cite": "c4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No, await ADAMTS13"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

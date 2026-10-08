@@ -150,5 +150,343 @@
       "caption": "Overview comparison matrix for accelerated idioventricular rhythm."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "accelerated_idioventricular_rhythm-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Twelve-lead ECG",
+          "cells": [
+            {
+              "text": "Rate, and fusion and capture beats"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous telemetry",
+          "cells": [
+            {
+              "text": "Onset, offset and relation to sinus rate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial cardiac troponin and ECG",
+          "cells": [
+            {
+              "text": "In the context of suspected reperfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum electrolytes (potassium and magnesium)",
+          "cells": [
+            {
+              "text": "Electrolyte derangement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum digoxin concentration",
+          "cells": [
+            {
+              "text": "When toxicity is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Ventricular function and structural disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accelerated_idioventricular_rhythm-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Ventricular tachycardia",
+          "cells": [
+            {
+              "text": "Faster than the 40 to 120 per minute of AIVR"
+            },
+            {
+              "text": "Twelve-lead ECG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperkalaemia producing a wide-complex rhythm",
+          "cells": [
+            {
+              "text": "Electrolyte cause"
+            },
+            {
+              "text": "Serum potassium"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "accelerated_idioventricular_rhythm-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Usually benign and self-limiting"
+            },
+            {
+              "text": "No antiarrhythmic suppression"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause and optimise reperfusion",
+          "cells": [
+            {
+              "text": "Acute myocardial infarction"
+            },
+            {
+              "text": "The rhythm marks successful reperfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Continuous telemetry",
+          "cells": [
+            {
+              "text": "Confirms haemodynamic tolerance"
+            },
+            {
+              "text": "Detects degeneration into a faster arrhythmia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Correct potassium and magnesium; review digoxin",
+          "cells": [
+            {
+              "text": "Contributing factors"
+            },
+            {
+              "text": "Digoxin toxicity review"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Atropine or atrial pacing",
+          "cells": [
+            {
+              "text": "Rare patient compromised by loss of AV synchrony"
+            },
+            {
+              "text": "Accelerates the sinus rate rather than suppressing the escape focus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid antiarrhythmics that suppress the focus",
+          "cells": [
+            {
+              "text": "The focus provides the effective rhythm"
+            },
+            {
+              "text": "Suppression can be harmful"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiology referral with echocardiography",
+          "cells": [
+            {
+              "text": "Underlying structural heart disease"
+            },
+            {
+              "text": "Assess ventricular function"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "accelerated_idioventricular_rhythm-dx-mgmt",
+      "title": "Diagnosis and management of accelerated idioventricular rhythm",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Wide-complex ventricular rhythm at 40 to 120 per minute, often after reperfusion",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Haemodynamic compromise from loss of AV synchrony?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Accelerate sinus rate with atropine or atrial pacing",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "12-lead ECG for fusion and capture beats; continuous telemetry",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Electrolyte or digoxin abnormality present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Correct potassium and magnesium; review digoxin toxicity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Confirm reperfusion with serial troponin and ECG; exclude VT",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Reassurance and observation; avoid antiarrhythmic suppression",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Optimise reperfusion therapy in acute myocardial infarction",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Continuous telemetry for degeneration into a faster ventricular arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally benign and transient; outcome set by the underlying condition",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -151,5 +151,308 @@
       "caption": "Overview comparison matrix for androgen insensitivity syndrome."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine / Endocrine Society",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "androgen_insensitivity-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Karyotype",
+          "cells": [
+            {
+              "text": "Demonstrates 46,XY"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Testosterone, dihydrotestosterone and LH/FSH",
+          "cells": [
+            {
+              "text": "Testosterone in the normal or high male range with elevated LH"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anti-Mullerian hormone and internal Mullerian structures on imaging",
+          "cells": [
+            {
+              "text": "Mullerian structures absent, as testes produce anti-Mullerian hormone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pelvic and inguinal imaging",
+          "cells": [
+            {
+              "text": "Locates the gonads"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Androgen receptor gene analysis",
+          "cells": [
+            {
+              "text": "Confirms the diagnosis and guides counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone density assessment",
+          "cells": [
+            {
+              "text": "Long-term implications of hormone status and gonadectomy"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Source states no numeric thresholds; cells use the source wording."
+    },
+    {
+      "id": "androgen_insensitivity-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Individualised gonadal management",
+          "cells": [
+            {
+              "text": "Gonadectomy timing balanced against germ-cell malignancy risk"
+            },
+            {
+              "text": "Option to retain gonads until after spontaneous puberty in complete cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oestrogen replacement after gonadectomy",
+          "cells": [
+            {
+              "text": "Induce or maintain secondary sexual characteristics"
+            },
+            {
+              "text": "Also protects bone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Graduated vaginal dilation",
+          "cells": [
+            {
+              "text": "First-line for vaginal hypoplasia in complete androgen insensitivity"
+            },
+            {
+              "text": "Surgical vaginoplasty reserved for selected cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sex of rearing and genital surgery in partial forms",
+          "cells": [
+            {
+              "text": "Individualised to phenotype"
+            },
+            {
+              "text": "Where possible, the person's own gender identity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bone-density surveillance",
+          "cells": [
+            {
+              "text": "Calcium and vitamin D optimisation"
+            },
+            {
+              "text": "Hypogonadism and post-gonadectomy fracture risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Psychological support",
+          "cells": [
+            {
+              "text": "Specialist disorders-of-sex-development multidisciplinary team"
+            },
+            {
+              "text": "Care coordinated through that team"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Testing of at-risk maternal-line relatives"
+            },
+            {
+              "text": "X-linked androgen receptor mutation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "androgen_insensitivity-dx-mgmt",
+      "title": "Diagnosis and management of Androgen insensitivity syndrome",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Phenotypic female with primary amenorrhoea or inguinal or labial gonads",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Malignant change risk in undescended testes?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent gonad assessment; malignancy risk rises with age",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Karyotype, hormones, anti-Mullerian hormone, pelvic and inguinal imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Karyotype 46,XY and androgen receptor gene testing confirm it?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Individualised gonadal management, weighing malignancy risk",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat targeted tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Oestrogen replacement after gonadectomy for secondary characteristics",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Graduated vaginal dilation first-line for vaginal hypoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Calcium, vitamin D and bone-density surveillance; psychological support",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good health with replacement and multidisciplinary care; no fertility if complete",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

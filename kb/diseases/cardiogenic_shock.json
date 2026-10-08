@@ -227,5 +227,535 @@
       "caption": "Diagnostic and clinical overview matrix for cardiogenic shock."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Shock",
+      "url": "https://www.merckmanuals.com/professional/critical-care-medicine/shock-and-fluid-resuscitation/shock",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cardiogenic_shock-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosing and staging cardiogenic shock",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Systolic BP",
+          "unit": "mm Hg",
+          "cells": [
+            {
+              "text": "<90 despite volume or needing vasopressors",
+              "op": "<",
+              "value": 90
+            },
+            {
+              "text": "Or MAP <60 to 65; normotension does not exclude shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lactate",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": ">2",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Tissue hypoperfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine output",
+          "unit": "mL/kg/h",
+          "cells": [
+            {
+              "text": "<0.5",
+              "op": "<",
+              "value": 0.5
+            },
+            {
+              "text": "Hypoperfusion"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Capillary refill",
+          "unit": "s",
+          "cells": [
+            {
+              "text": ">2",
+              "op": ">",
+              "value": 2
+            },
+            {
+              "text": "Cool clammy peripheries"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Filling pressures",
+          "cells": [
+            {
+              "text": "High PCWP (LV) or high CVP (RV)"
+            },
+            {
+              "text": "{{hy:Separates from hypovolaemia, where CVP <5 and PAOP <8 mm Hg}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "ST elevation, Q waves, LBBB; aVR elevation with diffuse depression"
+            },
+            {
+              "text": "Left main or global ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "LV, RV or biventricular failure, VSR, acute MR, tamponade"
+            },
+            {
+              "text": "Defines mechanism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCAI stage B",
+          "cells": [
+            {
+              "text": "Hypotension or tachycardia without hypoperfusion"
+            },
+            {
+              "text": "Pre-shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCAI stage C",
+          "cells": [
+            {
+              "text": "Hypoperfusion needing inotropes, vasopressors or MCS"
+            },
+            {
+              "text": "Classic shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCAI stage D",
+          "cells": [
+            {
+              "text": "Worsening despite initial therapy"
+            },
+            {
+              "text": "Deteriorating"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "SCAI stage E",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Lactate >8, arrest, CPR or ECMO",
+              "op": ">",
+              "value": 8
+            },
+            {
+              "text": "Extremis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic_shock-ddx",
+      "kind": "ddx",
+      "title": "Other shock states and causes to separate",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypovolaemic shock",
+          "cells": [
+            {
+              "text": "Low CVP and PCWP; responds to fluid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Septic or distributive shock",
+          "cells": [
+            {
+              "text": "Low SVR, warm peripheries; may coexist with septic cardiomyopathy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac tamponade",
+          "cells": [
+            {
+              "text": "{{hy:Raised JVP, muffled sounds, pulsus paradoxus; equalised diastolic pressures}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Tension pneumothorax",
+          "cells": [
+            {
+              "text": "Absent breath sounds, tracheal shift"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Massive pulmonary embolism",
+          "cells": [
+            {
+              "text": "Acute RV strain, hypoxia"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Mechanical complication of MI",
+          "cells": [
+            {
+              "text": "New murmur; absent in up to 50% of acute MR"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "RV infarction",
+          "cells": [
+            {
+              "text": "Inferior MI, raised JVP, clear lungs; needs preload"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug overdose: beta-blocker or calcium-channel blocker",
+          "cells": [
+            {
+              "text": "Bradycardia, drug history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic_shock-treatment",
+      "kind": "treatment",
+      "title": "Treatment of cardiogenic shock",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose or notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Immediate coronary angiography and revascularisation",
+          "cells": [
+            {
+              "text": "{{hy:Shock complicating MI}}"
+            },
+            {
+              "text": "PCI or CABG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Norepinephrine",
+          "cells": [
+            {
+              "text": "MAP <70 mm Hg"
+            },
+            {
+              "text": "2 to 12 mcg/min or 0.1 mcg/kg/min; aim SBP 80 to 90 mm Hg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dobutamine",
+          "cells": [
+            {
+              "text": "MAP about 70 to 90 mm Hg with low output"
+            },
+            {
+              "text": "2.5 to 10 mcg/kg/min; watch for arrhythmias"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Cautious fluid bolus",
+          "unit": "mL",
+          "cells": [
+            {
+              "text": "No pulmonary oedema; RV infarct; PAOP low or normal"
+            },
+            {
+              "text": "250 to 500 mL balanced crystalloid; optimal PAOP 15 to 18 mm Hg"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Vasodilator (nitroglycerin or nitroprusside)",
+          "cells": [
+            {
+              "text": "Without severe hypotension"
+            },
+            {
+              "text": "Reduces workload; monitor closely"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Intra-aortic balloon pump",
+          "cells": [
+            {
+              "text": "VSR or acute MR needing vasopressors >30 min"
+            },
+            {
+              "text": "Bridge to angiography or surgery"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical repair",
+          "cells": [
+            {
+              "text": "Septal rupture or valve failure"
+            },
+            {
+              "text": "Mechanical cause"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Pericardiocentesis or needle decompression",
+          "cells": [
+            {
+              "text": "Tamponade or tension pneumothorax"
+            },
+            {
+              "text": "Immediate"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oxygen and ventilation",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Oxygen if SpO2 <94%",
+              "op": "<",
+              "value": 94
+            },
+            {
+              "text": "Intubate if severe or ventilation inadequate"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "Mortality of MI-related cardiogenic shock is about 40% to 50% even with treatment (Merck)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cardiogenic_shock-dx-mgmt",
+      "title": "Diagnosis and management of cardiogenic shock",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Hypotension or hypoperfusion with suspected cardiac cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "ECG, troponin, lactate, echo or POCUS",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Tamponade, tension pneumothorax or massive PE?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "outcome",
+          "text": "Pericardiocentesis, decompression or reperfusion for PE",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pulmonary oedema?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Cautious 250 to 500 mL fluid bolus",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Norepinephrine if MAP <70; dobutamine for low output",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Acute MI?",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Immediate angiography and revascularisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Mechanical complication?",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "IABP bridge and surgical repair",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "ICU care; treat cause; escalate support",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

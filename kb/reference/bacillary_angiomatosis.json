@@ -150,5 +150,336 @@
       "caption": "Overview comparison matrix for bacillary angiomatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Mandell, Douglas and Bennett / Harrison's Principles of Internal Medicine",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bacillary_angiomatosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Skin or tissue biopsy with Warthin-Starry silver stain",
+          "cells": [
+            {
+              "text": "Clustered bacilli"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "PCR of tissue for Bartonella species",
+          "cells": [
+            {
+              "text": "Bartonella species"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serology for Bartonella",
+          "cells": [
+            {
+              "text": "Variable sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Prolonged-incubation blood cultures",
+          "cells": [
+            {
+              "text": "Where bacteraemia is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HIV testing and CD4 count",
+          "cells": [
+            {
+              "text": "Immune status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cross-sectional imaging of liver and spleen",
+          "cells": [
+            {
+              "text": "Visceral peliosis, if suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacillary_angiomatosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Kaposi sarcoma",
+          "cells": [
+            {
+              "text": "Mistaken for it, a treatable infection is missed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Verruga peruana (Bartonella bacilliformis) in endemic regions",
+          "cells": [
+            {
+              "text": "Caused by Bartonella bacilliformis in endemic regions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "bacillary_angiomatosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Prolonged oral antibiotics",
+          "cells": [
+            {
+              "text": "Macrolide such as erythromycin or tetracycline such as doxycycline"
+            },
+            {
+              "text": "Active against Bartonella"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rifampicin or combination therapy",
+          "cells": [
+            {
+              "text": "Severe or disseminated disease, including hepatic or splenic peliosis"
+            },
+            {
+              "text": "Severe disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended treatment course",
+          "cells": [
+            {
+              "text": "Prevents relapse"
+            },
+            {
+              "text": "Premature discontinuation predisposes to recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiretroviral therapy",
+          "cells": [
+            {
+              "text": "Start or optimise in HIV-associated disease"
+            },
+            {
+              "text": "Restores immune function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exposure reduction",
+          "cells": [
+            {
+              "text": "Cat and flea contact advice; body-louse eradication and hygiene"
+            },
+            {
+              "text": "Ongoing exposure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring for reaction and bleeding",
+          "cells": [
+            {
+              "text": "Jarisch-Herxheimer-type reaction; bleeding from friable lesions"
+            },
+            {
+              "text": "Monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious diseases referral",
+          "cells": [
+            {
+              "text": "Visceral or osteolytic disease"
+            },
+            {
+              "text": "Multidisciplinary care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bacillary_angiomatosis-dx-mgmt",
+      "title": "Diagnosis and management of Bacillary angiomatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Vascular skin lesions in a patient with HIV or immune compromise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Haemorrhage from friable lesions or hepatosplenic peliosis?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Manage bleeding from friable lesions; urgent review of peliosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Biopsy with Warthin-Starry stain, Bartonella PCR, serology, blood culture, HIV and CD4",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Clustered bacilli on silver stain or Bartonella PCR positive?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Prolonged oral antibiotics such as doxycycline or erythromycin",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat biopsy or PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Rifampicin or combination therapy for severe disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Start or optimise antiretroviral therapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Advise on cat and flea contact and body-louse hygiene",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Extended course to prevent relapse; infectious diseases follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

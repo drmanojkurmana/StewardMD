@@ -149,5 +149,343 @@
       "caption": "Overview comparison matrix for acute posterior multifocal placoid pigment epitheliopathy (apmppe)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acute_posterior_multifocal_placoid_pigment_epitheliopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Multiple placoid lesions at the posterior pole"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein angiography",
+          "cells": [
+            {
+              "text": "Early hypofluorescence and late hyperfluorescence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Indocyanine green angiography",
+          "cells": [
+            {
+              "text": "Choriocapillaris non-perfusion lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus autofluorescence and optical coherence tomography",
+          "cells": [
+            {
+              "text": "Outer retinal disruption"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Tests for syphilis and tuberculosis",
+          "cells": [
+            {
+              "text": "Excludes infective mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging and lumbar puncture if headache or neurological signs",
+          "cells": [
+            {
+              "text": "Cerebral vasculitis when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_posterior_multifocal_placoid_pigment_epitheliopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Serpiginous choroidopathy",
+          "cells": [
+            {
+              "text": "Serpiginous, progressive course"
+            },
+            {
+              "text": "Fluorescein angiography"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Syphilitic or tuberculous placoid chorioretinitis",
+          "cells": [
+            {
+              "text": "Infective placoid disease"
+            },
+            {
+              "text": "Syphilis and tuberculosis testing"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acute_posterior_multifocal_placoid_pigment_epitheliopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Expectant observation",
+          "cells": [
+            {
+              "text": "Most cases recover vision over weeks"
+            },
+            {
+              "text": "Most recover spontaneously"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclusion of syphilis and tuberculosis",
+          "cells": [
+            {
+              "text": "Before starting immunosuppression"
+            },
+            {
+              "text": "Infective mimics"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Systemic corticosteroids",
+          "cells": [
+            {
+              "text": "Foveal-threatening lesions or associated cerebral vasculitis"
+            },
+            {
+              "text": "Steroid use for foveal threat"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urgent neuroimaging, lumbar puncture and neurology referral",
+          "cells": [
+            {
+              "text": "Headache or neurological signs"
+            },
+            {
+              "text": "Suspected cerebral vasculitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Additional immunosuppression for CNS involvement",
+          "cells": [
+            {
+              "text": "Risk of stroke"
+            },
+            {
+              "text": "CNS involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serial fundus imaging and acuity monitoring",
+          "cells": [
+            {
+              "text": "Retinal recovery"
+            },
+            {
+              "text": "Ongoing monitoring"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retina specialist follow-up",
+          "cells": [
+            {
+              "text": "Residual paracentral scotomata"
+            },
+            {
+              "text": "When the fovea was involved"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acute_posterior_multifocal_placoid_pigment_epitheliopathy-dx-mgmt",
+      "title": "Diagnosis and management of Acute posterior multifocal placoid pigment epitheliopathy (APMPPE)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Sudden central visual loss, usually bilateral, in a young adult after a viral illness",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Headache, meningism, focal neurology or foveal involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent neuroimaging, lumbar puncture and neurology referral",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Dilated fundus exam; fluorescein and ICG angiography; OCT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Syphilis and tuberculosis excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Expectant observation; systemic steroids if foveal threat",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Treat infective placoid disease; review serpiginous choroidopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Expectant observation; most recover vision over weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Systemic corticosteroids for foveal-threatening lesions",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Additional immunosuppression for CNS involvement; serial fundus imaging",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Generally good visual recovery; residual scotomata if fovea involved",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -146,5 +146,312 @@
       "caption": "Overview comparison matrix for asteroid hyalosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / Ryan's Retina",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "asteroid_hyalosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Dilated slit-lamp biomicroscopy and indirect fundoscopy",
+          "cells": [
+            {
+              "text": "Characterises the opacities and their movement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "B-scan ultrasonography",
+          "cells": [
+            {
+              "text": "Multiple highly reflective mobile echoes that settle when eye movement stops"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "OCT of the macula",
+          "cells": [
+            {
+              "text": "Coexisting maculopathy where the direct view is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fundus photography",
+          "cells": [
+            {
+              "text": "Documents appearance and monitors over time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for diabetes mellitus",
+          "cells": [
+            {
+              "text": "The reported association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Careful peripheral retinal examination",
+          "cells": [
+            {
+              "text": "Coexisting pathology obscured by the opacities"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asteroid_hyalosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Synchysis scintillans",
+          "cells": [
+            {
+              "text": "Cholesterol crystals within liquefied vitreous that sediment inferiorly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Posterior vitreous detachment or retinal break",
+          "cells": [
+            {
+              "text": "New floaters or flashes; stable asteroid bodies do not behave this way"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "asteroid_hyalosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance and observation",
+          "cells": [
+            {
+              "text": "Benign condition"
+            },
+            {
+              "text": "Vision is characteristically preserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retinal examination",
+          "cells": [
+            {
+              "text": "B-scan ultrasonography or OCT where the direct view is obscured"
+            },
+            {
+              "text": "Excludes coexisting pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diabetes screening",
+          "cells": [
+            {
+              "text": "Screen for diabetes mellitus"
+            },
+            {
+              "text": "Reported association"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pars plana vitrectomy",
+          "cells": [
+            {
+              "text": "Rare cases of genuine visual impairment or opacities preventing diagnosis"
+            },
+            {
+              "text": "Reserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Routine follow-up",
+          "cells": [
+            {
+              "text": "Monitor the opacities and retinal health"
+            },
+            {
+              "text": "Ophthalmological surveillance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "asteroid_hyalosis-dx-mgmt",
+      "title": "Diagnosis and management of Asteroid hyalosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Floating opacities seen on slit-lamp examination, usually incidental",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? New floaters, flashes or sudden visual loss?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent retinal review for detachment or retinal break",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit lamp, B-scan ultrasound, macular OCT, fundus photography, diabetes screen",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Mobile highly reflective echoes on B-scan that settle when eye movement stops?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Reassurance and observation; vision is preserved",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Screen for diabetes given the reported association",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Examine the peripheral retina for coexisting pathology",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Vitrectomy only for genuine visual impairment",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign course; routine ophthalmological follow-up",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

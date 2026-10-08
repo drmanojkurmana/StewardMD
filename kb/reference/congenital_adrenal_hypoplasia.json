@@ -152,5 +152,314 @@
       "caption": "Overview comparison matrix for congenital adrenal hypoplasia (nr0b1/dax1)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Sperling Pediatric Endocrinology / Endocrine Society Clinical Practice Guidelines",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_adrenal_hypoplasia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum electrolytes, glucose, paired cortisol and ACTH",
+          "cells": [
+            {
+              "text": "Low cortisol and high ACTH in primary failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma renin and aldosterone",
+          "cells": [
+            {
+              "text": "Mineralocorticoid deficiency confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ACTH (Synacthen) stimulation test",
+          "cells": [
+            {
+              "text": "Impaired cortisol response"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "LH, FSH and sex steroids",
+          "cells": [
+            {
+              "text": "Low, in hypogonadotropic hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NR0B1 (DAX1) genetic testing",
+          "cells": [
+            {
+              "text": "Contiguous Xp21 gene deletions evaluated"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_adrenal_hypoplasia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Congenital adrenal hyperplasia",
+          "cells": [
+            {
+              "text": "Excluded by 17-hydroxyprogesterone and steroid profile"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adrenal hypoplasia from NR5A1 (SF1) defects",
+          "cells": [
+            {
+              "text": "Named look-alike; genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolated hypogonadotropic hypogonadism (Kallmann syndrome)",
+          "cells": [
+            {
+              "text": "Hypogonadotropic pattern without adrenal failure"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_adrenal_hypoplasia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Lifelong glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Hydrocortisone for cortisol deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mineralocorticoid replacement",
+          "cells": [
+            {
+              "text": "Fludrocortisone and salt supplementation for aldosterone deficiency"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Crisis treatment",
+          "cells": [
+            {
+              "text": "Parenteral hydrocortisone, intravenous fluids and glucose; correct hyperkalaemia and hypoglycaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sick-day dosing",
+          "cells": [
+            {
+              "text": "Emergency steroid card and injectable hydrocortisone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Puberty induction",
+          "cells": [
+            {
+              "text": "Testosterone replacement for hypogonadotropic hypogonadism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fertility counselling",
+          "cells": [
+            {
+              "text": "Impaired fertility often persists despite gonadotropin therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "X-linked NR0B1; test carrier mothers; contiguous Xp21 deletions"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_adrenal_hypoplasia-dx-mgmt",
+      "title": "Diagnosis and management of Congenital adrenal hypoplasia (NR0B1/DAX1)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital adrenal hypoplasia (NR0B1): primary adrenal failure in a boy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (salt-wasting crisis, family X-linked deaths, pubertal failure)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Emergency parenteral hydrocortisone, IV fluids and glucose for adrenal crisis",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cortisol and ACTH; renin and aldosterone; Synacthen test; LH, FSH; NR0B1 testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does NR0B1 testing confirm the defect with a low-cortisol, high-ACTH pattern?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider congenital adrenal hyperplasia or secondary adrenal insufficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lifelong hydrocortisone for cortisol deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Fludrocortisone and salt supplementation for aldosterone deficiency",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Testosterone replacement to induce and maintain puberty",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Sick-day dosing; genetic counselling and carrier testing of mothers",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "With early diagnosis and lifelong replacement outlook is good; crises are the main risk",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

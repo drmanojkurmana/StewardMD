@@ -148,5 +148,287 @@
       "caption": "Overview comparison matrix for conjunctivochalasis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "conjunctivochalasis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp assessment of conjunctival folds in primary gaze, downgaze and on blinking",
+          "cells": [
+            {
+              "text": "Redundant conjunctival folds"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluorescein clearance and tear meniscus assessment",
+          "cells": [
+            {
+              "text": "Impaired tear drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lissamine green staining of redundant folds",
+          "cells": [
+            {
+              "text": "Redundant folds stained"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lid position and punctal patency",
+          "cells": [
+            {
+              "text": "Other causes of epiphora distinguished"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conjunctivochalasis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Aqueous-deficient or evaporative dry eye disease",
+          "cells": [
+            {
+              "text": "Symptoms may be wrongly attributed; folds are the mechanical role"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Punctal or nasolacrimal duct obstruction",
+          "cells": [
+            {
+              "text": "Causes epiphora; pitfall of unnecessary lacrimal surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Involutional lower-lid malposition (ectropion, entropion)",
+          "cells": [
+            {
+              "text": "Lid position assessed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "conjunctivochalasis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Ocular lubricants and topical anti-inflammatory drops",
+          "cells": [
+            {
+              "text": "First-line conservative management"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coexisting dry eye and blepharitis",
+          "cells": [
+            {
+              "text": "Treated; they aggravate symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical correction",
+          "cells": [
+            {
+              "text": "Conjunctival resection with primary closure, cautery or amniotic-membrane grafting for medically refractory symptoms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Epiphora",
+          "cells": [
+            {
+              "text": "Folds obstructing the inferior punctum relieved; punctal patency confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Slit-lamp and anterior-segment photography for extent and progression"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "conjunctivochalasis-dx-mgmt",
+      "title": "Diagnosis and management of Conjunctivochalasis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected conjunctivochalasis: redundant conjunctival folds with watery eye",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (mass-like or unilateral fold, dellen, progressive epiphora)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Biopsy a mass-like fold to exclude conjunctival neoplasia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit-lamp of folds in gaze and blinking; fluorescein; Lissamine green; punctal check",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Do redundant folds explain the epiphora on slit-lamp examination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider dry eye, punctal obstruction or lid malposition",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Ocular lubricants and topical anti-inflammatory drops first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat coexisting dry eye and blepharitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Conjunctival resection or amniotic-membrane graft for refractory cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Relieve folds obstructing the inferior punctum; monitor with photography",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Benign and chronic; most are controlled with lubricants and conservative measures",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

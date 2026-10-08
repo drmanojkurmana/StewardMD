@@ -178,5 +178,508 @@
       "caption": "Overview comparison matrix for hypothermia and peripheral cold injuries."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Hypothermia",
+      "kind": "web",
+      "url": "https://www.merckmanuals.com/professional/injuries-poisoning/cold-injury/hypothermia"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "hypothermia_and_peripheral_cold_injuries-diagnostic",
+      "kind": "diagnostic",
+      "title": "Grading hypothermia and cold injury",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Threshold",
+        "Clinical picture"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypothermia definition",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Core temperature below 35 C",
+              "op": "<",
+              "value": 35
+            },
+            {
+              "text": "Measure with lower-oesophageal probe; rectal and bladder lag"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mild",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "35 to 32.2 C",
+              "range": [
+                32.2,
+                35
+              ]
+            },
+            {
+              "text": "Shivering, tachycardia then bradycardia, dysarthria, cold diuresis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Moderate",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "32.2 to 28 C",
+              "range": [
+                28,
+                32.2
+              ]
+            },
+            {
+              "text": "Falling consciousness, paradoxical undressing, arrhythmias, J waves"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Severe",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Below 28 C",
+              "op": "<",
+              "value": 28
+            },
+            {
+              "text": "{{hy:Coma, apnoea, highest risk of VF and asystole}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Profound (Swiss stage 4 to 5)",
+          "unit": "C",
+          "cells": [
+            {
+              "text": "Below 24 C",
+              "op": "<",
+              "value": 24
+            },
+            {
+              "text": "No detectable vital signs"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Haematocrit",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Rises about 2% per 1 C fall",
+              "op": "=",
+              "value": 2
+            },
+            {
+              "text": "Masks anaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial gas",
+          "cells": [
+            {
+              "text": "Read uncorrected for temperature"
+            },
+            {
+              "text": "pH 7.42 and PCO2 40 mmHg uncorrected is appropriate at any temperature"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Potassium during arrest",
+          "unit": "mmol/L",
+          "cells": [
+            {
+              "text": "Above 12 mmol/L",
+              "op": ">",
+              "value": 12
+            },
+            {
+              "text": "Cell lysis; usually fatal, supports stopping resuscitation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frostbite grade by cyanosis extent",
+          "cells": [
+            {
+              "text": "Grade 1 none; 2 distal phalanx; 3 to MCP joint; 4 proximal to MCP"
+            },
+            {
+              "text": "Haemorrhagic blisters mean deep injury and amputation risk"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Severity bands: Harrison 22e makes severe everything below 28 C; Merck (Wilderness Medical Society and Revised Swiss system) splits severe 24 to 28 C from profound below 24 C. Both kept."
+    },
+    {
+      "id": "hypothermia_and_peripheral_cold_injuries-ddx",
+      "kind": "ddx",
+      "title": "Secondary causes and look-alikes",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypoglycaemia",
+          "cells": [
+            {
+              "text": "Tachycardia out of keeping with temperature"
+            },
+            {
+              "text": "Bedside glucose"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hypothyroidism or myxoedema coma",
+          "cells": [
+            {
+              "text": "Fails to rewarm"
+            },
+            {
+              "text": "TSH and free T4"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Adrenal insufficiency",
+          "cells": [
+            {
+              "text": "Often occult, fails to rewarm"
+            },
+            {
+              "text": "Cortisol"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Sepsis",
+          "cells": [
+            {
+              "text": "Hypothermia here is a poor sign; rigors mimic shivering"
+            },
+            {
+              "text": "Cultures, lactate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Drug or alcohol intoxication",
+          "cells": [
+            {
+              "text": "Impaired thermoregulation and immobility"
+            },
+            {
+              "text": "Serum alcohol and toxicology"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Stroke, head or spinal injury",
+          "cells": [
+            {
+              "text": "Persistent hyperventilation or focal signs"
+            },
+            {
+              "text": "CT or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trench or immersion foot versus frostbite",
+          "cells": [
+            {
+              "text": "Wet cold above freezing; bullae look alike"
+            },
+            {
+              "text": "Exposure history"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "hypothermia_and_peripheral_cold_injuries-treatment",
+      "kind": "treatment",
+      "title": "Rewarming and cold-injury care",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Passive rewarming",
+          "cells": [
+            {
+              "text": "Mild, shivering intact"
+            },
+            {
+              "text": "Insulation, warm drinks; stable patients warm about 1 C per hour"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Active external rewarming",
+          "cells": [
+            {
+              "text": "Moderate (28 to 32 C)"
+            },
+            {
+              "text": "Forced warm air, heat to the thorax; avoid heating limbs first (afterdrop)"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Active internal rewarming",
+          "cells": [
+            {
+              "text": "Severe (below 28 C)"
+            },
+            {
+              "text": "Humidified oxygen 40 to 45 C, IV fluids 40 to 42 C, thoracic or peritoneal lavage"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "ECMO or bypass",
+          "cells": [
+            {
+              "text": "Unstable or in hypothermic arrest"
+            },
+            {
+              "text": "{{hy:Preferred method; continue until rewarmed}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Defibrillation and ACLS drugs in arrest",
+          "cells": [
+            {
+              "text": "VF in hypothermic arrest"
+            },
+            {
+              "text": "One shock at maximum; defer further shocks and drugs until above 30 C"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Gentle handling",
+          "cells": [
+            {
+              "text": "All moderate to severe"
+            },
+            {
+              "text": "Rough movement and deep lines can trigger VF"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Frostbite rapid thaw",
+          "cells": [
+            {
+              "text": "Frozen tissue, no risk of refreezing"
+            },
+            {
+              "text": "Warm water with analgesia; iloprost or thrombolysis for deep injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Delayed debridement",
+          "cells": [
+            {
+              "text": "Frostbite"
+            },
+            {
+              "text": "Wait for demarcation; give tetanus prophylaxis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "hypothermia_and_peripheral_cold_injuries-dx-mgmt",
+      "title": "Diagnosis and management of hypothermia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cold exposure or low reading; confirm core temperature",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Stop heat loss, handle gently, monitor ECG",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Cardiac arrest?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "CPR, one maximal shock if VF, transfer for ECMO",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Potassium above 12 mmol/L or lethal injury?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "outcome",
+          "text": "Consider stopping resuscitation",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "outcome",
+          "text": "Continue until rewarmed on ECMO",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "decision",
+          "text": "Core temperature 32 C or above?",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Passive rewarming; find secondary cause",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "decision",
+          "text": "Core temperature 28 C or above?",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Active external rewarming, warm fluids",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Active internal rewarming; ECMO if unstable",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Yes"
+        },
+        {
+          "from": "n8",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

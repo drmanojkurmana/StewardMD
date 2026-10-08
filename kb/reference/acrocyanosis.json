@@ -149,5 +149,352 @@
       "caption": "Overview comparison matrix for acrocyanosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Rook's Textbook of Dermatology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acrocyanosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulse oximetry and arterial blood gas",
+          "cells": [
+            {
+              "text": "Excludes central cyanosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nailfold capillaroscopy",
+          "cells": [
+            {
+              "text": "Differentiates from connective-tissue disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autoimmune serology (antinuclear and antiphospholipid antibodies)",
+          "cells": [
+            {
+              "text": "Connective-tissue or thrombophilic associations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulins and cold agglutinin titres",
+          "cells": [
+            {
+              "text": "Secondary causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count with blood viscosity and paraproteins",
+          "cells": [
+            {
+              "text": "Viscosity and paraprotein status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Doppler studies and palpation of peripheral pulses",
+          "cells": [
+            {
+              "text": "Patent large vessels"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Screening for occult malignancy or eating disorder",
+          "cells": [
+            {
+              "text": "Where clinically suggested"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acrocyanosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Raynaud phenomenon",
+          "cells": [
+            {
+              "text": "Episodic rather than continuous; triphasic colour change"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cryoglobulinaemia and cold agglutinin disease",
+          "cells": [
+            {
+              "text": "Cold-related secondary disease"
+            },
+            {
+              "text": "Cryoglobulin and cold agglutinin titres"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antiphospholipid syndrome",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Antiphospholipid antibodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Peripheral arterial occlusive disease",
+          "cells": [
+            {
+              "text": "Pulses normal in acrocyanosis"
+            },
+            {
+              "text": "Doppler studies and pulse palpation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acrocyanosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reassurance in primary disease",
+          "cells": [
+            {
+              "text": "Benign and does not threaten limb viability"
+            },
+            {
+              "text": "Primary acrocyanosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cold avoidance, warmth and smoking cessation",
+          "cells": [
+            {
+              "text": "Conservative measures"
+            },
+            {
+              "text": "Keeps extremities warm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Calcium-channel blockers",
+          "cells": [
+            {
+              "text": "Troublesome cases"
+            },
+            {
+              "text": "Benefit is limited"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Treat the underlying cause in secondary disease",
+          "cells": [
+            {
+              "text": "Connective-tissue disease, cryoglobulinaemia, antiphospholipid syndrome, malignancy, anorexia or drugs"
+            },
+            {
+              "text": "Secondary disease only"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exclude hypoxaemia first",
+          "cells": [
+            {
+              "text": "Central cyanosis must be excluded"
+            },
+            {
+              "text": "Before attributing to vasospasm"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acrocyanosis-dx-mgmt",
+      "title": "Diagnosis and management of acrocyanosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persistent painless blue-purple discolouration of hands and feet, cold and clammy",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Ulceration, pain, central cyanosis or single-digit involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent work-up for ischaemia, hypoxaemia or structural arterial disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Pulse oximetry, arterial blood gas, pulse palpation and Doppler",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pulses normal and central oxygen saturation normal?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Nailfold capillaroscopy and autoimmune serology",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review peripheral arterial occlusive disease and cardiopulmonary causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cold avoidance, warmth and smoking cessation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Calcium-channel blockers for troublesome cases; benefit is limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Treat secondary causes: connective tissue disease, cryoglobulinaemia, APS",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Primary disease is benign and does not threaten limb viability",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

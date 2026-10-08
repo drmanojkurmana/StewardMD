@@ -148,5 +148,334 @@
       "caption": "Overview comparison matrix for adhesive capsulitis (frozen shoulder)."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Green's Operative Hand Surgery / Campbell's Operative Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "adhesive_capsulitis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical examination for global loss of active and passive movement",
+          "cells": [
+            {
+              "text": "Especially external rotation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plain radiographs",
+          "cells": [
+            {
+              "text": "Excludes osteoarthritis, locked dislocation or calcific tendinitis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Assessment for diabetes mellitus and thyroid dysfunction",
+          "cells": [
+            {
+              "text": "Associated conditions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ultrasound",
+          "cells": [
+            {
+              "text": "Coexisting rotator cuff pathology"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "MRI or arthrography when uncertain",
+          "cells": [
+            {
+              "text": "Contracted capsule and reduced joint volume"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adhesive_capsulitis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Rotator cuff tear or tendinopathy",
+          "cells": [
+            {
+              "text": "needs-source"
+            },
+            {
+              "text": "Ultrasound"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Locked posterior shoulder dislocation",
+          "cells": [
+            {
+              "text": "Locked shoulder after trauma"
+            },
+            {
+              "text": "Radiographs with an axillary view"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "adhesive_capsulitis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Analgesia and anti-inflammatory measures",
+          "cells": [
+            {
+              "text": "Pain control in the painful freezing phase"
+            },
+            {
+              "text": "Pain relief"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intra-articular glenohumeral corticosteroid injection",
+          "cells": [
+            {
+              "text": "Reduces pain and capsular inflammation"
+            },
+            {
+              "text": "Early in the disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Structured physiotherapy with graded stretching",
+          "cells": [
+            {
+              "text": "Restores range of motion"
+            },
+            {
+              "text": "Intensified as pain settles"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Reassurance and activity modification",
+          "cells": [
+            {
+              "text": "Self-limiting but protracted course"
+            },
+            {
+              "text": "Reassurance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Optimisation of glycaemic control; treatment of thyroid dysfunction",
+          "cells": [
+            {
+              "text": "Influences severity and recovery"
+            },
+            {
+              "text": "Diabetes and thyroid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Capsular hydrodilatation, manipulation or arthroscopic release",
+          "cells": [
+            {
+              "text": "Refractory stiffness"
+            },
+            {
+              "text": "Procedures for stiffness"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Shoulder specialist referral",
+          "cells": [
+            {
+              "text": "Failure to improve with conservative care"
+            },
+            {
+              "text": "Specialist review"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "adhesive_capsulitis-dx-mgmt",
+      "title": "Diagnosis and management of Adhesive capsulitis (frozen shoulder)",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful progressive global shoulder restriction, especially external rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Locked shoulder after trauma or night pain with systemic features?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent imaging with axillary view for posterior dislocation or malignancy",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Examination; radiographs with axillary view; HbA1c and thyroid tests",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Osteoarthritis, dislocation and calcific tendinitis excluded on radiographs?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Adhesive capsulitis confirmed; start NSAIDs and structured physiotherapy",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review cuff tear, impingement, osteoarthritis and calcific tendinitis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Intra-articular corticosteroid injection in the painful phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Graded stretching and range-of-motion physiotherapy as pain settles",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Optimise glycaemic control; treat thyroid dysfunction",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Self-limiting but slow, one to three years; diabetes often more protracted",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

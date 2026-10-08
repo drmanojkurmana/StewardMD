@@ -177,5 +177,547 @@
       "caption": "Overview comparison matrix for disorders of the female reproductive system."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "AAFP, Amenorrhea: Diagnosis and Management, 2019",
+      "url": "https://www.aafp.org/pubs/afp/issues/2019/0701/p39.html",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "disorders_of_the_female_reproductive-diagnostic",
+      "kind": "diagnostic",
+      "title": "Key definitions and tests in female reproductive disorders",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Value or finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Primary amenorrhoea",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "No menses by age 15, or none 3 years after thelarche",
+              "op": ">=",
+              "value": 15
+            },
+            {
+              "text": "No pubertal development by 13 also warrants evaluation"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Secondary amenorrhoea",
+          "unit": "months",
+          "cells": [
+            {
+              "text": "Loss of regular menses for 3, or irregular menses for 6",
+              "op": ">=",
+              "value": 3
+            },
+            {
+              "text": "{{hy:Exclude pregnancy first}}"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Normal cycle length",
+          "unit": "days",
+          "cells": [
+            {
+              "text": "About 28 (25 to 35)",
+              "range": [
+                25,
+                35
+              ]
+            },
+            {
+              "text": "Luteal phase fixed at 12 to 14 days"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mid-luteal progesterone",
+          "unit": "ng/mL",
+          "cells": [
+            {
+              "text": ">3 about 7 days after ovulation",
+              "op": ">",
+              "value": 3
+            },
+            {
+              "text": "Confirms ovulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "FSH in ovarian insufficiency",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": ">15, twice at least 1 month apart, age under 40",
+              "op": ">",
+              "value": 15
+            },
+            {
+              "text": "Low oestradiol and low AMH; check karyotype and FMR1"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "FSH and LH in hypothalamic amenorrhoea",
+          "unit": "IU/L",
+          "cells": [
+            {
+              "text": "Often <10 (may be normal)",
+              "op": "<",
+              "value": 10
+            },
+            {
+              "text": "Low oestradiol, high AMH; check prolactin and MRI if indicated"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Prolactin",
+          "cells": [
+            {
+              "text": "Raised"
+            },
+            {
+              "text": "Adenoma, drugs or hypothyroidism; pituitary MRI if persistent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Testosterone, DHEAS, 8 am 17-OHP",
+          "cells": [
+            {
+              "text": "Raised in hyperandrogenism"
+            },
+            {
+              "text": "PCOS, nonclassic CAH, tumour or Cushing syndrome"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Progestin challenge",
+          "unit": "mg",
+          "cells": [
+            {
+              "text": "Medroxyprogesterone 10 mg daily for 10 days"
+            },
+            {
+              "text": "Withdrawal bleed implies oestrogen exposure; predictive value inconsistent"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Precocious puberty in girls",
+          "unit": "years",
+          "cells": [
+            {
+              "text": "Secondary sexual development before age 8",
+              "op": "<",
+              "value": 8
+            },
+            {
+              "text": "Central form idiopathic in about 85%; exclude CNS cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Harrison uses age 13 without secondary sexual characteristics as the trigger for evaluating delayed puberty; AAFP 2019 defines primary amenorrhoea as no menses by 15. Laboratory cutoffs are approximate and depend on local reference ranges."
+    },
+    {
+      "id": "disorders_of_the_female_reproductive-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of amenorrhoea",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "{{hy:Most common cause of amenorrhoea}}"
+            },
+            {
+              "text": "Beta-hCG"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Polycystic ovary syndrome",
+          "cells": [
+            {
+              "text": "Oligo-anovulation with hyperandrogenism; high AMH"
+            },
+            {
+              "text": "Androgens, pelvic ultrasound"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Primary ovarian insufficiency or Turner syndrome",
+          "cells": [
+            {
+              "text": "High FSH, low oestradiol; short stature in Turner"
+            },
+            {
+              "text": "Repeat FSH, karyotype"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Functional hypothalamic amenorrhoea",
+          "cells": [
+            {
+              "text": "Undernutrition, exercise, stress; low or normal gonadotropins"
+            },
+            {
+              "text": "FSH, LH, oestradiol and history"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Hyperprolactinaemia",
+          "cells": [
+            {
+              "text": "Galactorrhoea, headache, visual loss; drug history"
+            },
+            {
+              "text": "Prolactin, pituitary MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mullerian agenesis or androgen insensitivity",
+          "cells": [
+            {
+              "text": "Primary amenorrhoea with absent or abnormal uterus"
+            },
+            {
+              "text": "Pelvic ultrasound, karyotype"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Outflow obstruction",
+          "cells": [
+            {
+              "text": "Cyclic pelvic pain with primary amenorrhoea"
+            },
+            {
+              "text": "Examination, pelvic ultrasound or MRI"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Asherman syndrome",
+          "cells": [
+            {
+              "text": "Intrauterine adhesions, including from genital tuberculosis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Sheehan syndrome or lymphocytic hypophysitis",
+          "cells": [
+            {
+              "text": "Postpartum amenorrhoea"
+            },
+            {
+              "text": "Pituitary hormone testing and MRI"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "disorders_of_the_female_reproductive-treatment",
+      "kind": "treatment",
+      "title": "Treatment by cause",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Correct energy deficit, nutrition, stress",
+          "cells": [
+            {
+              "text": "Functional hypothalamic amenorrhoea, first line"
+            },
+            {
+              "text": "Check BMD after 6 months of amenorrhoea; avoid COC only for bone; no bisphosphonates"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Transdermal oestradiol 100 mcg with cyclic medroxyprogesterone 2.5 mg for 10 days per month",
+          "cells": [
+            {
+              "text": "FHA not improved after 6 to 12 months"
+            },
+            {
+              "text": "Bone age 15 or older"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Oestradiol 100 mcg patch or conjugated oestrogens 0.625 mg daily, plus micronized progesterone 200 mg for 12 days per month",
+          "cells": [
+            {
+              "text": "{{hy:Primary ovarian insufficiency}}"
+            },
+            {
+              "text": "Continue to about age 50 to 51; add calcium 1,200 mg and vitamin D 1,000 IU"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Dopamine agonist",
+          "cells": [
+            {
+              "text": "Hyperprolactinaemia"
+            },
+            {
+              "text": "Resection for selected prolactinomas"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Combined hormonal contraceptive",
+          "cells": [
+            {
+              "text": "PCOS menstrual irregularity, hirsutism, acne"
+            },
+            {
+              "text": "Weight loss and exercise; metformin for cycles and diabetes risk"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Letrozole",
+          "cells": [
+            {
+              "text": "Anovulatory infertility in PCOS, first line"
+            },
+            {
+              "text": "Preferred over clomifene"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Outflow tract obstruction"
+            },
+            {
+              "text": "Do not delay; retrograde flow causes endometriosis"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "Hormone therapy in ovarian insufficiency may not reliably prevent ovulation, so add contraception if pregnancy is not wanted."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "disorders_of_the_female_reproductive-dx-mgmt",
+      "title": "Diagnosis and management of amenorrhoea",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Primary or secondary amenorrhoea",
+          "cite": "c2"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Pregnancy test positive?",
+          "cite": "c2"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Pregnancy: obstetric care",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "FSH, LH, prolactin, TSH; androgens if hyperandrogenic",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "FSH raised on two tests?",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Ovarian insufficiency: karyotype, FMR1, oestrogen-progestin to age 50",
+          "cite": "c2"
+        },
+        {
+          "id": "n7",
+          "type": "decision",
+          "text": "Prolactin raised?",
+          "cite": "c2"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Pituitary MRI; dopamine agonist",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Hyperandrogenism present?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "PCOS, CAH or tumour workup; COC, lifestyle, letrozole for fertility",
+          "cite": "c2"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Low gonadotropins: hypothalamic cause; restore energy balance",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Follow-up with BMD where oestrogen deficient",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n8",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n12",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

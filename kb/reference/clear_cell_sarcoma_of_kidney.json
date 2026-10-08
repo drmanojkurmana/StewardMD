@@ -158,5 +158,312 @@
       "caption": "Overview comparison matrix for clear cell sarcoma of the kidney."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Paediatric oncology references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "clear_cell_sarcoma_of_kidney-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Abdominal ultrasound with contrast-enhanced CT or MRI",
+          "cells": [
+            {
+              "text": "Characterises and stages the renal mass"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histopathology with immunohistochemistry",
+          "cells": [
+            {
+              "text": "BCOR, cyclin D1, WT1 and INI1/SMARCB1 panel"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "BCOR internal tandem duplication and YWHAE-NUTM2 testing",
+          "cells": [
+            {
+              "text": "Recurrent molecular hallmark"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Skeletal imaging and bone scintigraphy",
+          "cells": [
+            {
+              "text": "Bone metastases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Brain MRI and chest CT",
+          "cells": [
+            {
+              "text": "CNS relapse and pulmonary metastases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clear_cell_sarcoma_of_kidney-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Wilms tumour (nephroblastoma)",
+          "cells": [
+            {
+              "text": "WT1 positive, whereas CCSK is WT1 negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignant rhabdoid tumour of the kidney",
+          "cells": [
+            {
+              "text": "SMARCB1/INI1 loss; the critical distinction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital mesoblastic nephroma",
+          "cells": [
+            {
+              "text": "Cellular type with ETV6-NTRK3"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "clear_cell_sarcoma_of_kidney-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Radical nephrectomy",
+          "cells": [
+            {
+              "text": "Surgical mainstay, usually upfront with regional lymph node sampling"
+            },
+            {
+              "text": "Upfront surgery"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anthracycline-based adjuvant chemotherapy",
+          "cells": [
+            {
+              "text": "Cooperative group renal tumour protocol"
+            },
+            {
+              "text": "Treats essentially all stages"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary metastasectomy",
+          "cells": [
+            {
+              "text": "Metastatic or relapsed disease, case by case"
+            },
+            {
+              "text": "Case by case"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography at baseline and during surveillance",
+          "cells": [
+            {
+              "text": "Cumulative anthracycline exposure"
+            },
+            {
+              "text": "Cardiac safety"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Relapse protocols or clinical trials",
+          "cells": [
+            {
+              "text": "Relapsed or refractory disease"
+            },
+            {
+              "text": "Trial enrolment"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "clear_cell_sarcoma_of_kidney-dx-mgmt",
+      "title": "Diagnosis and management of Clear Cell Sarcoma of the Kidney",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected clear cell sarcoma of kidney: abdominal mass in a young child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (bone pain, neurological signs, renal vein extension)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: urgent paediatric oncology review for metastasis or rupture",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cross-sectional imaging, bone scintigraphy, brain MRI and chest CT",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "BCOR tandem duplication or YWHAE-NUTM2 fusion with INI1 retained?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Radical nephrectomy with regional lymph node sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check Wilms tumour, rhabdoid tumour and mesoblastic nephroma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Anthracycline-based adjuvant chemotherapy within a cooperative group protocol",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Baseline and surveillance echocardiography for anthracycline exposure",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Pulmonary metastasectomy case by case within multidisciplinary discussion",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Relapse protocols or trial enrolment for relapsed or refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

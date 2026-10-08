@@ -156,5 +156,523 @@
       "caption": "Overview comparison matrix for diphtheria."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "CDC, Clinical Guidance for Diphtheria",
+      "url": "https://www.cdc.gov/diphtheria/hcp/clinical-guidance/index.html",
+      "kind": "web"
+    },
+    {
+      "id": "c3",
+      "label": "Merck Manual Professional, Diphtheria",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/gram-positive-bacilli/diphtheria",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "diphtheria-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnosis of diphtheria",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Clinical triad",
+          "cells": [
+            {
+              "text": "Sore throat, adherent grey pseudomembrane, low-grade fever"
+            },
+            {
+              "text": "{{hy:Clinical diagnosis; give antitoxin without waiting for culture}}"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pseudomembrane character",
+          "cells": [
+            {
+              "text": "Tightly adherent, bleeds when dislodged"
+            },
+            {
+              "text": "Streptococcal exudate is not adherent"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bull neck",
+          "cells": [
+            {
+              "text": "Submandibular and paratracheal oedema"
+            },
+            {
+              "text": "Severe disease, poor prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture",
+          "cells": [
+            {
+              "text": "Pseudomembrane or submembranous swab on tellurite selective medium (Loeffler or Tinsdale) plus blood agar"
+            },
+            {
+              "text": "Tell the laboratory diphtheria is suspected"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Gram stain",
+          "cells": [
+            {
+              "text": "Gram-positive club-shaped bacilli with beaded metachromatic staining"
+            },
+            {
+              "text": "Supportive only"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Toxigenicity testing",
+          "cells": [
+            {
+              "text": "Modified Elek test; PCR for toxin gene"
+            },
+            {
+              "text": "Separates toxigenic from nontoxigenic strains; reportable"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Cardiac assessment",
+          "cells": [
+            {
+              "text": "ECG and cardiac work-up"
+            },
+            {
+              "text": "Myocarditis from 1 week onward"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Laryngoscopy",
+          "cells": [
+            {
+              "text": "Hoarseness"
+            },
+            {
+              "text": "Laryngeal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cutaneous lesions",
+          "cells": [
+            {
+              "text": "Non-specific ulcers"
+            },
+            {
+              "text": "Need laboratory confirmation; culture nasopharynx too"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diphtheria-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of diphtheria",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Group A streptococcal pharyngitis",
+          "cells": [
+            {
+              "text": "{{hy:Exudate not tightly adherent}}"
+            },
+            {
+              "text": "Throat culture or rapid antigen test"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infectious mononucleosis (EBV)",
+          "cells": [
+            {
+              "text": "Exudative tonsillitis with lymphadenopathy"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Viral pharyngitis",
+          "cells": [
+            {
+              "text": "Rhinovirus, influenza, adenovirus; no membrane"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Candida pharyngitis",
+          "cells": [
+            {
+              "text": "White plaques, thrush"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lemierre syndrome (Fusobacterium)",
+          "cells": [
+            {
+              "text": "Pharyngitis with septic thrombophlebitis"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gonococcal pharyngitis or acute HIV",
+          "cells": [
+            {
+              "text": "Sexual exposure"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C. ulcerans or C. pseudotuberculosis",
+          "cells": [
+            {
+              "text": "Same toxin, diphtheria-like illness"
+            },
+            {
+              "text": "Culture and toxin testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "C. pseudodiphtheriticum",
+          "cells": [
+            {
+              "text": "Nontoxigenic commensal"
+            },
+            {
+              "text": "Biochemical differentiation in the laboratory"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "diphtheria-treatment",
+      "kind": "treatment",
+      "title": "Treatment of diphtheria",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Dose and detail"
+      ],
+      "rows": [
+        {
+          "parameter": "Diphtheria antitoxin (equine)",
+          "cells": [
+            {
+              "text": "{{hy:Respiratory diphtheria, on clinical suspicion}}"
+            },
+            {
+              "text": "20,000 to 100,000 units IM or IV by site, severity and duration; skin or conjunctival test first; from CDC in the US"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Procaine penicillin G IM",
+          "cells": [
+            {
+              "text": "Eradicate organism"
+            },
+            {
+              "text": "300,000 units every 12 h if <=10 kg, 600,000 units every 12 h if >10 kg; oral penicillin 250 mg four times daily step-down; 14 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Erythromycin",
+          "cells": [
+            {
+              "text": "Alternative first-line"
+            },
+            {
+              "text": "500 mg (child 10 mg/kg) every 6 h, max 2 g/day; 14 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Azithromycin",
+          "cells": [
+            {
+              "text": "Alternative"
+            },
+            {
+              "text": "Adult 500 mg daily; child 10 to 12 mg/kg daily, max 500 mg"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vancomycin or linezolid",
+          "cells": [
+            {
+              "text": "Resistant strains"
+            },
+            {
+              "text": "Penicillin resistance is common in several regions"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Airway support",
+          "cells": [
+            {
+              "text": "Obstruction or bull neck"
+            },
+            {
+              "text": "Intubation or tracheostomy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Isolation",
+          "cells": [
+            {
+              "text": "Until antibiotics finished and cultures negative"
+            },
+            {
+              "text": "Two negative cultures 24 h apart after therapy"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Close contacts",
+          "cells": [
+            {
+              "text": "Quarantine 7 to 10 days"
+            },
+            {
+              "text": "Cultures; penicillin G IM single dose 600,000 units (<6 y) or 1.2 million units (>=6 y), or erythromycin 500 mg four times daily 7 to 10 days"
+            }
+          ],
+          "cite": "c3"
+        },
+        {
+          "parameter": "Vaccination",
+          "cells": [
+            {
+              "text": "Patient in convalescence; contacts last dosed over 5 years ago"
+            },
+            {
+              "text": "Infection may not confer immunity"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "CDC recommends only erythromycin or penicillin; Merck also lists azithromycin. Glucocorticoids do not prevent myocarditis or neuropathy."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "diphtheria-dx-mgmt",
+      "title": "Diagnosis and management of diphtheria",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Severe pharyngitis with adherent pseudomembrane or bull neck",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "action",
+          "text": "Swab under membrane on selective media; alert laboratory; droplet isolation",
+          "cite": "c3"
+        },
+        {
+          "id": "n3",
+          "type": "decision",
+          "text": "Clinically suspected respiratory diphtheria?",
+          "cite": "c2"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Give antitoxin now after sensitivity test",
+          "cite": "c3"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Penicillin or erythromycin for 14 days",
+          "cite": "c3"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Airway obstruction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Intubation or tracheostomy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "ECG and neurological monitoring for weeks",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Two negative cultures 24 h apart after therapy?",
+          "cite": "c2"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Further erythromycin course",
+          "cite": "c3"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "End isolation, vaccinate, trace and treat contacts",
+          "cite": "c2"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Cutaneous or other: culture and treat as indicated",
+          "cite": "c2"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Next"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n12",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "No"
+        },
+        {
+          "from": "n10",
+          "to": "n9",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

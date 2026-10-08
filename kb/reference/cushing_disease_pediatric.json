@@ -151,5 +151,314 @@
       "caption": "Overview comparison matrix for paediatric cushing disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Williams Textbook of Endocrinology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cushing_disease_pediatric-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Growth curve and height velocity",
+          "cells": [
+            {
+              "text": "Growth arrest with weight gain"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Late-night cortisol or midnight serum cortisol",
+          "cells": [
+            {
+              "text": "Loss of diurnal rhythm"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Plasma ACTH and low-dose dexamethasone suppression",
+          "cells": [
+            {
+              "text": "ACTH-dependent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pituitary MRI",
+          "cells": [
+            {
+              "text": "Microadenoma may be small or unseen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Inferior petrosal sinus sampling with CRH",
+          "cells": [
+            {
+              "text": "Pituitary source and lateralisation"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_disease_pediatric-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Exogenous glucocorticoid exposure",
+          "cells": [
+            {
+              "text": "Commonest cause in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Simple exogenous obesity",
+          "cells": [
+            {
+              "text": "Growth velocity usually normal or increased"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carney complex or McCune-Albright syndrome",
+          "cells": [
+            {
+              "text": "Named syndromic look-alikes"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cushing_disease_pediatric-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Transsphenoidal selective adenomectomy",
+          "cells": [
+            {
+              "text": "First-line by an experienced pituitary neurosurgeon"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Radiotherapy or steroidogenesis inhibitors",
+          "cells": [
+            {
+              "text": "Second-line or bridging therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative glucocorticoid replacement",
+          "cells": [
+            {
+              "text": "Expected secondary adrenal insufficiency; gradual withdrawal"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth support",
+          "cells": [
+            {
+              "text": "Growth hormone and pubertal induction where needed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication care",
+          "cells": [
+            {
+              "text": "Hypertension, glucose intolerance and reduced bone density"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Long-term surveillance",
+          "cells": [
+            {
+              "text": "Recurrent hypercortisolism"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paediatric endocrine team",
+          "cells": [
+            {
+              "text": "Pituitary multidisciplinary team"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cushing_disease_pediatric-dx-mgmt",
+      "title": "Diagnosis and management of Paediatric Cushing disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected paediatric Cushing disease: growth arrest with weight gain in a child",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag? (severe hypertension, hypokalaemia, vertebral fracture, psychosis)",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent control of hypertension or hypokalaemia; fracture and mood review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Growth curve; late-night cortisol; ACTH; dexamethasone test; MRI; petrosal sampling",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does ACTH-dependent cortisol excess localise to the pituitary?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider exogenous steroids, simple obesity or ACTH-independent causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Transsphenoidal selective adenomectomy first-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Radiotherapy or metyrapone or ketoconazole as second-line",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Glucocorticoid replacement after surgery with gradual withdrawal",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Growth monitoring with growth hormone and pubertal induction if needed",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most children achieve remission; catch-up growth is often incomplete",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

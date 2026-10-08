@@ -149,5 +149,298 @@
       "caption": "Overview comparison matrix for cataract."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Parsons' Diseases of the Eye / Kanski Clinical Ophthalmology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cataract-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Visual acuity and refraction",
+          "cells": [
+            {
+              "text": "Nuclear cataract can cause a temporary myopic shift"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Slit-lamp examination",
+          "cells": [
+            {
+              "text": "Grades and localises the opacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Red reflex",
+          "cells": [
+            {
+              "text": "Reduced, or dark opacities against the glow on ophthalmoscopy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Dilated fundus examination",
+          "cells": [
+            {
+              "text": "Excludes co-existing macular or retinal disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Biometry (keratometry and axial length)",
+          "cells": [
+            {
+              "text": "Calculates intraocular lens power before surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "cataract-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Phacoemulsification with intraocular lens",
+          "cells": [
+            {
+              "text": "Definitive treatment when the cataract limits daily function"
+            },
+            {
+              "text": "Offered on functional impairment, not lens appearance alone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Interim optical correction",
+          "cells": [
+            {
+              "text": "Updated spectacles and improved lighting"
+            },
+            {
+              "text": "While surgery is deferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Preoperative biometry",
+          "cells": [
+            {
+              "text": "Keratometry and axial length measurement"
+            },
+            {
+              "text": "Calculates intraocular lens power"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-existing disease",
+          "cells": [
+            {
+              "text": "Assess macular, retinal or optic nerve disease"
+            },
+            {
+              "text": "May limit the visual outcome"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying causes",
+          "cells": [
+            {
+              "text": "Control diabetes, chronic steroid use and uveitis"
+            },
+            {
+              "text": "Underlying causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Postoperative care",
+          "cells": [
+            {
+              "text": "Topical antibiotic and anti-inflammatory drops"
+            },
+            {
+              "text": "Monitor for endophthalmitis and posterior capsule opacification"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ophthalmology referral",
+          "cells": [
+            {
+              "text": "Surgical assessment by ophthalmology"
+            },
+            {
+              "text": "Referral for surgery"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "cataract-dx-mgmt",
+      "title": "Diagnosis and management of Cataract",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected cataract: gradual painless blurring, glare and haloes around lights",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (childhood leukocoria, sudden loss, pain or redness, mature lens)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: exclude retinoblastoma; manage glaucoma or lens-induced inflammation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Visual acuity, slit-lamp grading, red reflex and dilated fundus examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Opacity graded and localised on slit-lamp examination, with other disease excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Phacoemulsification with intraocular lens when function is limited",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check macular, retinal and optic nerve disease and glaucoma",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Interim spectacles and better lighting while surgery is deferred",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Control diabetes, chronic steroid use and uveitis as underlying causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Keratometry and axial length for intraocular lens power",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Good vision after surgery if retina and optic nerve are healthy",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

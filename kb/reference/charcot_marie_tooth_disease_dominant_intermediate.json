@@ -153,5 +153,336 @@
       "caption": "Overview comparison matrix for dominant intermediate charcot-marie-tooth disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Neurogenetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "charcot_marie_tooth_disease_dominant_intermediate-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Nerve conduction studies and EMG",
+          "cells": [
+            {
+              "text": "Intermediate motor conduction velocities with mixed features"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Broad hereditary neuropathy gene panel or next-generation sequencing",
+          "cells": [
+            {
+              "text": "Covers DNM2, YARS, MPZ, INF2 and GNB4"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and renal function",
+          "cells": [
+            {
+              "text": "Proteinuria and glomerulosclerosis when INF2 is considered"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and ophthalmology review",
+          "cells": [
+            {
+              "text": "Neutropenia and cataract when DNM2 is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "GJB1 testing",
+          "cells": [
+            {
+              "text": "Excludes X-linked CMT, guided by the pedigree"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_dominant_intermediate-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "X-linked CMT (GJB1)",
+          "cells": [
+            {
+              "text": "Commonly intermediate velocities; no male-to-male transmission"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Demyelinating CMT1",
+          "cells": [
+            {
+              "text": "Slower end of the conduction spectrum"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Axonal CMT2",
+          "cells": [
+            {
+              "text": "Faster end of the conduction spectrum"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "charcot_marie_tooth_disease_dominant_intermediate-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Physiotherapy and occupational therapy"
+            },
+            {
+              "text": "No disease-modifying treatment"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Orthoses and footwear",
+          "cells": [
+            {
+              "text": "Ankle-foot orthoses, podiatry, footwear and walking aids"
+            },
+            {
+              "text": "Foot drop and pes cavus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Foot surgery and pain control",
+          "cells": [
+            {
+              "text": "Orthopaedic foot surgery for fixed deformity; treat neuropathic pain; avoid vincristine"
+            },
+            {
+              "text": "Disabling deformity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal screening in INF2",
+          "cells": [
+            {
+              "text": "Urinalysis and renal function; nephrology referral for proteinuria"
+            },
+            {
+              "text": "INF2-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring in DNM2",
+          "cells": [
+            {
+              "text": "Full blood count and ophthalmology review for neutropenia, cataract and ophthalmoplegia"
+            },
+            {
+              "text": "DNM2-related disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Autosomal dominant inheritance by gene; pedigree and relative assessment"
+            },
+            {
+              "text": "Gene-specific counselling"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multidisciplinary care",
+          "cells": [
+            {
+              "text": "Neuromuscular, nephrology, ophthalmology and rehabilitation care"
+            },
+            {
+              "text": "As the subtype dictates"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "charcot_marie_tooth_disease_dominant_intermediate-dx-mgmt",
+      "title": "Diagnosis and management of Dominant intermediate Charcot-Marie-Tooth disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected dominant intermediate CMT: intermediate conduction velocities, mixed features",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (proteinuria, no male-to-male transmission, subacute decline)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Escalate: nephrology for proteinuria; inflammatory neuropathy review if subacute",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Nerve conduction studies, gene panel, urinalysis, full blood count and pedigree",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Intermediate velocities with a DI-CMT gene variant and X-linked CMT excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Physiotherapy and occupational therapy; no disease-modifying treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Re-check X-linked CMT (GJB1), CMT1 and CMT2 subtypes, and CIDP",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ankle-foot orthoses, podiatry and footwear for foot drop",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Orthopaedic foot surgery for fixed deformity; avoid vincristine",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Renal care for INF2 disease; haematology and eye review for DNM2 disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling by gene and pedigree; outcome depends on the causative gene",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -150,5 +150,336 @@
       "caption": "Overview comparison matrix for autosomal dominant tubulointerstitial kidney disease."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Standard nephrology and clinical genetics references",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "autosomal_dominant_tubulointerstitial_kidney_disease-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Serum urate",
+          "cells": [
+            {
+              "text": "Early-onset or disproportionate hyperuricaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urinalysis and urine protein-to-creatinine ratio",
+          "cells": [
+            {
+              "text": "Bland sediment and low-grade proteinuria"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal ultrasound",
+          "cells": [
+            {
+              "text": "Kidney size and medullary cysts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Multigenerational family history and eGFR trajectory",
+          "cells": [
+            {
+              "text": "Pattern across generations"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Targeted genetic testing (UMOD, MUC1, HNF1B, REN)",
+          "cells": [
+            {
+              "text": "Genetic subtype; specialised MUC1 assays where standard sequencing is negative"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Kidney biopsy",
+          "cells": [
+            {
+              "text": "Nonspecific tubulointerstitial fibrosis, in selected cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_tubulointerstitial_kidney_disease-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "HNF1B-associated kidney disease (RCAD)",
+          "cells": [
+            {
+              "text": "Separated by HNF1B genetic testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Autosomal dominant polycystic kidney disease",
+          "cells": [
+            {
+              "text": "Medullary cysts rather than polycystic kidneys on ultrasound"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "autosomal_dominant_tubulointerstitial_kidney_disease-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Progressive CKD management",
+          "cells": [
+            {
+              "text": "Blood pressure control and cardiovascular risk reduction"
+            },
+            {
+              "text": "No disease-specific drug therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Urate-lowering therapy in UMOD subtype",
+          "cells": [
+            {
+              "text": "Allopurinol or febuxostat for early-onset hyperuricaemia and gout"
+            },
+            {
+              "text": "UMOD subtype"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Avoid volume depletion and RAS blockade in REN disease",
+          "cells": [
+            {
+              "text": "Volume depletion and renin-angiotensin blockade avoided"
+            },
+            {
+              "text": "Can precipitate hyperkalaemia, anaemia and acute kidney injury"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Complication management",
+          "cells": [
+            {
+              "text": "Anaemia and mineral-and-bone disorder"
+            },
+            {
+              "text": "Declining filtration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal replacement planning",
+          "cells": [
+            {
+              "text": "Transplantation, which is suitable because the disease does not recur in the graft"
+            },
+            {
+              "text": "Plan in good time"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Family screening; specialised MUC1 assays where standard sequencing is negative"
+            },
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Coordinated care",
+          "cells": [
+            {
+              "text": "Nephrology and clinical genetics"
+            },
+            {
+              "text": "Long-term care"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "autosomal_dominant_tubulointerstitial_kidney_disease-dx-mgmt",
+      "title": "Diagnosis and management of Autosomal dominant tubulointerstitial kidney disease",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Progressive CKD with bland urine and early or disproportionate hyperuricaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Fast decline or anaemia out of proportion to CKD?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Review for REN subtype; avoid volume depletion and RAS blockade",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Urate, urinalysis, renal ultrasound, family history, UMOD, MUC1, HNF1B, REN testing",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Gene variant confirmed in a family with bland sediment?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Manage as progressive CKD; treat hyperuricaemia in UMOD disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review differentials (see table) and repeat testing with MUC1 assay",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Urate-lowering therapy for UMOD subtype",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Plan renal replacement; transplantation suits this disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Blood pressure and cardiovascular risk control",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Genetic counselling and family screening for autosomal dominant inheritance",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

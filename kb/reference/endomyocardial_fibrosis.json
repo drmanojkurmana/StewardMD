@@ -146,5 +146,314 @@
       "caption": "Overview comparison matrix for endomyocardial fibrosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Braunwald's Heart Disease / restrictive cardiomyopathy literature",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "endomyocardial_fibrosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Apical obliteration, endocardial thickening and atrioventricular valve involvement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac MRI",
+          "cells": [
+            {
+              "text": "Fibrosis and thrombus with late enhancement"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and eosinophil assessment",
+          "cells": [
+            {
+              "text": "Identifies a hypereosinophilic driver"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG",
+          "cells": [
+            {
+              "text": "Conduction and repolarisation abnormalities"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac catheterisation",
+          "cells": [
+            {
+              "text": "Restrictive filling; endomyocardial biopsy when needed"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endomyocardial_fibrosis-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Loffler endocarditis",
+          "cells": [
+            {
+              "text": "Earlier active eosinophilic phase of the same spectrum; treated with corticosteroids"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Constrictive pericarditis",
+          "cells": [
+            {
+              "text": "Surgically curable, so it must not be confused with this condition"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "endomyocardial_fibrosis-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Corticosteroids in the active phase",
+          "cells": [
+            {
+              "text": "Treats hypereosinophilia in early Loffler phase to limit progression to fibrosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cytoreductive or targeted therapy",
+          "cells": [
+            {
+              "text": "Where indicated, in the active eosinophilic phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Diuretics and arrhythmia control",
+          "cells": [
+            {
+              "text": "Congestion and atrial arrhythmia from restrictive heart failure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Anticoagulation",
+          "cells": [
+            {
+              "text": "Mural thrombus and thromboembolic risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgical endocardial decortication with valve repair",
+          "cells": [
+            {
+              "text": "Selected advanced cases to relieve restriction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Device therapy",
+          "cells": [
+            {
+              "text": "Conduction disease and arrhythmia where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial echocardiography and eosinophil counts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and transplantation",
+          "cells": [
+            {
+              "text": "Cardiology and cardiothoracic surgery; transplant evaluation for advanced or refractory disease"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "endomyocardial_fibrosis-dx-mgmt",
+      "title": "Diagnosis and management of Endomyocardial fibrosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Restrictive heart failure, ascites or raised venous pressure with apical fibrosis",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (intractable failure, systemic embolism, severe AV regurgitation)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Refer urgently to cardiology and cardiothoracic surgery",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Echocardiography for apical obliteration; cardiac MRI for fibrosis and thrombus",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Active eosinophilic (Loffler) phase with hypereosinophilia?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider constrictive pericarditis and other infiltrative cardiomyopathies",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Corticosteroids and cytoreductive therapy in the active eosinophilic phase",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Diuretics for congestion and control of atrial arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Anticoagulation for mural thrombus",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Consider endocardial decortication with valve repair in selected advanced cases",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Serial echocardiography; transplant evaluation for refractory disease",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

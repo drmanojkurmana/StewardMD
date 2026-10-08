@@ -154,5 +154,334 @@
       "caption": "Overview comparison matrix for desmoid-type fibromatosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "WHO Classification of Tumours: Soft Tissue and Bone / Enzinger and Weiss's Soft Tissue Tumors",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "desmoid_tumor-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "MRI to characterise infiltrative margins",
+          "cells": [
+            {
+              "text": "Infiltrative margins, and growth on surveillance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Core biopsy with histology",
+          "cells": [
+            {
+              "text": "Bland spindled myofibroblasts"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nuclear beta-catenin immunohistochemistry",
+          "cells": [
+            {
+              "text": "Supportive diagnostic marker"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CTNNB1 mutation analysis",
+          "cells": [
+            {
+              "text": "Supports diagnosis and prognosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Colonoscopy and APC evaluation",
+          "cells": [
+            {
+              "text": "Familial adenomatous polyposis when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoid_tumor-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Fibrosarcoma",
+          "cells": [
+            {
+              "text": "Sarcoma and desmoid mistaken for each other without beta-catenin and molecular testing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Scar or reactive fibrosis",
+          "cells": [
+            {
+              "text": "Bland infiltrative spindle cells mistaken for a reactive scar"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "desmoid_tumor-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Active surveillance",
+          "cells": [
+            {
+              "text": "Preferred first line for asymptomatic or stable disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Trigger for treatment",
+          "cells": [
+            {
+              "text": "Symptoms, growth on imaging, or threat to vital structures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "NSAIDs first",
+          "cells": [
+            {
+              "text": "Sulindac-class agents for lower-risk, symptomatic disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hormonal manipulation",
+          "cells": [
+            {
+              "text": "Anti-oestrogen agents and other hormonal options"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Surgery",
+          "cells": [
+            {
+              "text": "Reasonable for small growing abdominal wall lesions; less favoured for large extremity lesions in young patients"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Adjuvant radiation",
+          "cells": [
+            {
+              "text": "Generally omitted with negative margins; debated with positive margins"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Definitive radiation",
+          "cells": [
+            {
+              "text": "Option when resection would compromise function"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ablative options",
+          "cells": [
+            {
+              "text": "Cryoablation, high-intensity focused ultrasound or chemoembolisation for unsuitable lesions"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Referral and genetics",
+          "cells": [
+            {
+              "text": "Sarcoma centre for growing or high-risk disease; genetics for multifocal disease or FAP suspicion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "desmoid_tumor-dx-mgmt",
+      "title": "Diagnosis and management of Desmoid-type fibromatosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected desmoid-type fibromatosis: infiltrative mass that does not metastasise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (organ compression, rapid growth, or mesenteric tumour suggesting FAP)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent relief of obstruction or compression; sarcoma team review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "MRI for margins; core biopsy with beta-catenin; CTNNB1 analysis",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does biopsy show bland spindled myofibroblasts with nuclear beta-catenin?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider low-grade fibromyxoid sarcoma, nodular fasciitis, fibrosarcoma or scar",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Active surveillance for asymptomatic or stable disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Treat if symptomatic, growing on imaging or threatening vital structures",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Sulindac-class NSAIDs first for lower-risk symptomatic disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Surgery for small resectable abdominal wall or separable mesenteric tumours",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "action",
+          "text": "Refer to a sarcoma centre; genetics evaluation if FAP is suspected",
+          "cite": "c1"
+        },
+        {
+          "id": "n12",
+          "type": "outcome",
+          "text": "Does not metastasise but is locally aggressive; many stabilise or regress",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        },
+        {
+          "from": "n11",
+          "to": "n12",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

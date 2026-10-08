@@ -151,5 +151,305 @@
       "caption": "Overview comparison matrix for congenital vertical talus."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Tachdjian's Pediatric Orthopaedics",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "congenital_vertical_talus-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Weight-bearing or simulated weight-bearing foot radiographs",
+          "cells": [
+            {
+              "text": "Foot alignment assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forced plantarflexion lateral radiograph",
+          "cells": [
+            {
+              "text": "Irreducible talonavicular dislocation confirmed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Forced dorsiflexion lateral view",
+          "cells": [
+            {
+              "text": "Fixed hindfoot equinus"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full neurological examination",
+          "cells": [
+            {
+              "text": "Neuromuscular disease assessed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Karyotype and genetic evaluation",
+          "cells": [
+            {
+              "text": "Syndrome or chromosomal disorder when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_vertical_talus-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Flexible calcaneovalgus foot",
+          "cells": [
+            {
+              "text": "Supple and positional rather than rigid"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Oblique talus",
+          "cells": [
+            {
+              "text": "Milder reducible variant; forced plantarflexion view separates"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Paralytic flatfoot from cerebral palsy or myelomeningocele",
+          "cells": [
+            {
+              "text": "Neuromuscular cause"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "congenital_vertical_talus-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Reverse-Ponseti (Dobbs) serial casting",
+          "cells": [
+            {
+              "text": "Progressively stretches contracted dorsolateral soft tissues"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Minimally invasive surgery",
+          "cells": [
+            {
+              "text": "Talonavicular reduction and pinning with percutaneous Achilles tenotomy after casting"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bracing and orthoses",
+          "cells": [
+            {
+              "text": "Maintain correction and prevent recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Underlying disorder",
+          "cells": [
+            {
+              "text": "Neuromuscular disorder, chromosomal abnormality or arthrogryposis, in roughly half of cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Spinal imaging",
+          "cells": [
+            {
+              "text": "Where a neural-tube or cord anomaly is suspected"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling",
+          "cells": [
+            {
+              "text": "Syndromic or familial cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "congenital_vertical_talus-dx-mgmt",
+      "title": "Diagnosis and management of Congenital vertical talus",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected congenital vertical talus: rigid rocker-bottom foot at birth",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present (fully rigid foot, arthrogryposis, spinal or neuromuscular signs)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Full neurological and spinal assessment for an underlying disorder",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Foot radiographs; forced plantarflexion and dorsiflexion views; neurological exam",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Does forced plantarflexion show an irreducible talonavicular dislocation?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Consider flexible calcaneovalgus or oblique talus; recheck",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Reverse-Ponseti serial casting to stretch contracted soft tissues",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Talonavicular reduction and pinning with Achilles tenotomy after casting",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Bracing to maintain correction and prevent recurrence",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Evaluate for neuromuscular or syndromic cause; spinal imaging if indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Early casting and timely surgery usually give a plantigrade, functional foot",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

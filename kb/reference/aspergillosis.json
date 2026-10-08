@@ -173,5 +173,476 @@
       "caption": "Overview comparison matrix for aspergillosis."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Harrison's Principles of Internal Medicine, 22e",
+      "kind": "entry"
+    },
+    {
+      "id": "c2",
+      "label": "Merck Manual Professional, Aspergillosis",
+      "url": "https://www.merckmanuals.com/professional/infectious-diseases/fungi/aspergillosis",
+      "kind": "web"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "aspergillosis-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in aspergillosis",
+      "rowHeader": "Criterion",
+      "columns": [
+        "Finding",
+        "Interpretation"
+      ],
+      "rows": [
+        {
+          "parameter": "Thoracic CT halo sign",
+          "cells": [
+            {
+              "text": "Ground-glass rim around a nodule, lasts about 7 days early in neutropenia"
+            },
+            {
+              "text": "{{hy:Early sign; good prognostic marker}}; air-crescent comes later"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Galactomannan antigen",
+          "cells": [
+            {
+              "text": "BAL more sensitive than serum"
+            },
+            {
+              "text": "Serum positivity often precedes signs; antifungals reduce sensitivity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Beta-D-glucan and real-time PCR",
+          "cells": [
+            {
+              "text": "Faster and more sensitive than culture"
+            },
+            {
+              "text": "Use with antigen"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture in invasive disease",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "Positive in only 10 to 30%",
+              "range": [
+                10,
+                30
+              ]
+            },
+            {
+              "text": "Request fungal culture; also tests azole resistance"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Histology",
+          "cells": [
+            {
+              "text": "Narrow septate hyphae branching at 45 degrees; angioinvasion"
+            },
+            {
+              "text": "Mucorales and Fusarium can mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Aspergillus IgG",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "About 90% in chronic cavitary disease; 65% in nodules"
+            },
+            {
+              "text": "Main test for chronic forms"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ABPA total IgE",
+          "unit": "IU/mL",
+          "cells": [
+            {
+              "text": "Usually >1000 with specific IgE or skin test",
+              "op": ">",
+              "value": 1000
+            },
+            {
+              "text": "Allergic form"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neutropenia duration as risk",
+          "unit": "days",
+          "cells": [
+            {
+              "text": ">7",
+              "op": ">",
+              "value": 7
+            },
+            {
+              "text": "Major invasive risk factor"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Chronic pulmonary aspergillosis after TB",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "6 to 13% of treated TB",
+              "range": [
+                6,
+                13
+              ]
+            },
+            {
+              "text": "Often mistaken for TB"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aspergillosis-ddx",
+      "kind": "ddx",
+      "title": "Differential diagnosis of aspergillosis",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature"
+      ],
+      "rows": [
+        {
+          "parameter": "Pulmonary tuberculosis or NTM",
+          "cells": [
+            {
+              "text": "{{hy:Chronic cavitary aspergillosis follows and mimics TB}}; Aspergillus IgG helps"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mucormycosis",
+          "cells": [
+            {
+              "text": "Angioinvasive mould; histology can mimic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fusarium or Scedosporium",
+          "cells": [
+            {
+              "text": "Other moulds mimicking Aspergillus histologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lung carcinoma",
+          "cells": [
+            {
+              "text": "Aspergillus nodule can look like early cancer"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Bacterial sinusitis",
+          "cells": [
+            {
+              "text": "Early invasive Aspergillus sinusitis looks the same radiologically"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "COVID-19 pneumonia",
+          "cells": [
+            {
+              "text": "Halo nodules occur in COVID-19 itself"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Granulomatosis with polyangiitis",
+          "cells": [
+            {
+              "text": "Other cavitary lung disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Airway colonisation",
+          "cells": [
+            {
+              "text": "Positive culture without invasion"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "aspergillosis-treatment",
+      "kind": "treatment",
+      "title": "Treatment of aspergillosis",
+      "rowHeader": "Option",
+      "columns": [
+        "When to use",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Voriconazole, posaconazole or isavuconazonium",
+          "cells": [
+            {
+              "text": "{{hy:Invasive aspergillosis}}"
+            },
+            {
+              "text": "Posaconazole and isavuconazonium equal efficacy, fewer side effects"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Lipid amphotericin B",
+          "cells": [
+            {
+              "text": "Alternative for invasive disease"
+            },
+            {
+              "text": "Effective but more toxic"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Echinocandin plus triazole or amphotericin",
+          "cells": [
+            {
+              "text": "Salvage"
+            },
+            {
+              "text": "Caspofungin or others"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Reverse immunosuppression",
+          "cells": [
+            {
+              "text": "All invasive disease"
+            },
+            {
+              "text": "Resolve neutropenia, stop steroids"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Itraconazole",
+          "cells": [
+            {
+              "text": "Chronic pulmonary aspergillosis"
+            },
+            {
+              "text": "Fluconazole has no activity"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Surgical resection",
+          "cells": [
+            {
+              "text": "Aspergilloma with haemoptysis or pressure effects"
+            },
+            {
+              "text": "Systemic antifungals do not clear fungal balls"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Posaconazole prophylaxis",
+          "cells": [
+            {
+              "text": "GVHD or prolonged neutropenia in AML"
+            },
+            {
+              "text": "No regimen fully protective"
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "HEPA filtration",
+          "cells": [
+            {
+              "text": "High-risk wards and theatres"
+            },
+            {
+              "text": "Outbreaks follow construction or air sources"
+            }
+          ],
+          "cite": "c1"
+        }
+      ],
+      "footnote": "No doses or durations were stated in the sources opened. Mortality of treated invasive disease 30 to 70% (Harrison)."
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "aspergillosis-dx-mgmt",
+      "title": "Diagnosis and management of aspergillosis",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Suspected Aspergillus disease",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Immunocompromised (neutropenia, transplant, steroids)?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Urgent chest CT; serum and BAL galactomannan, PCR",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Start voriconazole, posaconazole or isavuconazonium empirically",
+          "cite": "c2"
+        },
+        {
+          "id": "n5",
+          "type": "outcome",
+          "text": "Reverse immunosuppression; salvage with echinocandin combination",
+          "cite": "c2"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Cavity or fungal ball with prior lung disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Aspergillus IgG, CT, exclude TB",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Itraconazole for chronic disease; surgery for bleeding aspergilloma",
+          "cite": "c2"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Asthma or CF with high IgE?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Allergic aspergillosis pathway (ABPA)",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Consider colonisation or other diagnosis",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n6",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n9",
+          "label": "No"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
+      ]
+    }
+  ]
 }

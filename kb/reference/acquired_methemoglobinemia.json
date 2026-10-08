@@ -153,5 +153,331 @@
       "caption": "Overview comparison matrix for acquired methaemoglobinaemia."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Goldfrank's Toxicologic Emergencies",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "acquired_methemoglobinemia-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Co-oximetry",
+          "cells": [
+            {
+              "text": "Methaemoglobin fraction measured directly"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas",
+          "cells": [
+            {
+              "text": "Normal partial pressure of oxygen with a saturation gap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Full blood count and film",
+          "cells": [
+            {
+              "text": "Haemolysis or Heinz bodies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Glucose-6-phosphate dehydrogenase status",
+          "cells": [
+            {
+              "text": "Enzyme deficiency that affects methylene blue use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Renal and liver function and lactate",
+          "cells": [
+            {
+              "text": "Systemic effect"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Medication and exposure review",
+          "cells": [
+            {
+              "text": "Identifies the oxidant precipitant"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_methemoglobinemia-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions",
+      "rowHeader": "Condition",
+      "columns": [
+        "Key distinguishing feature",
+        "Best test to separate"
+      ],
+      "rows": [
+        {
+          "parameter": "Hypoxaemia from cardiopulmonary disease",
+          "cells": [
+            {
+              "text": "Low arterial oxygen tension"
+            },
+            {
+              "text": "Arterial blood gas"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Congenital methaemoglobinaemia (cytochrome b5 reductase deficiency or haemoglobin M)",
+          "cells": [
+            {
+              "text": "Congenital enzyme or haemoglobin defect"
+            },
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "acquired_methemoglobinemia-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Purpose",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Withdraw the precipitating oxidant",
+          "cells": [
+            {
+              "text": "Removes the cause (benzocaine, dapsone, nitrites, antimalarials, aniline dyes)"
+            },
+            {
+              "text": "Topical anaesthetics among the causes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Methylene blue (methylthioninium chloride)",
+          "cells": [
+            {
+              "text": "Symptomatic or high-fraction methaemoglobinaemia"
+            },
+            {
+              "text": "Given as the antidote"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supplemental oxygen and supportive care",
+          "cells": [
+            {
+              "text": "Cyanosis unresponsive to oxygen"
+            },
+            {
+              "text": "Supportive care"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "G6PD testing; ascorbic acid or exchange transfusion where deficient",
+          "cells": [
+            {
+              "text": "Methylene blue may be ineffective or harmful in deficiency"
+            },
+            {
+              "text": "Ascorbic acid or exchange transfusion preferred"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Co-oximetry monitoring",
+          "cells": [
+            {
+              "text": "Pulse oximetry is unreliable"
+            },
+            {
+              "text": "Track the methaemoglobin fraction"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Exchange transfusion or hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Life-threatening or refractory poisoning"
+            },
+            {
+              "text": "Consider in severe cases"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "acquired_methemoglobinemia-dx-mgmt",
+      "title": "Diagnosis and management of Acquired methaemoglobinaemia",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Cyanosis that does not improve with oxygen, with normal PaO2",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Saturation gap with high methaemoglobin on co-oximetry?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent methylene blue treatment and toxicology input",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Co-oximetry, arterial blood gas, FBC and film",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Oxidant drug or chemical exposure identified?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Withdraw the oxidant and check G6PD before methylene blue",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Review cardiopulmonary, sulphaemoglobin and congenital causes",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Methylene blue for symptomatic or high-fraction methaemoglobinaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Supplemental oxygen and supportive care",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Ascorbic acid or exchange transfusion if G6PD deficient",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Mild cases resolve after withdrawal; enzyme deficiency or severe cases are riskier",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

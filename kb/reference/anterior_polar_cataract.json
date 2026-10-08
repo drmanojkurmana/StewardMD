@@ -147,5 +147,295 @@
       "caption": "Overview comparison matrix for anterior polar cataract."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Kanski's Clinical Ophthalmology / AAO Basic and Clinical Science Course",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "anterior_polar_cataract-diagnostic",
+      "kind": "diagnostic",
+      "title": "Investigations and what they show",
+      "rowHeader": "Criterion",
+      "columns": [
+        "What it shows"
+      ],
+      "rows": [
+        {
+          "parameter": "Slit-lamp biomicroscopy",
+          "cells": [
+            {
+              "text": "Localises the opacity to the anterior capsule and any pyramidal projection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction and keratometry",
+          "cells": [
+            {
+              "text": "Associated astigmatism and anisometropia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Visual acuity and fixation testing",
+          "cells": [
+            {
+              "text": "Screens for amblyopia in children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Retro-illumination and red reflex assessment",
+          "cells": [
+            {
+              "text": "Visual significance of the opacity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for anterior segment dysgenesis",
+          "cells": [
+            {
+              "text": "Peters anomaly, persistent pupillary membrane, microphthalmos"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination of parents and siblings",
+          "cells": [
+            {
+              "text": "Familial autosomal dominant pattern"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    },
+    {
+      "id": "anterior_polar_cataract-treatment",
+      "kind": "treatment",
+      "title": "Management options, in order",
+      "rowHeader": "Option",
+      "columns": [
+        "Step",
+        "Notes"
+      ],
+      "rows": [
+        {
+          "parameter": "Observation",
+          "cells": [
+            {
+              "text": "Small, stationary, visually insignificant opacities"
+            },
+            {
+              "text": "Most cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cycloplegic refraction and refractive correction",
+          "cells": [
+            {
+              "text": "Induced refractive error and anisometropia"
+            },
+            {
+              "text": "Corrects refractive error"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Amblyopia monitoring and treatment",
+          "cells": [
+            {
+              "text": "Occlusion therapy where indicated"
+            },
+            {
+              "text": "Children"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Lens extraction",
+          "cells": [
+            {
+              "text": "Visually significant or pyramidal opacities projecting into the anterior chamber"
+            },
+            {
+              "text": "Reserved"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Examination for dysgenesis",
+          "cells": [
+            {
+              "text": "Peters anomaly, persistent pupillary membrane, microphthalmos"
+            },
+            {
+              "text": "Associated anomalies"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Genetic counselling and family examination",
+          "cells": [
+            {
+              "text": "Parents and siblings"
+            },
+            {
+              "text": "Autosomal dominant inheritance"
+            }
+          ],
+          "cite": "c1"
+        }
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "anterior_polar_cataract-dx-mgmt",
+      "title": "Diagnosis and management of anterior polar cataract",
+      "start": "n1",
+      "nodes": [
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Anterior capsular opacity in a child, sometimes familial",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag present? Dense axial opacity or Peters anomaly with corneal involvement?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "outcome",
+          "text": "Urgent ophthalmology review to prevent deprivation amblyopia",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Slit lamp, cycloplegic refraction, acuity and fixation, dysgenesis examination",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Opacity visually significant on red reflex and retro-illumination?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Lens extraction for visually significant or pyramidal opacity",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Observe small stationary opacities; review differentials (see table)",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Cycloplegic refraction and refractive correction",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Occlusion therapy for amblyopia where indicated",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "action",
+          "text": "Examine for dysgenesis and counsel on autosomal dominant inheritance",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Small opacities are often observed; induced astigmatism risks amblyopia",
+          "cite": "c1"
+        }
+      ],
+      "edges": [
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        },
+        {
+          "from": "n10",
+          "to": "n11",
+          "label": "Next"
+        }
+      ]
+    }
+  ]
 }

@@ -148,5 +148,86 @@
       "caption": "Overview comparison matrix for bilateral vestibulopathy."
     }
   ],
-  "diagrams": []
+  "diagrams": [],
+  "citations": [
+    {
+      "id": "c1",
+      "label": "Cummings Otolaryngology",
+      "kind": "entry"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "bilateral_vestibulopathy-diagnostic",
+      "kind": "diagnostic",
+      "title": "Diagnostic tests in bilateral vestibulopathy",
+      "rowHeader": "Criterion",
+      "columns": ["What it shows"],
+      "rows": [
+        {"parameter": "Bedside head impulse test", "cells": [{"text": "Positive in both horizontal directions"}], "cite": "c1"},
+        {"parameter": "Dynamic visual acuity", "cells": [{"text": "Acuity loss on head shaking"}], "cite": "c1"},
+        {"parameter": "Video head impulse testing", "cells": [{"text": "Quantifies vestibulo-ocular reflex gain in all canals"}], "cite": "c1"},
+        {"parameter": "Caloric testing", "cells": [{"text": "Bilateral reduced responses"}], "cite": "c1"},
+        {"parameter": "Rotational chair testing", "cells": [{"text": "Low-frequency vestibular function"}], "cite": "c1"},
+        {"parameter": "Audiometry", "cells": [{"text": "Associated cochlear involvement"}], "cite": "c1"},
+        {"parameter": "Neurological evaluation and imaging", "cells": [{"text": "When ataxia or neuropathy suggests a central or systemic cause"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_vestibulopathy-ddx",
+      "kind": "ddx",
+      "title": "Look-alike conditions for bilateral vestibulopathy",
+      "rowHeader": "Condition",
+      "columns": ["Key distinguishing feature"],
+      "rows": [
+        {"parameter": "CANVAS (cerebellar ataxia, neuropathy, vestibular areflexia)", "cells": [{"text": "Vestibular areflexia with cerebellar ataxia and neuropathy"}], "cite": "c1"},
+        {"parameter": "Cerebellar ataxia and degenerative gait disorders", "cells": [{"text": "Diagnosis requires bilaterally reduced vestibulo-ocular reflex gain on quantitative testing"}], "cite": "c1"}
+      ]
+    },
+    {
+      "id": "bilateral_vestibulopathy-treatment",
+      "kind": "treatment",
+      "title": "Management options in bilateral vestibulopathy",
+      "rowHeader": "Option",
+      "columns": ["Step", "Notes"],
+      "rows": [
+        {"parameter": "Vestibular rehabilitation", "cells": [{"text": "Exercises for gaze stabilisation and sensory substitution"}, {"text": "Mainstay of treatment"}], "cite": "c1"},
+        {"parameter": "Remove the cause", "cells": [{"text": "Stop and avoid aminoglycosides and other ototoxic drugs; treat bilateral Meniere disease"}, {"text": "Where a cause is identified"}], "cite": "c1"},
+        {"parameter": "Immunosuppression", "cells": [{"text": "Corticosteroids or immunosuppression"}, {"text": "Only when an autoimmune aetiology is identified"}], "cite": "c1"},
+        {"parameter": "Falls prevention", "cells": [{"text": "Home hazard reduction, adequate lighting, walking aids and advice about moving in the dark"}, {"text": "Reduces injury risk"}], "cite": "c1"},
+        {"parameter": "Patient education", "cells": [{"text": "Avoid situations relying on vestibular input, such as swimming underwater and night driving"}, {"text": "Safety advice"}], "cite": "c1"},
+        {"parameter": "Neurology and audiovestibular referral", "cells": [{"text": "Evaluate for a central or systemic cause"}, {"text": "When ataxia or neuropathy coexists"}], "cite": "c1"},
+        {"parameter": "Investigational vestibular implant", "cells": [{"text": "Considered in severe refractory disease"}, {"text": "Investigational"}], "cite": "c1"}
+      ]
+    }
+  ],
+  "flowcharts": [
+    {
+      "id": "bilateral_vestibulopathy-dx-mgmt",
+      "title": "Diagnosis and management of bilateral vestibulopathy",
+      "start": "n1",
+      "nodes": [
+        {"id": "n1", "type": "start", "text": "Unsteadiness worse in the dark or on uneven ground, with oscillopsia and little vertigo", "cite": "c1"},
+        {"id": "n2", "type": "decision", "text": "Red flag: progressive ataxia or neuropathy, injurious falls, or rapid progression?", "cite": "c1"},
+        {"id": "n3", "type": "action", "text": "Escalate: neurology review and imaging for a central or systemic cause", "cite": "c1"},
+        {"id": "n4", "type": "action", "text": "Bedside head impulse test in both directions; dynamic visual acuity", "cite": "c1"},
+        {"id": "n5", "type": "action", "text": "Video head impulse testing, caloric and rotational chair testing; audiometry", "cite": "c1"},
+        {"id": "n6", "type": "decision", "text": "Reduced vestibulo-ocular reflex gain bilaterally on quantitative testing?", "cite": "c1"},
+        {"id": "n7", "type": "action", "text": "Stop ototoxic drugs; check for autoimmune cause; vestibular rehabilitation", "cite": "c1"},
+        {"id": "n8", "type": "outcome", "text": "No: consider CANVAS, cerebellar ataxia, bilateral neuritis or functional dizziness", "cite": "c1"},
+        {"id": "n9", "type": "outcome", "text": "Peripheral function rarely recovers; rehabilitation improves gait and gaze stability", "cite": "c1"}
+      ],
+      "edges": [
+        {"from": "n1", "to": "n2", "label": "Next"},
+        {"from": "n2", "to": "n3", "label": "Yes"},
+        {"from": "n2", "to": "n4", "label": "No"},
+        {"from": "n3", "to": "n5", "label": "Next"},
+        {"from": "n4", "to": "n5", "label": "Next"},
+        {"from": "n5", "to": "n6", "label": "Next"},
+        {"from": "n6", "to": "n7", "label": "Yes"},
+        {"from": "n6", "to": "n8", "label": "No"},
+        {"from": "n7", "to": "n9", "label": "Next"}
+      ]
+    }
+  ]
 }
