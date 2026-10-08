@@ -700,6 +700,7 @@
       '<div class="ln-fchips" role="group" aria-label="' + s("fChoose") + '">' + chip("normal", s("fNormal")) +
       f.items.map(function (x) { return chip(x.id, tx(x.label)); }).join("") + "</div>" +
       '<div class="ln-fsim' + (m ? "" : " err") + '" id="lnFSim" data-sel="' + esc(sel) + '" data-le="' + esc(le) + '" data-re="' + esc(re) + '" data-style="' + style + '">' +
+      '<span class="oph-sr" role="status" id="lnFLive"></span>' +
       '<div class="ln-fpair">' + pane("L", le) + pane("R", re) + "</div>" +
       '<figure class="ln-fpane ln-fboth"><div class="ln-fframe"><canvas class="ln-fcv" data-eye="B" role="img" aria-label="' + s("eyeB") + ": " + bothText(it) + '"></canvas></div>' +
       "<figcaption><b>" + s("eyeB") + "</b><span>" + bothText(it) + "</span></figcaption></figure>" +
@@ -806,6 +807,12 @@
     }
     if (o.ok || o.bad) go(); else o.wait.push(go);
   }
+  // A rotation or resize changes the canvases' size: repaint them at the new size (once per frame).
+  var fRaf = 0;
+  G.addEventListener("resize", function () {
+    if (fRaf || !G.document.getElementById("lnFSim")) return;
+    fRaf = G.requestAnimationFrame(function () { fRaf = 0; paintFields(); });
+  });
   // Swap the pattern in place (no repaint of the step, so focus stays on the chip and nothing moves).
   function selectField(id, focus) {
     var l = W.les, f = fieldsOf(l);
@@ -817,6 +824,9 @@
     art.innerHTML = fieldsHtml(l);
     if (sc) sc.scrollTop = top;
     paintFields();
+    // Announce the new pattern: the status region is empty when inserted, then filled, so it is read out.
+    var it = W.fsel !== "normal" && fieldItem(f, W.fsel), live = G.document.getElementById("lnFLive");
+    G.setTimeout(function () { if (live && live.isConnected) live.textContent = it ? D.t(it.label, L()) : D.t(STR.fNormal, L()); }, 60);
     var b = focus && art.querySelector(focus);
     try { if (b) b.focus({ preventScroll: true }); } catch (e) {}
   }

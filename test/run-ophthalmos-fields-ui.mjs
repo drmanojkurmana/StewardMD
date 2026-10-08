@@ -182,6 +182,24 @@ try {
   }
   ok(found === "lateral geniculate nucleus (LGN)", "neuro-pathway: the first LGN reads \"lateral geniculate nucleus (LGN)\" (got \"" + found + "\")");
   await shot("07-neuro-pathway-lgn-light");
+
+  // Explorers rewritten to the rules: the pupil pathway and the guided tours still fit at 390
+  const exFit = `var r=document.getElementById("smdOphthalmos"), sc=r.querySelector(".oph-scroll"), bad=[].filter.call(r.querySelectorAll(".oph-scroll *"), function(e){ var b=e.getBoundingClientRect(); return b.width>0 && b.right>390.5; });
+    return !!sc && sc.scrollWidth <= sc.clientWidth + 1 && bad.length === 0 ? true : "overflow " + (sc && sc.scrollWidth) + " " + bad.slice(0,3).map(function(e){return e.tagName + "." + e.className;}).join(",");`;
+  await ev(`OPHTHALMOS._internal.leave(); OPHTHALMOS._renderHub(); return 1;`);
+  for (const x of ["pupil", "tours", "pathway"]) {
+    await until(`return !!document.querySelector('#smdOphthalmos [data-act=exopen][data-x=${x}]');`, 10000);
+    await ev(`document.querySelector('#smdOphthalmos [data-act=exopen][data-x=${x}]').click(); return 1;`);
+    await until(`return OPHTHALMOS._st.view === "explore";`, 10000);
+    await sleep(600);
+    if (x === "pupil") await ev(`var b=document.querySelector('#smdOphthalmos [data-act=excond][data-v=horner]') || [].filter.call(document.querySelectorAll('#smdOphthalmos [data-act=excond]'), function(b){return /Horner/.test(b.textContent);})[0]; if (b) b.click(); return 1;`);
+    if (x === "tours") await ev(`var b=[].filter.call(document.querySelectorAll('#smdOphthalmos [data-act=extour]'), function(b){return /OCT/.test(b.textContent);})[0]; if (b) b.click(); return 1;`);
+    await sleep(500);
+    const fit = await ev(exFit);
+    ok(fit === true, `explorer ${x}: no horizontal overflow at 390` + (fit === true ? "" : ": " + fit));
+    if (x !== "pathway") await shot("08-explore-" + x);
+    await ev(`OPHTHALMOS.back(); return 1;`);
+  }
   await ev(`OPHTHALMOS.close(); return 1;`);
 
   ok(errors.length === 0, "no uncaught Ophthalmós errors" + (errors.length ? ": " + errors.slice(0, 3).join(" | ") : ""));
