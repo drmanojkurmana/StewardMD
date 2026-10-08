@@ -402,10 +402,11 @@
       }, function (e) { if (hit) return (st.mem[p] = hit.items); throw e; });
     });
   }
-  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, set "radnotes"), at
-     overlay/<set>/<subject>/<module>.json { topic, set, v, items }, immutable once uploaded. Only subjects listed here
-     are asked for; a module without a file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"] };
+  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, set "radnotes"; new
+     Medicine questions for topics the bank covered thinly, set "medcov"), at overlay/<set>/<subject>/<module>.json
+     { topic, set, v, items }, immutable once uploaded. Only subjects listed here are asked for; a module without a
+     file (404) or offline without a copy adds nothing. */
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"], medicine: ["medcov"], "ss-pulmonology": ["medcov"] };
   function loadOverlay(sid, mid, miss) {
     var sets = OVERLAYS[sid] || [];
     return Promise.all(sets.map(function (set) {

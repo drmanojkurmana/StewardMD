@@ -1,0 +1,119 @@
+// tools/prep-medcov.mjs: pure parts (topic clusters, coverage rule, level plan, format and copy gates, item shape).
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import {
+  clusterTopics, coverageOf, gapOf, assignLevels, fmtOk, gateQ, numbersOk, reasoningOrder, finalItem, sanitizeQ, us, kwHit, SET,
+} from "../tools/prep-medcov.mjs";
+
+const g = (sents) => ({ sents: sents.map((tx, n) => ({ n, tx })), text: sents.join(" ") });
+const rq = (o) => ({ st: "A 30-year-old man has crushing chest pain and ST elevation in the anterior leads. What is the most specific marker of myocardial necrosis?",
+  key: { ot: "Cardiac troponin", wr: "Troponin is the most specific marker of myocardial necrosis." },
+  dis: [{ ot: "Serum myoglobin", wr: "Myoglobin rises early but is not cardiac specific.", et: "knowledge" }, { ot: "Lactate dehydrogenase", wr: "LDH rises in many tissues.", et: "knowledge" }, { ot: "Creatine kinase MB", wr: "CK-MB is less sensitive than troponin.", et: "knowledge" }],
+  kp: "Troponin is the preferred marker.", sn: [0], lv: "easy", fm: "vignette", ...o });
+const ground = g(["Cardiac troponin is the most specific marker of myocardial necrosis and the preferred test.", "Myoglobin rises early but lacks cardiac specificity.", "CK-MB is less sensitive than troponin."]);
+
+test("us folds British and American spellings; kwHit matches by 5-letter prefix", () => {
+  assert.equal(us("haemoglobin oesophagus"), us("hemoglobin esophagus"));
+  assert.ok(kwHit(new Set(["hyper", "ecg"].map((w) => w)), "hyperkalaemia ecg"));
+  assert.ok(!kwHit(new Set(["hyper"]), "hyperkalaemia ecg"));
+});
+
+test("clusterTopics merges similar topics in a module, drops skip, keeps no question ids, drops a concept copied from the book", () => {
+  const book = " " + "the quick brown fox jumps over the lazy dog every single morning" + " ";
+  const tags = [
+    { k: "I-1", topic: "Hyperkalaemia ECG changes", concept: "peaked T waves first", module: "med-potassium", level: "pg", kw: ["hyperkalaemia", "ecg"] },
+    { k: "I-2", topic: "Hyperkalaemia ECG findings", concept: "the quick brown fox jumps over the lazy dog every", module: "med-potassium", level: "ss", kw: ["hyperkalaemia", "ecg"] },
+    { k: "I-3", topic: "Ethics", concept: "x", module: "skip", level: "pg", kw: [] },
+  ];
+  const t = clusterTopics(tags, book);
+  assert.equal(t.length, 1);
+  assert.equal(t[0].n, 2);
+  assert.deepEqual(t[0].concepts, ["peaked T waves first"]);
+  assert.ok(!JSON.stringify(t).includes("I-1"));
+  assert.match(t[0].tid, /^t-[0-9a-f]{12}$/);
+});
+
+test("coverage: the core keyword plus one more must hit; gap under 5 items, harder items needed under 2 hard ones", () => {
+  const bank = [
+    { mod: "med-potassium", d: 3, _s5: new Set(["hyper", "ecg", "peake"]) },
+    { mod: "med-sodium", d: 1, _s5: new Set(["hyper", "ecg"]) },
+    { mod: "med-potassium", d: 1, _s5: new Set(["ecg", "peake"]) },
+  ];
+  const c = coverageOf({ topic: "x", module: "med-potassium", kw: ["hyperkalaemia", "ecg", "peaked"] }, bank);
+  assert.deepEqual(c, { all: 2, mod: 1, hard: 1 });
+  assert.equal(gapOf(c), "gap");
+  assert.equal(gapOf({ all: 9, hard: 1 }), "hard");
+  assert.equal(gapOf({ all: 9, hard: 2 }), "");
+});
+
+test("assignLevels: harder-only topics get hard and very hard; the plan meets the target shares", () => {
+  const topics = [{ gap: "hard", nSlots: 2 }, ...Array.from({ length: 10 }, () => ({ gap: "gap", nSlots: 4 }))];
+  const have = assignLevels(topics);
+  assert.deepEqual(topics[0].slots.map((s) => s.lv), ["hard", "vhard"]);
+  assert.equal(have.easy + have.hard + have.vhard, 42);
+  assert.equal(have.easy, Math.round(42 * 0.4));
+  topics.forEach((t) => assert.equal(t.slots.length, t.nSlots));
+});
+
+test("gateQ passes a grounded question; rejects an invented number, a copied book phrase and a missing citation", () => {
+  assert.equal(gateQ(rq(), ground, ""), null);
+  assert.equal(gateQ(rq({ st: rq().st.replace("anterior leads", "anterior leads with a heart rate of 132") }), ground, ""), "number not in grounding");
+  const book = " " + "a 30 year old man has crushing chest pain and st elevation in the anterior leads" + " ";
+  assert.equal(gateQ(rq(), ground, book), "copies the book");
+  assert.equal(gateQ(rq({ sn: [9] }), ground, ""), "no cited sentence");
+  assert.equal(gateQ(rq({ kp: "Troponin — the preferred marker." }), ground, ""), "banned word or dash");
+});
+
+test("numbersOk ignores the patient's age only", () => {
+  assert.ok(numbersOk("A 45-year-old woman", "no numbers"));
+  assert.ok(!numbersOk("A 45-year-old woman with potassium 7.2", "no numbers"));
+  assert.ok(numbersOk("potassium 7.2", "potassium above 7.2 is dangerous"));
+});
+
+test("format shapes: statements, matching and assertion-reason", () => {
+  assert.ok(fmtOk({ fm: "tf", st: "Statements:\n1. a\n2. b\n3. c\nWhich are correct?", key: { ot: "1 and 2 only" }, dis: [{ ot: "1 only" }, { ot: "2 and 3" }, { ot: "All" }] }));
+  assert.ok(!fmtOk({ fm: "tf", st: "Which is correct?", key: { ot: "x" }, dis: [{ ot: "y" }, { ot: "z" }, { ot: "w" }] }));
+  const m = { fm: "match", st: "Match:\na. X\nb. Y\nc. Z\nd. W\n1. p\n2. q\n3. r\n4. s", key: { ot: "a-2, b-1, c-4, d-3" }, dis: [{ ot: "a-1, b-2, c-3, d-4" }, { ot: "a-3, b-4, c-1, d-2" }, { ot: "a-4, b-3, c-2, d-1" }] };
+  assert.ok(fmtOk(m));
+  assert.ok(!fmtOk({ ...m, key: { ot: "X with p" } }));
+});
+
+test("reasoningOrder puts the four assertion-reason options in the standard order and finds the key", () => {
+  const r = { key: { ot: "A is true, but R is false", wr: "k" }, dis: [
+    { ot: "A is false, but R is true", wr: "d1" }, { ot: "Both A and R are true, and R explains A", wr: "d2" }, { ot: "Both A and R are true, but R does not explain A", wr: "d3" }] };
+  const sh = reasoningOrder(r);
+  assert.equal(sh.a, 2);
+  assert.match(sh.o[0], /explains A/);
+  assert.match(sh.o[1], /does not explain/);
+  assert.equal(sh.r[2], "k");
+  assert.equal(reasoningOrder({ key: { ot: "Something else", wr: "" }, dis: r.dis }), null);
+});
+
+test("sanitizeQ keeps line breaks in the stem and our fields", () => {
+  const out = sanitizeQ({ q: [{ ...rq({ st: "Statements:\n1. a\n2. b\n3. c" }), lv: "vhard", fm: "tf", sn: [0, 1] }] });
+  assert.equal(out.length, 1);
+  assert.match(out[0].st, /\n1\. a/);
+  assert.equal(out[0].lv, "vhard");
+  assert.deepEqual(out[0].sn, [0, 1]);
+});
+
+test("finalItem: bank shape, set medcov, very hard flagged vh with d 3, no source label", () => {
+  const it = { id: "mc-abc", q: "Q", o: ["a", "b", "c", "d"], a: 1, t: "med-acs", d: 3, lv: "vhard", fm: "vignette" };
+  const x = { key: "b because", notes: "## N\n- n", others: { A: "no a", C: "no c", D: "no d" }, pearl: "p" };
+  const f = finalItem(it, x);
+  assert.equal(f.set, SET);
+  assert.equal(f.d, 3);
+  assert.equal(f.vh, true);
+  assert.deepEqual(f.r, ["no a", "b because", "no c", "no d"]);
+  assert.equal(f.exp, "b because");
+  assert.ok(!("src" in f) && !("tid" in f));
+  assert.equal(finalItem({ ...it, lv: "hard" }, x).vh, undefined);
+});
+
+test("sanitizeQ builds a match stem from the two columns and puts one-line statements on their own lines", () => {
+  const m = sanitizeQ({ q: [{ ...rq(), fm: "match", st: "Match the drugs with their effects.", ci: ["W", "X", "Y", "Z"], cii: ["p", "q", "r", "s"], key: { ot: "a-2, b-1, c-4, d-3", wr: "k" } }] })[0];
+  assert.match(m.st, /\nColumn I\na\. W\nb\. X\nc\. Y\nd\. Z\nColumn II\n1\. p\n2\. q\n3\. r\n4\. s$/);
+  const t = sanitizeQ({ q: [{ ...rq(), fm: "tf", st: "1. Alpha is true. 2. Beta is false. 3. Gamma holds. Which of the above are correct?" }] })[0];
+  assert.equal(t.st, "1. Alpha is true.\n2. Beta is false.\n3. Gamma holds.\nWhich of the above are correct?");
+  assert.ok(!fmtOk({ fm: "match", st: m.st, key: { ot: "a-1, b-2, c-3, d-4" }, dis: [{ ot: "a-2, b-1, c-4, d-3" }, { ot: "a-3, b-4, c-1, d-2" }, { ot: "a-4, b-3, c-2, d-1" }] }), "the identity matching is never the key");
+});
