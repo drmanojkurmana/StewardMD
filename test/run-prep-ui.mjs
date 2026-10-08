@@ -131,6 +131,7 @@ try {
     b.dispatchEvent(new PointerEvent("pointerup",Object.assign({clientX:x+${dx},clientY:y+3},o))); return tr;`);
   for (let i = 0; i < 5; i++) {
     seen.push(await ev(`return document.querySelector("#smdPrep .pn-q").textContent;`));
+    if (i === 0) await shot("question");
     if (i === 0) { await click("#smdPrep [data-act=bookmark]"); ok(await ev(`return document.querySelector("#smdPrep [data-act=bookmark]").getAttribute("aria-pressed");`) === "true", "bookmark toggles on"); }
     if (i === 1) {
       // Round 3: a swipe before answering resists and stays; key B answers without the reveal motion; a swipe left goes on.
@@ -152,6 +153,9 @@ try {
       ok(await until(`return !!document.querySelector("#smdPrep .pn-fb .pn-exp");`, 3000), "an answer shows the verdict and explanation at once");
       ok(await ev(`return !document.querySelector("#smdPrep .pn-prov") && !/MedMCQA|AI-generated|Source:/.test(document.querySelector("#smdPrep .pn-fb").textContent);`) === true, "no source or authorship line under the explanation (owner rule: credits live in Terms)");
       ok(await ev(`return document.querySelectorAll("#smdPrep .pn-opt.right").length === 1;`) === true, "the right option is marked");
+      ok(await ev(`var it=PREP._st.run.items[PREP._st.run.i], a=document.querySelector("#smdPrep .pn-fb .pn-ans"); return !!a && a.textContent.indexOf(it.o[it.a])>=0 && a.querySelector("small").textContent==="Right answer" && a.querySelector(".pn-l").textContent===String.fromCharCode(65+it.a);`) === true, "round 7: the answer sits on its own line under the verdict");
+      ok(await ev(`var d=document.querySelectorAll("#smdPrep .pn-opt[aria-disabled=true]:not(.right):not(.wrong)"); return d.length>=2 && getComputedStyle(d[0]).opacity<1;`) === true, "round 7: the options that are neither the key nor the pick step back");
+      ok(await ev(`var n=document.querySelector("#smdPrep .pn-qw > .pn-fb + .pn-navrow"); return !!n && getComputedStyle(n).position==="sticky";`) === true, "round 7: Next stays in reach (sticky row)");
       await shot("feedback");
       const wrong = await ev(`return !!document.querySelector("#smdPrep .pn-fb.no");`);
       if (wrong) {
@@ -164,9 +168,16 @@ try {
       ok(await until(`return !!document.querySelector("#smdPrep .pn-fb");`, 3000), "after reporting, back on the answered question");
       ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return Object.keys(s.rep).length===1 && s.rep[Object.keys(s.rep)[0]]==="unclear";`) === true, "the report is kept on the device");
     }
+    if (i === 3) {
+      // Round 7: a tapped Next (pointer click, detail 1) slides the next question in; a key press does not.
+      await ev(`document.querySelector("#smdPrep [data-act=next]").dispatchEvent(new MouseEvent("click",{bubbles:true,cancelable:true,detail:1})); return 1;`);
+      ok(await ev(`return !!document.querySelector("#smdPrep .pn-qw.in-r");`) === true, "round 7: a tapped Next arrives from the right");
+      continue;
+    }
     await click("#smdPrep [data-act=next]");
   }
   ok(await until(`return /Set finished/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 5000), "after the last question: results");
+  ok(await ev(`var r=PREP._st.run, i=document.querySelectorAll("#smdPrep .pn-score .pn-recap i"); return i.length===r.items.length && document.querySelectorAll("#smdPrep .pn-recap i.ok").length===r.items.filter(function(it,k){return r.ans[k]===it.a;}).length;`) === true, "round 7: the result shows the set as one mark a question");
   ok(!seen.some((q) => /FLAGGED/.test(q)), "the flagged item never shows");
   ok(!seen.some((q) => /question 6 of/.test(q)), "the item on the hidden list never shows");
   ok(await ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return !!s.hid.ids["ana-gametogenesis-q6"];`) === true, "the hidden list was fetched and kept");
@@ -182,6 +193,7 @@ try {
   ok(await ev(`return !!document.querySelector("#smdPrep .pn-clockw .pn-pace .rv") && document.getElementById("pnClock").parentNode.classList.contains("pn-clockw");`) === true, "the clock sits in a pace ring");
   await click('#smdPrep .pn-opt[data-k="0"]');
   ok(await ev(`return !document.querySelector("#smdPrep .pn-fb");`) === true, "no feedback during a test");
+  ok(await ev(`return document.querySelectorAll("#smdPrep .pn-opt.sel .pn-pick").length===1 && !document.querySelector("#smdPrep .pn-opt:not(.sel) .pn-mark");`) === true, "round 7: a timed test's pick carries a check");
   await shot("exam");
   await click("#smdPrep [data-act=markq]");
   await click("#smdPrep [data-act=qgrid]");

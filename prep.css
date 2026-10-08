@@ -1135,3 +1135,47 @@ body.dark .pn-root .pn-facts { background: #152a31; }
 /* Loading: the skeleton opens with a band, the shape most list screens now start with. */
 .pn-root .pn-body > .pn-load::before { height: 150px; border-radius: var(--pn-r-xl); box-shadow: 0 160px 0 var(--sk), 0 242px 0 var(--sk), 0 324px 0 var(--sk); }
 .pn-root .pn-body > .pn-load { min-height: 420px; }
+
+/* ==== Round 7 (prep20) ==== the runner and its feedback. The stem keeps a reading measure; once answered, the options
+   that are neither the key nor the pick step back so the two that matter carry the screen; a timed test's pick carries a
+   check. The feedback reads top down: verdict, the answer on its own line, why it is right, why each other option is
+   wrong (when the item stores a reason per option), the pearl, then the "why did you miss it" tags under a hairline.
+   Next stays in reach at the bottom of a long explanation. The result shows the set as one mark a question. */
+.pn-root .pn-q { max-width: 34em; }
+.pn-root .pn-exp, .pn-root .pn-why p { max-width: 38em; }
+.pn-root .pn-opt { transition: border-color var(--pn-d-press) ease, background-color var(--pn-d-press) ease, box-shadow var(--pn-d-press) ease, transform var(--pn-d-press) var(--pn-ease), opacity var(--pn-d-quick) ease; }
+.pn-root .pn-opt[aria-disabled="true"]:not(.right):not(.wrong) { opacity: .55; box-shadow: none; }
+.pn-root .pn-opt .pn-pick { color: var(--pn-pri); }
+.pn-root .pn-opt .pn-mark svg { width: 20px; height: 20px; stroke-width: 2.4; }
+body.dark .pn-root .pn-opt.wrong { background: color-mix(in srgb, var(--pn-bad) 15%, var(--pn-card)); }
+body.dark .pn-root .pn-opt.right { background: color-mix(in srgb, var(--pn-ok) 11%, var(--pn-card)); }
+
+.pn-root .pn-fb { gap: 12px; padding: 18px 18px 18px; }
+.pn-root .pn-verdict > span:last-child { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.pn-root .pn-verdict small { font-size: 13.5px; font-weight: 600; color: var(--pn-mut); opacity: 1; }
+.pn-root .pn-ans { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: var(--pn-r-md); background: var(--pn-ok-bg); border: 1px solid var(--pn-ok-line); font-size: 16.5px; font-weight: 650; line-height: 1.4; }
+.pn-root .pn-ans .pn-l { background: var(--pn-ok); color: var(--pn-card); }
+.pn-root .pn-ans > span:last-child { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding-top: 1px; overflow-wrap: anywhere; }
+.pn-root .pn-ans small, .pn-root .pn-why small { font-size: 12px; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; color: var(--pn-ok); }
+.pn-root .pn-fb h3 { padding-top: 6px; }
+.pn-root .pn-why { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.pn-root .pn-why li { display: flex; align-items: flex-start; gap: 12px; }
+.pn-root .pn-why .pn-l { width: 28px; height: 28px; border-radius: 9px; font-size: 13.5px; }
+.pn-root .pn-why p { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 15.5px; line-height: 1.55; overflow-wrap: anywhere; text-wrap: pretty; }
+.pn-root .pn-why small { color: var(--pn-mut); text-transform: none; letter-spacing: 0; font-size: 13px; font-weight: 650; }
+.pn-root .pn-why li.mine .pn-l { background: var(--pn-bad); color: var(--pn-card); }
+.pn-root .pn-why li.mine small { color: var(--pn-bad); }
+.pn-root .pn-fb .pn-mtag { margin-top: 2px; padding-top: 14px; border-top: 1px solid var(--pn-line); }
+body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
+
+/* Next in reach: the study row sticks to the bottom of the scrolling body over a short fade of the page. */
+.pn-root .pn-qw > .pn-fb + .pn-navrow { position: sticky; bottom: calc(10px + env(safe-area-inset-bottom, 0px)); z-index: 2; margin-top: 2px; }
+.pn-root .pn-qw > .pn-fb button { scroll-margin-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }   /* a focused chip clears the sticky row */
+.pn-root .pn-qw > .pn-fb + .pn-navrow::before { content: ""; position: absolute; inset: -36px -16px -48px; z-index: -1; pointer-events: none; background: linear-gradient(to bottom, transparent, var(--pn-bg) 48%); }
+
+.pn-root .pn-recap { display: flex; justify-content: center; gap: 4px; margin: 2px auto 0; max-width: 280px; width: 100%; }
+.pn-root .pn-recap i { flex: 1 1 0; max-width: 22px; height: 6px; border-radius: var(--pn-r-xs); background: var(--pn-hero-chip); }
+.pn-root .pn-recap i.ok { background: #58da95; }
+.pn-root .pn-recap i.no { background: #ff8794; }
+.pn-root .pn-recap i.skip { background: rgba(255, 255, 255, .22); }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-opt { transition: none; } }

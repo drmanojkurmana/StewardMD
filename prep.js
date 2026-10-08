@@ -668,7 +668,7 @@
       if (shown) { if (k === it.a) cls += " right"; else if (k === chosen) cls += " wrong"; }
       else if (k === chosen) cls += " sel";
       return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span>" +
-        (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : "") + "</button></li>";
+        (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : !shown && k === chosen ? '<span class="pn-mark pn-pick" aria-hidden="true">' + ico("check") + "</span>" : "") + "</button></li>";
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
     // Study: bookmark and, once answered, report, as labelled icon buttons in the bar.
@@ -679,9 +679,18 @@
     if (shown) {
       var ok = chosen === it.a, fresh = r.fresh === r.i;
       r.fresh = -1;   // the reveal plays once, on the paint right after the answer (a bookmark or tag repaint keeps still)
+      // Round 7: verdict, then the answer on its own line, then why it is right and, when the item carries a reason
+      // per option (r: PYQ and deck items), why each other option is wrong, the student's pick first.
+      var rs = it.r && it.r.length === it.o.length ? it.r : null, why = it.exp || (rs && rs[it.a]) || "";
+      var others = rs ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && rs[k] && String(rs[k]).trim(); }) : [];
+      others.sort(function (x, y) { return (y === chosen) - (x === chosen) || x - y; });
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
-      fb += '<p class="pn-verdict"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : "x") + "</span><span><b>" + (ok ? "Correct" : "Incorrect") + "</b><small> · Answer " + L[it.a] + ". " + esc(it.o[it.a]) + "</small></span></p>" +
-        (it.exp ? '<h3>Explanation</h3><p class="pn-exp">' + esc(it.exp) + "</p>" : '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>") +
+      fb += '<p class="pn-verdict"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : "x") + "</span><span><b>" + (ok ? "Correct" : "Incorrect") + "</b>" + (ok ? "" : "<small>You chose " + L[chosen] + "</small>") + "</span></p>" +
+        '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + esc(it.o[it.a]) + "</span></p>" +
+        (why ? "<h3>" + (rs ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><p class="pn-exp">' + esc(why) + "</p>" : '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>") +
+        (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
+          return "<li" + (k === chosen ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === chosen ? "Your pick: " : "") + esc(it.o[k]) + "</small>" + esc(rs[k]) + "</p></li>";
+        }).join("") + "</ul>" : "") +
         (it.kp ? '<p class="pn-kp"><b>Exam pearl:</b> ' + esc(it.kp) + "</p>" : "") +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
         // Offline teacher (prep-teacher.js, Phase 6): only when MaiK runs on this phone; never a server call.
@@ -868,8 +877,16 @@
     if (r.custom) return r.custom.submit(r);
     if (r.mode === "exam") r.items.forEach(function (it, i) { if (r.ans[i] >= 0) record(it, r.ans[i]); else record(it, -1); });
     if (r.scheme) { var sc = scoreMock(r.items, r.ans, r.scheme), s = load(); s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length }]).slice(-20); save(); }
+    if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
     if (G.PREP_NATIVE) G.PREP_NATIVE.finished();
+  }
+  // Round 7: the set at a glance under the score, one mark a question in order (up to 30): right, missed, not answered.
+  function recapHtml(r) {
+    var n = r.items.length; if (n < 2 || n > 30) return "";
+    var ok = 0, no = 0;
+    var marks = r.items.map(function (it, i) { var c = r.ans[i] < 0 ? "skip" : r.ans[i] === it.a ? "ok" : "no"; if (c === "ok") ok++; else no++; return '<i class="' + c + '"></i>'; }).join("");
+    return '<div class="pn-recap" role="img" aria-label="' + ok + " right, " + no + ' missed, in question order">' + marks + "</div>";
   }
   function renderResult() {
     var r = st.run, ok = 0, missed = [];
@@ -877,7 +894,7 @@
     var pct = r.items.length ? Math.round(ok * 100 / r.items.length) : 0;
     paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r) : '<section class="pn-panel pn-score">' +
       '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
-      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p></section>") +
+      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + recapHtml(r) + "</section>") +
       (missed.length ? '<h2 class="pn-sec">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
         return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 119) + "…" : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
@@ -1189,8 +1206,9 @@
     if (a === "module" || a === "solvenext") { var s1 = b.getAttribute("data-s"), m1 = b.getAttribute("data-m"); return loadIndex(s1).then(function () { push(function () { renderModule(s1, m1); }); }); }
     if (a === "start") { var c = st.cur; return startModule(c.s, c.m, b.getAttribute("data-k")); }
     if (a === "answer") { if (Date.now() - (st.dragAt || 0) < 350) return; return answer(Number(b.getAttribute("data-k"))); }
-    if (a === "next") { var r = st.run; if (!r) return; if (r.i < r.items.length - 1) { r.i++; return renderRun(); } return finish(); }
-    if (a === "prev") { if (st.run && st.run.i) { st.run.i--; renderRun(); } return; }
+    // Round 7: a tapped Next or Previous slides the question in like a swipe; a key press (click detail 0) stays still.
+    if (a === "next") { var r = st.run; if (!r) return; if (r.i < r.items.length - 1) { r.i++; if (e.detail) st.swipeIn = 1; return renderRun(); } return finish(); }
+    if (a === "prev") { if (st.run && st.run.i) { st.run.i--; if (e.detail) st.swipeIn = -1; renderRun(); } return; }
     if (a === "markq") { var rr = st.run; rr.mark[rr.i] = !rr.mark[rr.i]; return renderRun(); }
     if (a === "qgrid") return openGrid();
     if (a === "goq") { st.run.i = Number(b.getAttribute("data-i")); st.stack.pop(); return renderRun(); }

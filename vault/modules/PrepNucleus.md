@@ -539,7 +539,7 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
 - Art (5 calls, $0.34): `subject` (subject hero, tinted to the subject's hue by a luminosity blend), `module` (module
   head band), `offline` (downloads band), `bookmarks` (bookmarks band). `empty-dl.webp` and `empty-nb.webp` deleted
   (nothing used them). `banner-dark|light.webp` had "AI-powered medical prep" painted under the wordmark: painted
-  out (owner rule); the unused `banner.webp` (same tagline) deleted; the 4K/PNG masters still carry it but never ship.
+  out (owner rule); the unused `banner.webp` (same tagline) deleted; the 4K/PNG masters were painted out in round 7.
   The Arena consent sheet uses `arena.webp` as its head and two icon rows (never shown; leave any time).
 - Screens: the subject hero carries a module map (`.pn-subbar`: completed, in progress, not started, with a key); the
   module panel head is a band over the art; downloads show the date and a progress bar while downloading; bookmark rows
@@ -553,6 +553,23 @@ Owner decisions: [[decisions/Decisions]] "PrepNucleus pricing, free tier and soc
   literal radius and duration in the six prep stylesheets maps onto them (`tmp/r6/radius.py`, `motion.py` in the job).
   `.pl-sic` is the `.pn-ic.xs` tile. Dead CSS removed: unused classes (`deadcss.py`) and declarations overridden by a
   later rule with the same selector (`dedupe.py`).
+
+## Premium UI round 7 (2026-10-08, same branch, `?v=prep20`)
+- Runner (prep.js `renderRun`): once answered, options that are neither the key nor the pick dim (CSS on
+  `[aria-disabled=true]:not(.right):not(.wrong)`); a timed test's pick carries `.pn-mark.pn-pick` (check). Feedback order:
+  `.pn-verdict` (Correct / Incorrect with "You chose X"), `.pn-ans` (the right answer on its own line), then "Why X is
+  right" + `.pn-exp` when the item has per-option reasons `r` (PYQ and Layer C deck items; `exp` first, else `r[a]`) or
+  "Explanation" otherwise, then "Why the others are wrong" `.pn-why` (one row per other option with a reason, the
+  student's pick first, `li.mine`), pearl, outdated note, teacher, and the miss tags under a hairline. The study Next row
+  is sticky at the bottom of `.pn-run` (buttons inside the feedback have `scroll-margin-bottom` to clear it).
+- Motion: a pointer-tapped Next/Previous (`click` with `detail` > 0) sets `st.swipeIn` so the question slides in like a
+  swipe; keys and synthetic clicks stay still. `finish()` marks `nav(1)` (not for key finishes).
+- Result: `recapHtml` draws `.pn-recap` under the score (one mark a question up to 30: ok, no, skip).
+- Banners: every master (`prep/art/banner-4k|dark-4k|light-4k|16x9-4k` png+webp, `banner.png`, repo-root
+  `prepnucleus-banner.png|.webp`, `prepnucleus-banner-dark|light.webp`) had the tagline painted out (job `tmp/r7/paintout.py`,
+  vertical blend of the rows above and below). No asset carries "AI-powered" now. $0 image spend.
+- Headless: run-prep-ui.mjs checks the answer line, the dimmed options, the sticky row, the tapped-Next slide, the timed
+  pick check and the result recap; run-prep-pyq-ui.mjs checks the right / others headings and the three reasons.
 
 ## Store
 localStorage `smd_prep_v1`: `{v, cards, conf, days, mod:{t,ok,last}, bm, rep, exam, last, dl, hid, mt, goal, mh, ls, lsp, pl, pt, ra, fc}` (`ls`/`lsp`: Lessons;

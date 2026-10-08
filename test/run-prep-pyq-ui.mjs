@@ -117,6 +117,7 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .pn-fb.ok");`, 3000), "the right answer is marked correct");
   ok(/C is the fixture key/.test(await text("#smdPrep .pn-exp")) && /Fixture pearl one/.test(await text("#smdPrep .pn-kp")), "our explanation and pearl show");
   ok(/2025 recall question \(memory-based, not an official paper\)/.test(await text("#smdPrep .pn-prov")), "the source line says recall, not official");
+  ok(await ev(`var h=Array.from(document.querySelectorAll("#smdPrep .pn-fb h3")).map(function(x){return x.textContent;}).join("|"), w=document.querySelectorAll("#smdPrep .pn-why li"); return h==="Why C is right|Why the others are wrong" && w.length===3 && /A is a distractor/.test(w[0].textContent) && !/AI/.test(document.querySelector("#smdPrep .pn-fb").textContent.replace(/NEET-PG|AIIMS/g,""));`) === true, "round 7: why the key is right, then a reason for each other option, no AI label");
   await shot("practice-answer");
   await click("#smdPrep [data-act=next]");
   ok(await until(`var i=document.querySelector("#smdPrep .pn-yq-fig img"); return !!(i && i.complete && i.naturalWidth > 0);`, 6000), "an image question shows its image (loaded)");
