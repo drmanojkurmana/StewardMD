@@ -605,3 +605,22 @@ prefers confident Gemini answers; embeddings are only the fallback, so bge-small
   hidden list at fixtures (`SMD_PREP_BANK_API`, `SMD_PREP_FLAG_API`) and answers the report API inside the browser.
 - Practice uses FSRS (due, then new); once everything is seen and nothing is due it becomes a random set. A timed
   test is always a random draw.
+
+## Radiology NEET-SS pilot (2026-10-08, branch `feat/prep-radiology-ss`)
+Plan and results: [[plans/PrepNucleus-RadiologySS]]. Subject `ss-radiology` (code `srd`, 12 sections, 19 modules) in the
+NEET-SS tab (branch `ss-medicine`, behind `smd_prep`). New taxonomy field `bank` (app `bv`): this subject reads
+`prep/bank/v6/ss-radiology/index.json` and `/api/prep/bank/v6/ss-radiology/...` while every other subject stays on the
+global version (`prep.js` `bvOf`). 29 questions in R2 `prep-bank/v6/ss-radiology/` (26 image items, 3 scroll stacks).
+- **Client:** `prep-rad.js` (`window.PREP_RAD`, optional in `prep-loader.js`, data-act `rd-`): scroll-stack viewer for
+  `stack: { id, n, base, w, wl, ar, lbl }` (slices `<base><window>/<NNN>.webp`), drag, wheel, keys, scrubber, window
+  switch, enlarge with pinch zoom, preload outward, cine only on request. Item images with a "/" in the name are bank
+  paths (`prep-pyq.js` `imgUrl`).
+- **Route:** `functions/api/prep/bank/[[path]].js` `RAD_RE` (img and stack files, immutable).
+- **Tools (dev only):** `tools/prep-rad.mjs` (Open-i search, Europe PMC licence check and case text, fetch, Batch gen +
+  review, Haiku vote inputs, finalize with credits), `tools/prep-rad-stack.py` (TCIA CC BY series to windowed WebP
+  stacks), metadata in `tools/prep-rad/` (targets, stacks with licences and DOIs, verifier votes). Data outside git in
+  `~/prep-data/rad/`. Credits in terms.html section 31 only.
+- **Tests:** `test/prep-rad.test.mjs`, `test/prep-rad-viewer.test.mjs`, `test/run-prep-rad-ui.mjs` (fixture
+  `test/fixtures/prep-rad/`; `REAL=~/prep-data/rad/out` runs on the real pilot output; `SHOTS`, `PN_LIGHT`).
+- **Gotchas:** Arena's `NEET_SS_SUBJECTS` does not include `ss-radiology`. Files under v6 are add-only like any bank
+  version; a changed module file needs a new name or version once the subject is live.
