@@ -212,13 +212,15 @@
   function loadTax() { return st.tax ? Promise.resolve(st.tax) : getJSON(STATIC + "taxonomy.json").then(function (t) { return (st.tax = t); }); }
   function loadIndex(sid) {
     if (st.ix[sid]) return Promise.resolve(st.ix[sid]);
-    return getJSON(STATIC + "bank/" + VER + "/" + sid + "/index.json").then(function (ix) { return (st.ix[sid] = ix); }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
+    return getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json").then(function (ix) { return (st.ix[sid] = ix); }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
   }
   function subjectsOf(exam) {
     var ex = examOf(exam), out = [];
     (st.tax ? st.tax.branches : []).forEach(function (b) { if (b.id === ex.branch) b.subjects.forEach(function (s) { if (ex.all || !s.ex || s.ex.indexOf(ex.tag) >= 0) out.push(s); }); });
     return out;
   }
+  // A subject piloted in its own bank path (taxonomy `bv`, e.g. ss-radiology in v6) reads from there; the rest from VER.
+  function bvOf(sid) { var s = subjectById(sid); return (s && s.bv) || VER; }
   function subjectById(id) { var r = null; (st.tax ? st.tax.branches : []).forEach(function (b) { b.subjects.forEach(function (s) { if (s.id === id) r = s; }); }); return r; }
   function topicOf(sid, mid) { var ix = st.ix[sid], r = null; if (ix) ix.topics.forEach(function (t) { if (t.id === mid) r = t; }); return r; }
 
@@ -248,7 +250,7 @@
   function cachePut(path, val) { return idbDo("readwrite", function (os) { return os.put(val, path); }); }
   function cacheKeys() { return idbDo("readonly", function (os) { return os.getAllKeys ? os.getAllKeys() : null; }); }
   function cacheDel(path) { return idbDo("readwrite", function (os) { return os.delete(path); }); }
-  function modulePath(sid, mid) { return VER + "/" + sid + "/mcq/" + mid + ".json"; }
+  function modulePath(sid, mid) { return bvOf(sid) + "/" + sid + "/mcq/" + mid + ".json"; }
   function loadModule(sid, mid) {
     var p = modulePath(sid, mid);
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
@@ -277,7 +279,7 @@
 
   // Subject search index (search.json, built with the bank): fetched on the first search, cached like module files.
   function loadSearch(sid) {
-    var p = VER + "/" + sid + "/search.json";
+    var p = bvOf(sid) + "/" + sid + "/search.json";
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
     return cacheGet(p).then(function (hit) {
       if (hit && hit.sx) return (st.mem[p] = hit.sx);
@@ -389,6 +391,8 @@
     if (G.PREP_LESSONS && G.PREP_LESSONS.back()) return true;
     // PYQ: an enlarged question image closes first.
     if (G.PREP_PYQ && G.PREP_PYQ.back()) return true;
+    // Radiology: an enlarged image series closes first.
+    if (G.PREP_RAD && G.PREP_RAD.back()) return true;
     // Plan: a readiness or settings sheet closes first; onboarding steps back.
     if (G.PREP_PLAN && G.PREP_PLAN.back()) return true;
     if (st.run && st.run.mode === "exam" && !st.run.done) { if (!G.confirm || G.confirm("Leave the test? Your answers in this test will be lost.")) { stopTimer(); st.run = null; } else return true; }
@@ -450,6 +454,7 @@
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     try { if (G.PREP_LESSONS) G.PREP_LESSONS.leave(); } catch (e) {}
     try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
+    try { if (G.PREP_RAD) G.PREP_RAD.leave(); } catch (e) {}
     try { if (G.PREP_PLAN) G.PREP_PLAN.leave(); } catch (e) {}
     try { if (G.PREP_FLASH) G.PREP_FLASH.leave(); } catch (e) {}
     try { if (G.PREP_MOTION) G.PREP_MOTION.detach(); } catch (e) {}
@@ -662,6 +667,8 @@
     var it = r.items[r.i], chosen = r.ans[r.i], shown = r.mode === "study" && chosen >= 0, s = load(), bm = !!s.bm[it.id], own = it._s === "deck";
     // PYQ items (prep-pyq.js) are not in a bank module file, so a bookmark could not reload them: no ribbon.
     var pyq = G.PREP_PYQ ? { tags: G.PREP_PYQ.chips(it, HOST), fig: G.PREP_PYQ.figure(it, HOST) } : { tags: "", fig: "" };
+    // Radiology image series (prep-rad.js): the scroll stack sits under the image slot.
+    if (G.PREP_RAD) pyq.fig += G.PREP_RAD.figure(it, HOST);
     var L = ["A", "B", "C", "D"];
     var opts = it.o.map(function (o, k) {
       var cls = "pn-opt";
@@ -713,6 +720,7 @@
     paint(bar(esc(r.title), "Question " + (r.i + 1) + " of " + r.items.length, "back", right) + qprogHtml(r) +
       '<div class="pn-body pn-run"><div class="pn-qw' + enter + '" id="pnQw">' + pyq.tags + '<p class="pn-q">' + esc(it.q) + "</p>" + pyq.fig + '<ol class="pn-opts" type="A">' + opts + "</ol>" + fb + nav + "</div></div>", shown ? ".pn-fb" : ".pn-opt");
     bindRunSwipe();
+    if (G.PREP_RAD) G.PREP_RAD.mount(root);
   }
   /* Swipe (touch and pen; the mouse has the buttons): left goes to the next question once this one is answered (or any
      time in a timed test), right goes back in a timed test. The page follows the finger 1:1, resists where it cannot
@@ -728,7 +736,7 @@
     var x0 = 0, y0 = 0, t0 = 0, id = null, on = false, moved = false, dx = 0, vx = 0, lt = 0, lx = 0;
     body.addEventListener("pointerdown", function (e) {
       st.dragAt = 0;   // a new press is a new intent
-      if (on || e.pointerType === "mouse" || e.clientX < 24 || (e.target.closest && e.target.closest(".pn-yq-fig,.pn-mtag,.pn-wrap"))) return;
+      if (on || e.pointerType === "mouse" || e.clientX < 24 || (e.target.closest && e.target.closest(".pn-yq-fig,.pn-stack,.pn-mtag,.pn-wrap"))) return;
       on = true; moved = false; id = e.pointerId; x0 = lx = e.clientX; y0 = e.clientY; t0 = lt = Date.now(); dx = vx = 0;
     });
     body.addEventListener("pointermove", function (e) {
@@ -906,9 +914,10 @@
     var r = st.run, it = r.items[i];
     st.stack.push(function () {
       var L = ["A", "B", "C", "D"];
-      paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
+      paint(bar("Review", esc(r.title), "back") + '<div class="pn-body pn-run">' + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<p class="pn-q">' + esc(it.q) + "</p>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
         return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + "</span></div></li>";
       }).join("") + '</ol><section class="pn-fb"><h3>Explanation</h3><p class="pn-exp">' + esc(it.exp || "No explanation is stored for this question yet.") + '</p>' + provHtml(it) + "</section></div>");
+      if (G.PREP_RAD) G.PREP_RAD.mount(root);
     });
     rerender();
   }
@@ -1181,7 +1190,7 @@
   function removeDownload(sid) {
     var s = load();
     cacheKeys().then(function (keys) {
-      (keys || []).forEach(function (k) { if (String(k).indexOf(VER + "/" + sid + "/") === 0) { cacheDel(k); delete st.mem[k]; } });
+      (keys || []).forEach(function (k) { if (String(k).indexOf(bvOf(sid) + "/" + sid + "/") === 0) { cacheDel(k); delete st.mem[k]; } });
       delete s.dl[sid]; save(); renderDownloads();
     });
   }
@@ -1254,6 +1263,8 @@
     if (a.indexOf("l-") === 0 && G.PREP_LESSONS) return G.PREP_LESSONS.act(a, b, HOST);
     // Previous year papers (prep-pyq.js) own every data-act starting "y-".
     if (a.indexOf("y-") === 0 && G.PREP_PYQ) return G.PREP_PYQ.act(a, b, HOST);
+    // Radiology image series (prep-rad.js) own every data-act starting "rd-".
+    if (a.indexOf("rd-") === 0 && G.PREP_RAD) return G.PREP_RAD.act(a, b, HOST);
     // Onboarding, readiness and today's plan (prep-plan.js) own every data-act starting "p-".
     if (a.indexOf("p-") === 0 && G.PREP_PLAN) return G.PREP_PLAN.act(a, b, HOST);
     // Module flashcards (prep-flash.js) own every data-act starting "k-".

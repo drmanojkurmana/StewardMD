@@ -255,6 +255,8 @@ if [ -f prep/taxonomy.json ]; then
   # Illustrations (home sky, brand banner, logo icon, onboarding, finish screens, Arena lobby, empty states).
   [ -d prep/art ] && mkdir -p "$WWW/prep/art" && for a in prep/art/*.webp; do case "$a" in *-4k.webp) ;; *) cp "$a" "$WWW/prep/art/";; esac; done  # 4K masters and PNGs stay out of the app bundle
   BV=$(sed -n 's/.*VER = G.SMD_PREP_BANK_VER || "\(v[0-9]*\)".*/\1/p' prep.js); for ix in prep/bank/${BV:-v1}/*/index.json; do [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
+  # A subject piloted in its own bank version (taxonomy "bv", e.g. ss-radiology in v6) ships that version's index.
+  for p in $(node -e 'const t=require("./prep/taxonomy.json");for(const b of t.branches)for(const s of b.subjects)if(s.bv)console.log(s.bv+"/"+s.id)' 2>/dev/null); do ix="prep/bank/$p/index.json"; [ -f "$ix" ] && mkdir -p "$WWW/$(dirname "$ix")" && cp "$ix" "$WWW/$ix"; done
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
   # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.
   if [ -f prep/lessons/v1/index.json ]; then

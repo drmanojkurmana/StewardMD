@@ -43,7 +43,7 @@ export const ORDER = {
     "orthopaedics", "dermatology", "psychiatry", "anaesthesia", "radiology"],
   "ss-medicine": ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology",
     "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology",
-    "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care", "ss-biostatistics"],
+    "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care", "ss-biostatistics", "ss-radiology"],
 };
 export const BRANCHES = [{ id: "mbbs", name: { en: "MBBS" } }, { id: "ss-medicine", name: { en: "SS Medicine" } }];
 export const EXAMS = ["neet-pg", "ini-cet", "neet-ss", "usmle"];
@@ -64,6 +64,9 @@ export function validateSubject(s) {
   if (!/^[a-z]{2,4}$/.test(s.code || "")) e.push("code");
   if (!BRANCHES.some((b) => b.id === s.branch)) e.push("branch " + s.branch);
   if (!s.title) e.push("title");
+  // bank: an optional bank version for this subject alone (a new subject piloted in its own path, e.g. "v6" for
+  // ss-radiology); the app reads it as `bv` and falls back to its global bank version.
+  if (s.bank != null && !/^v\d{1,3}$/.test(s.bank)) e.push("bank " + s.bank);
   if (!Array.isArray(s.exams) || !s.exams.length || s.exams.some((x) => !EXAMS.includes(x))) e.push("exams");
   if (!Array.isArray(s.sections) || !s.sections.length) e.push("sections");
   for (const sec of s.sections || []) {
@@ -108,7 +111,7 @@ export function taxonomyForApp(subjects) {
     branches: BRANCHES.map((b) => ({
       id: b.id, name: b.name,
       subjects: subjects.filter((s) => s.branch === b.id).map((s) => ({
-        id: s.id, code: s.code, name: { en: s.title }, ex: s.exams, medmcqa: s.medmcqa || null,
+        id: s.id, code: s.code, name: { en: s.title }, ex: s.exams, medmcqa: s.medmcqa || null, ...(s.bank ? { bv: s.bank } : {}),
         sections: s.sections.map((sec) => ({ id: sec.id, name: { en: sec.title }, modules: sec.modules.map((m) => ({ id: m.id, name: { en: m.title }, size: m.size })) })),
       })),
     })),

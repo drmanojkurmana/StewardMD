@@ -1,0 +1,209 @@
+{
+ "note": "Radiology NEET-SS pilot scroll stacks. Each from one TCIA series; licence per the collection page and the NBIA getSeries record (LicenseName / LicenseURI) on 2026-10-08. Built with tools/prep-rad-stack.py build <dicom> <out> --range a b --n n --win w. views = original slice numbers shown to the verifiers. Clinical facts only from the collection's own clinical data sheet or summary. Credit lines go to terms.html only.",
+ "stacks": {
+  "vs": {
+   "id": "rad-vs-01",
+   "collection": "Vestibular-Schwannoma-SEG",
+   "patient": "VS-SEG-032",
+   "uid": "1.3.6.1.4.1.14519.5.2.1.138184616496900780587882999220215107975",
+   "range": [
+    26,
+    60
+   ],
+   "n": 40,
+   "wins": [
+    "mr"
+   ],
+   "views": [
+    38,
+    42,
+    46
+   ],
+   "label": "Axial T1 post-contrast MRI",
+   "modality": "contrast-enhanced axial T1-weighted 3D MRI of the brain",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "doi": "https://doi.org/10.7937/TCIA.9YTJ-5Q73",
+   "creditTitle": "Segmentation of Vestibular Schwannoma from Magnetic Resonance Imaging: An Open Annotated Dataset and Baseline Algorithm (Vestibular-Schwannoma-SEG), version 2",
+   "creditAuthor": "Shapey J, Kujawa A, Dorent R, Wang G, Bisdas S, et al. (2021); The Cancer Imaging Archive",
+   "series": "Contrast-enhanced axial T1-weighted 3D gradient echo MRI acquired for Gamma Knife radiosurgery planning; 35 consecutive 1.5 mm slices from the lower pons to the lateral ventricles.",
+   "text": "Collection: patients with a single sporadic vestibular schwannoma referred for Gamma Knife stereotactic radiosurgery; the tumour was outlined on contrast-enhanced T1 images by neurosurgeon and physicist. This patient: a well-defined avidly enhancing extra-axial mass in the right cerebellopontine angle cistern that extends into and widens the right internal acoustic canal, with mass effect on the right middle cerebellar peduncle and pons. No dural tail is evident and the mass is centred on the porus acusticus.",
+   "extra": "Vestibular schwannoma arises from the vestibular nerve within the internal acoustic canal; the intracanalicular component gives an ice cream cone shape. Meningioma is centred away from the porus, often broad based with a dural tail and calcification, and rarely enters the canal. Bilateral vestibular schwannomas define neurofibromatosis type 2. Small or slow growing tumours may be observed with serial MRI; radiosurgery or microsurgery treat growing tumours."
+  },
+  "gbm": {
+   "id": "rad-gbm-01",
+   "collection": "UPENN-GBM",
+   "patient": "UPENN-GBM-00009",
+   "uid": "1.3.6.1.4.1.14519.5.2.1.170870999839860708966191655293902879313",
+   "range": [
+    84,
+    150
+   ],
+   "n": 48,
+   "wins": [
+    "mr"
+   ],
+   "views": [
+    106,
+    116,
+    126
+   ],
+   "label": "Axial T1 post-contrast MRI",
+   "modality": "contrast-enhanced axial T1-weighted MRI of the brain",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "doi": "https://doi.org/10.7937/TCIA.709X-DN49",
+   "creditTitle": "Multi-parametric magnetic resonance imaging (mpMRI) scans for de novo Glioblastoma (GBM) patients from the University of Pennsylvania Health System (UPENN-GBM), version 2",
+   "creditAuthor": "Bakas S, Sako C, Akbari H, et al., Davatzikos C (2021); The Cancer Imaging Archive",
+   "series": "Pre-operative contrast-enhanced axial T1-weighted MRI (co-registered to an atlas space); 48 slices through the supratentorial brain.",
+   "text": "Collection: adults with newly diagnosed, histologically confirmed de novo glioblastoma (WHO grade 4) imaged before surgery. This patient, 69-year-old man: a lobulated intra-axial mass in the right parieto-occipital region with intense heterogeneous enhancement and irregular margins, surrounded by low T1 signal oedema, with mild effacement of the adjacent sulci and of the occipital horn of the right lateral ventricle.",
+   "extra": "Glioblastoma enhances heterogeneously, often with a thick irregular rim around necrosis, and infiltrates the surrounding non-enhancing T2 signal, so relative cerebral blood volume (rCBV) on dynamic susceptibility contrast perfusion is raised both in the enhancing tumour and in the peritumoural region. A solitary metastasis has pure vasogenic oedema around it with low peritumoural rCBV. Primary CNS lymphoma enhances solidly, restricts diffusion and has only mildly raised rCBV. MR spectroscopy of glioblastoma shows raised choline, low N-acetylaspartate and a lipid lactate peak."
+  },
+  "lung": {
+   "id": "rad-lung-01",
+   "collection": "Lung-PET-CT-Dx",
+   "patient": "Lung_Dx-G0024",
+   "uid": "1.3.6.1.4.1.14519.5.2.1.6655.2359.100400340731154014028866339815",
+   "range": [
+    12,
+    42
+   ],
+   "n": 40,
+   "wins": [
+    "lung",
+    "soft"
+   ],
+   "views": [
+    20,
+    23,
+    26
+   ],
+   "label": "Axial chest CT",
+   "modality": "axial chest CT (lung and soft-tissue windows)",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "doi": "https://doi.org/10.7937/TCIA.2020.NNC2-0461",
+   "creditTitle": "A Large-Scale CT and PET/CT Dataset for Lung Cancer Diagnosis (Lung-PET-CT-Dx)",
+   "creditAuthor": "Li P, Wang S, Li T, Lu J, HuangFu Y, Wang D (2020); The Cancer Imaging Archive",
+   "series": "Axial chest CT, 5 mm slices from the lung bases to the aortic arch; lung and soft-tissue windows.",
+   "text": "Collection: patients with suspected lung cancer who underwent standard of care lung biopsy and FDG PET-CT; patient IDs with G were squamous cell carcinoma on histopathology. This patient, 72-year-old man: a solitary lobulated, spiculated soft-tissue mass at the right lung base next to the right heart border, with strands radiating into the surrounding lung; no pleural effusion.",
+   "extra": "A spiculated solid lung mass in an older adult is lung cancer until proved otherwise. Work-up: contrast CT of chest and upper abdomen, then FDG PET-CT for nodal and distant staging and a tissue diagnosis (CT-guided biopsy for a peripheral lesion, bronchoscopy or endobronchial ultrasound for central lesions and for sampling mediastinal nodes). Squamous cell carcinoma is classically central and may cavitate; adenocarcinoma is classically peripheral."
+  },
+  "rcc": {
+   "id": "rad-rcc-01",
+   "collection": "C4KC-KiTS",
+   "patient": "KiTS-00192",
+   "uid": "1.3.6.1.4.1.14519.5.2.1.6919.4624.255684524130128723743191175659",
+   "range": [
+    34,
+    70
+   ],
+   "n": 40,
+   "wins": [
+    "soft"
+   ],
+   "views": [
+    46,
+    52,
+    58
+   ],
+   "label": "Axial contrast CT abdomen",
+   "modality": "arterial phase contrast-enhanced axial CT of the abdomen",
+   "licence": "CC BY 3.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/3.0/",
+   "doi": "https://doi.org/10.7937/TCIA.2019.IX49E8NX",
+   "creditTitle": "Data from the training set of the 2019 Kidney and Kidney Tumor Segmentation Challenge (C4KC-KiTS)",
+   "creditAuthor": "Heller N, Sathianathen N, Kalapara A, et al., Weight C (2019); The Cancer Imaging Archive",
+   "series": "Pre-operative arterial (corticomedullary) phase contrast CT of the abdomen; 37 slices through both kidneys.",
+   "text": "Collection: patients who underwent partial or radical nephrectomy for a renal tumour, with the pathology recorded. This patient, 61-year-old man: a large heterogeneously enhancing solid mass arising from the left kidney with internal low-attenuation necrotic areas and avid peripheral enhancement, radiographic size 12 cm; pathology clear cell renal cell carcinoma, pathological T3, N0.",
+   "extra": "Clear cell renal cell carcinoma is the commonest renal cancer; it is hypervascular, enhances avidly in the corticomedullary phase and is heterogeneous with necrosis when large. Papillary carcinoma enhances weakly; angiomyolipoma contains macroscopic fat; oncocytoma may show a central scar but cannot be separated reliably on CT. Staging looks for renal vein and inferior vena cava tumour thrombus, perinephric fat invasion, nodes and metastases; T3 means extension into major veins or perinephric tissues."
+  },
+  "acc": {
+   "id": "rad-acc-01",
+   "collection": "Adrenal-ACC-Ki67-Seg",
+   "patient": "Adrenal_Ki67_Seg_011",
+   "uid": "1.3.6.1.4.1.14519.5.2.1.205011809217295320567685474865140359559",
+   "range": [
+    48,
+    78
+   ],
+   "n": 40,
+   "wins": [
+    "soft"
+   ],
+   "views": [
+    60,
+    64,
+    68
+   ],
+   "label": "Axial contrast CT abdomen",
+   "modality": "portal venous phase contrast-enhanced axial CT of the abdomen",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "doi": "https://doi.org/10.7937/1FPG-VM46",
+   "creditTitle": "Voxel-level segmentation of pathologically-proven Adrenocortical carcinoma with Ki-67 expression (Adrenal-ACC-Ki67-Seg)",
+   "creditAuthor": "Moawad AW, Ahmed AA, ElMohr M, et al., Elsayes K (2023); The Cancer Imaging Archive",
+   "series": "Portal venous phase contrast CT of the abdomen, 5 mm slices from the renal hila to the adrenal glands.",
+   "text": "Collection: patients with histologically proven adrenocortical carcinoma imaged before surgery. This patient, 66-year-old woman presenting with hypertension: a heterogeneously enhancing solid mass of the left adrenal gland, pathological size 5.5 cm, with irregular internal low attenuation areas, lying anteromedial to the upper pole of the left kidney. Only a portal venous phase was acquired (no unenhanced or delayed series). Stage T2 N1 M0, Ki-67 index 15 percent.",
+   "extra": "An adrenal mass larger than 4 cm, heterogeneous with necrosis, haemorrhage or calcification, is suspicious for adrenocortical carcinoma. Lipid-rich adenoma measures 10 HU or less unenhanced; on adrenal protocol CT an adenoma shows absolute washout of 60 percent or more and relative washout of 40 percent or more. Pheochromocytoma must be excluded biochemically with plasma or urine metanephrines before biopsy or surgery; percutaneous biopsy of a suspected adrenocortical carcinoma is avoided because of tumour seeding."
+  },
+  "hcc": {
+   "id": "rad-hcc-01",
+   "collection": "HCC-TACE-Seg",
+   "patient": "HCC_075",
+   "uid": "1.3.6.1.4.1.14519.5.2.1.1706.8374.937868213453950964734050568980",
+   "range": [
+    24,
+    112
+   ],
+   "n": 48,
+   "wins": [
+    "soft"
+   ],
+   "views": [
+    50,
+    70,
+    90
+   ],
+   "label": "Axial contrast CT abdomen",
+   "modality": "contrast-enhanced axial CT of the liver from a multiphase liver protocol",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "doi": "https://doi.org/10.7937/TCIA.5FNA-0924",
+   "creditTitle": "Multimodality annotated HCC cases with and without advanced imaging segmentation (HCC-TACE-Seg)",
+   "creditAuthor": "Moawad AW, Fuentes D, Morshid A, et al., Elsayes K (2021); The Cancer Imaging Archive",
+   "series": "Contrast-enhanced CT of the liver from a three phase liver protocol, 48 slices from the kidneys to the liver dome.",
+   "text": "Collection: patients with hepatocellular carcinoma treated with transarterial chemoembolisation. This patient, 67 years old, no viral hepatitis and no cirrhosis, Child-Pugh class A, performance status 1 to 2, AFP 38.5: a large multinodular heterogeneous tumour involving more than half of the liver, with portal vein tumour thrombosis; vascular invasion, nodal disease and metastasis were recorded; poorly differentiated hepatocellular carcinoma; BCLC stage C.",
+   "extra": "BCLC stage C (advanced) is defined by portal vein invasion or extrahepatic spread, or performance status 1 to 2, with preserved liver function; first line treatment is systemic therapy (for example atezolizumab with bevacizumab). BCLC B (intermediate, multinodular without vascular invasion, performance status 0) is the classic indication for transarterial chemoembolisation. Portal vein tumour thrombus expands the vein and enhances in the arterial phase, unlike bland thrombus."
+  },
+  "pda": {
+   "id": "rad-pda-01",
+   "collection": "CPTAC-PDA",
+   "patient": "C3N-00957",
+   "uid": "1.3.6.1.4.1.14519.5.2.1.7085.2626.984361307626903829562789406767",
+   "range": [
+    88,
+    134
+   ],
+   "n": 47,
+   "wins": [
+    "soft"
+   ],
+   "views": [
+    106,
+    115,
+    121
+   ],
+   "label": "Axial contrast CT abdomen",
+   "modality": "pancreatic protocol venous phase contrast-enhanced axial CT of the upper abdomen",
+   "licence": "CC BY 4.0",
+   "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+   "doi": "https://doi.org/10.7937/K9/TCIA.2018.SC20FO18",
+   "creditTitle": "The Clinical Proteomic Tumor Analysis Consortium Pancreatic Ductal Adenocarcinoma Collection (CPTAC-PDA), version 15",
+   "creditAuthor": "National Cancer Institute Clinical Proteomic Tumor Analysis Consortium (CPTAC) (2018); The Cancer Imaging Archive",
+   "series": "Venous phase of a pancreas protocol CT, 3 mm slices from the kidneys to the liver dome.",
+   "text": "Collection: patients with pancreatic ductal adenocarcinoma. This patient, 74-year-old man with pancreatic ductal adenocarcinoma: multiple round hypoattenuating lesions scattered through both lobes of the liver, the largest in the right lobe, consistent with hepatic metastases.",
+   "extra": "Hepatic metastases make pancreatic adenocarcinoma stage IV (M1) and unresectable whatever the local vascular involvement; treatment is systemic chemotherapy (for example FOLFIRINOX or gemcitabine with nab-paclitaxel) with tissue confirmation if needed. Resectability categories (resectable, borderline, locally advanced) apply only without distant metastases and depend on contact with the superior mesenteric artery, coeliac axis, common hepatic artery and the superior mesenteric and portal veins. Small liver metastases are better shown by MRI with diffusion."
+  }
+ }
+}

@@ -60,6 +60,8 @@
   /* ================= browser ================= */
   var P = { ix: null, ixP: null, items: null, itP: null, zoom: null, mf: {}, host: null };
   function base(host) { return (host.bankApi || "/api/prep/bank/") + "v2/pyq/"; }
+  // An image name with a "/" is a bank path (e.g. "v6/ss-radiology/img/x.webp", PREP_RAD items); PYQ names never have one.
+  function imgUrl(host, f) { return String(f).indexOf("/") >= 0 ? (host.bankApi || "/api/prep/bank/") + f : base(host) + "img/" + f; }
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
   // index.json: network first (it names the current items file), the IndexedDB copy when offline.
   function loadIndex(host) {
@@ -204,9 +206,9 @@
   function figure(it, host) {
     if (host) P.host = host;
     if (!it.img || !it.img.length || !P.host) return "";
-    var e = P.host.esc, b = base(P.host);
+    var e = P.host.esc;
     return it.img.map(function (f, k) {
-      return '<figure class="pn-vfig pn-yq-fig"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" aria-label="Enlarge image ' + (k + 1) + ' of this question"><img src="' + e(b + "img/" + f) + '" alt="Image for this question (' + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
+      return '<figure class="pn-vfig pn-yq-fig"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" aria-label="Enlarge image ' + (k + 1) + ' of this question"><img src="' + e(imgUrl(P.host, f)) + '" alt="Image for this question (' + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
         '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + "</span><span>Tap to enlarge.</span></figcaption></figure>";
     }).join("");
   }
@@ -219,7 +221,7 @@
     var root = host.root(), e = host.esc, el = G.document.createElement("div");
     el.className = "pn-zoom"; el.id = "pnYqZoom"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Image, enlarged");
     el.innerHTML = '<div class="pn-zoom-top"><p>Question image</p><button type="button" class="pn-ib" data-act="y-unzoom" aria-label="Close image">' + host.ico("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(base(host) + "img/" + f) + '" alt="Image for this question, enlarged"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(imgUrl(host, f)) + '" alt="Image for this question, enlarged"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
     root.appendChild(el);
     P.zoom = { el: el, from: f };
     var c = el.querySelector("[data-act=y-unzoom]"); if (c) c.focus();

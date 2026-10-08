@@ -1,0 +1,518 @@
+{
+ "v": 1,
+ "note": "Radiology NEET-SS pilot blueprint: one target = one MCQ. kind img = a CC BY / CC0 PMC case report figure found through NLM Open-i; kind stack = a TCIA CC BY series (tools/prep-rad/stacks.json). style: dx (diagnosis), sign (name the sign or finding), next (next best imaging or management step), ir (IR technique, device or complication), proto (protocol, sequence or physics point), ddx (key differentiating feature).",
+ "targets": [
+  {
+   "id": "moyamoya",
+   "mod": "srd-neuro-vascular",
+   "kind": "img",
+   "it": "m,c",
+   "q": [
+    "moyamoya"
+   ],
+   "dx": "Moyamoya disease",
+   "style": "sign"
+  },
+  {
+   "id": "pres",
+   "mod": "srd-neuro-metabolic",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "posterior reversible encephalopathy"
+   ],
+   "dx": "Posterior reversible encephalopathy syndrome",
+   "style": "dx"
+  },
+  {
+   "id": "cjd",
+   "mod": "srd-neuro-metabolic",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "Creutzfeldt-Jakob diffusion",
+    "Creutzfeldt-Jakob MRI"
+   ],
+   "dx": "Sporadic Creutzfeldt-Jakob disease",
+   "style": "proto"
+  },
+  {
+   "id": "ods",
+   "mod": "srd-neuro-metabolic",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "central pontine myelinolysis",
+    "osmotic demyelination"
+   ],
+   "dx": "Osmotic demyelination syndrome",
+   "style": "dx"
+  },
+  {
+   "id": "dvst",
+   "mod": "srd-neuro-vascular",
+   "kind": "img",
+   "it": "c,m",
+   "q": [
+    "cerebral venous thrombosis",
+    "empty delta sign"
+   ],
+   "dx": "Cerebral venous sinus thrombosis",
+   "style": "sign"
+  },
+  {
+   "id": "jna",
+   "mod": "srd-hn-neck",
+   "kind": "img",
+   "it": "c,m",
+   "q": [
+    "nasopharyngeal angiofibroma"
+   ],
+   "dx": "Juvenile nasopharyngeal angiofibroma",
+   "style": "ir"
+  },
+  {
+   "id": "glomus",
+   "mod": "srd-hn-skullbase",
+   "kind": "img",
+   "it": "c,m",
+   "q": [
+    "glomus jugulare",
+    "jugular paraganglioma"
+   ],
+   "dx": "Jugular paraganglioma (glomus jugulare)",
+   "style": "sign"
+  },
+  {
+   "id": "lemierre",
+   "mod": "srd-hn-neck",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "Lemierre syndrome"
+   ],
+   "dx": "Lemierre syndrome",
+   "style": "dx"
+  },
+  {
+   "id": "pap",
+   "mod": "srd-chest-ild",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "alveolar proteinosis",
+    "crazy paving"
+   ],
+   "dx": "Pulmonary alveolar proteinosis",
+   "style": "next"
+  },
+  {
+   "id": "lam",
+   "mod": "srd-chest-ild",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "lymphangioleiomyomatosis"
+   ],
+   "dx": "Lymphangioleiomyomatosis",
+   "style": "dx"
+  },
+  {
+   "id": "sequestration",
+   "mod": "srd-chest-focal",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "pulmonary sequestration"
+   ],
+   "dx": "Intralobar pulmonary sequestration",
+   "style": "ddx"
+  },
+  {
+   "id": "angioinvasive-asp",
+   "mod": "srd-chest-focal",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "invasive aspergillosis halo",
+    "halo sign aspergillosis"
+   ],
+   "dx": "Angioinvasive pulmonary aspergillosis",
+   "style": "sign"
+  },
+  {
+   "id": "lvnc",
+   "mod": "srd-cardiac-vascular",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "left ventricular noncompaction",
+    "noncompaction cardiomyopathy"
+   ],
+   "dx": "Left ventricular noncompaction",
+   "style": "proto"
+  },
+  {
+   "id": "constrictive",
+   "mod": "srd-cardiac-vascular",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "constrictive pericarditis calcification",
+    "constrictive pericarditis"
+   ],
+   "dx": "Constrictive pericarditis",
+   "style": "ddx"
+  },
+  {
+   "id": "gallstone-ileus",
+   "mod": "srd-abd-bowel",
+   "kind": "img",
+   "it": "c,x",
+   "q": [
+    "gallstone ileus"
+   ],
+   "dx": "Gallstone ileus",
+   "style": "sign"
+  },
+  {
+   "id": "aip",
+   "mod": "srd-abd-liver",
+   "kind": "img",
+   "it": "c,m",
+   "q": [
+    "autoimmune pancreatitis"
+   ],
+   "dx": "Type 1 autoimmune pancreatitis",
+   "style": "next"
+  },
+  {
+   "id": "budd-chiari",
+   "mod": "srd-abd-liver",
+   "kind": "img",
+   "it": "c,m",
+   "q": [
+    "Budd-Chiari"
+   ],
+   "dx": "Budd-Chiari syndrome",
+   "style": "ir"
+  },
+  {
+   "id": "sma-syndrome",
+   "mod": "srd-abd-bowel",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "superior mesenteric artery syndrome"
+   ],
+   "dx": "Superior mesenteric artery syndrome",
+   "style": "dx"
+  },
+  {
+   "id": "emph-pyelo",
+   "mod": "srd-gu-kidney",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "emphysematous pyelonephritis"
+   ],
+   "dx": "Emphysematous pyelonephritis",
+   "style": "next"
+  },
+  {
+   "id": "xgp",
+   "mod": "srd-gu-kidney",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "xanthogranulomatous pyelonephritis"
+   ],
+   "dx": "Xanthogranulomatous pyelonephritis",
+   "style": "sign"
+  },
+  {
+   "id": "aml-bleed",
+   "mod": "srd-gu-kidney",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "angiomyolipoma rupture",
+    "Wunderlich syndrome angiomyolipoma"
+   ],
+   "dx": "Ruptured renal angiomyolipoma",
+   "style": "ir"
+  },
+  {
+   "id": "osteoid-osteoma",
+   "mod": "srd-msk-tumour",
+   "kind": "img",
+   "it": "c,x",
+   "q": [
+    "osteoid osteoma"
+   ],
+   "dx": "Osteoid osteoma",
+   "style": "ir"
+  },
+  {
+   "id": "tgct",
+   "mod": "srd-msk-joint",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "pigmented villonodular synovitis",
+    "tenosynovial giant cell tumor knee"
+   ],
+   "dx": "Diffuse tenosynovial giant cell tumour (pigmented villonodular synovitis)",
+   "style": "proto"
+  },
+  {
+   "id": "abc",
+   "mod": "srd-msk-tumour",
+   "kind": "img",
+   "it": "m,c",
+   "q": [
+    "aneurysmal bone cyst"
+   ],
+   "dx": "Aneurysmal bone cyst",
+   "style": "sign"
+  },
+  {
+   "id": "phyllodes",
+   "mod": "srd-breast",
+   "kind": "img",
+   "it": "x,u,m",
+   "q": [
+    "phyllodes tumor"
+   ],
+   "dx": "Phyllodes tumour of the breast",
+   "style": "ddx"
+  },
+  {
+   "id": "breast-hamartoma",
+   "mod": "srd-breast",
+   "kind": "img",
+   "it": "x",
+   "q": [
+    "breast hamartoma"
+   ],
+   "dx": "Breast hamartoma (fibroadenolipoma)",
+   "style": "sign"
+  },
+  {
+   "id": "midgut-volvulus",
+   "mod": "srd-paeds",
+   "kind": "img",
+   "it": "u,c,x",
+   "q": [
+    "midgut volvulus",
+    "whirlpool sign volvulus"
+   ],
+   "dx": "Malrotation with midgut volvulus",
+   "style": "sign"
+  },
+  {
+   "id": "lch-skull",
+   "mod": "srd-paeds",
+   "kind": "img",
+   "it": "x,c",
+   "q": [
+    "Langerhans cell histiocytosis skull"
+   ],
+   "dx": "Langerhans cell histiocytosis of the skull",
+   "style": "dx"
+  },
+  {
+   "id": "sega",
+   "mod": "srd-paeds",
+   "kind": "img",
+   "it": "m,c",
+   "q": [
+    "subependymal giant cell astrocytoma"
+   ],
+   "dx": "Tuberous sclerosis complex with subependymal giant cell astrocytoma",
+   "style": "dx"
+  },
+  {
+   "id": "may-thurner",
+   "mod": "srd-ir",
+   "kind": "img",
+   "it": "c,x",
+   "q": [
+    "May-Thurner"
+   ],
+   "dx": "May-Thurner (iliac vein compression) syndrome",
+   "style": "ir"
+  },
+  {
+   "id": "splenic-psa",
+   "mod": "srd-ir",
+   "kind": "img",
+   "it": "c,x",
+   "q": [
+    "splenic artery pseudoaneurysm"
+   ],
+   "dx": "Splenic artery pseudoaneurysm",
+   "style": "ir"
+  },
+  {
+   "id": "superscan",
+   "mod": "srd-nuclear",
+   "kind": "img",
+   "it": "x,p,g",
+   "q": [
+    "superscan"
+   ],
+   "dx": "Superscan on bone scintigraphy",
+   "style": "sign"
+  },
+  {
+   "id": "boerhaave",
+   "mod": "srd-emergency",
+   "kind": "img",
+   "it": "c,x",
+   "q": [
+    "Boerhaave"
+   ],
+   "dx": "Boerhaave syndrome",
+   "style": "next"
+  },
+  {
+   "id": "gad-nsf",
+   "mod": "srd-physics",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "gadolinium deposition dentate",
+    "dentate nucleus hyperintensity gadolinium"
+   ],
+   "dx": "Gadolinium retention in the dentate nucleus",
+   "style": "proto"
+  },
+  {
+   "id": "cholangiocarcinoma-hilar",
+   "mod": "srd-abd-liver",
+   "kind": "img",
+   "it": "m,c",
+   "q": [
+    "Klatskin tumor",
+    "hilar cholangiocarcinoma"
+   ],
+   "dx": "Hilar cholangiocarcinoma (Klatskin tumour)",
+   "style": "ddx"
+  },
+  {
+   "id": "spine-tb",
+   "mod": "srd-msk-joint",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "spinal tuberculosis",
+    "Pott disease"
+   ],
+   "dx": "Tuberculous spondylitis (Pott disease)",
+   "style": "ddx"
+  },
+  {
+   "id": "ewing",
+   "mod": "srd-msk-tumour",
+   "kind": "img",
+   "it": "x,m",
+   "q": [
+    "Ewing sarcoma femur",
+    "Ewing sarcoma"
+   ],
+   "dx": "Ewing sarcoma",
+   "style": "sign"
+  },
+  {
+   "id": "hsv-enceph",
+   "mod": "srd-neuro-metabolic",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "herpes simplex encephalitis"
+   ],
+   "dx": "Herpes simplex encephalitis",
+   "style": "next"
+  },
+  {
+   "id": "aortic-dissection",
+   "mod": "srd-emergency",
+   "kind": "img",
+   "it": "c",
+   "q": [
+    "type A aortic dissection"
+   ],
+   "dx": "Stanford type A aortic dissection",
+   "style": "next"
+  },
+  {
+   "id": "nmosd",
+   "mod": "srd-neuro-metabolic",
+   "kind": "img",
+   "it": "m",
+   "q": [
+    "neuromyelitis optica myelitis",
+    "longitudinally extensive transverse myelitis"
+   ],
+   "dx": "Neuromyelitis optica spectrum disorder",
+   "style": "ddx"
+  },
+  {
+   "id": "st-vs",
+   "mod": "srd-neuro-tumour",
+   "kind": "stack",
+   "stack": "vs",
+   "dx": "Vestibular schwannoma",
+   "style": "dx"
+  },
+  {
+   "id": "st-gbm",
+   "mod": "srd-neuro-tumour",
+   "kind": "stack",
+   "stack": "gbm",
+   "dx": "Glioblastoma",
+   "style": "proto"
+  },
+  {
+   "id": "st-lung",
+   "mod": "srd-chest-focal",
+   "kind": "stack",
+   "stack": "lung",
+   "dx": "Squamous cell carcinoma of the lung",
+   "style": "dx"
+  },
+  {
+   "id": "st-rcc",
+   "mod": "srd-gu-kidney",
+   "kind": "stack",
+   "stack": "rcc",
+   "dx": "Renal cell carcinoma",
+   "style": "dx"
+  },
+  {
+   "id": "st-hcc",
+   "mod": "srd-abd-liver",
+   "kind": "stack",
+   "stack": "hcc",
+   "dx": "Hepatocellular carcinoma",
+   "style": "next"
+  },
+  {
+   "id": "st-acc",
+   "mod": "srd-gu-kidney",
+   "kind": "stack",
+   "stack": "acc",
+   "dx": "Adrenocortical carcinoma",
+   "style": "ddx"
+  },
+  {
+   "id": "st-pda",
+   "mod": "srd-abd-liver",
+   "kind": "stack",
+   "stack": "pda",
+   "dx": "Pancreatic ductal adenocarcinoma",
+   "style": "next"
+  }
+ ]
+}
