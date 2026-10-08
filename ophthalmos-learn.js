@@ -915,7 +915,8 @@
   function glossList(focusSel) {
     st.view = "lngloss"; st.onBack = sheetBack; W.again = glossList;
     var g = W.gloss || {}, lang = L();
-    var ids = Object.keys(g).sort(function (a, b) { return D.t(g[a].term, lang).localeCompare(D.t(g[b].term, lang), lang); });
+    // Sorted by the title the row shows (an abbreviation term shows its full form first, owner rule R3).
+    var ids = Object.keys(g).sort(function (a, b) { return glossTitle(g[a]).localeCompare(glossTitle(g[b]), lang); });
     paint(I.top(s("backLearn"), s("glossary"), s("nTerms", { n: fmt(ids.length) }), langBtn()) +
       '<div class="oph-scroll oph-pad"><div class="ln-col"><ul class="ln-gloss">' + ids.map(function (id) {
         return '<li><button class="ln-grow" data-act="lngloss" data-g="' + esc(id) + '" aria-haspopup="dialog"><b>' + esc(glossTitle(g[id])) + "</b><span>" + tx(g[id].def) + "</span></button></li>";
