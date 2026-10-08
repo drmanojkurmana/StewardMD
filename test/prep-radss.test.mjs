@@ -145,3 +145,32 @@ test("the bank route serves every path the finalizer writes for v7, and nothing 
   for (const p of ok) assert.equal(bankPath({ path: p.split("/") }), p, p);
   for (const p of ["v7/ss-radiology/img/../x.webp", "v7/ss-radiology/raw/x.pdf", "v7/ss-radiology/img/X.webp"]) assert.equal(bankPath({ path: p.split("/") }), null, p);
 });
+
+test("fit4 cuts a five-option reply to four and keeps key and reasons aligned", () => {
+  const r = { o: ["p", "q", "r", "s", "t"], a: 4, ot: [{ k: "A", why: "wa" }, { k: "B", why: "wb" }, { k: "C", why: "wc" }, { k: "D", why: "wd" }] };
+  const f = R.fit4(r);
+  assert.deepEqual(f.o, ["p", "q", "r", "t"]); assert.equal(f.a, 3);
+  assert.deepEqual(f.ot.map((x) => x.k + x.why), ["Awa", "Bwb", "Cwc"]);
+  const g = R.fit4({ o: ["p", "q", "r", "s", "t"], a: 1, ot: [{ k: "A", why: "wa" }, { k: "C", why: "wc" }, { k: "D", why: "wd" }, { k: "E", why: "we" }] });
+  assert.deepEqual(g.o, ["p", "q", "r", "s"]); assert.equal(g.a, 1); assert.deepEqual(g.ot.map((x) => x.k), ["A", "C", "D"]);
+  const four = { o: [1, 2, 3, 4], a: 0 }; assert.equal(R.fit4(four), four);
+});
+
+test("fixOt relabels three badly labelled reasons with the wrong options' letters and leaves good ones", () => {
+  const r = { o: ["a", "b", "c", "d"], a: 2, ot: [{ k: "AD", why: "x" }, { k: "", why: "y" }, { k: "option d", why: "z" }] };
+  assert.deepEqual(R.fixOt(r).ot.map((x) => x.k), ["A", "B", "D"]);
+  const good = { o: ["a", "b", "c", "d"], a: 0, ot: [{ k: "D", why: "x" }, { k: "B", why: "y" }, { k: "C", why: "z" }] };
+  assert.equal(R.fixOt(good), good);
+  const two = { o: ["a", "b", "c", "d"], a: 0, ot: [{ k: "", why: "x" }, { k: "", why: "y" }] };
+  assert.equal(R.fixOt(two), two, "two reasons cannot be relabelled safely");
+});
+
+test("itemGates refuses reasons not labelled with exactly the three wrong letters; targetD spreads difficulty", () => {
+  const ground = "History: a 45-year-old man. Imaging findings: hilar mass. Diagnosis: cholangiocarcinoma.";
+  const x = { q: "A 45-year-old man has jaundice and a hilar mass on CT. Which classification type applies here?", o: ["Type IV", "Type I", "Type II", "Type IIIa"], a: 0, ky: "Type IV is right.", nt: Array(60).fill("word").join(" "), others: { B: "b", C: "c", D: "d" }, pl: "Remember type IV.", d: 2 };
+  assert.equal(R.itemGates(x, { kind: "text" }, ground), null);
+  assert.equal(R.itemGates({ ...x, others: { B: "b", C: "c", BACAA: "d" } }, { kind: "text" }, ground), "others");
+  const ds = new Set(); for (let i = 0; i < 60; i++) ds.add(R.targetD("t" + i));
+  assert.deepEqual([...ds].sort(), [1, 2, 3]);
+  assert.equal(R.targetD("t5"), R.targetD("t5"), "stable");
+});
