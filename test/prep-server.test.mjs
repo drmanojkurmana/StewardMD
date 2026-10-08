@@ -76,6 +76,18 @@ test("bank: PYQ index (short cache), hashed items file and webp images (immutabl
   assert.equal(asked, 0);
 });
 
+test("bank: a bank item's images (v<n>/img/<name>.webp, immutable, image/webp); nothing else under img/", async () => {
+  const env = { PREP_BANK_R2: r2({ "prep-bank/v5/img/ana-brachial-plexus-1.webp": "RIFF" }) };
+  const im = await get("v5/img/ana-brachial-plexus-1.webp", env);
+  assert.equal(im.status, 200);
+  assert.equal(im.headers.get("Content-Type"), "image/webp");
+  assert.match(im.headers.get("Cache-Control"), /immutable/);
+  let asked = 0;
+  const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
+  for (const p of ["v5/img/x.png", "v5/img/../manifest.json", "v5/img/a/b.webp", "v5/img/UPPER.webp", "v5/img/x.webp.json", "img/x.webp", "v5/anatomy/img/x.webp"]) assert.equal((await get(p, spy)).status, 404, p);
+  assert.equal(asked, 0);
+});
+
 test("bank: lessons and cards (index short cache; module files and lesson media immutable, right types); nothing else", async () => {
   const env = { PREP_BANK_R2: r2({ "prep-bank/v1/lessons/index.json": '{"v":1}', "prep-bank/v1/lessons/sur-thyroid.json": '{"v":1}', "prep-bank/v1/lessons/media/thyroid-flow.svg": "<svg/>",
     "prep-bank/v1/lessons/media/neck-us.webp": "RIFF", "prep-bank/v1/cards/index.json": '{"v":1}', "prep-bank/v1/cards/sur-thyroid.json": '{"v":1}' }) };

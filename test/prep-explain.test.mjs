@@ -3,10 +3,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import crypto from "node:crypto";
 import os from "node:os";
 import path from "node:path";
 import {
-  passagesOf, index, namesOther, misaligned, fixTables, queryOf, groundFor, explainPrompt, readX, tidy, keyAgrees, tableOk, xGate, gateWhy, reviewPrompt, readReview,
+  passagesOf, index, namesOther, misaligned, fixTables, pyqCopy, buildVersion, collectResults, queryOf, groundFor, explainPrompt, readX, tidy, keyAgrees, tableOk, xGate, gateWhy, reviewPrompt, readReview,
   reviewOk, XPASS, toR, applyX, scopeItems, pickPilot, estimate, run, XSchema, PER,
 } from "../tools/prep-explain.mjs";
 
@@ -74,6 +75,8 @@ test("xGate: passes a grounded, well formed explanation and names each failure",
   assert.equal(xGate(IT, { ...GOOD, pearl: "Seen in 90% of cases." }, G0), "g9b");
   assert.equal(xGate(IT, { ...GOOD, pearl: "Seen at age 30." }, G0), null, "a number in the stem is grounded");
   assert.equal(xGate(IT, { ...GOOD, pearl: "CD20, IL-2, I-131 and HbA1c are names, not numbers." }, G0), null, "identifiers with digits are not quantities");
+  assert.equal(xGate(IT, { ...GOOD, pearl: "CD 20 and the 50S subunit are names too." }, G0), null, "spaced CD markers and ribosome subunits");
+  assert.equal(xGate(IT, { ...GOOD, pearl: "Give 50 mg twice." }, G0), "g9b", "a dose is still a number");
   assert.equal(xGate(IT, { ...GOOD, notes: GOOD.notes + "\n1. Third step" }, G0), null, "list markers are not numbers");
   assert.equal(xGate(IT, { ...GOOD, pearl: "Beaded look of the mid renal artery in young women is fibromuscular dysplasia and more." }, G0), "verbatim");
   assert.equal(xGate(IT, { ...GOOD, notes: GOOD.notes + "\n![x](y.png)" }, G0), "markup");
@@ -259,4 +262,73 @@ test("explainOf: x needs a key line; r comes from the item, else from x", () => 
   assert.equal(P.explainOf({ ...it, x: { key: "  " } }).x, null);
   assert.equal(P.explainOf({ ...it, x: "junk" }).x, null);
   assert.equal(P.explainOf(it).r, null);
+});
+
+test("relevance: an off-topic passage is never sent; the model then works from exp and the stem", () => {
+  const ps = passagesOf("Inflammatory bowel disease: faecal calprotectin is a useful marker; CD activity is scored clinically.\n\nPolycythaemia vera has a natural course of decades; radiation was used in the past.", "KB");
+  const ix = index(ps), ctx = { packIx: () => null, kbIx: ix };
+  const cd = { id: "c", q: "Which of the following is a pan B lymphocyte marker?", o: ["CD 19", "CD 3", "CD 56", "CD 34"], a: 0, exp: "" };
+  assert.equal(groundFor(cd, ctx).notes, "", "a 'marker' passage about bowel disease is off topic");
+  const nat = { id: "n", q: "Natural radiation includes:", o: ["Cosmic rays", "Radon gas", "Terrestrial gamma rays", "All of the above"], a: 3, exp: "" };
+  assert.equal(groundFor(nat, ctx).notes, "", "'All of the above': the passage must name one of the options");
+  const ok = index(passagesOf("Cosmic rays and radon gas are the main sources of natural background radiation.", "KB"));
+  assert.match(groundFor(nat, { packIx: () => null, kbIx: ok }).notes, /Cosmic rays/);
+});
+
+test("run: the spend cap stops a job before it is submitted", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pxc-"));
+  let submits = 0;
+  const vertex = { cfg: { model: "gemini-3.1-flash-lite" }, log: [], batch: { submit: async () => { submits++; return { jobId: "j" }; }, wait: async () => ({ state: "JOB_STATE_SUCCEEDED" }), results: async () => new Map() } };
+  try {
+    await assert.rejects(run([{ ...IT, id: "c1" }], { packIx: () => null, kbIx: null }, { work: dir, run: "cap", pollMs: 0, maxWaitMs: 0, budget: { cap: 0.000001, spent: 0, reserved: 0 } }, { vertex, log: () => {} }), /would pass the cap/);
+    assert.equal(submits, 0);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("pyqCopy: the bank's x with letters remapped by option text; a different key or option set gives null", () => {
+  const b = { ...IT, x: GOOD };
+  const p = { ...IT, o: ["Embolism", "Atheroma", "Fibromuscular dysplasia", "Arteritis"], a: 2 };
+  const x = pyqCopy(p, b);
+  assert.deepEqual(x.others, { A: GOOD.others.D, B: GOOD.others.A, D: GOOD.others.C });
+  assert.equal(pyqCopy({ ...p, a: 0 }, b), null);
+  assert.equal(pyqCopy({ ...p, o: ["Embolism", "Atheroma", "Fibromuscular dysplasia", "Something else"] }, b), null);
+});
+
+test("buildVersion: a new version with x and r, index v and note, manifest hashes; PYQ copies go to <to>/pyq; the source is untouched", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "pxv-"));
+  try {
+    const from = path.join(dir, "v4"), to = path.join(dir, "v5"), pyq = path.join(dir, "pyqout");
+    fs.mkdirSync(path.join(from, "anatomy", "mcq"), { recursive: true });
+    const a = { ...IT, id: "a1", exp: "" }, b = { ...IT, id: "a2", exp: "long enough already" };
+    fs.writeFileSync(path.join(from, "anatomy", "mcq", "m1.json"), JSON.stringify({ topic: "m1", items: [a, b] }));
+    fs.writeFileSync(path.join(from, "anatomy", "index.json"), JSON.stringify({ id: "anatomy", v: 1, modifications: "Cleaned." }));
+    fs.writeFileSync(path.join(from, "manifest.json"), JSON.stringify({ v: 4, subjects: [{ id: "anatomy", items: 2, bytes: 1, index: "x" }] }));
+    fs.mkdirSync(path.join(pyq, "img"), { recursive: true });
+    fs.writeFileSync(path.join(pyq, "img", "p-1.webp"), "w");
+    const pItem = { ...IT, id: "pyq-1", bank: "a1", r: null, exp: null, flags: ["exp-pending"] };
+    fs.writeFileSync(path.join(pyq, "items-00000000.json"), JSON.stringify({ v: 1, items: [pItem, { ...IT, id: "pyq-2" }] }));
+    fs.writeFileSync(path.join(pyq, "index.json"), JSON.stringify({ v: 1, file: "items-00000000.json", papers: [] }));
+    const before = fs.readFileSync(path.join(from, "anatomy", "mcq", "m1.json"), "utf8");
+    const out = buildVersion({ from, to, results: { a1: { x: GOOD } }, pyqDir: pyq, log: () => {} });
+    assert.deepEqual(out, { items: 1, subjects: ["anatomy"], pyq: 1 });
+    assert.equal(fs.readFileSync(path.join(from, "anatomy", "mcq", "m1.json"), "utf8"), before, "v4 untouched");
+    const m1 = JSON.parse(fs.readFileSync(path.join(to, "anatomy", "mcq", "m1.json"), "utf8")).items;
+    assert.deepEqual(m1[0].x, GOOD); assert.equal(m1[0].r[1], GOOD.key); assert.equal(m1[0].exp, ""); assert.equal(m1[1].x, undefined);
+    const ix = JSON.parse(fs.readFileSync(path.join(to, "anatomy", "index.json"), "utf8"));
+    assert.equal(ix.v, 5); assert.match(ix.modifications, /^Cleaned\. Structured explanations/);
+    const man = JSON.parse(fs.readFileSync(path.join(to, "manifest.json"), "utf8"));
+    assert.equal(man.v, 5); assert.equal(man.explained.items, 1);
+    assert.equal(man.subjects[0].index, crypto.createHash("sha256").update(fs.readFileSync(path.join(to, "anatomy", "index.json"))).digest("hex"));
+    const pix = JSON.parse(fs.readFileSync(path.join(to, "pyq", "index.json"), "utf8"));
+    const pits = JSON.parse(fs.readFileSync(path.join(to, "pyq", pix.file), "utf8")).items;
+    assert.ok(pits[0].x && pits[0].r && !pits[0].flags, "the PYQ copy carries x and r and is no longer exp-pending");
+    assert.equal(pits[1].x, undefined);
+    assert.ok(fs.existsSync(path.join(to, "pyq", "img", "p-1.webp")));
+    assert.throws(() => buildVersion({ from, to, results: {}, log: () => {} }), /immutable/);
+    fs.mkdirSync(path.join(dir, "runs", "b-p01"), { recursive: true }); fs.mkdirSync(path.join(dir, "runs", "b-p02"), { recursive: true });
+    fs.writeFileSync(path.join(dir, "runs", "b-p01", "results.json"), JSON.stringify({ q: { pending: true } }));
+    fs.writeFileSync(path.join(dir, "runs", "b-p02", "results.json"), JSON.stringify({ q: { x: GOOD }, r: { pending: true } }));
+    const all = collectResults(path.join(dir, "runs"), ["b"]);
+    assert.ok(all.q.x && all.r.pending);
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
 });

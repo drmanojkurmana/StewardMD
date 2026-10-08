@@ -244,7 +244,7 @@
 
   /* ================= browser ================= */
   var D = G.document, C = G.SPECIALTY_CORE;
-  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = G.SMD_PREP_BANK_VER || "v4";
+  var STATIC = G.SMD_PREP_BASE || "/prep/", API = G.SMD_PREP_BANK_API || "/api/prep/bank/", FLAG_API = G.SMD_PREP_FLAG_API || "/api/prep/flag", VER = G.SMD_PREP_BANK_VER || "v5", PYQ_VER = G.SMD_PREP_PYQ_VER || "v5";
   var HID_TTL = 6 * 3600e3;
   var KEY = "smd_prep_v1", SESSION = 20;
   var st = { open: false, stack: [], tax: null, ix: {}, mem: {}, store: null, run: null, timer: 0, prevOverflow: "", prevFocus: null, sub: null, filter: "all" };
@@ -718,8 +718,11 @@
   /* The explanation under the answer: the key line and topic notes when the item has x, else its stored text (old "*"
      bullets made into a list), else a plain "not written yet" line. */
   function whyHtml(it, xo, why, L) {
-    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "");
-    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>";
+    // images placed in the explanation (imgPlace "exp") follow the notes, with the same tap to enlarge
+    var fig = G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST, "exp") : "";
+    if (xo.x) return "<h3>Why " + L[it.a] + ' is right</h3><p class="pn-xkey">' + inlineMd(xo.x.key) + "</p>" + (xo.x.notes ? '<div class="pn-xnotes">' + mdLite(xo.x.notes) + "</div>" : "") + fig;
+    if (why) return "<h3>" + (xo.r ? "Why " + L[it.a] + " is right" : "Explanation") + '</h3><div class="pn-exp">' + mdLite(legacyExp(why)) + "</div>" + fig;
+    if (fig) return "<h3>Explanation</h3>" + fig;
     return '<p class="pn-mut">' + (it._py ? "Explanation coming soon." : "No explanation is stored for this question yet.") + "</p>";
   }
   function pearlHtml(it, xo) {
@@ -1350,7 +1353,7 @@
   /* The surface Layer C (window.PREP_C: prep-create.js, prep-cards.js) draws through, so its screens share this
      overlay, back stack, runner and store. Deck items carry _s "deck" and _m "deck-<id>": their FSRS cards live in
      the same store under deck key "p:deck-<id>". */
-  var HOST = { push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
+  var HOST = { bankVer: function () { return VER; }, pyqVer: function () { return PYQ_VER; }, push: push, rerender: rerender, back: back, paint: paint, nav: nav, bar: bar, hband: hband, ico: ico, esc: esc, toast: toast, fmt: fmt,
     run: runQuestions, today: today, store: load, save: save, core: function () { return C; }, root: function () { return root; },
     exam: function () { return examOf(load().exam); },
     // Arena and My stats (prep-arena.js)

@@ -135,7 +135,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(m){(window.__confirms=window.__confirms||[]).push(m);return true;}; window.SMD_PREP_ONBOARD=false; window.toast=function(m){(window.__toasts=window.__toasts||[]).push(m);}; ${WS_STUB}` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(m){(window.__confirms=window.__confirms||[]).push(m);return true;}; window.SMD_PREP_ONBOARD=false; window.toast=function(m){(window.__toasts=window.__toasts||[]).push(m);}; ${WS_STUB}` });
   await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/prep/social/*" }, { urlPattern: "*/api/prep/arena/*" }] });
   await call("Page.navigate", { url: BASE + "?prep=1&tour=0" });
   await until(`return !!(window.PREP && window.SMD_showHome);`, 30000);

@@ -73,7 +73,7 @@ try {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false;` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
@@ -107,6 +107,16 @@ try {
         ok(!s.pageX && !s.wide.length && s.tblFit, tag + ": nothing scrolls the page sideways" + (s.wide.length ? " " + s.wide.join(",") : ""));
         if (SYNTH && i === 0) ok(s.heads === 3 && s.tables === 1, tag + ": three headings and the comparison table render");
         if (SYNTH && i === 1) ok(s.legacyLi === 3, tag + ": old '*' bullets render as a 3-item list");
+        if (it.img && it.img.length) {
+          const fg = JSON.parse(await ev(`var f=document.querySelector("#smdPrep .pn-fb"), xi=f.querySelector(".pn-xfig img"), si=document.querySelector("#smdPrep .pn-qw > .pn-yq-fig img"), o=document.querySelector("#smdPrep .pn-opts");
+            return JSON.stringify({ exp: !!xi, stem: !!si, src: (xi||si||{}).getAttribute ? (xi||si).getAttribute("src") : "", stemBeforeOpts: !!(si && (si.closest("figure").compareDocumentPosition(o) & 4)) });`));
+          if (it.imgPlace === "exp") ok(fg.exp && !fg.stem && /\/img\/fx-explain-fig\.webp$/.test(fg.src), tag + ": imgPlace exp: the image sits in the feedback card, not by the stem " + fg.src);
+          else ok(fg.stem && !fg.exp && fg.stemBeforeOpts, tag + ": imgPlace stem: the image sits between the stem and the options");
+          ok(await until(`var i=document.querySelector("#smdPrep .pn-yq-fig img"); return !!(i && i.complete && i.naturalWidth > 0);`, 5000), tag + ": the bank image loads from <VER>/img/");
+          await ev(`document.querySelector("#smdPrep .pn-yq-fig [data-act=y-zoom]").click(); return 1;`);
+          ok(await until(`var z=document.querySelector("#smdPrep #pnYqZoom img"); return !!z && z.getAttribute("src")===${JSON.stringify(fg.src)};`, 3000), tag + ": tap enlarges the same image");
+          await ev(`PREP.back(); return 1;`);
+        }
         if (SYNTH && i === 0 && size === "phone") {
           const sc = JSON.parse(await ev(`var x=document.querySelector("#smdPrep .pn-xt"); return JSON.stringify({ sw: x.scrollWidth, cw: x.clientWidth, ov: getComputedStyle(x).overflowX, sticky: getComputedStyle(x.querySelector("tbody th")).position, role: x.getAttribute("role"), tab: x.tabIndex });`));
           ok(sc.sw > sc.cw && sc.ov === "auto" && sc.sticky === "sticky" && sc.role === "region" && sc.tab === 0, "phone: the wide table scrolls inside its own focusable frame with the first column pinned " + JSON.stringify(sc));

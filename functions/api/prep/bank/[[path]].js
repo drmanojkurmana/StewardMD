@@ -22,13 +22,15 @@ const PYQ_RE = /^v\d{1,3}\/pyq\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z
 // or v<n>/cards): index.json (lists the modules, so a short cache: a later run may add modules), <module>.json and
 // lesson media (both immutable).
 const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp))$/;
+// Images a bank item carries (img + imgPlace, set by the bank build): v<n>/img/<name>.webp, immutable.
+const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
 const PREFIX = "prep-bank/";
 
 function notFound() { return new Response(JSON.stringify({ error: "not-found" }), { status: 404, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }); }
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {

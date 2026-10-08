@@ -59,7 +59,11 @@
 
   /* ================= browser ================= */
   var P = { ix: null, ixP: null, items: null, itP: null, zoom: null, mf: {}, host: null };
-  function base(host) { return (host.bankApi || "/api/prep/bank/") + "v2/pyq/"; }
+  // PYQ files live under the bank version that last rebuilt them (v5: bank explanations copied onto matching PYQs);
+  // host.pyqVer() (prep.js, SMD_PREP_PYQ_VER) names it.
+  function base(host) { return (host.bankApi || "/api/prep/bank/") + (host.pyqVer ? host.pyqVer() : "v2") + "/pyq/"; }
+  // Image folder of an item: a PYQ's own, else the bank version's img/ (bank items may carry img + imgPlace too).
+  function imgBase(it, host) { return it._py ? base(host) + "img/" : (host.bankApi || "/api/prep/bank/") + (host.bankVer ? host.bankVer() : "v4") + "/img/"; }
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
   // index.json: network first (it names the current items file), the IndexedDB copy when offline.
   function loadIndex(host) {
@@ -201,12 +205,15 @@
     var e = P.host ? P.host.esc : function (s) { return s; };
     return '<p class="pn-yq-tags">' + tagLabel(list).map(function (l) { return '<span class="pn-yq-tag">' + svg("tag", 14) + "<span>" + e(l) + "</span></span>"; }).join("") + "</p>";
   }
-  function figure(it, host) {
+  /* figure(item, host, where) -> the item's images for one place: "stem" (default; next to the question) or "exp"
+     (inside the feedback card, after the notes). An item's imgPlace says where its images go; none means "stem". */
+  function figure(it, host, where) {
     if (host) P.host = host;
     if (!it.img || !it.img.length || !P.host) return "";
-    var e = P.host.esc, b = base(P.host);
+    if ((it.imgPlace === "exp" ? "exp" : "stem") !== (where || "stem")) return "";
+    var e = P.host.esc, b = imgBase(it, P.host), of = where === "exp" ? "this explanation" : "this question";
     return it.img.map(function (f, k) {
-      return '<figure class="pn-vfig pn-yq-fig"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" aria-label="Enlarge image ' + (k + 1) + ' of this question"><img src="' + e(b + "img/" + f) + '" alt="Image for this question (' + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
+      return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(b + f) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(b + f) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
         '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + "</span><span>Tap to enlarge.</span></figcaption></figure>";
     }).join("");
   }
@@ -214,12 +221,12 @@
     var p = it.pyq && it.pyq[0], what = p ? (EXAM_LABEL[p.exam] || p.exam) + " " + p.year + " recall question (memory-based, not an official paper)" : "Recall question";
     return what + ".";
   }
-  function zoomOpen(host, f) {
+  function zoomOpen(host, f, u) {
     zoomClose();
     var root = host.root(), e = host.esc, el = G.document.createElement("div");
     el.className = "pn-zoom"; el.id = "pnYqZoom"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Image, enlarged");
-    el.innerHTML = '<div class="pn-zoom-top"><p>Question image</p><button type="button" class="pn-ib" data-act="y-unzoom" aria-label="Close image">' + host.ico("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(base(host) + "img/" + f) + '" alt="Image for this question, enlarged"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
+    el.innerHTML = '<div class="pn-zoom-top"><p>Image</p><button type="button" class="pn-ib" data-act="y-unzoom" aria-label="Close image">' + host.ico("close") + "</button></div>" +
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(u || base(host) + "img/" + f) + '" alt="Image, enlarged"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
     root.appendChild(el);
     P.zoom = { el: el, from: f };
     var c = el.querySelector("[data-act=y-unzoom]"); if (c) c.focus();
@@ -241,7 +248,7 @@
     if (a === "y-start") return startPaper(host, v, b.getAttribute("data-k"));
     if (a === "y-mf") { P.mf[b.getAttribute("data-m")] = v; var slot = host.root().querySelector("#pnPyqSlot"); return drawSlot(slot, b.getAttribute("data-s"), b.getAttribute("data-m"), moduleCount(P.ix, b.getAttribute("data-m")), host); }
     if (a === "y-mstart") return startModulePyq(host, b.getAttribute("data-s"), b.getAttribute("data-m"), b.getAttribute("data-k"));
-    if (a === "y-zoom") return zoomOpen(host, v);
+    if (a === "y-zoom") return zoomOpen(host, v, b.getAttribute("data-u"));
     if (a === "y-zoom2") { var big = b.classList.toggle("big"); b.setAttribute("aria-pressed", String(big)); return; }
     if (a === "y-unzoom") return zoomClose();
   }

@@ -32,6 +32,7 @@
 //   node tools/prep-explain.mjs --apply --run <id> --bank <dir> --to <dir>       a bank copy with x and r for accepted items
 // Cost rows are appended to $CLAUDE_JOB_DIR/tmp/explain/log.tsv (else prep/explain/log.tsv).
 import fs from "node:fs";
+import crypto from "node:crypto";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -103,27 +104,41 @@ export function queryOf(it) {
 }
 // KB flattening leaves index lines ("Aliases: ...", "Headers: ...", "Clinical pathway for ..."): no teaching in them.
 const BOILER = /\b(?:Aliases|Headers|Clinical Domain|Operational Goal)\s*[:;]|^(?:Clinical pathway for|Overview comparison matrix)/i;
-export const GROUND = { maxWords: 380, packK: 4, kbK: 3, packRel: 0.12, kbRel: 0.18 };
+export const GROUND = { maxWords: 380, packK: 4, kbK: 3, packRel: 0.1, kbRel: 0.18 };
 /* groundFor(item, ctx) -> { exp, notes, text }: exp is the stored explanation (clipped), notes the picked passages in
  * score order (module pack first, then KB; a KB passage must contain a key word), text both for the number and copy
  * checks. ctx: { packIx(moduleId) -> index | null, kbIx: index | null }. */
 export function groundFor(it, ctx) {
   const exp = cleanText(it.exp || "", 1800);
-  const q = queryOf(it), keyToks = new Set(tokenize(it.o[it.a]).filter((t) => !OPT_GENERIC.has(t))), stemToks = new Set(tokenize(it.q));
+  const q = queryOf(it), stemToks = new Set(tokenize(it.q).filter((t) => t.length >= 4));
+  // strong key words: 4+ letters, or a short token with a digit in it ("cd19" yes, "cd" no)
+  const strong = (txt) => tokenize(txt).filter((t) => !OPT_GENERIC.has(t) && (t.length >= 4 || (/\d/.test(t) && /[a-z]/.test(t))));
+  const neg = NEGATIVE.test(it.q), generic = /\b(?:all|none|both|neither)\b/i.test(it.o[it.a]);
+  const keyToks = new Set(strong(it.o[it.a])), optToks = new Set(it.o.flatMap((o) => strong(o)).filter((t) => !stemToks.has(t)));
   const picked = [];
   let n = 0;
-  const add = (hits, rel, needKey) => {
+  /* Relevance (owner rule 2026-10-08, after the pilot's off-topic KB passages): a passage is kept only when it is on
+     the question's topic: it shares a strong stem word (4+ letters) and a strong key word; when the key has none
+     ("All of the above") or the stem asks for the exception, a strong word of any option; when no option has one
+     ("bde", "CD 19"), two stem words. Otherwise nothing is sent and the model works from the item's own exp and the
+     stem. */
+  const onTopic = (tx) => {
+    const tk = new Set(tokenize(tx)), has = (set) => [...set].filter((t) => tk.has(t)).length;
+    const st = has(stemToks);
+    if (!st) return false;
+    if (!neg && !generic && keyToks.size) return has(keyToks) > 0;
+    if (optToks.size) return has(optToks) > 0 && st + has(optToks) >= 2;
+    return st >= 2;
+  };
+  const add = (hits, rel) => {
     for (const h of hits) {
-      if (h.rel < rel || n >= GROUND.maxWords) continue;
-      // a KB passage must share a stem word and (unless the stem asks for the exception) a key word
-      if (needKey) { const tk = tokenize(h.p.tx); if (!tk.some((t) => stemToks.has(t)) || (!NEGATIVE.test(it.q) && keyToks.size && !tk.some((t) => keyToks.has(t)))) continue; }
-      if (picked.includes(h.p.tx)) continue;
+      if (h.rel < rel || n >= GROUND.maxWords || !onTopic(h.p.tx) || picked.includes(h.p.tx)) continue;
       picked.push(h.p.tx); n += words(h.p.tx);
     }
   };
   const pix = ctx.packIx ? ctx.packIx(it.t) : null;
-  if (pix) add(pix.search(q, GROUND.packK), GROUND.packRel, false);
-  if (ctx.kbIx) add(ctx.kbIx.search(q, GROUND.kbK), GROUND.kbRel, true);
+  if (pix) add(pix.search(q, GROUND.packK), GROUND.packRel);
+  if (ctx.kbIx) add(ctx.kbIx.search(q, GROUND.kbK), GROUND.kbRel);
   const notes = picked.join("\n");
   return { exp, notes, text: exp + "\n" + notes };
 }
@@ -284,8 +299,8 @@ const SOURCE_RE = /\b(?:references?|ref\.|bibliography|textbook|statpearls|uptod
 const AI_RE = /\b(?:AI|A\.I\.|artificial intelligence|language model|chatbot|as an assistant)\b/;
 const MARKUP_RE = /<\s*\/?\s*[a-z!]|\]\(|!\[|```|https?:|www\./i;
 /* numbersText(x) -> the text whose numbers must be grounded (list markers "1." and heading marks dropped). */
-// Names with digits in them (CD20, IL-2, I-131, COX-2, T3, HbA1c, P450) are identifiers, not quantities: left out.
-const IDENT = /\b[A-Za-z]{1,6}-?\d+[A-Za-z]?\d*\b/g;
+// Names with digits in them (CD20, CD 20, IL-2, I-131, COX-2, T3, HbA1c, P450, 50S) are identifiers, not quantities: left out.
+const IDENT = /\b[A-Za-z]{1,6}-?\d+[A-Za-z]?\d*\b|\b(?:CD|IL|HLA|COX|TLR|MHC|HbA|Ig[AGMDE]|[CT])[ -]\d{1,3}\b|\b\d{2}S\b/g;
 const numbersText = (x) => [x.key, x.notes.replace(/^\s*\d+[.)]\s+/gm, "").replace(/^#+\s*/gm, ""), ...Object.values(x.others), x.pearl].join("\n").replace(IDENT, " ");
 /* xGate(item, x, ground, avoid) -> null when every code check passes, else its name. */
 export function xGate(it, x, ground, avoid = []) {
@@ -473,6 +488,14 @@ export async function run(items, ctx, opts, deps = {}) {
     if (st.status === "done") return { t: readJson(outF, {}), lines: sentLines(inF) };
     if (!lines.length) { st.status = "done"; writeJson(outF, {}); fs.writeFileSync(inF, ""); save(); return { t: {}, lines: [] }; }
     if (!st.jobId) {
+      // spend cap: this job's estimate (prompt characters / 4 in, a per-item output allowance) must fit what is left
+      const b = opts.budget;
+      if (b) {
+        const inTok = lines.reduce((a, l) => a + reqTok(l.request), 0), outTok = lines.reduce((a, l) => a + l.ids.length * (/review/.test(name) ? 100 : 450), 0);
+        const est = costUsd({ inTok, outTok }, vx.cfg.model, { batch: true });
+        if (b.spent + b.reserved + est > b.cap) throw Object.assign(new Error(`${state.run} ${name}: estimate $${est.toFixed(2)} would pass the cap ($${b.spent.toFixed(2)} spent, $${b.reserved.toFixed(2)} in flight, cap $${b.cap})`), { cap: true });
+        b.reserved += est; st.est = est;
+      }
       fs.writeFileSync(inF, lines.map((l) => JSON.stringify(l)).join("\n") + "\n");
       Object.assign(st, { status: "submitted", requests: lines.length, ...(await vx.batch.submit({ name: "explain/" + name, run: state.run, lines })) });
       save(); log(`${name}: submitted ${lines.length} requests as ${st.jobId}`);
@@ -485,6 +508,7 @@ export async function run(items, ctx, opts, deps = {}) {
     for (const l of saved) text[l.key] = (r.get(l.key) || {}).text || "";
     writeJson(outF, text);
     const usage = sumUsage(vx.log.slice(before), vx.cfg.model, { batch: true });
+    if (opts.budget) { opts.budget.reserved = Math.max(0, opts.budget.reserved - (st.est || 0)); opts.budget.spent += usage.usd; }
     Object.assign(st, { status: "done", usage }); save();
     logCost({ run: state.run, stage: name, requests: saved.length, inTok: usage.inTok, outTok: usage.outTok, thinkTok: usage.thinkTok, usd: usage.usd });
     log(`${name}: done, ${usage.calls} replies, in ${usage.inTok} out ${usage.outTok}, $${usage.usd.toFixed(4)}`);
@@ -540,27 +564,107 @@ export async function run(items, ctx, opts, deps = {}) {
   return { results: res, report };
 }
 
+/* collectResults(outBase, names) -> { id: result } over the run folders named (exact, or "<name>-pNN" parts); a later
+ * folder's accepted x wins over an earlier pending one. */
+export function collectResults(outBase, names) {
+  const out = {};
+  const dirs = fs.existsSync(outBase) ? fs.readdirSync(outBase) : [];
+  for (const n of names) for (const d of dirs.filter((x) => x === n || new RegExp("^" + n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "-p\\d+$").test(x)).sort()) {
+    for (const [id, r] of Object.entries(readJson(path.join(outBase, d, "results.json"), {}))) if (r.x || !out[id]) out[id] = r;
+  }
+  return out;
+}
+const sha256 = (b) => crypto.createHash("sha256").update(b).digest("hex");
+const thin = (it) => String(it.exp || "").length + (Array.isArray(it.r) ? it.r.join(" ").length : 0) + String(it.kp || "").length;
+const xLen = (x) => [x.key, x.notes, ...Object.values(x.others || {}), x.pearl].join(" ").length;
+/* pyqCopy(pyqItem, bankItem) -> x for the PYQ item with its letters remapped by option text, or null when the keys
+ * differ or the four options do not match one to one. */
+export function pyqCopy(p, b) {
+  if (!b || !b.x || normText(p.o[p.a]) !== normText(b.o[b.a])) return null;
+  const map = p.o.map((o) => b.o.findIndex((bo) => normText(bo) === normText(o)));
+  if (map.some((j) => j < 0) || new Set(map).size !== p.o.length) return null;
+  const others = {};
+  p.o.forEach((o, k) => { if (k !== p.a) others[L[k]] = b.x.others[L[map[k]]] || ""; });
+  if (Object.values(others).some((v) => !v)) return null;
+  return { key: b.x.key, notes: b.x.notes, others, pearl: b.x.pearl };
+}
+/* buildVersion({ from, to, results, pyqDir }) -> a NEW bank version: a copy of from with x (and r where missing) on
+ * every accepted item; subject index.json gets v and a modifications note; manifest.json bytes and index hashes are
+ * recomputed. pyqDir: the PYQ out folder; its items that match a bank item with x (same key, options one to one) and
+ * carry a thinner explanation get the bank's x, written to <to>/pyq/ (index.json + a new items-<hash>.json + img/).
+ * A published version is immutable: an existing <to> is refused unless replace. */
+export function buildVersion({ from, to, results, pyqDir, replace = false, log = console.log }) {
+  if (!fs.existsSync(from)) throw new Error("no source bank at " + from);
+  if (path.resolve(from) === path.resolve(to)) throw new Error("--to must differ from the source");
+  if (fs.existsSync(to)) { if (!replace) throw new Error(`${to} exists; a published version is immutable (pass --replace for an unpublished one)`); fs.rmSync(to, { recursive: true, force: true }); }
+  fs.cpSync(from, to, { recursive: true, filter: (src) => !/[\\/]pyq([\\/]|$)/.test(path.relative(from, src)) });
+  const ver = Number((/v(\d+)$/.exec(path.basename(to)) || [])[1]) || 0;
+  const touched = new Set(), withX = new Map();
+  let n = 0;
+  for (const s of fs.readdirSync(to)) {
+    const md = path.join(to, s, "mcq");
+    if (!fs.existsSync(md)) continue;
+    for (const f of fs.readdirSync(md).filter((x) => x.endsWith(".json"))) {
+      const p = path.join(md, f), j = readJson(p, null);
+      if (!j || !Array.isArray(j.items)) continue;
+      let hit = false;
+      j.items = j.items.map((it) => { const r = results[it.id]; if (r && r.x) { hit = true; n++; const c = applyX(it, r); withX.set(it.id, c); return c; } return it; });
+      if (hit) { fs.writeFileSync(p, JSON.stringify(j)); touched.add(s); }
+    }
+  }
+  const manifestP = path.join(to, "manifest.json"), manifest = readJson(manifestP, { v: 1, subjects: [] });
+  const NOTE = " Structured explanations (topic notes, a reason per option, a pearl) added to items whose explanation was missing or short: StewardMD, auto-checked.";
+  for (const s of touched) {
+    const ixP = path.join(to, s, "index.json"), ix = readJson(ixP, null);
+    if (ix) { ix.v = ver || ix.v; if (!String(ix.modifications || "").includes("Structured explanations")) ix.modifications = String(ix.modifications || "") + NOTE; fs.writeFileSync(ixP, JSON.stringify(ix)); }
+    let bytes = 0;
+    const walk = (d) => { for (const e of fs.readdirSync(d, { withFileTypes: true })) { const q = path.join(d, e.name); if (e.isDirectory()) walk(q); else bytes += fs.statSync(q).size; } };
+    walk(path.join(to, s));
+    const row = manifest.subjects.find((x) => x.id === s);
+    if (row) Object.assign(row, { bytes, index: sha256(fs.readFileSync(ixP)) });
+  }
+  manifest.v = ver || manifest.v;
+  manifest.explained = { from: path.basename(from), items: n };
+  let pyqN = 0;
+  if (pyqDir) {
+    const pix = readJson(path.join(pyqDir, "index.json"), null);
+    if (!pix) throw new Error("no PYQ index in " + pyqDir);
+    const items = readJson(path.join(pyqDir, pix.file), { items: [] }).items;
+    const bankById = new Map();
+    for (const [id, c] of withX) bankById.set(id, c);
+    const outItems = items.map((p) => {
+      const b = p.bank && bankById.get(p.bank);
+      const x = b ? pyqCopy(p, b) : null;
+      if (!x || thin(p) >= xLen(x)) return p;
+      pyqN++;
+      const c = { ...p, x };
+      if (!(Array.isArray(p.r) && p.r.length === p.o.length && p.r.every((v) => String(v || "").trim()))) c.r = toR(p, x);
+      if (c.flags) { c.flags = c.flags.filter((f) => f !== "exp-pending"); if (!c.flags.length) delete c.flags; }
+      return c;
+    });
+    const body = JSON.stringify({ v: 1, items: outItems });
+    const file = "items-" + sha256(body).slice(0, 8) + ".json";
+    const pd = path.join(to, "pyq");
+    fs.mkdirSync(pd, { recursive: true });
+    fs.writeFileSync(path.join(pd, file), body);
+    fs.writeFileSync(path.join(pd, "index.json"), JSON.stringify({ ...pix, file }));
+    if (fs.existsSync(path.join(pyqDir, "img"))) fs.cpSync(path.join(pyqDir, "img"), path.join(pd, "img"), { recursive: true });
+    manifest.pyq = { from: path.basename(path.dirname(pyqDir)) + "/" + path.basename(pyqDir), file, explained: pyqN };
+  }
+  fs.writeFileSync(manifestP, JSON.stringify(manifest));
+  log(`built ${to}: x on ${n} bank items in ${touched.size} subjects${pyqDir ? `, ${pyqN} PYQ items took a matching bank item's x` : ""}; ${from} untouched`);
+  return { items: n, subjects: [...touched], pyq: pyqN };
+}
+
 export async function main(argv = process.argv.slice(2), deps = {}) {
   const args = parseArgs(argv), log = deps.log || console.log, root = deps.root || ROOT;
   const cfg = { ...vertexConfig(deps.env || process.env), ...(deps.config || {}) };
   const bankDir = path.resolve(root, args.bank || "prep/bank/v4");
   const outBase = path.resolve(root, args.out || "prep/explain");
   if (args.flags.has("apply")) {
-    if (!args.run || !args.to) throw new Error("--apply needs --run <id> and --to <dir>");
-    const res = readJson(path.join(outBase, args.run, "results.json"), {});
-    let n = 0;
-    for (const s of fs.readdirSync(bankDir)) {
-      const md = path.join(bankDir, s, "mcq");
-      if (!fs.existsSync(md)) continue;
-      for (const f of fs.readdirSync(md).filter((x) => x.endsWith(".json"))) {
-        const j = readJson(path.join(md, f), null);
-        if (!j || !(j.items || []).some((it) => res[it.id] && res[it.id].x)) continue;
-        j.items = j.items.map((it) => { if (res[it.id] && res[it.id].x) { n++; return applyX(it, res[it.id]); } return it; });
-        writeJson(path.join(path.resolve(root, args.to), s, "mcq", f), j);
-      }
-    }
-    log(`applied x to ${n} items -> ${args.to} (only the changed module files are written)`);
-    return { applied: n };
+    if (!args.runs || !args.to) throw new Error("--apply needs --runs <id,prefix,...> and --to <new version dir>");
+    const results = collectResults(outBase, String(args.runs).split(","));
+    return buildVersion({ from: bankDir, to: path.resolve(root, args.to), results, pyqDir: args.pyq ? path.resolve(root, args.pyq) : null, replace: args.flags.has("replace"), log });
   }
   log(`loading bank ${bankDir}`);
   const bank = deps.bank || bankItems(bankDir);
@@ -581,22 +685,50 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
   if (args.pilot) {
     items = pickPilot(bank, Number(args.pilot) || 60, ["\"pile of plates\" appearance involving the internal carotid artery is observed", "Digital subtraction Angiography of a 35"]);
     runId = runId || "pilot";
+  } else if (args.ids) {
+    const want = new Set((fs.existsSync(String(args.ids)) ? fs.readFileSync(String(args.ids), "utf8") : String(args.ids)).split(/[\s,]+/).filter(Boolean));
+    items = bank.concat(pyq).filter((x) => want.has(x.id));
+    runId = runId || "explain-ids-" + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
   } else if (args.scope) {
     items = scopeItems(args.scope, bank, pyq);
+    // --skip-runs a,b: items those runs already explained are not sent again
+    if (args["skip-runs"]) { const done = collectResults(outBase, String(args["skip-runs"]).split(",")); items = items.filter((x) => !(done[x.id] && done[x.id].x)); }
     if (args.limit) items = items.slice(0, Number(args.limit));
     runId = runId || "explain-" + args.scope + "-" + new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
-  } else throw new Error("pass --dry-run, --pilot <n>, --scope <name> or --apply");
-  const work = path.join(outBase, runId);
-  const est = estimate(items, ctx, cfg.model, 0);
+  } else throw new Error("pass --dry-run, --pilot <n>, --scope <name>, --ids <list|file> or --apply");
+  const est = estimate(items, ctx, cfg.model, Math.min(items.length, 3000));
   const bands = { empty: items.filter((x) => !expLen(x)).length, short: items.filter((x) => expLen(x) && expLen(x) < 200).length, normal: items.filter((x) => expLen(x) >= 200).length };
   log(`${runId}: ${items.length} items (${JSON.stringify(bands)}), ${new Set(items.map((x) => x._s)).size} subjects; estimate in ${est.inTok} out ${est.outTok} $${est.usd.toFixed(4)}`);
   if (args.flags.has("dry-run")) return { dryRun: true, items, est };
-  if (args["max-usd"] != null && est.usd > Number(args["max-usd"])) throw new Error(`estimate $${est.usd.toFixed(4)} is over --max-usd ${args["max-usd"]}`);
-  fs.mkdirSync(work, { recursive: true });
-  writeJson(path.join(work, "items.json"), { items }, false);
-  const out = await run(items, ctx, { work, run: runId, pollMs: (args["poll-sec"] != null ? Number(args["poll-sec"]) : 60) * 1000, maxWaitMs: args.flags.has("no-wait") ? 0 : (args["max-wait-min"] != null ? Number(args["max-wait-min"]) : 1440) * 60000 }, { vertex: deps.vertex, log });
-  if (!out.pending) writeJson(path.join(work, "applied.json"), { items: items.map((it) => { const c = applyX(it, out.results[it.id]); delete c.prev; return c; }) });
-  return out;
+  const cap = args["max-usd"] != null ? Number(args["max-usd"]) : null;
+  // spend so far under this run id (a resumed run counts what it already paid)
+  const logF = process.env.CLAUDE_JOB_DIR ? path.join(process.env.CLAUDE_JOB_DIR, "tmp", "explain", "log.tsv") : path.join(ROOT, "prep", "explain", "log.tsv");
+  const spent = fs.existsSync(logF) ? fs.readFileSync(logF, "utf8").split("\n").slice(1).map((l) => l.split("\t")).filter((c) => c[1] && (c[1] === runId || c[1].startsWith(runId + "-p"))).reduce((a, c) => a + Number(c[7] || 0), 0) : 0;
+  if (cap != null && spent + est.usd > cap) throw new Error(`estimate $${est.usd.toFixed(4)} plus $${spent.toFixed(4)} spent is over --max-usd ${cap}`);
+  const budget = cap != null ? { cap, spent, reserved: 0 } : null;
+  // --parts n: the list in n runs (<run>-p01 ...), at most --conc (default 4) at a time; each one is its own Batch chain
+  const nParts = Math.max(1, Number(args.parts) || 1), conc = Math.max(1, Number(args.conc) || 4);
+  const parts = Array.from({ length: nParts }, (_, k) => ({ id: nParts > 1 ? `${runId}-p${String(k + 1).padStart(2, "0")}` : runId, items: items.slice(Math.floor(k * items.length / nParts), Math.floor((k + 1) * items.length / nParts)) }));
+  const opts = { pollMs: (args["poll-sec"] != null ? Number(args["poll-sec"]) : 60) * 1000, maxWaitMs: args.flags.has("no-wait") ? 0 : (args["max-wait-min"] != null ? Number(args["max-wait-min"]) : 1440) * 60000, budget };
+  const outs = new Array(parts.length);
+  let next = 0;
+  const worker = async () => {
+    for (;;) {
+      const k = next++; if (k >= parts.length) return;
+      const pt = parts[k], work = path.join(outBase, pt.id);
+      fs.mkdirSync(work, { recursive: true });
+      if (!fs.existsSync(path.join(work, "items.json"))) writeJson(path.join(work, "items.json"), { items: pt.items }, false);
+      try {
+        outs[k] = await run(pt.items, ctx, { ...opts, work, run: pt.id }, { vertex: deps.vertex, log: (m) => log(pt.id + " " + m) });
+        if (!outs[k].pending) writeJson(path.join(work, "applied.json"), { items: pt.items.map((it) => { const c = applyX(it, outs[k].results[it.id]); delete c.prev; return c; }) });
+      } catch (e) { outs[k] = { error: e.message, cap: !!e.cap }; log(pt.id + " stopped: " + e.message); }
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(conc, parts.length) }, worker));
+  const sum = { parts: parts.length, accepted: 0, pending: 0, stopped: outs.filter((o) => o && o.error).length, spent: budget ? budget.spent : null };
+  for (const o of outs) if (o && o.results) for (const r of Object.values(o.results)) { if (r.x) sum.accepted++; if (r.pending) sum.pending++; }
+  log("ALL PARTS: " + JSON.stringify(sum));
+  return nParts > 1 ? { parts: outs, sum } : outs[0];
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((e) => { console.error(e.message); process.exit(1); });
