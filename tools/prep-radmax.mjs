@@ -673,9 +673,10 @@ function assemble(dir, args) {
   const dups = load(/^dup-out-.*\.json$/), dupDrop = new Map(dups.map((d) => [d.drop, d]));
   const vh = new Map(load(/^vh-out-.*\.json$/).map((v) => [v.id, v]));
   const flagged = [], left = [], kept = [], usedFig = new Set();
-  const stems = new Map();
+  const stems = new Map(), idCount = new Map(); for (const it of items0) idCount.set(it.id, (idCount.get(it.id) || 0) + 1);
   for (const it of items0) {
     const why = [];
+    if (idCount.get(it.id) > 1) why.push("item id shared by two drafts, so its checks are ambiguous");
     if (it.fig && args["img-runs"] && !String(args["img-runs"]).split(",").includes(it.run)) { left.push({ id: it.id, src: it.src, uid: it.uid, fmt: it.fmt, dif: it.dif, why: "image item superseded by the figure-checked regeneration" }); continue; }
     if (it.fig) { const v = votes.get(it.id); if (!v.ok) why.push("image vote: " + v.why); if (v.flag) flagged.push({ id: it.id, kind: "image content", why: v.flag, fig: it.fig.id, page: it.fig.page, file: it.file }); if (usedFig.has(it.fig.id)) why.push("figure already used"); }
     const f = fact.get(it.id);
