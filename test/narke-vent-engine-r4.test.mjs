@@ -133,7 +133,7 @@ test("E4: SaO2 against PaO2 is explained in plain words, not as a contradiction"
   let s = E.init(quiet("postop-atelectasis")); const st = Object.assign({}, s.settings, { vt: 290, fio2: 80 }), s2 = E.step(s, st, 1500);
   const rs = E.explainDelta(B, A, s.settings, st, s, s2), sa = rs.find((x) => x.param === "SaO2");
   assert.ok(sa, "SaO2 reason when it moves against PaO2");
-  assert.match(sa.plain.en, /more acid, so it holds oxygen less tightly/); assert.match(sa.plain.en, /Both numbers are right/);
+  assert.match(sa.plain.en, /more acid, so it lets go of oxygen more easily/); // round 6: "holds oxygen less tightly" removed assert.match(sa.plain.en, /Both numbers are right/);
 });
 
 test("E4: shunt in plain words and a short curve note without P50", () => {

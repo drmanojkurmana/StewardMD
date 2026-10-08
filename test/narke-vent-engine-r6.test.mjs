@@ -141,6 +141,110 @@ test("E4: Kavya B6: goals are not 'met at 0 min' when VT was 10.4 mL/kg at 0 min
   assert.equal(r.goals.firstMin, 1);
 });
 
+/* ---------- E5: drift and chain wording ---------- */
+test("E5: a worsening after the learner's change is named with its direction, not 'still working'", () => {
+  let s = E.init(quiet("postop-normal")); const st0 = s.settings, base = E.readout(s, st0), st = set(s, { fio2: 21 });
+  s = E.step(s, st, 600);
+  const why = E.whyDrift(s, st, base), r0 = why[0];
+  assert.equal(r0.kind, "yourChange");
+  assert.match(r0.because.en, /^Your change 10 min ago \(FiO2 40 to 21%\) lowered SpO2 \d+% to \d+%/);
+  assert.ok(!/still working/.test(r0.because.en)); assert.ok(bi(r0.because) && noDash(r0.because));
+  // an improvement keeps the old wording (r5): the change is still working
+  let c = E.init(quiet("postop-normal")); const s1 = set(c, { rr: 8 }); c = E.step(c, s1, 1800); c.changes = [];
+  const b2 = E.readout(c, s1), s2 = set(c, { rr: 14 }); c = E.step(c, s2, 1800);
+  assert.match(E.whyDrift(c, s2, b2)[0].because.en, /^Your change 30 min ago \(the rate 8 to 14\/min\) is still working: PaCO2 \d+ to \d+/);
+});
+
+test("E5: smaller breaths at a faster rate: one dead-space line, never 'more air' next to 'did not fall'", () => {
+  const sc = quiet("postop-atelectasis"), s0 = E.init(sc), stB = s0.settings, stA = set(s0, { vt: 300, rr: 24 });
+  const b = E.step(s0, stB, 1800), a = E.step(s0, stA, 1800);
+  const why = E.explainDelta(E.abg(b), E.abg(a), stB, stA, b, a).filter((x) => x.param === "PaCO2");
+  assert.ok(E.abg(a).PaCO2 > E.abg(b).PaCO2, "CO2 rose with the pair");
+  const ds = why.filter((x) => /dead space/i.test(x.plain.en));
+  assert.equal(ds.length, 1, JSON.stringify(why.map((x) => x.plain.en)));
+  assert.match(ds[0].plain.en, /^Smaller breaths waste more on dead space, so CO2 rose although the air each minute (stayed about the same|rose)\.$/);
+  assert.ok(bi(ds[0].plain) && noDash(ds[0].plain));
+  assert.ok(!why.some((x) => /did not fall/.test(x.plain.en)));
+});
+
+/* ---------- E6: what-if has a lung protection axis ---------- */
+test("E6: lowering an injurious VT is 'Safer for the lung; CO2 rises to N: add rate', not only 'makes it worse'", () => {
+  const s = E.init(quiet("postop-atelectasis")), w = E.whatIf(s, s.settings, { key: "vt", to: 400 });
+  assert.ok(w.lung, "lung axis");
+  assert.equal(w.lung.axis, "safer");
+  assert.ok(w.lung.vtPerKg.without > 10 && w.lung.vtPerKg.withChange < 8.5, JSON.stringify(w.lung.vtPerKg));
+  const pc = w.withChange.gas.paco2;
+  assert.ok(pc > 45);
+  assert.equal(w.lung.text.en, "Safer for the lung; CO2 rises to " + pc + ": add rate.");
+  assert.ok(bi(w.lung.text) && noDash(w.lung.text));
+  // raising VT into injury is harder on the lung; a change that does not touch the lung has no axis
+  const up = E.whatIf(E.init(quiet("postop-normal")), E.init(quiet("postop-normal")).settings, { key: "vt", to: 700 });
+  assert.equal(up.lung.axis, "harder"); assert.match(up.lung.text.en, /^Harder on the lung/);
+  const f = E.whatIf(s, s.settings, { key: "fio2", to: 70 });
+  assert.equal(f.lung.axis, null); assert.equal(f.lung.text, null);
+});
+
+/* ---------- E8: the PEEP and blood flow line is plain ---------- */
+test("E8: PEEP what-if: 'higher pressure squeezes blood flow ... less oxygen is carried to the body' (Kavya B5)", () => {
+  const OLD = /holds less oxygen|holds more oxygen|बची रहती/;
+  const s = E.init(quiet("postop-normal")), w = E.whatIf(s, s.settings, { key: "peep", to: 14 });
+  const co = w.because.find((x) => /heart pumps/.test(x.plain.en));
+  assert.ok(co, JSON.stringify(w.because.map((x) => x.plain.en)));
+  assert.equal(co.plain.en, "Higher pressure in the chest squeezes blood flow, so the heart pumps less. Less blood flows, so less oxygen is carried to the body.");
+  assert.ok(bi(co.plain) && noDash(co.plain) && !OLD.test(co.plain.en + co.plain.hi), co.plain.hi);
+  const a = E.init(quiet("asthma")), u = E.whatIf(a, a.settings, { key: "peep", to: 0 }).because.find((x) => /heart pumps/.test(x.plain.en));
+  assert.ok(u && !OLD.test(u.plain.en + u.plain.hi), JSON.stringify(u && u.plain));
+  assert.match(u.plain.en, /more oxygen is carried to the body/);
+});
+
+/* ---------- E9: bagging over, and suction reopens the lung over minutes ---------- */
+function plugged() {
+  let s = E.init(quiet("postop-normal")); let st = s.settings;
+  s = E.step(E.inject(E.inject(s, "plug"), "plug"), st, 240);
+  st = set(s, { fio2: 50 }); s = E.step(s, st, 300);
+  s = E.step(E.inject(E.inject(s, "secretions", { factor: 4 }), "plug"), st, 240);
+  return { s, st };
+}
+test("E9: after a bag ends with SpO2 still below goal: 'Bagging over: set the ventilator FiO2 to 100% now, or keep bagging'", () => {
+  let { s, st } = plugged();
+  assert.equal(E.readout(s, st).bagOver, null, "no prompt before any bagging");
+  s = E.step(E.act(s, "bag100"), st, 30);
+  assert.equal(E.readout(s, st).bagOver, null, "no prompt while bagging");
+  s = E.step(s, st, 50); // the 60 s bag has ended
+  const r = E.readout(s, st);
+  assert.ok(r.vitals.spo2 < 94, "SpO2 still below goal: " + r.vitals.spo2);
+  assert.ok(r.bagOver, "bagOver prompt");
+  assert.equal(r.bagOver.text.en, "Bagging over: set the ventilator FiO2 to 100% now, or keep bagging.");
+  assert.ok(bi(r.bagOver.text) && noDash(r.bagOver.text)); assert.equal(r.bagOver.fio2To, 100);
+  const a = E.alarms(s, st).find((x) => x.id === "spo2Low");
+  assert.ok(a.bagOver, "the low SpO2 card carries it");
+  if (a.spo2Band === "mild") assert.deepEqual([a.primary.key, a.primary.to], ["fio2", 100]);
+  else assert.ok((a.primary.kind === "action" && a.primary.id === "bag100") || a.primary.to === 100, JSON.stringify(a.primary));
+  // FiO2 100 set: the prompt goes
+  assert.equal(E.readout(s, set(s, { fio2: 100 })).bagOver, null);
+});
+
+test("E9: suction clears the plug, but SpO2 does not jump 86 to 100 in one step: the lung reopens over minutes", () => {
+  let { s, st } = plugged();
+  const sp0 = E.readout(s, st).vitals.spo2;
+  assert.ok(sp0 <= 88, "plugged: " + sp0);
+  s = E.step(E.act(s, "suction"), st, 60);
+  const sp1 = E.readout(s, st).vitals.spo2;
+  assert.ok(sp1 > sp0 && sp1 <= 94, "one minute after suction: " + sp1);
+  s = E.step(s, st, 240);
+  assert.ok(E.readout(s, st).vitals.spo2 >= 94, "back on goal within 5 minutes");
+});
+
+test("R6: every new bilingual field is short, dash free and has Hindi", () => {
+  const out = [], short = (o) => o.en.split(/(?<=[.!?:;])\s+/).every((x) => x.split(/\s+/).length <= 22);
+  const walk = (x) => { if (Array.isArray(x)) x.forEach(walk); else if (x && typeof x === "object") { if (typeof x.en === "string" && "hi" in x) out.push(x); for (const k in x) walk(x[k]); } };
+  const { s, st } = pinkiAcid(5); walk(E.alarms(s, st));
+  let p = plugged(); let b = E.step(E.act(p.s, "bag100"), p.st, 80); walk(E.readout(b, p.st)); walk(E.alarms(b, p.st));
+  const d = E.init(quiet("postop-atelectasis")); walk(E.whatIf(d, d.settings, { key: "vt", to: 400 }).lung);
+  assert.ok(out.length > 20);
+  for (const o of out) { assert.ok(bi(o) || o.en === o.hi, JSON.stringify(o)); assert.ok(short(o), "over 22 words: " + o.en); assert.ok(noDash(o)); }
+});
+
 /* ---------- E7: one FiO2 step is 10 points everywhere ---------- */
 test("E7: the mild low SpO2 card raises FiO2 one step, 40 to 50 (Pinki B2), and E.fio2Step is exported", () => {
   let s = E.init(quiet("postop-normal")); const st = s.settings;

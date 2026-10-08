@@ -135,7 +135,8 @@
       (the set back or the safe pair, with heading {en, hi}: "Also fix the CO2" for the rate pair); a FiO2 set back
       leads only when it gives at least what the band needs (100% in an emergency). disconnect primary is reconnect.
       ACTIONS.reconnect (end a disconnect or hand bagging now; checks [{en, hi}] after reconnecting). Suction clears
-      the tube at once, but the lung behind a plug or secretions reopens over minutes (tau 60 s; teaching value) and
+      the tube at once, but the lung behind a plug or secretions reopens over minutes (tau 120 s since round 6, the same
+      as PEEP recruitment; teaching value) and
       only on the ventilator with PEEP (state.m.reopenSh, reopenC); oxygenHelp kind "reopening".
       ACTIONS.paralyse and blood: seniorOnly true, consequence {en, hi}, indicated(state). act() logs indicated on
       state.acts and the event log (readout().events[i].seniorOnly, .indicated); score() counts an unindicated
@@ -163,6 +164,34 @@
       (true unless arrested: the engine looked, so a missing causedBy means no learner change caused it). spo2Low alarms and
       alarmPlan("spo2Low") carry oxygenKeep {key "fio2", from, to, minutesAgo, text {en, hi}} when the learner raised FiO2
       in the last 30 min: "You raised FiO2 to 50%: keep it until SpO2 is back, then wean it in steps."
+      E2: interpretAbg(g) reads an optional g.hco3Base (the bicarbonate expected for this patient at this PaCO2; absent:
+      24 + 0.1 per mmHg above 40). A high CO2 has a metabolic part only when HCO3 is below 20 or 4 or more below that
+      baseline. abg() passes the patient's own bicarbonate carried to the gas PaCO2 by acute buffering. interp gains
+      lactate (the value the lactate line quotes, else null) and hco3Base. curveNoteShort is null unless the shown pH is
+      below 7.35, above 7.45, or there is fever; curveNote names acid blood only below a shown pH of 7.35.
+      E3: alarm id co2High (label "CO2 high: blood turning acid", warn, priority medium, not a monitor alarm): PaCO2 above
+      50 or pH below 7.30 now, EtCO2 not already alarming, and a learner change the cause (steady state acid at these
+      settings, not acid with it undone). Its primary is the cause fix (set back, or the rate pair) with why {en, hi}
+      "... Raise the rate or the breath size." alarmPlan(state, "co2High") works too. score(): a pH below 7.25 from the
+      learner's settings (lower than the start gas by 0.05, settings changed, after the grace window) for 10 min or more
+      is an unsafe moment ("pH 7.15 from your settings for 20 min").
+      E4: score(): every correct answer for an alarm id the learner caused is left out of Alarm response (so it shows
+      Not scored with explain.alarms). offGoalSpells [spellOf items] lists every spell off a goal of 5 min or more in time
+      order, and notes gain "Every time off a goal: ..." when there are two or more. A goals spell never starts at the
+      same sim time as an off-goal sample (a change made at 0 min is first met at the next sample).
+      E5: driftReport/whyDrift: the yourChange reason gains worse (bool); when a moved value moved away from normal it
+      reads "Your change 10 min ago (FiO2 40 to 21%) lowered SpO2 98% to 93%." explainDelta: a CO2 rise with the minute
+      volume held or raised gives one dead-space line ("Smaller breaths waste more on dead space, so CO2 rose although
+      the air each minute stayed about the same.") and no separate dead-space fraction reason.
+      E6: whatIf() gains lung {axis "safer" | "harder" | null, vtPerKg {without, withChange} | null, pplat {without,
+      withChange}, text {en, hi} | null}: "Safer for the lung; CO2 rises to 53: add rate."
+      E7: one FiO2 step is +10 points (E.fio2Step exported), so the mild card says "from 40% to 50%".
+      E8: the cardiac output line of explainDelta is plain ("Higher pressure in the chest squeezes blood flow, so the
+      heart pumps less. Less blood flows, so less oxygen is carried to the body."); the SaO2 line says the acid blood
+      "lets go of oxygen more easily".
+      E9: readout().bagOver and the spo2Low alarm's bagOver {text {en, hi}, fio2To 100, endedMinAgo}: a bag ended in the
+      last 10 min, back on the ventilator below the SpO2 goal, FiO2 under 100: "Bagging over: set the ventilator FiO2 to
+      100% now, or keep bagging." A mild low SpO2 card then leads with FiO2 100. Suction reopening tau is 120 s.
    Settings also accept flowPattern "square" | "decel" for volume breaths (not in SETTINGS until learn.json covers it).
    Integration: step() sub-steps at 10 s or less with exact exponential updates, so dt from 1 s to 3600 s is stable.
    Teaching gains marked above are model choices for a clinical reviewer to tune, not measured patient data.
@@ -186,7 +215,7 @@
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function log10(x) { return Math.log(x) / Math.LN10; }
 
-  var SPO2_TAU = 15, REOPEN_TAU = 60, LAG = 0.6, HYPER_DS = 0.03, VEI0 = 12, HYPER_MAX = 0.45, DS_MAX = 0.6, ARREST_S = 120, HYS_P = 6, K_CO2 = 40, KOD = 0.5, PATM = 760, PH2O = 47, RQ = 0.8, TIN = 1.0, SUB = 10;
+  var SPO2_TAU = 15, REOPEN_TAU = 120, LAG = 0.6, HYPER_DS = 0.03, VEI0 = 12, HYPER_MAX = 0.45, DS_MAX = 0.6, ARREST_S = 120, HYS_P = 6, K_CO2 = 40, KOD = 0.5, PATM = 760, PH2O = 47, RQ = 0.8, TIN = 1.0, SUB = 10;
 
   var SOURCES = [
     { label: "West JB, Luks AM. West's Respiratory Physiology: The Essentials, 11th edition (alveolar gas equation, PaCO2 and alveolar ventilation, shunt, V/Q, O2 content)" },
@@ -995,7 +1024,7 @@
       next.push(T("Listen to both sides and look at the trachea, then decompress.", "दोनों ओर सुनें और trachea देखें, फिर decompress करें।"));
     } else if (m.reopenSh > 0.01 && !(m.sec > 0 || m.plug > 0)) {
       kind = "reopening";
-      reason = T("Suction cleared the tube. The lung behind the plug reopens over a minute or two on the ventilator with PEEP.", "Suction से tube साफ़ हुई। Plug के पीछे का फेफड़ा ventilator और PEEP पर एक दो मिनट में खुलता है।");
+      reason = T("Suction cleared the tube. The lung behind the plug reopens over a few minutes on the ventilator with PEEP.", "Suction से tube साफ़ हुई। Plug के पीछे का फेफड़ा ventilator और PEEP पर कुछ मिनटों में खुलता है।");
       next.push(T("Keep him on the ventilator with PEEP and recheck SpO2 in 2 minutes.", "उन्हें ventilator और PEEP पर रखें और 2 मिनट में SpO2 दोबारा देखें।"));
     } else if (m.sec > 0 || m.plug > 0) {
       kind = "secretions";
@@ -1022,6 +1051,15 @@
     if (kind !== "disconnected") next.unshift(O2_FIRST[band]);
     return { kind: kind, reason: reason, next: next, band: band, trend: oxyTrend(state, st, mo),
       callSenior: r0(mo.spo2) < SPO2_EMERG || atMax || kind === "notRecruiting" || kind === "pneumothorax", fio2AtMax: atMax, shunt: { fixed: r2(fixed), collapsed: r2(col) } };
+  }
+  /* Round 6 (E9): a hand bag ended (its 60 s ran out, or Reconnect) in the last 10 min, the patient is back on the
+     ventilator below the SpO2 goal, and the ventilator FiO2 is under 100%: {text {en, hi}, fio2To 100, endedMinAgo}. */
+  var BAG_OVER_S = 600;
+  function bagOverOf(state, st, mo) {
+    var m = state.m || {}, gl = (state.goals || {}).spo2 || [92, 98], mc = mo.mech, bagged = false, i;
+    for (i = 0; i < (state.acts || []).length; i++) if (state.acts[i].id === "bag100") bagged = true;
+    if (!bagged || mc.bag || mc.disc || state.arrest || !(m.bagUntil <= state.t) || state.t - m.bagUntil > BAG_OVER_S || st.fio2 >= 100 || r0(mo.spo2) >= gl[0]) return null;
+    return { text: T("Bagging over: set the ventilator FiO2 to 100% now, or keep bagging.", "Bagging ख़त्म: अभी ventilator का FiO2 100% करें, या bagging जारी रखें।"), fio2To: 100, endedMinAgo: Math.max(0, Math.round((state.t - m.bagUntil) / 60)) };
   }
   function readout(state, settings) {
     var st = norm(settings || state.settings), mo = model(state, st), mc = mo.mech, ev = [], i;
@@ -1051,7 +1089,8 @@
       events: ev,
       arrest: state.arrest ? { t: state.arrest.t, cause: state.arrest.cause, label: ARREST_TXT[state.arrest.cause] } : null,
       oxygenHelp: oxyHelp(state, st, mo),
-      oxygenTrend: oxyTrend(state, st, mo)
+      oxygenTrend: oxyTrend(state, st, mo),
+      bagOver: bagOverOf(state, st, mo)
     };
   }
   /* "about a quarter of the blood passes lung that gets no air" (E4). */
@@ -1638,12 +1677,13 @@
     function fio2To(to) { return { kind: "setting", key: "fio2", to: to, label: T("Raise FiO2 to " + to + "%", "FiO2 " + to + "% करें") }; }
     // round 5 (E1): low SpO2 leads with its own oxygen step, whatever else is suggested (those stay in actions)
     // with no more oxygen to give (bagging, FiO2 100%) the state-aware bedside fix (suction, decompress) leads, else DOPE
-    var noMore = sug.length && avail(sug[0]) ? pa(sug[0]) : pc("dope");
+    var noMore = sug.length && avail(sug[0]) ? pa(sug[0]) : pc("dope"), bo = id === "spo2Low" ? bagOverOf(state, st, mo) : null;
     if (id === "spo2Low") {
       if (mc.disc) prim = avail("reconnect") ? pa("reconnect") : pc("reconnect");
       else if (mc.bag) prim = noMore; // the bag already gives 100%: find the cause
       else if (band === "emergency" && avail("bag100")) prim = pa("bag100");
       else if (band === "emergency") prim = st.fio2 < 100 ? fio2To(100) : noMore;
+      else if (bo) { prim = fio2To(100); prim.why = bo.text; } // round 6 (E9): just off the bag at 100%: no one-step drop
       else prim = st.fio2 < 100 ? fio2To(fio2Step(st.fio2)) : noMore;
     }
     else if (sug.length && avail(sug[0])) prim = pa(sug[0]);
@@ -1693,7 +1733,7 @@
     if (call) out.callWhy = call;
     if (fl) out.fio2Line = fl;
     if (band) out.spo2Band = band;
-    if (id === "spo2Low") { var kp = oxygenKeep(state, st); if (kp) out.oxygenKeep = kp; }
+    if (id === "spo2Low") { var kp = oxygenKeep(state, st); if (kp) out.oxygenKeep = kp; if (bo) out.bagOver = bo; }
     return out;
   }
   /* suggestions that belong to one alarm (the state-aware cause) */
@@ -1734,13 +1774,17 @@
       var dir = dC > 0 ? "up" : "down", why = [];
       var vaUp = A.va > B.va * 1.03, vaDn = A.va < B.va * 0.97, veB = B.mech.veMeasured, veA = A.mech.veMeasured, veUp = veA > veB * 1.03, veDn = veA < veB * 0.97;
       if ((dir === "down" && vaUp) || (dir === "up" && vaDn)) {
+        // round 6 (E5): when the minute volume held or rose, the dead space is the whole story: one line, said once
+        var dsOnly = dir === "up" && !veDn;
         var pl = dir === "up" ? (veDn ? P("Less fresh air reaches the air sacs each minute, so CO2 builds up in the blood.", "हर मिनट air sacs तक कम ताज़ी हवा पहुँचती है, इसलिए ख़ून में CO2 बढ़ती है।")
-          : P("The air moved each minute did not fall, but more of it is wasted in dead space, so less fresh air reaches the air sacs and CO2 builds up.", "हर मिनट की हवा कम नहीं हुई, पर उसका ज़्यादा हिस्सा dead space में बेकार जाता है, इसलिए air sacs तक कम ताज़ी हवा पहुँचती है और CO2 बढ़ती है।"))
+          : A.mech.vt < B.mech.vt * 0.97 ? P("Smaller breaths waste more on dead space, so CO2 rose although the air each minute " + (veUp ? "rose." : "stayed about the same."), "छोटी साँसों का ज़्यादा हिस्सा dead space में बेकार जाता है, इसलिए हर मिनट की हवा " + (veUp ? "बढ़ने" : "लगभग उतनी ही रहने") + " पर भी CO2 बढ़ी।")
+            : P("More of each breath is wasted on dead space, so CO2 rose although the air each minute " + (veUp ? "rose." : "stayed about the same."), "हर साँस का ज़्यादा हिस्सा dead space में बेकार जाता है, इसलिए हर मिनट की हवा " + (veUp ? "बढ़ने" : "लगभग उतनी ही रहने") + " पर भी CO2 बढ़ी।"))
           : (veUp ? P("More fresh air reaches the air sacs each minute and washes CO2 out of the blood.", "हर मिनट air sacs तक ज़्यादा ताज़ी हवा पहुँचती है और ख़ून से CO2 निकालती है।")
             : P("Less of each breath is wasted in dead space, so more fresh air reaches the air sacs and washes CO2 out.", "हर साँस का कम हिस्सा dead space में बेकार जाता है, इसलिए air sacs तक ज़्यादा ताज़ी हवा पहुँचती है और CO2 निकालती है।"));
-        why.push([T("Alveolar ventilation went from " + fx(B.va, 1) + " to " + fx(A.va, 1) + " L/min. PaCO2 = 0.863 x VCO2 / VA.",
-          "Alveolar ventilation " + fx(B.va, 1) + " से " + fx(A.va, 1) + " L/min हुआ। PaCO2 = 0.863 x VCO2 / VA।"), pl]);
-        if (Math.abs(A.vdvt - B.vdvt) >= 0.03) why.push([T("Dead space fraction went from " + fx(B.vdvt, 2) + " to " + fx(A.vdvt, 2) + ".", "Dead space fraction " + fx(B.vdvt, 2) + " से " + fx(A.vdvt, 2) + " हुआ।"),
+        var dsT = dsOnly && Math.abs(A.vdvt - B.vdvt) >= 0.03 ? [" Dead space fraction went from " + fx(B.vdvt, 2) + " to " + fx(A.vdvt, 2) + ".", " Dead space fraction " + fx(B.vdvt, 2) + " से " + fx(A.vdvt, 2) + " हुआ।"] : ["", ""];
+        why.push([T("Alveolar ventilation went from " + fx(B.va, 1) + " to " + fx(A.va, 1) + " L/min." + dsT[0] + " PaCO2 = 0.863 x VCO2 / VA.",
+          "Alveolar ventilation " + fx(B.va, 1) + " से " + fx(A.va, 1) + " L/min हुआ।" + dsT[1] + " PaCO2 = 0.863 x VCO2 / VA।"), pl]);
+        if (Math.abs(A.vdvt - B.vdvt) >= 0.03 && !dsOnly) why.push([T("Dead space fraction went from " + fx(B.vdvt, 2) + " to " + fx(A.vdvt, 2) + ".", "Dead space fraction " + fx(B.vdvt, 2) + " से " + fx(A.vdvt, 2) + " हुआ।"),
           A.vdvt > B.vdvt ? P("More of each breath is wasted in dead space.", "हर साँस का ज़्यादा हिस्सा dead space में बेकार जाता है।") : P("Less of each breath is wasted in dead space.", "हर साँस का कम हिस्सा dead space में बेकार जाता है।")]);
       }
       if ((dir === "up" && A.vco2 > B.vco2 * 1.03) || (dir === "down" && A.vco2 < B.vco2 * 0.97)) why.push([T("CO2 production changed from " + fx(B.vco2) + " to " + fx(A.vco2) + " mL/min.", "CO2 production " + fx(B.vco2) + " से " + fx(A.vco2) + " mL/min हुआ।"),
@@ -1776,7 +1820,11 @@
         A.paco2 < B.paco2 ? P("Less CO2 in the air sacs leaves more room for oxygen.", "Air sacs में कम CO2 से oxygen के लिए ज़्यादा जगह बचती है।") : P("More CO2 in the air sacs leaves less room for oxygen.", "Air sacs में ज़्यादा CO2 से oxygen के लिए कम जगह बचती है।"));
       tryT("co", { co: A.co }, T("Cardiac output went from " + fx(B.co, 1) + " to " + fx(A.co, 1) + " L/min. Mixed venous oxygen changed and the shunt carries it.",
         "Cardiac output " + fx(B.co, 1) + " से " + fx(A.co, 1) + " L/min हुआ। Mixed venous oxygen बदला और shunt उसे arterial blood में लाता है।"),
-        A.co > B.co ? P("The heart pumps more blood, so blood coming back to the lungs still holds more oxygen.", "दिल ज़्यादा ख़ून पंप करता है, इसलिए फेफड़ों में लौटते ख़ून में ज़्यादा oxygen बची रहती है।") : P("The heart pumps less blood, so blood coming back to the lungs holds less oxygen.", "दिल कम ख़ून पंप करता है, इसलिए फेफड़ों में लौटते ख़ून में कम oxygen बची रहती है।"));
+        // round 6 (E8): plain words; the chest pressure clause only when chest pressure really moved
+        A.co > B.co ? (A.mech.pitp < B.mech.pitp - 0.5 ? P("Lower pressure in the chest lets blood flow back, so the heart pumps more. More blood flows, so more oxygen is carried to the body.", "छाती में कम दबाव से ख़ून आसानी से लौटता है, इसलिए दिल ज़्यादा ख़ून पंप करता है। ज़्यादा ख़ून बहता है, इसलिए शरीर तक ज़्यादा oxygen पहुँचती है।")
+          : P("The heart pumps more blood. More blood flows, so more oxygen is carried to the body.", "दिल ज़्यादा ख़ून पंप करता है। ज़्यादा ख़ून बहता है, इसलिए शरीर तक ज़्यादा oxygen पहुँचती है।"))
+          : (A.mech.pitp > B.mech.pitp + 0.5 ? P("Higher pressure in the chest squeezes blood flow, so the heart pumps less. Less blood flows, so less oxygen is carried to the body.", "छाती में ज़्यादा दबाव ख़ून के बहाव को दबाता है, इसलिए दिल कम ख़ून पंप करता है। कम ख़ून बहता है, इसलिए शरीर तक कम oxygen पहुँचती है।")
+            : P("The heart pumps less blood. Less blood flows, so less oxygen is carried to the body.", "दिल कम ख़ून पंप करता है। कम ख़ून बहता है, इसलिए शरीर तक कम oxygen पहुँचती है।")));
       tryT("va", { va: A.va }, T("Ventilation of low V/Q units changed with alveolar ventilation.", "Alveolar ventilation के साथ low V/Q units का ventilation बदला।"),
         A.va > B.va ? P("Poorly aired parts of the lung get more fresh air.", "कम हवा वाले फेफड़े के हिस्सों को ज़्यादा ताज़ी हवा मिलती है।") : P("Poorly aired parts of the lung get less fresh air.", "कम हवा वाले फेफड़े के हिस्सों को कम ताज़ी हवा मिलती है।"));
       terms.sort(function (a, b) { return Math.abs(b.eff) - Math.abs(a.eff); });
@@ -1791,7 +1839,7 @@
       // SaO2 can move against PaO2 when pH or temperature shift the curve (Bohr effect); say so instead of contradicting
       var dS = abgA.SaO2 - abgB.SaO2;
       if (Math.abs(dS) >= 1 && (dS > 0) !== (dO > 0) && fx(B.ph, 2) !== fx(A.ph, 2)) out.push({ param: "SaO2", direction: dS > 0 ? "up" : "down", because: T("SaO2 moved the other way to PaO2: pH went from " + fx(B.ph, 2) + " to " + fx(A.ph, 2) + " and shifted the oxygen curve.", "SaO2 PaO2 से उल्टी दिशा में गया: pH " + fx(B.ph, 2) + " से " + fx(A.ph, 2) + " हुआ और oxygen curve खिसकी।"),
-        plain: dS < 0 ? P("More oxygen reached the blood, but the blood became more acid, so it holds oxygen less tightly: saturation dipped a little. Both numbers are right.", "ख़ून तक ज़्यादा oxygen पहुँची, पर ख़ून ज़्यादा अम्लीय हुआ, इसलिए वह oxygen कम कसकर पकड़ता है: saturation थोड़ा घटा। दोनों संख्याएँ सही हैं।")
+        plain: dS < 0 ? P("More oxygen reached the blood, but the blood became more acid, so it lets go of oxygen more easily: saturation dipped a little. Both numbers are right.", "ख़ून तक ज़्यादा oxygen पहुँची, पर ख़ून ज़्यादा अम्लीय हुआ, इसलिए वह oxygen आसानी से छोड़ता है: saturation थोड़ा घटा। दोनों संख्याएँ सही हैं।")
           : P("Less oxygen reached the blood, but the blood became less acid, so it holds oxygen more tightly: saturation rose a little. Both numbers are right.", "ख़ून तक कम oxygen पहुँची, पर ख़ून कम अम्लीय हुआ, इसलिए वह oxygen ज़्यादा कसकर पकड़ता है: saturation थोड़ा बढ़ा। दोनों संख्याएँ सही हैं।"), chain: ["gasExchange", "abg"] });
     }
     // pH: from the actual signed changes of PaCO2 and of the metabolic bicarbonate (A6)
@@ -1850,6 +1898,27 @@
     }
     return T(en.join(" "), hi.join(" "));
   }
+  /* Round 6 (E6): the what-if verdict's second axis, lung protection, so a smaller injurious breath reads "Safer for the
+     lung; CO2 rises to 53: add rate" and not only "Makes it worse". VT per kg PBW (set VT in volume modes, delivered
+     otherwise; not judged in spontaneous modes), plateau and driving pressure, 30 min without and with the change.
+     {axis "safer" | "harder" | null, vtPerKg {without, withChange} | null, pplat {without, withChange}, text {en, hi} | null} */
+  function lungAxis(state, st, s2, rWo, rW) {
+    var p = state.p, spont = function (x) { return SPONT_MODES.indexOf(x.mode) >= 0 || x.mode === "aprv"; };
+    function vk(x, r) { return spont(x) ? null : (["vc", "acvc", "simv"].indexOf(x.mode) >= 0 ? x.vt : r.vent.vte) / p.pbw; }
+    var k0 = vk(st, rWo), k1 = vk(s2, rW), p0 = rWo.vent.pplat, p1 = rW.vent.pplat, d0 = rWo.vent.drivingP, d1 = rW.vent.drivingP, sp = spont(st) || spont(s2);
+    var safer = !sp && ((k0 > 8 && k1 < k0 - 0.3) || (p0 > 30 && p1 < p0 - 1) || (d0 > 15 && d1 < d0 - 1));
+    var harder = !sp && ((k1 > 8 && k1 > k0 + 0.3) || (p1 > 30 && p1 > p0 + 1) || (d1 > 15 && d1 > d0 + 1));
+    var axis = safer && !harder ? "safer" : harder && !safer ? "harder" : null, text = null;
+    var c0 = rWo.gas.paco2, c1 = rW.gas.paco2;
+    if (axis === "safer") {
+      var co2 = c1 > 45 && c1 >= c0 + 2 ? ["; CO2 rises to " + c1 + ": add rate.", "; CO2 " + c1 + " तक बढ़ती है: rate बढ़ाएँ।"] : [".", "।"];
+      text = T("Safer for the lung" + co2[0], "फेफड़े के लिए ज़्यादा सुरक्षित" + co2[1]);
+    } else if (axis === "harder") {
+      var why = k1 > 8 && k1 > k0 + 0.3 ? ["VT " + fx(k1, 1) + " mL/kg, above 8", "VT " + fx(k1, 1) + " mL/kg, 8 से ज़्यादा"] : p1 > 30 && p1 > p0 + 1 ? ["plateau " + fx(p1) + ", above 30", "plateau " + fx(p1) + ", 30 से ज़्यादा"] : ["driving pressure " + fx(d1) + ", above 15", "driving pressure " + fx(d1) + ", 15 से ज़्यादा"];
+      text = T("Harder on the lung: " + why[0] + ".", "फेफड़े पर ज़्यादा भार: " + why[1] + "।");
+    }
+    return { axis: axis, vtPerKg: k0 == null || k1 == null ? null : { without: r1(k0), withChange: r1(k1) }, pplat: { without: p0, withChange: p1 }, text: text };
+  }
   function freeze(state) { var f = clone(state), i; for (i = 0; i < f.timeline.length; i++) if (f.fired.indexOf(i) < 0) f.fired.push(i); return f; }
   function whatIf(state, settings, change) {
     var st = norm(settings || state.settings), s2 = clone(st);
@@ -1862,6 +1931,7 @@
     var wo = step(frozen, st, 1800), w = step(frozen, s2, 1800);
     var now = readout(state, st), rWo = readout(wo, st), rW = readout(w, s2), rows = rowsOf(now, rWo, rW);
     return {
+      lung: lungAxis(state, st, s2, rWo, rW),
       before: now, after: rW, now: now, without: rWo, withChange: rW, minutes: 30, rows: rows,
       because: explainDelta(abg(wo), abg(w), st, s2, wo, w, { prediction: true, horizonMin: 30 }), verdict: verdictOf(rows, state, change.key), prediction: true, horizonMin: 30,
       columns: { now: T("Now", "अभी"), without: T("In 30 min without the change", "30 मिनट में, बदलाव के बिना"), withChange: T("In 30 min with the change", "30 मिनट में, बदलाव के साथ") },
@@ -1887,10 +1957,16 @@
     for (i = 0; i < (state.acts || []).length; i++) if (state.acts[i].t >= from) acts.push({ id: state.acts[i].id, t: state.acts[i].t });
     for (i = 0; i < ch.length; i++) { last = Math.max(last, ch[i].t); ch[i].minutesAgo = Math.max(0, Math.round((t1 - ch[i].t) / 60)); }
     for (i = 0; i < acts.length; i++) { last = Math.max(last, acts[i].t); acts[i].minutesAgo = Math.max(0, Math.round((t1 - acts[i].t) / 60)); }
-    var now = readout(state, st), moved = [], movedH = [];
+    var now = readout(state, st), moved = [], movedH = [], verbE = [], verbH = [], worse = false;
     if (base) for (i = 0; i < DRIFT_KEYS.length; i++) {
       var d = DRIFT_KEYS[i], v0 = (base[d[1]] || {})[d[0]], v1 = now[d[1]][d[0]];
-      if (typeof v0 === "number" && typeof v1 === "number" && Math.abs(v1 - v0) >= d[3]) { moved.push(d[2] + " " + fx(v0, d[4]) + d[5] + " to " + fx(v1, d[4]) + d[5]); movedH.push(d[2].replace("mean BP", "औसत BP") + " " + fx(v0, d[4]) + d[5] + " से " + fx(v1, d[4]) + d[5]); }
+      if (typeof v0 === "number" && typeof v1 === "number" && Math.abs(v1 - v0) >= d[3]) {
+        var nmH = d[2].replace("mean BP", "औसत BP"), a0 = fx(v0, d[4]) + d[5], a1 = fx(v1, d[4]) + d[5], up = v1 > v0;
+        moved.push(d[2] + " " + a0 + " to " + a1); movedH.push(nmH + " " + a0 + " से " + a1);
+        verbE.push((up ? "raised " : "lowered ") + d[2] + " " + a0 + " to " + a1); verbH.push(nmH + " " + a0 + " से " + a1 + " " + (up ? "बढ़ा" : "घटा"));
+        // round 6 (E5): a move away from normal is a worsening (SpO2 or BP down; PaCO2 or pH further from 40 or 7.40)
+        if (d[0] === "spo2" || d[0] === "map" ? !up : d[0] === "paco2" ? Math.abs(v1 - 40) > Math.abs(v0 - 40) : Math.abs(v1 - 7.4) > Math.abs(v0 - 7.4)) worse = true;
+      }
     }
     var learner = ch.length + acts.length > 0;
     if (learner) {
@@ -1900,8 +1976,10 @@
       var many = en.length > 1, ago = Math.max(0, Math.round((t1 - last) / 60));
       var whenEn = ago >= 1 ? ago + " min ago" : "just now", whenHi = ago >= 1 ? ago + " मिनट पहले" : "अभी";
       var tail = moved.length ? [": " + moved.join(", ") + ".", ": " + movedH.join(", ") + "।"] : [". The numbers have not moved much yet.", "। संख्याएँ अभी ज़्यादा नहीं बदलीं।"];
-      reasons.push({ param: "change", direction: "change", kind: "yourChange", minutesAgo: ago, keys: ch.map(function (x) { return x.key; }), actions: acts.map(function (x) { return x.id; }),
-        because: T("Your " + (many ? "changes " : "change ") + whenEn + " (" + en.join(", ") + ") " + (many ? "are" : "is") + " still working" + tail[0], "आपका " + whenHi + " का बदलाव (" + hi.join(", ") + ") अभी भी असर कर रहा है" + tail[1]) });
+      // round 6 (E5): a worsening is named with its direction ("lowered SpO2 98% to 93%"), not "still working"
+      var bc = worse ? T("Your " + (many ? "changes " : "change ") + whenEn + " (" + en.join(", ") + ") " + verbE.join(", ") + ".", "आपके " + whenHi + " के बदलाव (" + hi.join(", ") + ") से " + verbH.join(", ") + "।")
+        : T("Your " + (many ? "changes " : "change ") + whenEn + " (" + en.join(", ") + ") " + (many ? "are" : "is") + " still working" + tail[0], "आपका " + whenHi + " का बदलाव (" + hi.join(", ") + ") अभी भी असर कर रहा है" + tail[1]);
+      reasons.push({ param: "change", direction: "change", kind: "yourChange", minutesAgo: ago, keys: ch.map(function (x) { return x.key; }), actions: acts.map(function (x) { return x.id; }), worse: worse, because: bc });
     }
     // events in the window, then the lung and CO2 from the numbers themselves
     for (i = 0; i < (state.evlog || []).length; i++) {
