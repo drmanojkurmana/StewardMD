@@ -246,15 +246,23 @@
   }
   // A question image: a file in the PYQ image folder, or a data: URL kept on the phone (a deck made from a PDF).
   function imgSrc(host, f) { return /^data:image\//.test(String(f)) ? String(f) : base(host) + "img/" + f; }
+  // One image's URL: a data: URL as is; a name with a "/" is a bank path (e.g. "v6/ss-radiology/img/x.webp", PREP_RAD
+  // items; PYQ names never have one), relative to the bank API; else the item's image folder (imgBase).
+  function itemImg(it, host, f) {
+    f = String(f);
+    if (/^data:image\//.test(f)) return f;
+    if (f.indexOf("/") >= 0) { var u = (host.bankApi || "/api/prep/bank/") + f; return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u; }
+    return imgBase(it, host) + f;
+  }
   /* figure(item, host, where) -> the item's images for one place: "stem" (default; next to the question) or "exp"
      (inside the feedback card, after the notes). An item's imgPlace says where its images go; none means "stem". */
   function figure(it, host, where) {
     if (host) P.host = host;
     if (!it.img || !it.img.length || !P.host) return "";
     if ((it.imgPlace === "exp" ? "exp" : "stem") !== (where || "stem")) return "";
-    var e = P.host.esc, b = imgBase(it, P.host), of = where === "exp" ? "this explanation" : "this question";
+    var e = P.host.esc, of = where === "exp" ? "this explanation" : "this question";
     return it.img.map(function (f, k) {
-      return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(/^data:image\//.test(String(f)) ? String(f) : b + f) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(/^data:image\//.test(String(f)) ? String(f) : b + f) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
+      return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(itemImg(it, P.host, f)) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(itemImg(it, P.host, f)) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
         '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + "</span><span>Tap to enlarge.</span></figcaption></figure>";
     }).join("");
   }

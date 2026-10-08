@@ -22,6 +22,10 @@ const PYQ_RE = /^v\d{1,3}\/pyq\/(?:index\.json|items-[0-9a-f]{8}\.json|img\/[a-z
 // or v<n>/cards): index.json (lists the modules, so a short cache: a later run may add modules), <module>.json and
 // lesson media (both immutable).
 const STUDY_RE = /^v\d{1,3}\/(?:(?:lessons|cards)\/(?:index|[a-z0-9-]{2,80})\.json|lessons\/media\/[a-z0-9-]{2,80}\.(?:svg|webp))$/;
+// Radiology media (tools/prep-rad.mjs, a subject's own bank path such as v6/ss-radiology/): question images
+// img/<name>.webp and scroll stacks stack/<id>/<window>/<NNN>.webp plus stack/<id>/stack.json. All immutable: a changed
+// image or stack gets a new name or id, never new bytes. Not under pyq/, lessons/ or cards/.
+const RAD_RE = /^v\d{1,3}\/(?!pyq\/|lessons\/|cards\/)[a-z0-9-]{2,60}\/(?:img\/[a-z0-9-]{2,100}\.webp|stack\/[a-z0-9-]{2,60}\/(?:stack\.json|[a-z]{2,12}\/\d{3}\.webp))$/;
 // Images a bank item carries (img + imgPlace, set by the bank build): v<n>/img/<name>.webp, immutable.
 const IMG_RE = /^v\d{1,3}\/img\/[a-z0-9-]{2,80}\.webp$/;
 // The owner's radiology notes (tools/prep-radnotes.mjs, set "radnotes"): figures img/radnotes/rn-<id>.webp and MCQ
@@ -33,7 +37,7 @@ function notFound() { return new Response(JSON.stringify({ error: "not-found" })
 
 export function bankPath(params) {
   const p = [].concat((params && params.path) || []).map(String).join("/");
-  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) ? p : null;
+  return PATH_RE.test(p) || PYQ_RE.test(p) || STUDY_RE.test(p) || IMG_RE.test(p) || RADNOTES_RE.test(p) || RAD_RE.test(p) ? p : null;
 }
 
 export async function onRequestGet({ env, params }) {

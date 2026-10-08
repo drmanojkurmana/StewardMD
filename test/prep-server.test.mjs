@@ -130,6 +130,25 @@ test("bank: lessons and cards (index short cache; module files and lesson media 
   assert.equal(asked, 0);
 });
 
+test("bank: radiology images and scroll-stack slices in a subject's own version (immutable, right types); nothing else", async () => {
+  const env = { PREP_BANK_R2: r2({ "prep-bank/v6/ss-radiology/img/rad-moyamoya-pmc1-f1.webp": "RIFF", "prep-bank/v6/ss-radiology/stack/vs/soft/000.webp": "RIFF",
+    "prep-bank/v6/ss-radiology/stack/vs/stack.json": '{"n":1}', "prep-bank/v6/ss-radiology/index.json": '{"id":"ss-radiology"}', "prep-bank/v6/ss-radiology/mcq/srd-neuro-tumour.json": '{"items":[]}' }) };
+  for (const [p, type] of [["v6/ss-radiology/img/rad-moyamoya-pmc1-f1.webp", /^image\/webp$/], ["v6/ss-radiology/stack/vs/soft/000.webp", /^image\/webp$/], ["v6/ss-radiology/stack/vs/stack.json", /json/], ["v6/ss-radiology/mcq/srd-neuro-tumour.json", /json/]]) {
+    const r = await get(p, env);
+    assert.equal(r.status, 200, p);
+    assert.match(r.headers.get("Content-Type"), type, p);
+    assert.match(r.headers.get("Cache-Control"), /immutable/, p);
+  }
+  assert.equal((await get("v6/ss-radiology/index.json", env)).status, 200);
+  let asked = 0;
+  const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
+  for (const p of ["v6/ss-radiology/img/x.png", "v6/ss-radiology/img/a/b.webp", "v6/ss-radiology/img/../index.json", "v6/ss-radiology/stack/vs/soft/00.webp", "v6/ss-radiology/stack/vs/soft/0001.webp",
+    "v6/ss-radiology/stack/vs/Soft/000.webp", "v6/ss-radiology/stack/vs/soft/000.png", "v6/ss-radiology/stack/vs/a/b/000.webp", "v6/ss-radiology/stack/vs.json", "v1/cards/img/x.webp", "v1/lessons/img/x.webp", "ss-radiology/img/x.webp"]) {
+    assert.equal((await get(p, spy)).status, 404, p);
+  }
+  assert.equal(asked, 0);
+});
+
 test("bank: no binding is a clear 503", async () => {
   assert.equal((await get("v1/anatomy/index.json", {})).status, 503);
 });

@@ -1180,6 +1180,52 @@ body.dark .pn-root .pn-fb .pn-mtag { border-top-color: var(--pn-edge); }
 .pn-root .pn-recap i.skip { background: rgba(255, 255, 255, .22); }
 @media (prefers-reduced-motion: reduce) { .pn-root .pn-opt { transition: none; } }
 
+/* ---------- Radiology image series (prep-rad.js): a scroll stack in the stem ----------
+   A dark reading stage (radiology is read on black in both themes), the slice counter on the image, a scrubber, an
+   optional window switch, Enlarge. The stage takes vertical drags (touch-action: none) so the page scrolls from around it. */
+.pn-root .pn-stack { display: flex; flex-direction: column; gap: 10px; margin: 2px 0 14px; padding: 12px; border-radius: var(--pn-r-lg); background: var(--pn-card); border: 1px solid var(--pn-edge); box-shadow: var(--pn-elev); }
+.pn-root .pn-stack-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0; padding: 0 2px; font-size: 13px; line-height: 1.3; color: var(--pn-mut); }
+.pn-root .pn-stack-lbl { display: inline-flex; align-items: center; gap: 6px; min-width: 0; font-weight: 650; color: var(--pn-text); }
+.pn-root .pn-stack-lbl svg { width: 16px; height: 16px; flex: 0 0 auto; color: var(--pn-pri); }
+.pn-root .pn-stack-lbl span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pn-root .pn-stack-cnt { flex: 0 0 auto; font-family: var(--pn-num); font-variant-numeric: tabular-nums; }
+.pn-root .pn-stack-cnt b { font-weight: 750; color: var(--pn-text); }
+.pn-root .pn-stack-st { position: relative; width: 100%; max-width: 560px; max-height: 62vh; aspect-ratio: 1 / var(--ar, 1); margin: 0 auto; overflow: hidden; border-radius: var(--pn-r-md); background: #05090c; touch-action: none; cursor: ns-resize; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; outline: none; }
+.pn-root .pn-stack-st:focus-visible { box-shadow: 0 0 0 3px var(--pn-pri); }
+.pn-root .pn-stack-z { position: absolute; inset: 0; transform-origin: 50% 50%; will-change: transform; }
+.pn-root .pn-stack-im { display: block; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.pn-root .pn-stack-ct { position: absolute; right: 8px; bottom: 8px; padding: 3px 8px; border-radius: var(--pn-r-pill); background: rgba(0, 0, 0, .58); color: #dfe9ee; font-family: var(--pn-num); font-size: 12px; font-variant-numeric: tabular-nums; pointer-events: none; }
+.pn-root .pn-stack-ct b { font-weight: 750; color: #fff; }
+.pn-root .pn-stack-ld { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: rgba(255, 255, 255, .08); transition: opacity var(--pn-d-base) ease; pointer-events: none; }
+.pn-root .pn-stack-ld i { display: block; height: 100%; background: #63f0db; transform: scaleX(0); transform-origin: 0 50%; transition: transform var(--pn-d-quick) linear; }
+.pn-root .pn-stack-ld.done { opacity: 0; }
+.pn-root .pn-stack-ctl { display: flex; align-items: center; gap: 8px; }
+.pn-root .pn-stack-b { width: 44px; height: 44px; flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 50%; background: var(--pn-s1); color: var(--pn-text); transition: transform var(--pn-d-press) var(--pn-ease), background-color var(--pn-d-press) ease; }
+.pn-root .pn-stack-b:active { transform: scale(.92); }
+.pn-root .pn-stack-b[aria-pressed="true"] { background: var(--pn-pri-soft); color: var(--pn-pri-ink); }
+.pn-root .pn-stack-sc { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; height: 44px; }
+.pn-root .pn-stack-rg { width: 100%; height: 44px; margin: 0; background: transparent; accent-color: var(--pn-pri); cursor: pointer; }
+.pn-root .pn-stack-win { display: flex; gap: 4px; padding: 3px; border-radius: var(--pn-r-pill); background: var(--pn-s1); }
+.pn-root .pn-stack-wb { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 12px; border: 0; border-radius: var(--pn-r-pill); background: transparent; color: var(--pn-mut); font-size: 14px; font-weight: 650; transition: background-color var(--pn-d-press) ease, color var(--pn-d-press) ease; }
+.pn-root .pn-stack-wb.on { background: var(--pn-seg); color: var(--pn-text); box-shadow: var(--pn-shadow); }
+.pn-root .pn-stack-h { margin: 0; padding: 0 2px; font-size: 12.5px; line-height: 1.4; color: var(--pn-mut); }
+/* enlarged: the same stage, full screen on the zoom shell */
+.pn-root .pn-stack-ov { --pn-text: #e8f0f4; --pn-mut: #9fb0ba; --pn-s1: rgba(255, 255, 255, .1); --pn-seg: rgba(255, 255, 255, .2); --pn-pri-soft: rgba(99, 240, 219, .18); --pn-pri-ink: #8ff3e4; }
+.pn-root .pn-stack-ov .pn-zoom-top p { display: flex; justify-content: space-between; gap: 10px; }
+.pn-root .pn-stack-ovb { flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; padding: 0 8px; }
+.pn-root .pn-stack-ovb .pn-stack-st { max-width: 100%; max-height: 100%; width: auto; height: 100%; border-radius: var(--pn-r-sm); cursor: ns-resize; }
+.pn-root .pn-stack-st.zoomed { cursor: grab; }
+.pn-root .pn-stack-ovf { display: flex; flex-direction: column; gap: 6px; padding: 8px 12px 0; }
+.pn-root .pn-stack-ovf .pn-zoom-h { padding-top: 2px; }
+@media (min-width: 700px) { .pn-root .pn-stack { padding: 14px; } .pn-root .pn-stack-ovb .pn-stack-st { max-width: min(100%, 900px); } }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-stack-ld, .pn-root .pn-stack-ld i, .pn-root .pn-stack-b, .pn-root .pn-stack-wb { transition: none; } }
+/* Radiology viewer finish pass: one slice counter (the header), visible focus and a hover state on the controls. */
+.pn-root .pn-stack-ct { display: none; }
+.pn-root .pn-stack-b:focus-visible, .pn-root .pn-stack-wb:focus-visible { outline: 3px solid var(--pn-pri); outline-offset: 2px; }
+.pn-root .pn-stack-rg:focus-visible { outline: 3px solid var(--pn-pri); outline-offset: 2px; border-radius: var(--pn-r-pill); }
+@media (hover: hover) { .pn-root .pn-stack-b:hover { background: var(--pn-seg); } .pn-root .pn-stack-wb:not(.on):hover { color: var(--pn-text); } }
+.pn-root .pn-stack-b, .pn-root .pn-stack-wb, .pn-root .pn-stack-rg { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.pn-root .pn-stack-ov { overscroll-behavior: contain; }
 /* ==== Explanations (prep21) ==== the key line, then short topic notes (headings, bullets, steps, a comparison table),
    then why each other option is wrong, then the "Remember" line. Notes keep the reading measure of the stem; a table
    wider than the card scrolls inside its own frame (the page never scrolls sideways), its first column stays in view. */
