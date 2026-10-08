@@ -130,6 +130,12 @@
   function xpFor(l) { return (l && l.steps ? l.steps.length : 0) * XP_STEP; }
   /* swipeDir(dx, dy) -> 1 (next), -1 (back) or 0: a clear horizontal swipe of 56 px or more. */
   function swipeDir(dx, dy) { return Math.abs(dx) >= 56 && Math.abs(dx) > 1.5 * Math.abs(dy) ? (dx < 0 ? 1 : -1) : 0; }
+  /* lessonImgUrl(src, api) -> the URL a lesson figure loads from. A bank path ("v7/ss-radiology/img/x.webp", a figure a
+     subject's own bank serves, PREP_RAD items) goes through the bank API; anything else is in-app media from the web root. */
+  function lessonImgUrl(src, api) {
+    var p = str(src).replace(/^\/+/, "");
+    return /^v\d{1,3}\//.test(p) ? str(api || "/api/prep/bank/").replace(/\/?$/, "/") + p : "/" + p;
+  }
   function pickQuiz(items, ids) { var by = {}; (items || []).forEach(function (it) { by[it.id] = it; }); return (ids || []).map(function (id) { return by[id]; }).filter(Boolean); }
 
   /* Bundled index (pilot files in the app) + bank index (generated, from R2 through /api/prep/bank): the bank copy
@@ -143,7 +149,7 @@
   }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
-    swipeDir: swipeDir, pickQuiz: pickQuiz };
+    swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImgUrl: lessonImgUrl };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -265,7 +271,7 @@
     var side = function (c) { return '<div class="pn-cmp-c"><h3>' + boldHtml(c.title) + "</h3><ul>" + c.points.map(function (p) { return "<li>" + boldHtml(p) + "</li>"; }).join("") + "</ul></div>"; };
     return '<div class="pn-cmp">' + side(v.left) + side(v.right) + "</div>";
   }
-  function imgSrc(src) { return "/" + str(src).replace(/^\/+/, ""); }
+  function imgSrc(src) { return lessonImgUrl(src, (host && host.bankApi) || G.SMD_PREP_BANK_API || "/api/prep/bank/"); }
   function imageHtml(v) {
     return '<figure class="pn-vfig"><button type="button" class="pn-vimg" data-act="l-zoom" aria-label="Enlarge image: ' + escH(v.alt) + '"><img src="' + escH(imgSrc(v.src)) + '" alt="' + escH(v.alt) + '" loading="lazy" decoding="async"></button>' +
       '<figcaption><span class="pn-vzi" aria-hidden="true">' + ic("zoom") + "</span><span>" + escH(v.caption) + " Tap to enlarge.</span></figcaption></figure>";

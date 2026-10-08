@@ -4,7 +4,7 @@
   "branch": "ss-medicine",
   "title": "Radiology (Radiodiagnosis)",
   "medmcqa": null,
-  "bank": "v6",
+  "bank": "v7",
   "exams": [
     "neet-ss"
   ],
@@ -46,7 +46,8 @@
       "title": "Abdomen and gastrointestinal",
       "modules": [
         { "id": "srd-abd-liver", "title": "Liver, biliary tree and pancreas", "size": "l", "scope": "hepatocellular carcinoma LI-RADS, liver metastasis, Budd-Chiari syndrome, cholangiocarcinoma, autoimmune pancreatitis, pancreatic adenocarcinoma staging, cystic pancreatic lesions" },
-        { "id": "srd-abd-bowel", "title": "Bowel, peritoneum and acute abdomen", "size": "m", "scope": "bowel obstruction, gallstone ileus, superior mesenteric artery syndrome, mesenteric ischaemia, appendicitis, inflammatory bowel disease, peritoneal carcinomatosis" }
+        { "id": "srd-abd-bowel", "title": "Bowel, peritoneum and acute abdomen", "size": "m", "scope": "bowel obstruction, gallstone ileus, superior mesenteric artery syndrome, mesenteric ischaemia, appendicitis, inflammatory bowel disease, peritoneal carcinomatosis" },
+        { "id": "srd-abd-peritoneum", "title": "Peritoneum, mesentery, retroperitoneum and abdominal wall", "size": "m", "scope": "peritoneal carcinomatosis, mesenteric desmoid, mesenteric cyst, retroperitoneal lymphoma, inferior vena cava leiomyosarcoma, scar endometriosis, perianal fistula MRI" }
       ]
     },
     {
@@ -61,7 +62,8 @@
       "title": "Musculoskeletal",
       "modules": [
         { "id": "srd-msk-tumour", "title": "Bone and soft-tissue tumours", "size": "m", "scope": "osteoid osteoma, aneurysmal bone cyst, Ewing sarcoma, osteosarcoma, giant cell tumour, chondroid lesions, periosteal reaction, soft-tissue sarcoma MRI" },
-        { "id": "srd-msk-joint", "title": "Joints, spine, infection and trauma", "size": "m", "scope": "tenosynovial giant cell tumour, spinal tuberculosis, pyogenic spondylodiscitis, inflammatory arthritis, internal derangement of the knee, fracture patterns, metabolic bone disease" }
+        { "id": "srd-msk-joint", "title": "Joints, spine, infection and trauma", "size": "m", "scope": "tenosynovial giant cell tumour, spinal tuberculosis, pyogenic spondylodiscitis, inflammatory arthritis, internal derangement of the knee, fracture patterns, metabolic bone disease" },
+        { "id": "srd-msk-metabolic", "title": "Metabolic, haematological and infective bone disease", "size": "m", "scope": "Paget disease, hyperparathyroidism and brown tumour, renal osteodystrophy, sickle cell disease, osseous hydatid disease, fibrous dysplasia, bone infarction, marrow imaging" }
       ]
     },
     {
@@ -98,6 +100,15 @@
       "title": "Emergency radiology",
       "modules": [
         { "id": "srd-emergency", "title": "Trauma and emergency imaging", "size": "m", "scope": "aortic dissection, oesophageal perforation, Boerhaave syndrome, traumatic brain injury, solid organ injury grading, pneumothorax, acute abdomen in the emergency room" }
+      ]
+    },
+    {
+      "id": "srd-anatomy",
+      "title": "Radiological anatomy",
+      "modules": [
+        { "id": "srd-anat-neuro", "title": "Brain, head and neck and spine anatomy", "size": "m", "scope": "cerebral arteries and veins, cranial nerves, skull base foramina, ventricles and cisterns, neck spaces, larynx, orbit, vertebral column and cord" },
+        { "id": "srd-anat-body", "title": "Chest, heart, abdomen and pelvis anatomy", "size": "m", "scope": "bronchopulmonary segments, mediastinum, cardiac chambers and coronary arteries, liver segments, biliary and pancreatic ducts, bowel, kidneys and adrenals, pelvic organs" },
+        { "id": "srd-anat-limbs", "title": "Musculoskeletal, breast, obstetric and paediatric anatomy", "size": "m", "scope": "joints and ligaments, ossification centres, limb arteries and veins, lymphatics, breast anatomy, placenta and fetal anatomy, paediatric normal variants" }
       ]
     }
   ]
