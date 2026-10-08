@@ -285,7 +285,7 @@ test("R5 B1: progress() has the exact shape the lab's path card uses, from saved
   const ids = ["never", "bed", "screen", "modes", "alarms", "drills", "read", "skills", "care", "hand", "card", "check"];
   assert.deepEqual(UI.ITEMS.map((x) => x.id), ids);
   const empty = UI.progressOf({});
-  assert.deepEqual(Object.keys(empty).sort(), ["doneCount", "firstNightPassed", "items", "total"]);
+  assert.deepEqual(Object.keys(empty).sort(), ["doneCount", "firstNightPassed", "items", "missing", "ready", "total"]);
   assert.equal(empty.total, 12); assert.equal(empty.doneCount, 0); assert.equal(empty.firstNightPassed, false);
   empty.items.forEach((x, i) => {
     assert.deepEqual(Object.keys(x).sort(), ["done", "id", "label", "open"]);
@@ -301,6 +301,28 @@ test("R5 B1: progress() has the exact shape the lab's path card uses, from saved
   // documented at the top of the file, for the UI fixer
   const src = readFileSync("narke-vent-bridge.js", "utf8").slice(0, 3500);
   assert.ok(/NARKE_VENT_BRIDGE\.progress\(\)/.test(src) && /firstNightPassed/.test(src) && /never, bed, screen, modes, alarms, drills, read, skills, care, hand, card, check/.test(src));
+});
+
+test("R6 B1: progress().ready needs the check passed, all 5 drills safe, skills, read, modes, alarm map and screen map", () => {
+  const all = { screen: 1, modes: 1, alarms: 1, drills: 1, read: 1, skills: 1, check: 1 };
+  assert.deepEqual(UI.READY_IDS, ["screen", "modes", "alarms", "drills", "read", "skills", "check"]);
+  const e = UI.progressOf({});
+  assert.equal(e.ready, false); assert.deepEqual(e.missing, UI.READY_IDS);
+  const r = UI.progressOf({ done: all, checkPass: "8 Oct 2026" });
+  assert.equal(r.ready, true); assert.deepEqual(r.missing, []);
+  // the round-5 hole: passing the check alone (or with a handful of pages) never earns ready
+  const q = UI.progressOf({ done: { never: 1, bed: 1, care: 1, hand: 1, card: 1, check: 1 }, checkPass: "8 Oct 2026" });
+  assert.equal(q.firstNightPassed, true); assert.equal(q.ready, false);
+  assert.deepEqual(q.missing, ["screen", "modes", "alarms", "drills", "read", "skills"]);
+  for (const id of UI.READY_IDS) {
+    const d = Object.assign({}, all); delete d[id];
+    const x = UI.progressOf({ done: d, checkPass: "8 Oct 2026" });
+    assert.equal(x.ready, false, "ready without " + id); assert.deepEqual(x.missing, [id]);
+  }
+  assert.deepEqual(UI.progressOf({ done: all }).missing, ["check"], "check done without the saved pass is not passed");
+  assert.equal(UI.progressOf(null).ready, false); assert.ok(Array.isArray(UI.progressOf("x").missing));
+  const src = readFileSync("narke-vent-bridge.js", "utf8").slice(0, 4500);
+  assert.ok(/ready: boolean/.test(src) && /missing: \[ids\]/.test(src) && /READY_IDS/.test(src), "documented at the top of the file");
 });
 
 test("R5 B2: first-night check: 12 mixed questions, teach-back on each, pass 10 (80%), covers the brief's topics", () => {

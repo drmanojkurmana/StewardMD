@@ -19,12 +19,17 @@
        items: [{ id, done, label: {en, hi}, open }],   // in path order; open() opens that page (a function in the
                                                         // browser once the lab is loaded; the page id string otherwise)
        doneCount, total,                                // items done / items listed
-       firstNightPassed: boolean                        // the First-night check was passed (10 of 12 or better)
+       firstNightPassed: boolean,                       // the First-night check was passed (12 of 14 or better)
+       ready: boolean,                                  // round 6: "Ready to start under supervision" is earned
+       missing: [ids]                                   // round 6: what still stands between the learner and ready,
+                                                        // in path order (a subset of READY_IDS); [] when ready
      }
+     READY_IDS (round 6, B1): check (First-night check passed), drills (all 5 night drills in a safe order), skills,
+     read (Read this screen finished), modes, alarms, screen (both screen-map quizzes finished). ready === !missing.length.
      ids, in order: never, bed, screen, modes, alarms, drills, read, skills, care, hand, card, check.
      It reads only this device's saved progress (localStorage "smd_narke_vbridge"), works before bridge.json has
      loaded, never throws, and returns a fresh object on every call.
-   Node (tests): module.exports = { STR, ITEMS, verdict, order, safeOrder, drillCount, progressOf, cardOrders,
+   Node (tests): module.exports = { STR, ITEMS, READY_IDS, verdict, order, safeOrder, drillCount, progressOf, cardOrders,
    noteText, perm }. */
 (function (G) {
   "use strict";
@@ -242,6 +247,8 @@
     { id: "read", label: "read", icon: "pulse" }, { id: "skills", label: "skills", icon: "sliders" }, { id: "care", label: "care", icon: "rounds" },
     { id: "hand", label: "hand", icon: "note" }, { id: "card", label: "card", icon: "print" }, { id: "check", label: "check", icon: "award" }
   ];
+  // What the "Ready to start under supervision" badge needs (round 6, B1), in path order.
+  var READY_IDS = ["screen", "modes", "alarms", "drills", "read", "skills", "check"];
   var PK = "smd_narke_vbridge", CK_KEY = "smd_narke_vcard";
   // Progress from saved prefs: p.done[id] is set by each page when its own done rule is met.
   function progressOf(p, opener) {
@@ -251,14 +258,15 @@
       var o = opener && opener[x.id];
       return { id: x.id, done: !!dn[x.id], label: { en: STR[x.label].en, hi: STR[x.label].hi }, open: o || x.id };
     });
-    var n = items.filter(function (x) { return x.done; }).length;
-    return { items: items, doneCount: n, total: items.length, firstNightPassed: !!(p.checkPass && dn.check) };
+    var n = items.filter(function (x) { return x.done; }).length, passed = !!(p.checkPass && dn.check);
+    var missing = READY_IDS.filter(function (id) { return id === "check" ? !passed : !dn[id]; });
+    return { items: items, doneCount: n, total: items.length, firstNightPassed: passed, ready: !missing.length, missing: missing };
   }
   var OPENER = null;
   function readPrefs() { try { var o = JSON.parse(G.localStorage.getItem(PK)); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
   function progress() { try { return progressOf(readPrefs(), OPENER); } catch (e) { return progressOf({}, null); } }
 
-  var PURE = { STR: STR, ITEMS: ITEMS, verdict: verdict, order: order, safeOrder: safeOrder, drillCount: drillCount, progressOf: progressOf, cardOrders: cardOrders, noteText: noteText, perm: perm };
+  var PURE = { STR: STR, ITEMS: ITEMS, READY_IDS: READY_IDS, verdict: verdict, order: order, safeOrder: safeOrder, drillCount: drillCount, progressOf: progressOf, cardOrders: cardOrders, noteText: noteText, perm: perm };
   if (typeof module !== "undefined" && module.exports) { module.exports = PURE; return; }
   G.NARKE_VENT_BRIDGE = PURE;
   PURE.progress = progress;
