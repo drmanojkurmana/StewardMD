@@ -82,6 +82,42 @@
       "glaucoma-disc-cupped"
     ]
   },
+  "fields": {
+    "intro": {
+      "en": "Glaucoma field loss starts away from the centre, so each eye must be tested alone.",
+      "hi": "ग्लूकोमा (glaucoma) में दृष्टि क्षेत्र (visual field) की कमी बीच से दूर शुरू होती है, इसलिए हर आँख को अलग से जाँचें।"
+    },
+    "items": [
+      {
+        "id": "arcuate-superior",
+        "label": {
+          "en": "Superior arcuate scotoma (curved blind patch above the centre)",
+          "hi": "ऊपरी आर्कुएट स्कोटोमा (superior arcuate scotoma, बीच के ऊपर मुड़ा हुआ अंधा हिस्सा)"
+        },
+        "le": "full",
+        "re": "arcuate-sup",
+        "where": {
+          "en": "Right eye, early glaucoma: arcuate nerve fibres lost at the inferior (lower) rim of the optic disc. This causes a defect in the upper visual field of that eye.",
+          "hi": "दाईं आँख, शुरुआती ग्लूकोमा (glaucoma): ऑप्टिक डिस्क (optic disc) के निचले (inferior) किनारे (rim) के आर्क्युएट तंतु नष्ट। इससे उसी आँख के दृष्टि क्षेत्र (visual field) के ऊपरी हिस्से में दोष होता है।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "tunnel-late",
+        "label": {
+          "en": "Tunnel vision (only a small central island left)",
+          "hi": "टनल विज़न (tunnel vision, बीच में सिर्फ़ छोटा सा हिस्सा बचता है)"
+        },
+        "le": "tunnel",
+        "re": "tunnel",
+        "where": {
+          "en": "Advanced glaucoma in both eyes: the edges are lost, the centre goes last.",
+          "hi": "दोनों आँखों में बढ़ा हुआ ग्लूकोमा: किनारे पहले जाते हैं, बीच का हिस्सा सबसे आख़िर में।"
+        },
+        "lesion": "optic-nerve"
+      }
+    ]
+  },
   "why": {
     "steps": [
       {
@@ -195,8 +231,8 @@
     },
     {
       "q": {
-        "en": "Why is POAG often found late?",
-        "hi": "POAG अक्सर देर से क्यों पकड़ में आता है?"
+        "en": "Why is primary open-angle glaucoma (POAG) often found late?",
+        "hi": "primary open-angle glaucoma (POAG) अक्सर देर से क्यों पकड़ में आता है?"
       },
       "o": [
         {
