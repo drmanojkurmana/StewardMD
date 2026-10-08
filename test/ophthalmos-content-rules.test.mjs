@@ -71,8 +71,10 @@ const VAGUE_HI = [/दो धमनि/, /एक आँख ले जा/, /क�
 const DASH = /[–—]/;
 const FIELD_WORDS = /hemianopia|quadrantanopia|scotoma|field defect|tunnel vision/i;
 
-function screenIssues(where, obj) {
+function screenIssues(where, obj, plain) {
   const t = texts(obj), out = [];
+  // notes.json is English-only plain text: its plain strings are checked as English
+  if (plain) t.en = t.en.concat(t.any);
   t.en.forEach((s) => { if (WORLD_EN.test(s)) out.push(`R1 ${where} [en]: "world" for the visual field: ${s.slice(0, 120)}`); });
   t.hi.forEach((s) => { if (WORLD_HI.test(s)) out.push(`R1 ${where} [hi]: "दुनिया" for the visual field: ${s.slice(0, 120)}`); });
   t.en.concat(t.analogyEn).forEach((s) => VAGUE_EN.forEach((re) => { if (re.test(s)) out.push(`R9 ${where} [en]: vague "${s.match(re)[0]}": ${s.slice(0, 120)}`); }));
@@ -107,7 +109,7 @@ test("R5: every lesson that teaches a field defect has a valid fields block", ()
 });
 test("R1, R3, R9: notes.json (each note is a screen)", () => {
   const bad = [];
-  for (const n of readJSON(join(ROOT, "ophthalmos/notes.json")).notes) bad.push(...screenIssues("note " + n.id, n));
+  for (const n of readJSON(join(ROOT, "ophthalmos/notes.json")).notes) bad.push(...screenIssues("note " + n.id, n, true));
   assert.deepEqual(record(bad), []);
 });
 test("R1, R3, R9: tracks.json (each clinic is a screen)", () => {
