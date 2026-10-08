@@ -311,10 +311,10 @@
   function p50Of(ph, temp, pco2) { return P50_STD / Math.pow(10, 0.024 * (37 - temp) + 0.40 * (ph - 7.40) + 0.06 * log10(40 / Math.max(5, pco2))); }
   /* One line that explains a shifted curve, so "SaO2 90 at PaO2 78" reads as physiology, not a bug (E4). */
   function curveNote(pao2, sao2, ph, temp, pco2) {
-    var p50 = p50Of(ph, temp, pco2), std = sat(pao2, 7.4, 37, 40) * 100, why = [], whyH = [];
+    var p50 = p50Of(ph, temp, pco2), std = sat(pao2, 7.4, 37, 40) * 100, why = [], whyH = [], phS = r2(ph); // round 6 (E2): the shown pH
     if (Math.abs(p50 - 26.8) < 2 || Math.abs(std - sao2 * 100) < 1.5) return null;
-    if (ph < 7.35) { why.push("acid blood (pH " + fx(ph, 2) + ")"); whyH.push("अम्लीय ख़ून (pH " + fx(ph, 2) + ")"); }
-    if (ph > 7.45) { why.push("alkaline blood (pH " + fx(ph, 2) + ")"); whyH.push("क्षारीय ख़ून (pH " + fx(ph, 2) + ")"); }
+    if (phS < 7.35) { why.push("acid blood (pH " + fx(ph, 2) + ")"); whyH.push("अम्लीय ख़ून (pH " + fx(ph, 2) + ")"); }
+    if (phS > 7.45) { why.push("alkaline blood (pH " + fx(ph, 2) + ")"); whyH.push("क्षारीय ख़ून (pH " + fx(ph, 2) + ")"); }
     if (temp >= 38) { why.push("fever (" + fx(temp, 1) + " C)"); whyH.push("बुख़ार (" + fx(temp, 1) + " C)"); }
     if (temp <= 36) { why.push("a low temperature (" + fx(temp, 1) + " C)"); whyH.push("कम तापमान (" + fx(temp, 1) + " C)"); }
     if (pco2 >= 50) { why.push("high CO2"); whyH.push("ज़्यादा CO2"); }
@@ -943,7 +943,7 @@
      "emergency" below 88% (hand bag with 100% oxygen, DOPE, call the senior). Alarm priorities do not change. */
   var SPO2_EMERG = 88;
   function spo2Band(spo2) { return r0(spo2) < SPO2_EMERG ? "emergency" : "mild"; } // the shown (rounded) SpO2 (round 5)
-  function fio2Step(f) { return Math.min(100, f + (f < 60 ? 20 : 10)); }
+  function fio2Step(f) { return Math.min(100, f + 10); } // round 6 (E7): one step is 10 points everywhere, as the coach says
   var O2_FIRST = {
     mild: T("SpO2 is a little low: check the probe and its trace first, then give a little more oxygen and recheck in 2 minutes.", "SpO2 थोड़ा कम है: पहले probe और उसका trace जाँचें, फिर थोड़ी और oxygen दें और 2 मिनट में दोबारा देखें।"),
     emergency: T("SpO2 below 88% is an emergency: hand bag with 100% oxygen, think DOPE and call your senior now.", "SpO2 88% से कम emergency है: 100% oxygen से हाथ से bag करें, DOPE सोचें और अभी senior को बुलाएँ।")
@@ -1068,14 +1068,19 @@
     // P50 and curveNote (E4): additive; the UI may show the note beside SaO2 so a right-shifted curve is explained
     var o = { pH: r2(l.ph), PaCO2: r0(l.paco2), PaO2: r0(l.pao2), HCO3: r1(l.hco3), SaO2: r0(l.sao2 * 100), BE: r1(l.be), lactate: r1(l.lactate), FiO2: r2(l.fio2), AaDO2: r0(Math.max(0, (l.pA || 0) - l.pao2)), t: state.t,
       P50: r1(p50Of(l.ph, tp, l.paco2)), curveNote: curveNote(l.pao2, l.sao2, l.ph, tp, l.paco2), curveNoteShort: curveShort(l.pao2, l.sao2, l.ph, tp, l.paco2) };
-    o.interp = interpretAbg(o); // E8
+    // round 6 (E2): the baseline is the patient's own bicarbonate carried to this PaCO2 by acute buffering, with no new
+    // metabolic acid: a learner-made CO2 rise never reads as a metabolic acidosis, a lactate rise does
+    var gi = clone(o); gi.hco3Base = r1(Math.max(2, state.p.hco3 + (bufOf(l.paco2) - bufOf(state.p.pco2Ref)) * Math.min(1, state.p.hco3 / 24)));
+    o.interp = interpretAbg(gi); // E8
     return o;
   }
   /* curveNote without P50 numbers: one line for Level 1 (E4). null when curveNote is null. */
   function curveShort(pao2, sao2, ph, temp, pco2) {
     if (!curveNote(pao2, sao2, ph, temp, pco2)) return null;
-    var right = p50Of(ph, temp, pco2) > 26.8, acid = ph < 7.35, alk = ph > 7.45, fev = temp >= 38;
-    var why = acid && fev ? ["Acid blood and fever", "अम्लीय ख़ून और बुख़ार"] : acid ? ["Acid blood", "अम्लीय ख़ून"] : alk ? ["Alkaline blood", "क्षारीय ख़ून"] : fev ? ["Fever", "बुख़ार"] : [right ? "Acid blood or a high temperature" : "Alkaline blood or a low temperature", right ? "अम्लीय ख़ून या ऊँचा तापमान" : "क्षारीय ख़ून या कम तापमान"];
+    // round 6 (E2): judged on the shown pH; no line at all without a named cause (a normal pH and temperature)
+    var right = p50Of(ph, temp, pco2) > 26.8, acid = r2(ph) < 7.35, alk = r2(ph) > 7.45, fev = temp >= 38;
+    if (!acid && !alk && !fev) return null;
+    var why = acid && fev ? ["Acid blood and fever", "अम्लीय ख़ून और बुख़ार"] : acid ? ["Acid blood", "अम्लीय ख़ून"] : alk ? ["Alkaline blood", "क्षारीय ख़ून"] : ["Fever", "बुख़ार"];
     var vb = / and /.test(why[0]) ? "make" : "makes"; // "Acid blood makes", "Acid blood and fever make" (S9)
     return right ? T(why[0] + " " + vb + " blood let go of oxygen more easily, so SaO2 is " + fx(sao2 * 100) + "% at PaO2 " + fx(pao2) + ".", why[1] + " से ख़ून oxygen आसानी से छोड़ता है, इसलिए PaO2 " + fx(pao2) + " पर SaO2 " + fx(sao2 * 100) + "% है।")
       : T(why[0] + " " + vb + " blood hold on to oxygen more tightly, so SaO2 is " + fx(sao2 * 100) + "% at PaO2 " + fx(pao2) + ".", why[1] + " से ख़ून oxygen कसकर पकड़ता है, इसलिए PaO2 " + fx(pao2) + " पर SaO2 " + fx(sao2 * 100) + "% है।");
@@ -1105,14 +1110,16 @@
     if (!(ph > 0 && c > 0 && h > 0)) return null;
     var rA = c > 45, rK = c < 35, mA = h < 22, mK = h > 26, acid = ph < 7.35, alk = ph > 7.45;
     var win = 1.5 * h + 8, extra = null, chronic = null;
+    // round 6 (E2): a high CO2 with a metabolic part too needs a clearly low bicarbonate: below 20, or 4 or more below
+    // the patient's own baseline (g.hco3Base, e.g. a COPD patient's usual 32). 21 to 23 with PaCO2 57 is respiratory.
+    // Without a baseline the expected value is a normal 24 carried by the acute CO2 rise (about 1 per 10 mmHg above 40).
+    var base = +g.hco3Base > 0 ? +g.hco3Base : null, expH = base != null ? base : 24 + Math.max(0, 0.1 * (c - 40)), metLow = h < 20 || h <= expH - 4;
     if (acid) {
-      if (rA && mA) id = "mixedAcidosis";
-      else if (mA) { id = "metabolicAcidosis"; if (c > win + 2) { id = "mixedAcidosis"; extra = "co2High"; } else if (c < win - 2) extra = "co2Low"; }
+      if (rA && metLow) { id = "mixedAcidosis"; if (h >= 20) extra = "hco3BelowBase"; }
+      else if (mA && !rA) { id = "metabolicAcidosis"; if (c > win + 2) { id = "mixedAcidosis"; extra = "co2High"; } else if (c < win - 2) extra = "co2Low"; }
       else if (rA) {
         var acute = 24 + 0.1 * (c - 40), chr = 24 + 0.35 * (c - 40);
-        // an acute CO2 rise lifts HCO3 about 1 per 10 mmHg: a bicarbonate well below that is a metabolic acidosis too
-        if (h < acute - 2) { id = "mixedAcidosis"; extra = "hco3Low"; }
-        else { id = "respiratoryAcidosis"; chronic = h >= chr - 2 ? "chronic" : h > acute + 2 ? "acuteOnChronic" : "acute"; }
+        id = "respiratoryAcidosis"; chronic = h >= chr - 2 ? "chronic" : h > acute + 2 ? "acuteOnChronic" : "acute";
       }
       else id = "metabolicAcidosis";
     } else if (alk) {
@@ -1129,7 +1136,7 @@
     if (id === "mixedAlkalosis" || id === "metabolicAlkalosis" || (id === "compensated" && mK)) parts.push("metabolicAlkalosis");
     var phT = "pH " + fx(ph, 2), cT = "PaCO2 " + fx(c), hT = "HCO3 " + fx(h, 1);
     if (id === "mixedAcidosis" && extra === "co2High") { en.push(phT + " with " + hT + " is a metabolic acidosis. Breathing should bring PaCO2 down to about " + fx(win - 2) + " to " + fx(win + 2) + " (Winter's formula); " + cT + " is higher, so there is a respiratory acidosis too."); hi.push(phT + " और " + hT + " metabolic acidosis है। साँस से PaCO2 लगभग " + fx(win - 2) + " से " + fx(win + 2) + " होना चाहिए (Winter's formula); " + cT + " इससे ज़्यादा है, इसलिए respiratory acidosis भी है।"); }
-    else if (id === "mixedAcidosis" && extra === "hco3Low") { en.push(phT + ": acid. " + cT + " is high (respiratory acidosis). An acute CO2 rise should lift HCO3 to about " + fx(24 + 0.1 * (c - 40)) + "; " + hT + " is lower, so there is a metabolic acidosis too."); hi.push(phT + ": अम्लीय। " + cT + " ज़्यादा है (respiratory acidosis)। CO2 के acute बढ़ने से HCO3 लगभग " + fx(24 + 0.1 * (c - 40)) + " होना चाहिए; " + hT + " इससे कम है, इसलिए metabolic acidosis भी है।"); }
+    else if (id === "mixedAcidosis" && extra === "hco3BelowBase") { en.push(phT + ": acid. " + cT + " is high (respiratory acidosis). " + hT + " is " + fx(expH - h) + " below the " + fx(expH) + " expected at this CO2, so there is a metabolic acidosis too."); hi.push(phT + ": अम्लीय। " + cT + " ज़्यादा है (respiratory acidosis)। " + hT + " इस CO2 पर अपेक्षित " + fx(expH) + " से " + fx(expH - h) + " कम है, इसलिए metabolic acidosis भी है।"); }
     else if (id === "mixedAcidosis") { en.push(phT + ": acid. " + cT + " is high (respiratory acidosis) and " + hT + " is low (metabolic acidosis), so both push the pH down."); hi.push(phT + ": अम्लीय। " + cT + " ज़्यादा है (respiratory acidosis) और " + hT + " कम है (metabolic acidosis), इसलिए दोनों pH को नीचे धकेलते हैं।"); }
     else if (id === "respiratoryAcidosis") {
       var ct = chronic === "chronic" ? ["The bicarbonate has risen to match: chronic, kidney compensated.", "Bicarbonate बराबरी में बढ़ा है: chronic, kidney ने compensate किया।"] : chronic === "acuteOnChronic" ? ["The bicarbonate is higher than an acute rise gives but lower than full compensation: acute on chronic.", "Bicarbonate acute बढ़त से ज़्यादा पर पूरे compensation से कम है: chronic के ऊपर acute।"] : ["The bicarbonate has barely moved: acute.", "Bicarbonate लगभग नहीं बदला: acute।"];
@@ -1158,7 +1165,7 @@
     var rEff = Math.abs(log10(40 / c)), mEff = Math.abs(log10(h / 24)), main = id === "normal" ? null : rEff >= mEff ? "respiratory" : "metabolic";
     var wx = id === "metabolicAcidosis" || (!!extra && extra !== "hco3LowNear" && extra !== "hco3HighNear");
     return { acidBase: id, main: main, parts: parts, mixed: parts.length >= 2 && id !== "compensated", label: label, detail: T(en.join(" "), hi.join(" ")), hypoxaemia: hyp, failure: fail, pf: pf, pfLow: pfLow, lactic: lactic, chronicity: chronic, winters: wx ? [r0(win - 2), r0(win + 2)] : null,
-      plain: abPlain(id, extra, chronic, acid, alk, lactic, fail, ph) };
+      plain: abPlain(id, extra, chronic, acid, alk, lactic ? +g.lactate : null, fail, ph), lactate: lactic ? r1(+g.lactate) : null, hco3Base: base };
   }
   /* Level 1 reading of a gas (round 5, E4): short sentences, no formula names, no "acidaemia". */
   function abPlain(id, extra, chronic, acid, alk, lactic, fail, ph) {
@@ -1172,12 +1179,13 @@
     } else if (id === "metabolicAcidosis") {
       a(acid ? p + ": the blood is too acid from the body's chemistry. Bicarbonate is low." : p + ": bicarbonate is low, but fast breathing keeps the pH normal.", acid ? p + ": शरीर के रसायन से ख़ून बहुत अम्लीय है। Bicarbonate कम है।" : p + ": bicarbonate कम है, पर तेज़ साँस pH को सामान्य रखती है।");
       if (acid) { if (extra === "co2Low") a("Breathing is blowing off even more CO2 than expected.", "साँस उम्मीद से भी ज़्यादा CO2 निकाल रही है।"); else a("Breathing lowers CO2 to help, as expected.", "मदद के लिए साँस CO2 घटाती है, जैसा होना चाहिए।"); }
-    } else if (id === "mixedAcidosis") a(p + ": the blood is too acid from two causes: high CO2 and low bicarbonate.", p + ": ख़ून दो कारणों से बहुत अम्लीय है: ज़्यादा CO2 और कम bicarbonate।");
+    } else if (id === "mixedAcidosis" && extra === "co2High") a(p + ": the blood is too acid. Bicarbonate is low, and breathing is not lowering CO2 as much as it should.", p + ": ख़ून बहुत अम्लीय है। Bicarbonate कम है, और साँस CO2 को उतना नहीं घटा रही जितना चाहिए।"); // round 6: CO2 is not high here
+    else if (id === "mixedAcidosis") a(p + ": the blood is too acid from two causes: high CO2 and " + (extra === "hco3BelowBase" ? "bicarbonate lower than expected." : "low bicarbonate."), p + ": ख़ून दो कारणों से बहुत अम्लीय है: ज़्यादा CO2 और " + (extra === "hco3BelowBase" ? "अपेक्षा से कम bicarbonate।" : "कम bicarbonate।"));
     else if (id === "respiratoryAlkalosis") a(p + ": the blood is too alkaline because CO2 is low: too much breathing.", p + ": CO2 कम है, इसलिए ख़ून बहुत क्षारीय है: साँस बहुत ज़्यादा।");
     else if (id === "metabolicAlkalosis") a(alk ? p + ": the blood is too alkaline from extra bicarbonate." : p + ": bicarbonate is high, but the pH is still normal.", alk ? p + ": extra bicarbonate से ख़ून बहुत क्षारीय है।" : p + ": bicarbonate ज़्यादा है, पर pH अभी सामान्य है।");
     else if (id === "mixedAlkalosis") a(p + ": the blood is too alkaline from two causes: low CO2 and high bicarbonate.", p + ": ख़ून दो कारणों से बहुत क्षारीय है: कम CO2 और ज़्यादा bicarbonate।");
     else a(p + " is normal, but CO2 and bicarbonate are both off, in opposite directions. One is balancing the other.", p + " सामान्य है, पर CO2 और bicarbonate दोनों उल्टी दिशा में बदले हैं। एक दूसरे को संतुलित कर रहा है।");
-    if (lactic) a("Lactate is high: tissues are short of oxygen.", "Lactate ज़्यादा है: tissues को oxygen कम मिल रही है।");
+    if (lactic != null) a("Lactate " + fx(lactic, 1) + " is high: tissues are short of oxygen.", "Lactate " + fx(lactic, 1) + " ज़्यादा है: tissues को oxygen कम मिल रही है।"); // round 6 (E2): quote the value
     if (fail === "type2") a("Oxygen is low and CO2 is high together.", "Oxygen कम और CO2 ज़्यादा, दोनों एक साथ।");
     else if (fail === "type1") a("Oxygen is low.", "Oxygen कम है।");
     return T(en.join(" "), hi.join(" "));
@@ -1254,7 +1262,8 @@
     peepSetHigh: T("PEEP set high: blood pressure falling", "PEEP ज़्यादा रखा गया: BP गिर रहा है"),
     spo2Low: T("Low SpO2", "SpO2 कम"), mapLow: T("Low blood pressure", "Blood pressure कम"),
     hrHigh: T("High heart rate", "Heart rate ज़्यादा"), hrLow: T("Low heart rate", "Heart rate कम"),
-    etco2High: T("High EtCO2", "EtCO2 ज़्यादा")
+    etco2High: T("High EtCO2", "EtCO2 ज़्यादा"),
+    co2High: T("CO2 high: blood turning acid", "CO2 ज़्यादा: ख़ून अम्लीय हो रहा है")
   };
   var MONITOR = { spo2Low: 1, mapLow: 1, hrHigh: 1, hrLow: 1, etco2High: 1 };
   /* Capnograph high EtCO2 limit (mmHg): 50 by default (a common monitor default); a scenario may set monitor.etco2High
@@ -1314,7 +1323,7 @@
     autoPeep: ["rr", "vt", "ti", "pinsp", "mode", "ps", "cycle"], dyssync: ["trigType", "trigFlow", "trigPress", "cycle", "mode", "ps", "rr", "vt", "ti", "peep"],
     peepSetHigh: ["peep", "epap"], spo2Low: ["fio2", "peep", "epap", "mode", "vt", "rr", "pinsp", "ps", "plow", "phigh", "tlow"],
     mapLow: ["peep", "epap", "rr", "vt", "ti", "pinsp", "ipap", "mode", "phigh", "plow"], hrHigh: ["peep", "rr", "vt", "ti", "fio2", "mode"], hrLow: ["fio2", "peep", "mode", "rr", "vt"],
-    etco2High: ["rr", "vt", "pinsp", "ps", "mode", "ipap", "pPeakHigh"]
+    etco2High: ["rr", "vt", "pinsp", "ps", "mode", "ipap", "pPeakHigh"], co2High: ["rr", "vt", "pinsp", "ps", "mode", "ipap", "pPeakHigh"]
   };
   var SLOW_ALARMS = { spo2Low: 1, hrLow: 1, hrHigh: 1, etco2High: 1 };
   /* Round 6 (E1, safety): a low oxygen alarm (low SpO2, the hypoxic slow heart) never names an FiO2 or PEEP INCREASE
@@ -1350,6 +1359,7 @@
       var alt = clone(st); alt[c.key] = c.from; alt = norm(alt);
       var gone;
       if (id === "etco2High") gone = etco2Clears(state, st, alt); // CO2 settles over 10 to 30 min: judge the steady state
+      else if (id === "co2High") gone = co2Acid(state, st) && !co2Acid(state, alt);
       else if (SLOW_ALARMS[id]) {
         if (!settled.on) settled.on = rawAlarms(settled.base = frozenStep(state, st, 600), st);
         gone = hasA(settled.on, id) && !hasA(rawAlarms(frozenStep(state, alt, 600), alt), id);
@@ -1365,6 +1375,25 @@
     function ss(x) { var mo = model(state, x); if (!(mo.va > 0.05) || !(mo.paco2 > 0)) return 1e9; return 0.863 * mo.vco2 / mo.va * mo.etco2 / mo.paco2; }
     return ss(st) > lim && ss(alt) <= lim;
   }
+  /* Round 6 (E3): a respiratory acidosis the learner made. The ventilator cannot measure PaCO2, but a lab that lets a
+     learner sit at pH 7.22 for 30 min with no alarm (EtCO2 under its limit because small breaths widen the gap) teaches
+     the wrong lesson. co2High (medium) fires when the blood now has PaCO2 above 50 or pH below 7.30, EtCO2 is not
+     already alarming, and the learner's change is the cause: at steady state it is acid at these settings and not with
+     the change undone. Leads with the cause fix (rate or breath size). */
+  var CO2_ACID = { paco2: 50, ph: 7.3 };
+  function co2Acid(state, x) {
+    var mo = model(state, x); if (!(mo.va > 0.05)) return true;
+    var pss = 0.863 * mo.vco2 / mo.va, ph = phOf(hco3Of(state, pss), pss);
+    return pss > CO2_ACID.paco2 || ph < CO2_ACID.ph;
+  }
+  function co2HighAlarm(state, st, mo, list, settled) {
+    var mc = mo.mech;
+    if (state.arrest || mc.disc || mc.bag || hasA(list, "etco2High") || !(mo.paco2 > CO2_ACID.paco2 || mo.ph < CO2_ACID.ph)) return null;
+    var c = causeOf(state, st, "co2High", settled);
+    if (!c) return null;
+    var a = alarm("co2High", "warn"); a.causedBy = c;
+    return a;
+  }
   function frozenStep(state, st, secs) {
     var f = clone(state), i;
     for (i = 0; i < f.timeline.length; i++) if (f.fired.indexOf(i) < 0) f.fired.push(i);
@@ -1376,7 +1405,8 @@
   function alarms(state, settings, ctx) {
     var st = norm(settings || state.settings), a = rawAlarms(state, st), i, settled = {};
     // E7: the bedside response plan rides on each alarm (additive fields, see planOf)
-    var mo = model(state, st), k, pl;
+    var mo = model(state, st), k, pl, ca = co2HighAlarm(state, st, mo, a, settled);
+    if (ca) a.push(ca);
     for (i = 0; i < a.length; i++) {
       var c = state.arrest ? null : causeOf(state, st, a[i].id, settled);
       if (c) { causeSafety(state, st, mo, c, a[i].id); a[i].causedBy = c; }
@@ -1422,7 +1452,7 @@
       return c;
     }
     // the safe pair: a smaller breath lost minute volume, so keep the breath and raise the rate (not in a flow-limited lung)
-    var veAlarm = id === "etco2High" || id === "veLow" || id === "spo2Low" || id === "hrHigh";
+    var veAlarm = id === "etco2High" || id === "co2High" || id === "veLow" || id === "spo2Low" || id === "hrHigh";
     if ((c.key === "vt" || c.key === "pinsp") && c.to < c.from && veAlarm && !state.p.fl && MODES[st.mode] && MODES[st.mode].controls.indexOf("rr") >= 0 && st.rr < 35) {
       // match ALVEOLAR ventilation, not minute volume: a smaller breath wastes a larger share in the airways (dead space)
       var veOld = h1.mo.mech.veMeasured, rr = clamp(Math.round(st.rr * h1.mo.va / Math.max(0.05, mo.va)), st.rr + 1, 35);
@@ -1530,7 +1560,8 @@
     mapLow: [["patient", "bpCheck", "trapping", "bpTreat", "senior"], []],
     hrHigh: [["patient", "agitation", "senior"], []],
     hrLow: [["patient", "slowHeart", "dope", "senior"], ["bag100"]],
-    etco2High: [["patient", "co2", "abg", "senior"], []]
+    etco2High: [["patient", "co2", "abg", "senior"], []],
+    co2High: [["patient", "co2", "abg", "senior"], []]
   };
   var PRIO = { danger: "high", warn: "medium", info: "low" };
   var CHECK_LABEL = {
@@ -1624,6 +1655,7 @@
     else if (id === "fio2High") prim = pc("fio2Set");
     else if (id === "peepSetHigh") prim = pc("peepBack");
     else if (id === "autoPeep" || id === "peepHigh") prim = pc("trapping");
+    else if (id === "co2High") prim = pc("co2");
     else if (id === "etco2High") {
       // no learner cause: more air each minute, unless the lung traps air (asthma, COPD): there the blood gas decides
       var hasRr = MODES[st.mode] && MODES[st.mode].controls.indexOf("rr") >= 0 && SPONT_MODES.indexOf(st.mode) < 0;
@@ -1652,6 +1684,8 @@
       else if (cause.instead) prim = cause.instead;
       else prim.why = cause.unsafeWhy;
     }
+    // round 6 (E3): the self-made acidosis card says what to do in one line, whichever fix leads
+    if (id === "co2High") { prim = clone(prim); prim.why = T("Your change left too little fresh air each minute, so CO2 builds up and the blood turns acid. Raise the rate or the breath size.", "आपके बदलाव से हर मिनट कम ताज़ी हवा जाती है, इसलिए CO2 बढ़ती है और ख़ून अम्लीय होता है। Rate या साँस का आकार बढ़ाएँ।"); }
     var call = callOf(state, st, mo, ctx), out = { priority: PRIO[a.severity] || "medium", checklist: steps, actions: acts, primary: prim, callNow: !!call };
     // round 5 (E1): no Silence on an emergency low SpO2 or a high-priority monitor (patient) alarm
     out.silenceOk = !(band === "emergency" || (MONITOR[id] && out.priority === "high"));
@@ -1667,6 +1701,7 @@
   function alarmPlan(state, id, settings, ctx) {
     var st = norm(settings || state.settings), mo = model(state, st), list = rawAlarms(state, st, mo), a = null, i;
     for (i = 0; i < list.length; i++) if (list[i].id === id) a = list[i];
+    if (id === "co2High") a = co2HighAlarm(state, st, mo, list, {}); // round 6 (E3): not a rawAlarms() id
     var c = a && !state.arrest ? causeOf(state, st, id, {}) : null;
     if (c) causeSafety(state, st, mo, c, id);
     a = a || { id: id, severity: "warn" };
@@ -2088,7 +2123,7 @@
   var SPONT = ["psv", "cpap", "niv"];
   var HARMFUL = { secretions: 1, bronchospasm: 1, pneumothorax: 1, plug: 1, disconnect: 1, cuffLeak: 1, o2Failure: 1, hypotension: 1, hypovolaemia: 1, fever: 1, fatigue: 1, sedationLight: 1, sedationDeep: 1 };
   var SCORE_MAX = { mode: 10, initial: 10, oxygenation: 15, ventilation: 15, protection: 20, alarms: 10, abg: 10, time: 10, unsafeMin: -30 };
-  var GRACE = 600, ARREST_CAP = 20;
+  var GRACE = 600, ARREST_CAP = 20, PH_UNSAFE = 7.25;
   /* ARDSNet 2000 PEEP/FiO2 tables: lower PEEP table minimum and higher PEEP table maximum for this FiO2. */
   function peepTableOk(fio2, peep) {
     var f = fio2 / 100;
@@ -2146,7 +2181,7 @@
     var tl = sc.timeline || [], win = [];
     for (i = 0; i < tl.length; i++) if (HARMFUL[tl[i].event]) win.push([tl[i].t, tl[i].t + (tl[i].duration || 0) + 300]);
     function scripted(t) { for (var w = 0; w < win.length; w++) if (t >= win[w][0] && t <= win[w][1]) return true; return false; }
-    var spells = [], curSp = null, offs = [], openOff = {};
+    var spells = [], curSp = null, offs = [], openOff = {}, offT = null;
     function offSpell(key, off, val, side, ls) {
       var cur = openOff[key], t = log[i].t;
       if (cur) { cur.until = t; if (!off || cur.side !== side) { openOff[key] = null; cur = null; } else if (side === "high" ? val > cur.peak : val < cur.peak) cur.peak = val; }
@@ -2167,6 +2202,12 @@
     }
     if (wTot <= 0) for (i = 0; i < n; i++) wt[i] = counted(i) ? 1 : 0;
     var PRESET = ["mode", "vt", "pinsp", "ps", "ipap", "epap", "phigh", "plow"];
+    var ph0 = n && log[0].readout && log[0].readout.gas && typeof log[0].readout.gas.ph === "number" ? log[0].readout.gas.ph : 7.4, acidSp = null;
+    function changedFrom(ls) { for (var q = 0; q < CHANGE_KEYS.length; q++) { var kk = CHANGE_KEYS[q]; if (kk !== "pPeakHigh" && ls[kk] != null && start[kk] != null && ls[kk] !== start[kk]) return true; } return false; }
+    function acidEnd() {
+      if (acidSp && acidSp.until - acidSp.t >= 600) unsafeList.push({ t: acidSp.t, until: acidSp.until, minute: tmin(acidSp.t), what: T("pH " + fx(acidSp.low, 2) + " from your settings for " + tmin(acidSp.until - acidSp.t) + " min", "आपकी settings से pH " + fx(acidSp.low, 2) + ", " + tmin(acidSp.until - acidSp.t) + " मिनट तक") });
+      acidSp = null;
+    }
     for (i = 0; i < n; i++) {
       var L = log[i], r = L.readout || { vitals: {}, vent: {}, gas: {}, flags: [] }, f = r.flags || [], ls = L.settings || {};
       if (r.arrest && !arrest) arrest = r.arrest;
@@ -2200,7 +2241,9 @@
       // E5 (round 4): goals count as met only when every goal holds together for 5 sim min or more (spells below)
       var allH = all && !harm;
       if (i === 0) startAll = allH; // round 5 (E6): the patient was on target before the learner did anything
-      if (allH) { if (!curSp) { curSp = { t: L.t, until: L.t }; spells.push(curSp); } else curSp.until = L.t; } else curSp = null;
+      // round 6 (E4): a change at the same sim time as an off-goal sample has had no time to work: the spell starts at
+      // the next sample, so "met at 0 min" is never said when VT was 10.4 mL/kg at 0 min
+      if (allH) { if (!curSp) { if (L.t !== offT) { curSp = { t: L.t, until: L.t }; spells.push(curSp); } } else curSp.until = L.t; } else { curSp = null; offT = L.t; }
       offSpell("spo2", !o, sp, above ? "high" : "low", ls);
       offSpell("vent", !v, g.ph ? r.gas.ph : r.gas.paco2, g.ph ? (r.gas.ph < g.ph[0] ? "low" : "high") : (r.gas.paco2 > (g.paco2 || [35, 45])[1] ? "high" : "low"), ls);
       offSpell("pplat", !spont && r.vent.pplat > pplatMax, r.vent.pplat, "high", ls);
@@ -2219,16 +2262,24 @@
           else prev.until = L.t;
         }
       }
+      // round 6 (E3): a pH below 7.25 from the learner's own settings (lower than the start gas, settings changed) for
+      // 10 min or more is unsafe; a presenting acidosis left as it was is the patient's problem, not a moment
+      var phNow = (r.gas || {}).ph, acidMine = L.t > GRACE && !scripted(L.t) && typeof phNow === "number" && phNow < PH_UNSAFE && phNow < ph0 - 0.05 && changedFrom(ls);
+      if (acidMine) { if (!acidSp) acidSp = { t: L.t, until: L.t, low: phNow }; else { acidSp.until = L.t; acidSp.low = Math.min(acidSp.low, phNow); } }
+      else acidEnd();
     }
+    acidEnd();
     var fr = function (x) { return wsum > 0 ? x / wsum : 0; };
     var endAll = !!(end && end.all && end.pr);
     // round 5 (E6): honest alarm responses. An alarm the learner's own change caused and then fixed is not a response
     // (selfMadeAlarms); an answer cleared more than 5 min after it began is late; and a monitor alarm the log shows on
     // for 5 min or more makes its "cleared after a change" answer late.
     var ans0 = run.answers || [], ans = [], selfMade = [], smk = {}, alS = monitorSpells(log, spo2R, (sc.monitor || {}).etco2High || ETCO2_HIGH), used = {};
+    for (i = 0; i < ans0.length; i++) { var s0_ = ans0[i]; if (s0_ && s0_.kind === "alarm" && s0_.correct && (s0_.selfMade || s0_.causedBy) && !smk[s0_.id]) { smk[s0_.id] = 1; selfMade.push({ id: s0_.id, label: ALARM[s0_.id] || T(s0_.id, s0_.id) }); } }
     for (i = 0; i < ans0.length; i++) {
       var a0 = ans0[i];
-      if (a0 && a0.kind === "alarm" && a0.correct && (a0.selfMade || a0.causedBy)) { if (!smk[a0.id]) { smk[a0.id] = 1; selfMade.push({ id: a0.id, label: ALARM[a0.id] || T(a0.id, a0.id) }); } continue; }
+      // round 6 (E4): every correct answer for an alarm id the learner caused is left out, not only the flagged one
+      if (a0 && a0.kind === "alarm" && a0.correct && smk[a0.id]) continue;
       if (a0 && a0.kind === "alarm" && a0.correct && typeof a0.t === "number" && typeof a0.clearedT === "number" && a0.clearedT - a0.t > 300) a0 = { kind: "alarm", id: a0.id, correct: false, late: true, t: a0.t };
       ans.push(a0);
     }
@@ -2320,6 +2371,10 @@
     var worst = null;
     for (i = 0; i < offs.length; i++) { var od = offs[i].until - offs[i].t; if (od >= 120 && (!worst || od > worst.until - worst.t)) worst = offs[i]; }
     var worstSpell = worst ? spellOf(worst, g, spo2R, pplatMax, drvMax, vtR) : null;
+    // round 6 (E4): every spell off a goal of 5 min or more, in time order (the Timing list), not only the longest
+    var offList = [];
+    for (i = 0; i < offs.length; i++) if (offs[i].until - offs[i].t >= 300) offList.push(spellOf(offs[i], g, spo2R, pplatMax, drvMax, vtR));
+    offList.sort(function (x, y) { return x.fromMin - y.fromMin; });
     // round 5 (E7): a senior-only action (relaxant, transfusion) without a clear reason is unsafe whenever it happens
     var soSeen = {}, soBad = 0;
     for (i = 0; i < n; i++) {
@@ -2356,7 +2411,9 @@
     if (hiFiO2) notes.push(T("SpO2 was above target on FiO2 above 50%: wean FiO2.", "FiO2 50% से ऊपर पर SpO2 लक्ष्य से ऊपर था: FiO2 घटाएँ।"));
     if (fr(vW) < 0.8 && wsum > 0) notes.push(T("Ventilation goal was not met for much of the run.", "Run के बड़े हिस्से में ventilation लक्ष्य पूरा नहीं हुआ।"));
     if (backup) notes.push(T("The patient needed apnoea backup: the mode did not match the drive to breathe.", "मरीज़ को apnoea backup चाहिए था: mode साँस की drive से मेल नहीं खाता था।"));
-    if (unsafeList.length) notes.push(T("Unsafe moments: very high plateau, severe hypoxaemia, a large VT you set, or trapping with hypotension.", "असुरक्षित पल: बहुत ऊँचा plateau, गंभीर hypoxaemia, आपका रखा बड़ा VT, या trapping के साथ hypotension।"));
+    if (unsafeList.length) notes.push(T("Unsafe moments: very high plateau, severe hypoxaemia, a large VT you set, trapping with hypotension, or a pH below 7.25 from your settings.", "असुरक्षित पल: बहुत ऊँचा plateau, गंभीर hypoxaemia, आपका रखा बड़ा VT, trapping के साथ hypotension, या आपकी settings से pH 7.25 से कम।"));
+    if (offList.length >= 2) notes.unshift(T("Every time off a goal: " + offList.map(function (x) { return x.what.en + " from " + x.fromMin + " to " + x.toMin + " min"; }).join("; ") + ".",
+      "लक्ष्य से बाहर का हर समय: " + offList.map(function (x) { return x.what.hi + ", " + x.fromMin + " से " + x.toMin + " मिनट तक"; }).join("; ") + "।"));
     if (worstSpell) notes.unshift(T("Longest time off a goal: " + worstSpell.what.en + " from " + worstSpell.fromMin + " to " + worstSpell.toMin + " min.", "किसी लक्ष्य से सबसे लंबा समय बाहर: " + worstSpell.what.hi + ", " + worstSpell.fromMin + " से " + worstSpell.toMin + " मिनट तक।"));
     if (soBad) notes.push(T("A muscle relaxant or a transfusion is your senior's decision. You gave one without a clear reason: call first.", "Muscle relaxant या transfusion आपके senior का फ़ैसला है। आपने बिना साफ़ कारण दिया: पहले बुलाएँ।"));
     if (selfMade.length) notes.push(T(selfMade.length + (selfMade.length === 1 ? " alarm" : " alarms") + " came from your own change. Fixing it is not counted as an alarm response.", selfMade.length + " alarm आपके अपने बदलाव से आए। उन्हें ठीक करना alarm response में नहीं गिना जाता।"));
@@ -2369,7 +2426,7 @@
     return { total: clamp(Math.round(total), 0, 100), parts: parts, scored: scored, max: X, explain: ex, unsafeList: unsafeList, notes: notes, arrest: !!arrest, goodRun: sc.goodRun || null,
       goals: { firstMin: tFirst === null ? null : tmin(tFirst), metAtEnd: endAll, heldAtEndMin: endAll ? tmin(endHeld) : 0, holdMin: HOLD / 60, missedAtEnd: miss, missedText: miss.length ? missT : null,
         settledMin: tSet === null ? null : tmin(tSet), lostAfterFirst: lostS },
-      worstSpell: worstSpell, nothingToImprove: nothing, selfMadeAlarms: selfMade,
+      worstSpell: worstSpell, offGoalSpells: offList, nothingToImprove: nothing, selfMadeAlarms: selfMade,
       missedAlarms: missed, practice: !!run.tutorial, countsForBest: !run.tutorial && !nothing };
   }
 
@@ -2382,7 +2439,7 @@
     init: init, step: step, breath: breath, readout: readout, abg: abg, explainDelta: explainDelta, alarms: alarms,
     dyssync: dyssync, whatIf: whatIf, score: score, SCORE_MAX: SCORE_MAX, pbw: pbw, normSettings: norm, ACTIONS: ACTIONS, act: act,
     hold: hold, exam: exam, suggestActions: suggestActions, alarmPlan: alarmPlan, oxygen: { sat: sat, p50: p50Of }, whyDrift: whyDrift, caseState: caseState, inject: inject, interpretAbg: interpretAbg,
-    driftReport: driftReport, settingWarnings: settingWarnings, constants5: { spo2LagS: SPO2_TAU, reopenS: REOPEN_TAU, spo2Emergency: SPO2_EMERG },
+    driftReport: driftReport, settingWarnings: settingWarnings, fio2Step: fio2Step, constants5: { spo2LagS: SPO2_TAU, reopenS: REOPEN_TAU, spo2Emergency: SPO2_EMERG },
     constants2: { grace: GRACE, arrestSeconds: ARREST_S, arrestScoreCap: ARREST_CAP }
   };
 });

@@ -249,7 +249,10 @@ test("E7: a fall while bagging on 100% oxygen comes with its reason (no PEEP, lu
 /* E8: 7.18 / 57 / HCO3 20.7 was never named a mixed acidosis */
 test("E8: abg() names a mixed respiratory and metabolic acidosis, and the textbook steps behind it", () => {
   const I = E.interpretAbg;
-  const sameer = I({ pH: 7.18, PaCO2: 57, HCO3: 20.7, PaO2: 55, FiO2: 0.6, lactate: 2.5 });
+  // round 6 (E2): the metabolic part needs HCO3 below 20, or 4 below the baseline (the patient's own, else a normal 24
+  // carried by the acute CO2 rise); against Mrs Das's own 22, 20.7 reads respiratory
+  assert.equal(I({ pH: 7.18, PaCO2: 57, HCO3: 20.7, hco3Base: 22 }).acidBase, "respiratoryAcidosis");
+  const sameer = I({ pH: 7.14, PaCO2: 57, HCO3: 19.2, PaO2: 55, FiO2: 0.6, lactate: 2.5 });
   assert.equal(sameer.acidBase, "mixedAcidosis"); assert.equal(sameer.mixed, true);
   assert.deepEqual(sameer.parts, ["respiratoryAcidosis", "metabolicAcidosis"]);
   assert.equal(sameer.label.en, "Mixed respiratory and metabolic acidosis"); assert.ok(bi(sameer.label) && bi(sameer.detail));
@@ -274,7 +277,10 @@ test("E8: a combined hypoxia and hypercapnia gas case comes from the model (data
   // suggested case: ARDS, VT 420, rate 24, PEEP 5, FiO2 50 for 60 min
   const cs = E.caseState(byId("ards"), { settings: { vt: 420, rr: 24, peep: 5, fio2: 50 }, pre: 3600 }), g = E.abg(cs.state);
   assert.ok(g.pH < 7.2 && g.PaCO2 > 45 && g.HCO3 < 22 && g.PaO2 < 60, JSON.stringify(g));
-  assert.equal(g.interp.acidBase, "mixedAcidosis"); assert.equal(g.interp.failure, "type2");
+  // round 6 (E2): the live gas is judged against this patient's own bicarbonate (20 at presentation), so HCO3 20.1 is no
+  // new metabolic acid there; the case card (learn.json abg-15) reads its printed gas against a normal 24: mixed
+  assert.ok(g.interp.parts.includes("respiratoryAcidosis")); assert.equal(g.interp.failure, "type2");
+  assert.equal(E.interpretAbg({ pH: g.pH, PaCO2: g.PaCO2, HCO3: g.HCO3, PaO2: g.PaO2, FiO2: 0.5, lactate: g.lactate }).acidBase, "mixedAcidosis");
 });
 
 test("R4: every new bilingual field is short, dash free and has Hindi", () => {
