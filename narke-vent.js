@@ -363,6 +363,7 @@
     bandT_emergency: T("SpO2 is below 88%. Hand bag with 100% oxygen, think DOPE and call your senior now.", "SpO2 88% से कम है। 100% oxygen से हाथ से bag करें, DOPE सोचें और अभी senior को बुलाएँ।"),
     o2Trend: T("Where SpO2 is heading", "SpO2 किधर जा रहा है"), unsafeBack: T("Why not set it back", "वापस क्यों नहीं"),
     interpH: T("Reading the gas", "गैस को पढ़ना"), stepByStep: T("Step by step", "क़दम दर क़दम"),
+    spellsH: T("Every time off a goal", "हर बार जब लक्ष्य से बाहर रहे"),
     worstH: T("Longest time off a goal", "किसी लक्ष्य से सबसे लंबा समय बाहर"), worstLine: T("{x}, from {a} to {b} min ({m} min).", "{x}, {a} से {b} मिनट तक ({m} मिनट)।"),
     wVe: T("Smaller breaths at this rate cut the air moved each minute by {p}% ({a} to {b} L/min). CO2 will rise.", "इस rate पर छोटी साँसें हर मिनट की हवा {p}% घटा देंगी ({a} से {b} L/min)। CO2 बढ़ेगा।"),
     rrPair: T("Also raise rate to {n} to keep minute air the same", "हर मिनट की हवा बराबर रखने के लिए rate भी {n} करें"),
@@ -453,7 +454,7 @@
   var DYS_KINDS = ["doubleTrigger", "ineffectiveTrigger", "autoTrigger", "flowStarvation", "prematureCycle", "delayedCycle", "reverseTrigger"];
   // What-if moves a setting by a teaching-sized amount in its own units; others move four steps.
   var WI_DELTA = { fio2: 20, peep: 4, vt: 100, rr: 6, pinsp: 5, ps: 5, ti: 0.4, ipap: 4, epap: 3, phigh: 4, plow: 3, thigh: 1, tlow: 0.2, trigFlow: 2, cycle: 15 };
-  var OX_KEYS = { fio2: 1, peep: 1, epap: 1, plow: 1, phigh: 1, ti: 1, thigh: 1 };
+  var OX_KEYS = { fio2: 1, peep: 1, epap: 1, plow: 1, phigh: 1, ti: 1, thigh: 1 }, O2_UP = { fio2: 1, peep: 1, epap: 1, plow: 1 };
 
   function L() { return I.lang(); }
   function t(o) { return o == null ? "" : typeof o === "string" ? o : (o[L()] || o.en || ""); }
@@ -2109,6 +2110,8 @@
     autoPeep: ["rr", "vt", "ti"], spo2Low: ["fio2", "peep", "mode"], fio2Low: ["fio2"], fio2High: ["fio2"], peepLow: ["peep"] };
   function causedBy(a) {
     if (a && a.causedBy && a.causedBy.key) return a.causedBy;
+    // SAFETY (round 6, E1): the engine looked and found no learner change behind this alarm; the UI never guesses one
+    if (a && a.causeChecked === true) return null;
     var keys = CAUSE_KEYS[a && a.id], since = R.seen[a.id] != null ? R.seen[a.id] : R.s.t, i, x, prev, k;
     if (!keys) return null;
     for (i = R.log.length - 1; i > 0; i--) {
@@ -2120,7 +2123,9 @@
       for (var j = i - 1; j >= 0; j--) if (R.log[j].settings) { prev = R.log[j].settings; break; }
       if (!prev) return null;
       var ch = x.action.slice(4).split(",");
-      for (k = 0; k < ch.length; k++) if (keys.indexOf(ch[k]) >= 0 && ch[k] !== "mode" && String(prev[ch[k]]) !== String(x.settings[ch[k]])) return { key: ch[k], from: prev[ch[k]], to: x.settings[ch[k]], minutesAgo: Math.round((R.s.t - x.t) / 60), ui: true };
+      // more oxygen (FiO2, PEEP, EPAP, P low raised) never causes low SpO2 or a low heart rate (round 6, E1)
+      for (k = 0; k < ch.length; k++) if (keys.indexOf(ch[k]) >= 0 && ch[k] !== "mode" && String(prev[ch[k]]) !== String(x.settings[ch[k]]) &&
+        !((a.id === "spo2Low" || a.id === "hrLow") && O2_UP[ch[k]] && +x.settings[ch[k]] > +prev[ch[k]])) return { key: ch[k], from: prev[ch[k]], to: x.settings[ch[k]], minutesAgo: Math.round((R.s.t - x.t) / 60), ui: true };
       return null;
     }
     return null;
@@ -2151,10 +2156,13 @@
     var cb = a ? causedBy(a) : null, top = "", lim = "", sev = sevOf(a), A0 = E().ACTIONS || {}, keepOx = "";
     // SAFETY (round 6, E1 guard in the UI too): more oxygen or more PEEP never causes low SpO2, and the card never offers
     // to take oxygen away on a low SpO2 alarm; it says to keep the raise until SpO2 is back
-    if (id === "spo2Low" && cb && (cb.key === "fio2" || cb.key === "peep") && +cb.to >= +cb.from) {
-      keepOx = '<p class="vl-note vl-keepox">' + s("keepOx", { x: setLabel(cb.key), v: setText(cb.key, cb.to) + (setUnit(cb.key) ? " " + setUnit(cb.key) : "") }) + "</p>";
+    var ok0 = a && a.oxygenKeep && a.oxygenKeep.text;
+    if ((id === "spo2Low" || id === "hrLow") && cb && O2_UP[cb.key] && +cb.to >= +cb.from) {
+      if (!ok0) keepOx = '<p class="vl-note vl-keepox">' + s("keepOx", { x: setLabel(cb.key), v: setText(cb.key, cb.to) + (setUnit(cb.key) ? " " + setUnit(cb.key) : "") }) + "</p>";
       cb = null;
     }
+    // the engine's own "You raised FiO2 to 50%: keep it until SpO2 is back, then wean it in steps" (round 6, E1)
+    if (ok0) keepOx = '<p class="vl-note vl-keepox">' + tx(ok0) + "</p>";
     if (cb) {
       var u = setUnit(cb.key) ? " " + setUnit(cb.key) : "", can = setDef(cb.key) && String(R.set[cb.key]) === String(cb.to), n0 = cb.minutesAgo != null ? cb.minutesAgo : 0;
       if (ALARM_KEYS.indexOf(cb.key) >= 0) {
@@ -2180,7 +2188,8 @@
     // the UI's own rule for low SpO2.
     var sec2 = pr && pr.second;
     // never a step that lowers FiO2 or PEEP on a low SpO2 card (round 6, E1 guard)
-    if (o2 && sec2 && sec2.kind === "setting" && (sec2.key === "fio2" || sec2.key === "peep") && +sec2.to < +R.set[sec2.key]) sec2 = null;
+    if (o2 && sec2 && sec2.kind === "setting" && O2_UP[sec2.key] && +sec2.to < +R.set[sec2.key]) sec2 = null;
+    if (!keepOx && P && P.oxygenKeep && P.oxygenKeep.text) keepOx = '<p class="vl-note vl-keepox">' + tx(P.oxygenKeep.text) + "</p>";
     if (sec2) {
       also = '<div class="vl-also"><h3 class="vl-h3">' + (sec2.heading ? tx(sec2.heading) : s("alsoThen")) + "</h3>" +
         (top ? top.replace(/sp-btn pri/g, "sp-btn sec") : sec2.kind === "action" && A0[sec2.id] ? bedBtn({ id: sec2.id, a: A0[sec2.id], on: true, sug: true }, true) : setDef(sec2.key) && ALARM_KEYS.indexOf(sec2.key) < 0 ? planBtn(sec2, "sec") + (sec2.why ? '<p class="vl-note vl-prim-why">' + txg(sec2.why) + "</p>" : "") : "") + "</div>";
@@ -2213,7 +2222,10 @@
       (checks.length > 3 ? '<details class="vl-more vl-moresteps"><summary>' + s("moreSteps", { n: checks.length - 3 }) + '</summary><ol class="vl-ol vl-now" start="4">' + checks.slice(3).map(liOf).join("") + "</ol></details>" : "")
       : (beg ? '<p class="vl-look">' + s("lookFirst") + "</p>" : "");
     // Bagging over with SpO2 still low (round 6, E9/U5): the ventilator must now give the oxygen the bag gave
-    var bagOver = o2 && R.bagOver && +R.set.fio2 < 100 ? '<div class="vl-call vl-bagover" role="note"><p>' + s("bagOver") + "</p>" + planBtn({ key: "fio2", to: 100, label: { en: STR.raiseFio2.en.replace("{v}", 100), hi: STR.raiseFio2.hi.replace("{v}", 100) } }, "sec") + "</div>" : "";
+    // the engine's spo2Low.bagOver {text, fio2To} when it gives one (its plan then leads with FiO2 100), else the UI's own
+    var bo = (a && a.bagOver) || (P && P.bagOver) || null, primO2 = pr && pr.kind === "setting" && pr.key === "fio2" && +pr.to >= 100;
+    var bagOver = o2 && (bo || R.bagOver) && +R.set.fio2 < 100 ? '<div class="vl-call vl-bagover" role="note"><p>' + (bo && bo.text ? tx(bo.text) : s("bagOver")) + "</p>" +
+      (primO2 ? "" : planBtn({ key: "fio2", to: (bo && bo.fio2To) || 100, label: { en: STR.raiseFio2.en.replace("{v}", (bo && bo.fio2To) || 100), hi: STR.raiseFio2.hi.replace("{v}", (bo && bo.fio2To) || 100) } }, "sec")) + "</div>" : "";
     var rest = acts.filter(function (k) { return k !== primAct && !lineActs[k] && A0[k]; });
     var fio2 = !P && id === "spo2Low" ? '<p class="vl-fix vl-fio2l">' + (R.set.fio2 >= 100 ? s("fio2Max") : R.set.fio2 >= 60 ? s("fio2Hi", { v: R.set.fio2 }) : s("ams_spo2Low")) + "</p>" : "";
     var now = bagOver + call + prim + keepOx + ol + fio2 + (rest.length ? '<div class="vl-bed-g vl-bed-s" role="group" aria-label="' + s("bedH") + '">' + rest.map(function (k) { return actBtn(k, false); }).join("") + "</div>" : "");
@@ -2416,14 +2428,12 @@
     if (R.s.t % 60 < sec) checkDrift(r);
     checkArrest(r);
   }
-  // Bagging over (round 6, E9/U5): when the bag ends and SpO2 is still under the goal on less than 100% oxygen, one
-  // toast and a line on the low SpO2 card say to put the ventilator on 100% now, or keep bagging. Cleared once SpO2 is
-  // back or FiO2 is 100. ponytail: UI-side detection; prefer the engine's own bagging-over field once it ships.
+  // Bagging over (round 6, E9/U5): the engine's readout().bagOver (a bag ended in the last 10 min, SpO2 still under the
+  // goal, FiO2 under 100). One toast when it first appears; the low SpO2 card carries the same line.
   function bagWatch(r) {
-    var bl = bagLeft(), sp = (r.vitals || {}).spo2;
-    if (R.bagWas > 0 && !bl && sp != null && sp < spo2Lo() && +R.set.fio2 < 100) { R.bagOver = true; toast("event", s("bagOver")); }
-    if (bl || (sp != null && sp >= spo2Lo()) || +R.set.fio2 >= 100) R.bagOver = false;
-    R.bagWas = bl;
+    var eb = r.bagOver && r.bagOver.text ? r.bagOver : null;
+    if (eb && !R.bagOver) toast("event", tx(eb.text));
+    R.bagOver = !!eb;
   }
   // flash: a Confirm or a time skip (not a live tick): changed numbers get a brief tint so the eye finds them.
   function refresh(flash) {
@@ -2952,10 +2962,13 @@
       else goal(s("gVt") + " " + rng(g.vtPerKg) + " mL/kg", fmtN(pk), pk >= g.vtPerKg[0] - 0.3 && pk <= g.vtPerKg[1] + 0.3);
     }
     var ws = sco.worstSpell, wsEn = ws && ws.what ? "Longest time off a goal" : null;
-    var us = unsafeList(sco), notes = (sco.notes || []).filter(function (n) { return !(wsEn && n && n.en && n.en.indexOf(wsEn) === 0); }).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
+    // every spell off a goal of 5 min or more, in time order (engine r6, E4); the engine's matching note is not repeated
+    var spells = (sco.offGoalSpells || []).filter(function (x) { return x && x.what; });
+    var us = unsafeList(sco), notes = (sco.notes || []).filter(function (n) { return !(wsEn && n && n.en && n.en.indexOf(wsEn) === 0) && !(spells.length && n && n.en && n.en.indexOf("Every time off a goal") === 0); }).map(anyTx).filter(Boolean), good = sco.goodRun || sco.good || sco.goodRunDescription;
     // the engine's "nothing to improve" note (its first note then) leads the debrief instead of hiding in the takeaways
     var noimp = sco.nothingToImprove ? (notes.length ? notes.shift() : s("noImprove")) : null;
-    var worst = ws && ws.what ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("worstH") + "</b></p><p>" + s("worstLine", { x: t(ws.what), a: ws.fromMin, b: ws.toMin, m: ws.minutes }) + "</p></div>" : "";
+    var worst = spells.length >= 2 ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("spellsH") + '</b></p><ul class="vl-spells">' + spells.map(function (x) { return "<li>" + s("worstLine", { x: t(x.what), a: x.fromMin, b: x.toMin, m: x.minutes }) + "</li>"; }).join("") + "</ul></div>"
+      : ws && ws.what ? '<div class="vl-worst" role="note"><p class="vl-o2h-h"><b>' + s("worstH") + "</b></p><p>" + s("worstLine", { x: t(ws.what), a: ws.fromMin, b: ws.toMin, m: ws.minutes }) + "</p></div>" : "";
     var key = (sc.debrief || []).map(function (n) { return txg(n); });
     var tone = R.arrest ? "bad" : sco.total >= 80 ? "ok" : sco.total >= 60 ? "mid" : "bad";
     I.paint(I.top(t(STR.backLab), s("debrief"), tx(sc.title), I.langBtn()) +
@@ -3015,11 +3028,11 @@
     var now = wi.now || e.readout(st0, set0), prB = wi.without || wi.before || e.readout(pB, set0), prA = wi["with"] || wi.after || e.readout(pA, set1);
     var reasons = safe(function () { return e.explainDelta(e.abg(pB), e.abg(pA), set0, set1, pB, pA); }, []);
     var chain = compose({ setB: set0, setA: set1, keys: [key], roB: e.readout(st0, set0), roA: e.readout(st0, set1), now: now, prB: prB, prA: prA, reasons: reasons, wiChain: presetChain });
-    return { key: key, from: set0[key], to: to, now: now, before: prB, after: prA, chain: chain };
+    return { key: key, from: set0[key], to: to, now: now, before: prB, after: prA, chain: chain, lung: wi.lung || null };
   }
   // One-sentence verdict (U5, round 4): what the change does in 30 min to oxygen, CO2 (or pH) and blood pressure, judged
   // against this patient's own goals: Helps, Trade off, Makes it worse, or Little change. b = without, a = with.
-  function verdictHtml(b, a, g, withPh) {
+  function verdictHtml(b, a, g, withPh, lung) {
     g = g || {};
     var items = [], good = 0, bad = 0;
     function dist(x, rg) { return x == null || !rg ? 0 : x < rg[0] ? rg[0] - x : x > rg[1] ? x - rg[1] : 0; }
@@ -3038,15 +3051,18 @@
     add(raw("vdMap"), gv(b, "vitals", "map"), gv(a, "vitals", "map"), 3, function (x, y) { return y < x ? (y < 65 || x - y >= 8 ? -1 : 0) : (x < 65 ? 1 : 0); });
     var pl0 = gv(b, "vent", "pplat"), pl1 = gv(a, "vent", "pplat"), pmax = g.pplatMax || 30;
     if (pl1 != null && pl0 != null && pl1 > pmax && pl1 > pl0 + 1) { bad++; items.push(raw("vdPlat", { b: fmtN(pl1) })); }
-    var tag = !items.length ? "vd_none" : bad && good ? "vd_mix" : bad ? "vd_bad" : good ? "vd_good" : "vd_none";
+    // the lung axis (engine r6, E6): a change that is safer for the lung is never only "Makes it worse"; a change that is
+    // harder on the lung is never only "Helps". Its line ("Safer for the lung; CO2 rises to 53: add rate") follows.
+    var la = lung && lung.axis; if (la === "safer") good++; else if (la === "harder") bad++;
+    var tag = !items.length && !la ? "vd_none" : bad && good ? "vd_mix" : bad ? "vd_bad" : good ? "vd_good" : "vd_none";
     var list = items.length > 1 ? items.slice(0, -1).join(", ") + raw("vdAnd") + items[items.length - 1] : items[0];
     var line = items.length ? raw("vdLine", { x: list }) : raw("vdNone");
-    return '<p class="vl-verdict vd-' + tag.slice(3) + '"><b>' + s(tag) + ":</b> " + esc(line) + "</p>";
+    return '<div class="vl-verdict vd-' + tag.slice(3) + '"><p><b>' + s(tag) + ":</b> " + esc(line) + "</p>" + (lung && lung.text ? '<p class="vl-verdict-l">' + tx(lung.text) + "</p>" : "") + "</div>";
   }
   function wiResHtml(res) {
     var u = setUnit(res.key);
     return '<h2 class="vl-h vl-wi-h">' + s("cSet", { x: setLabel(res.key), a: setText(res.key, res.from) + (u ? " " + u : ""), b: setText(res.key, res.to) + (u ? " " + u : "") }) + "</h2>" +
-      verdictHtml(res.before, res.after, (scById(WI.sc) || {}).goals) +
+      verdictHtml(res.before, res.after, (scById(WI.sc) || {}).goals, false, res.lung) +
       '<div class="vl-wi-grid"><div class="vl-card">' + p3Html(res.now, res.before, res.after, [["Pplat", "vent", "pplat", "cmH2O"], ["Driving P", "vent", "drivingP", "cmH2O"], ["Auto-PEEP", "vent", "autoPeep", "cmH2O"]], "vl-ba") +
       '<p class="sp-small">' + s("simulated") + "</p></div>" +
       '<section class="vl-card vl-chainw" aria-labelledby="vlChH"><h2 class="vl-h" id="vlChH">' + s("chain") + '</h2><div id="vlChain"></div></section></div>';

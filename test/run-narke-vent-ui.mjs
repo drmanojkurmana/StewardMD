@@ -304,7 +304,7 @@ try {
   await click(`[data-act=vlwip]`);
   ok(await until(`return document.querySelectorAll('#smdNarke .vl-wi-res .vl-ba tbody tr').length === 3 && document.querySelectorAll('#smdNarke .vl-wi-res .vl-cs').length >= 6;`), "Level 1 what-if: three rows (SpO2, CO2, blood pressure) with the chain");
   ok(await ev(`var h=[].map.call(document.querySelectorAll('#smdNarke .vl-wi-res .vl-ba thead th'), function(x){return x.textContent;}).join('|'); return /Now/.test(h) && /In 30 min without your change/.test(h) && /In 30 min with it/.test(h);`) === true, "what-if columns read Now / In 30 min without your change / In 30 min with it");
-  ok(await ev(`var h=document.querySelector('#smdNarke .vl-wi-h'), v=h && h.nextElementSibling; return !!v && v.classList.contains('vl-verdict') && /^(Helps|Trade off|Makes it worse|Little change):/.test(v.textContent.trim()) && v.textContent.split(/[.!?](\\s|$)/).filter(function(x){return x && x.trim();}).length === 1;`) === true, "r4 U5: a one-sentence verdict sits at the top of the what-if result");
+  ok(await ev(`var h=document.querySelector('#smdNarke .vl-wi-h'), v=h && h.nextElementSibling; return !!v && v.classList.contains('vl-verdict') && /^(Helps|Trade off|Makes it worse|Little change):/.test(v.textContent.trim()) && v.querySelector('p').textContent.split(/[.!?](\\s|$)/).filter(function(x){return x && x.trim();}).length === 1;`) === true, "r4 U5: a one-sentence verdict sits at the top of the what-if result");
   await sleep(2000);
   ok(await noOverflow() === true, "what-if: no horizontal scroll");
   { const sm = await small(); ok(sm === true, "what-if: every target is at least 44 px" + (sm === true ? "" : ": " + sm)); }
@@ -793,7 +793,7 @@ try {
     ok(await ev(`var i=document.querySelector('#vlAbg .vl-interp'); return !!i && /Reading the gas/.test(i.textContent) && /acidosis|alkalosis|normal|Normal/i.test(i.textContent);`) === true, "r4 U9: the gas view reads the gas (engine interp)");
     ok(await ev(`return [].every.call(document.querySelectorAll('#smdNarke .vl-ro-i[data-vl-id=shunt] b'), function(b){ return !/^0\\./.test(b.textContent); });`) === true, "r4 U9: shunt never shows as a raw fraction");
     await click(`[data-act=vlfinish]`); await until(`return !!document.querySelector('#smdNarke .vl-done');`);
-    ok(await ev(`var R0=NARKE_VENT_UI.run(), w=R0.score && R0.score.worstSpell; return !w || (!!document.querySelector('#smdNarke .vl-worst') && /Longest time off a goal/.test(document.querySelector('#smdNarke .vl-worst').textContent) && document.querySelectorAll('#smdNarke .vl-notes li').length >= 0 && ![].some.call(document.querySelectorAll('#smdNarke .vl-notes li'), function(l){ return /^Longest time off a goal/.test(l.textContent); }));`) === true, "r4 U9: the debrief names the longest time off a goal once");
+    ok(await ev(`var R0=NARKE_VENT_UI.run(), w=R0.score && R0.score.worstSpell; return !w || (!!document.querySelector('#smdNarke .vl-worst') && /Longest time off a goal|Every time off a goal/.test(document.querySelector('#smdNarke .vl-worst').textContent) && document.querySelectorAll('#smdNarke .vl-notes li').length >= 0 && ![].some.call(document.querySelectorAll('#smdNarke .vl-notes li'), function(l){ return /^Longest time off a goal/.test(l.textContent); }));`) === true, "r4 U9 + r6 E4: the debrief names the longest time off a goal (or every spell, round 6) once");
     await shot("r4-debrief-worst");
     // Level 1 gas: the short curve note and the reading folded under Step by step
     await goRun(1, "postop-normal");
@@ -1111,6 +1111,98 @@ try {
   await click(`[data-act=vlwip]`); await sleep(2200); await shot("1280-dark-whatif"); await theme(false); await shot("1280-light-whatif"); await theme(true);
   await ev(`__back(); return 1;`);
   await size(390, 844);
+
+  /* ---- round 6 (bugs only): one check per U item, at 390 px ---- */
+  {
+    const coachTx = () => ev(`var c=document.getElementById('vlCoach'); return c ? c.textContent : "";`);
+    const doStep = async () => { if (await ev(`return !!document.querySelector('#smdNarke [data-act=vltutdo]');`)) { await click(`[data-act=vltutdo]`); await sleep(150); } for (let i = 0; i < 8 && await ev(`return document.querySelector('#smdNarke [data-act=vltutn]').getAttribute('data-wait')==='1';`); i++) { await click(`[data-act=vlskip][data-k="300"]`); await sleep(80); } };
+    const toStep = async (n) => { for (let g = 0; g < 14; g++) { const st = await ev(`return document.querySelector('#smdNarke .vl-co-st').textContent;`); if (new RegExp("Step " + n + " ").test(st + " ")) return true; await doStep(); await click(`[data-act=vltutn]`); await sleep(120); } return false; };
+    await toHome(); await click(`[data-act=vllevel][data-v="1"]`);
+    // U1 + U2: How does a ventilator work? step 7 (rate 16) and step 8 (rate back to 14)
+    await tap(`[data-act=vltut][data-k="how-it-works"]`); await until(`return !!document.getElementById('vlCoach');`);
+    ok(await toStep(7), "r6: reached tutorial 1 step 7");
+    ok(await ev(`var k=document.querySelector('#smdNarke [data-knob=rr]'); return !!k && k.classList.contains('vl-hl');`) === true, "r6 U2: the dial the step asks for is outlined");
+    ok(/Set rate 14/.test(await coachTx()), "r6 U2: the coach shows the asked dial's live value (Set rate 14)");
+    await click(`[data-act=vltutn]`); await sleep(750);
+    ok(await ev(`var n=document.getElementById('vlCoNudge'); return !!n && /First do your turn above/.test(n.textContent);`) === true, "r6 U1: a grey Next says 'First do your turn above'");
+    ok(await ev(`var c=document.getElementById('vlCoach').getBoundingClientRect(), b=document.querySelector('#smdNarke [data-knob=rr] .vl-step').getBoundingClientRect(); return b.height > 0 && b.bottom <= c.top + 1 && b.top >= 0;`) === true, "r6 U2: Show me the control lands the rate + and minus buttons above the coach");
+    await click(`[data-act=vlstep][data-k=rr][data-d="1"]`); await sleep(80);
+    ok(await ev(`var v=document.querySelector('#smdNarke [data-spin=rr]').getAttribute('aria-valuenow'); return new RegExp('Set rate ' + v + ' ').test(document.getElementById('vlCoNums').textContent);`) === true, "r6 U2: the coach value follows the dial as it is turned, no lag");
+    await click(`[data-act=vlcancel]`);
+    await doStep(); await click(`[data-act=vltutn]`); await sleep(150);
+    ok(/Step 8 /.test(await ev(`return document.querySelector('#smdNarke .vl-co-st').textContent + ' ';`)), "r6: step 8");
+    await click(`[data-act=vlstep][data-k=rr][data-d="-1"]`); await click(`[data-act=vlstep][data-k=rr][data-d="-1"]`); await sleep(80);
+    ok(/You set 12; this step wants 14\. Press \+ once, then Confirm\./.test(await coachTx()), "r6 U1: an overshoot is named with the presses to fix it: " + (await coachTx()).slice(0, 0));
+    await click(`[data-act=vlconfirm]`); await sleep(120);
+    ok(/You set 12; this step wants 14/.test(await coachTx()) && !!(await ev(`return !!document.querySelector('#smdNarke [data-act=vltutdo]');`)), "r6 U1: after a wrong Confirm the line stays, with Do it for me");
+    await click(`[data-act=vlskip][data-k="300"]`); await sleep(80);
+    await click(`[data-act=vlstep][data-k=rr][data-d="1"]`); await click(`[data-act=vlconfirm]`); await sleep(120);
+    await click(`[data-act=vlskip][data-k="300"]`); await sleep(150);
+    ok(await ev(`var n=document.querySelector('#smdNarke [data-act=vltutn]'); return n.getAttribute('data-wait')!=='1' && !/press \\+5/.test(document.getElementById('vlCoach').textContent);`) === true, "r6 U1: right value plus one time step: Next is open, never 'First: press +5' again");
+    await click(`[data-act=vltutx]`); await sleep(100);
+    // U5 + E1 SAFETY: low SpO2 tutorial step 8: the emergency card never offers to take back the FiO2 raise
+    await toHome(); await tap(`[data-act=vltut][data-k="low-spo2"]`); await until(`return !!document.getElementById('vlCoach');`);
+    ok(await toStep(8), "r6: reached the low SpO2 tutorial step 8");
+    await click(`.vl-al[data-k="spo2Low"]`); await sleep(500);
+    const card = await ev(`var s=document.querySelector('#smdNarke .vl-sheet'); return s ? s.textContent : "";`);
+    ok(!!card && !/back to 40|Set FiO2 back/i.test(card) && !(await ev(`return !!document.querySelector('#smdNarke .vl-sheet [data-act=vlsetback][data-k=fio2]');`)), "r6 E1 SAFETY: the low SpO2 card at step 8 never offers 'Set FiO2 back'");
+    ok(/keep it until SpO2 is back/.test(card), "r6 E1: the card says to keep the FiO2 raise until SpO2 is back");
+    ok(await ev(`var s=document.querySelector('#smdNarke .vl-sheet'), o=s.querySelector('.vl-now'), d=s.querySelector('.vl-acard > details.vl-more:not(.vl-moresteps)'); return !!o && o.children.length <= 3 && (!d || !d.open) && !!s.querySelector('.vl-ackwhy');`) === true, "r6 U5: three-step Do now, the rest folded, Acknowledge explained");
+    ok(await ev(`var w=document.querySelector('#smdNarke .vl-sheet-wrap'); return w.firstElementChild.classList.contains('vl-sheet') && w.querySelector('.vl-scrim').getAttribute('aria-hidden')==='true';`) === true, "r6 U7: the dialog comes first in the DOM, the scrim is hidden from assistive tech");
+    await ev(`var x=document.querySelector('#smdNarke .vl-sheet .vl-x'); if (x) x.click(); return 1;`); await sleep(300);
+    await click(`[data-act=vltutx]`); await sleep(100);
+    // U4 + U3 + B9: Mrs Das, VT 500 to 300 at rate 14
+    await toHome(); await click(`[data-act=vlgo][data-s="postop-atelectasis"]`); await until(`return !!document.querySelector('#smdNarke .vl-run');`);
+    await click(`[data-act=vltab][data-t=dials]`);
+    await click(`[data-act=vltype][data-k=vt]`); await sleep(80);
+    await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='300'; i.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})); return 1;`); await sleep(120);
+    ok(await ev(`var p=document.querySelector('#smdNarke .vl-pair'), c=document.querySelector('#smdNarke [data-act=vlconfirm]'), x=document.querySelector('#smdNarke [data-act=vlcancel]'); return !!p && /24/.test(p.textContent) && p.classList.contains('is-pri') && c.classList.contains('vl-anyway') && !c.classList.contains('pri') && !x.classList.contains('pri');`) === true, "r6 U4 (B5): VT 500 to 300 at rate 14 offers the rate pair (24) as the filled button, Confirm anyway outlined");
+    await ev(`var d=document.querySelector('#smdNarke [data-spin=vt]'); d.focus(); d.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})); return 1;`); await sleep(80);
+    ok(await ev(`return NARKE_VENT_UI.run().pend.vt === 300;`) === true, "r6 U4: Enter on a dial never confirms past a warning");
+    await click(`[data-act=vlcancel]`);
+    await click(`[data-act=vltype][data-k=fio2]`); await sleep(80);
+    await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='21'; i.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})); return 1;`); await sleep(120);
+    ok(await ev(`var f=document.getElementById('vlFoot'), c=f.querySelector('[data-act=vlconfirm]'), x=f.querySelector('[data-act=vlcancel]'); return /room air/.test(f.textContent) && x.classList.contains('pri') && c.classList.contains('vl-anyway') && !c.classList.contains('pri');`) === true, "r6 U4 (S17): FiO2 60 to 21 warns, Cancel is filled and Confirm anyway outlined");
+    await click(`[data-act=vlcancel]`);
+    // B9: a self-made acidosis raises an alarm and the Next strip never says Compare, then Finish over a red number
+    await click(`[data-act=vldraw]`); await click(`[data-act=vlskip][data-k="300"]`); await sleep(80);
+    await click(`[data-act=vltype][data-k=vt]`); await sleep(80);
+    await ev(`var i=document.querySelector('#smdNarke .vl-type'); i.value='300'; i.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})); return 1;`); await sleep(100);
+    await click(`[data-act=vlconfirm]`); await sleep(300);
+    await click(`[data-act=vldraw]`); await sleep(80);
+    ok(/soon after your change/.test(await ev(`return document.querySelector('#smdNarke .vl-next').textContent;`)), "r6 U3: a gas right after the change asks for +30");
+    await click(`[data-act=vlskip][data-k="1800"]`); await sleep(200);
+    const nx1 = await ev(`return document.querySelector('#smdNarke .vl-next').textContent;`);
+    ok(!/soon after your change|tap \+30/i.test(nx1), "r6 U3 (B3): 30 min later the strip is recomputed, no stale 'tap +30': " + nx1);
+    ok(await ev(`return document.querySelectorAll('#smdNarke .vl-alarms .vl-al').length >= 1;`) === true, "r6 E3 (B9): pH and CO2 from the learner's own smaller breaths raise an alarm");
+    await ev(`var r=NARKE_VENT_UI.run(); r.ack = r.ack || {}; Object.keys(r.seen||{}).forEach(function(k){ r.ack[k]=1; r.sil[k]=r.s.t+99999; }); return 1;`);
+    await click(`[data-act=vldraw]`); await sleep(120);
+    const nx2 = await ev(`return document.querySelector('#smdNarke .vl-next').textContent;`), flagged = await ev(`return !!document.querySelector('#smdNarke .vl-abgt tr.out[data-vl-id=ph], #smdNarke .vl-abgt tr.out[data-vl-id=paco2], #smdNarke .vl-abgt tr.out[data-vl-id=pao2], #smdNarke .vl-abgt tr.amb');`);
+    ok(!flagged || (/Fix the (red|amber) number first/.test(nx2) && !/Compare|Finish/.test(nx2)), "r6 U3 (B9): a flagged gas value leads the strip instead of 'Compare, then Finish': " + nx2);
+    ok(await ev(`return !/\\(/.test([].map.call(document.querySelectorAll('#smdNarke #vlChain .vl-cs-t'), function(p){return p.textContent;}).join(' '));`) === true, "r6 U6: the Level 1 chain has one plain sentence per box, no brackets");
+    // U6 (E6): what-if lung axis on Mrs Das, smaller breaths
+    await toHome(); await click(`[data-act=vlwhat]`); await until(`return !!document.querySelector('#smdNarke .vl-wi');`);
+    await ev(`var s=document.getElementById('vlWiSc'); s.value='postop-atelectasis'; s.dispatchEvent(new Event('change',{bubbles:true})); return 1;`); await sleep(150);
+    await ev(`var s=document.getElementById('vlWiK'); s.value='vt'; s.dispatchEvent(new Event('change',{bubbles:true})); return 1;`);
+    await click(`[data-act=vlwid][data-v="-1"]`); await sleep(100); await ev(`var s=document.getElementById('vlWiK'); s.value='vt'; return 1;`);
+    await click(`[data-act=vlwigo]`); await sleep(400);
+    const vd = await ev(`var v=document.querySelector('#smdNarke .vl-verdict'); return v ? v.textContent : "";`);
+    ok(/Safer for the lung/.test(vd) && !/^Makes it worse/.test(vd.trim()), "r6 U6 (E6): a smaller VT on Mrs Das reads 'Safer for the lung' with the CO2 cost: " + vd);
+    // U7: Hindi goal ranges, neutral above-target badge
+    await toHome(); await click(`[data-act=vllevel][data-v="2"]`); await click(`[data-act=vlgo][data-s="postop-normal"]`); await until(`return !!document.querySelector('#smdNarke .vl-run');`);
+    await click(`[data-act=lang]`); await until(`return document.getElementById('smdNarke').getAttribute('lang')==='hi';`);
+    ok(await ev(`var t=document.querySelector('#smdNarke .vl-story').textContent; return / से /.test(t) && !/\\d to \\d/.test(t);`) === true, "r6 U7: Hindi goal ranges read 'से', no English 'to'");
+    await click(`[data-act=lang]`); await until(`return !document.getElementById('smdNarke').getAttribute('lang');`);
+    ok(await ev(`var b=document.querySelector('#smdNarke #vlSpo2T .vl-abn-t.neu'); return !b || getComputedStyle(b).backgroundColor === 'rgba(0, 0, 0, 0)';`) === true, "r6 U7: the above-target SpO2 badge is neutral (no fill)");
+    // U8: path card drills count and the bridge's readiness rule with what is missing
+    await toHome(); await click(`[data-act=vllevel][data-v="1"]`); await sleep(150);
+    ok(await ev(`return /Night drills: \\d+ of \\d+ safe/.test(document.querySelector('#smdNarke .vl-path').textContent) || !NARKE_VENT_BRIDGE;`) === true, "r6 U8: the path names 'Night drills: N of 5 safe'");
+    await ev(`var B=window.NARKE_VENT_BRIDGE; if (B && B.progress) { window.__p0=B.progress; B.progress=function(){ var p=window.__p0(); p.ready=false; p.missing=['modes','check']; return p; }; } return 1;`);
+    await click(`[data-act=vllevel][data-v="2"]`); await click(`[data-act=vllevel][data-v="1"]`); await sleep(150);
+    ok(await ev(`var f=document.querySelector('#smdNarke .vl-path-fin'); return !window.__p0 || (!!f && /Still to do: /.test(f.textContent) && !document.querySelector('#smdNarke .vl-path.ready'));`) === true, "r6 U8: not ready under the bridge's rule: the finish line says what is still to do");
+    await ev(`if (window.__p0) NARKE_VENT_BRIDGE.progress=window.__p0; return 1;`);
+  }
+
 
   const txt = await ev(`return document.getElementById("smdNarke").innerText;`), dm = /[\s\S]{0,60}[–—][\s\S]{0,60}/.exec(txt);
   ok(!dm, "no em or en dash on the lab screens" + (dm ? ": " + dm[0] : ""));
