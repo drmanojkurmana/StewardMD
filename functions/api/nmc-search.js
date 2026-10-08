@@ -11,23 +11,13 @@
  * only (no phone/email/Aadhaar/address); the same data anyone can search at nmc.org.in.
  */
 import { identify } from "../_usage.js";
-import { NMC_SEARCH, NMC_REFERER, looksLikeReg, regCore, normalizeResults } from "./_nmc.js";
+import { nmcQuery, looksLikeReg, regCore, normalizeResults } from "./_nmc.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
 async function nmcSearch(body) {
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 8000);   // don't let a hung NMC stall the request
-  try {
-    const res = await fetch(NMC_SEARCH, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Referer": NMC_REFERER, "User-Agent": "Mozilla/5.0" },
-      body: JSON.stringify(body), signal: ctrl.signal,
-    });
-    if (!res.ok) return null;
-    const arr = await res.json();
-    return Array.isArray(arr) ? arr : [];
-  } catch (e) { return null; } finally { clearTimeout(t); }
+  try { return await nmcQuery(body.registrationNo ? { regNo: body.registrationNo } : { name: body.name }); }
+  catch (e) { return null; }   // down -> the offline mirror
 }
 
 async function d1Search(env, q, isReg) {
@@ -60,5 +50,5 @@ export async function onRequest({ request, env }) {
   if (rows === null) { rows = await d1Search(env, q, isReg); source = "register"; }   // live down → offline mirror
   if (rows === null) return json({ error: "register_unavailable" }, 503);
 
-  return json({ results: normalizeResults(rows).slice(0, 25), source, mode: isReg ? "reg" : "name" });
+  return json({ results: normalizeResults(rows.filter((r) => !(r && r.removed))).slice(0, 25), source, mode: isReg ? "reg" : "name" });
 }

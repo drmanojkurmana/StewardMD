@@ -84,17 +84,19 @@ try {
       gate: getComputedStyle(document.getElementById("verifyGate")).display });`));
   ok(ch.gate !== "none", "the verification panel is open");
   ok(ch.n === 4, "the chooser offers four roles (" + ch.n + ")");
-  ok(ch.labels.join("|") === "Medical student|Intern|PG Resident|Doctor (practising)", "labels: " + JSON.stringify(ch.labels));
+  ok(ch.labels.join("|") === "Medical student|Intern|PG Resident|Doctor", "labels: " + JSON.stringify(ch.labels));
   ok(ch.roles.join(",") === "student,intern,resident,doctor", "roles: " + JSON.stringify(ch.roles));
   ok(ch.shown.every(Boolean), "all four are on screen at 390px and a real tap target " + JSON.stringify(ch.shown));
   ok(ch.on === "doctor", "Doctor is the default selection (" + ch.on + ")");
 
   const pick = async (r) => { await ev(`document.querySelector('#verifyRoles [data-role="${r}"]').click(); return 1;`); await sleep(200);
-    return JSON.parse(await ev(`var rr=document.getElementById("verifyRegRow"); return JSON.stringify({ reg: !!rr && getComputedStyle(rr).display !== "none",
+    // 2026-10-08 redesign: the registration path is the "Certificate | Reg. number + photo ID" switch (#verifyMethod);
+    // the number field itself appears once "Reg. number + photo ID" is chosen.
+    return JSON.parse(await ev(`var rr=document.getElementById("verifyMethod"); return JSON.stringify({ reg: !!rr && getComputedStyle(rr).display !== "none",
       sub: (document.getElementById("verifySubtitle")||{}).textContent || "", btn: (document.getElementById("verifySubmit")||{}).textContent || "" });`)); };
   const res = await pick("resident");
   ok(res.reg, "PG Resident shows the registration-number row (same NMC/SMC path as Doctor)");
-  ok(/full medical registration/i.test(res.sub) && /State Medical Council/.test(res.sub), "PG Resident copy: full registration, register check");
+  ok(/registration certificate/i.test(res.sub) && /national medical register/i.test(res.sub), "PG Resident copy: full registration, register check");
   const intern = await pick("intern");
   ok(!intern.reg, "Intern hides the registration-number row (ID review path)");
   ok(/provisional registration/i.test(intern.sub) && /stays locked/i.test(intern.sub), "Intern copy says the prescription generator stays locked");
@@ -118,7 +120,7 @@ try {
     var vis = [].slice.call(host.querySelectorAll("[data-role]")).filter(function (b) { return b.style.display !== "none"; }).map(function (b) { return b.getAttribute("data-role"); });
     return JSON.stringify({ title: document.getElementById("verifyTitle").textContent, badge: document.getElementById("verifyBadge").textContent.trim(),
       sub: document.getElementById("verifySubtitle").textContent, vis: vis, on: host.querySelector(".is-on").getAttribute("data-role") });`));
-  ok(tp.title === "Your student account is verified", "trainee title: " + tp.title);
+  ok(tp.title === "Student account verified", "trainee title: " + tp.title);
   ok(tp.badge === "Verified student", "trainee badge: " + tp.badge);
   ok(/stays locked/.test(tp.sub) && tp.sub.indexOf("—") < 0, "trainee copy explains the locked prescription pad, no em-dash");
   ok(tp.vis.join(",") === "resident,doctor" && tp.on === "resident", "a trainee is offered only the upgrade roles " + JSON.stringify(tp));
