@@ -133,3 +133,70 @@ Filled at the end of the pilot run; see the branch report.
   the Arena reads the global version).
 - Stack orientation: axial slices are shown in radiological convention (patient right on the viewer's left, as stored
   in the DICOM); no R/L letters are drawn, as in RadioAnatome where orientation is not proved.
+
+## 10. Best module from the owner's radiology notes (branch `feat/prep-ss-radiology-best`, 2026-10-09)
+Owner 2026-10-08: "USE THIS TWO TOO. NEED BEST RADIOLOGY SS MODULE" (two PDFs in `~/prep-data/radnotes/`). Built on top of
+the licensed-figure pilot (sections 1 to 9); tool `tools/prep-radss.mjs` imports the pilot's pure helpers (licence check,
+gates, item shape) and adds text and anatomy kinds, a checker-feedback revise loop and lessons.
+
+### 10.1 Sources and what each may be used for
+| Source | What it is | Used for | Not used for |
+| --- | --- | --- | --- |
+| RDN11 (415 pages) | a published long-case book for the MD radiology practical exam (79 chapters 4.121 to 4.199: cardiovascular, MSK, GI, peritoneum, hepatobiliary), about 1,500 figures | case facts as ground for clinical-scenario items, teaching notes behind image items, lesson grounding (fresh wording; a 12-word copy gate) | its figures: a textbook's images are not the owner's to license for a public app (Plan2 section 8 "never textbooks"); held back pending the owner's written confirmation of rights |
+| RADN1 (201 pages) | a true/false radiological anatomy MCQ book (FRCR Part 1 style, 227 stems with answers) | anatomy facts for one-best-answer anatomy items (reworded, no statement letters) | its question text |
+| PMC open-access case reports (Open-i search, Europe PMC licence check) | CC BY 2.0/3.0/4.0 figures with case text | every image in the module (48), with the case text as the stem's ground | anything NC/ND |
+Extraction is local (`tools/prep-radss-extract.py`, PyMuPDF): `cases.json` (97 case records), `tf.json` (457 stems and
+answer blocks). Nothing from the notes is in git; data and outputs live in `~/prep-data/radnotes/ss/` (about 140 MB).
+
+### 10.2 Pipeline (`tools/prep-radss.mjs`)
+search, license, fetch (as the pilot) -> `pickin` + Haiku pre-pick (one licensed figure a target, 103 of 115) ->
+`anat` (anatomy targets) -> `gen` (Vertex Batch gemini-3.1-flash-lite: write, code gates, review gates g4 to g11; fit4
+cuts five options to four, fixOt relabels reasons, difficulty spread by target) -> `vbatches` -> two independent Haiku
+votes per item (image votes see the figure; fact votes judge key and explanation) -> `revise` (a rejected draft is
+rewritten once or twice with both voters' reasons, old votes dropped, voted again; key-wrong verdicts never revised,
+listed for the owner) -> `finalize` (checkItem, bank files, credits) -> `lessons` (Batch) + Haiku lesson review ->
+`lessonsout`. Six item rounds, five lesson passes.
+
+### 10.3 Result
+- 160 MCQs in 24 modules, bank path `v7/ss-radiology/` (taxonomy `bank: v7`): image-based 48 (all with a licensed
+  figure, both votes yes), clinical scenario 49, radiological anatomy 63. Styles: dx 17, sign 18, next 23, ddx 12,
+  proto 22, ir 5, anat 63. Difficulty: d1 34, d2 91, d3 35.
+- 12 lessons (of 15 planned; one per module, as the lesson index allows): cardiac-vascular, physics (cardiac MRI and
+  LGE), IR, MSK tumour, MSK metabolic, liver and pancreas, bowel, peritoneum, three anatomy lessons, emergency; 4 to 5
+  steps each, 3 quick questions from the module's own items, figures from the module's verified items. Withdrawn: nuclear
+  and MSK joint (failed the step checks three times), paediatrics (too few steps left after the review). Every lesson
+  had a Haiku review; flagged steps were rewritten once and then dropped (`lessonfix`).
+- R2: `prep-bank/v7/ss-radiology/` 73 files (index, 24 module files, 48 figures, 1.6 MB) and
+  `prep-bank/v1/lessons/srd-*.json` 12 files, SHA-256 verified object by object (`verify`). The lessons index is not
+  uploaded (see 10.5).
+- Spend: $0.70 of Vertex Batch in 17 batch stages (log `~/.claude/jobs/c927630f/tmp/radss/log.tsv`); Haiku votes,
+  picks and reviews on the subscription.
+- New modules: `srd-msk-metabolic`, `srd-abd-peritoneum`, `srd-anat-neuro`, `srd-anat-body`, `srd-anat-limbs`.
+
+### 10.4 Coverage against the DM / NEET-SS radiology syllabus (items in the bank)
+| Area | Items | Strong | Gaps |
+| --- | --- | --- | --- |
+| Radiological anatomy | 63 | neuro, head and neck, spine, chest, abdomen, pelvis | limbs, breast, obstetric, paediatric anatomy thin (8) |
+| Cardiac and vascular | 10 | congenital heart disease, aorta, vasculitis, cardiomyopathy | coronary CT, cardiac CT technique |
+| MSK (tumour, joint, metabolic) | 21 | bone tumour approach, metabolic bone, AVN | spine degenerative and infection, sports MRI, soft-tissue tumours |
+| Abdomen (liver, bowel, peritoneum) | 21 | focal liver lesions, GI tumours, peritoneum and retroperitoneum | biliary and pancreatitis, LI-RADS detail |
+| Paediatrics | 10 | skeletal dysplasia, DDH, neonatal GI | paediatric neuro, chest, NAI |
+| Neuro | 9 | vascular malformations, metabolic | stroke imaging and perfusion, tumours (2), spine cord, epilepsy |
+| Head and neck | 5 | neck masses | temporal bone, orbit, sinonasal staging |
+| Chest | 3 | | HRCT patterns, nodules and Fleischner, lung cancer staging, pleura |
+| GU and adrenal | 3 | | renal masses (Bosniak), prostate PI-RADS, female pelvis, scrotum |
+| Breast | 1 | | BI-RADS, MRI, biopsy |
+| IR | 3 | TIPS, BCS, abscess drainage | embolisation agents, EVAR, stroke thrombectomy, biliary and urinary IR |
+| Nuclear, physics, safety | 6 | MRI and US artefacts, PET viability | radiation dose and safety, contrast reactions, MRI safety, CT physics, PET oncology |
+| Emergency | 5 | volvulus, trauma hypoperfusion, dislocation | head trauma, spine trauma, pelvis |
+Chest, breast, GU, neuro tumours and physics/safety need the next round; the notes do not cover them, so they need
+licensed figures (pilot targets list) or open grounding (StatPearls bank).
+
+### 10.5 Open items
+- Owner: confirm whether the RDN11 figures may be shown publicly (only with the publisher's or author's written permission).
+- Owner/radiologist: clinical sample review; 19 items were dropped because a checker judged the key wrong (list in
+  `~/prep-data/radnotes/ss/out/report.json` keyReview; none shipped, no key changed).
+- Pilot bug carried over and fixed here: `tools/prep-rad.mjs finalize` writes index topics without group/file, so
+  `prep.js` lists no module; `bankIndex()` in prep-radss writes the full prep-build-bank shape.
+- Lessons index: `v1/lessons/index.json` is live and shared; the 15 radiology entries are staged as
+  `~/prep-data/radnotes/ss/out/lessons-index-add.json` and merged into the live index only at ship time.

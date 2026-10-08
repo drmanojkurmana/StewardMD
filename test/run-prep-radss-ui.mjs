@@ -37,8 +37,8 @@ if (process.env.REAL) {
   FIX = "/test/fixtures/.radss-real-" + process.pid + "/";
   // a module with a lesson whose steps show a figure, else any module with a lesson
   const ix = JSON.parse(fs.readFileSync(join(src, "v1", "lessons", "index.json"), "utf8")).modules;
-  const withFig = Object.keys(ix).filter((m) => JSON.parse(fs.readFileSync(join(src, "v1", "lessons", m + ".json"), "utf8")).steps.some((s) => s.vis && s.vis.kind === "image"));
-  MID = process.env.MODULE || withFig[0] || Object.keys(ix)[0];
+  const withFig = Object.keys(ix).filter((m) => /^srd-/.test(m) && fs.existsSync(join(src, "v1", "lessons", m + ".json"))).filter((m) => JSON.parse(fs.readFileSync(join(src, "v1", "lessons", m + ".json"), "utf8")).steps.some((s) => s.vis && s.vis.kind === "image"));
+  MID = process.env.MODULE || withFig[0] || Object.keys(ix).find((m) => /^srd-/.test(m));
 }
 const REAL = !!realDir;
 

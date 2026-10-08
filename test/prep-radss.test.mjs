@@ -174,3 +174,27 @@ test("itemGates refuses reasons not labelled with exactly the three wrong letter
   assert.deepEqual([...ds].sort(), [1, 2, 3]);
   assert.equal(R.targetD("t5"), R.targetD("t5"), "stable");
 });
+
+test("toLesson accepts the Batch schema's object rows and edges", () => {
+  const tx = "The **zone of transition** is the edge of a bone lesion. A narrow sclerotic rim means slow growth and a wide permeative edge means fast growth, which points to round cell tumours or infection in a young patient. Read it first, always.";
+  const steps = [
+    { tx, say: "Look at the edge.", vis: { kind: "table", cols: ["Margin", "Meaning"], rows: [{ c: ["Sclerotic", "Slow"] }, { c: ["Permeative", "Fast"] }], nodes: [], edges: [], lt: "", lp: [], rt: "", rp: [], fig: "" } },
+    { tx, say: "Follow the flow.", vis: { kind: "flow", cols: [], rows: [], nodes: [{ id: "a", label: "Lesion", sub: "" }, { id: "b", label: "Narrow", sub: "" }, { id: "c", label: "Wide", sub: "" }], edges: [{ from: "a", to: "b" }, { from: "a", to: "c" }], lt: "", lp: [], rt: "", rp: [], fig: "" } },
+    { tx, say: "Compare.", vis: { kind: "compare", cols: [], rows: [], nodes: [], edges: [], lt: "Slow", lp: ["Narrow zone"], rt: "Fast", rp: ["Wide zone"], fig: "" } },
+    { tx, say: "Done.", vis: { kind: "table", cols: ["A", "B"], rows: [{ c: ["1", "2"] }, { c: ["3", "4"] }] } },
+  ];
+  const les = R.toLesson({ title: "T", steps }, { module: "srd-msk-tumour", title: "T" }, []);
+  assert.deepEqual(LP.checkLesson(les), []);
+  assert.deepEqual(les.steps[1].vis.edges, [["a", "b"], ["a", "c"]]);
+  assert.equal(les.steps[1].vis.nodes[0].sub, undefined, "an empty sub is dropped");
+});
+
+test("bankIndex writes the prep-build-bank subject index shape with a row per taxonomy module", () => {
+  const tax = JSON.parse(fs.readFileSync(new URL("../prep/taxonomy/ss-radiology.json", import.meta.url), "utf8"));
+  const ix = R.bankIndex(tax, { "srd-msk-tumour": [{ d: 1 }, { d: 3 }] });
+  const row = ix.topics.find((t) => t.id === "srd-msk-tumour");
+  assert.deepEqual([row.group, row.count, row.file, row.target], ["srd-msk", 2, "mcq/srd-msk-tumour.json", 40]);
+  assert.equal(ix.topics.length, tax.sections.reduce((n, s) => n + s.modules.length, 0));
+  assert.deepEqual([ix.counts.total, ix.counts.d1, ix.counts.d3], [2, 1, 1]);
+  assert.ok(!/stewardmd|ai-generated|licen/i.test(JSON.stringify(ix)), "no source or AI field");
+});
