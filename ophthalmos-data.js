@@ -329,6 +329,9 @@
   function glossFull(g, lang) {
     var a = glossAbbr(g);
     if (!a || !g.full || !g.full.en) return null;
+    // A full form that already holds its short form in brackets ("optical coherence tomography (OCT) scan") is used as
+    // written; Hindi then adds it after the Hindi words.
+    if (/\(/.test(g.full.en)) return lang === "hi" && g.full.hi ? g.full.hi + " (" + g.full.en + ")" : g.full.en;
     return lang === "hi" && g.full.hi ? g.full.hi + " (" + g.full.en + ", " + a + ")" : g.full.en + " (" + a + ")";
   }
 
