@@ -139,13 +139,16 @@
     var top = 0; Object.keys(subj).forEach(function (k) { if (subj[k] > top) top = subj[k]; });
     var subs = Object.keys(subj).sort(function (a, b) { return subj[b] - subj[a]; }).map(function (sid) {
       var sb = host.subjectById(sid);
-      return '<li>' + (sb ? '<span class="pn-ic xs" style="--h:' + host.subjHue(sid) + '" aria-hidden="true">' + host.subjIco(sid) + "</span>" : '<span class="pn-ic xs pn-ic-none" aria-hidden="true">' + host.subjIco("") + "</span>") +
-        '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span></li>";
+      // With the practice setup sheet each subject row opens it for that subject's questions in this paper.
+      var su = G.PREP_SETUP && G.PREP_SETUP.enabled();
+      return (su ? '<li><button type="button" class="pn-yq-subb" data-act="y-ssub" data-v="' + esc(pid) + '" data-s="' + esc(sid) + '" aria-label="Practise ' + (sb ? host.tx(sb.name) : "questions not sorted yet") + ' from this paper">' : "<li>") + (sb ? '<span class="pn-ic xs" style="--h:' + host.subjHue(sid) + '" aria-hidden="true">' + host.subjIco(sid) + "</span>" : '<span class="pn-ic xs pn-ic-none" aria-hidden="true">' + host.subjIco("") + "</span>") +
+        '<span class="pn-yq-sn">' + (sb ? host.tx(sb.name) : "Not sorted yet") + '<span class="pn-yq-bar" aria-hidden="true"><i data-p="' + (subj[sid] / top).toFixed(3) + '" style="transform:scaleX(' + (subj[sid] / top).toFixed(3) + ')"></i></span></span><span class="pn-st">' + subj[sid] + "</span>" + (su ? "</button>" : "") + "</li>";
     }).join("");
     host.paint(host.bar(esc(paperTitle(p)), "Recall paper", "back") + '<div class="pn-body"><section class="pn-panel pn-modp pn-yqp" style="--h:262">' +
       '<p class="pn-big">' + host.fmt(ok.length) + ' questions</p><p class="pn-mut">' + (held ? held + " held back (unclear key or missing image) · " : "") + "memory-based recall</p>" +
       '<button type="button" class="pn-btn pri" data-act="y-start" data-v="' + esc(pid) + '" data-k="exam"' + (ok.length ? "" : " disabled") + ">" + host.ico("clock") + " Timed test: " + (tn < ok.length ? tn + " random questions, " : "") + fmtMin(Math.round(sc.limit / 60)) + ", +" + mock.plus + " / −" + fmtMark(mock.minus) + "</button>" +
       '<button type="button" class="pn-btn" data-act="y-start" data-v="' + esc(pid) + '" data-k="study"' + (ok.length ? "" : " disabled") + ">" + host.ico("play") + " Practice in paper order</button>" +
+      (G.PREP_SETUP && G.PREP_SETUP.enabled() ? '<button type="button" class="pn-btn" data-act="y-setup" data-v="' + esc(pid) + '"' + (ok.length ? "" : " disabled") + ">" + host.ico("next") + " Choose questions</button>" : "") +
       '<p class="pn-mut pn-small">The timed test uses the ' + esc(mock.label) + " (" + mock.n + " questions in " + fmtMin(mock.min) + "), scaled to this paper. Practice shows each answer with its explanation.</p></section>" +
       (subs ? '<h2 class="pn-sec">By subject</h2><ul class="pn-yq-subs pn-fills">' + subs + "</ul>" : "") + "</div>");
   }
@@ -181,6 +184,35 @@
         '<button type="button" class="pn-btn pri" data-act="y-mstart" data-k="study" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("play") + " Practice PYQs</button>" +
         '<button type="button" class="pn-btn" data-act="y-mstart" data-k="exam" data-s="' + host.esc(sid) + '" data-m="' + host.esc(mid) + '">' + host.ico("clock") + " Timed test of PYQs</button></section>" : "");
   }
+  /* Practice setup sheet (prep-setup.js) over a paper, one subject of it, or a module's PYQs. A timed test from it keeps
+     the paper's marking and time per question (NEET-PG pattern). */
+  function setupRun(host, list, mode, title, ro) {
+    if (mode !== "exam") return host.run(list, "study", title, ro);
+    var sc = paperScheme(mockFor(host, "neet-pg"), list.length), o = {};
+    for (var k in ro || {}) o[k] = ro[k];
+    o.scheme = { plus: sc.plus, minus: sc.minus, label: sc.label };
+    host.run(list, "exam", title, o);
+  }
+  function setupPaper(host, pid, sid) {
+    var p = null; (P.ix ? P.ix.papers : []).forEach(function (x) { if (x.id === pid) p = x; });
+    if (!p || !P.items) return;
+    var sb = sid ? host.subjectById(sid) : null, title = paperTitle(p) + " (recall)", sname = sid ? (sb ? host.tx(sb.name) : "Not sorted yet") : "";
+    return G.PREP_SETUP.open({ kind: "pyq", id: pid + (sid ? "/" + sid : ""), title: paperTitle(p), sub: sid ? sname : "Recall paper", hue: sb ? host.subjHue(sid) : 262,
+      load: function () { var hid = hiddenOf(host); return [paperItems(P.items, pid).filter(function (it) { return usable(it, hid) && (!sid || (it.subject || "unsorted") === sid); })]; },
+      start: function (list, mode, ro) { setupRun(host, list, mode, sid ? sname + " \u00b7 " + title : title, ro); } }, host);
+  }
+  function setupModulePyq(host, sid, mid, kind) {
+    var t = host.subjectById(sid);
+    return G.PREP_SETUP.open({ kind: "pyq-module", id: mid, title: "PYQs", sub: t ? host.tx(t.name) : "", hue: 262, mode: kind === "exam" ? "exam" : "study",
+      load: function () { return modulePyqList(host, sid, mid).then(function (l) { return [l]; }); },
+      start: function (list, mode, ro) { setupRun(host, list, mode, "PYQs" + (t ? " \u00b7 " + host.tx(t.name) : ""), ro); } }, host);
+  }
+  function modulePyqList(host, sid, mid) {
+    return Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; })]).then(function (r) {
+      var hid = hiddenOf(host), tags = P.ix.tags || {};
+      return host.pool(r[1]).filter(function (it) { return tags[it.id]; }).concat(r[0].filter(function (it) { return it.t === mid && !it.bank && usable(it, hid); }));
+    });
+  }
   function startModulePyq(host, sid, mid, kind) {
     Promise.all([loadItems(host), host.loadModule(sid, mid).then(null, function () { return []; })]).then(function (r) {
       var hid = hiddenOf(host), tags = P.ix.tags || {};
@@ -201,12 +233,14 @@
     var e = P.host ? P.host.esc : function (s) { return s; };
     return '<p class="pn-yq-tags">' + tagLabel(list).map(function (l) { return '<span class="pn-yq-tag">' + svg("tag", 14) + "<span>" + e(l) + "</span></span>"; }).join("") + "</p>";
   }
+  // A question image: a file in the PYQ image folder, or a data: URL kept on the phone (a deck made from a PDF).
+  function imgSrc(host, f) { return /^data:image\//.test(String(f)) ? String(f) : base(host) + "img/" + f; }
   function figure(it, host) {
     if (host) P.host = host;
     if (!it.img || !it.img.length || !P.host) return "";
     var e = P.host.esc, b = base(P.host);
     return it.img.map(function (f, k) {
-      return '<figure class="pn-vfig pn-yq-fig"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" aria-label="Enlarge image ' + (k + 1) + ' of this question"><img src="' + e(b + "img/" + f) + '" alt="Image for this question (' + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
+      return '<figure class="pn-vfig pn-yq-fig"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" aria-label="Enlarge image ' + (k + 1) + ' of this question"><img src="' + e(imgSrc(P.host, f)) + '" alt="Image for this question (' + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async"></button>' +
         '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + "</span><span>Tap to enlarge.</span></figcaption></figure>";
     }).join("");
   }
@@ -219,7 +253,7 @@
     var root = host.root(), e = host.esc, el = G.document.createElement("div");
     el.className = "pn-zoom"; el.id = "pnYqZoom"; el.setAttribute("role", "dialog"); el.setAttribute("aria-modal", "true"); el.setAttribute("aria-label", "Image, enlarged");
     el.innerHTML = '<div class="pn-zoom-top"><p>Question image</p><button type="button" class="pn-ib" data-act="y-unzoom" aria-label="Close image">' + host.ico("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(base(host) + "img/" + f) + '" alt="Image for this question, enlarged"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="y-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + e(imgSrc(host, f)) + '" alt="Image for this question, enlarged"></button></div><p class="pn-zoom-h">Tap the image to enlarge it further</p>';
     root.appendChild(el);
     P.zoom = { el: el, from: f };
     var c = el.querySelector("[data-act=y-unzoom]"); if (c) c.focus();
@@ -240,6 +274,9 @@
     if (a === "y-paper") return loadItems(host).then(function () { host.push(function () { renderPaper(host, v); }); }, function () { host.toast("The paper did not load. Check the connection and try again."); });
     if (a === "y-start") return startPaper(host, v, b.getAttribute("data-k"));
     if (a === "y-mf") { P.mf[b.getAttribute("data-m")] = v; var slot = host.root().querySelector("#pnPyqSlot"); return drawSlot(slot, b.getAttribute("data-s"), b.getAttribute("data-m"), moduleCount(P.ix, b.getAttribute("data-m")), host); }
+    if (a === "y-setup") return setupPaper(host, v, null);
+    if (a === "y-ssub") return setupPaper(host, v, b.getAttribute("data-s"));
+    if (a === "y-mstart" && G.PREP_SETUP && G.PREP_SETUP.enabled()) return setupModulePyq(host, b.getAttribute("data-s"), b.getAttribute("data-m"), b.getAttribute("data-k"));
     if (a === "y-mstart") return startModulePyq(host, b.getAttribute("data-s"), b.getAttribute("data-m"), b.getAttribute("data-k"));
     if (a === "y-zoom") return zoomOpen(host, v);
     if (a === "y-zoom2") { var big = b.classList.toggle("big"); b.setAttribute("aria-pressed", String(big)); return; }
