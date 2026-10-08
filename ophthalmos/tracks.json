@@ -1,14 +1,14 @@
 {
  "v": 1,
  "review": "ai_drafted",
- "reviewNote": "Teaching points and plans follow standard references (ICDR, ICROP3, ETROP, AAO Preferred Practice Patterns). They are for learning, not patient care. ROP stage descriptions follow the ROP-VL dataset (CC BY 4.0).",
+ "reviewNote": "Teaching points and plans follow standard references: the International Clinical Diabetic Retinopathy (ICDR) scale, the International Classification of Retinopathy of Prematurity, third edition (ICROP3), the Early Treatment for Retinopathy of Prematurity (ETROP) study, and the American Academy of Ophthalmology (AAO) Preferred Practice Patterns. They are for learning, not patient care. Retinopathy of prematurity (ROP) stage descriptions follow the ROP-VL dataset (Creative Commons, CC BY 4.0).",
  "tracks": [
   {
    "id": "oct",
    "deck": "decks/oct.json",
-   "title": "OCT reading",
+   "title": "Optical coherence tomography (OCT) reading",
    "sub": "Macular B-scans, 7 diagnoses",
-   "modality": "Spectral-domain OCT, macular B-scan",
+   "modality": "Spectral-domain optical coherence tomography (OCT), macular B-scan (cross-section)",
    "source": "octdl",
    "labels": {
     "NO": "Normal",
@@ -32,32 +32,32 @@
     "NO": [
      "Foveal pit with a smooth, symmetric contour",
      "Every layer continuous, including the ellipsoid zone",
-     "No intraretinal or subretinal fluid; RPE line smooth"
+     "No intraretinal or subretinal fluid. Retinal pigment epithelium (RPE) line smooth"
     ],
     "AMD": [
-     "Drusen: dome-shaped elevations of the RPE",
-     "Neovascular AMD: subretinal fluid, pigment epithelial detachment, subretinal hyperreflective material",
-     "Atrophic AMD: RPE loss with light passing into the choroid (hypertransmission)"
+     "Drusen (yellow deposits): dome-shaped elevations of the retinal pigment epithelium (RPE)",
+     "Neovascular age-related macular degeneration (AMD, wet AMD): subretinal fluid, pigment epithelial detachment, subretinal hyperreflective (bright) material",
+     "Atrophic (dry) AMD: RPE loss with light passing into the choroid (hypertransmission)"
     ],
     "DME": [
-     "Hyporeflective cystoid spaces within the retina",
+     "Hyporeflective (dark) cystoid spaces within the retina",
      "Increased central retinal thickness",
-     "Hyperreflective foci and exudates; subretinal fluid in some eyes"
+     "Hyperreflective foci (bright dots) and exudates. Subretinal fluid in some eyes"
     ],
     "ERM": [
-     "Hyperreflective band on the inner retinal surface",
+     "Hyperreflective (bright) band on the inner retinal surface",
      "Wrinkled inner retina and a flattened or lost foveal pit",
-     "Diffuse thickening; traction cysts in some eyes"
+     "Diffuse thickening. Traction cysts in some eyes"
     ],
     "RVO": [
      "Cystoid macular edema with inner retinal thickening",
-     "Branch occlusion: often sectoral, respecting the horizontal raphe",
+     "Branch occlusion: often sectoral, respecting the horizontal raphe (the midline the vessels do not cross)",
      "Look for disorganised inner layers and hyperreflective foci"
     ],
     "RAO": [
      "Acute: thickened, hyperreflective inner retina with shadowing of the outer layers",
      "Chronic: thinning and atrophy of the inner retina",
-     "Outer retina and RPE are relatively preserved"
+     "Outer retina and retinal pigment epithelium (RPE) are relatively preserved"
     ],
     "VID": [
      "Macular hole: full-thickness foveal defect, often with cystic edges",
@@ -65,7 +65,7 @@
      "Vitreomacular traction: vitreous still attached at the fovea, distorting it"
     ]
    },
-   "pearl": "Read an OCT outside in: vitreous and interface, inner retina, fluid spaces, outer retina and ellipsoid zone, RPE, then choroid.",
+   "pearl": "Read an optical coherence tomography (OCT) scan outside in. Vitreous and interface, inner retina, fluid spaces, outer retina and ellipsoid zone. Then the retinal pigment epithelium (RPE), then the choroid.",
    "foundation": [
     {
      "id": "NO",
@@ -83,7 +83,7 @@
     },
     {
      "id": "fluid",
-     "label": "Fluid in the retina (DME or vein occlusion)",
+     "label": "Fluid in the retina (diabetic macular edema or vein occlusion)",
      "of": [
       "DME",
       "RVO"
@@ -108,12 +108,12 @@
    "clinic": "Retina clinic",
    "plan": {
     "NO": "No macular treatment needed.",
-    "AMD": "Separate wet from dry: fluid or subretinal material means urgent retina referral for anti-VEGF; drusen alone means monitoring, and AREDS2 supplements for intermediate AMD.",
-    "DME": "Refer to retina. Anti-VEGF injections are first line for centre-involving DME with reduced vision; optimise glucose, blood pressure and lipids.",
+    "AMD": "Separate wet from dry. Fluid or subretinal material means urgent retina referral for anti-vascular endothelial growth factor (anti-VEGF) injections. Drusen alone means monitoring. Give Age-Related Eye Disease Study 2 (AREDS2) supplements for intermediate age-related macular degeneration (AMD).",
+    "DME": "Refer to retina. Anti-vascular endothelial growth factor (anti-VEGF) injections are first line for centre-involving diabetic macular edema (DME) with reduced vision. Optimise glucose, blood pressure and lipids.",
     "ERM": "Observe while vision is good. Vitrectomy with membrane peel if distortion or vision loss affects daily life.",
-    "RVO": "Treat macular edema with anti-VEGF, watch for neovascularisation, and manage systemic risk: blood pressure, diabetes, lipids.",
-    "RAO": "An acute artery occlusion is an eye stroke: same-day stroke-pathway referral, and check ESR and CRP for giant cell arteritis if over 50.",
-    "VID": "Full-thickness macular hole: vitrectomy with ILM peel. Lamellar hole or traction: observe, operate if it progresses or vision falls."
+    "RVO": "Treat macular edema with anti-vascular endothelial growth factor (anti-VEGF) injections. Watch for neovascularisation (new vessels). Manage systemic risk: blood pressure, diabetes, lipids.",
+    "RAO": "An acute retinal artery occlusion is an eye stroke. Refer the same day on the stroke pathway. If over 50, check erythrocyte sedimentation rate (ESR) and C-reactive protein (CRP) for giant cell arteritis.",
+    "VID": "Full-thickness macular hole: vitrectomy with internal limiting membrane (ILM) peel. Lamellar hole or traction: observe, operate if it progresses or vision falls."
    }
   },
   {
@@ -133,14 +133,14 @@
    },
    "teach": {
     "normal": [
-     "Pink neuroretinal rim that follows the ISNT pattern (inferior thickest, then superior, nasal, temporal)",
+     "Pink neuroretinal rim that follows the ISNT pattern (rim thickest inferior, then superior, nasal, temporal)",
      "Cup size in proportion to disc size: a large disc can have a large cup",
      "No notch, no disc haemorrhage"
     ],
     "glaucoma": [
-     "Enlarged vertical cup, or rim thinning that breaks the ISNT pattern",
+     "Enlarged vertical cup, or rim thinning that breaks the ISNT pattern (inferior, superior, nasal, temporal rim order)",
      "Focal notching, most often inferotemporal or superotemporal",
-     "Disc haemorrhage at the rim, bayoneting vessels, beta-zone peripapillary atrophy"
+     "Disc haemorrhage at the rim, bayoneting vessels (sharp kinks at the rim), beta-zone peripapillary atrophy"
     ]
    },
    "pearl": "Judge the rim, not the cup-to-disc ratio alone. Always estimate disc size first.",
@@ -163,22 +163,22 @@
    "clinic": "Glaucoma clinic",
    "plan": {
     "normal": "Routine review. A large cup in a large disc can be normal.",
-    "glaucoma": "Confirm and stage: IOP, gonioscopy, visual fields and OCT nerve fibre layer. Treat to a target pressure."
+    "glaucoma": "Confirm and stage: intraocular pressure (IOP), gonioscopy, visual fields and optical coherence tomography (OCT) of the nerve fibre layer. Treat to a target pressure."
    }
   },
   {
    "id": "dr",
    "deck": "decks/dr.json",
    "title": "Diabetic retinopathy",
-   "sub": "Grade 0 to 4 (ICDR)",
+   "sub": "Grade 0 to 4 (International Clinical Diabetic Retinopathy, ICDR, scale)",
    "modality": "45-degree macula-centred colour fundus photograph",
    "source": "retino",
    "labels": {
     "0": "No retinopathy",
-    "1": "Mild NPDR",
-    "2": "Moderate NPDR",
-    "3": "Severe NPDR",
-    "4": "Proliferative DR"
+    "1": "Mild non-proliferative diabetic retinopathy (NPDR)",
+    "2": "Moderate non-proliferative diabetic retinopathy (NPDR)",
+    "3": "Severe non-proliferative diabetic retinopathy (NPDR)",
+    "4": "Proliferative diabetic retinopathy (PDR)"
    },
    "short": {
     "0": "0 None",
@@ -195,11 +195,11 @@
      "Microaneurysms only: tiny, sharp red dots"
     ],
     "2": [
-     "More than microaneurysms but less than severe NPDR",
+     "More than microaneurysms but less than severe non-proliferative diabetic retinopathy (NPDR)",
      "Dot and blot haemorrhages, hard exudates, cotton wool spots"
     ],
     "3": [
-     "4-2-1 rule, any one of: more than 20 haemorrhages in each of 4 quadrants; venous beading in 2 or more quadrants; prominent IRMA in 1 or more quadrant",
+     "4-2-1 rule, any one of these. More than 20 haemorrhages in each of 4 quadrants. Venous beading in 2 or more quadrants. Prominent intraretinal microvascular abnormalities (IRMA) in 1 or more quadrant",
      "No new vessels"
     ],
     "4": [
@@ -207,7 +207,7 @@
      "Or preretinal or vitreous haemorrhage"
     ]
    },
-   "pearl": "One macula-centred photograph cannot show all four quadrants, so severe NPDR is a judgement from what is visible. Grade the worst lesion you can see.",
+   "pearl": "One macula-centred photograph cannot show all four quadrants. So severe non-proliferative diabetic retinopathy (NPDR) is a judgement from what is visible. Grade the worst lesion you can see.",
    "foundation": [
     {
      "id": "none",
@@ -236,21 +236,21 @@
    "clinic": "Diabetic eye screening",
    "plan": {
     "0": "Rescreen in 12 months.",
-    "1": "Rescreen in 12 months; optimise glucose, blood pressure and lipids.",
-    "2": "Refer to ophthalmology: review in 6 to 12 months without macular oedema, 3 to 6 months with non-central oedema; centre-involving oedema needs treatment (AAO DR PPP 2024).",
-    "3": "Urgent ophthalmology referral; panretinal laser is often considered, especially if follow-up is uncertain.",
-    "4": "Urgent treatment: panretinal laser and/or anti-VEGF; vitrectomy for non-clearing vitreous haemorrhage."
+    "1": "Rescreen in 12 months. Optimise glucose, blood pressure and lipids.",
+    "2": "Refer to ophthalmology. Review in 6 to 12 months without macular oedema, 3 to 6 months with non-central oedema. Centre-involving oedema needs treatment (American Academy of Ophthalmology, AAO, Diabetic Retinopathy Preferred Practice Pattern 2024).",
+    "3": "Urgent ophthalmology referral. Panretinal laser is often considered, especially if follow-up is uncertain.",
+    "4": "Urgent treatment: panretinal laser and/or anti-vascular endothelial growth factor (anti-VEGF) injections. Vitrectomy for non-clearing vitreous haemorrhage."
    }
   },
   {
    "id": "rop",
    "deck": "decks/rop.json",
    "title": "Retinopathy of prematurity",
-   "sub": "Stage, A-ROP or treated",
+   "sub": "Stage, aggressive retinopathy of prematurity (A-ROP) or treated",
    "modality": "Wide-field neonatal fundus image",
    "source": "ropvl",
    "labels": {
-    "normal": "No ROP",
+    "normal": "No retinopathy of prematurity (ROP)",
     "s1": "Stage 1",
     "s2": "Stage 2",
     "s3": "Stage 3",
@@ -271,7 +271,7 @@
    },
    "teach": {
     "normal": [
-     "No ROP signs; the peripheral retina may still be incompletely vascularised"
+     "No retinopathy of prematurity (ROP) signs. The peripheral retina may still be incompletely vascularised (vessels not yet grown to the edge)"
     ],
     "s1": [
      "Demarcation line: a thin, flat white line between vascular and avascular retina"
@@ -288,31 +288,31 @@
      "Partial retinal detachment: 4A spares the fovea, 4B involves it"
     ],
     "s5": [
-     "Total retinal detachment (ICROP3: 5A open funnel, 5B closed funnel, 5C with anterior segment changes)"
+     "Total retinal detachment. International Classification of ROP, third edition (ICROP3): 5A open funnel, 5B closed funnel, 5C with anterior segment changes"
     ],
     "arop": [
-     "Rapid, severe disease with marked plus disease",
-     "Flat, often subtle neovascularisation at the vascular-avascular border, typically posterior",
+     "Rapid, severe disease with marked plus disease (dilated, twisted posterior vessels)",
+     "Flat, often subtle neovascularisation (new vessels) at the vascular-avascular border, typically posterior",
      "May skip the classic stage sequence"
     ],
     "laser": [
      "White or pigmented laser spots in the peripheral avascular retina"
     ]
    },
-   "descSource": "ROP-VL disease descriptions (CC BY 4.0), paraphrased",
-   "pearl": "Treat Type 1 ROP (ETROP): zone I any stage with plus, zone I stage 3 without plus, or zone II stage 2 or 3 with plus.",
+   "descSource": "ROP-VL disease descriptions (Creative Commons, CC BY 4.0), paraphrased",
+   "pearl": "Treat Type 1 retinopathy of prematurity (ROP), as defined by the Early Treatment for ROP (ETROP) study. Zone I any stage with plus. Zone I stage 3 without plus. Zone II stage 2 or 3 with plus.",
    "context": true,
    "foundation": [
     {
      "id": "none",
-     "label": "No ROP",
+     "label": "No retinopathy of prematurity (ROP)",
      "of": [
       "normal"
      ]
     },
     {
      "id": "active",
-     "label": "Active ROP (stage 1 to 3 or A-ROP)",
+     "label": "Active retinopathy of prematurity (stage 1 to 3, or aggressive ROP)",
      "of": [
       "s1",
       "s2",
@@ -340,12 +340,12 @@
    "plan": {
     "normal": "Continue screening until the retina is fully vascularised.",
     "s1": "Review in 1 to 2 weeks. Zone and plus disease, not stage alone, decide treatment.",
-    "s2": "Review in 1 to 2 weeks; treat if it meets Type 1 (zone I with plus, or zone II with plus).",
-    "s3": "Treat if Type 1 (zone I stage 3, or zone II stage 3 with plus); otherwise review within a week.",
+    "s2": "Review in 1 to 2 weeks. Treat if it meets Type 1 (zone I with plus, or zone II with plus).",
+    "s3": "Treat if Type 1 (zone I stage 3, or zone II stage 3 with plus). Otherwise review within a week.",
     "s4": "Refer for vitreoretinal surgery.",
-    "s5": "Refer for vitreoretinal surgery; visual prognosis is poor.",
-    "arop": "Treat urgently with laser or anti-VEGF; do not wait for the classic stages.",
-    "laser": "Follow up for regression and late problems: myopia, strabismus, amblyopia, retinal detachment."
+    "s5": "Refer for vitreoretinal surgery. Visual prognosis is poor.",
+    "arop": "Treat urgently with laser or anti-vascular endothelial growth factor (anti-VEGF) injection. Do not wait for the classic stages.",
+    "laser": "Follow up for regression and late problems: myopia (short sight), strabismus (squint), amblyopia (lazy eye), retinal detachment."
    }
   },
   {
@@ -353,14 +353,14 @@
    "deck": "decks/cases.json",
    "title": "Image cases",
    "sub": "60 cases, 10 questions each",
-   "modality": "Slit lamp, SLO, fundus photo, OCT, FFA, ocular ultrasound",
+   "modality": "Slit lamp, scanning laser ophthalmoscopy (SLO), fundus photo, optical coherence tomography (OCT), fundus fluorescein angiography (FFA), ocular ultrasound",
    "source": "ophthalvqa",
    "selfRated": true,
    "types": {
     "Slit_lamp": "Slit lamp",
     "SLO": "Scanning laser ophthalmoscopy",
     "FPP": "Fundus photograph",
-    "OCT": "OCT",
+    "OCT": "Optical coherence tomography (OCT)",
     "FFA": "Fluorescein angiography",
     "OUS": "Ocular ultrasound"
    },
@@ -406,23 +406,23 @@
      "Clear media, sharp disc and vessels, no labelled disease sign on this photo"
     ],
     "CME": [
-     "Multiple cyst-like fluid pockets in the macula, often in a petaloid pattern",
+     "Multiple cyst-like fluid pockets in the macula, often in a petaloid (flower-petal) pattern",
      "Retina looks thickened at the fovea; central vision is blurred",
      "Common after cataract surgery, uveitis, diabetic macular edema or a vein occlusion"
     ],
     "CRS": [
-     "Yellow-white patch of active retinochoroidal inflammation, sometimes beside an old pigmented scar",
+     "Yellow-white patch of active retinochoroidal inflammation (inflamed retina and choroid), sometimes beside an old pigmented scar",
      "Overlying vitreous haze or cells when the lesion is active",
      "Common causes: toxoplasmosis, tuberculosis, viral retinitis"
     ],
     "CSR": [
-     "Shallow, dome-shaped serous detachment of the neurosensory retina at the macula",
+     "Shallow, dome-shaped serous (clear fluid) detachment of the neurosensory retina at the macula",
      "Round or oval area of subretinal fluid with a sharp edge",
      "Typically a young or middle-aged adult, often stressed or on steroids"
     ],
     "EDN": [
      "Yellow-white lipid deposits with sharp, waxy edges",
-     "Often ringed around a leaking vessel or microaneurysm (a circinate pattern)",
+     "Often ringed around a leaking vessel or microaneurysm (a circinate, ring-shaped, pattern)",
      "A sign of chronic vascular leakage, most often diabetic or hypertensive"
     ],
     "MH": [
@@ -431,22 +431,22 @@
      "Causes: cataract, vitreous haemorrhage, or inflammation of the media"
     ],
     "MS": [
-     "Well-defined pale or pigmented flat lesion at the macula from healed inflammation, trauma or neovascularisation",
+     "Well-defined pale or pigmented flat lesion at the macula. Causes: healed inflammation, trauma or neovascularisation (new vessels)",
      "No active fluid or haemorrhage",
      "Vision loss is fixed and usually central"
     ],
     "MYA": [
-     "Pale, tessellated fundus with visible large choroidal vessels",
+     "Pale, tessellated (tiled-looking) fundus with visible large choroidal vessels",
      "Peripapillary crescent beside a tilted or stretched disc",
-     "High myopia can add a posterior staphyloma, lacquer cracks or myopic choroidal neovascularisation"
+     "High myopia can add a posterior staphyloma (outpouching of the back of the eye), lacquer cracks or myopic choroidal neovascularisation"
     ],
     "ODC": [
-     "Enlarged cup relative to the disc, with rim thinning that can break the ISNT pattern",
+     "Enlarged cup relative to the disc, with rim thinning that can break the ISNT pattern (inferior, superior, nasal, temporal rim order)",
      "May show a notch or a disc haemorrhage in progressive cases",
      "The chief fundus-photo red flag for glaucoma"
     ],
     "RD": [
-     "Retina lifted off the RPE, looking pale, out of focus and folded, with darker vessels than the surrounding retina",
+     "Retina lifted off the retinal pigment epithelium (RPE). It looks pale, out of focus and folded, with darker vessels than the surrounding retina",
      "Wavy or corrugated surface, sometimes with a visible break",
      "Sight- and eye-threatening; needs urgent referral"
     ],
@@ -456,12 +456,12 @@
      "Seen in proliferative diabetic retinopathy, after trauma, or with vitreomacular traction"
     ],
     "TD": [
-     "Oval, obliquely inserted optic disc with an inferior or inferonasal crescent of exposed sclera or choroid",
+     "Oval, obliquely inserted optic disc. An inferior or inferonasal crescent of exposed sclera or choroid",
      "Often paired with myopia, on a fundus that looks stretched inferiorly",
      "A benign congenital variant that can mimic a field defect, not glaucoma itself"
     ]
    },
-   "pearl": "Each RFMiD photo here carries one label, but real fundi often show more than one of these signs together, so keep scanning the whole photo even after you spot the first one.",
+   "pearl": "Each Retinal Fundus Multi-disease Image Dataset (RFMiD) photo here carries one label. Real fundi often show more than one of these signs together. So keep scanning the whole photo even after you spot the first one.",
    "foundation": [
     {
      "id": "normal",
@@ -521,17 +521,17 @@
    "clinic": "General retina clinic",
    "plan": {
     "normal": "No treatment needed. Routine review.",
-    "CME": "Treat the cause: NSAID or steroid drops after surgery, anti-VEGF or steroid for vascular causes; refer to retina if it persists.",
-    "CRS": "Identify the organism where possible (serology, PCR); treat the specific infection first, and add an oral steroid only under antimicrobial cover.",
-    "CSR": "Most resolve spontaneously in 1 to 3 months: stop steroids if possible and observe; photodynamic therapy or a leak-directed laser for chronic or recurrent cases.",
-    "EDN": "Treat the underlying vasculopathy: glycaemic and blood pressure control; refer to retina if exudates threaten or involve the fovea.",
-    "MH": "Find and treat the media opacity itself (cataract surgery, clearing a vitreous haemorrhage); repeat the fundus exam once the view improves.",
+    "CME": "Treat the cause. After surgery: non-steroidal anti-inflammatory drug (NSAID) or steroid drops. Vascular causes: anti-vascular endothelial growth factor (anti-VEGF) or steroid. Refer to retina if it persists.",
+    "CRS": "Identify the organism where possible (serology, polymerase chain reaction, PCR). Treat the specific infection first. Add an oral steroid only under antimicrobial cover.",
+    "CSR": "Most resolve spontaneously in 1 to 3 months. Stop steroids if possible and observe. Photodynamic therapy or a leak-directed laser for chronic or recurrent cases.",
+    "EDN": "Treat the underlying vasculopathy: glycaemic and blood pressure control. Refer to retina if exudates threaten or involve the fovea.",
+    "MH": "Find and treat the media opacity itself (cataract surgery, clearing a vitreous haemorrhage). Repeat the fundus exam once the view improves.",
     "MS": "No treatment restores the scar. Correct any residual refractive error and consider low-vision aids if central vision is reduced.",
     "MYA": "Correct refraction. Screen high myopes yearly for peripheral retinal breaks, staphyloma and myopic choroidal neovascularisation.",
-    "ODC": "Confirm with intraocular pressure, visual fields and OCT nerve fibre layer; start pressure-lowering treatment if glaucoma is confirmed.",
-    "RD": "Urgent vitreoretinal referral: same-day if the macula is still attached, urgent within days if the macula is already detached.",
-    "RT": "Treat the underlying disease (panretinal laser or anti-VEGF for proliferative DR); vitrectomy if traction threatens or involves the macula.",
-    "TD": "No treatment. Document the appearance to avoid mislabelling it as glaucoma, and check refraction and visual fields once to confirm it is stable."
+    "ODC": "Confirm with intraocular pressure, visual fields and optical coherence tomography (OCT) of the nerve fibre layer. Start pressure-lowering treatment if glaucoma is confirmed.",
+    "RD": "Urgent vitreoretinal referral. Same-day if the macula is still attached. Urgent within days if the macula is already detached.",
+    "RT": "Treat the underlying disease: panretinal laser or anti-vascular endothelial growth factor (anti-VEGF) for proliferative diabetic retinopathy. Vitrectomy if traction threatens or involves the macula.",
+    "TD": "No treatment. Document the appearance to avoid mislabelling it as glaucoma. Check refraction and visual fields once to confirm it is stable."
    }
   }
  ],
@@ -582,7 +582,7 @@
  "levels": {
   "foundation": {
    "label": "MBBS",
-   "sub": "Students: the main patterns, guided"
+   "sub": "Students (Bachelor of Medicine and Bachelor of Surgery, MBBS): the main patterns, guided"
   },
   "resident": {
    "label": "Resident",
