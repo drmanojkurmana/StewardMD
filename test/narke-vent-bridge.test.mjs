@@ -325,9 +325,9 @@ test("R6 B1: progress().ready needs the check passed, all 5 drills safe, skills,
   assert.ok(/ready: boolean/.test(src) && /missing: \[ids\]/.test(src) && /READY_IDS/.test(src), "documented at the top of the file");
 });
 
-test("R5 B2: first-night check: 12 mixed questions, teach-back on each, pass 10 (80%), covers the brief's topics", () => {
+test("R5 B2: first-night check: 14 mixed questions, teach-back on each, pass 12 (80%), covers the brief's topics", () => {
   const C = J.check;
-  assert.ok(C.items.length >= 10 && C.items.length <= 12);
+  assert.equal(C.items.length, 14);
   assert.equal(C.pass, Math.ceil(C.items.length * 0.8));
   assert.ok(bi(C.badge) && /under supervision/.test(C.badge.en) && /never change settings alone/.test(C.badgeNote.en));
   const ids = C.items.map((x) => x.id);
@@ -435,7 +435,7 @@ test("R5 B8: fixes: the demo alarm matches its numbers, find Q5 is unambiguous, 
   const steps = J.drills.items[0].steps;
   const c = UI.drillCount(UI.verdict(steps, ["suction", "look", "trap"]));
   assert.deepEqual(c, { picked: 3, right: 1, fix: 2, missed: 3 });
-  assert.ok(/\{p\}/.test(UI.STR.someWrong.en) && /\{m\}/.test(UI.STR.someWrong.hi) && /missed/.test(UI.STR.someWrong.en));
+  assert.ok(/\{p\}/.test(UI.STR.wrP.en) && /\{m\}/.test(UI.STR.wrM.hi) && /missed/.test(UI.STR.wrM.en));
   assert.equal(UI.STR.wrong.en, "Not right"); assert.equal(UI.STR.wrong.hi, "गलत");
   const N = J.handover.note;
   assert.ok(N.fields.length >= 6 && N.fields.every(bi) && /Nothing is typed or saved/.test(N.intro.en));
@@ -455,4 +455,51 @@ test("R5: draft marking once per page group: the review note is on the bridge ho
   const js = readFileSync("narke-vent-bridge.js", "utf8");
   assert.equal((js.match(/reviewNote/g) || []).length, 1, "one place");
   assert.ok(/draft/i.test(UI.STR.cardFoot.en), "the printed card, which leaves the app, carries it too");
+});
+
+/* ================= round 6 (B2 to B6) ================= */
+test("R6 B2: first-night check: the right answer is never the longest option (en and hi), two read-the-screen items", () => {
+  const C = J.check, len = (o, k) => (typeof o === "string" ? o : o[k]).length;
+  C.items.forEach((q) => ["en", "hi"].forEach((k) => {
+    const ls = q.options.map((o) => len(o, k)), others = ls.filter((_, i) => i !== q.answer);
+    assert.ok(ls[q.answer] <= Math.max(...others), q.id + " " + k + ": the right answer is the longest " + ls);
+  }));
+  // the round-5 shortcut (pick the longest) no longer passes
+  const byLongest = C.items.filter((q) => { const ls = q.options.map((o) => len(o, "en")); return ls.indexOf(Math.max(...ls)) === q.answer; }).length;
+  assert.ok(byLongest < C.pass, "picking the longest scores " + byLongest + " of " + C.items.length);
+  const rd = C.items.filter((q) => q.topic === "read");
+  assert.equal(rd.length, 2);
+  rd.forEach((q) => assert.ok(/^Read this screen/.test(q.q.en) && /screen/.test(q.q.hi) && bi(q.why) && bi(q.key), q.id));
+  assert.ok(/12 of 14/.test(C.intro.en) && /14 में से 12/.test(C.intro.hi) && /14/.test(UI.STR.checkSub.en) && /12/.test(UI.STR.checkSub.hi));
+  const js = readFileSync("narke-vent-bridge.js", "utf8");
+  assert.ok(/z\.tries \+ SALT/.test(js) && /RD\.tries \+ SALT/.test(js) && /Math\.random/.test(js), "option order also changes per visit");
+});
+
+test("R6 B4: drill counts read 1 as one (en and hi); the note step is required everywhere; alarm map and drills move on", () => {
+  assert.equal(UI.STR.wrM1.en, "1 needed step missed."); assert.ok(/step छूटा/.test(UI.STR.wrM1.hi) && /steps छूटे/.test(UI.STR.wrM.hi));
+  assert.equal(UI.STR.wrP1.en, "Your 1 step:"); assert.ok(/आपका 1 step/.test(UI.STR.wrP1.hi));
+  assert.ok(/1 to fix/.test(UI.STR.wrX1.en) && /1 ठीक करना है/.test(UI.STR.wrX1.hi));
+  const sil = J.drills.items.find((d) => d.id === "silence"), doc = sil.steps.find((x) => x.id === "doc");
+  assert.ok(doc.rank != null && !doc.opt && !doc.flex && /Needed every time/.test(doc.why.en), "the note is required in the drill");
+  const may = J.never.may.find((x) => /write down/i.test(x.en));
+  assert.ok(/never optional/.test(may.en) && /वैकल्पिक नहीं/.test(may.hi), "the never-alone card says the same");
+  const js = readFileSync("narke-vent-bridge.js", "utf8");
+  assert.ok(/function nextDrill\(cur\)/.test(js) && /\(i \+ k \+ l\.length\) % l\.length/.test(js) && /!prefs\(\)\.drills\[x\.id\]/.test(js), "next drill wraps to the first one not yet safe");
+  assert.ok(/nx \? '<button type="button" class="sp-btn ' \+ \(d \? "pri" : "sec"\)/.test(js), "every Got it block offers the next page (alarm map: Next: 3 am drill)");
+  assert.ok(/all \{m\} are in a safe order/.test(UI.STR.drillsRule.en), "the drill page states its rule");
+});
+
+test("R6 B5: the pocket card gives the per-patient VT rule and sends the learner to the senior for limits", () => {
+  const c = J.card;
+  assert.ok(bi(c.vtRule) && /6 to 8 mL\/kg/.test(c.vtRule.en) && /PBW/.test(c.vtRule.en) && /6 से 8 mL\/kg/.test(c.vtRule.hi));
+  assert.ok(bi(c.limitsNote) && /Ask your senior for this patient's limits/.test(c.limitsNote.en) && /senior/.test(c.limitsNote.hi));
+  const js = readFileSync("narke-vent-bridge.js", "utf8");
+  assert.ok(/r\.id === "vte" && c\.vtRule/.test(js), "the VTe row on the card uses the rule, not 350 to 600");
+});
+
+test("R6 B6 + B3: one accent (lab indigo primary buttons); the screen-map explanation docks in view", () => {
+  const css = readFileSync("narke-vent-bridge.css", "utf8");
+  assert.ok(/\.nrk-root:has\(\.vb-wrap\) \.sp-btn\.pri \{ background: var\(--vl-acc\)/.test(css));
+  assert.ok(/\.nrk-root:has\(\.vb-wrap\) \{ --sp-acc: var\(--vl-acc\)/.test(css));
+  assert.ok(/\.vb-info\.vb-sheet \{ position: sticky; bottom: 0/.test(css));
 });
