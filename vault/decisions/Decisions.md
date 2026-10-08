@@ -11655,3 +11655,8 @@ hydrochloride denied pgp_inhibitor like sarecycline. Deferred to a separate task
 NSAID, low-dose aspirin in NSAID rules, prophylaxis severity, weak P-gp inhibitors, and the coverage gaps R1
 listed (valproate, insulin brands, febuxostat severity, sacubitril + ACEi). `mech-pde5i-nondhp-ccb` is moderate,
 which the sign-off gate does not cover, so it has no manifest entry.
+- **Owner, 2026-10-08 ("why isn't it approved automatically ... 0.95 ... 7 day pro not activated"):** a
+  certificate whose number does not match the national register is auto-verified when the LIVE register
+  holds exactly one doctor with the same full name, not struck off (`strictNameMatch`); the register's number
+  is recorded. Confidence alone never approves anyone. Kill switch env `VERIFY_NAME_FALLBACK=0`.
+  [[StewardMD ID]]

@@ -104,6 +104,30 @@ for the unverified/pending reasons, so no call site can open the wrong door.
   SMD ID, provider, and a note when the address is an Apple relay. Students/interns use the
   `trainee` Gemini prompt (name + college + course + years, no ID numbers). All email values are
   HTML-escaped. `test/verify-review-contact.test.mjs`.
+- **NMC moved its register (found 2026-10-08).** `POST nmc.org.in/MCIRest/open/getDataFromService?
+  service=searchDoctor` now answers 301 -> 404, so EVERY live lookup "failed" and fell to the offline D1
+  mirror; any doctor missing from it went to manual review (owner's case: Dr S N Sravani Yarrarapu, Delhi
+  cert 100286, "no_offline_match"). The live register is now `GET nmc.org.in/indian-medical-register/search
+  ?search_type=reg_no|name&reg_no=|name=&page=&per_page=` -> `{success, data:[{registration_no, name,
+  state_medical_council, removed_status, ...}], pagination}`, wrapped once in `functions/api/_nmc.js`
+  `nmcQuery()` (used by verify-doctor.js AND the in-app register search `nmc-search.js`, which was broken
+  the same way). `removed_status` rows never match. Probe it before blaming the matcher:
+  `curl -G https://nmc.org.in/indian-medical-register/search --data-urlencode search_type=reg_no --data-urlencode reg_no=100286`.
+- **A state certificate number may not be the register's number.** Dr Sravani's Delhi 100286 is not on
+  the IMR under that number; her name is, once (APMC/FMR/110431). When the number finds nobody with the
+  name, the LIVE register is asked for the name and `_verify_match.js strictNameMatch()` accepts only
+  exactly one non-removed row with the same full name (every word, any order, 3+ words or 2 words of 4+
+  letters), never from the capped offline mirror or a truncated page. The register's number is the one
+  recorded (one number, one account). Kill switch: env `VERIFY_NAME_FALLBACK=0`. Tests:
+  `test/verify-nmc-live.test.mjs`.
+- **The manual-review path must refresh the token.** The free week is the `provUntil` claim the server
+  writes on `pending_review`; verify.js refreshed the token only on `verified`, so a doctor under review
+  saw Free until the token renewed itself (up to an hour). Both paths now `getIdToken(true)` + `resyncPro()`.
+- **Verification screen redesign (2026-10-08).** `#verifyGate` (index.html) + verify.js: role-true promise
+  line (`#verifyPerks`), "Certificate | Reg. number + photo ID" switch (`#verifyMethod`, verify.js `_method`;
+  ID mode is the switch now, not "a number was typed"), thumbnail preview, live steps (`runSteps`), result
+  cards (`resultHtml`/`settle`), account table hidden on a first visit. All old element IDs kept.
+  Browser test: `test/run-verify-ux-ui.mjs`.
 - **Auto-verification asks the register for the digit CORE first** (`_verify_match.js`
   `nmcQueriesFor`), falls through to the D1 mirror on an EMPTY answer, and treats Gemini's confidence
   as a 0.5 floor once number and name matched. The matching rules are pure and tested there; keep

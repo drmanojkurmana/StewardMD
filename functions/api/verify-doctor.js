@@ -28,13 +28,12 @@ import { gateTrial, weekPatch, requestSignals, trialOnceMode, firstGrantAt, warm
 import { clearBudgetCache } from "../_aibudget.js";
 import { reconcileVerifiedClaim } from "../_verify_claim.js";
 import { normalizeVerifyRole, isTraineeVerifyRole, recordVerifiedRole } from "../_entitlement.js";
-import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName } from "../_verify_match.js";
+import { regCandidates, nmcNameOf, nmcQueriesFor, pickMatch, uniqueNameMatch, autoVerifyOk, normName, strictNameMatch } from "../_verify_match.js";
 import { gatherReviewContact, contactHtml, escHtml } from "../_review_contact.js";
+import { nmcQuery } from "./_nmc.js";
 // Re-exported: test/verify-cert-recognition.test.mjs imports these from here.
 export { regCandidates, nmcNameOf };
 
-const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
-const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
 // Developer-API model for reading certificates. Uses the rolling "…-latest" alias so it
 // never gets retired out from under us (gemini-2.0-flash and 2.5-flash both got 404'd for
 // new keys). Do NOT read env.GEMINI_MODEL — that's tuned for MaiK's Vertex path (2.5-flash),
@@ -238,20 +237,8 @@ async function geminiExtract(env, imageB64, mime, mode) {
 // `body` is the searchDoctor payload: { registrationNo } or { name }. Throws when the service is
 // down (non-2xx / timeout) so the caller can tell "down" from "answered empty".
 async function nmcLookup(body) {
-  // Timeout so a hung NMC doesn't stall verification — fall back to the offline DB instead.
-  const ctrl = new AbortController();
-  const t = setTimeout(() => ctrl.abort(), 8000);
-  try {
-    const res = await fetch(NMC_SEARCH, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Referer": NMC_REFERER, "User-Agent": "Mozilla/5.0" },
-      body: JSON.stringify(body),
-      signal: ctrl.signal,
-    });
-    if (!res.ok) throw new Error("nmc_http_" + res.status);
-    const arr = await res.json();
-    return Array.isArray(arr) ? arr : [];
-  } finally { clearTimeout(t); }
+  // NMC's new register search (functions/api/_nmc.js nmcQuery); throws when it cannot be asked.
+  return nmcQuery(body && body.registrationNo ? { regNo: body.registrationNo } : { name: normName((body && body.name) || "") });
 }
 
 // Offline fallback: the NMC register mirrored in Cloudflare D1 (binding: stewardmd_nmc).
@@ -560,6 +547,16 @@ export async function onRequest(context) {
     if (lk.unavailable) return toManual("nmc_unreachable");   // NMC down AND no offline DB
     match = pickMatch(lk.records, effReg, ex.name, ex.council);
     console.log("[verify] uid", uid, "source:", source, "queries:", JSON.stringify(lk.queries), "records:", lk.records.length, "match:", match ? "yes" : "NONE");
+    // The number found nobody with this name: ask the register for the NAME, and accept only one
+    // row with the same full name (strictNameMatch). Kill switch: env VERIFY_NAME_FALLBACK=0.
+    if (!match && String(env.VERIFY_NAME_FALLBACK || "") !== "0") {
+      const ln = await registerLookupByName(env, ex.name);
+      // live register only: the offline mirror's name search is capped and could hide a namesake
+      const nm = (ln.unavailable || ln.source !== "nmc" || ln.records.truncated) ? null : strictNameMatch(ln.records, ex.name);
+      lookupDiag.nameFallback = { source: ln.source, records: ln.records.length, matched: !!nm };
+      console.log("[verify] uid", uid, "name fallback:", ln.source, "records:", ln.records.length, "match:", nm ? "yes" : "NONE");
+      if (nm) { match = nm; source = ln.source + "-name"; }
+    }
     if (!match) return toManual(source === "offline" ? "no_offline_match" : "no_nmc_match");
   } else if (!idMode && nameOnlyEnabled(env)) {
     // No number could be read. Off by default: it is a loosening of the rule, and the owner turns
