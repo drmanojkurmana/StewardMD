@@ -114,7 +114,7 @@
     ]
   },
   "review": {
-    "status": "approved",
+    "status": "ai_drafted",
     "reviewedBy": null,
     "reviewedAt": null
   },
@@ -350,6 +350,70 @@
         {
           "label": "Pleural Margins",
           "description": "Costophrenic and cardiophrenic recesses, hemidiaphragm contours, and pleural lines."
+        }
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c4",
+      "label": "CAP predisposing-factor/pathogen table, user-supplied low-resolution screenshot; source line not shown",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "cap-pathogens-by-setting",
+      "title": "Likely pathogens by predisposing factor or setting (source screenshot only partly legible)",
+      "columns": [
+        "Predisposing factor / setting",
+        "Possible pathogens"
+      ],
+      "rows": [
+        {
+          "parameter": "Aspiration",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Alcoholism",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "COPD",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "Nursing-home residence",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
+        },
+        {
+          "parameter": "ICU admission",
+          "cells": [
+            {
+              "text": "needs-source"
+            }
+          ],
+          "cite": "c4"
         }
       ]
     }

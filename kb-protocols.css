@@ -182,3 +182,9 @@ body.dark .kblib-tool-protocols .kbp-diagram-img, body.dark .kbp-embed .kbp-diag
   .kblib-tool-protocols .kbp-diagram-ann li, .kbp-embed .kbp-diagram-ann li { flex-direction:column; gap:2px; }
   .kblib-tool-protocols .kbp-diagram-ann strong, .kbp-embed .kbp-diagram-ann strong { white-space:normal; }
 }
+
+/* High-yield emphasis (kb-highyield.js): bold and underlined, not colour alone. */
+.kb-hy{font-weight:700;text-decoration:underline;text-decoration-thickness:.12em;text-underline-offset:.18em}
+.kbp-pending{color:inherit;font-style:italic;background:rgba(200,120,0,.12)}
+.kbp-unit{display:block;font-size:12px;opacity:.75;font-weight:400}
+.kbp-cite{font-size:12px;opacity:.8}

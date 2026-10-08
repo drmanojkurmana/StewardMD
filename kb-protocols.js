@@ -16,7 +16,7 @@
 (function (root) {
   "use strict";
   var G = root, D = root.document;
-  var CONTENT_V = "2e662f7b0a07";
+  var CONTENT_V = "17ee7c31bc51";
   var BASE = "/kb/clinical-protocols/";
 
   var KINDS = {
@@ -272,6 +272,15 @@
             (a.caption ? '<p class="kbp-caption">' + esc(a.caption) + '</p>' : '') + '</section>';
         }).join("")
       : "";
+    // Schema v2 flowcharts (kb-flowchart.js): branching, textbook style. Legacy step lists remain the fallback.
+    var v2flows = (p.flowcharts && p.flowcharts.length && window.KBFlowchart)
+      ? p.flowcharts.map(function (fc, i) {
+          toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Flow' + i + '">' + esc(fc.title || fc.id) + '</button>');
+          return '<section class="kbp-sec kbp-sec-algo" id="' + pre + 'Flow' + i + '"><h2><span class="kbp-kind">Flowchart</span>' + esc(fc.title || fc.id) + '</h2>' +
+            window.KBFlowchart.render(fc) + '</section>';
+        }).join("")
+      : "";
+    algos = v2flows + algos;
     if (p.algorithms && p.algorithms.length) {
       p.algorithms.forEach(function (a, i) { toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Algo' + i + '">' + esc(a.title) + '</button>'); });
     }
@@ -287,6 +296,29 @@
             (t.caption ? '<p class="kbp-caption">' + esc(t.caption) + '</p>' : '') + '</section>';
         }).join("")
       : "";
+    // Schema v2 value tables (kb-highyield.js for {{hy:}} emphasis). Citations show as labels.
+    var v2cites = {};
+    (p.citations || []).forEach(function (c) { v2cites[c.id] = c.label || c.id; });
+    if (p.valueTables && p.valueTables.length && window.KBHy) {
+      tables += p.valueTables.map(function (vt, i) {
+        toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'VTbl' + i + '">' + esc(vt.title || vt.id) + '</button>');
+        var cols = (vt.columns || []).slice();
+        if (cols.length && String(cols[0]).toLowerCase() === 'parameter') cols = cols.slice(1);
+        var ths = '<th scope="col">Parameter</th>' + cols.map(function (c) { return '<th scope="col">' + esc(c) + '</th>'; }).join('') + '<th scope="col">Source</th>';
+        var trs = (vt.rows || []).map(function (r) {
+          var unit = r.unit ? '<span class="kbp-unit">' + esc(r.unit) + '</span>' : '';
+          var cells = (r.cells || []).map(function (c) {
+            var pending = String(c.text || '').indexOf('needs-source') >= 0 ? ' class="kbp-pending"' : '';
+            return '<td' + pending + '>' + window.KBHy.html(c.text || '') + '</td>';
+          }).join('');
+          return '<tr><th scope="row">' + esc(r.parameter || '') + unit + '</th>' + cells +
+            '<td class="kbp-cite">' + esc(v2cites[r.cite] || r.cite || '') + '</td></tr>';
+        }).join('');
+        return '<section class="kbp-sec kbp-sec-tbl" id="' + pre + 'VTbl' + i + '"><h2><span class="kbp-kind">Value table</span>' + esc(vt.title || vt.id) + '</h2>' +
+          '<div class="kbp-table-wrap"><table class="kbp-tbl"><thead><tr>' + ths + '</tr></thead><tbody>' + trs + '</tbody></table></div>' +
+          (vt.footnote ? '<p class="kbp-caption">' + window.KBHy.html(vt.footnote) + '</p>' : '') + '</section>';
+      }).join("");
+    }
     if (p.tables && p.tables.length) {
       p.tables.forEach(function (t, i) { toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Tbl' + i + '">' + esc(t.title) + '</button>'); });
     }
@@ -294,6 +326,14 @@
     // Clinical diagrams and diagnostic imaging: annotated figures (ECG, X-ray, CT schematic)
     // with structured callout badges for each annotation. Each card is a jump target.
     var DTYPE = { ecg: "ECG", xray: "X-ray", ct: "CT", diagram: "Diagram", ultrasound: "Ultrasound" };
+    // Schema v2 drawn figures (kb-figure.js). Image diagrams below are unchanged.
+    var v2figs = (p.figures && p.figures.length && window.KBFigure)
+      ? p.figures.filter(function (f) { return f.type === 'svg-spec'; }).map(function (f, i) {
+          toc.push('<button type="button" class="kbp-jump" data-kbp-jump="' + pre + 'Fig' + i + '">' + esc(f.title || f.id) + '</button>');
+          return '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'Fig' + i + '"><h2><span class="kbp-kind">Figure</span>' + esc(f.title || f.id) + '</h2>' +
+            window.KBFigure.render(f) + (f.caption ? '<p class="kbp-caption">' + window.KBHy.html(f.caption) + '</p>' : '') + '</section>';
+        }).join("")
+      : "";
     var diagrams = (p.diagrams && p.diagrams.length)
       ? '<section class="kbp-sec kbp-sec-diagrams" id="' + pre + 'Diagrams"><h2><span class="kbp-kind">Imaging</span>Clinical diagrams and imaging</h2>' +
         p.diagrams.map(function (d, i) {
@@ -337,7 +377,7 @@
       (opts.back ? '<button type="button" class="kbp-back" data-kbp-back aria-label="Back to protocols"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span>All protocols</span></button>' : "") +
       '<header class="kblib-tool-intro kbp-hero">' + (opts.brand ? brandHTML() : "") + '<span class="kblib-tool-kicker">' + esc(subjectLabel(p.subject)) + "</span><h1>" + esc(p.title) + "</h1>" +
       (meta ? '<div class="kbp-metas">' + meta + "</div>" : "") + '<p class="kbp-summary">' + esc(p.summary) + "</p></header>" +
-      statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + algos + tables + diagrams + calcs + drugs + sources + "</div>";
+      statusHTML(p) + twin + '<nav class="kbp-toc" aria-label="Jump to section">' + toc.join("") + "</nav>" + secs + algos + tables + v2figs + diagrams + calcs + drugs + sources + "</div>";
   }
   /* ---- assign: a protocol as case-sheet instructions (flag smd_protocol_assign) ------------------
    * Everything here is PURE (no DOM, no state, unit-tested): the host owns the patient record.

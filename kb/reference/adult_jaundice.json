@@ -1,0 +1,265 @@
+{
+ "id": "adult_jaundice",
+ "name": "Jaundice in adults: diagnostic approach",
+ "aliases": [
+  "adult jaundice",
+  "hyperbilirubinaemia in adults",
+  "icterus",
+  "approach to jaundice"
+ ],
+ "class": "non_infective",
+ "system": "Hepatobiliary / Gastrointestinal",
+ "specialty": "Hepatology",
+ "referenceOnly": true,
+ "reference": {
+  "source": "Harrison's Manual of Medicine",
+  "sourceEdition": "20e",
+  "pages": null,
+  "clinicalPearls": [],
+  "pathophysiology": "",
+  "additionalDifferentials": [],
+  "additionalInvestigations": [],
+  "redFlags": [],
+  "prognosis": "",
+  "pitfalls": [],
+  "references": [
+   "Harrison's Manual of Medicine, 20th ed."
+  ],
+  "crossLinks": [
+   "neonatal_jaundice",
+   "evaluation_of_liver_function"
+  ],
+  "management": []
+ },
+ "review": {
+  "status": "ai_drafted",
+  "reviewedBy": null,
+  "reviewedAt": null,
+  "clinicianApproved": false
+ },
+ "version": 1,
+ "algorithms": [],
+ "tables": [],
+ "diagrams": [],
+ "citations": [
+  {
+   "id": "c5",
+   "label": "Harrison's Manual of Medicine, 20th ed., chart: algorithm for the patient with jaundice",
+   "kind": "user-supplied"
+  }
+ ],
+ "flowcharts": [
+  {
+   "id": "adult-jaundice-approach",
+   "title": "Working up jaundice in an adult",
+   "start": "j1",
+   "nodes": [
+    {
+     "id": "j1",
+     "type": "start",
+     "text": "Take a history (including every medicine and drug exposure), examine, and send bilirubin with direct/indirect split, ALT, AST, alkaline phosphatase, PT and albumin",
+     "cite": "c5"
+    },
+    {
+     "id": "j2",
+     "type": "decision",
+     "text": "Is bilirubin the only abnormal liver test?",
+     "cite": "c5"
+    },
+    {
+     "id": "j3",
+     "type": "decision",
+     "text": "What share of total bilirubin is direct (conjugated)?",
+     "cite": "c5"
+    },
+    {
+     "id": "j4",
+     "type": "outcome",
+     "text": "Consider inherited conjugated hyperbilirubinaemia: Dubin-Johnson or Rotor syndrome",
+     "cite": "c5"
+    },
+    {
+     "id": "j5",
+     "type": "outcome",
+     "text": "Consider drugs (rifampicin, probenecid), inherited causes (Gilbert, Crigler-Najjar), haemolysis, or ineffective erythropoiesis",
+     "cite": "c5"
+    },
+    {
+     "id": "j6",
+     "type": "decision",
+     "text": "Which pattern dominates the other liver tests?",
+     "cite": "c5"
+    },
+    {
+     "id": "j7",
+     "type": "action",
+     "text": "Hepatocellular work-up: hepatitis A IgM, HBsAg and hepatitis B core IgM, HCV RNA; toxicology screen with paracetamol (acetaminophen) level; ceruloplasmin if under 40 years; ANA, smooth-muscle antibody, serum protein electrophoresis",
+     "cite": "c5"
+    },
+    {
+     "id": "j8",
+     "type": "decision",
+     "text": "Did the first-line hepatocellular tests find a cause?",
+     "cite": "c5"
+    },
+    {
+     "id": "j9",
+     "type": "action",
+     "text": "Second-line tests: CMV DNA, EBV capsid antigen, hepatitis D antibody if indicated, hepatitis E IgM if indicated",
+     "cite": "c5"
+    },
+    {
+     "id": "j10",
+     "type": "decision",
+     "text": "Did the second-line tests find a cause?",
+     "cite": "c5"
+    },
+    {
+     "id": "j11",
+     "type": "outcome",
+     "text": "Liver biopsy",
+     "cite": "c5"
+    },
+    {
+     "id": "j12",
+     "type": "outcome",
+     "text": "Cause identified by testing; cause-specific management is outside this chart (needs-source)",
+     "cite": "c5"
+    },
+    {
+     "id": "j13",
+     "type": "action",
+     "text": "Cholestatic work-up: abdominal ultrasound",
+     "cite": "c5"
+    },
+    {
+     "id": "j14",
+     "type": "decision",
+     "text": "Are the bile ducts dilated?",
+     "cite": "c5"
+    },
+    {
+     "id": "j15",
+     "type": "outcome",
+     "text": "CT, MRCP or ERCP",
+     "cite": "c5"
+    },
+    {
+     "id": "j16",
+     "type": "action",
+     "text": "Serology: antimitochondrial antibody (AMA), hepatitis serologies including hepatitis A, CMV, EBV; review the drug list",
+     "cite": "c5"
+    },
+    {
+     "id": "j17",
+     "type": "decision",
+     "text": "Serology result?",
+     "cite": "c5"
+    },
+    {
+     "id": "j18",
+     "type": "outcome",
+     "text": "MRCP or liver biopsy",
+     "cite": "c5"
+    }
+   ],
+   "edges": [
+    {
+     "from": "j1",
+     "to": "j2",
+     "label": "Next"
+    },
+    {
+     "from": "j2",
+     "to": "j3",
+     "label": "Yes, bilirubin alone"
+    },
+    {
+     "from": "j2",
+     "to": "j6",
+     "label": "No, other liver tests also raised"
+    },
+    {
+     "from": "j3",
+     "to": "j4",
+     "label": "Direct over 15% of total"
+    },
+    {
+     "from": "j3",
+     "to": "j5",
+     "label": "Direct under 15% (mainly indirect)"
+    },
+    {
+     "from": "j6",
+     "to": "j7",
+     "label": "Hepatocellular: ALT/AST raised out of proportion to ALP"
+    },
+    {
+     "from": "j6",
+     "to": "j13",
+     "label": "Cholestatic: ALP raised out of proportion to ALT/AST"
+    },
+    {
+     "from": "j7",
+     "to": "j8",
+     "label": "Next"
+    },
+    {
+     "from": "j8",
+     "to": "j12",
+     "label": "Yes"
+    },
+    {
+     "from": "j8",
+     "to": "j9",
+     "label": "No, all negative"
+    },
+    {
+     "from": "j9",
+     "to": "j10",
+     "label": "Next"
+    },
+    {
+     "from": "j10",
+     "to": "j12",
+     "label": "Yes"
+    },
+    {
+     "from": "j10",
+     "to": "j11",
+     "label": "No, all negative"
+    },
+    {
+     "from": "j13",
+     "to": "j14",
+     "label": "Next"
+    },
+    {
+     "from": "j14",
+     "to": "j15",
+     "label": "Yes"
+    },
+    {
+     "from": "j14",
+     "to": "j16",
+     "label": "No"
+    },
+    {
+     "from": "j16",
+     "to": "j17",
+     "label": "Next"
+    },
+    {
+     "from": "j17",
+     "to": "j11",
+     "label": "AMA positive"
+    },
+    {
+     "from": "j17",
+     "to": "j18",
+     "label": "All negative"
+    }
+   ]
+  }
+ ]
+}

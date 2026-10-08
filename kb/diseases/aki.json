@@ -55,7 +55,7 @@
     ]
   },
   "review": {
-    "status": "approved",
+    "status": "ai_drafted",
     "reviewedBy": null,
     "reviewedAt": null
   },
@@ -243,6 +243,126 @@
           "description": "Pelvicalyceal acoustic windows, caliceal dilatation, and ureteric outflow."
         }
       ]
+    }
+  ],
+  "citations": [
+    {
+      "id": "c2",
+      "label": "Table 61-2, user-supplied; source edition not shown (laboratory findings in acute renal failure)",
+      "kind": "user-supplied"
+    }
+  ],
+  "valueTables": [
+    {
+      "id": "arf-prerenal-vs-atn",
+      "title": "Urine and blood indices separating prerenal azotaemia from oliguric acute tubular necrosis",
+      "columns": [
+        "Parameter",
+        "Prerenal azotemia",
+        "Oliguric ARF (ATN)"
+      ],
+      "rows": [
+        {
+          "parameter": "BUN/creatinine ratio",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": "{{hy:>20:1}}",
+              "op": ">",
+              "value": 20
+            },
+            {
+              "text": "10-15:1",
+              "range": [
+                10,
+                15
+              ]
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine sodium (UNa)",
+          "unit": "mEq/L",
+          "cells": [
+            {
+              "text": "<20",
+              "op": "<",
+              "value": 20
+            },
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine osmolality",
+          "unit": "mOsm/kg H2O",
+          "cells": [
+            {
+              "text": ">500",
+              "op": ">",
+              "value": 500
+            },
+            {
+              "text": "<350",
+              "op": "<",
+              "value": 350
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Fractional excretion of sodium (FENa)",
+          "unit": "%",
+          "cells": [
+            {
+              "text": "{{hy:<1%}}",
+              "op": "<",
+              "value": 1
+            },
+            {
+              "text": "{{hy:>2%}}",
+              "op": ">",
+              "value": 2
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urine/plasma creatinine ratio",
+          "unit": "ratio",
+          "cells": [
+            {
+              "text": ">40",
+              "op": ">",
+              "value": 40
+            },
+            {
+              "text": "<20",
+              "op": "<",
+              "value": 20
+            }
+          ],
+          "cite": "c2"
+        },
+        {
+          "parameter": "Urinary casts",
+          "cells": [
+            {
+              "text": "None, or hyaline/granular"
+            },
+            {
+              "text": "Muddy brown"
+            }
+          ],
+          "cite": "c2"
+        }
+      ],
+      "footnote": "FENa (%) = (UNa x PCr x 100) / (PNa x UCr), where U = urine and P = plasma."
     }
   ]
 }
