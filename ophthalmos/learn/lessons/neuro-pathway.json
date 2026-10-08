@@ -128,6 +128,98 @@
       "visual-pathway-signal"
     ]
   },
+  "fields": {
+    "intro": {
+      "en": "Each damage site on the right side of the pathway, and what each eye then sees. Patterns are shown as the patient sees them.",
+      "hi": "रास्ते की दाईं ओर चोट की हर जगह, और तब हर आँख क्या देखती है। पैटर्न वैसे दिखाए गए हैं जैसे मरीज़ देखता है।"
+    },
+    "items": [
+      {
+        "id": "optic-nerve-right",
+        "label": {
+          "en": "Right eye blind (monocular loss)",
+          "hi": "दाईं आँख में पूरी दृष्टि जाना (monocular loss, सिर्फ़ एक आँख)"
+        },
+        "le": "full",
+        "re": "blind",
+        "where": {
+          "en": "Right optic nerve: it carries only the right eye's fibres.",
+          "hi": "दाईं ऑप्टिक नर्व (optic nerve): यह सिर्फ़ दाईं आँख के तंतु ले जाती है।"
+        },
+        "lesion": "optic-nerve"
+      },
+      {
+        "id": "bitemporal",
+        "label": {
+          "en": "Bitemporal hemianopia (outer half lost in each eye)",
+          "hi": "बाइटेम्पोरल हेमियानोपिया (bitemporal hemianopia, हर आँख का बाहरी आधा जाना)"
+        },
+        "le": "temporal",
+        "re": "temporal",
+        "where": {
+          "en": "Optic chiasm: a pituitary tumour pressing the crossing nasal fibres.",
+          "hi": "ऑप्टिक कियाज़्म (optic chiasm): पिट्यूटरी की गाँठ (tumour) पार करते नाक वाले तंतुओं को दबाती है।"
+        },
+        "lesion": "chiasm"
+      },
+      {
+        "id": "left-homonymous",
+        "label": {
+          "en": "Left homonymous hemianopia (left half lost in both eyes)",
+          "hi": "बायाँ होमोनिमस हेमियानोपिया (left homonymous hemianopia, दोनों आँखों में बायाँ आधा जाना)"
+        },
+        "le": "left-half",
+        "re": "left-half",
+        "where": {
+          "en": "Right optic tract: it carries the left half of the visual field from both eyes.",
+          "hi": "दायाँ ऑप्टिक ट्रैक्ट (optic tract): यह दोनों आँखों से दृष्टि क्षेत्र (visual field) का बायाँ आधा ले जाता है।"
+        },
+        "lesion": "optic-tract"
+      },
+      {
+        "id": "left-upper-quadrant",
+        "label": {
+          "en": "Left upper quadrantanopia (upper left quarter lost in both eyes, 'pie in the sky')",
+          "hi": "बायाँ ऊपरी क्वाड्रेंटानोपिया (left upper quadrantanopia, दोनों आँखों में ऊपर का बायाँ चौथाई जाना, 'pie in the sky')"
+        },
+        "le": "sup-left",
+        "re": "sup-left",
+        "where": {
+          "en": "Right temporal lobe: the Meyer loop carries the upper visual field.",
+          "hi": "दायाँ टेम्पोरल लोब (temporal lobe): मेयर लूप (Meyer loop) ऊपर का दृष्टि क्षेत्र ले जाता है।"
+        },
+        "lesion": "meyer-loop"
+      },
+      {
+        "id": "left-lower-quadrant",
+        "label": {
+          "en": "Left lower quadrantanopia (lower left quarter lost in both eyes, 'pie on the floor')",
+          "hi": "बायाँ निचला क्वाड्रेंटानोपिया (left lower quadrantanopia, दोनों आँखों में नीचे का बायाँ चौथाई जाना, 'pie on the floor')"
+        },
+        "le": "inf-left",
+        "re": "inf-left",
+        "where": {
+          "en": "Right parietal lobe: these optic radiation fibres carry the lower visual field.",
+          "hi": "दायाँ पैराइटल लोब (parietal lobe): ऑप्टिक रेडिएशन (optic radiation) के ये तंतु नीचे का दृष्टि क्षेत्र ले जाते हैं।"
+        },
+        "lesion": "parietal-radiation"
+      },
+      {
+        "id": "left-homonymous-sparing",
+        "label": {
+          "en": "Left homonymous hemianopia with macular sparing (centre kept)",
+          "hi": "मैक्युलर स्पेयरिंग के साथ बायाँ होमोनिमस हेमियानोपिया (macular sparing, बीच की दृष्टि बची रहती है)"
+        },
+        "le": "left-half-sparing",
+        "re": "left-half-sparing",
+        "where": {
+          "en": "Right occipital cortex: a stroke here often spares the centre, which has a second blood supply.",
+          "hi": "दायाँ ऑक्सिपिटल कॉर्टेक्स (occipital cortex): यहाँ स्ट्रोक में बीच का हिस्सा अक्सर बच जाता है, क्योंकि उसे दूसरी जगह से भी खून मिलता है।"
+        },
+        "lesion": "occipital-cortex"
+      }
+    ]
+  },
   "why": {
     "steps": [
       {
