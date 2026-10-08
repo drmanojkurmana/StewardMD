@@ -358,7 +358,7 @@
   function bar(title, sub, left, right) {
     var isPN = title === "PrepNucleus";
     var tHtml = isPN
-      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo" src="/prep/art/logo-icon.png" alt="" width="22" height="22" decoding="async"><span>' + title + "</span></h1>"
+      ? '<h1 class="pn-t-brand"><img class="pn-bar-logo" src="/prep/art/logo-icon-96.webp" alt="" width="22" height="22" decoding="async"><span>' + title + "</span></h1>"
       : "<h1>" + title + "</h1>";
     return '<header class="pn-bar' + (isPN ? " pn-bar-brand" : "") + '"><button type="button" class="pn-ib" data-act="' + (left || "back") + '" aria-label="' + (left === "close" ? "Close PrepNucleus" : "Back") + '">' + ico(left === "close" ? "close" : "back") + "</button>" +
       '<div class="pn-t">' + tHtml + (sub ? "<p>" + sub + "</p>" : "") + "</div>" + (right || '<span class="pn-ib-sp"></span>') + "</header>";
@@ -472,7 +472,7 @@
     var nb = Object.keys(s.bm).length;
     paint('<div class="pn-sky" aria-hidden="true"></div>' + bar("PrepNucleus", ex.label, "close", '<button type="button" class="pn-ib" data-act="downloads" aria-label="Offline downloads">' + ico("dl") + "</button>") +
       tabs + '<div class="pn-body pn-home" id="pnHome">' +
-      '<div class="pn-banner pn-brand-banner" role="img" aria-label="PrepNucleus: AI-Powered Medical Prep"></div>' +
+      '<div class="pn-banner pn-brand-banner" role="img" aria-label="PrepNucleus"></div>' +
       // Readiness and Today's plan (prep-plan.js); the older Today card without it.
       (G.PREP_PLAN ? G.PREP_PLAN.homeHtml(HOST) : '<h2 class="pn-h">Today</h2>' + planCard(s)) +
       (arena ? '<p class="pn-eb" aria-hidden="true">Live, with other students</p><h2 class="pn-h">Compete</h2><div id="pnCompete">' + G.PREP_ARENA.homeHtml(HOST) + "</div>" : "") +
