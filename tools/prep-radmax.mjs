@@ -285,8 +285,9 @@ export function imgPrompt(u, redo) {
     "The question must need the image: the stem says the image is shown ('The radiograph shown', 'The CT image shown') and never names or describes the answer finding in words. Ask for the diagnosis, the sign, the structure, the differential, the next investigation or the management, as the source supports.",
   ].concat(rulesText(bank)).join("\n");
   const src = "<source>\n" + (u.header ? "Context: " + u.header + "\n" : "") + u.segs.map((s) => "[" + s.id + "] " + s.tx).join("\n") + "\n</source>";
+  const learn = (u.lessons || []).length && !redo ? "\nEarlier items on this figure were rejected for these reasons; do not repeat these faults:\n" + u.lessons.map((s) => "- " + cleanText(s, 220)).join("\n") : "";
   const seen = u.shows ? "\nWhat a reviewer could clearly see in the image: " + u.shows + "\nAsk only about a finding that is visible as described and that the source explains." : "";
-  const ask = seen + "\n" + (u.modHint ? "Module: " + u.modHint + " is the usual module here.\n" : "") + (redo ? `A first draft was rejected because: ${cleanText(redo.why, 400)}. Draft stem: ${cleanText(redo.q, 600)}. Write a better item (format image, level ${w.dif}) or set sure to false.` : `Write one item: format image, level ${w.dif}. The image is attached.`);
+  const ask = seen + learn + "\n" + (u.modHint ? "Module: " + u.modHint + " is the usual module here.\n" : "") + (redo ? `A first draft was rejected because: ${cleanText(redo.why, 400)}. Draft stem: ${cleanText(redo.q, 600)}. Write a better item (format image, level ${w.dif}) or set sure to false.` : `Write one item: format image, level ${w.dif}. The image is attached.`);
   return { op: "radmax-img", system, user: src + "\n" + ask, schema: IMG_SCHEMA, maxOut: 2400, temperature: 0.5 };
 }
 const REVIEW_SCHEMA = O({ g: S("ARRAY", { items: O({ i: S("INTEGER"), g4: S("BOOLEAN"), g6: S("BOOLEAN"), g7: S("BOOLEAN"), g8: S("BOOLEAN"), g9: S("BOOLEAN"), gx: S("BOOLEAN"), g10: S("BOOLEAN"), gf: S("BOOLEAN"), gl: S("BOOLEAN"), why: S("STRING") }, ["i", "g4", "g6", "g7", "g8", "g9", "gx", "g10", "gf", "gl", "why"]) }) }, ["g"]);
