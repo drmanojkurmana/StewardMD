@@ -28,7 +28,7 @@
      device, never dropped.
    - days and mod[mid].t/.ok are per-device grow-only counters (slot max, value = sum): replaying a merge or losing
      a PUT response cannot double count. mod[mid].last is a max. conf, dl, hid, fc, sims stay on the device.
-   - exam, goal, last, pl, pt, lsp, ra and every key of bm, mt, rep, ls are last-writer-wins registers with a hybrid
+   - exam, goal, last, pl, pt, lsp, ra, ask, cel, ml and every key of bm, mt, rep, ls are last-writer-wins registers with a hybrid
      clock: a local change (found by diffing against the last merged doc) is stamped max(now, newest stamp this device
      has seen + 1), so an edit made after seeing a value beats it even on a slow clock. Concurrent edits: the later
      wall clock wins; ties by JSON string. A deleted map key is a [ts, null] tombstone.
@@ -39,7 +39,8 @@
   "use strict";
 
   /* ================= pure ================= */
-  var SCALARS = ["exam", "goal", "last", "pl", "pt", "lsp", "ra"], MAPS = ["bm", "mt", "rep", "ls"];
+  // ask (Ask MaiK choice), cel (celebrated milestones), ml (MaiK line rotation): owner 2026-10-09, plain registers.
+  var SCALARS = ["exam", "goal", "last", "pl", "pt", "lsp", "ra", "ask", "cel", "ml"], MAPS = ["bm", "mt", "rep", "ls"];
   var KEEP_DAYS = 30, TOMB_MS = 120 * 864e5, MH_MAX = 20, INFO = "prepnucleus-sync-v1";
   var _core = null;
   function core() { return _core || (_core = (G && G.SPECIALTY_CORE) || require("./specialty-core.js")); }

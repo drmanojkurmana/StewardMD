@@ -33,6 +33,7 @@ export const AI_MODULES = {
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
   prep:        { id: "prep",        label: "PrepNucleus decks",  group: "PrepNucleus",   daily: 95,  provider: "vertex" }, // Layer C PDF/notes -> deck. Unit = Gemini calls: 3 decks x up to 31 calls + 2 retries (vault/plans/PrepNucleus.md 9.3). env AI_LIMIT_PREP / admin KV override.
+  prep_tutor:  { id: "prep_tutor",  label: "PrepNucleus Ask MaiK", group: "PrepNucleus", daily: 0, provider: "vertex" }, // Ask MaiK online. daily 0 = unlimited ON PURPOSE: the owner meters it by the student's MaiK Token balance (gateAndCount + AI_COST_CAP_ON), not a count cap.
 };
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";

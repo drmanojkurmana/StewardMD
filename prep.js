@@ -28,7 +28,7 @@
   function examOf(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i].id === id) return EXAMS[i]; return EXAMS[0]; }
   // mt: mistakes { itemId: [subject, module, tag, ts, preview] }, removed when the item is next answered right.
   // goal: new questions a day for the daily plan. mh: finished mocks, newest last, at most 20 ({ ts, label, marks, max, n }).
-  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [] }; }
+  function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [], ask: null, cel: null, ml: null }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
   /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
@@ -243,7 +243,59 @@
     if (!r && x && x.others) r = it.o.map(function (o, k) { return k === it.a ? x.key : String(x.others[L4[k]] || ""); });
     return { x: x, r: r };
   }
-  var PURE = { EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
+  /* ---- MaiK lines (prep/maik-lines.json, owner-approved 2026-10-09): one warm line after a set of 5 or more, never in
+     mocks or battles. Lookup: module, then subject, then the exam's branch; unknown ids give nothing. ---- */
+  function pickLine(lines, ids, n) {
+    if (!lines || !ids) return null;
+    var list = (ids.module && lines.module && lines.module[ids.module]) || (ids.subject && lines.subject && lines.subject[ids.subject]) || (ids.branch && lines.branch && lines.branch[ids.branch]) || null;
+    if (!list || !list.length) return null;
+    var k = Math.max(0, Math.floor(Number(n) || 0)) % list.length;
+    return { text: list[k], key: ids.module && lines.module && lines.module[ids.module] ? "m:" + ids.module : ids.subject && lines.subject && lines.subject[ids.subject] ? ids.subject : "b:" + ids.branch };
+  }
+  // The set's one subject (every item from the same taxonomy subject), else null (mixed, decks, papers).
+  function setSubject(items, isSubject) {
+    var sid = null;
+    for (var i = 0; i < (items || []).length; i++) { var x = items[i] && items[i]._s; if (!x || (sid && x !== sid)) return null; sid = x; }
+    return sid && (!isSubject || isSubject(sid)) ? sid : null;
+  }
+  /* ---- Balloons (plan section 2): milestones only, at most one release a day except a level-up or a new rank. XP and
+     level follow prep-plan.js (1 per answer, 1 more when right, plus lesson XP; level n from 50 n (n - 1) XP). ---- */
+  var RANKS = [[1, "Fresher"], [3, "Intern"], [5, "Resident"], [8, "Registrar"], [12, "Consultant"]];
+  var Q_MILES = [100, 500, 1000, 2500, 5000, 10000];
+  function xpOfStore(s) { var x = 0, k; for (k in (s && s.mod) || {}) x += (s.mod[k].t || 0) + (s.mod[k].ok || 0); for (k in (s && s.ls) || {}) x += s.ls[k].xp || 0; return x; }
+  function levelN(xp) { var n = 1; while (50 * (n + 1) * n <= xp) n++; return n; }
+  function rankOf(n) { var r = RANKS[0][1]; RANKS.forEach(function (x) { if (n >= x[0]) r = x[1]; }); return r; }
+  function mileSnap(s, streak) {
+    var q = 0, k; for (k in (s && s.mod) || {}) q += s.mod[k].t || 0;
+    var lv = levelN(xpOfStore(s));
+    return { lv: lv, rank: rankOf(lv), streak: streak || 0, q: q, mocks: ((s && s.mh) || []).length };
+  }
+  function streakMile(a, b) { var m = 0; [7, 30, 100].forEach(function (x) { if (a < x && b >= x) m = x; }); if (b >= 200 && Math.floor(b / 100) > Math.floor(a / 100)) m = Math.floor(b / 100) * 100; return m; }
+  /* milestone(m0, m1, cel, day) -> { key, label, big } | null: the biggest milestone crossed between two snapshots that
+     has not fired before (cel.keys) and fits the day's budget (cel.day: one a day, a level-up or rank always). */
+  function milestone(m0, m1, cel, day) {
+    if (!m0 || !m1) return null;
+    var seen = {}, list = [];
+    ((cel && cel.keys) || []).forEach(function (k) { seen[k] = 1; });
+    if (m1.rank !== m0.rank && m1.lv > m0.lv) list.push({ key: "rk-" + m1.rank, label: "New rank: " + m1.rank, big: 2, lvl: 1 });
+    if (m1.lv > m0.lv) list.push({ key: "lv" + m1.lv, label: "Level " + m1.lv, big: 0, lvl: 1 });
+    var sm = streakMile(m0.streak, m1.streak); if (sm) list.push({ key: "st" + sm, label: sm + " day streak", big: 0 });
+    Q_MILES.forEach(function (x) { if (m0.q < x && m1.q >= x) list.push({ key: "q" + x, label: fmtN(x) + " questions answered", big: 0 }); });
+    if (m0.mocks === 0 && m1.mocks >= 1) list.push({ key: "mock1", label: "First mock exam finished", big: 0 });
+    var free = !cel || cel.day !== day;
+    for (var i = 0; i < list.length; i++) { var x0 = list[i]; if (!seen[x0.key] && (free || x0.lvl)) return x0; }
+    return null;
+  }
+  function fmtN(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+  // Record a fired milestone (and every other key crossed with it, so none fires late).
+  function noteCele(s, m, day, alsoKeys) {
+    var c = s.cel && typeof s.cel === "object" ? s.cel : { day: null, keys: [] };
+    var keys = (c.keys || []).slice();
+    [m.key].concat(alsoKeys || []).forEach(function (k) { if (keys.indexOf(k) < 0) keys.push(k); });
+    s.cel = { day: day, keys: keys.slice(-200) };
+    return s.cel;
+  }
+  var PURE = { pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
     statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
@@ -278,6 +330,8 @@
   /* ---------- data ---------- */
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) { var e = new Error("HTTP " + r.status); e.status = r.status; throw e; } return r.json(); }); }
   function loadTax() { return st.tax ? Promise.resolve(st.tax) : getJSON(STATIC + "taxonomy.json").then(function (t) { return (st.tax = t); }); }
+  // MaiK lines: fetched once per open, cached like the taxonomy; a miss shows no line.
+  function loadLines() { if (st.lines || st.linesP) return; st.linesP = getJSON(STATIC + "maik-lines.json").then(function (j) { st.lines = j && j.subject ? j : null; }, function () { st.linesP = null; }); }
   function loadIndex(sid) {
     if (st.ix[sid]) return Promise.resolve(st.ix[sid]);
     return getJSON(STATIC + "bank/" + bvOf(sid) + "/" + sid + "/index.json").then(function (ix) { return (st.ix[sid] = ix); }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
@@ -485,6 +539,7 @@
   function rerender() { var v = st.stack[st.stack.length - 1]; if (v) v(); }
   function back() {
     if (!st.open) return false;
+    if (G.PREP_ASK && G.PREP_ASK.back()) return true;   // the Ask MaiK sheet (prep-ask.js) closes first
     if (G.PrepPro && G.PrepPro.back && G.PrepPro.back()) return true;   // PrepNucleus Pro: the limit sheet closes first
     if (G.PREP_SETUP && G.PREP_SETUP.back()) return true;   // the practice setup sheet (prep-setup.js)
     // Arena: a sheet closes first; a live battle asks before it is left.
@@ -522,7 +577,7 @@
     });
     root.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.preventDefault(); st.navKey = 1; try { back(); } finally { st.navKey = 0; } } else onRunKey(e); });
     st.open = true; st.stack = [];
-    refreshHidden();
+    refreshHidden(); loadLines();
     // Reminder, widget, Live Activity and sync on open (prep-native.js).
     if (G.PREP_NATIVE) G.PREP_NATIVE.opened(HOST);
     root.innerHTML = '<div class="pn-load" role="status">Loading PrepNucleus…</div>';
@@ -561,6 +616,7 @@
     try { if (G.PREP_PLAN) G.PREP_PLAN.leave(); } catch (e) {}
     try { if (G.PREP_FLASH) G.PREP_FLASH.leave(); } catch (e) {}
     try { if (G.PREP_SETUP) G.PREP_SETUP.leave(); } catch (e) {}
+    try { if (G.PREP_ASK) G.PREP_ASK.leave(); } catch (e) {}
     try { if (G.PREP_MOTION) G.PREP_MOTION.detach(); } catch (e) {}
     st.open = false; st.run = null; st.stack = [];
     if (root && root.parentNode) root.parentNode.removeChild(root);
@@ -720,7 +776,7 @@
     opts = opts || {};
     // PrepNucleus Pro (prep-pro.js): the free tier is checked when a set starts, never mid-set. Arena runs (custom) are free.
     if (!opts.custom && G.PrepPro && !G.PrepPro.can("questions", { items: items })) { rerender(); return G.PrepPro.openLimit("questions"); }
-    st.run = { items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: opts.untimed || opts.qsec ? 0 : opts.limit || (mode === "exam" ? items.length * ex.sec : 0), qsec: opts.qsec || 0, scheme: opts.scheme || null, custom: opts.custom || null };
+    st.run = { m0: opts.custom ? null : snapNow(), items: items, i: 0, mode: mode, title: title, ans: items.map(function () { return -1; }), mark: {}, done: false, t0: Date.now(), limit: opts.untimed || opts.qsec ? 0 : opts.limit || (mode === "exam" ? items.length * ex.sec : 0), qsec: opts.qsec || 0, scheme: opts.scheme || null, custom: opts.custom || null };
     st.stack.push(renderRun);
     nav(1); renderRun();
     if (st.run.limit || st.run.qsec) startTimer();
@@ -789,6 +845,7 @@
     var p = xo.x && xo.x.pearl ? xo.x.pearl : it.kp;
     return p ? '<aside class="pn-kp" aria-label="Remember"><b>Remember</b><span>' + inlineMd(p) + "</span></aside>" : "";
   }
+  function askBtn(act, label, attrs) { return '<button type="button" class="pn-btn pa-ask" data-act="' + act + '"' + (attrs || "") + '><span class="pt-av" aria-hidden="true"></span><span>' + label + "</span></button>"; }
   function renderRun() {
     var r = st.run; if (!r) return;
     if (r.done) return r.custom ? r.custom.render(r) : renderResult();
@@ -830,8 +887,10 @@
         }).join("") + "</ul>" : "") +
         pearlHtml(it, xo) +
         (it.rv && it.rv.old ? '<p class="pn-old">This may be outdated: check current guidance.</p>' : "") +
-        // Offline teacher (prep-teacher.js, Phase 6): only when MaiK runs on this phone; never a server call.
-        (!ok && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
+        // Ask MaiK (prep-ask.js): on every answer, right or wrong, on this phone or online. Without prep-ask.js the
+        // older offline-only button, shown only when MaiK runs on this phone.
+        (G.PREP_ASK ? askBtn("ask", ok ? "Ask MaiK why " + L[it.a] + " is right" : "Why is " + L[chosen] + " wrong? Ask MaiK") :
+          !ok && G.PREP_TEACHER && G.PREP_TEACHER.ready && G.PREP_TEACHER.ready() ? '<button type="button" class="pn-btn" data-act="teach">Why is ' + L[chosen] + " wrong? Ask MaiK offline</button>" : "") +
         (!ok && !own ? '<div class="pn-mtag" role="group" aria-label="Why did you miss it?"><span class="pn-mut pn-small">Why did you miss it?</span><div class="pn-wrap">' + MISTAKE_TAGS.map(function (t) {
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
@@ -968,10 +1027,12 @@
   function onRunKey(e) {
     var r = st.run;
     if (!r || r.done || st.stack[st.stack.length - 1] !== renderRun || e.ctrlKey || e.metaKey || e.altKey) return;
+    if (root && root.querySelector(".pn-sheet-wrap")) return;   // a sheet over the runner keeps the keys
     var t = e.target, tag = t && t.tagName, k = String(e.key || "").toLowerCase();
     if (tag === "INPUT" || tag === "TEXTAREA" || (t && t.isContentEditable)) return;
     var idx = "abcd".indexOf(k); if (idx < 0 && /^[1-4]$/.test(k)) idx = Number(k) - 1;
-    if (idx >= 0 && idx < r.items[r.i].o.length) {
+    // B answers option B until the question is answered; after that (practice) it bookmarks, below.
+    if (idx >= 0 && idx < r.items[r.i].o.length && !(k === "b" && r.mode === "study" && r.ans[r.i] >= 0)) {
       if (r.mode === "study" && r.ans[r.i] >= 0) return;
       e.preventDefault(); st.kb = true; answer(idx); st.kb = false; return;
     }
@@ -981,7 +1042,10 @@
       if (r.i < r.items.length - 1) { r.i++; renderRun(); } else if (r.mode === "study") finish();
       st.kb = false; return;
     }
-    if (k === "arrowleft" && canSwipe(-1)) { e.preventDefault(); r.i--; renderRun(); }
+    if (k === "arrowleft" && canSwipe(-1)) { e.preventDefault(); r.i--; renderRun(); return; }
+    // B bookmarks (bank questions), G opens the question grid in a timed test.
+    if (k === "b" && !(r.items[r.i]._s === "deck" || r.items[r.i]._py)) { e.preventDefault(); toggleBookmark(); return; }
+    if (k === "g" && r.mode === "exam") { e.preventDefault(); openGrid(); }
   }
   function record(it, chosen) {
     var s = load(), ok = chosen === it.a, td = today(), dk = deckKey(it._m || it.t);
@@ -1026,13 +1090,42 @@
     var marks = r.items.map(function (it, i) { var c = r.ans[i] < 0 ? "skip" : r.ans[i] === it.a ? "ok" : "no"; if (c === "ok") ok++; else no++; return '<i class="' + c + '"></i>'; }).join("");
     return '<div class="pn-recap" role="img" aria-label="' + ok + " right, " + no + ' missed, in question order">' + marks + "</div>";
   }
+  /* ---------- celebrations and MaiK lines ---------- */
+  function snapNow() { var s = load(); var sk = 0; try { sk = C.streak ? C.streak(s, today()) : 0; } catch (e) {} return mileSnap(s, sk); }
+  // The milestone a finish crossed (once, on the first paint of that result): { key, label, big } or null. Records it.
+  function celeFor(m0, holder) {
+    if (holder.cele !== undefined) return holder.cele;
+    var s = load(), m = milestone(m0, snapNow(), s.cel, today());
+    if (m) { noteCele(s, m, today()); save(); }
+    return (holder.cele = m);
+  }
+  function celeAttrs(m) { return m ? ' data-cele="balloons"' + (m.big ? ' data-big="' + m.big + '"' : "") : ""; }
+  function celeChip(m) { return m ? '<p class="pn-mile"><span>' + esc(m.label) + "</span></p>" : ""; }
+  var ML_SS = "smd_prep_ml_shown";
+  function lineShown() { if (st.mlShown) return true; try { return G.sessionStorage.getItem(ML_SS) === "1"; } catch (e) { return false; } }
+  /* maikLine(ids, holder) -> HTML: one line per app session, the next one for that subject each time. holder keeps the
+     chosen line so a repaint of the same result shows it again. */
+  function maikLine(ids, holder) {
+    if (holder.ml !== undefined) return holder.ml;
+    holder.ml = "";
+    if (lineShown() || !st.lines) return "";
+    var s = load(), ml = s.ml && typeof s.ml === "object" ? s.ml : (s.ml = {});
+    ids.branch = ids.branch || examOf(s.exam).branch;
+    var probe = pickLine(st.lines, ids, 0); if (!probe) return "";
+    var pick = pickLine(st.lines, ids, ml[probe.key] || 0);
+    ml[probe.key] = (ml[probe.key] || 0) + 1; save();
+    st.mlShown = true; try { G.sessionStorage.setItem(ML_SS, "1"); } catch (e) {}
+    return (holder.ml = '<p class="pn-maikline" role="status"><span class="pt-av" aria-hidden="true"></span><span>' + esc(pick.text) + "</span></p>");
+  }
   function renderResult() {
     var r = st.run, ok = 0, missed = [];
     r.items.forEach(function (it, i) { if (r.ans[i] === it.a) ok++; else missed.push(i); });
     var pct = r.items.length ? Math.round(ok * 100 / r.items.length) : 0;
-    paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r) : '<section class="pn-panel pn-score">' +
+    var cele = r.m0 ? celeFor(r.m0, r) : null, answered = r.ans.filter(function (a) { return a >= 0; }).length;
+    var line = !r.scheme && answered >= 5 ? maikLine({ subject: setSubject(r.items, subjectById) }, r) : "";
+    paint(bar(r.mode === "exam" ? "Test marked" : "Set finished", esc(r.title), "back") + '<div class="pn-body">' + (r.scheme ? mockAnalysis(r, cele) : '<section class="pn-panel pn-score"' + celeAttrs(cele) + ">" + celeChip(cele) +
       '<div class="pn-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="rt" cx="60" cy="60" r="52" pathLength="100"/>' + (pct > 0 ? '<circle class="rv" cx="60" cy="60" r="52" pathLength="100" stroke-dasharray="' + pct + ' 100"/>' : "") + '</svg>' +
-      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + recapHtml(r) + "</section>") +
+      '<p class="pn-big">' + ok + " / " + r.items.length + '</p></div><p class="pn-mut">' + pct + "% right" + (r.mode === "exam" ? " · " + fmtTime(r.secs) + " taken" : "") + "</p>" + recapHtml(r) + "</section>") + line +
       (missed.length ? '<h2 class="pn-sec">Review the missed</h2><ol class="pn-missed">' + missed.map(function (i) {
         var it = r.items[i];
         return '<li><button type="button" class="pn-mod" data-act="reviewq" data-i="' + i + '"><span class="pn-mb"><b>' + esc(it.q.length > 120 ? it.q.slice(0, 119) + "…" : it.q) + "</b><small>Answer: " + esc(it.o[it.a]) + (r.ans[i] >= 0 ? " · you chose " + esc(it.o[r.ans[i]]) : " · not answered") + "</small></span></button></li>";
@@ -1050,7 +1143,7 @@
         var xo = explainOf(it), others = xo.r ? it.o.map(function (o, k) { return k; }).filter(function (k) { return k !== it.a && String(xo.r[k] || "").trim(); }) : [];
         return whyHtml(it, xo, it.exp || (xo.r && xo.r[it.a]) || "", L) + (others.length ? '<h3>Why the others are wrong</h3><ul class="pn-why">' + others.map(function (k) {
           return "<li" + (k === r.ans[i] ? ' class="mine"' : "") + '><span class="pn-l">' + L[k] + "</span><p><small>" + (k === r.ans[i] ? "Your pick: " : "") + esc(it.o[k]) + "</small><span>" + inlineMd(xo.r[k]) + "</span></p></li>";
-        }).join("") + "</ul>" : "") + pearlHtml(it, xo);
+        }).join("") + "</ul>" : "") + pearlHtml(it, xo) + (G.PREP_ASK ? askBtn("ask-rv", r.ans[i] >= 0 && r.ans[i] !== it.a ? "Why is " + L[r.ans[i]] + " wrong? Ask MaiK" : "Ask MaiK why " + L[it.a] + " is right", ' data-i="' + i + '"') : "");
       })() + provHtml(it) + "</section></div>");
       if (G.PREP_RAD) G.PREP_RAD.mount(root);
     });
@@ -1164,10 +1257,10 @@
       runQuestions(list, "exam", m.label + (kind === "mini" ? " (mini)" : kind === "part" ? " (one part)" : ""), { limit: Math.round(m.min * 60 * list.length / m.n), scheme: { plus: m.plus, minus: m.minus, label: m.label, pass: m.pass ? m.pass / (m.n * m.plus) : 0 } });
     });
   }
-  function mockAnalysis(r) {
+  function mockAnalysis(r, cele) {
     var sc = scoreMock(r.items, r.ans, r.scheme), rows = Object.keys(sc.bySubject).map(function (sid) { var b = sc.bySubject[sid], sb = subjectById(sid); return { sid: sid, sb: sb, name: sb ? tx(sb.name) : "Not sorted into a subject yet", n: b.n, right: b.right, wrong: b.wrong, pct: b.n ? Math.round(b.right * 100 / b.n) : 0 }; });
     rows.sort(function (a, b) { return a.pct - b.pct; });
-    return '<section class="pn-panel pn-score"><p class="pn-big">' + fmtMark(sc.marks) + " / " + sc.max + '</p><p class="pn-mut">' + sc.right + " right · " + sc.wrong + " wrong · " + sc.blank + " unanswered · " + fmtTime(r.secs) + " taken</p>" +
+    return '<section class="pn-panel pn-score"' + celeAttrs(cele) + ">" + celeChip(cele) + '<p class="pn-big">' + fmtMark(sc.marks) + " / " + sc.max + '</p><p class="pn-mut">' + sc.right + " right · " + sc.wrong + " wrong · " + sc.blank + " unanswered · " + fmtTime(r.secs) + " taken</p>" +
       (r.scheme.pass ? '<p class="pn-mut pn-small">Pass mark in the exam: ' + Math.round(r.scheme.pass * 100) + "% of the maximum. This set: " + (sc.max ? Math.round(Math.max(0, sc.marks) * 100 / sc.max) : 0) + "%.</p>" : "") + "</section>" +
       '<h2 class="pn-sec">By subject, weakest first</h2><ul class="pn-mods">' + rows.map(function (x) {
         // A previous-year question not yet sorted into a subject (_s "pyq") has no subject screen to open.
@@ -1450,6 +1543,9 @@
     if (a === "mpractice") return setupOn() ? setupMistakes() : practiceMistakes();
     if (a === "mtag") { var rt = st.run, itm = rt && rt.items[rt.i]; if (itm && s.mt[itm.id]) { s.mt[itm.id][2] = s.mt[itm.id][2] === v ? null : v; save(); } return renderRun(); }
     if (a === "mocks") return push(renderMocks);
+    if (a === "ask") { var rt4 = st.run, it4 = rt4 && rt4.items[rt4.i]; if (it4 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it4, chosen: rt4.ans[rt4.i], side: true }, HOST); return; }
+    if (a === "ask-rv") { var rt5 = st.run, i5 = Number(b.getAttribute("data-i")), it5 = rt5 && rt5.items[i5]; if (it5 && G.PREP_ASK) G.PREP_ASK.open({ kind: "mcq", item: it5, chosen: rt5.ans[i5], side: true }, HOST); return; }
+    if (a.indexOf("ak-") === 0 && G.PREP_ASK) return G.PREP_ASK.act(a, b, HOST);
     if (a === "teach") { var rt3 = st.run, it3 = rt3 && rt3.items[rt3.i]; if (it3 && G.PREP_TEACHER) G.PREP_TEACHER.explain(it3, rt3.ans[rt3.i], HOST); return; }
     if (a === "mock") return startMock(v, b.getAttribute("data-k"));
     if (a === "practicebm") return setupOn() ? setupBookmarks() : practiceBookmarks();
@@ -1511,6 +1607,8 @@
     // Lessons (prep-lessons.js)
     // Plan (prep-plan.js)
     subjectsOf: subjectsOf, loadIndex: loadIndex, ix: function () { return st.ix; }, startMock: startMock, pure: PURE,
+    // Celebrations and MaiK lines (lessons): celeFor(m0, holder), celeAttrs, celeChip, maikLine({ subject }, holder), snap().
+    snap: snapNow, celeFor: celeFor, celeAttrs: celeAttrs, celeChip: celeChip, maikLine: maikLine,
     stack: function () { return st.stack; }, loadModule: loadModule, bankApi: API, shuffle: shuffle, pool: function (items) { var h = hidden(); return (items || []).filter(function (it) { return usable(it, h); }); }, cacheGet: cacheGet, cachePut: cachePut };
 
   var API_OBJ = { open: open, close: close, back: back, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST };

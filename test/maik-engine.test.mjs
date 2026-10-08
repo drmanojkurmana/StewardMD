@@ -76,7 +76,7 @@ function load(env = {}) {
                    why: "A medical fine-tune on a newer, stronger base.",
                    pick: "Best quality here, slowest of the four. On an older phone prefer MxCore." } }
       },
-      DEVICE_WARNING: "Built for flagship, AI-enabled phones: iPhone 18 Pro, 17 Pro, 16 Pro. Samsung Galaxy Fold 7, 6, 5 or S24, S25, S26 Ultra. On any other phone this is at your own risk. It may hang or crash the phone.",
+      DEVICE_WARNING: "Built for recent flagship phones: an iPhone 15 Pro or newer, an iPad with an M1 chip or newer, or an Android phone with 8 GB of memory or more and Android 12 or newer. On any other phone this is at your own risk. It may hang or crash the phone.",
       GUIDE_INTRO: [
         "Answers come from a model stored on your phone. No internet, no AI tokens.",
         "It answers from its own training, not from StewardMD's knowledge base, so there are no sources or citations and it can be wrong. Verify against local protocol.",
@@ -551,11 +551,11 @@ function load(env = {}) {
   const { E } = load({ gate: true, runtime: true, pack: true });
   const h = E.settingsHTML();
 
-  ok("warning shows in the download section", /Built for flagship, AI-enabled phones/.test(h));
+  ok("warning shows in the download section", /Built for recent flagship phones/.test(h));
   ok("warning appears BEFORE the on-device model list, not after",
-     h.indexOf("Built for flagship") < h.indexOf('aria-label="On-device model"'));
-  ok("warning names the supported iPhones", /iPhone 18 Pro, 17 Pro, 16 Pro/.test(h));
-  ok("warning names the supported Samsungs", /Fold 7, 6, 5 or S24, S25, S26 Ultra/.test(h));
+     h.indexOf("Built for recent flagship") < h.indexOf('aria-label="On-device model"'));
+  ok("warning names the supported iPhones", /iPhone 15 Pro or newer/.test(h));
+  ok("warning names the Android rule", /Android phone with 8 GB of memory or more and Android 12 or newer/.test(h));
   ok("warning states the risk plainly", /at your own risk/.test(h) && /hang or crash the phone/.test(h));
   ok("warning is styled as a caution, not a footnote", /role="note"/.test(h));
   ok("no em-dash in the warning (app-facing text)", !/Built for flagship[^<]*\u2014/.test(h));

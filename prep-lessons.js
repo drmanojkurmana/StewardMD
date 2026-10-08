@@ -297,17 +297,19 @@
     return '<section class="pn-vis pn-vis-' + v.kind + '" aria-label="' + (v.kind === "image" ? "Figure" : v.kind === "flow" ? "Flow diagram" : v.kind === "compare" ? "Comparison" : "Table") + '">' + inner + "</section>";
   }
 
-  function askable() { var T = G.PREP_TEACHER; try { return !!(T && T.explainStep && T.ready && T.ready()); } catch (e) { return false; } }
+  // Ask MaiK (prep-ask.js) is always offered: on this phone or online, and the sheet says which works here. Without it,
+  // the older offline-only teacher, only when MaiK runs on this phone.
+  function askable() { if (G.PREP_ASK) return true; var T = G.PREP_TEACHER; try { return !!(T && T.explainStep && T.ready && T.ready()); } catch (e) { return false; } }
   function barHtml() {
     var s = store(), last = L.i === L.les.steps.length - 1, speak = canSpeak();
-    return '<div class="pn-lsn-bar" id="pnLsnBar">' +
+    return '<div class="pn-lsn-bar" id="pnLsnBar"><div class="pn-lsn-bin">' +
       (askable() ? '<button type="button" class="pn-ib" data-act="l-ask" aria-label="Ask MaiK about this step">' + ic("ask") + "</button>" : "") +
       '<button type="button" class="pn-ib" data-act="l-prev" aria-label="Previous step"' + (L.i ? "" : " disabled") + ">" + ic("back") + "</button>" +
       // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
       (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") +
         '<span class="pn-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>' +
         '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>" : "") +
-      '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div>";
+      '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div></div>";
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
   function readerHtml() {
@@ -325,12 +327,14 @@
     var les = L.les, s = store(), total = 0;
     for (var k in s.ls) total += s.ls[k].xp || 0;
     var nq = (les.quiz || []).length;
-    return host.bar(escH(les.title), "Lesson finished", "back") + '<div class="pn-body"><section class="pn-panel pn-lsn-fin" role="status" tabindex="-1">' +
+    var fx = L.fx || {}, cele = fx.m0 && host.celeFor ? host.celeFor(fx.m0, fx) : null;
+    var line = host.maikLine ? host.maikLine({ subject: L.sid }, fx) : "";
+    return host.bar(escH(les.title), "Lesson finished", "back") + '<div class="pn-body"><section class="pn-panel pn-lsn-fin" role="status" tabindex="-1"' + (fx.cf && L.firstXp ? ' data-cf="1"' : "") + (host.celeAttrs ? host.celeAttrs(cele) : "") + ">" + (host.celeChip ? host.celeChip(cele) : "") +
       (L.firstXp ? '<p class="pn-lsn-xp"><b>+' + L.firstXp + '</b> XP</p><p class="pn-mut">' + les.steps.length + " steps read. Lesson XP so far: " + host.fmt(total) + "</p>"
         : '<p class="pn-lsn-xp"><b>Done</b></p><p class="pn-mut">Read again. XP counts the first time through; lesson XP so far: ' + host.fmt(total) + "</p>") +
       (nq ? '<button type="button" class="pn-btn pri" data-act="l-quiz">' + ico("play") + " " + nq + " quick questions</button>" : "") +
       '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="l-again">' + ic("redo") + ' Read again</button><button type="button" class="pn-btn" data-act="back">Done</button></div>' +
-      (nq ? '<p class="pn-mut pn-small">The questions come from this module\'s bank and are scheduled for spaced review like any other answer.</p>' : "") + "</section></div>";
+      (nq ? '<p class="pn-mut pn-small">The questions come from this module\'s bank and are scheduled for spaced review like any other answer.</p>' : "") + "</section>" + line + "</div>";
   }
   function zoomHtml() {
     var v = L.les.steps[L.i].vis;
@@ -411,6 +415,11 @@
     var s = store(), p = s.ls[L.key];
     L.playing = false; stopVoice();
     L.firstXp = 0;
+    // Celebrations: the level before this lesson's XP (balloons on a milestone), and whether another lesson was already
+    // finished today (confetti only for the first lesson of the day). A repaint of the same finish keeps L.fx.
+    var m0 = host.snap ? host.snap() : null, td = host.today(), core = host.core && host.core(), dayOf = function (ms) { try { return core.dayNum(ms, new Date(ms).getTimezoneOffset()); } catch (e) { return -1; } };
+    var earlier = Object.keys(s.ls).some(function (k) { return k !== L.key && s.ls[k].done && dayOf(s.ls[k].done) === td; });
+    L.fx = { m0: m0, cf: !earlier };
     if (!p.done) { p.xp = xpFor(L.les); L.firstXp = p.xp; }
     p.done = Date.now(); p.i = 0; host.save();
     L.fin = true; draw();
@@ -502,7 +511,7 @@
     if (a === "l-unzoom") { L.zoom = false; return draw("[data-act=l-zoom]"); }
     if (a === "l-again") { L.fin = false; L.i = 0; L.dir = 0; save(); return draw(); }
     if (a === "l-quiz") return startQuiz();
-    if (a === "l-ask") { var st = L.les.steps[L.i]; L.playing = false; stopVoice(); return G.PREP_TEACHER.explainStep(st, L.les.title, host); }
+    if (a === "l-ask") { var st = L.les.steps[L.i]; L.playing = false; stopVoice(); if (G.PREP_ASK) return G.PREP_ASK.open({ kind: "step", step: st, title: L.les.title }, host); return G.PREP_TEACHER.explainStep(st, L.les.title, host); }
   }
   /* back(): true when handled here (the zoomed image closes first). Leaving the reader stops the voice. */
   function back() {
@@ -512,6 +521,21 @@
     return false;
   }
   function leave() { L.playing = false; L.zoom = false; stopVoice(); }
+  /* Keys in the reader (an iPad with a keyboard, a laptop): ArrowRight next step, ArrowLeft previous, Space play or
+     pause. Only while the reader is the top screen with no sheet or enlarged image over it; never while typing, never
+     on a table that scrolls sideways (its arrows scroll it), and Space stays the button's own key on a focused control. */
+  function onKey(e) {
+    if (!host || !L.les || L.fin || L.zoom || e.defaultPrevented || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    var k = e.key, r = host.root && host.root(), t = e.target;
+    if (k !== "ArrowRight" && k !== "ArrowLeft" && k !== " " && k !== "Spacebar") return;
+    if (!r || !r.querySelector("#pnLsn") || host.stackTop() !== L.view || r.querySelector(".pn-sheet-wrap,.pn-zoom")) return;
+    if (t && t.closest && (t.closest("input,textarea,select,[contenteditable]") || (k !== " " && k !== "Spacebar" && t.closest(".pn-vtbl")))) return;
+    if (k === "ArrowRight") { e.preventDefault(); return next(); }
+    if (k === "ArrowLeft") { e.preventDefault(); if (L.i) go(L.i - 1); return; }
+    if (!canSpeak() || (t && t.closest && t.closest("button,a,[role=button]"))) return;
+    e.preventDefault(); setPlaying(!L.playing);
+  }
+  if (G.document && G.document.addEventListener) G.document.addEventListener("keydown", onKey);
 
   G.PREP_LESSONS = { mount: mount, open: open, act: act, back: back, leave: leave, index: index, _pure: PURE, _l: L };
 })(typeof window !== "undefined" ? window : this);
