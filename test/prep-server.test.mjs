@@ -106,9 +106,9 @@ test("bank: radnotes figures and overlays (img/radnotes/rn-<id>.webp, overlay/ra
   assert.equal(asked, 0);
 });
 
-test("bank: medcov overlays (overlay/medcov/<subject>/<module>.json, immutable); nothing else", async () => {
-  const env = { PREP_BANK_R2: r2({ "prep-bank/overlay/medcov/medicine/med-acs.json": '{"topic":"med-acs","set":"medcov","v":1,"items":[]}', "prep-bank/overlay/medcov/ss-cardiology/sca-stemi.json": '{"topic":"sca-stemi","set":"medcov","v":1,"items":[]}' }) };
-  for (const p of ["overlay/medcov/medicine/med-acs.json", "overlay/medcov/ss-cardiology/sca-stemi.json"]) {
+test("bank: medcov overlays (overlay/medcov[N]/<subject>/<module>.json, immutable); nothing else", async () => {
+  const env = { PREP_BANK_R2: r2({ "prep-bank/overlay/medcov/medicine/med-acs.json": '{"topic":"med-acs","set":"medcov","v":1,"items":[]}', "prep-bank/overlay/medcov/ss-cardiology/sca-stemi.json": '{"topic":"sca-stemi","set":"medcov","v":1,"items":[]}', "prep-bank/overlay/medcov2/medicine/med-acs.json": '{"topic":"med-acs","set":"medcov","v":2,"items":[]}' }) };
+  for (const p of ["overlay/medcov/medicine/med-acs.json", "overlay/medcov/ss-cardiology/sca-stemi.json", "overlay/medcov2/medicine/med-acs.json"]) {
     const r = await get(p, env);
     assert.equal(r.status, 200, p);
     assert.match(r.headers.get("Content-Type"), /application\/json/);
@@ -117,7 +117,7 @@ test("bank: medcov overlays (overlay/medcov/<subject>/<module>.json, immutable);
   }
   let asked = 0;
   const spy = { PREP_BANK_R2: { get: async () => { asked++; return { body: "x" }; } } };
-  for (const p of ["overlay/medcov/med-acs.json", "overlay/medcov/medicine/med-acs.webp", "overlay/medcov/medicine/../x.json", "overlay/medcov/Medicine/med-acs.json", "overlay/medcov/medicine/a/b.json", "img/medcov/x.webp", "overlay/medcovx/medicine/med-acs.json"]) assert.equal((await get(p, spy)).status, 404, p);
+  for (const p of ["overlay/medcov/med-acs.json", "overlay/medcov/medicine/med-acs.webp", "overlay/medcov/medicine/../x.json", "overlay/medcov/Medicine/med-acs.json", "overlay/medcov/medicine/a/b.json", "img/medcov/x.webp", "overlay/medcovx/medicine/med-acs.json", "overlay/medcov1/medicine/med-acs.json", "overlay/medcov02/medicine/med-acs.json", "overlay/medcov2/../medcov/medicine/med-acs.json"]) assert.equal((await get(p, spy)).status, 404, p);
   assert.equal(asked, 0);
 });
 

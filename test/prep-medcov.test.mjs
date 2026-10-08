@@ -3,6 +3,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   clusterTopics, coverageOf, gapOf, assignLevels, fmtOk, gateQ, numbersOk, reasoningOrder, finalItem, sanitizeQ, us, kwHit, SET,
+  OUT_SET, keyOpener, noteLines, applyDrops, tidyItem, readTidy, tidyPrompt,
 } from "../tools/prep-medcov.mjs";
 
 const g = (sents) => ({ sents: sents.map((tx, n) => ({ n, tx })), text: sents.join(" ") });
@@ -116,4 +117,42 @@ test("sanitizeQ builds a match stem from the two columns and puts one-line state
   const t = sanitizeQ({ q: [{ ...rq(), fm: "tf", st: "1. Alpha is true. 2. Beta is false. 3. Gamma holds. Which of the above are correct?" }] })[0];
   assert.equal(t.st, "1. Alpha is true.\n2. Beta is false.\n3. Gamma holds.\nWhich of the above are correct?");
   assert.ok(!fmtOk({ fm: "match", st: m.st, key: { ot: "a-1, b-2, c-3, d-4" }, dis: [{ ot: "a-2, b-1, c-4, d-3" }, { ot: "a-3, b-4, c-1, d-2" }, { ot: "a-4, b-3, c-2, d-1" }] }), "the identity matching is never the key");
+});
+
+test("tidy: key opener cut only when the line still names the answer; keys, options and stems untouched", () => {
+  const it = { o: ["Cardiac troponin", "Myoglobin", "LDH", "CK-MB"], a: 0 };
+  assert.equal(keyOpener("Cardiac troponin is the correct answer because it is the most specific marker.", it), "Cardiac troponin: It is the most specific marker.");
+  assert.equal(keyOpener("Cardiac troponin is the correct marker as it rises in necrosis only.", it), "Cardiac troponin: It rises in necrosis only.");
+  assert.equal(keyOpener("The correct answer is cardiac troponin because it is specific to the heart.", it), "Cardiac troponin: It is specific to the heart.");
+  assert.equal(keyOpener("A is correct because it is specific to the heart.", it), "A is correct because it is specific to the heart.", "a bare letter does not name the answer: kept");
+  assert.equal(keyOpener("Troponin rises within hours of necrosis.", it), "Troponin rises within hours of necrosis.");
+  assert.equal(OUT_SET, "medcov2", "a changed release goes to a new immutable folder");
+});
+
+test("tidy: applyDrops removes whole lines only, keeps headings and tables whole, renumbers steps, refuses big cuts", () => {
+  const filler = Array.from({ length: 6 }, (_, k) => "- Point " + k + " about the tested condition and how it is diagnosed and treated well.").join("\n");
+  const notes = "## Topic\n" + filler + "\n- Off topic line about another disease entirely here.\n\n| A | B |\n| --- | --- |\n| x | y |\n\n1. First step.\n2. Second step.\n3. Third step.\n\n## Other\n- Unrelated bullet.";
+  const L = noteLines(notes);
+  const ix = (re) => L.findIndex((l) => re.test(l.t));
+  assert.equal(L[0].kind, "h"); assert.equal(L[ix(/^\| A/)].kind, "th"); assert.equal(L[ix(/^\| ---/)].kind, "ts"); assert.equal(L[ix(/^\| x/)].kind, "tr");
+  const out = applyDrops(notes, [ix(/Off topic/), ix(/^\| x/), ix(/^2\./), ix(/Unrelated/), 0]);
+  assert.ok(out, "gates pass");
+  assert.doesNotMatch(out, /Off topic|Unrelated|\| A \||## Other/, "dropped lines, the empty table and the empty heading go");
+  assert.match(out, /^## Topic/, "a heading is never dropped on its own");
+  assert.match(out, /1\. First step\.\n2\. Third step\./, "steps renumbered");
+  for (const l of out.split("\n")) assert.ok(notes.split("\n").includes(l) || /^2\. Third/.test(l), "no new text: " + l);
+  assert.equal(applyDrops(notes, []), null);
+  assert.equal(applyDrops(notes, [1, 2, 3, 4, 5]), null, "more than 45% of the words: refused");
+});
+
+test("tidy: tidyItem follows the key line into exp and the right option's reason; readTidy and the prompt", () => {
+  const it = { id: "mc-1", q: "Q?", o: ["Cardiac troponin", "Myoglobin", "LDH", "CK-MB"], a: 0, exp: "Cardiac troponin is correct because it is specific.", r: ["Cardiac troponin is correct because it is specific.", "no", "no", "no"],
+    x: { key: "Cardiac troponin is correct because it is specific.", notes: "## N\n- n", others: { B: "no", C: "no", D: "no" }, pearl: "p" } };
+  const t = tidyItem(it, null);
+  assert.equal(t.x.key, "Cardiac troponin: It is specific."); assert.equal(t.exp, t.x.key); assert.equal(t.r[0], t.x.key);
+  assert.deepEqual([t.q, t.o, t.a, t.r.slice(1)], [it.q, it.o, it.a, it.r.slice(1)]);
+  assert.equal(it.x.key, "Cardiac troponin is correct because it is specific.", "input untouched");
+  assert.deepEqual(readTidy('{"r":[{"i":1,"drop":[3,4]},{"i":9,"drop":[1]}]}', 2), [null, { drop: [3, 4] }]);
+  const p = tidyPrompt([it]);
+  assert.match(p.user, /\(0, keep\) ## N/); assert.match(p.user, /\[1\] - n/);
 });

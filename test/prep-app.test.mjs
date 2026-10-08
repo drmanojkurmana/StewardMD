@@ -94,6 +94,28 @@ test("customDraw spreads across modules, honours difficulty and the count", () =
   assert.equal(l1.length, 6, "inputs untouched");
 });
 
+test("very hard: vh items are level 4 at load, the bank's d left as written elsewhere; draw, chip and adaptive honour it", () => {
+  const items = [item("v1", { d: 3, vh: true }), item("h1", { d: 3 }), item("e1", { d: 1 }), item("m1", { d: 2 }), item("v2", { d: 4 })];
+  assert.deepEqual(items.map(P.levelOf), [4, 3, 1, 2, 4], "levelOf reads vh before markLevels too");
+  P.markLevels(items);
+  assert.deepEqual(items.map((i) => i.d), [4, 3, 1, 2, 4], "only vh items change");
+  let seed = 3; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  assert.deepEqual(P.customDraw([items], 10, 4, rnd).map((i) => i.id).sort(), ["v1", "v2"]);
+  assert.deepEqual(P.customDraw([items], 10, 3, rnd).map((i) => i.id), ["h1"]);
+  assert.deepEqual(P.adaptiveNew(items, {}, "p:x", 4, 3, () => 0.5).map((i) => P.levelOf(i)), [4, 4, 3], "nearest very hard first");
+  const src = read("prep.js");
+  assert.match(src, /\[4, "Very hard"\]/, "custom practice chip");
+  assert.match(src, /"hard", "very hard"\]\[cm\.d\]/, "custom practice line");
+  assert.match(src, /markLevels\(mergeOverlay\(/, "loadModule marks the levels");
+});
+
+test("overlay releases: a new folder per release, the earlier folders' cached copies named for removal", () => {
+  assert.deepEqual(P.oldOverlays("medcov2"), ["medcov"]);
+  assert.deepEqual(P.oldOverlays("medcov4"), ["medcov", "medcov2", "medcov3"]);
+  assert.deepEqual(P.oldOverlays("medcov"), []); assert.deepEqual(P.oldOverlays("radnotes"), []);
+  assert.match(read("prep.js"), /medicine: \["medcov2"\], "ss-pulmonology": \["medcov2"\]/);
+});
+
 test("fmtTime and examOf", () => {
   assert.equal(P.fmtTime(0), "0:00"); assert.equal(P.fmtTime(65), "1:05"); assert.equal(P.fmtTime(-3), "0:00");
   assert.equal(P.examOf("usmle").sec, 90);
@@ -156,7 +178,9 @@ test("app text has no em or en dash", () => {
 
 test("Phase 4: target difficulty and adaptive new picks", () => {
   assert.equal(P.targetDifficulty(null), 2);
-  assert.equal(P.targetDifficulty({ t: 10, ok: 9 }), 3);
+  assert.equal(P.targetDifficulty({ t: 10, ok: 9 }), 4, "90% after 10 attempts -> very hard");
+  assert.equal(P.targetDifficulty({ t: 9, ok: 9 }), 3, "very hard needs 10 attempts");
+  assert.equal(P.targetDifficulty({ t: 10, ok: 8 }), 3);
   assert.equal(P.targetDifficulty({ t: 10, ok: 6 }), 2);
   assert.equal(P.targetDifficulty({ t: 10, ok: 3 }), 1);
   const pool = [item("e1", { d: 1 }), item("e2", { d: 1 }), item("m1", { d: 2 }), item("h1", { d: 3 }), item("h2", { d: 3 })];

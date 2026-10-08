@@ -118,6 +118,23 @@ test("Mix: repeat 50/30/20 new, due, incorrect; types in thirds; difficulty in p
   assert.deepEqual(S.allocate({ new: 1, due: 0, wrong: 0, seen: 9 }, 4, { new: 0.5, due: 0.3, wrong: 0.2, seen: 0 }), { new: 1, due: 0, wrong: 0, seen: 3 }, "a weight-0 group fills what is left");
 });
 
+test("very hard: a fifth difficulty (d 4 or vh), counted, filtered, drawn and named", () => {
+  assert.deepEqual(S.DIFFS.map((d) => d[0]), ["1", "2", "3", "4", "mix"]);
+  assert.equal(S.DIFFS[3][1], "Very hard");
+  assert.equal(S.dOf(it("a", { d: 3, vh: true })), 4); assert.equal(S.dOf(it("b", { d: 4 })), 4); assert.equal(S.dOf(it("c", { d: 3 })), 3); assert.equal(S.dOf(it("d", { d: 7 })), 2);
+  const L = [[it("v1", { d: 3, vh: true }), it("v2", { d: 4 }), it("h1", { d: 3 }), it("e1", { d: 1 })], [it("v3", { d: 3, vh: true, _m: "m2", t: "m2" }), it("m1", { _m: "m2", t: "m2" })]];
+  const ctx = { cards: {}, bm: {}, mt: {}, today: 10 };
+  const c = S.counts(L, S.normSel({ type: "all", seen: "all", d: "mix" }), ctx);
+  assert.deepEqual([c.d["1"], c.d["2"], c.d["3"], c.d["4"], c.d.mix], [1, 1, 1, 3, 6]);
+  assert.equal(S.normSel({ d: "4" }).d, "4", "4 is a valid choice");
+  const v = S.draw(L, { type: "all", seen: "all", d: "4", n: 10 }, ctx, seq(11));
+  assert.deepEqual(v.map((x) => x.id).sort(), ["v1", "v2", "v3"]);
+  const mix = S.draw(L, { type: "all", seen: "all", d: "mix", n: 6 }, ctx, seq(12));
+  assert.equal(mix.filter((x) => S.dOf(x) === 4).length, 3, "Mix keeps the pool's own share of very hard");
+  const h = S.relaxHint([[it("e9", { d: 1 })]], { type: "all", seen: "all", d: "4", n: 10 }, ctx);
+  assert.match(h.msg, /^No very hard questions match/);
+});
+
 test("empty pool: names the row to relax; a scope with nothing says so", () => {
   const L = pool(), ctx = ctxFor(L);
   const h = S.relaxHint(L, { type: "img", seen: "due", d: "3", n: 10 }, ctx);

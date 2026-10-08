@@ -7,7 +7,7 @@
      Question type   All / Image-based / Clinical scenario / One-liner / Mix
      How many        10 / 20 / 30 / 50, or a custom count (stepper), never more than the pool
      New or repeat   New / Incorrect before / Bookmarked / Due for review / All / Mix
-     Difficulty      Easy / Moderate / Hard / Mix (item.d 1, 2, 3; Mix keeps the pool's own spread)
+     Difficulty      Easy / Moderate / Hard / Very hard / Mix (item.d 1, 2, 3, 4; Mix keeps the pool's own spread)
      Mode            Practice (marked at once) / Timed test
      Timer           Off / Per question (30, 45, 60, 90 s or custom) / Whole set (exam pace, 1 min a question, or custom
                      minutes). Per question: a timed test moves on when the time is up (the question stays unanswered);
@@ -88,11 +88,12 @@
     if (v === "bm") return !!(ctx && ctx.bm && ctx.bm[it.id]);
     return true;
   }
-  function dOf(it) { return it.d === 1 || it.d === 3 ? it.d : 2; }
+  // Very hard items carry vh: true in the bank files (d 3 there); the app counts them as level 4.
+  function dOf(it) { return it.vh === true || it.d === 4 ? 4 : it.d === 1 || it.d === 3 ? it.d : 2; }
 
   var TYPES = [["all", "All"], ["img", "Image-based"], ["case", "Clinical scenario"], ["line", "One-liner"], ["mix", "Mix"]];
   var SEENS = [["new", "New"], ["wrong", "Incorrect before"], ["bm", "Bookmarked"], ["due", "Due for review"], ["all", "All"], ["mix", "Mix"]];
-  var DIFFS = [["1", "Easy"], ["2", "Moderate"], ["3", "Hard"], ["mix", "Mix"]];
+  var DIFFS = [["1", "Easy"], ["2", "Moderate"], ["3", "Hard"], ["4", "Very hard"], ["mix", "Mix"]];
   var COUNTS = [10, 20, 30, 50], N_MAX = 200;
   var TIMERS = [["off", "Off"], ["q", "Per question"], ["set", "Whole set"]], QSECS = [30, 45, 60, 90];
   var DEFAULTS = { type: "all", seen: "mix", d: "mix", n: 20, mode: "study", timer: "off", qs: 60, mins: 0 };
@@ -176,7 +177,7 @@
   var DIMS = {
     type: { keys: ["img", "case", "line"], of: function (it) { return typeOf(it); }, w: { img: 1, "case": 1, line: 1 } },
     seen: { keys: ["new", "due", "wrong", "seen"], of: function (it, ctx) { return seenOf(it, ctx); }, w: { "new": 0.5, due: 0.3, wrong: 0.2, seen: 0 } },
-    d: { keys: ["1", "2", "3"], of: function (it) { return String(dOf(it)); }, w: null }   // null: in proportion to the pool
+    d: { keys: ["1", "2", "3", "4"], of: function (it) { return String(dOf(it)); }, w: null }   // null: in proportion to the pool
   };
   function pick(lists, n, dims, ctx, rnd) {
     if (n <= 0) return [];
@@ -200,7 +201,7 @@
     if (sel.d === "mix") dims.push("d");
     return core().shuffle(pick(L, sel.n, dims, ctx, rnd), rnd);
   }
-  var LABEL = { type: { img: "image-based", "case": "clinical scenario", line: "one-liner" }, seen: { "new": "new", wrong: "incorrect before", bm: "bookmarked", due: "due for review" }, d: { 1: "easy", 2: "moderate", 3: "hard" } };
+  var LABEL = { type: { img: "image-based", "case": "clinical scenario", line: "one-liner" }, seen: { "new": "new", wrong: "incorrect before", bm: "bookmarked", due: "due for review" }, d: { 1: "easy", 2: "moderate", 3: "hard", 4: "very hard" } };
   var RELAX = { type: "Question type: All", seen: "New or repeat: All", d: "Difficulty: Mix" };
   /* An empty pool: which one row to open up, the one that frees the most questions. { msg, dim } or null when the
      scope itself has nothing. */
@@ -230,7 +231,7 @@
   function recall(map, kind, id) { map = map || {}; return normSel((id && map[kind + ":" + id]) || map[kind] || null); }
   function hasLast(map, kind, id) { map = map || {}; return !!((id && map[kind + ":" + id]) || map[kind]); }
 
-  var PURE = { CASE_MIN: CASE_MIN, LONG_WORDS: LONG_WORDS, MID_WORDS: MID_WORDS, stemScore: stemScore, stemKind: stemKind, kindOf: kindOf, hasImg: hasImg, typeOf: typeOf,
+  var PURE = { CASE_MIN: CASE_MIN, LONG_WORDS: LONG_WORDS, MID_WORDS: MID_WORDS, stemScore: stemScore, stemKind: stemKind, kindOf: kindOf, hasImg: hasImg, typeOf: typeOf, dOf: dOf,
     wrongBefore: wrongBefore, seenOf: seenOf, seenMatch: seenMatch, normSel: normSel, keep: keep, counts: counts, allocate: allocate, draw: draw, relaxHint: relaxHint,
     remember: remember, recall: recall, hasLast: hasLast, timerOf: timerOf, runOpts: runOpts, summary: summary, TIMERS: TIMERS, QSECS: QSECS, TYPES: TYPES, SEENS: SEENS, DIFFS: DIFFS, COUNTS: COUNTS, N_MAX: N_MAX, DEFAULTS: DEFAULTS };
   if (isNode) { module.exports = PURE; return; }

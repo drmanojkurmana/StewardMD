@@ -90,22 +90,26 @@
       return filter === "all" || (filter === "paused" && st === "paused") || (filter === "done" && st === "done") || (filter === "new" && st === "new");
     });
   }
+  /* Difficulty levels: 1 easy, 2 medium, 3 hard, 4 very hard. Bank and overlay files keep d 1 to 3 and mark very hard
+     items vh: true; markLevels sets d 4 on those at load time (the files are not rewritten). levelOf reads either. */
+  function levelOf(it) { return it.vh === true || it.d === 4 ? 4 : it.d === 1 || it.d === 3 ? it.d : 2; }
+  function markLevels(items) { (items || []).forEach(function (it) { if (it && it.vh === true) it.d = 4; }); return items; }
   function shuffle(a, rnd) { rnd = rnd || Math.random; for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(rnd() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
   // Custom module: n questions from the given items, optionally one difficulty, spread across modules.
   function customDraw(lists, n, d, rnd) {
-    var pools = lists.map(function (l) { return shuffle(l.filter(function (it) { return !d || it.d === d; }).slice(), rnd); }).filter(function (p) { return p.length; });
+    var pools = lists.map(function (l) { return shuffle(l.filter(function (it) { return !d || levelOf(it) === d; }).slice(), rnd); }).filter(function (p) { return p.length; });
     var out = [], i = 0;
     while (out.length < n && pools.some(function (p) { return p.length; })) { var p = pools[i % pools.length]; if (p.length) out.push(p.pop()); i++; }
     return shuffle(out, rnd);
   }
   /* ---- Phase 4: adapt ---- */
-  // Target difficulty from the share right: 80% and over -> hard (3), 60% and over -> medium (2), else easy (1);
-  // under 5 attempts -> medium.
-  function targetDifficulty(ms) { if (!ms || (ms.t || 0) < 5) return 2; var acc = ms.ok / ms.t; return acc >= 0.8 ? 3 : acc >= 0.6 ? 2 : 1; }
+  // Target difficulty from the share right: 90% and over after 10 attempts -> very hard (4), 80% and over -> hard (3),
+  // 60% and over -> medium (2), else easy (1); under 5 attempts -> medium.
+  function targetDifficulty(ms) { if (!ms || (ms.t || 0) < 5) return 2; var acc = ms.ok / ms.t; return acc >= 0.9 && ms.t >= 10 ? 4 : acc >= 0.8 ? 3 : acc >= 0.6 ? 2 : 1; }
   // n unseen items, closest to the target difficulty first (random within a level).
   function adaptiveNew(pool, cards, dk, target, n, rnd) {
     var fresh = shuffle(pool.filter(function (it) { return !cards[dk + ":" + it.id]; }), rnd);
-    fresh.sort(function (a, b) { return Math.abs((a.d || 2) - target) - Math.abs((b.d || 2) - target); });
+    fresh.sort(function (a, b) { return Math.abs(levelOf(a) - target) - Math.abs(levelOf(b) - target); });
     return fresh.slice(0, n);
   }
   // Modules with at least 5 attempts and under 60% right, weakest first.
@@ -306,7 +310,7 @@
     return s.cel;
   }
   var PURE = { pickLine: pickLine, setSubject: setSubject, mileSnap: mileSnap, milestone: milestone, noteCele: noteCele, levelN: levelN, xpOfStore: xpOfStore, streakMile: streakMile, EXAMS: EXAMS, examOf: examOf, emptyStore: emptyStore, deckKey: deckKey, usable: usable, poolFor: poolFor, progressByModule: progressByModule,
-    statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime,
+    statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, oldOverlays: oldOverlays, levelOf: levelOf, markLevels: markLevels, shuffle: shuffle, fmtTime: fmtTime,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
     mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay, bankStamps: bankStamps, cacheFresh: cacheFresh };
@@ -404,9 +408,12 @@
   }
   /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, set "radnotes"; new
      Medicine questions for topics the bank covered thinly, set "medcov"), at overlay/<set>/<subject>/<module>.json
-     { topic, set, v, items }, immutable once uploaded. Only subjects listed here are asked for; a module without a
-     file (404) or offline without a copy adds nothing. */
-  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"], medicine: ["medcov"], "ss-pulmonology": ["medcov"] };
+     { topic, set, v, items }, immutable once uploaded. A file is cached for good under its path, so a changed release
+     goes to a new folder (medcov2: rounds 1 to 3 with tidied explanations) and the folder named here moves with it.
+     Only subjects listed here are asked for; a module without a file (404) or offline without a copy adds nothing. */
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"], medicine: ["medcov2"], "ss-pulmonology": ["medcov2"] };
+  // Earlier releases of a set (medcov3 -> medcov, medcov2), whose cached copies a new release replaces.
+  function oldOverlays(set) { var m = /^(.*?[a-z])(\d+)$/.exec(set), out = []; if (!m || +m[2] < 2) return out; out.push(m[1]); for (var k = 2; k < +m[2]; k++) out.push(m[1] + k); return out; }
   function loadOverlay(sid, mid, miss) {
     var sets = OVERLAYS[sid] || [];
     return Promise.all(sets.map(function (set) {
@@ -418,6 +425,7 @@
           var items = (f && f.items) || [];
           st.mem[p] = items;
           cachePut(p, { items: items, ts: Date.now() });
+          oldOverlays(set).forEach(function (o) { cacheDel("overlay/" + o + "/" + sid + "/" + mid + ".json"); });
           return items;
         }, function (e) { if (e && e.status === 404) return (st.mem[p] = []); if (miss) miss.n++; return []; });
       }).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
@@ -431,7 +439,7 @@
     var bankErr = null, miss = { n: 0 };
     return Promise.all([loadBank(sid, mid).then(null, function (e) { bankErr = e; return []; }), loadOverlay(sid, mid, miss)]).then(function (r) {
       if (bankErr && !r[1].length) throw bankErr;
-      var items = mergeOverlay(r[0], r[1]);
+      var items = markLevels(mergeOverlay(r[0], r[1]));
       items.forEach(function (it) { it._s = sid; it._m = mid; });
       if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
       return items;
@@ -1382,10 +1390,10 @@
     var chip = function (act, v, on, label) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; };
     var nsub = Object.keys(cm.subs).length;
     paint(bar("Custom module", examOf(s.exam).label, "back") + '<div class="pn-body pn-cm">' +
-      hband("cm", setupOn() ? String(nsub) : String(cm.n), setupOn() ? (nsub === 1 ? "subject" : "subjects") : "questions", setupOn() ? "Pick the subjects, then the kind of questions and how many." : nsub ? (cm.mode === "exam" ? "A timed test" : "Practice") + (cm.d ? ", " + ["", "easy", "medium", "hard"][cm.d] + " questions" : "") + ", from " + nsub + (nsub === 1 ? " subject" : " subjects") + "." : "Pick the subjects, then how hard and how many.") +
+      hband("cm", setupOn() ? String(nsub) : String(cm.n), setupOn() ? (nsub === 1 ? "subject" : "subjects") : "questions", setupOn() ? "Pick the subjects, then the kind of questions and how many." : nsub ? (cm.mode === "exam" ? "A timed test" : "Practice") + (cm.d ? ", " + ["", "easy", "medium", "hard", "very hard"][cm.d] + " questions" : "") + ", from " + nsub + (nsub === 1 ? " subject" : " subjects") + "." : "Pick the subjects, then how hard and how many.") +
       '<section class="pn-panel"><h2 class="pn-sec">Subjects</h2><div class="pn-wrap">' +
       subs.map(function (sb) { return chip("cmsub", sb.id, !!cm.subs[sb.id], tx(sb.name)); }).join("") + "</div></section>" +
-      (setupOn() ? "" : '<section class="pn-panel"><h2 class="pn-sec">Difficulty</h2><div class="pn-wrap pn-seg4">' + [[0, "Any"], [1, "Easy"], [2, "Medium"], [3, "Hard"]].map(function (x) { return chip("cmd", x[0], cm.d === x[0], x[1]); }).join("") + "</div>" +
+      (setupOn() ? "" : '<section class="pn-panel"><h2 class="pn-sec">Difficulty</h2><div class="pn-wrap pn-seg4">' + [[0, "Any"], [1, "Easy"], [2, "Medium"], [3, "Hard"], [4, "Very hard"]].map(function (x) { return chip("cmd", x[0], cm.d === x[0], x[1]); }).join("") + "</div>" +
       '<h2 class="pn-sec">Questions</h2><div class="pn-wrap pn-seg4">' + [10, 25, 50, 100].map(function (x) { return chip("cmn", x, cm.n === x, String(x)); }).join("") + "</div>" +
       '<h2 class="pn-sec">Mode</h2><div class="pn-wrap pn-seg4">' + chip("cmm", "study", cm.mode === "study", "Practice") + chip("cmm", "exam", cm.mode === "exam", "Timed test") + "</div></section>") +
       '<p class="pn-cm-sum" aria-live="polite">' + (nsub && setupOn() ? "Questions from " + nsub + (nsub === 1 ? " subject" : " subjects") + ". Choose the type, count and difficulty next." : nsub ? cm.n + " questions from " + nsub + (nsub === 1 ? " subject" : " subjects") + ", " + (cm.mode === "exam" ? "timed" : "marked as you go") : "Pick at least one subject") + "</p>" +
