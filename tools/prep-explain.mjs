@@ -171,10 +171,10 @@ export function explainPrompt(items, opts = {}) {
     "You write explanations for Indian postgraduate entrance MCQs (NEET-PG, INI-CET) whose correct answer is given. A final-year MBBS student reads each one in 30 to 60 seconds, so use plain words and short lines that scan fast.",
     "For each item return:",
     "ka: the letter of the correct option.",
-    "ky: one sentence of at most 30 words that names the correct option (its words as written in the option) and says why it is right.",
+    "ky: one sentence of at most 30 words that names the correct option (its words as written in the option) and says why it is right. Start with the answer and the reason; do not write 'is the correct answer because'.",
     "nt: topic notes of 80 to 170 words that teach what the question tests, so the student can answer a variation: the defining features, the mechanism or classification, the look-alikes and how to tell them apart. Format: one to three lines starting '## ' as short headings, '**bold**' for the few key terms, lines starting '- ' for bullets, '1. ' for ordered steps, and when a comparison helps one simple pipe table (a header row, a '| --- |' row, at most 5 rows and 4 columns). Nothing else: no images, links, HTML, quotes or code.",
     "ra, rb, rc, rd: one line of at most 25 words for each option, in order (ra is option A, rb is B, rc is C, rd is D): for the correct option why it is right, for every other option why it is wrong here (what it really is or where it is seen). Each line must be about its own option.",
-    "pl: one high-yield exam pearl of at most 25 words that does not repeat ky.",
+    "pl: one high-yield exam pearl of at most 25 words that does not repeat ky. It is shown under the label 'Remember', so do not start with that word.",
     "Ground everything in the item's stored explanation and notes. Every number you write (dose, percentage, value, age, count, year, grade) must appear in the stored explanation, the notes or the question; where they give none, say it in words. When the notes do not cover the topic, explain from standard teaching without numbers.",
     "Write fresh text: never copy a sentence of the notes or the stored explanation. Never name a book, author, website, guideline document or source, never write 'reference', never mention AI. No long dashes and no emoji.",
     ...(redo ? [
@@ -216,7 +216,7 @@ export function readX(text, items) {
     if (i < 0 || i >= items.length || out[i]) continue;
     const it = items[i], others = {};
     [r.ra, r.rb, r.rc, r.rd].forEach((w, k) => { if (k !== it.a && k < it.o.length) others[L[k]] = tidy(w).slice(0, 400); });
-    out[i] = { key: tidy(r.ky).slice(0, 400), notes: fixTables(tidy(r.nt, true)).slice(0, 3000), others, pearl: tidy(r.pl).slice(0, 400) };
+    out[i] = { key: tidy(r.ky).slice(0, 400), notes: fixTables(tidy(r.nt, true)).slice(0, 3000), others, pearl: tidy(r.pl).replace(/^(?:remember|note|pearl|exam pearl)\s*(?:that\s*)?[:,-]?\s*/i, "").replace(/^[a-z]/, (c) => c.toUpperCase()).slice(0, 400) };
     Object.defineProperty(out[i], "ka", { value: String(r.ka || "").trim().toUpperCase().slice(0, 1), enumerable: false });
   }
   return out;

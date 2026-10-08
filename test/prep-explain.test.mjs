@@ -95,6 +95,7 @@ test("readX: one x per item from the reply, others never carry the key's letter,
   assert.equal(JSON.stringify(out[0]).includes("ka"), false, "ka checks the reply; it is never stored");
   assert.equal(out[1], null);
   assert.deepEqual(readX("not json", [IT]), [null]);
+  assert.equal(readX(JSON.stringify({ xs: [{ i: 0, pl: "Remember that beads mean FMD." }] }), [IT])[0].pearl, "Beads mean FMD.", "the label is the UI's, not the text's");
 });
 
 test("explainPrompt: one block per item with the key, the stored explanation and the notes; redo carries the reason", () => {
