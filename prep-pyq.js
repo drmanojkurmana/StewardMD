@@ -62,8 +62,15 @@
   // PYQ files live under the bank version that last rebuilt them (v5: bank explanations copied onto matching PYQs);
   // host.pyqVer() (prep.js, SMD_PREP_PYQ_VER) names it.
   function base(host) { return (host.bankApi || "/api/prep/bank/") + (host.pyqVer ? host.pyqVer() : "v2") + "/pyq/"; }
-  // Image folder of an item: a PYQ's own, else the bank version's img/ (bank items may carry img + imgPlace too).
-  function imgBase(it, host) { return it._py ? base(host) + "img/" : (host.bankApi || "/api/prep/bank/") + (host.bankVer ? host.bankVer() : "v4") + "/img/"; }
+  // Image folder of an item: a PYQ's own; an overlay item's set folder (img/<set>/, e.g. the owner's radiology notes
+  // img/radnotes/); else the bank version's img/ (bank items may carry img + imgPlace too). A root path gets the API
+  // origin on native (SMD_API_BASE, set by native-bridge.js): the app runs at https://localhost and an <img> is not
+  // routed through the fetch bridge.
+  function imgBase(it, host) {
+    var api = host.bankApi || "/api/prep/bank/";
+    var u = it._py ? base(host) + "img/" : it._ov && /^[a-z0-9-]{2,40}$/.test(it._ov) ? api + "img/" + it._ov + "/" : api + (host.bankVer ? host.bankVer() : "v4") + "/img/";
+    return u.charAt(0) === "/" && G.SMD_API_BASE ? G.SMD_API_BASE + u : u;
+  }
   function getJSON(url) { return G.fetch(url, { cache: "no-cache" }).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }); }
   // index.json: network first (it names the current items file), the IndexedDB copy when offline.
   function loadIndex(host) {

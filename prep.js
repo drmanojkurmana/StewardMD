@@ -31,6 +31,14 @@
   function emptyStore() { return { v: 1, cards: {}, conf: {}, days: {}, mod: {}, bm: {}, rep: {}, exam: "neet-pg", last: null, dl: {}, hid: { ids: {}, ts: 0 }, mt: {}, goal: 30, mh: [], ls: {}, lsp: { r: 1, au: 0 }, pl: null, pt: null, ra: [] }; }
   function deckKey(moduleId) { return "p:" + moduleId; }
   // hidden: item ids withdrawn after repeated student reports (/api/prep/flag?hidden=1), as an id -> 1 map.
+  /* mergeOverlay(bank, extra) -> bank items, then overlay items whose id the bank (or an earlier overlay item) does not
+     have. Items are kept as they are (x, r, img, imgPlace, prov, set, sid and the key untouched). */
+  function mergeOverlay(bank, extra) {
+    var seen = {}, out = [];
+    (bank || []).forEach(function (it) { if (it && !seen[it.id]) { seen[it.id] = 1; out.push(it); } });
+    (extra || []).forEach(function (it) { if (it && it.id && !seen[it.id]) { seen[it.id] = 1; out.push(it); } });
+    return out;
+  }
   function usable(it, hidden) { return !!it && !(it.flags && it.flags.length) && !(hidden && hidden[it.id]); }
   // Questions the app shows for a module: flagged keys and hidden items out; for USMLE, vignettes when there are enough.
   function poolFor(items, exam, hidden) {
@@ -239,7 +247,7 @@
     statusOf: statusOf, stars: stars, countFor: countFor, solveNext: solveNext, filterModules: filterModules, customDraw: customDraw, shuffle: shuffle, fmtTime: fmtTime,
     targetDifficulty: targetDifficulty, adaptiveNew: adaptiveNew, weakModules: weakModules, planToday: planToday, MISTAKE_TAGS: MISTAKE_TAGS, mistakeCounts: mistakeCounts,
     MOCKS: MOCKS, mockOf: mockOf, mockModules: mockModules, scoreMock: scoreMock, findModule: findModule,
-    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf };
+    mdLite: mdLite, inlineMd: inlineMd, legacyExp: legacyExp, explainOf: explainOf, mergeOverlay: mergeOverlay };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -309,7 +317,7 @@
   function cacheKeys() { return idbDo("readonly", function (os) { return os.getAllKeys ? os.getAllKeys() : null; }); }
   function cacheDel(path) { return idbDo("readwrite", function (os) { return os.delete(path); }); }
   function modulePath(sid, mid) { return VER + "/" + sid + "/mcq/" + mid + ".json"; }
-  function loadModule(sid, mid) {
+  function loadBank(sid, mid) {
     var p = modulePath(sid, mid);
     if (st.mem[p]) return Promise.resolve(st.mem[p]);
     return cacheGet(p).then(function (hit) {
@@ -320,7 +328,41 @@
         cachePut(p, { items: items, ts: Date.now() });
         return items;
       });
-    }).then(function (items) { items.forEach(function (it) { it._s = sid; it._m = mid; }); return items; });
+    });
+  }
+  /* Overlay sets: extra MCQs for a module from outside the bank (the owner's radiology notes, set "radnotes"), at
+     overlay/<set>/<subject>/<module>.json { topic, set, v, items }, immutable once uploaded. Only subjects listed here
+     are asked for; a module without a file (404) or offline without a copy adds nothing. */
+  var OVERLAYS = G.SMD_PREP_OVERLAYS || { radiology: ["radnotes"] };
+  function loadOverlay(sid, mid, miss) {
+    var sets = OVERLAYS[sid] || [];
+    return Promise.all(sets.map(function (set) {
+      var p = "overlay/" + set + "/" + sid + "/" + mid + ".json";
+      if (st.mem[p]) return st.mem[p];
+      return cacheGet(p).then(function (hit) {
+        if (hit && hit.items) return (st.mem[p] = hit.items);
+        return getJSON(API + p).then(function (f) {
+          var items = (f && f.items) || [];
+          st.mem[p] = items;
+          cachePut(p, { items: items, ts: Date.now() });
+          return items;
+        }, function (e) { if (e && e.status === 404) return (st.mem[p] = []); if (miss) miss.n++; return []; });
+      }).then(function (items) { items.forEach(function (it) { it._ov = set; }); return items; });
+    })).then(function (r) { return [].concat.apply([], r); });
+  }
+  // A module's questions: the bank file plus its overlay items (mergeOverlay). A bank failure with overlay items still
+  // gives the overlay items; with none, the failure stands.
+  function loadModule(sid, mid) {
+    var k = "mod:" + sid + "/" + mid;
+    if (st.mem[k]) return Promise.resolve(st.mem[k]);
+    var bankErr = null, miss = { n: 0 };
+    return Promise.all([loadBank(sid, mid).then(null, function (e) { bankErr = e; return []; }), loadOverlay(sid, mid, miss)]).then(function (r) {
+      if (bankErr && !r[1].length) throw bankErr;
+      var items = mergeOverlay(r[0], r[1]);
+      items.forEach(function (it) { it._s = sid; it._m = mid; });
+      if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+      return items;
+    });
   }
 
   // Items withdrawn after repeated reports: refreshed on open at most every 6 hours; offline keeps the last list.
@@ -1274,7 +1316,8 @@
   function removeDownload(sid) {
     var s = load();
     cacheKeys().then(function (keys) {
-      (keys || []).forEach(function (k) { if (String(k).indexOf(VER + "/" + sid + "/") === 0) { cacheDel(k); delete st.mem[k]; } });
+      (keys || []).forEach(function (k) { k = String(k); if (k.indexOf(VER + "/" + sid + "/") === 0 || (k.indexOf("overlay/") === 0 && k.split("/")[2] === sid)) { cacheDel(k); delete st.mem[k]; } });
+      Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:" + sid + "/") === 0) delete st.mem[k]; });
       delete s.dl[sid]; save(); renderDownloads();
     });
   }
