@@ -507,3 +507,11 @@ body:not(.dark):not(.v3-dark) .nrk-root .vb-info.vb-sheet { box-shadow: 0 -12px 
   .nrk-root .vb-wrap .sp-btn, .nrk-root .vb-dfoot .sp-btn { transition: none; }
   .nrk-root .vb-wrap .sp-btn:active, .nrk-root .vb-dfoot .sp-btn:active { transform: none; }
 }
+/* Finish gate (web interface guidelines): the docked sheet never hides a focused tile (focus scrolling keeps clear of
+   it), and the new controls have hover and focus states. */
+.nrk-root .sp-scroll:has(.vb-info.vb-sheet) { scroll-padding-bottom: 46vh; scroll-padding-bottom: 46dvh; }
+.nrk-root .vb-needb:focus-visible { outline: 2px solid var(--vl-acc); outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .nrk-root .vb-needb:hover { border-color: color-mix(in srgb, var(--vl-acc) 55%, var(--vl-cline)); }
+  .nrk-root .vb-infox:hover { color: var(--sp-text); background: var(--vl-acc-soft); }
+}

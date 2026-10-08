@@ -359,21 +359,26 @@
     if (had) focus("#vbGot .vb-next, #vbGot .vb-gotd");
   }
   // Round 6 (B1): a reading page counts as done once its end has been scrolled into view (a page that fits the
-  // screen counts at once). Watches #vbGot; stops when the page is left.
+  // screen counts at once). Checks on scroll (a passive listener; an IntersectionObserver missed a filter-then-scroll in
+  // one frame); stops when the page is left or done. A page that opened long counts only once it was scrolled, so a
+  // glossary search that shrinks the page does not count.
   function endWatch(id) {
-    if (isDone(id) || !G.IntersectionObserver) return;
-    var sc = q(".sp-scroll"), end = q("#vbGot"), view = st.view;
-    if (!sc || !end) return;
-    var io = new G.IntersectionObserver(function (es) {
-      if (!es.some(function (e) { return e.isIntersecting; })) return;
-      if (sc.scrollTop < 8 && sc.scrollHeight > sc.clientHeight + 8) return;
-      io.disconnect();
-      if (isDone(id) || st.view !== view) return;
-      setDone(id, true); refreshGot(id, "readEnd");
-    }, { root: sc, threshold: 0.5 });
-    io.observe(end);
+    var sc = q(".sp-scroll"), view = st.view;
+    if (isDone(id) || !sc || !q("#vbGot")) return;
+    var long = sc.scrollHeight > sc.clientHeight + 8;
+    function off() { sc.removeEventListener("scroll", chk); }
+    function chk() {
+      if (isDone(id) || st.view !== view) return off();
+      var end = q("#vbGot"); if (!end) return;
+      if (long ? sc.scrollTop < 8 : sc.scrollHeight > sc.clientHeight + 8) return;
+      var r = end.getBoundingClientRect(), b = sc.getBoundingClientRect();
+      if (r.top + Math.min(r.height, 48) / 2 > b.bottom) return;
+      off(); setDone(id, true); refreshGot(id, "readEnd");
+    }
+    sc.addEventListener("scroll", chk, { passive: true });
     var prev = st.onLeave;
-    st.onLeave = function () { io.disconnect(); if (prev) prev(); };
+    st.onLeave = function () { off(); if (prev) prev(); };
+    chk();
   }
   A.vbgot = function (b) {
     var id = b.getAttribute("data-k"); setDone(id, true); I.haptic("success");
